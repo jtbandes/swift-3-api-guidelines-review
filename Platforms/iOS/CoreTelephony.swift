@@ -3,17 +3,17 @@ let CTCallStateDialing: String
 let CTCallStateIncoming: String
 let CTCallStateConnected: String
 let CTCallStateDisconnected: String
-class CTCall : NSObject {
+class CTCall : Object {
   var callState: String { get }
   var callID: String { get }
   init()
 }
-class CTCallCenter : NSObject {
+class CTCallCenter : Object {
   var currentCalls: Set<CTCall>? { get }
   var callEventHandler: ((CTCall) -> Void)?
   init()
 }
-class CTCarrier : NSObject {
+class CTCarrier : Object {
   var carrierName: String? { get }
   var mobileCountryCode: String? { get }
   var mobileNetworkCode: String? { get }
@@ -29,17 +29,17 @@ enum CTCellularDataRestrictedState : UInt {
   case NotRestricted
 }
 typealias CellularDataRestrictionDidUpdateNotifier = (CTCellularDataRestrictedState) -> Void
-class CTCellularData : NSObject {
+class CTCellularData : Object {
   var cellularDataRestrictionDidUpdateNotifier: CellularDataRestrictionDidUpdateNotifier?
   var restrictedState: CTCellularDataRestrictedState { get }
   init()
 }
 let CTSubscriberTokenRefreshed: String
-class CTSubscriber : NSObject {
-  var carrierToken: NSData? { get }
+class CTSubscriber : Object {
+  var carrierToken: Data? { get }
   init()
 }
-class CTSubscriberInfo : NSObject {
+class CTSubscriberInfo : Object {
   class func subscriber() -> CTSubscriber
   init()
 }
@@ -55,7 +55,7 @@ let CTRadioAccessTechnologyCDMAEVDORevA: String
 let CTRadioAccessTechnologyCDMAEVDORevB: String
 let CTRadioAccessTechnologyeHRPD: String
 let CTRadioAccessTechnologyLTE: String
-class CTTelephonyNetworkInfo : NSObject {
+class CTTelephonyNetworkInfo : Object {
   var subscriberCellularProvider: CTCarrier? { get }
   var subscriberCellularProviderDidUpdateNotifier: ((CTCarrier) -> Void)?
   var currentRadioAccessTechnology: String? { get }

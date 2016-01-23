@@ -274,8 +274,8 @@ class DOMCSSImportRule : DOMCSSRule {
 class DOMCSSMediaRule : DOMCSSRule {
   var media: DOMMediaList! { get }
   var cssRules: DOMCSSRuleList! { get }
-  func insertRule(rule: String!, index: UInt32) -> UInt32
-  func deleteRule(index: UInt32)
+  func insert(rule: String!, index: UInt32) -> UInt32
+  func delete(index: UInt32)
 }
 extension DOMCSSMediaRule {
 }
@@ -315,8 +315,8 @@ var DOM_CSS_VMIN: Int { get }
 var DOM_CSS_VMAX: Int { get }
 class DOMCSSPrimitiveValue : DOMCSSValue {
   var primitiveType: UInt16 { get }
-  func setFloatValue(unitType: UInt16, floatValue: Float)
-  func getFloatValue(unitType: UInt16) -> Float
+  func setFloat(unitType: UInt16, floatValue: Float)
+  func getFloat(unitType: UInt16) -> Float
   func setStringValue(stringType: UInt16, stringValue: String!)
   func getStringValue() -> String!
   func getCounterValue() -> DOMCounter!
@@ -342,7 +342,7 @@ class DOMCSSRule : DOMObject {
   var type: UInt16 { get }
   var cssText: String!
   var parentStyleSheet: DOMCSSStyleSheet! { get }
-  var parentRule: DOMCSSRule! { get }
+  var parent: DOMCSSRule! { get }
 }
 class DOMCSSRuleList : DOMObject {
   var length: UInt32 { get }
@@ -395,10 +395,10 @@ class DOMCharacterData : DOMNode {
   var data: String!
   var length: UInt32 { get }
   func substringData(offset: UInt32, length: UInt32) -> String!
-  func appendData(data: String!)
-  func insertData(offset: UInt32, data: String!)
-  func deleteData(offset: UInt32, length: UInt32)
-  func replaceData(offset: UInt32, length: UInt32, data: String!)
+  func append(data: String!)
+  func insert(offset: UInt32, data: String!)
+  func delete(offset: UInt32, length: UInt32)
+  func replace(offset: UInt32, length: UInt32, data: String!)
 }
 extension DOMCharacterData {
 }
@@ -423,7 +423,7 @@ class DOMDocument : DOMNode {
   var title: String!
   var referrer: String! { get }
   var domain: String! { get }
-  var URL: String! { get }
+  var url: String! { get }
   var cookie: String!
   var body: DOMHTMLElement!
   var images: DOMHTMLCollection! { get }
@@ -460,7 +460,7 @@ class DOMDocument : DOMNode {
   func getOverrideStyle(element: DOMElement!, pseudoElement: String!) -> DOMCSSStyleDeclaration!
   func createExpression(expression: String!, resolver: DOMXPathNSResolver!) -> DOMXPathExpression!
   func createNSResolver(nodeResolver: DOMNode!) -> DOMXPathNSResolver!
-  func evaluate(expression: String!, contextNode: DOMNode!, resolver: DOMXPathNSResolver!, type: UInt16, inResult: DOMXPathResult!) -> DOMXPathResult!
+  func evaluate(expression: String!, contextNode: DOMNode!, resolver: DOMXPathNSResolver!, type: UInt16, in inResult: DOMXPathResult!) -> DOMXPathResult!
   func execCommand(command: String!, userInterface: Bool, value: String!) -> Bool
   func execCommand(command: String!, userInterface: Bool) -> Bool
   func execCommand(command: String!) -> Bool
@@ -583,10 +583,10 @@ struct DOMEventExceptionCode : RawRepresentable, Equatable {
   var rawValue: UInt32
 }
 var DOM_UNSPECIFIED_EVENT_TYPE_ERR: DOMEventExceptionCode { get }
-protocol DOMEventListener : NSObjectProtocol {
-  func handleEvent(event: DOMEvent!)
+protocol DOMEventListener : ObjectProtocol {
+  func handle(event: DOMEvent!)
 }
-protocol DOMEventTarget : NSObjectProtocol, NSCopying {
+protocol DOMEventTarget : ObjectProtocol, Copying {
   func addEventListener(type: String!, listener: DOMEventListener!, useCapture: Bool)
   func removeEventListener(type: String!, listener: DOMEventListener!, useCapture: Bool)
   func dispatchEvent(event: DOMEvent!) -> Bool
@@ -613,14 +613,14 @@ var DOM_INVALID_MODIFICATION_ERR: DOMExceptionCode { get }
 var DOM_NAMESPACE_ERR: DOMExceptionCode { get }
 var DOM_INVALID_ACCESS_ERR: DOMExceptionCode { get }
 extension DOMNode {
-  func boundingBox() -> NSRect
+  func boundingBox() -> Rect
   func lineBoxRects() -> [AnyObject]!
 }
 extension DOMElement {
   func image() -> NSImage!
 }
 extension DOMHTMLDocument {
-  func createDocumentFragmentWithMarkupString(markupString: String!, baseURL: NSURL!) -> DOMDocumentFragment!
+  func createDocumentFragmentWithMarkupString(markupString: String!, baseURL: URL!) -> DOMDocumentFragment!
   func createDocumentFragmentWithText(text: String!) -> DOMDocumentFragment!
 }
 class DOMFile : DOMBlob {
@@ -649,7 +649,7 @@ class DOMHTMLAnchorElement : DOMHTMLElement {
   var `protocol`: String! { get }
   var search: String! { get }
   var text: String! { get }
-  @NSCopying var absoluteLinkURL: NSURL! { get }
+  @NSCopying var absoluteLinkURL: URL! { get }
 }
 class DOMHTMLAppletElement : DOMHTMLElement {
   var align: String!
@@ -678,7 +678,7 @@ class DOMHTMLAreaElement : DOMHTMLElement {
   var port: String! { get }
   var `protocol`: String! { get }
   var search: String! { get }
-  @NSCopying var absoluteLinkURL: NSURL! { get }
+  @NSCopying var absoluteLinkURL: URL! { get }
 }
 class DOMHTMLBRElement : DOMHTMLElement {
   var clear: String!
@@ -859,7 +859,7 @@ class DOMHTMLImageElement : DOMHTMLElement {
   var x: Int32 { get }
   var y: Int32 { get }
   var altDisplayString: String! { get }
-  @NSCopying var absoluteImageURL: NSURL! { get }
+  @NSCopying var absoluteImageURL: URL! { get }
 }
 class DOMHTMLInputElement : DOMHTMLElement {
   var accept: String!
@@ -886,7 +886,7 @@ class DOMHTMLInputElement : DOMHTMLElement {
   var align: String!
   var useMap: String!
   var altDisplayString: String! { get }
-  @NSCopying var absoluteImageURL: NSURL! { get }
+  @NSCopying var absoluteImageURL: URL! { get }
   func select()
   func setSelectionRange(start: Int32, end: Int32)
   func click()
@@ -914,7 +914,7 @@ class DOMHTMLLinkElement : DOMHTMLElement {
   var target: String!
   var type: String!
   var sheet: DOMStyleSheet! { get }
-  @NSCopying var absoluteLinkURL: NSURL! { get }
+  @NSCopying var absoluteLinkURL: URL! { get }
 }
 class DOMHTMLMapElement : DOMHTMLElement {
   var areas: DOMHTMLCollection! { get }
@@ -961,7 +961,7 @@ class DOMHTMLObjectElement : DOMHTMLElement {
   var vspace: Int32
   var width: String!
   var contentDocument: DOMDocument! { get }
-  @NSCopying var absoluteImageURL: NSURL! { get }
+  @NSCopying var absoluteImageURL: URL! { get }
 }
 class DOMHTMLOptGroupElement : DOMHTMLElement {
   var disabled: Bool
@@ -1235,7 +1235,7 @@ class DOMNode : DOMObject, DOMEventTarget {
   var nodeName: String! { get }
   var nodeValue: String!
   var nodeType: UInt16 { get }
-  var parentNode: DOMNode! { get }
+  var parent: DOMNode! { get }
   var childNodes: DOMNodeList! { get }
   var firstChild: DOMNode! { get }
   var lastChild: DOMNode! { get }
@@ -1288,8 +1288,8 @@ var DOM_SHOW_DOCUMENT: UInt32 { get }
 var DOM_SHOW_DOCUMENT_TYPE: UInt32 { get }
 var DOM_SHOW_DOCUMENT_FRAGMENT: UInt32 { get }
 var DOM_SHOW_NOTATION: UInt32 { get }
-protocol DOMNodeFilter : NSObjectProtocol {
-  func acceptNode(n: DOMNode!) -> Int16
+protocol DOMNodeFilter : ObjectProtocol {
+  func accept(n: DOMNode!) -> Int16
 }
 class DOMNodeIterator : DOMObject {
   var root: DOMNode! { get }
@@ -1307,8 +1307,8 @@ class DOMNodeList : DOMObject {
   func item(index: UInt32) -> DOMNode!
 }
 typealias DOMTimeStamp = UInt64
-class DOMObject : WebScriptObject, NSCopying {
-  func copyWithZone(zone: NSZone) -> AnyObject
+class DOMObject : WebScriptObject, Copying {
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 extension DOMObject {
   var sheet: DOMStyleSheet! { get }
@@ -1356,20 +1356,20 @@ class DOMRange : DOMObject {
   func setEndBefore(refNode: DOMNode!)
   func setEndAfter(refNode: DOMNode!)
   func collapse(toStart: Bool)
-  func selectNode(refNode: DOMNode!)
+  func select(refNode: DOMNode!)
   func selectNodeContents(refNode: DOMNode!)
   func compareBoundaryPoints(how: UInt16, sourceRange: DOMRange!) -> Int16
   func deleteContents()
   func extractContents() -> DOMDocumentFragment!
   func cloneContents() -> DOMDocumentFragment!
-  func insertNode(newNode: DOMNode!)
+  func insert(newNode: DOMNode!)
   func surroundContents(newParent: DOMNode!)
-  func cloneRange() -> DOMRange!
+  func clone() -> DOMRange!
   func toString() -> String!
   func detach()
   func createContextualFragment(html: String!) -> DOMDocumentFragment!
   func intersectsNode(refNode: DOMNode!) -> Bool
-  func compareNode(refNode: DOMNode!) -> Int16
+  func compare(refNode: DOMNode!) -> Int16
   func comparePoint(refNode: DOMNode!, offset: Int32) -> Int16
   func isPointInRange(refNode: DOMNode!, offset: Int32) -> Bool
 }
@@ -1393,7 +1393,7 @@ class DOMStyleSheet : DOMObject {
   var type: String! { get }
   var disabled: Bool
   var ownerNode: DOMNode! { get }
-  var parentStyleSheet: DOMStyleSheet! { get }
+  var parent: DOMStyleSheet! { get }
   var href: String! { get }
   var title: String! { get }
   var media: DOMMediaList! { get }
@@ -1452,11 +1452,11 @@ struct DOMXPathExceptionCode : RawRepresentable, Equatable {
 var DOM_INVALID_EXPRESSION_ERR: DOMXPathExceptionCode { get }
 var DOM_TYPE_ERR: DOMXPathExceptionCode { get }
 class DOMXPathExpression : DOMObject {
-  func evaluate(contextNode: DOMNode!, type: UInt16, inResult: DOMXPathResult!) -> DOMXPathResult!
+  func evaluate(contextNode: DOMNode!, type: UInt16, in inResult: DOMXPathResult!) -> DOMXPathResult!
 }
 extension DOMXPathExpression {
 }
-protocol DOMXPathNSResolver : NSObjectProtocol {
+protocol DOMXPathNSResolver : ObjectProtocol {
   func lookupNamespaceURI(prefix: String!) -> String!
 }
 var DOM_ANY_TYPE: Int { get }
@@ -1480,19 +1480,19 @@ class DOMXPathResult : DOMObject {
   func iterateNext() -> DOMNode!
   func snapshotItem(index: UInt32) -> DOMNode!
 }
-class WKBackForwardList : NSObject {
+class WKBackForwardList : Object {
   var currentItem: WKBackForwardListItem? { get }
   var backItem: WKBackForwardListItem? { get }
   var forwardItem: WKBackForwardListItem? { get }
-  func itemAtIndex(index: Int) -> WKBackForwardListItem?
+  func itemAt(index: Int) -> WKBackForwardListItem?
   var backList: [WKBackForwardListItem] { get }
   var forwardList: [WKBackForwardListItem] { get }
   init()
 }
-class WKBackForwardListItem : NSObject {
-  @NSCopying var URL: NSURL { get }
+class WKBackForwardListItem : Object {
+  @NSCopying var url: URL { get }
   var title: String? { get }
-  @NSCopying var initialURL: NSURL { get }
+  @NSCopying var initialURL: URL { get }
   init()
 }
 let WKErrorDomain: String
@@ -1509,14 +1509,14 @@ extension WKErrorCode : _BridgedNSError {
   static var _NSErrorDomain: String { get }
   typealias RawValue = Int
 }
-class WKFrameInfo : NSObject, NSCopying {
-  var mainFrame: Bool { get }
-  @NSCopying var request: NSURLRequest { get }
+class WKFrameInfo : Object, Copying {
+  var isMainFrame: Bool { get }
+  @NSCopying var request: URLRequest { get }
   var securityOrigin: WKSecurityOrigin { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class WKNavigation : NSObject {
+class WKNavigation : Object {
   init()
 }
 enum WKNavigationType : Int {
@@ -1529,11 +1529,11 @@ enum WKNavigationType : Int {
   case FormResubmitted
   case Other
 }
-class WKNavigationAction : NSObject {
+class WKNavigationAction : Object {
   @NSCopying var sourceFrame: WKFrameInfo { get }
   @NSCopying var targetFrame: WKFrameInfo? { get }
   var navigationType: WKNavigationType { get }
-  @NSCopying var request: NSURLRequest { get }
+  @NSCopying var request: URLRequest { get }
   var modifierFlags: NSEventModifierFlags { get }
   var buttonNumber: Int { get }
   init()
@@ -1550,25 +1550,25 @@ enum WKNavigationResponsePolicy : Int {
   case Cancel
   case Allow
 }
-protocol WKNavigationDelegate : NSObjectProtocol {
-  optional func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void)
-  optional func webView(webView: WKWebView, decidePolicyForNavigationResponse navigationResponse: WKNavigationResponse, decisionHandler: (WKNavigationResponsePolicy) -> Void)
+protocol WKNavigationDelegate : ObjectProtocol {
+  optional func webView(webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void)
+  optional func webView(webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: (WKNavigationResponsePolicy) -> Void)
   optional func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!)
   optional func webView(webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!)
-  optional func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError)
-  optional func webView(webView: WKWebView, didCommitNavigation navigation: WKNavigation!)
+  optional func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error)
+  optional func webView(webView: WKWebView, didCommit navigation: WKNavigation!)
   optional func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!)
-  optional func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError)
-  optional func webView(webView: WKWebView, didReceiveAuthenticationChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void)
+  optional func webView(webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error)
+  optional func webView(webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: (URLSessionAuthChallengeDisposition, URLCredential?) -> Void)
   optional func webViewWebContentProcessDidTerminate(webView: WKWebView)
 }
-class WKNavigationResponse : NSObject {
-  var forMainFrame: Bool { get }
-  @NSCopying var response: NSURLResponse { get }
+class WKNavigationResponse : Object {
+  var isForMainFrame: Bool { get }
+  @NSCopying var response: URLResponse { get }
   var canShowMIMEType: Bool { get }
   init()
 }
-class WKPreferences : NSObject {
+class WKPreferences : Object {
   var minimumFontSize: CGFloat
   var javaScriptEnabled: Bool
   var javaScriptCanOpenWindowsAutomatically: Bool
@@ -1576,36 +1576,36 @@ class WKPreferences : NSObject {
   var plugInsEnabled: Bool
   init()
 }
-class WKProcessPool : NSObject {
+class WKProcessPool : Object {
   init()
 }
-class WKScriptMessage : NSObject {
+class WKScriptMessage : Object {
   @NSCopying var body: AnyObject { get }
   weak var webView: @sil_weak WKWebView? { get }
   @NSCopying var frameInfo: WKFrameInfo { get }
   var name: String { get }
   init()
 }
-protocol WKScriptMessageHandler : NSObjectProtocol {
-  func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage)
+protocol WKScriptMessageHandler : ObjectProtocol {
+  func userContentController(userContentController: WKUserContentController, didReceive message: WKScriptMessage)
 }
-class WKSecurityOrigin : NSObject {
+class WKSecurityOrigin : Object {
   var `protocol`: String { get }
   var host: String { get }
   var port: Int { get }
 }
-protocol WKUIDelegate : NSObjectProtocol {
-  optional func webView(webView: WKWebView, createWebViewWithConfiguration configuration: WKWebViewConfiguration, forNavigationAction navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView?
+protocol WKUIDelegate : ObjectProtocol {
+  optional func webView(webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, forNavigationAction navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView?
   optional func webViewDidClose(webView: WKWebView)
   optional func webView(webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: () -> Void)
   optional func webView(webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: (Bool) -> Void)
   optional func webView(webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: (String?) -> Void)
 }
-class WKUserContentController : NSObject {
+class WKUserContentController : Object {
   var userScripts: [WKUserScript] { get }
   func addUserScript(userScript: WKUserScript)
   func removeAllUserScripts()
-  func addScriptMessageHandler(scriptMessageHandler: WKScriptMessageHandler, name: String)
+  func add(scriptMessageHandler: WKScriptMessageHandler, name: String)
   func removeScriptMessageHandlerForName(name: String)
   init()
 }
@@ -1615,28 +1615,28 @@ enum WKUserScriptInjectionTime : Int {
   case AtDocumentStart
   case AtDocumentEnd
 }
-class WKUserScript : NSObject, NSCopying {
+class WKUserScript : Object, Copying {
   var source: String { get }
   var injectionTime: WKUserScriptInjectionTime { get }
-  var forMainFrameOnly: Bool { get }
+  var isForMainFrameOnly: Bool { get }
   init(source: String, injectionTime: WKUserScriptInjectionTime, forMainFrameOnly: Bool)
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 class WKWebView : NSView {
   @NSCopying var configuration: WKWebViewConfiguration { get }
   weak var navigationDelegate: @sil_weak WKNavigationDelegate?
-  weak var UIDelegate: @sil_weak WKUIDelegate?
+  weak var uiDelegate: @sil_weak WKUIDelegate?
   var backForwardList: WKBackForwardList { get }
   init(frame: CGRect, configuration: WKWebViewConfiguration)
-  func loadRequest(request: NSURLRequest) -> WKNavigation?
-  func loadFileURL(URL: NSURL, allowingReadAccessToURL readAccessURL: NSURL) -> WKNavigation?
-  func loadHTMLString(string: String, baseURL: NSURL?) -> WKNavigation?
-  func loadData(data: NSData, MIMEType: String, characterEncodingName: String, baseURL: NSURL) -> WKNavigation?
-  func goToBackForwardListItem(item: WKBackForwardListItem) -> WKNavigation?
+  func load(request: URLRequest) -> WKNavigation?
+  func loadFileURL(URL: URL, allowingReadAccessTo readAccessURL: URL) -> WKNavigation?
+  func loadHTMLString(string: String, baseURL: URL?) -> WKNavigation?
+  func load(data: Data, mimeType MIMEType: String, characterEncodingName: String, baseURL: URL) -> WKNavigation?
+  func goTo(item: WKBackForwardListItem) -> WKNavigation?
   var title: String? { get }
-  @NSCopying var URL: NSURL? { get }
-  var loading: Bool { get }
+  @NSCopying var url: URL? { get }
+  var isLoading: Bool { get }
   var estimatedProgress: Double { get }
   var hasOnlySecureContent: Bool { get }
   var certificateChain: [AnyObject] { get }
@@ -1647,14 +1647,14 @@ class WKWebView : NSView {
   func reload() -> WKNavigation?
   func reloadFromOrigin() -> WKNavigation?
   func stopLoading()
-  func evaluateJavaScript(javaScriptString: String, completionHandler: ((AnyObject?, NSError?) -> Void)?)
+  func evaluateJavaScript(javaScriptString: String, completionHandler: ((AnyObject?, Error?) -> Void)? = nil)
   var allowsBackForwardNavigationGestures: Bool
   var customUserAgent: String?
   var allowsLinkPreview: Bool
   var allowsMagnification: Bool
   var magnification: CGFloat
-  func setMagnification(magnification: CGFloat, centeredAtPoint point: CGPoint)
-  convenience init(frame frameRect: NSRect)
+  func setMagnification(magnification: CGFloat, centeredAt point: CGPoint)
+  convenience init(frame frameRect: Rect)
   convenience init()
 }
 extension WKWebView : NSUserInterfaceValidations {
@@ -1663,9 +1663,9 @@ extension WKWebView : NSUserInterfaceValidations {
   @IBAction func reload(sender: AnyObject?)
   @IBAction func reloadFromOrigin(sender: AnyObject?)
   @IBAction func stopLoading(sender: AnyObject?)
-  func validateUserInterfaceItem(anItem: NSValidatedUserInterfaceItem) -> Bool
+  func validate(anItem: NSValidatedUserInterfaceItem) -> Bool
 }
-class WKWebViewConfiguration : NSObject, NSCopying {
+class WKWebViewConfiguration : Object, Copying {
   var processPool: WKProcessPool
   var preferences: WKPreferences
   var userContentController: WKUserContentController
@@ -1674,7 +1674,7 @@ class WKWebViewConfiguration : NSObject, NSCopying {
   var applicationNameForUserAgent: String?
   var allowsAirPlayForMediaPlayback: Bool
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 extension WKWebViewConfiguration {
 }
@@ -1686,59 +1686,59 @@ let WKWebsiteDataTypeSessionStorage: String
 let WKWebsiteDataTypeLocalStorage: String
 let WKWebsiteDataTypeWebSQLDatabases: String
 let WKWebsiteDataTypeIndexedDBDatabases: String
-class WKWebsiteDataRecord : NSObject {
+class WKWebsiteDataRecord : Object {
   var displayName: String { get }
   var dataTypes: Set<String> { get }
   init()
 }
-class WKWebsiteDataStore : NSObject {
+class WKWebsiteDataStore : Object {
   class func defaultDataStore() -> WKWebsiteDataStore
-  class func nonPersistentDataStore() -> WKWebsiteDataStore
-  var persistent: Bool { get }
+  class func nonPersistent() -> WKWebsiteDataStore
+  var isPersistent: Bool { get }
   class func allWebsiteDataTypes() -> Set<String>
   func fetchDataRecordsOfTypes(dataTypes: Set<String>, completionHandler: ([WKWebsiteDataRecord]) -> Void)
   func removeDataOfTypes(dataTypes: Set<String>, forDataRecords dataRecords: [WKWebsiteDataRecord], completionHandler: () -> Void)
-  func removeDataOfTypes(websiteDataTypes: Set<String>, modifiedSince date: NSDate, completionHandler: () -> Void)
+  func removeDataOfTypes(websiteDataTypes: Set<String>, modifiedSince date: Date, completionHandler: () -> Void)
 }
-class WKWindowFeatures : NSObject {
-  var menuBarVisibility: NSNumber? { get }
-  var statusBarVisibility: NSNumber? { get }
-  var toolbarsVisibility: NSNumber? { get }
-  var allowsResizing: NSNumber? { get }
-  var x: NSNumber? { get }
-  var y: NSNumber? { get }
-  var width: NSNumber? { get }
-  var height: NSNumber? { get }
+class WKWindowFeatures : Object {
+  var menuBarVisibility: Number? { get }
+  var statusBarVisibility: Number? { get }
+  var toolbarsVisibility: Number? { get }
+  var allowsResizing: Number? { get }
+  var x: Number? { get }
+  var y: Number? { get }
+  var width: Number? { get }
+  var height: Number? { get }
   init()
 }
 let WebArchivePboardType: String
-class WebArchive : NSObject, NSCoding, NSCopying {
+class WebArchive : Object, Coding, Copying {
   init!(mainResource: WebResource!, subresources: [AnyObject]!, subframeArchives: [AnyObject]!)
-  init!(data: NSData!)
+  init!(data: Data!)
   var mainResource: WebResource! { get }
   var subresources: [AnyObject]! { get }
   var subframeArchives: [AnyObject]! { get }
-  @NSCopying var data: NSData! { get }
+  @NSCopying var data: Data! { get }
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class WebBackForwardList : NSObject {
-  func addItem(item: WebHistoryItem!)
+class WebBackForwardList : Object {
+  func add(item: WebHistoryItem!)
   func goBack()
   func goForward()
-  func goToItem(item: WebHistoryItem!)
+  func goTo(item: WebHistoryItem!)
   var backItem: WebHistoryItem! { get }
   var currentItem: WebHistoryItem! { get }
   var forwardItem: WebHistoryItem! { get }
-  func backListWithLimit(limit: Int32) -> [AnyObject]!
+  func backWithLimit(limit: Int32) -> [AnyObject]!
   func forwardListWithLimit(limit: Int32) -> [AnyObject]!
   var capacity: Int32
   var backListCount: Int32 { get }
   var forwardListCount: Int32 { get }
-  func containsItem(item: WebHistoryItem!) -> Bool
-  func itemAtIndex(index: Int32) -> WebHistoryItem!
+  func contains(item: WebHistoryItem!) -> Bool
+  func itemAt(index: Int32) -> WebHistoryItem!
   init()
 }
 extension WebBackForwardList {
@@ -1750,7 +1750,7 @@ extension DOMNode {
 }
 extension DOMDocument {
   var webFrame: WebFrame! { get }
-  func URLWithAttributeString(string: String!) -> NSURL!
+  func urlWithAttributeString(string: String!) -> URL!
 }
 extension DOMRange {
   var webArchive: WebArchive! { get }
@@ -1765,26 +1765,26 @@ extension DOMHTMLIFrameElement {
 extension DOMHTMLObjectElement {
   var contentFrame: WebFrame! { get }
 }
-class WebDataSource : NSObject {
-  init!(request: NSURLRequest!)
-  @NSCopying var data: NSData! { get }
+class WebDataSource : Object {
+  init!(request: URLRequest!)
+  @NSCopying var data: Data! { get }
   var representation: WebDocumentRepresentation! { get }
   var webFrame: WebFrame! { get }
-  var initialRequest: NSURLRequest! { get }
-  var request: NSMutableURLRequest! { get }
-  var response: NSURLResponse! { get }
+  var initialRequest: URLRequest! { get }
+  var request: MutableURLRequest! { get }
+  var response: URLResponse! { get }
   var textEncodingName: String! { get }
-  var loading: Bool { get }
+  var isLoading: Bool { get }
   var pageTitle: String! { get }
-  var unreachableURL: NSURL! { get }
+  var unreachableURL: URL! { get }
   var webArchive: WebArchive! { get }
   var mainResource: WebResource! { get }
   var subresources: [AnyObject]! { get }
-  func subresourceForURL(URL: NSURL!) -> WebResource!
+  func subresourceFor(URL: URL!) -> WebResource!
   func addSubresource(subresource: WebResource!)
   init()
 }
-protocol WebDocumentView : NSObjectProtocol {
+protocol WebDocumentView : ObjectProtocol {
   func setDataSource(dataSource: WebDataSource!)
   func dataSourceUpdated(dataSource: WebDataSource!)
   func setNeedsLayout(flag: Bool)
@@ -1792,33 +1792,33 @@ protocol WebDocumentView : NSObjectProtocol {
   func viewWillMoveToHostWindow(hostWindow: NSWindow!)
   func viewDidMoveToHostWindow()
 }
-protocol WebDocumentSearching : NSObjectProtocol {
+protocol WebDocumentSearching : ObjectProtocol {
   func searchFor(string: String!, direction forward: Bool, caseSensitive caseFlag: Bool, wrap wrapFlag: Bool) -> Bool
 }
-protocol WebDocumentText : NSObjectProtocol {
+protocol WebDocumentText : ObjectProtocol {
   func supportsTextEncoding() -> Bool
   func string() -> String!
-  func attributedString() -> NSAttributedString!
+  func attributedString() -> AttributedString!
   func selectedString() -> String!
-  func selectedAttributedString() -> NSAttributedString!
+  func selectedAttributedString() -> AttributedString!
   func selectAll()
   func deselectAll()
 }
-protocol WebDocumentRepresentation : NSObjectProtocol {
+protocol WebDocumentRepresentation : ObjectProtocol {
   func setDataSource(dataSource: WebDataSource!)
-  func receivedData(data: NSData!, withDataSource dataSource: WebDataSource!)
-  func receivedError(error: NSError!, withDataSource dataSource: WebDataSource!)
-  func finishedLoadingWithDataSource(dataSource: WebDataSource!)
+  func receivedData(data: Data!, withDataSource dataSource: WebDataSource!)
+  func receivedError(error: Error!, withDataSource dataSource: WebDataSource!)
+  func finishedLoadingWith(dataSource: WebDataSource!)
   func canProvideDocumentSource() -> Bool
   func documentSource() -> String!
   func title() -> String!
 }
-class WebDownload : NSURLDownload {
-  init(request: NSURLRequest, delegate: NSURLDownloadDelegate?)
-  init(resumeData: NSData, delegate: NSURLDownloadDelegate?, path: String)
+class WebDownload : URLDownload {
+  init(request: URLRequest, delegate: URLDownloadDelegate?)
+  init(resumeData: Data, delegate: URLDownloadDelegate?, path: String)
   init()
 }
-protocol WebDownloadDelegate : NSURLDownloadDelegate {
+protocol WebDownloadDelegate : URLDownloadDelegate {
   optional func downloadWindowForAuthenticationSheet(download: WebDownload!) -> NSWindow!
 }
 enum WebViewInsertAction : Int {
@@ -1828,78 +1828,78 @@ enum WebViewInsertAction : Int {
   case Pasted
   case Dropped
 }
-protocol WebEditingDelegate : NSObjectProtocol {
+protocol WebEditingDelegate : ObjectProtocol {
 }
-extension NSObject {
-  class func webView(webView: WebView!, shouldBeginEditingInDOMRange range: DOMRange!) -> Bool
-  func webView(webView: WebView!, shouldBeginEditingInDOMRange range: DOMRange!) -> Bool
-  class func webView(webView: WebView!, shouldEndEditingInDOMRange range: DOMRange!) -> Bool
-  func webView(webView: WebView!, shouldEndEditingInDOMRange range: DOMRange!) -> Bool
-  class func webView(webView: WebView!, shouldInsertNode node: DOMNode!, replacingDOMRange range: DOMRange!, givenAction action: WebViewInsertAction) -> Bool
-  func webView(webView: WebView!, shouldInsertNode node: DOMNode!, replacingDOMRange range: DOMRange!, givenAction action: WebViewInsertAction) -> Bool
-  class func webView(webView: WebView!, shouldInsertText text: String!, replacingDOMRange range: DOMRange!, givenAction action: WebViewInsertAction) -> Bool
-  func webView(webView: WebView!, shouldInsertText text: String!, replacingDOMRange range: DOMRange!, givenAction action: WebViewInsertAction) -> Bool
-  class func webView(webView: WebView!, shouldDeleteDOMRange range: DOMRange!) -> Bool
-  func webView(webView: WebView!, shouldDeleteDOMRange range: DOMRange!) -> Bool
-  class func webView(webView: WebView!, shouldChangeSelectedDOMRange currentRange: DOMRange!, toDOMRange proposedRange: DOMRange!, affinity selectionAffinity: NSSelectionAffinity, stillSelecting flag: Bool) -> Bool
-  func webView(webView: WebView!, shouldChangeSelectedDOMRange currentRange: DOMRange!, toDOMRange proposedRange: DOMRange!, affinity selectionAffinity: NSSelectionAffinity, stillSelecting flag: Bool) -> Bool
-  class func webView(webView: WebView!, shouldApplyStyle style: DOMCSSStyleDeclaration!, toElementsInDOMRange range: DOMRange!) -> Bool
-  func webView(webView: WebView!, shouldApplyStyle style: DOMCSSStyleDeclaration!, toElementsInDOMRange range: DOMRange!) -> Bool
+extension Object {
+  class func webView(webView: WebView!, shouldBeginEditingIn range: DOMRange!) -> Bool
+  func webView(webView: WebView!, shouldBeginEditingIn range: DOMRange!) -> Bool
+  class func webView(webView: WebView!, shouldEndEditingIn range: DOMRange!) -> Bool
+  func webView(webView: WebView!, shouldEndEditingIn range: DOMRange!) -> Bool
+  class func webView(webView: WebView!, shouldInsert node: DOMNode!, replacing range: DOMRange!, given action: WebViewInsertAction) -> Bool
+  func webView(webView: WebView!, shouldInsert node: DOMNode!, replacing range: DOMRange!, given action: WebViewInsertAction) -> Bool
+  class func webView(webView: WebView!, shouldInsertText text: String!, replacing range: DOMRange!, given action: WebViewInsertAction) -> Bool
+  func webView(webView: WebView!, shouldInsertText text: String!, replacing range: DOMRange!, given action: WebViewInsertAction) -> Bool
+  class func webView(webView: WebView!, shouldDelete range: DOMRange!) -> Bool
+  func webView(webView: WebView!, shouldDelete range: DOMRange!) -> Bool
+  class func webView(webView: WebView!, shouldChangeSelectedDOMRange currentRange: DOMRange!, to proposedRange: DOMRange!, affinity selectionAffinity: NSSelectionAffinity, stillSelecting flag: Bool) -> Bool
+  func webView(webView: WebView!, shouldChangeSelectedDOMRange currentRange: DOMRange!, to proposedRange: DOMRange!, affinity selectionAffinity: NSSelectionAffinity, stillSelecting flag: Bool) -> Bool
+  class func webView(webView: WebView!, shouldApplyStyle style: DOMCSSStyleDeclaration!, toElementsIn range: DOMRange!) -> Bool
+  func webView(webView: WebView!, shouldApplyStyle style: DOMCSSStyleDeclaration!, toElementsIn range: DOMRange!) -> Bool
   class func webView(webView: WebView!, shouldChangeTypingStyle currentStyle: DOMCSSStyleDeclaration!, toStyle proposedStyle: DOMCSSStyleDeclaration!) -> Bool
   func webView(webView: WebView!, shouldChangeTypingStyle currentStyle: DOMCSSStyleDeclaration!, toStyle proposedStyle: DOMCSSStyleDeclaration!) -> Bool
-  class func webView(webView: WebView!, doCommandBySelector selector: Selector) -> Bool
-  func webView(webView: WebView!, doCommandBySelector selector: Selector) -> Bool
-  class func webViewDidBeginEditing(notification: NSNotification!)
-  func webViewDidBeginEditing(notification: NSNotification!)
-  class func webViewDidChange(notification: NSNotification!)
-  func webViewDidChange(notification: NSNotification!)
-  class func webViewDidEndEditing(notification: NSNotification!)
-  func webViewDidEndEditing(notification: NSNotification!)
-  class func webViewDidChangeTypingStyle(notification: NSNotification!)
-  func webViewDidChangeTypingStyle(notification: NSNotification!)
-  class func webViewDidChangeSelection(notification: NSNotification!)
-  func webViewDidChangeSelection(notification: NSNotification!)
-  class func undoManagerForWebView(webView: WebView!) -> NSUndoManager!
-  func undoManagerForWebView(webView: WebView!) -> NSUndoManager!
+  class func webView(webView: WebView!, doCommandBy selector: Selector) -> Bool
+  func webView(webView: WebView!, doCommandBy selector: Selector) -> Bool
+  class func webViewDidBeginEditing(notification: Notification!)
+  func webViewDidBeginEditing(notification: Notification!)
+  class func webViewDidChange(notification: Notification!)
+  func webViewDidChange(notification: Notification!)
+  class func webViewDidEndEditing(notification: Notification!)
+  func webViewDidEndEditing(notification: Notification!)
+  class func webViewDidChangeTypingStyle(notification: Notification!)
+  func webViewDidChangeTypingStyle(notification: Notification!)
+  class func webViewDidChangeSelection(notification: Notification!)
+  func webViewDidChangeSelection(notification: Notification!)
+  class func undoManagerFor(webView: WebView!) -> UndoManager!
+  func undoManagerFor(webView: WebView!) -> UndoManager!
 }
-class WebFrame : NSObject {
+class WebFrame : Object {
   init!(name: String!, webFrameView view: WebFrameView!, webView: WebView!)
   var name: String! { get }
   var webView: WebView! { get }
   var frameView: WebFrameView! { get }
-  var DOMDocument: DOMDocument! { get }
+  var domDocument: DOMDocument! { get }
   var frameElement: DOMHTMLElement! { get }
-  func loadRequest(request: NSURLRequest!)
-  func loadData(data: NSData!, MIMEType: String!, textEncodingName encodingName: String!, baseURL URL: NSURL!)
-  func loadHTMLString(string: String!, baseURL URL: NSURL!)
-  func loadAlternateHTMLString(string: String!, baseURL: NSURL!, forUnreachableURL unreachableURL: NSURL!)
-  func loadArchive(archive: WebArchive!)
+  func load(request: URLRequest!)
+  func load(data: Data!, mimeType MIMEType: String!, textEncodingName encodingName: String!, baseURL URL: URL!)
+  func loadHTMLString(string: String!, baseURL URL: URL!)
+  func loadAlternateHTMLString(string: String!, baseURL: URL!, forUnreachableURL unreachableURL: URL!)
+  func load(archive: WebArchive!)
   var dataSource: WebDataSource? { get }
   var provisionalDataSource: WebDataSource! { get }
   func stopLoading()
   func reload()
   func reloadFromOrigin()
-  func findFrameNamed(name: String!) -> WebFrame!
-  var parentFrame: WebFrame! { get }
+  func findNamed(name: String!) -> WebFrame!
+  var parent: WebFrame! { get }
   var childFrames: [AnyObject]! { get }
   var windowObject: WebScriptObject! { get }
   var globalContext: JSGlobalContextRef { get }
   var javaScriptContext: JSContext! { get }
   init()
 }
-protocol WebFrameLoadDelegate : NSObjectProtocol {
-  optional func webView(sender: WebView!, didStartProvisionalLoadForFrame frame: WebFrame!)
-  optional func webView(sender: WebView!, didReceiveServerRedirectForProvisionalLoadForFrame frame: WebFrame!)
-  optional func webView(sender: WebView!, didFailProvisionalLoadWithError error: NSError!, forFrame frame: WebFrame!)
-  optional func webView(sender: WebView!, didCommitLoadForFrame frame: WebFrame!)
+protocol WebFrameLoadDelegate : ObjectProtocol {
+  optional func webView(sender: WebView!, didStartProvisionalLoadFor frame: WebFrame!)
+  optional func webView(sender: WebView!, didReceiveServerRedirectForProvisionalLoadFor frame: WebFrame!)
+  optional func webView(sender: WebView!, didFailProvisionalLoadWithError error: Error!, forFrame frame: WebFrame!)
+  optional func webView(sender: WebView!, didCommitLoadFor frame: WebFrame!)
   optional func webView(sender: WebView!, didReceiveTitle title: String!, forFrame frame: WebFrame!)
   optional func webView(sender: WebView!, didReceiveIcon image: NSImage!, forFrame frame: WebFrame!)
-  optional func webView(sender: WebView!, didFinishLoadForFrame frame: WebFrame!)
-  optional func webView(sender: WebView!, didFailLoadWithError error: NSError!, forFrame frame: WebFrame!)
-  optional func webView(sender: WebView!, didChangeLocationWithinPageForFrame frame: WebFrame!)
-  optional func webView(sender: WebView!, willPerformClientRedirectToURL URL: NSURL!, delay seconds: NSTimeInterval, fireDate date: NSDate!, forFrame frame: WebFrame!)
-  optional func webView(sender: WebView!, didCancelClientRedirectForFrame frame: WebFrame!)
-  optional func webView(sender: WebView!, willCloseFrame frame: WebFrame!)
+  optional func webView(sender: WebView!, didFinishLoadFor frame: WebFrame!)
+  optional func webView(sender: WebView!, didFailLoadWithError error: Error!, forFrame frame: WebFrame!)
+  optional func webView(sender: WebView!, didChangeLocationWithinPageFor frame: WebFrame!)
+  optional func webView(sender: WebView!, willPerformClientRedirectTo URL: URL!, delay seconds: TimeInterval, fire date: Date!, forFrame frame: WebFrame!)
+  optional func webView(sender: WebView!, didCancelClientRedirectFor frame: WebFrame!)
+  optional func webView(sender: WebView!, willClose frame: WebFrame!)
   optional func webView(webView: WebView!, didClearWindowObject windowObject: WebScriptObject!, forFrame frame: WebFrame!)
   optional func webView(webView: WebView!, didCreateJavaScriptContext context: JSContext!, forFrame frame: WebFrame!)
 }
@@ -1908,11 +1908,11 @@ class WebFrameView : NSView {
   var documentView: NSView! { get }
   var allowsScrolling: Bool
   var canPrintHeadersAndFooters: Bool { get }
-  func printOperationWithPrintInfo(printInfo: NSPrintInfo!) -> NSPrintOperation!
+  func printOperationWith(printInfo: NSPrintInfo!) -> NSPrintOperation!
   var documentViewShouldHandlePrint: Bool { get }
   func printDocumentView()
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 let WebHistoryItemsAddedNotification: String
@@ -1921,32 +1921,32 @@ let WebHistoryAllItemsRemovedNotification: String
 let WebHistoryLoadedNotification: String
 let WebHistorySavedNotification: String
 let WebHistoryItemsKey: String
-class WebHistory : NSObject {
-  class func optionalSharedHistory() -> WebHistory!
+class WebHistory : Object {
+  class func optionalShared() -> WebHistory!
   class func setOptionalSharedHistory(history: WebHistory!)
-  func loadFromURL(URL: NSURL!) throws
-  func saveToURL(URL: NSURL!) throws
+  func loadFrom(URL: URL!) throws
+  func saveTo(URL: URL!) throws
   func addItems(newItems: [AnyObject]!)
   func removeItems(items: [AnyObject]!)
   func removeAllItems()
   var orderedLastVisitedDays: [AnyObject]! { get }
-  func orderedItemsLastVisitedOnDay(calendarDate: NSCalendarDate!) -> [AnyObject]!
-  func itemForURL(URL: NSURL!) -> WebHistoryItem!
+  func orderedItemsLastVisitedOnDay(calendarDate: CalendarDate!) -> [AnyObject]!
+  func itemFor(URL: URL!) -> WebHistoryItem!
   var historyItemLimit: Int32
   var historyAgeInDaysLimit: Int32
   init()
 }
 let WebHistoryItemChangedNotification: String
-class WebHistoryItem : NSObject, NSCopying {
-  init!(URLString: String!, title: String!, lastVisitedTimeInterval time: NSTimeInterval)
+class WebHistoryItem : Object, Copying {
+  init!(urlString URLString: String!, title: String!, lastVisitedTimeInterval time: TimeInterval)
   var originalURLString: String! { get }
-  var URLString: String! { get }
+  var urlString: String! { get }
   var title: String! { get }
-  var lastVisitedTimeInterval: NSTimeInterval { get }
+  var lastVisitedTimeInterval: TimeInterval { get }
   var alternateTitle: String!
   var icon: NSImage! { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 let WebKitErrorDomain: String
 let WebKitErrorMIMETypeKey: String
@@ -1959,7 +1959,7 @@ var WebKitErrorCannotFindPlugIn: Int { get }
 var WebKitErrorCannotLoadPlugIn: Int { get }
 var WebKitErrorJavaUnavailable: Int { get }
 var WebKitErrorBlockedPlugInVersion: Int { get }
-extension NSObject {
+extension Object {
   class func webPlugInInitialize()
   func webPlugInInitialize()
   class func webPlugInStart()
@@ -1971,19 +1971,19 @@ extension NSObject {
   class func webPlugInSetIsSelected(isSelected: Bool)
   func webPlugInSetIsSelected(isSelected: Bool)
   var objectForWebScript: AnyObject! { get }
-  class func webPlugInMainResourceDidReceiveResponse(response: NSURLResponse!)
-  func webPlugInMainResourceDidReceiveResponse(response: NSURLResponse!)
-  class func webPlugInMainResourceDidReceiveData(data: NSData!)
-  func webPlugInMainResourceDidReceiveData(data: NSData!)
-  class func webPlugInMainResourceDidFailWithError(error: NSError!)
-  func webPlugInMainResourceDidFailWithError(error: NSError!)
+  class func webPlugInMainResourceDidReceive(response: URLResponse!)
+  func webPlugInMainResourceDidReceive(response: URLResponse!)
+  class func webPlugInMainResourceDidReceive(data: Data!)
+  func webPlugInMainResourceDidReceive(data: Data!)
+  class func webPlugInMainResourceDidFailWithError(error: Error!)
+  func webPlugInMainResourceDidFailWithError(error: Error!)
   class func webPlugInMainResourceDidFinishLoading()
   func webPlugInMainResourceDidFinishLoading()
   class func objectForWebScript() -> AnyObject!
 }
-extension NSObject {
-  class func webPlugInContainerLoadRequest(request: NSURLRequest!, inFrame target: String!)
-  func webPlugInContainerLoadRequest(request: NSURLRequest!, inFrame target: String!)
+extension Object {
+  class func webPlugInContainerLoad(request: URLRequest!, inFrame target: String!)
+  func webPlugInContainerLoad(request: URLRequest!, inFrame target: String!)
   class func webPlugInContainerShowStatus(message: String!)
   func webPlugInContainerShowStatus(message: String!)
   var webPlugInContainerSelectionColor: NSColor! { get }
@@ -1996,8 +1996,8 @@ let WebPlugInAttributesKey: String
 let WebPlugInContainerKey: String
 let WebPlugInContainingElementKey: String
 let WebPlugInShouldLoadMainResourceKey: String
-protocol WebPlugInViewFactory : NSObjectProtocol {
-  static func plugInViewWithArguments(arguments: [NSObject : AnyObject]!) -> NSView!
+protocol WebPlugInViewFactory : ObjectProtocol {
+  static func plugInViewWithArguments(arguments: [Object : AnyObject]!) -> NSView!
 }
 enum WebNavigationType : Int {
   init?(rawValue: Int)
@@ -2014,16 +2014,16 @@ let WebActionElementKey: String
 let WebActionButtonKey: String
 let WebActionModifierFlagsKey: String
 let WebActionOriginalURLKey: String
-protocol WebPolicyDecisionListener : NSObjectProtocol {
+protocol WebPolicyDecisionListener : ObjectProtocol {
   func use()
   func download()
   func ignore()
 }
-protocol WebPolicyDelegate : NSObjectProtocol {
-  optional func webView(webView: WebView!, decidePolicyForNavigationAction actionInformation: [NSObject : AnyObject]!, request: NSURLRequest!, frame: WebFrame!, decisionListener listener: WebPolicyDecisionListener!)
-  optional func webView(webView: WebView!, decidePolicyForNewWindowAction actionInformation: [NSObject : AnyObject]!, request: NSURLRequest!, newFrameName frameName: String!, decisionListener listener: WebPolicyDecisionListener!)
-  optional func webView(webView: WebView!, decidePolicyForMIMEType type: String!, request: NSURLRequest!, frame: WebFrame!, decisionListener listener: WebPolicyDecisionListener!)
-  optional func webView(webView: WebView!, unableToImplementPolicyWithError error: NSError!, frame: WebFrame!)
+protocol WebPolicyDelegate : ObjectProtocol {
+  optional func webView(webView: WebView!, decidePolicyForNavigationAction actionInformation: [Object : AnyObject]!, request: URLRequest!, frame: WebFrame!, decisionListener listener: WebPolicyDecisionListener!)
+  optional func webView(webView: WebView!, decidePolicyForNewWindowAction actionInformation: [Object : AnyObject]!, request: URLRequest!, newFrameName frameName: String!, decisionListener listener: WebPolicyDecisionListener!)
+  optional func webView(webView: WebView!, decidePolicyForMIMEType type: String!, request: URLRequest!, frame: WebFrame!, decisionListener listener: WebPolicyDecisionListener!)
+  optional func webView(webView: WebView!, unableToImplementPolicyWithError error: Error!, frame: WebFrame!)
 }
 enum WebCacheModel : UInt {
   init?(rawValue: UInt)
@@ -2033,8 +2033,8 @@ enum WebCacheModel : UInt {
   case PrimaryWebBrowser
 }
 let WebPreferencesChangedNotification: String
-class WebPreferences : NSObject, NSCoding {
-  class func standardPreferences() -> WebPreferences!
+class WebPreferences : Object, Coding {
+  class func standard() -> WebPreferences!
   init!(identifier anIdentifier: String!)
   var identifier: String! { get }
   var standardFontFamily: String!
@@ -2049,11 +2049,11 @@ class WebPreferences : NSObject, NSCoding {
   var minimumLogicalFontSize: Int32
   var defaultTextEncodingName: String!
   var userStyleSheetEnabled: Bool
-  var userStyleSheetLocation: NSURL!
-  var javaEnabled: Bool
-  var javaScriptEnabled: Bool
+  var userStyleSheetLocation: URL!
+  var isJavaEnabled: Bool
+  var isJavaScriptEnabled: Bool
   var javaScriptCanOpenWindowsAutomatically: Bool
-  var plugInsEnabled: Bool
+  var arePlugInsEnabled: Bool
   var allowsAnimatedImages: Bool
   var allowsAnimatedImageLooping: Bool
   var loadsImagesAutomatically: Bool
@@ -2066,34 +2066,34 @@ class WebPreferences : NSObject, NSCoding {
   var suppressesIncrementalRendering: Bool
   var allowsAirPlayForMediaPlayback: Bool
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class WebResource : NSObject, NSCoding, NSCopying {
-  init!(data: NSData!, URL: NSURL!, MIMEType: String!, textEncodingName: String!, frameName: String!)
-  @NSCopying var data: NSData! { get }
-  var URL: NSURL! { get }
-  var MIMEType: String! { get }
+class WebResource : Object, Coding, Copying {
+  init!(data: Data!, url URL: URL!, mimeType MIMEType: String!, textEncodingName: String!, frameName: String!)
+  @NSCopying var data: Data! { get }
+  var url: URL! { get }
+  var mimeType: String! { get }
   var textEncodingName: String! { get }
   var frameName: String! { get }
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-protocol WebResourceLoadDelegate : NSObjectProtocol {
-  optional func webView(sender: WebView!, identifierForInitialRequest request: NSURLRequest!, fromDataSource dataSource: WebDataSource!) -> AnyObject!
-  optional func webView(sender: WebView!, resource identifier: AnyObject!, willSendRequest request: NSURLRequest!, redirectResponse: NSURLResponse!, fromDataSource dataSource: WebDataSource!) -> NSURLRequest!
-  optional func webView(sender: WebView!, resource identifier: AnyObject!, didReceiveAuthenticationChallenge challenge: NSURLAuthenticationChallenge!, fromDataSource dataSource: WebDataSource!)
-  optional func webView(sender: WebView!, resource identifier: AnyObject!, didCancelAuthenticationChallenge challenge: NSURLAuthenticationChallenge!, fromDataSource dataSource: WebDataSource!)
-  optional func webView(sender: WebView!, resource identifier: AnyObject!, didReceiveResponse response: NSURLResponse!, fromDataSource dataSource: WebDataSource!)
-  optional func webView(sender: WebView!, resource identifier: AnyObject!, didReceiveContentLength length: Int, fromDataSource dataSource: WebDataSource!)
-  optional func webView(sender: WebView!, resource identifier: AnyObject!, didFinishLoadingFromDataSource dataSource: WebDataSource!)
-  optional func webView(sender: WebView!, resource identifier: AnyObject!, didFailLoadingWithError error: NSError!, fromDataSource dataSource: WebDataSource!)
-  optional func webView(sender: WebView!, plugInFailedWithError error: NSError!, dataSource: WebDataSource!)
+protocol WebResourceLoadDelegate : ObjectProtocol {
+  optional func webView(sender: WebView!, identifierForInitialRequest request: URLRequest!, from dataSource: WebDataSource!) -> AnyObject!
+  optional func webView(sender: WebView!, resource identifier: AnyObject!, willSend request: URLRequest!, redirectResponse: URLResponse!, from dataSource: WebDataSource!) -> URLRequest!
+  optional func webView(sender: WebView!, resource identifier: AnyObject!, didReceive challenge: URLAuthenticationChallenge!, from dataSource: WebDataSource!)
+  optional func webView(sender: WebView!, resource identifier: AnyObject!, didCancel challenge: URLAuthenticationChallenge!, from dataSource: WebDataSource!)
+  optional func webView(sender: WebView!, resource identifier: AnyObject!, didReceive response: URLResponse!, from dataSource: WebDataSource!)
+  optional func webView(sender: WebView!, resource identifier: AnyObject!, didReceiveContentLength length: Int, from dataSource: WebDataSource!)
+  optional func webView(sender: WebView!, resource identifier: AnyObject!, didFinishLoadingFrom dataSource: WebDataSource!)
+  optional func webView(sender: WebView!, resource identifier: AnyObject!, didFailLoadingWithError error: Error!, from dataSource: WebDataSource!)
+  optional func webView(sender: WebView!, plugInFailedWithError error: Error!, dataSource: WebDataSource!)
 }
-extension NSObject {
-  class func webScriptNameForSelector(selector: Selector) -> String!
+extension Object {
+  class func webScriptNameFor(selector: Selector) -> String!
   class func isSelectorExcludedFromWebScript(selector: Selector) -> Bool
   class func webScriptNameForKey(name: UnsafePointer<Int8>) -> String!
   class func isKeyExcludedFromWebScript(name: UnsafePointer<Int8>) -> Bool
@@ -2104,24 +2104,24 @@ extension NSObject {
   class func finalizeForWebScript()
   func finalizeForWebScript()
 }
-class WebScriptObject : NSObject {
+class WebScriptObject : Object {
   class func throwException(exceptionMessage: String!) -> Bool
-  func JSObject() -> JSObjectRef
+  func jsObject() -> JSObjectRef
   func callWebScriptMethod(name: String!, withArguments arguments: [AnyObject]!) -> AnyObject!
   func evaluateWebScript(script: String!) -> AnyObject!
   func removeWebScriptKey(name: String!)
   func stringRepresentation() -> String!
-  func webScriptValueAtIndex(index: UInt32) -> AnyObject!
-  func setWebScriptValueAtIndex(index: UInt32, value: AnyObject!)
+  func webScriptValueAt(index: UInt32) -> AnyObject!
+  func setWebScriptValueAt(index: UInt32, value: AnyObject!)
   func setException(description: String!)
-  func JSValue() -> JSValue!
+  func jsValue() -> JSValue!
   init()
 }
-class WebUndefined : NSObject, NSCoding, NSCopying {
+class WebUndefined : Object, Coding, Copying {
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 var WebMenuItemTagOpenLinkInNewWindow: Int { get }
 var WebMenuItemTagDownloadLinkToDisk: Int { get }
@@ -2174,15 +2174,15 @@ struct WebDragSourceAction : OptionSetType {
   static var Selection: WebDragSourceAction { get }
   static var Any: WebDragSourceAction { get }
 }
-protocol WebOpenPanelResultListener : NSObjectProtocol {
+protocol WebOpenPanelResultListener : ObjectProtocol {
   func chooseFilename(fileName: String!)
   func chooseFilenames(fileNames: [AnyObject]!)
   func cancel()
 }
-protocol WebUIDelegate : NSObjectProtocol {
-  optional func webView(sender: WebView!, createWebViewWithRequest request: NSURLRequest!) -> WebView!
+protocol WebUIDelegate : ObjectProtocol {
+  optional func webView(sender: WebView!, createWebViewWith request: URLRequest!) -> WebView!
   optional func webViewShow(sender: WebView!)
-  optional func webView(sender: WebView!, createWebViewModalDialogWithRequest request: NSURLRequest!) -> WebView!
+  optional func webView(sender: WebView!, createWebViewModalDialogWith request: URLRequest!) -> WebView!
   optional func webViewRunModal(sender: WebView!)
   optional func webViewClose(sender: WebView!)
   optional func webViewFocus(sender: WebView!)
@@ -2197,27 +2197,27 @@ protocol WebUIDelegate : NSObjectProtocol {
   optional func webView(sender: WebView!, setStatusBarVisible visible: Bool)
   optional func webViewIsResizable(sender: WebView!) -> Bool
   optional func webView(sender: WebView!, setResizable resizable: Bool)
-  optional func webView(sender: WebView!, setFrame frame: NSRect)
-  optional func webViewFrame(sender: WebView!) -> NSRect
-  optional func webView(sender: WebView!, runJavaScriptAlertPanelWithMessage message: String!, initiatedByFrame frame: WebFrame!)
-  optional func webView(sender: WebView!, runJavaScriptConfirmPanelWithMessage message: String!, initiatedByFrame frame: WebFrame!) -> Bool
-  optional func webView(sender: WebView!, runJavaScriptTextInputPanelWithPrompt prompt: String!, defaultText: String!, initiatedByFrame frame: WebFrame!) -> String!
-  optional func webView(sender: WebView!, runBeforeUnloadConfirmPanelWithMessage message: String!, initiatedByFrame frame: WebFrame!) -> Bool
-  optional func webView(sender: WebView!, runOpenPanelForFileButtonWithResultListener resultListener: WebOpenPanelResultListener!)
-  optional func webView(sender: WebView!, runOpenPanelForFileButtonWithResultListener resultListener: WebOpenPanelResultListener!, allowMultipleFiles: Bool)
-  optional func webView(sender: WebView!, mouseDidMoveOverElement elementInformation: [NSObject : AnyObject]!, modifierFlags: Int)
-  optional func webView(sender: WebView!, contextMenuItemsForElement element: [NSObject : AnyObject]!, defaultMenuItems: [AnyObject]!) -> [AnyObject]!
-  optional func webView(webView: WebView!, validateUserInterfaceItem item: NSValidatedUserInterfaceItem!, defaultValidation: Bool) -> Bool
+  optional func webView(sender: WebView!, setFrame frame: Rect)
+  optional func webViewFrame(sender: WebView!) -> Rect
+  optional func webView(sender: WebView!, runJavaScriptAlertPanelWithMessage message: String!, initiatedBy frame: WebFrame!)
+  optional func webView(sender: WebView!, runJavaScriptConfirmPanelWithMessage message: String!, initiatedBy frame: WebFrame!) -> Bool
+  optional func webView(sender: WebView!, runJavaScriptTextInputPanelWithPrompt prompt: String!, defaultText: String!, initiatedBy frame: WebFrame!) -> String!
+  optional func webView(sender: WebView!, runBeforeUnloadConfirmPanelWithMessage message: String!, initiatedBy frame: WebFrame!) -> Bool
+  optional func webView(sender: WebView!, runOpenPanelForFileButtonWith resultListener: WebOpenPanelResultListener!)
+  optional func webView(sender: WebView!, runOpenPanelForFileButtonWith resultListener: WebOpenPanelResultListener!, allowMultipleFiles: Bool)
+  optional func webView(sender: WebView!, mouseDidMoveOverElement elementInformation: [Object : AnyObject]!, modifierFlags: Int)
+  optional func webView(sender: WebView!, contextMenuItemsForElement element: [Object : AnyObject]!, defaultMenuItems: [AnyObject]!) -> [AnyObject]!
+  optional func webView(webView: WebView!, validate item: NSValidatedUserInterfaceItem!, defaultValidation: Bool) -> Bool
   optional func webView(webView: WebView!, shouldPerformAction action: Selector, fromSender sender: AnyObject!) -> Bool
-  optional func webView(webView: WebView!, dragDestinationActionMaskForDraggingInfo draggingInfo: NSDraggingInfo!) -> Int
-  optional func webView(webView: WebView!, willPerformDragDestinationAction action: WebDragDestinationAction, forDraggingInfo draggingInfo: NSDraggingInfo!)
-  optional func webView(webView: WebView!, dragSourceActionMaskForPoint point: NSPoint) -> Int
-  optional func webView(webView: WebView!, willPerformDragSourceAction action: WebDragSourceAction, fromPoint point: NSPoint, withPasteboard pasteboard: NSPasteboard!)
-  optional func webView(sender: WebView!, printFrameView frameView: WebFrameView!)
+  optional func webView(webView: WebView!, dragDestinationActionMaskFor draggingInfo: NSDraggingInfo!) -> Int
+  optional func webView(webView: WebView!, willPerform action: WebDragDestinationAction, forDraggingInfo draggingInfo: NSDraggingInfo!)
+  optional func webView(webView: WebView!, dragSourceActionMaskFor point: Point) -> Int
+  optional func webView(webView: WebView!, willPerform action: WebDragSourceAction, from point: Point, withPasteboard pasteboard: NSPasteboard!)
+  optional func webView(sender: WebView!, print frameView: WebFrameView!)
   optional func webViewHeaderHeight(sender: WebView!) -> Float
   optional func webViewFooterHeight(sender: WebView!) -> Float
-  optional func webView(sender: WebView!, drawHeaderInRect rect: NSRect)
-  optional func webView(sender: WebView!, drawFooterInRect rect: NSRect)
+  optional func webView(sender: WebView!, drawHeaderIn rect: Rect)
+  optional func webView(sender: WebView!, drawFooterIn rect: Rect)
 }
 let WebElementDOMNodeKey: String
 let WebElementFrameKey: String
@@ -2236,15 +2236,15 @@ let WebViewProgressFinishedNotification: String
 class WebView : NSView {
   class func canShowMIMEType(MIMEType: String!) -> Bool
   class func canShowMIMETypeAsHTML(MIMEType: String!) -> Bool
-  class func MIMETypesShownAsHTML() -> [AnyObject]!
+  class func mimeTypesShownAsHTML() -> [AnyObject]!
   class func setMIMETypesShownAsHTML(MIMETypes: [AnyObject]!)
-  class func URLFromPasteboard(pasteboard: NSPasteboard!) -> NSURL!
-  class func URLTitleFromPasteboard(pasteboard: NSPasteboard!) -> String!
+  class func urlFrom(pasteboard: NSPasteboard!) -> URL!
+  class func urlTitleFrom(pasteboard: NSPasteboard!) -> String!
   class func registerURLSchemeAsLocal(scheme: String!)
-  init!(frame: NSRect, frameName: String!, groupName: String!)
+  init!(frame: Rect, frameName: String!, groupName: String!)
   func close()
   var shouldCloseWithWindow: Bool
-  unowned(unsafe) var UIDelegate: @sil_unmanaged WebUIDelegate!
+  unowned(unsafe) var uiDelegate: @sil_unmanaged WebUIDelegate!
   unowned(unsafe) var resourceLoadDelegate: @sil_unmanaged WebResourceLoadDelegate!
   unowned(unsafe) var downloadDelegate: @sil_unmanaged WebDownloadDelegate!
   unowned(unsafe) var frameLoadDelegate: @sil_unmanaged WebFrameLoadDelegate!
@@ -2259,26 +2259,26 @@ class WebView : NSView {
   var textSizeMultiplier: Float
   var applicationNameForUserAgent: String!
   var customUserAgent: String!
-  func userAgentForURL(URL: NSURL!) -> String!
+  func userAgentFor(URL: URL!) -> String!
   var supportsTextEncoding: Bool { get }
   var customTextEncodingName: String!
   var mediaStyle: String!
-  func stringByEvaluatingJavaScriptFromString(script: String!) -> String!
+  func stringByEvaluatingJavaScriptFrom(script: String!) -> String!
   var windowScriptObject: WebScriptObject! { get }
   var preferences: WebPreferences!
   var preferencesIdentifier: String!
   var hostWindow: NSWindow!
   func searchFor(string: String!, direction forward: Bool, caseSensitive caseFlag: Bool, wrap wrapFlag: Bool) -> Bool
-  class func registerViewClass(viewClass: AnyClass!, representationClass: AnyClass!, forMIMEType MIMEType: String!)
+  class func registerClass(viewClass: AnyClass!, representationClass: AnyClass!, forMIMEType MIMEType: String!)
   var groupName: String!
   var estimatedProgress: Double { get }
-  var loading: Bool { get }
-  func elementAtPoint(point: NSPoint) -> [NSObject : AnyObject]!
+  var isLoading: Bool { get }
+  func elementAt(point: Point) -> [Object : AnyObject]!
   var pasteboardTypesForSelection: [AnyObject]! { get }
-  func writeSelectionWithPasteboardTypes(types: [AnyObject]!, toPasteboard pasteboard: NSPasteboard!)
-  func pasteboardTypesForElement(element: [NSObject : AnyObject]!) -> [AnyObject]!
-  func writeElement(element: [NSObject : AnyObject]!, withPasteboardTypes types: [AnyObject]!, toPasteboard pasteboard: NSPasteboard!)
-  func moveDragCaretToPoint(point: NSPoint)
+  func writeSelectionWithPasteboardTypes(types: [AnyObject]!, to pasteboard: NSPasteboard!)
+  func pasteboardTypesForElement(element: [Object : AnyObject]!) -> [AnyObject]!
+  func writeElement(element: [Object : AnyObject]!, withPasteboardTypes types: [AnyObject]!, to pasteboard: NSPasteboard!)
+  func moveDragCaretTo(point: Point)
   func removeDragCaret()
   var drawsBackground: Bool
   var shouldUpdateWhileOffscreen: Bool
@@ -2286,8 +2286,8 @@ class WebView : NSView {
   var mainFrameDocument: DOMDocument! { get }
   var mainFrameTitle: String! { get }
   var mainFrameIcon: NSImage! { get }
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 extension WebView : NSUserInterfaceValidations {
@@ -2307,7 +2307,7 @@ extension WebView : NSUserInterfaceValidations {
   @IBAction func makeTextStandardSize(sender: AnyObject?)
   @IBAction func toggleContinuousSpellChecking(sender: AnyObject?)
   @IBAction func toggleSmartInsertDelete(sender: AnyObject?)
-  func validateUserInterfaceItem(anItem: NSValidatedUserInterfaceItem) -> Bool
+  func validate(anItem: NSValidatedUserInterfaceItem) -> Bool
 }
 let WebViewDidBeginEditingNotification: String
 let WebViewDidChangeNotification: String
@@ -2315,28 +2315,28 @@ let WebViewDidEndEditingNotification: String
 let WebViewDidChangeTypingStyleNotification: String
 let WebViewDidChangeSelectionNotification: String
 extension WebView {
-  func computedStyleForElement(element: DOMElement!, pseudoElement: String!) -> DOMCSSStyleDeclaration!
+  func computedStyleFor(element: DOMElement!, pseudoElement: String!) -> DOMCSSStyleDeclaration!
 }
 extension WebView {
-  func editableDOMRangeForPoint(point: NSPoint) -> DOMRange!
+  func editableDOMRangeFor(point: Point) -> DOMRange!
   func setSelectedDOMRange(range: DOMRange!, affinity selectionAffinity: NSSelectionAffinity)
   var selectedDOMRange: DOMRange! { get }
   var selectionAffinity: NSSelectionAffinity { get }
   var maintainsInactiveSelection: Bool { get }
-  var editable: Bool
+  var isEditable: Bool
   var typingStyle: DOMCSSStyleDeclaration!
   var smartInsertDeleteEnabled: Bool
-  var continuousSpellCheckingEnabled: Bool
+  var isContinuousSpellCheckingEnabled: Bool
   var spellCheckerDocumentTag: Int { get }
-  var undoManager: NSUndoManager! { get }
+  var undoManager: UndoManager! { get }
   var editingDelegate: AnyObject!
   func styleDeclarationWithText(text: String!) -> DOMCSSStyleDeclaration!
 }
 extension WebView {
-  func replaceSelectionWithNode(node: DOMNode!)
+  func replaceSelectionWith(node: DOMNode!)
   func replaceSelectionWithText(text: String!)
   func replaceSelectionWithMarkupString(markupString: String!)
-  func replaceSelectionWithArchive(archive: WebArchive!)
+  func replaceSelectionWith(archive: WebArchive!)
   func deleteSelection()
   func applyStyle(style: DOMCSSStyleDeclaration!)
 }

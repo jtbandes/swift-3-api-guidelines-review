@@ -1,8 +1,8 @@
 
-typealias AVB17221ACMPInterfaceCompletion = (NSError?, AVB17221ACMPMessage) -> Void
+typealias AVB17221ACMPInterfaceCompletion = (Error?, AVB17221ACMPMessage) -> Void
 protocol AVB17221ACMPClient {
-  func ACMPDidReceiveCommand(message: AVB17221ACMPMessage, onInterface anInterface: AVB17221ACMPInterface) -> Bool
-  func ACMPDidReceiveResponse(message: AVB17221ACMPMessage, onInterface anInterface: AVB17221ACMPInterface) -> Bool
+  func acmpDidReceiveCommand(message: AVB17221ACMPMessage, on anInterface: AVB17221ACMPInterface) -> Bool
+  func acmpDidReceiveResponse(message: AVB17221ACMPMessage, on anInterface: AVB17221ACMPInterface) -> Bool
 }
 class AVB17221ACMPInterface : AVB1722ControlInterface {
   @NSCopying var multicastDestinationAddress: AVBMACAddress { get }
@@ -10,11 +10,11 @@ class AVB17221ACMPInterface : AVB1722ControlInterface {
   func setHandler(handler: AVB17221ACMPClient, forEntityID targetEntityID: UInt64) -> Bool
   func removeHandlerForEntityID(targetEntityID: UInt64)
   func sendACMPResponseMessage(message: AVB17221ACMPMessage) throws
-  func sendACMPCommandMessage(message: AVB17221ACMPMessage, completionHandler: AVB17221ACMPInterfaceCompletion) -> Bool
+  func sendACMPCommand(message: AVB17221ACMPMessage, completionHandler: AVB17221ACMPInterfaceCompletion) -> Bool
   init?(interfaceName anInterfaceName: String)
   init?(interface anInterface: AVBInterface)
 }
-class AVB17221ACMPMessage : NSObject, NSCopying {
+class AVB17221ACMPMessage : Object, Copying {
   var messageType: AVB17221ACMPMessageType
   var status: AVB17221ACMPStatusCode
   var streamID: UInt64
@@ -30,13 +30,13 @@ class AVB17221ACMPMessage : NSObject, NSCopying {
   var vlanID: UInt16
   @NSCopying var sourceMAC: AVBMACAddress?
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 protocol AVB17221AECPClient {
-  func AECPDidReceiveCommand(message: AVB17221AECPMessage, onInterface anInterface: AVB17221AECPInterface) -> Bool
-  func AECPDidReceiveResponse(message: AVB17221AECPMessage, onInterface anInterface: AVB17221AECPInterface) -> Bool
+  func aecpDidReceiveCommand(message: AVB17221AECPMessage, on anInterface: AVB17221AECPInterface) -> Bool
+  func aecpDidReceiveResponse(message: AVB17221AECPMessage, on anInterface: AVB17221AECPInterface) -> Bool
 }
-typealias AVB17221AECPInterfaceCompletion = (NSError?, AVB17221AECPMessage) -> Void
+typealias AVB17221AECPInterfaceCompletion = (Error?, AVB17221AECPMessage) -> Void
 class AVB17221AECPInterface : AVB1722ControlInterface {
    init?(interfaceNamed anInterfaceName: String)
   func setHandler(handler: AVB17221AECPClient, forEntityID targetEntityID: UInt64) -> Bool
@@ -45,12 +45,12 @@ class AVB17221AECPInterface : AVB1722ControlInterface {
   func removeCommandHandlerForEntityID(targetEntityID: UInt64)
   func setResponseHandler(handler: AVB17221AECPClient, forControllerEntityID controllerEntityID: UInt64) -> Bool
   func removeResponseHandlerForControllerEntityID(controllerEntityID: UInt64)
-  func sendCommand(message: AVB17221AECPMessage, toMACAddress destMAC: AVBMACAddress, completionHandler: AVB17221AECPInterfaceCompletion) -> Bool
-  func sendResponse(message: AVB17221AECPMessage, toMACAddress destMAC: AVBMACAddress) throws
+  func sendCommand(message: AVB17221AECPMessage, to destMAC: AVBMACAddress, completionHandler: AVB17221AECPInterfaceCompletion) -> Bool
+  func sendResponse(message: AVB17221AECPMessage, to destMAC: AVBMACAddress) throws
   init?(interfaceName anInterfaceName: String)
   init?(interface anInterface: AVBInterface)
 }
-class AVB17221AECPMessage : NSObject, NSCopying {
+class AVB17221AECPMessage : Object, Copying {
   var messageType: AVB17221AECPMessageType
   var status: AVB17221AECPStatusCode
   var targetEntityID: UInt64
@@ -58,40 +58,40 @@ class AVB17221AECPMessage : NSObject, NSCopying {
   var sequenceID: UInt16
   @NSCopying var sourceMAC: AVBMACAddress
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 class AVB17221AECPAEMMessage : AVB17221AECPMessage {
   var commandType: AVB17221AEMCommandType
-  var unsolicited: Bool
-  var controllerRequest: Bool
-  @NSCopying var commandSpecificData: NSData?
-  class func commandMessage() -> AVB17221AECPAEMMessage
-  class func responseMessage() -> AVB17221AECPAEMMessage
+  var isUnsolicited: Bool
+  var isControllerRequest: Bool
+  @NSCopying var commandSpecificData: Data?
+  class func command() -> AVB17221AECPAEMMessage
+  class func response() -> AVB17221AECPAEMMessage
   init()
 }
 class AVB17221AECPAddressAccessMessage : AVB17221AECPMessage {
   var tlvs: [AVB17221AECPAddressAccessTLV]?
-  class func commandMessage() -> AVB17221AECPAddressAccessMessage
-  class func responseMessage() -> AVB17221AECPAddressAccessMessage
+  class func command() -> AVB17221AECPAddressAccessMessage
+  class func response() -> AVB17221AECPAddressAccessMessage
   init()
 }
-class AVB17221AECPAddressAccessTLV : NSObject {
+class AVB17221AECPAddressAccessTLV : Object {
   var mode: AVB17221AECPAddressAccessTLVMode
   var address: UInt64
-  @NSCopying var memoryData: NSData?
+  @NSCopying var memoryData: Data?
   init()
 }
 class AVB17221AECPAVCMessage : AVB17221AECPMessage {
-  @NSCopying var commandResponse: NSData?
+  @NSCopying var commandResponse: Data?
   init()
 }
 class AVB17221AECPVendorMessage : AVB17221AECPMessage {
   var protocolID: UInt64
-  @NSCopying var protocolSpecificData: NSData?
+  @NSCopying var protocolSpecificData: Data?
   init()
 }
-class AVB17221Entity : NSObject {
-  var localEntity: Bool
+class AVB17221Entity : Object {
+  var isLocalEntity: Bool
   var timeToLive: UInt8
   var entityID: UInt64
   var entityModelID: UInt64
@@ -111,7 +111,7 @@ class AVB17221Entity : NSObject {
   unowned(unsafe) var entityDiscovery: @sil_unmanaged AVB17221EntityDiscovery?
   init()
 }
-class AVB17221EntityDiscovery : NSObject {
+class AVB17221EntityDiscovery : Object {
   var interfaceName: String
   unowned(unsafe) var interface: @sil_unmanaged AVBInterface? { get }
   unowned(unsafe) var discoveryDelegate: @sil_unmanaged AVB17221EntityDiscoveryDelegate?
@@ -156,17 +156,17 @@ protocol AVB17221EntityDiscoveryDelegate {
   func didRediscoverLocalEntity(entity: AVB17221Entity, on17221EntityDiscovery entityDiscovery: AVB17221EntityDiscovery)
   func didUpdateLocalEntity(entity: AVB17221Entity, changedProperties: AVB17221EntityPropertyChanged, on17221EntityDiscovery entityDiscovery: AVB17221EntityDiscovery)
 }
-class AVB1722ControlInterface : NSObject {
+class AVB1722ControlInterface : Object {
   var interfaceName: String { get }
   unowned(unsafe) var interface: @sil_unmanaged AVBInterface? { get }
   init?(interfaceName anInterfaceName: String)
   init?(interface anInterface: AVBInterface)
 }
 let AVBNullEUI64: UInt64
-class AVBCentralManager : NSObject {
+class AVBCentralManager : Object {
   func startControllerMatching()
-  func didAddInterface(interface: AVBInterface)
-  func didRemoveInterface(interface: AVBInterface)
+  func didAdd(interface: AVBInterface)
+  func didRemove(interface: AVBInterface)
   func streamingEnabledInterfacesOnly() -> Bool
   class func nextAvailableDynamicEntityID() -> UInt64
   class func releaseDynamicEntityID(entityID: UInt64)
@@ -409,7 +409,7 @@ class AVBEthernetInterface : AVBInterface {
   init?(interfaceName anInterfaceName: String)
   init()
 }
-class AVBInterface : NSObject {
+class AVBInterface : Object {
   var interfaceName: String { get }
   var entityDiscovery: AVB17221EntityDiscovery? { get }
   var aecp: AVB17221AECPInterface? { get }
@@ -423,12 +423,12 @@ class AVBInterface : NSObject {
   class func myEntityID() -> UInt64
   init()
 }
-class AVBMACAddress : NSObject, NSCopying {
+class AVBMACAddress : Object, Copying {
   init(bytes: UnsafePointer<UInt8>)
   var bytes: UnsafePointer<UInt8> { get }
-  @NSCopying var dataRepresentation: NSData
+  @NSCopying var dataRepresentation: Data
   var stringRepresentation: String
-  var multicast: Bool
+  var isMulticast: Bool
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }

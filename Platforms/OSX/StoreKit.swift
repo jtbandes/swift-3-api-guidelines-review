@@ -10,17 +10,17 @@ var SKDownloadStatePaused: SKDownloadState { get }
 var SKDownloadStateFinished: SKDownloadState { get }
 var SKDownloadStateFailed: SKDownloadState { get }
 var SKDownloadStateCancelled: SKDownloadState { get }
-class SKDownload : NSObject {
+class SKDownload : Object {
   var contentIdentifier: String { get }
   var state: SKDownloadState { get }
-  @NSCopying var contentURL: NSURL? { get }
+  @NSCopying var contentURL: URL? { get }
   var progress: Float { get }
-  @NSCopying var error: NSError? { get }
-  var timeRemaining: NSTimeInterval { get }
-  @NSCopying var contentLength: NSNumber { get }
+  @NSCopying var error: Error? { get }
+  var timeRemaining: TimeInterval { get }
+  @NSCopying var contentLength: Number { get }
   var contentVersion: String? { get }
   var transaction: SKPaymentTransaction? { get }
-  class func contentURLForProductID(productID: String) -> NSURL?
+  class func contentURLForProductID(productID: String) -> URL?
   class func deleteContentForProductID(productID: String)
   init()
 }
@@ -30,43 +30,43 @@ var SKErrorClientInvalid: Int { get }
 var SKErrorPaymentCancelled: Int { get }
 var SKErrorPaymentInvalid: Int { get }
 var SKErrorPaymentNotAllowed: Int { get }
-class SKPayment : NSObject, NSCopying, NSMutableCopying {
-  class func paymentWithProduct(product: SKProduct) -> AnyObject
+class SKPayment : Object, Copying, MutableCopying {
+  class func paymentWith(product: SKProduct) -> AnyObject
   var productIdentifier: String { get }
-  @NSCopying var requestData: NSData? { get }
+  @NSCopying var requestData: Data? { get }
   var quantity: Int { get }
   var applicationUsername: String? { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
 }
 class SKMutablePayment : SKPayment {
   var productIdentifier: String
   var quantity: Int
-  @NSCopying var requestData: NSData?
+  @NSCopying var requestData: Data?
   var applicationUsername: String?
   init()
 }
-class SKPaymentQueue : NSObject {
+class SKPaymentQueue : Object {
   class func defaultQueue() -> SKPaymentQueue
   class func canMakePayments() -> Bool
-  func addPayment(payment: SKPayment)
+  func add(payment: SKPayment)
   func restoreCompletedTransactions()
   func restoreCompletedTransactionsWithApplicationUsername(username: String?)
   func finishTransaction(transaction: SKPaymentTransaction)
-  func addTransactionObserver(observer: SKPaymentTransactionObserver)
-  func removeTransactionObserver(observer: SKPaymentTransactionObserver)
+  func add(observer: SKPaymentTransactionObserver)
+  func remove(observer: SKPaymentTransactionObserver)
   var transactions: [SKPaymentTransaction]? { get }
-  func startDownloads(downloads: [SKDownload])
-  func pauseDownloads(downloads: [SKDownload])
+  func start(downloads: [SKDownload])
+  func pause(downloads: [SKDownload])
   func resumeDownloads(downloads: [SKDownload])
-  func cancelDownloads(downloads: [SKDownload])
+  func cancel(downloads: [SKDownload])
   init()
 }
-protocol SKPaymentTransactionObserver : NSObjectProtocol {
+protocol SKPaymentTransactionObserver : ObjectProtocol {
   func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction])
   optional func paymentQueue(queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction])
-  optional func paymentQueue(queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: NSError)
+  optional func paymentQueue(queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error)
   optional func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue)
   optional func paymentQueue(queue: SKPaymentQueue, updatedDownloads downloads: [SKDownload])
 }
@@ -76,36 +76,36 @@ var SKPaymentTransactionStateFailed: Int { get }
 var SKPaymentTransactionStateRestored: Int { get }
 var SKPaymentTransactionStateDeferred: Int { get }
 typealias SKPaymentTransactionState = Int
-class SKPaymentTransaction : NSObject {
-  var error: NSError? { get }
-  var originalTransaction: SKPaymentTransaction? { get }
+class SKPaymentTransaction : Object {
+  var error: Error? { get }
+  var original: SKPaymentTransaction? { get }
   var payment: SKPayment { get }
-  var transactionDate: NSDate? { get }
+  var transactionDate: Date? { get }
   var transactionIdentifier: String? { get }
   var downloads: [AnyObject]? { get }
   var transactionState: SKPaymentTransactionState { get }
   init()
 }
-class SKProduct : NSObject {
+class SKProduct : Object {
   var localizedDescription: String? { get }
   var localizedTitle: String? { get }
-  var price: NSDecimalNumber? { get }
-  var priceLocale: NSLocale? { get }
+  var price: DecimalNumber? { get }
+  var priceLocale: Locale? { get }
   var productIdentifier: String? { get }
   var downloadable: Bool { get }
   var contentVersion: String? { get }
-  var contentLengths: [NSNumber]? { get }
+  var contentLengths: [Number]? { get }
   init()
 }
 protocol SKProductsRequestDelegate : SKRequestDelegate {
-  func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse)
+  func productsRequest(request: SKProductsRequest, didReceive response: SKProductsResponse)
 }
 class SKProductsRequest : SKRequest {
-  init(productIdentifiers: Set<NSObject>)
+  init(productIdentifiers: Set<Object>)
   unowned(unsafe) var delegate: @sil_unmanaged SKProductsRequestDelegate?
   init()
 }
-class SKProductsResponse : NSObject {
+class SKProductsResponse : Object {
   var products: [SKProduct]? { get }
   var invalidProductIdentifiers: [String]? { get }
   init()
@@ -118,13 +118,13 @@ class SKReceiptRefreshRequest : SKRequest {
 let SKReceiptPropertyIsExpired: String
 let SKReceiptPropertyIsRevoked: String
 let SKReceiptPropertyIsVolumePurchase: String
-class SKRequest : NSObject {
+class SKRequest : Object {
   unowned(unsafe) var delegate: @sil_unmanaged SKRequestDelegate?
   func cancel()
   func start()
   init()
 }
-protocol SKRequestDelegate : NSObjectProtocol {
+protocol SKRequestDelegate : ObjectProtocol {
   optional func requestDidFinish(request: SKRequest)
-  optional func request(request: SKRequest, didFailWithError error: NSError?)
+  optional func request(request: SKRequest, didFailWithError error: Error?)
 }

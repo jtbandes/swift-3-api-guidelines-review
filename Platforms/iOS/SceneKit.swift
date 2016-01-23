@@ -8,64 +8,64 @@ enum SCNActionTimingMode : Int {
   case EaseInEaseOut
 }
 typealias SCNActionTimingFunction = (Float) -> Float
-protocol SCNActionable : NSObjectProtocol {
-  func runAction(action: SCNAction)
-  func runAction(action: SCNAction, completionHandler block: (() -> Void)?)
-  func runAction(action: SCNAction, forKey key: String?)
-  func runAction(action: SCNAction, forKey key: String?, completionHandler block: (() -> Void)?)
+protocol SCNActionable : ObjectProtocol {
+  func run(action: SCNAction)
+  func run(action: SCNAction, completionHandler block: (() -> Void)? = nil)
+  func run(action: SCNAction, forKey key: String?)
+  func run(action: SCNAction, forKey key: String?, completionHandler block: (() -> Void)? = nil)
   var hasActions: Bool { get }
   func actionForKey(key: String) -> SCNAction?
   func removeActionForKey(key: String)
   func removeAllActions()
   var actionKeys: [String] { get }
 }
-class SCNAction : NSObject, NSCopying, NSSecureCoding {
-  var duration: NSTimeInterval
+class SCNAction : Object, Copying, SecureCoding {
+  var duration: TimeInterval
   var timingMode: SCNActionTimingMode
   var timingFunction: SCNActionTimingFunction?
   var speed: CGFloat
-  func reversedAction() -> SCNAction
-  class func moveByX(deltaX: CGFloat, y deltaY: CGFloat, z deltaZ: CGFloat, duration: NSTimeInterval) -> SCNAction
-  class func moveBy(delta: SCNVector3, duration: NSTimeInterval) -> SCNAction
-  class func moveTo(location: SCNVector3, duration: NSTimeInterval) -> SCNAction
-  class func rotateByX(xAngle: CGFloat, y yAngle: CGFloat, z zAngle: CGFloat, duration: NSTimeInterval) -> SCNAction
-  class func rotateToX(xAngle: CGFloat, y yAngle: CGFloat, z zAngle: CGFloat, duration: NSTimeInterval) -> SCNAction
-  class func rotateToX(xAngle: CGFloat, y yAngle: CGFloat, z zAngle: CGFloat, duration: NSTimeInterval, shortestUnitArc: Bool) -> SCNAction
-  class func rotateByAngle(angle: CGFloat, aroundAxis axis: SCNVector3, duration: NSTimeInterval) -> SCNAction
-  class func rotateToAxisAngle(axisAngle: SCNVector4, duration: NSTimeInterval) -> SCNAction
-  class func scaleBy(scale: CGFloat, duration sec: NSTimeInterval) -> SCNAction
-  class func scaleTo(scale: CGFloat, duration sec: NSTimeInterval) -> SCNAction
+  func reversed() -> SCNAction
+  class func moveByX(deltaX: CGFloat, y deltaY: CGFloat, z deltaZ: CGFloat, duration: TimeInterval) -> SCNAction
+  class func moveBy(delta: SCNVector3, duration: TimeInterval) -> SCNAction
+  class func moveTo(location: SCNVector3, duration: TimeInterval) -> SCNAction
+  class func rotateByX(xAngle: CGFloat, y yAngle: CGFloat, z zAngle: CGFloat, duration: TimeInterval) -> SCNAction
+  class func rotateToX(xAngle: CGFloat, y yAngle: CGFloat, z zAngle: CGFloat, duration: TimeInterval) -> SCNAction
+  class func rotateToX(xAngle: CGFloat, y yAngle: CGFloat, z zAngle: CGFloat, duration: TimeInterval, shortestUnitArc: Bool) -> SCNAction
+  class func rotateByAngle(angle: CGFloat, aroundAxis axis: SCNVector3, duration: TimeInterval) -> SCNAction
+  class func rotateToAxisAngle(axisAngle: SCNVector4, duration: TimeInterval) -> SCNAction
+  class func scaleBy(scale: CGFloat, duration sec: TimeInterval) -> SCNAction
+  class func scaleTo(scale: CGFloat, duration sec: TimeInterval) -> SCNAction
   class func sequence(actions: [SCNAction]) -> SCNAction
   class func group(actions: [SCNAction]) -> SCNAction
   class func repeatAction(action: SCNAction, count: Int) -> SCNAction
-  class func repeatActionForever(action: SCNAction) -> SCNAction
-  class func fadeInWithDuration(sec: NSTimeInterval) -> SCNAction
-  class func fadeOutWithDuration(sec: NSTimeInterval) -> SCNAction
-  class func fadeOpacityBy(factor: CGFloat, duration sec: NSTimeInterval) -> SCNAction
-  class func fadeOpacityTo(opacity: CGFloat, duration sec: NSTimeInterval) -> SCNAction
+  class func repeatForever(action: SCNAction) -> SCNAction
+  class func fadeInWithDuration(sec: TimeInterval) -> SCNAction
+  class func fadeOutWithDuration(sec: TimeInterval) -> SCNAction
+  class func fadeOpacityBy(factor: CGFloat, duration sec: TimeInterval) -> SCNAction
+  class func fadeOpacityTo(opacity: CGFloat, duration sec: TimeInterval) -> SCNAction
   class func hide() -> SCNAction
   class func unhide() -> SCNAction
-  class func waitForDuration(sec: NSTimeInterval) -> SCNAction
-  class func waitForDuration(sec: NSTimeInterval, withRange durationRange: NSTimeInterval) -> SCNAction
+  class func waitForDuration(sec: TimeInterval) -> SCNAction
+  class func waitForDuration(sec: TimeInterval, withRange durationRange: TimeInterval) -> SCNAction
   class func removeFromParentNode() -> SCNAction
-  class func runBlock(block: (SCNNode) -> Void) -> SCNAction
-  class func runBlock(block: (SCNNode) -> Void, queue: dispatch_queue_t) -> SCNAction
-  class func javaScriptActionWithScript(script: String, duration seconds: NSTimeInterval) -> SCNAction
-  class func customActionWithDuration(seconds: NSTimeInterval, actionBlock block: (SCNNode, CGFloat) -> Void) -> SCNAction
-  class func playAudioSource(source: SCNAudioSource, waitForCompletion wait: Bool) -> SCNAction
+  class func run(block: (SCNNode) -> Void) -> SCNAction
+  class func run(block: (SCNNode) -> Void, queue: dispatch_queue_t) -> SCNAction
+  class func javaScriptActionWithScript(script: String, duration seconds: TimeInterval) -> SCNAction
+  class func customActionWithDuration(seconds: TimeInterval, actionBlock block: (SCNNode, CGFloat) -> Void) -> SCNAction
+  class func play(source: SCNAudioSource, waitForCompletion wait: Bool) -> SCNAction
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 typealias SCNAnimationEventBlock = (CAAnimation, AnyObject, Bool) -> Void
-class SCNAnimationEvent : NSObject {
+class SCNAnimationEvent : Object {
   convenience init(keyTime time: CGFloat, block eventBlock: SCNAnimationEventBlock)
   init()
 }
-protocol SCNAnimatable : NSObjectProtocol {
-  func addAnimation(animation: CAAnimation, forKey key: String?)
+protocol SCNAnimatable : ObjectProtocol {
+  func add(animation: CAAnimation, forKey key: String?)
   func removeAllAnimations()
   func removeAnimationForKey(key: String)
   var animationKeys: [String] { get }
@@ -81,11 +81,11 @@ extension CAAnimation {
   var fadeOutDuration: CGFloat
   var animationEvents: [SCNAnimationEvent]?
 }
-class SCNAudioSource : NSObject, NSCopying, NSSecureCoding {
+class SCNAudioSource : Object, Copying, SecureCoding {
   convenience init?(fileNamed name: String)
-  init?(URL url: NSURL)
+  init?(url: URL)
   convenience init?(named fileName: String)
-  var positional: Bool
+  var isPositional: Bool
   var volume: Float
   var rate: Float
   var reverbBlend: Float
@@ -93,12 +93,12 @@ class SCNAudioSource : NSObject, NSCopying, NSSecureCoding {
   var shouldStream: Bool
   func load()
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class SCNAudioPlayer : NSObject {
+class SCNAudioPlayer : Object {
   init(source: SCNAudioSource)
   var willStartPlayback: (() -> Void)?
   var didFinishPlayback: (() -> Void)?
@@ -110,12 +110,12 @@ extension SCNNode {
   func removeAudioPlayer(player: SCNAudioPlayer)
   var audioPlayers: [SCNAudioPlayer] { get }
 }
-protocol SCNBoundingVolume : NSObjectProtocol {
+protocol SCNBoundingVolume : ObjectProtocol {
   func getBoundingBoxMin(min: UnsafeMutablePointer<SCNVector3>, max: UnsafeMutablePointer<SCNVector3>) -> Bool
   func getBoundingSphereCenter(center: UnsafeMutablePointer<SCNVector3>, radius: UnsafeMutablePointer<CGFloat>) -> Bool
   func setBoundingBoxMin(min: UnsafeMutablePointer<SCNVector3>, max: UnsafeMutablePointer<SCNVector3>)
 }
-class SCNCamera : NSObject, SCNAnimatable, SCNTechniqueSupport, NSCopying, NSSecureCoding {
+class SCNCamera : Object, SCNAnimatable, SCNTechniqueSupport, Copying, SecureCoding {
   var name: String?
   var xFov: Double
   var yFov: Double
@@ -132,7 +132,7 @@ class SCNCamera : NSObject, SCNAnimatable, SCNTechniqueSupport, NSCopying, NSSec
   var aperture: CGFloat
   var categoryBitMask: Int
   init()
-  func addAnimation(animation: CAAnimation, forKey key: String?)
+  func add(animation: CAAnimation, forKey key: String?)
   func removeAllAnimations()
   func removeAnimationForKey(key: String)
   var animationKeys: [String] { get }
@@ -142,19 +142,19 @@ class SCNCamera : NSObject, SCNAnimatable, SCNTechniqueSupport, NSCopying, NSSec
   func isAnimationForKeyPaused(key: String) -> Bool
   func removeAnimationForKey(key: String, fadeOutDuration duration: CGFloat)
   @NSCopying var technique: SCNTechnique?
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class SCNConstraint : NSObject, NSCopying, NSSecureCoding, SCNAnimatable {
+class SCNConstraint : Object, Copying, SecureCoding, SCNAnimatable {
   var influenceFactor: CGFloat
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func addAnimation(animation: CAAnimation, forKey key: String?)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func add(animation: CAAnimation, forKey key: String?)
   func removeAllAnimations()
   func removeAnimationForKey(key: String)
   var animationKeys: [String] { get }
@@ -169,7 +169,7 @@ class SCNLookAtConstraint : SCNConstraint {
   var target: SCNNode { get }
   var gimbalLockEnabled: Bool
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 struct SCNBillboardAxis : OptionSetType {
   init(rawValue: UInt)
@@ -182,12 +182,12 @@ struct SCNBillboardAxis : OptionSetType {
 class SCNBillboardConstraint : SCNConstraint {
   var freeAxes: SCNBillboardAxis
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class SCNTransformConstraint : SCNConstraint {
   convenience init(inWorldSpace world: Bool, withBlock block: (SCNNode, SCNMatrix4) -> SCNMatrix4)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class SCNIKConstraint : SCNConstraint {
   init(chainRootNode: SCNNode)
@@ -197,7 +197,7 @@ class SCNIKConstraint : SCNConstraint {
   func setMaxAllowedRotationAngle(angle: CGFloat, forJoint node: SCNNode)
   func maxAllowedRotationAngleForJoint(node: SCNNode) -> CGFloat
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 enum SCNGeometryPrimitiveType : Int {
   init?(rawValue: Int)
@@ -215,26 +215,26 @@ let SCNGeometrySourceSemanticVertexCrease: String
 let SCNGeometrySourceSemanticEdgeCrease: String
 let SCNGeometrySourceSemanticBoneWeights: String
 let SCNGeometrySourceSemanticBoneIndices: String
-class SCNGeometry : NSObject, SCNAnimatable, SCNBoundingVolume, SCNShadable, NSCopying, NSSecureCoding {
+class SCNGeometry : Object, SCNAnimatable, SCNBoundingVolume, SCNShadable, Copying, SecureCoding {
   var name: String?
   var materials: [SCNMaterial]
   var firstMaterial: SCNMaterial?
-  func insertMaterial(material: SCNMaterial, atIndex index: Int)
-  func removeMaterialAtIndex(index: Int)
-  func replaceMaterialAtIndex(index: Int, withMaterial material: SCNMaterial)
+  func insertMaterial(material: SCNMaterial, at index: Int)
+  func removeMaterialAt(index: Int)
+  func replaceMaterialAt(index: Int, withMaterial material: SCNMaterial)
   func materialWithName(name: String) -> SCNMaterial?
   convenience init(sources: [SCNGeometrySource], elements: [SCNGeometryElement])
   var geometrySources: [SCNGeometrySource] { get }
   func geometrySourcesForSemantic(semantic: String) -> [SCNGeometrySource]
   var geometryElements: [SCNGeometryElement] { get }
   var geometryElementCount: Int { get }
-  func geometryElementAtIndex(elementIndex: Int) -> SCNGeometryElement
+  func geometryElementAt(elementIndex: Int) -> SCNGeometryElement
   var levelsOfDetail: [SCNLevelOfDetail]?
   var subdivisionLevel: Int
   var edgeCreasesElement: SCNGeometryElement?
   var edgeCreasesSource: SCNGeometrySource?
   init()
-  func addAnimation(animation: CAAnimation, forKey key: String?)
+  func add(animation: CAAnimation, forKey key: String?)
   func removeAllAnimations()
   func removeAnimationForKey(key: String)
   var animationKeys: [String] { get }
@@ -247,21 +247,21 @@ class SCNGeometry : NSObject, SCNAnimatable, SCNBoundingVolume, SCNShadable, NSC
   func getBoundingSphereCenter(center: UnsafeMutablePointer<SCNVector3>, radius: UnsafeMutablePointer<CGFloat>) -> Bool
   func setBoundingBoxMin(min: UnsafeMutablePointer<SCNVector3>, max: UnsafeMutablePointer<SCNVector3>)
   var program: SCNProgram?
-  func handleBindingOfSymbol(symbol: String, usingBlock block: SCNBindingBlock?)
-  func handleUnbindingOfSymbol(symbol: String, usingBlock block: SCNBindingBlock?)
+  func handleBindingOfSymbol(symbol: String, usingBlock block: SCNBindingBlock? = nil)
+  func handleUnbindingOfSymbol(symbol: String, usingBlock block: SCNBindingBlock? = nil)
   var shaderModifiers: [String : String]?
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class SCNGeometrySource : NSObject, NSSecureCoding {
-  convenience init(data: NSData, semantic: String, vectorCount: Int, floatComponents: Bool, componentsPerVector: Int, bytesPerComponent: Int, dataOffset offset: Int, dataStride stride: Int)
+class SCNGeometrySource : Object, SecureCoding {
+  convenience init(data: Data, semantic: String, vectorCount: Int, floatComponents: Bool, componentsPerVector: Int, bytesPerComponent: Int, dataOffset offset: Int, dataStride stride: Int)
   convenience init(vertices: UnsafePointer<SCNVector3>, count: Int)
   convenience init(normals: UnsafePointer<SCNVector3>, count: Int)
   convenience init(textureCoordinates texcoord: UnsafePointer<CGPoint>, count: Int)
   convenience init(buffer mtlBuffer: MTLBuffer, vertexFormat: MTLVertexFormat, semantic: String, vertexCount: Int, dataOffset offset: Int, dataStride stride: Int)
-  var data: NSData { get }
+  var data: Data { get }
   var semantic: String { get }
   var vectorCount: Int { get }
   var floatComponents: Bool { get }
@@ -271,35 +271,35 @@ class SCNGeometrySource : NSObject, NSSecureCoding {
   var dataStride: Int { get }
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class SCNGeometryElement : NSObject, NSSecureCoding {
-  convenience init(data: NSData?, primitiveType: SCNGeometryPrimitiveType, primitiveCount: Int, bytesPerIndex: Int)
-  var data: NSData { get }
+class SCNGeometryElement : Object, SecureCoding {
+  convenience init(data: Data?, primitiveType: SCNGeometryPrimitiveType, primitiveCount: Int, bytesPerIndex: Int)
+  var data: Data { get }
   var primitiveType: SCNGeometryPrimitiveType { get }
   var primitiveCount: Int { get }
   var bytesPerIndex: Int { get }
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 extension SCNGeometryElement {
   convenience init<IndexType : IntegerType>(indices: [IndexType], primitiveType: SCNGeometryPrimitiveType)
 }
 func SCNExportJavaScriptModule(context: JSContext)
-class SCNLevelOfDetail : NSObject, NSCopying, NSSecureCoding {
+class SCNLevelOfDetail : Object, Copying, SecureCoding {
   convenience init(geometry: SCNGeometry?, screenSpaceRadius radius: CGFloat)
   convenience init(geometry: SCNGeometry?, worldSpaceDistance distance: CGFloat)
   var geometry: SCNGeometry? { get }
   var screenSpaceRadius: CGFloat { get }
   var worldSpaceDistance: CGFloat { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let SCNLightTypeAmbient: String
 let SCNLightTypeOmni: String
@@ -312,7 +312,7 @@ enum SCNShadowMode : Int {
   case Deferred
   case Modulated
 }
-class SCNLight : NSObject, SCNAnimatable, SCNTechniqueSupport, NSCopying, NSSecureCoding {
+class SCNLight : Object, SCNAnimatable, SCNTechniqueSupport, Copying, SecureCoding {
   var type: String
   var color: AnyObject
   var name: String?
@@ -334,7 +334,7 @@ class SCNLight : NSObject, SCNAnimatable, SCNTechniqueSupport, NSCopying, NSSecu
   var gobo: SCNMaterialProperty? { get }
   var categoryBitMask: Int
   init()
-  func addAnimation(animation: CAAnimation, forKey key: String?)
+  func add(animation: CAAnimation, forKey key: String?)
   func removeAllAnimations()
   func removeAnimationForKey(key: String)
   var animationKeys: [String] { get }
@@ -344,10 +344,10 @@ class SCNLight : NSObject, SCNAnimatable, SCNTechniqueSupport, NSCopying, NSSecu
   func isAnimationForKeyPaused(key: String) -> Bool
   func removeAnimationForKey(key: String, fadeOutDuration duration: CGFloat)
   @NSCopying var technique: SCNTechnique?
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let SCNLightingModelPhong: String
 let SCNLightingModelBlinn: String
@@ -375,7 +375,7 @@ enum SCNBlendMode : Int {
   case Screen
   case Replace
 }
-class SCNMaterial : NSObject, SCNAnimatable, SCNShadable, NSCopying, NSSecureCoding {
+class SCNMaterial : Object, SCNAnimatable, SCNShadable, Copying, SecureCoding {
   var name: String?
   var diffuse: SCNMaterialProperty { get }
   var ambient: SCNMaterialProperty { get }
@@ -390,8 +390,8 @@ class SCNMaterial : NSObject, SCNAnimatable, SCNShadable, NSCopying, NSSecureCod
   var shininess: CGFloat
   var transparency: CGFloat
   var lightingModelName: String
-  var litPerPixel: Bool
-  var doubleSided: Bool
+  var isLitPerPixel: Bool
+  var isDoubleSided: Bool
   var cullMode: SCNCullMode
   var transparencyMode: SCNTransparencyMode
   var locksAmbientWithDiffuse: Bool
@@ -400,7 +400,7 @@ class SCNMaterial : NSObject, SCNAnimatable, SCNShadable, NSCopying, NSSecureCod
   var fresnelExponent: CGFloat
   var blendMode: SCNBlendMode
   init()
-  func addAnimation(animation: CAAnimation, forKey key: String?)
+  func add(animation: CAAnimation, forKey key: String?)
   func removeAllAnimations()
   func removeAnimationForKey(key: String)
   var animationKeys: [String] { get }
@@ -410,13 +410,13 @@ class SCNMaterial : NSObject, SCNAnimatable, SCNShadable, NSCopying, NSSecureCod
   func isAnimationForKeyPaused(key: String) -> Bool
   func removeAnimationForKey(key: String, fadeOutDuration duration: CGFloat)
   var program: SCNProgram?
-  func handleBindingOfSymbol(symbol: String, usingBlock block: SCNBindingBlock?)
-  func handleUnbindingOfSymbol(symbol: String, usingBlock block: SCNBindingBlock?)
+  func handleBindingOfSymbol(symbol: String, usingBlock block: SCNBindingBlock? = nil)
+  func handleUnbindingOfSymbol(symbol: String, usingBlock block: SCNBindingBlock? = nil)
   var shaderModifiers: [String : String]?
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 enum SCNFilterMode : Int {
   init?(rawValue: Int)
@@ -433,7 +433,7 @@ enum SCNWrapMode : Int {
   case ClampToBorder
   case Mirror
 }
-class SCNMaterialProperty : NSObject, SCNAnimatable, NSSecureCoding {
+class SCNMaterialProperty : Object, SCNAnimatable, SecureCoding {
   convenience init(contents: AnyObject)
   var contents: AnyObject?
   var intensity: CGFloat
@@ -447,7 +447,7 @@ class SCNMaterialProperty : NSObject, SCNAnimatable, NSSecureCoding {
   var mappingChannel: Int
   var maxAnisotropy: CGFloat
   init()
-  func addAnimation(animation: CAAnimation, forKey key: String?)
+  func add(animation: CAAnimation, forKey key: String?)
   func removeAllAnimations()
   func removeAnimationForKey(key: String)
   var animationKeys: [String] { get }
@@ -457,8 +457,8 @@ class SCNMaterialProperty : NSObject, SCNAnimatable, NSSecureCoding {
   func isAnimationForKeyPaused(key: String) -> Bool
   func removeAnimationForKey(key: String, fadeOutDuration duration: CGFloat)
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 enum SCNMorpherCalculationMode : Int {
   init?(rawValue: Int)
@@ -466,13 +466,13 @@ enum SCNMorpherCalculationMode : Int {
   case Normalized
   case Additive
 }
-class SCNMorpher : NSObject, SCNAnimatable, NSSecureCoding {
+class SCNMorpher : Object, SCNAnimatable, SecureCoding {
   var targets: [SCNGeometry]
-  func setWeight(weight: CGFloat, forTargetAtIndex targetIndex: Int)
-  func weightForTargetAtIndex(targetIndex: Int) -> CGFloat
+  func setWeight(weight: CGFloat, forTargetAt targetIndex: Int)
+  func weightForTargetAt(targetIndex: Int) -> CGFloat
   var calculationMode: SCNMorpherCalculationMode
   init()
-  func addAnimation(animation: CAAnimation, forKey key: String?)
+  func add(animation: CAAnimation, forKey key: String?)
   func removeAllAnimations()
   func removeAnimationForKey(key: String)
   var animationKeys: [String] { get }
@@ -482,8 +482,8 @@ class SCNMorpher : NSObject, SCNAnimatable, NSSecureCoding {
   func isAnimationForKeyPaused(key: String) -> Bool
   func removeAnimationForKey(key: String, fadeOutDuration duration: CGFloat)
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let SCNModelTransform: String
 let SCNViewTransform: String
@@ -491,7 +491,7 @@ let SCNProjectionTransform: String
 let SCNNormalTransform: String
 let SCNModelViewTransform: String
 let SCNModelViewProjectionTransform: String
-class SCNNode : NSObject, NSCopying, NSSecureCoding, SCNAnimatable, SCNActionable, SCNBoundingVolume {
+class SCNNode : Object, Copying, SecureCoding, SCNAnimatable, SCNActionable, SCNBoundingVolume {
    init(geometry: SCNGeometry?)
   func clone() -> Self
   func flattenedClone() -> Self
@@ -509,38 +509,38 @@ class SCNNode : NSObject, NSCopying, NSSecureCoding, SCNAnimatable, SCNActionabl
   var scale: SCNVector3
   var pivot: SCNMatrix4
   var worldTransform: SCNMatrix4 { get }
-  var hidden: Bool
+  var isHidden: Bool
   var opacity: CGFloat
   var renderingOrder: Int
   var castsShadow: Bool
-  var parentNode: SCNNode? { get }
+  var parent: SCNNode? { get }
   var childNodes: [SCNNode] { get }
   func addChildNode(child: SCNNode)
-  func insertChildNode(child: SCNNode, atIndex index: Int)
+  func insertChildNode(child: SCNNode, at index: Int)
   func removeFromParentNode()
   func replaceChildNode(oldChild: SCNNode, with newChild: SCNNode)
   func childNodeWithName(name: String, recursively: Bool) -> SCNNode?
   func childNodesPassingTest(predicate: (SCNNode, UnsafeMutablePointer<ObjCBool>) -> Bool) -> [SCNNode]
-  func enumerateChildNodesUsingBlock(block: (SCNNode, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func convertPosition(position: SCNVector3, toNode node: SCNNode?) -> SCNVector3
-  func convertPosition(position: SCNVector3, fromNode node: SCNNode?) -> SCNVector3
-  func convertTransform(transform: SCNMatrix4, toNode node: SCNNode?) -> SCNMatrix4
-  func convertTransform(transform: SCNMatrix4, fromNode node: SCNNode?) -> SCNMatrix4
+  func enumerateChildNodesUsing(block: (SCNNode, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func convertPosition(position: SCNVector3, to node: SCNNode?) -> SCNVector3
+  func convertPosition(position: SCNVector3, from node: SCNNode?) -> SCNVector3
+  func convertTransform(transform: SCNMatrix4, to node: SCNNode?) -> SCNMatrix4
+  func convertTransform(transform: SCNMatrix4, from node: SCNNode?) -> SCNMatrix4
   var physicsBody: SCNPhysicsBody?
   var physicsField: SCNPhysicsField?
   var constraints: [SCNConstraint]?
   var filters: [CIFilter]?
-  var presentationNode: SCNNode { get }
-  var paused: Bool
+  var presentation: SCNNode { get }
+  var isPaused: Bool
   unowned(unsafe) var rendererDelegate: @sil_unmanaged SCNNodeRendererDelegate?
-  func hitTestWithSegmentFromPoint(pointA: SCNVector3, toPoint pointB: SCNVector3, options: [String : AnyObject]?) -> [SCNHitTestResult]
+  func hitTestWithSegmentFromPoint(pointA: SCNVector3, toPoint pointB: SCNVector3, options: [String : AnyObject]? = [:]) -> [SCNHitTestResult]
   var categoryBitMask: Int
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func addAnimation(animation: CAAnimation, forKey key: String?)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func add(animation: CAAnimation, forKey key: String?)
   func removeAllAnimations()
   func removeAnimationForKey(key: String)
   var animationKeys: [String] { get }
@@ -549,10 +549,10 @@ class SCNNode : NSObject, NSCopying, NSSecureCoding, SCNAnimatable, SCNActionabl
   func resumeAnimationForKey(key: String)
   func isAnimationForKeyPaused(key: String) -> Bool
   func removeAnimationForKey(key: String, fadeOutDuration duration: CGFloat)
-  func runAction(action: SCNAction)
-  func runAction(action: SCNAction, completionHandler block: (() -> Void)?)
-  func runAction(action: SCNAction, forKey key: String?)
-  func runAction(action: SCNAction, forKey key: String?, completionHandler block: (() -> Void)?)
+  func run(action: SCNAction)
+  func run(action: SCNAction, completionHandler block: (() -> Void)? = nil)
+  func run(action: SCNAction, forKey key: String?)
+  func run(action: SCNAction, forKey key: String?, completionHandler block: (() -> Void)? = nil)
   var hasActions: Bool { get }
   func actionForKey(key: String) -> SCNAction?
   func removeActionForKey(key: String)
@@ -562,8 +562,8 @@ class SCNNode : NSObject, NSCopying, NSSecureCoding, SCNAnimatable, SCNActionabl
   func getBoundingSphereCenter(center: UnsafeMutablePointer<SCNVector3>, radius: UnsafeMutablePointer<CGFloat>) -> Bool
   func setBoundingBoxMin(min: UnsafeMutablePointer<SCNVector3>, max: UnsafeMutablePointer<SCNVector3>)
 }
-protocol SCNNodeRendererDelegate : NSObjectProtocol {
-  optional func renderNode(node: SCNNode, renderer: SCNRenderer, arguments: [String : NSValue])
+protocol SCNNodeRendererDelegate : ObjectProtocol {
+  optional func renderNode(node: SCNNode, renderer: SCNRenderer, arguments: [String : Value])
 }
 class SCNPlane : SCNGeometry {
   convenience init(width: CGFloat, height: CGFloat)
@@ -575,8 +575,8 @@ class SCNPlane : SCNGeometry {
   var cornerSegmentCount: Int
   convenience init(sources: [SCNGeometrySource], elements: [SCNGeometryElement])
   init()
-  init?(coder aDecoder: NSCoder)
-  convenience init(MDLMesh mdlMesh: MDLMesh)
+  init?(coder aDecoder: Coder)
+  convenience init(mdlMesh: MDLMesh)
 }
 class SCNBox : SCNGeometry {
   convenience init(width: CGFloat, height: CGFloat, length: CGFloat, chamferRadius: CGFloat)
@@ -590,8 +590,8 @@ class SCNBox : SCNGeometry {
   var chamferSegmentCount: Int
   convenience init(sources: [SCNGeometrySource], elements: [SCNGeometryElement])
   init()
-  init?(coder aDecoder: NSCoder)
-  convenience init(MDLMesh mdlMesh: MDLMesh)
+  init?(coder aDecoder: Coder)
+  convenience init(mdlMesh: MDLMesh)
 }
 class SCNPyramid : SCNGeometry {
   convenience init(width: CGFloat, height: CGFloat, length: CGFloat)
@@ -603,18 +603,18 @@ class SCNPyramid : SCNGeometry {
   var lengthSegmentCount: Int
   convenience init(sources: [SCNGeometrySource], elements: [SCNGeometryElement])
   init()
-  init?(coder aDecoder: NSCoder)
-  convenience init(MDLMesh mdlMesh: MDLMesh)
+  init?(coder aDecoder: Coder)
+  convenience init(mdlMesh: MDLMesh)
 }
 class SCNSphere : SCNGeometry {
   convenience init(radius: CGFloat)
   var radius: CGFloat
-  var geodesic: Bool
+  var isGeodesic: Bool
   var segmentCount: Int
   convenience init(sources: [SCNGeometrySource], elements: [SCNGeometryElement])
   init()
-  init?(coder aDecoder: NSCoder)
-  convenience init(MDLMesh mdlMesh: MDLMesh)
+  init?(coder aDecoder: Coder)
+  convenience init(mdlMesh: MDLMesh)
 }
 class SCNCylinder : SCNGeometry {
   convenience init(radius: CGFloat, height: CGFloat)
@@ -624,8 +624,8 @@ class SCNCylinder : SCNGeometry {
   var heightSegmentCount: Int
   convenience init(sources: [SCNGeometrySource], elements: [SCNGeometryElement])
   init()
-  init?(coder aDecoder: NSCoder)
-  convenience init(MDLMesh mdlMesh: MDLMesh)
+  init?(coder aDecoder: Coder)
+  convenience init(mdlMesh: MDLMesh)
 }
 class SCNCone : SCNGeometry {
   convenience init(topRadius: CGFloat, bottomRadius: CGFloat, height: CGFloat)
@@ -636,8 +636,8 @@ class SCNCone : SCNGeometry {
   var heightSegmentCount: Int
   convenience init(sources: [SCNGeometrySource], elements: [SCNGeometryElement])
   init()
-  init?(coder aDecoder: NSCoder)
-  convenience init(MDLMesh mdlMesh: MDLMesh)
+  init?(coder aDecoder: Coder)
+  convenience init(mdlMesh: MDLMesh)
 }
 class SCNTube : SCNGeometry {
   convenience init(innerRadius: CGFloat, outerRadius: CGFloat, height: CGFloat)
@@ -648,8 +648,8 @@ class SCNTube : SCNGeometry {
   var heightSegmentCount: Int
   convenience init(sources: [SCNGeometrySource], elements: [SCNGeometryElement])
   init()
-  init?(coder aDecoder: NSCoder)
-  convenience init(MDLMesh mdlMesh: MDLMesh)
+  init?(coder aDecoder: Coder)
+  convenience init(mdlMesh: MDLMesh)
 }
 class SCNCapsule : SCNGeometry {
   convenience init(capRadius: CGFloat, height: CGFloat)
@@ -660,8 +660,8 @@ class SCNCapsule : SCNGeometry {
   var capSegmentCount: Int
   convenience init(sources: [SCNGeometrySource], elements: [SCNGeometryElement])
   init()
-  init?(coder aDecoder: NSCoder)
-  convenience init(MDLMesh mdlMesh: MDLMesh)
+  init?(coder aDecoder: Coder)
+  convenience init(mdlMesh: MDLMesh)
 }
 class SCNTorus : SCNGeometry {
   convenience init(ringRadius: CGFloat, pipeRadius: CGFloat)
@@ -671,8 +671,8 @@ class SCNTorus : SCNGeometry {
   var pipeSegmentCount: Int
   convenience init(sources: [SCNGeometrySource], elements: [SCNGeometryElement])
   init()
-  init?(coder aDecoder: NSCoder)
-  convenience init(MDLMesh mdlMesh: MDLMesh)
+  init?(coder aDecoder: Coder)
+  convenience init(mdlMesh: MDLMesh)
 }
 class SCNFloor : SCNGeometry {
   var reflectivity: CGFloat
@@ -681,15 +681,15 @@ class SCNFloor : SCNGeometry {
   var reflectionResolutionScaleFactor: CGFloat
   convenience init(sources: [SCNGeometrySource], elements: [SCNGeometryElement])
   init()
-  init?(coder aDecoder: NSCoder)
-  convenience init(MDLMesh mdlMesh: MDLMesh)
+  init?(coder aDecoder: Coder)
+  convenience init(mdlMesh: MDLMesh)
 }
 class SCNText : SCNGeometry {
   convenience init(string: AnyObject?, extrusionDepth: CGFloat)
   var extrusionDepth: CGFloat
   @NSCopying var string: AnyObject?
   var font: UIFont!
-  var wrapped: Bool
+  var isWrapped: Bool
   var containerFrame: CGRect
   var truncationMode: String
   var alignmentMode: String
@@ -698,8 +698,8 @@ class SCNText : SCNGeometry {
   var flatness: CGFloat
   convenience init(sources: [SCNGeometrySource], elements: [SCNGeometryElement])
   init()
-  init?(coder aDecoder: NSCoder)
-  convenience init(MDLMesh mdlMesh: MDLMesh)
+  init?(coder aDecoder: Coder)
+  convenience init(mdlMesh: MDLMesh)
 }
 enum SCNChamferMode : Int {
   init?(rawValue: Int)
@@ -717,8 +717,8 @@ class SCNShape : SCNGeometry {
   @NSCopying var chamferProfile: UIBezierPath?
   convenience init(sources: [SCNGeometrySource], elements: [SCNGeometryElement])
   init()
-  init?(coder aDecoder: NSCoder)
-  convenience init(MDLMesh mdlMesh: MDLMesh)
+  init?(coder aDecoder: Coder)
+  convenience init(mdlMesh: MDLMesh)
 }
 let SCNParticlePropertyPosition: String
 let SCNParticlePropertyAngle: String
@@ -808,7 +808,7 @@ enum SCNParticleEvent : Int {
   case Death
   case Collision
 }
-class SCNParticlePropertyController : NSObject, NSSecureCoding, NSCopying {
+class SCNParticlePropertyController : Object, SecureCoding, Copying {
   convenience init(animation: CAAnimation)
   var animation: CAAnimation
   var inputMode: SCNParticleInputMode
@@ -818,11 +818,11 @@ class SCNParticlePropertyController : NSObject, NSSecureCoding, NSCopying {
   var inputProperty: String?
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class SCNParticleSystem : NSObject, NSCopying, NSSecureCoding, SCNAnimatable {
+class SCNParticleSystem : Object, Copying, SecureCoding, SCNAnimatable {
   convenience init?(named name: String, inDirectory directory: String?)
   var emissionDuration: CGFloat
   var emissionDurationVariation: CGFloat
@@ -838,7 +838,7 @@ class SCNParticleSystem : NSObject, NSCopying, NSSecureCoding, SCNAnimatable {
   var spreadingAngle: CGFloat
   var emittingDirection: SCNVector3
   var acceleration: SCNVector3
-  var local: Bool
+  var isLocal: Bool
   var particleAngle: CGFloat
   var particleAngleVariation: CGFloat
   var particleVelocity: CGFloat
@@ -863,10 +863,10 @@ class SCNParticleSystem : NSObject, NSCopying, NSSecureCoding, SCNAnimatable {
   var particleSize: CGFloat
   var particleSizeVariation: CGFloat
   var blendMode: SCNParticleBlendMode
-  var blackPassEnabled: Bool
+  var isBlackPassEnabled: Bool
   var orientationMode: SCNParticleOrientationMode
   var sortingMode: SCNParticleSortingMode
-  var lightingEnabled: Bool
+  var isLightingEnabled: Bool
   var affectedByGravity: Bool
   var affectedByPhysicsFields: Bool
   var particleDiesOnCollision: Bool
@@ -885,16 +885,16 @@ class SCNParticleSystem : NSObject, NSCopying, NSSecureCoding, SCNAnimatable {
   var fresnelExponent: CGFloat
   var propertyControllers: [String : SCNParticlePropertyController]?
   func reset()
-  func handleEvent(event: SCNParticleEvent, forProperties properties: [String], withBlock block: SCNParticleEventBlock)
-  func addModifierForProperties(properties: [String], atStage stage: SCNParticleModifierStage, withBlock block: SCNParticleModifierBlock)
-  func removeModifiersOfStage(stage: SCNParticleModifierStage)
+  func handle(event: SCNParticleEvent, forProperties properties: [String], withBlock block: SCNParticleEventBlock)
+  func addModifierForProperties(properties: [String], at stage: SCNParticleModifierStage, withBlock block: SCNParticleModifierBlock)
+  func removeModifiersOf(stage: SCNParticleModifierStage)
   func removeAllModifiers()
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func addAnimation(animation: CAAnimation, forKey key: String?)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func add(animation: CAAnimation, forKey key: String?)
   func removeAllAnimations()
   func removeAnimationForKey(key: String)
   var animationKeys: [String] { get }
@@ -916,11 +916,11 @@ extension SCNScene {
   func removeParticleSystem(system: SCNParticleSystem)
   var particleSystems: [SCNParticleSystem]? { get }
 }
-class SCNPhysicsBehavior : NSObject, NSSecureCoding {
+class SCNPhysicsBehavior : Object, SecureCoding {
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 class SCNPhysicsHingeJoint : SCNPhysicsBehavior {
   convenience init(bodyA: SCNPhysicsBody, axisA: SCNVector3, anchorA: SCNVector3, bodyB: SCNPhysicsBody, axisB: SCNVector3, anchorB: SCNVector3)
@@ -932,7 +932,7 @@ class SCNPhysicsHingeJoint : SCNPhysicsBehavior {
   var axisB: SCNVector3
   var anchorB: SCNVector3
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class SCNPhysicsBallSocketJoint : SCNPhysicsBehavior {
   convenience init(bodyA: SCNPhysicsBody, anchorA: SCNVector3, bodyB: SCNPhysicsBody, anchorB: SCNVector3)
@@ -942,7 +942,7 @@ class SCNPhysicsBallSocketJoint : SCNPhysicsBehavior {
   var bodyB: SCNPhysicsBody? { get }
   var anchorB: SCNVector3
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class SCNPhysicsSliderJoint : SCNPhysicsBehavior {
   convenience init(bodyA: SCNPhysicsBody, axisA: SCNVector3, anchorA: SCNVector3, bodyB: SCNPhysicsBody, axisB: SCNVector3, anchorB: SCNVector3)
@@ -962,9 +962,9 @@ class SCNPhysicsSliderJoint : SCNPhysicsBehavior {
   var motorTargetAngularVelocity: CGFloat
   var motorMaximumTorque: CGFloat
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class SCNPhysicsVehicleWheel : NSObject, NSCopying, NSSecureCoding {
+class SCNPhysicsVehicleWheel : Object, Copying, SecureCoding {
   convenience init(node: SCNNode)
   var node: SCNNode { get }
   var suspensionStiffness: CGFloat
@@ -979,21 +979,21 @@ class SCNPhysicsVehicleWheel : NSObject, NSCopying, NSSecureCoding {
   var radius: CGFloat
   var suspensionRestLength: CGFloat
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 class SCNPhysicsVehicle : SCNPhysicsBehavior {
   convenience init(chassisBody: SCNPhysicsBody, wheels: [SCNPhysicsVehicleWheel])
   var speedInKilometersPerHour: CGFloat { get }
   var wheels: [SCNPhysicsVehicleWheel] { get }
   var chassisBody: SCNPhysicsBody { get }
-  func applyEngineForce(value: CGFloat, forWheelAtIndex index: Int)
-  func setSteeringAngle(value: CGFloat, forWheelAtIndex index: Int)
-  func applyBrakingForce(value: CGFloat, forWheelAtIndex index: Int)
+  func applyEngineForce(value: CGFloat, forWheelAt index: Int)
+  func setSteeringAngle(value: CGFloat, forWheelAt index: Int)
+  func applyBrakingForce(value: CGFloat, forWheelAt index: Int)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 enum SCNPhysicsBodyType : Int {
   init?(rawValue: Int)
@@ -1009,10 +1009,10 @@ struct SCNPhysicsCollisionCategory : OptionSetType {
   static var Static: SCNPhysicsCollisionCategory { get }
   static var All: SCNPhysicsCollisionCategory { get }
 }
-class SCNPhysicsBody : NSObject, NSCopying, NSSecureCoding {
+class SCNPhysicsBody : Object, Copying, SecureCoding {
   class func staticBody() -> Self
-  class func dynamicBody() -> Self
-  class func kinematicBody() -> Self
+  class func dynamic() -> Self
+  class func kinematic() -> Self
   convenience init(type: SCNPhysicsBodyType, shape: SCNPhysicsShape?)
   var type: SCNPhysicsBodyType
   var mass: CGFloat
@@ -1034,19 +1034,19 @@ class SCNPhysicsBody : NSObject, NSCopying, NSSecureCoding {
   var categoryBitMask: Int
   var collisionBitMask: Int
   var contactTestBitMask: Int
-  var affectedByGravity: Bool
+  var isAffectedByGravity: Bool
   func applyForce(direction: SCNVector3, impulse: Bool)
   func applyForce(direction: SCNVector3, atPosition position: SCNVector3, impulse: Bool)
   func applyTorque(torque: SCNVector4, impulse: Bool)
   func clearAllForces()
   func resetTransform()
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class SCNPhysicsContact : NSObject {
+class SCNPhysicsContact : Object {
   var nodeA: SCNNode { get }
   var nodeB: SCNNode { get }
   var contactPoint: SCNVector3 { get }
@@ -1061,53 +1061,53 @@ enum SCNPhysicsFieldScope : Int {
   case InsideExtent
   case OutsideExtent
 }
-class SCNPhysicsField : NSObject, NSCopying, NSSecureCoding {
+class SCNPhysicsField : Object, Copying, SecureCoding {
   var strength: CGFloat
   var falloffExponent: CGFloat
   var minimumDistance: CGFloat
-  var active: Bool
-  var exclusive: Bool
+  var isActive: Bool
+  var isExclusive: Bool
   var halfExtent: SCNVector3
   var usesEllipsoidalExtent: Bool
   var scope: SCNPhysicsFieldScope
   var offset: SCNVector3
   var direction: SCNVector3
   var categoryBitMask: Int
-  class func dragField() -> SCNPhysicsField
-  class func vortexField() -> SCNPhysicsField
-  class func radialGravityField() -> SCNPhysicsField
-  class func linearGravityField() -> SCNPhysicsField
+  class func drag() -> SCNPhysicsField
+  class func vortex() -> SCNPhysicsField
+  class func radialGravity() -> SCNPhysicsField
+  class func linearGravity() -> SCNPhysicsField
   class func noiseFieldWithSmoothness(smoothness: CGFloat, animationSpeed speed: CGFloat) -> SCNPhysicsField
   class func turbulenceFieldWithSmoothness(smoothness: CGFloat, animationSpeed speed: CGFloat) -> SCNPhysicsField
-  class func springField() -> SCNPhysicsField
-  class func electricField() -> SCNPhysicsField
-  class func magneticField() -> SCNPhysicsField
+  class func spring() -> SCNPhysicsField
+  class func electric() -> SCNPhysicsField
+  class func magnetic() -> SCNPhysicsField
   class func customFieldWithEvaluationBlock(block: SCNFieldForceEvaluator) -> SCNPhysicsField
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-typealias SCNFieldForceEvaluator = (SCNVector3, SCNVector3, Float, Float, NSTimeInterval) -> SCNVector3
+typealias SCNFieldForceEvaluator = (SCNVector3, SCNVector3, Float, Float, TimeInterval) -> SCNVector3
 let SCNPhysicsShapeTypeKey: String
 let SCNPhysicsShapeTypeBoundingBox: String
 let SCNPhysicsShapeTypeConvexHull: String
 let SCNPhysicsShapeTypeConcavePolyhedron: String
 let SCNPhysicsShapeKeepAsCompoundKey: String
 let SCNPhysicsShapeScaleKey: String
-class SCNPhysicsShape : NSObject, NSCopying, NSSecureCoding {
-  convenience init(geometry: SCNGeometry, options: [String : AnyObject]?)
-  convenience init(node: SCNNode, options: [String : AnyObject]?)
-  convenience init(shapes: [SCNPhysicsShape], transforms: [NSValue]?)
+class SCNPhysicsShape : Object, Copying, SecureCoding {
+  convenience init(geometry: SCNGeometry, options: [String : AnyObject]? = [:])
+  convenience init(node: SCNNode, options: [String : AnyObject]? = [:])
+  convenience init(shapes: [SCNPhysicsShape], transforms: [Value]?)
   var options: [String : AnyObject]? { get }
   var sourceObject: AnyObject { get }
-  var transforms: [NSValue]? { get }
+  var transforms: [Value]? { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let SCNPhysicsTestCollisionBitMaskKey: String
 let SCNPhysicsTestSearchModeKey: String
@@ -1115,29 +1115,29 @@ let SCNPhysicsTestBackfaceCullingKey: String
 let SCNPhysicsTestSearchModeAny: String
 let SCNPhysicsTestSearchModeClosest: String
 let SCNPhysicsTestSearchModeAll: String
-protocol SCNPhysicsContactDelegate : NSObjectProtocol {
-  optional func physicsWorld(world: SCNPhysicsWorld, didBeginContact contact: SCNPhysicsContact)
+protocol SCNPhysicsContactDelegate : ObjectProtocol {
+  optional func physicsWorld(world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact)
   optional func physicsWorld(world: SCNPhysicsWorld, didUpdateContact contact: SCNPhysicsContact)
-  optional func physicsWorld(world: SCNPhysicsWorld, didEndContact contact: SCNPhysicsContact)
+  optional func physicsWorld(world: SCNPhysicsWorld, didEnd contact: SCNPhysicsContact)
 }
-class SCNPhysicsWorld : NSObject, NSSecureCoding {
+class SCNPhysicsWorld : Object, SecureCoding {
   var gravity: SCNVector3
   var speed: CGFloat
-  var timeStep: NSTimeInterval
+  var timeStep: TimeInterval
   unowned(unsafe) var contactDelegate: @sil_unmanaged SCNPhysicsContactDelegate?
-  func addBehavior(behavior: SCNPhysicsBehavior)
-  func removeBehavior(behavior: SCNPhysicsBehavior)
+  func add(behavior: SCNPhysicsBehavior)
+  func remove(behavior: SCNPhysicsBehavior)
   func removeAllBehaviors()
   var allBehaviors: [SCNPhysicsBehavior] { get }
-  func rayTestWithSegmentFromPoint(origin: SCNVector3, toPoint dest: SCNVector3, options: [String : AnyObject]?) -> [SCNHitTestResult]
-  func contactTestBetweenBody(bodyA: SCNPhysicsBody, andBody bodyB: SCNPhysicsBody, options: [String : AnyObject]?) -> [SCNPhysicsContact]
-  func contactTestWithBody(body: SCNPhysicsBody, options: [String : AnyObject]?) -> [SCNPhysicsContact]
-  func convexSweepTestWithShape(shape: SCNPhysicsShape, fromTransform from: SCNMatrix4, toTransform to: SCNMatrix4, options: [String : AnyObject]?) -> [SCNPhysicsContact]
+  func rayTestWithSegmentFromPoint(origin: SCNVector3, toPoint dest: SCNVector3, options: [String : AnyObject]? = [:]) -> [SCNHitTestResult]
+  func contactTestBetweenBody(bodyA: SCNPhysicsBody, andBody bodyB: SCNPhysicsBody, options: [String : AnyObject]? = [:]) -> [SCNPhysicsContact]
+  func contactTestWith(body: SCNPhysicsBody, options: [String : AnyObject]? = [:]) -> [SCNPhysicsContact]
+  func convexSweepTestWith(shape: SCNPhysicsShape, fromTransform from: SCNMatrix4, toTransform to: SCNMatrix4, options: [String : AnyObject]? = [:]) -> [SCNPhysicsContact]
   func updateCollisionPairs()
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 enum SCNReferenceLoadingPolicy : Int {
   init?(rawValue: Int)
@@ -1146,39 +1146,39 @@ enum SCNReferenceLoadingPolicy : Int {
   case OnDemand
 }
 class SCNReferenceNode : SCNNode {
-  init?(URL referenceURL: NSURL)
-  init?(coder aDecoder: NSCoder)
-  @NSCopying var referenceURL: NSURL
+  init?(url referenceURL: URL)
+  init?(coder aDecoder: Coder)
+  @NSCopying var referenceURL: URL
   var loadingPolicy: SCNReferenceLoadingPolicy
   func load()
   func unload()
-  var loaded: Bool { get }
+  var isLoaded: Bool { get }
   convenience init()
-  convenience init(MDLObject mdlObject: MDLObject)
+  convenience init(mdlObject: MDLObject)
 }
-class SCNRenderer : NSObject, SCNSceneRenderer, SCNTechniqueSupport {
-  convenience init(context: EAGLContext, options: [NSObject : AnyObject]?)
-  convenience init(device: MTLDevice?, options: [NSObject : AnyObject]?)
+class SCNRenderer : Object, SCNSceneRenderer, SCNTechniqueSupport {
+  convenience init(context: EAGLContext, options: [Object : AnyObject]? = [:])
+  convenience init(device: MTLDevice?, options: [Object : AnyObject]? = [:])
   var scene: SCNScene?
   func renderAtTime(time: CFTimeInterval)
   func renderAtTime(time: CFTimeInterval, viewport: CGRect, commandBuffer: MTLCommandBuffer, passDescriptor renderPassDescriptor: MTLRenderPassDescriptor)
   var nextFrameTime: CFTimeInterval { get }
   func render()
   init()
-  var sceneTime: NSTimeInterval
+  var sceneTime: TimeInterval
   unowned(unsafe) var delegate: @sil_unmanaged SCNSceneRendererDelegate?
-  func hitTest(point: CGPoint, options: [String : AnyObject]?) -> [SCNHitTestResult]
+  func hitTest(point: CGPoint, options: [String : AnyObject]? = [:]) -> [SCNHitTestResult]
   func isNodeInsideFrustum(node: SCNNode, withPointOfView pointOfView: SCNNode) -> Bool
   func nodesInsideFrustumWithPointOfView(pointOfView: SCNNode) -> [SCNNode]
   func projectPoint(point: SCNVector3) -> SCNVector3
   func unprojectPoint(point: SCNVector3) -> SCNVector3
-  var playing: Bool
+  var isPlaying: Bool
   var loops: Bool
   var pointOfView: SCNNode?
   var autoenablesDefaultLighting: Bool
-  var jitteringEnabled: Bool
-  func prepareObject(object: AnyObject, shouldAbortBlock block: (() -> Bool)?) -> Bool
-  func prepareObjects(objects: [AnyObject], withCompletionHandler completionHandler: ((Bool) -> Void)?)
+  var isJitteringEnabled: Bool
+  func prepare(object: AnyObject, shouldAbortBlock block: (() -> Bool)? = nil) -> Bool
+  func prepare(objects: [AnyObject], withCompletionHandler completionHandler: ((Bool) -> Void)? = nil)
   var showsStatistics: Bool
   var debugOptions: SCNDebugOptions
   var renderingAPI: SCNRenderingAPI { get }
@@ -1192,30 +1192,30 @@ class SCNRenderer : NSObject, SCNSceneRenderer, SCNTechniqueSupport {
   var audioListener: SCNNode?
   @NSCopying var technique: SCNTechnique?
 }
-typealias SCNSceneExportProgressHandler = (Float, NSError?, UnsafeMutablePointer<ObjCBool>) -> Void
+typealias SCNSceneExportProgressHandler = (Float, Error?, UnsafeMutablePointer<ObjCBool>) -> Void
 let SCNSceneExportDestinationURL: String
 let SCNSceneStartTimeAttributeKey: String
 let SCNSceneEndTimeAttributeKey: String
 let SCNSceneFrameRateAttributeKey: String
 let SCNSceneUpAxisAttributeKey: String
-class SCNScene : NSObject, NSSecureCoding {
+class SCNScene : Object, SecureCoding {
   var rootNode: SCNNode { get }
   var physicsWorld: SCNPhysicsWorld { get }
   func attributeForKey(key: String) -> AnyObject?
   func setAttribute(attribute: AnyObject?, forKey key: String)
   var background: SCNMaterialProperty { get }
   convenience init?(named name: String)
-  convenience init?(named name: String, inDirectory directory: String?, options: [String : AnyObject]?)
-  convenience init(URL url: NSURL, options: [String : AnyObject]?) throws
+  convenience init?(named name: String, inDirectory directory: String?, options: [String : AnyObject]? = [:])
+  convenience init(url: URL, options: [String : AnyObject]? = [:]) throws
   var fogStartDistance: CGFloat
   var fogEndDistance: CGFloat
   var fogDensityExponent: CGFloat
   var fogColor: AnyObject
-  var paused: Bool
+  var isPaused: Bool
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let SCNHitTestFirstFoundOnlyKey: String
 let SCNHitTestSortResultsKey: String
@@ -1242,7 +1242,7 @@ struct SCNDebugOptions : OptionSetType {
   static var ShowPhysicsFields: SCNDebugOptions { get }
   static var ShowWireframe: SCNDebugOptions { get }
 }
-class SCNHitTestResult : NSObject {
+class SCNHitTestResult : Object {
   var node: SCNNode { get }
   var geometryIndex: Int { get }
   var faceIndex: Int { get }
@@ -1254,22 +1254,22 @@ class SCNHitTestResult : NSObject {
   func textureCoordinatesWithMappingChannel(channel: Int) -> CGPoint
   init()
 }
-protocol SCNSceneRenderer : NSObjectProtocol {
+protocol SCNSceneRenderer : ObjectProtocol {
   var scene: SCNScene? { get set }
-  var sceneTime: NSTimeInterval { get set }
+  var sceneTime: TimeInterval { get set }
   unowned(unsafe) var delegate: @sil_unmanaged SCNSceneRendererDelegate? { get set }
-  func hitTest(point: CGPoint, options: [String : AnyObject]?) -> [SCNHitTestResult]
+  func hitTest(point: CGPoint, options: [String : AnyObject]? = [:]) -> [SCNHitTestResult]
   func isNodeInsideFrustum(node: SCNNode, withPointOfView pointOfView: SCNNode) -> Bool
   func nodesInsideFrustumWithPointOfView(pointOfView: SCNNode) -> [SCNNode]
   func projectPoint(point: SCNVector3) -> SCNVector3
   func unprojectPoint(point: SCNVector3) -> SCNVector3
-  var playing: Bool { get set }
+  var isPlaying: Bool { get set }
   var loops: Bool { get set }
   var pointOfView: SCNNode? { get set }
   var autoenablesDefaultLighting: Bool { get set }
-  var jitteringEnabled: Bool { get set }
-  func prepareObject(object: AnyObject, shouldAbortBlock block: (() -> Bool)?) -> Bool
-  func prepareObjects(objects: [AnyObject], withCompletionHandler completionHandler: ((Bool) -> Void)?)
+  var isJitteringEnabled: Bool { get set }
+  func prepare(object: AnyObject, shouldAbortBlock block: (() -> Bool)? = nil) -> Bool
+  func prepare(objects: [AnyObject], withCompletionHandler completionHandler: ((Bool) -> Void)? = nil)
   var showsStatistics: Bool { get set }
   var debugOptions: SCNDebugOptions { get set }
   var renderingAPI: SCNRenderingAPI { get }
@@ -1282,12 +1282,12 @@ protocol SCNSceneRenderer : NSObjectProtocol {
   var commandQueue: MTLCommandQueue? { get }
   var audioListener: SCNNode? { get set }
 }
-protocol SCNSceneRendererDelegate : NSObjectProtocol {
-  optional func renderer(renderer: SCNSceneRenderer, updateAtTime time: NSTimeInterval)
-  optional func renderer(renderer: SCNSceneRenderer, didApplyAnimationsAtTime time: NSTimeInterval)
-  optional func renderer(renderer: SCNSceneRenderer, didSimulatePhysicsAtTime time: NSTimeInterval)
-  optional func renderer(renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: NSTimeInterval)
-  optional func renderer(renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: NSTimeInterval)
+protocol SCNSceneRendererDelegate : ObjectProtocol {
+  optional func renderer(renderer: SCNSceneRenderer, updateAtTime time: TimeInterval)
+  optional func renderer(renderer: SCNSceneRenderer, didApplyAnimationsAtTime time: TimeInterval)
+  optional func renderer(renderer: SCNSceneRenderer, didSimulatePhysicsAtTime time: TimeInterval)
+  optional func renderer(renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval)
+  optional func renderer(renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval)
 }
 let SCNSceneSourceAssetContributorsKey: String
 let SCNSceneSourceAssetCreatedDateKey: String
@@ -1329,17 +1329,17 @@ enum SCNSceneSourceStatus : Int {
   case Processing
   case Complete
 }
-typealias SCNSceneSourceStatusHandler = (Float, SCNSceneSourceStatus, NSError?, UnsafeMutablePointer<ObjCBool>) -> Void
-class SCNSceneSource : NSObject {
-  init?(URL url: NSURL, options: [String : AnyObject]?)
-  init?(data: NSData, options: [String : AnyObject]?)
-  var url: NSURL? { get }
-  var data: NSData? { get }
-  func sceneWithOptions(options: [String : AnyObject]?, statusHandler: SCNSceneSourceStatusHandler?) -> SCNScene?
-  func sceneWithOptions(options: [String : AnyObject]?) throws -> SCNScene
+typealias SCNSceneSourceStatusHandler = (Float, SCNSceneSourceStatus, Error?, UnsafeMutablePointer<ObjCBool>) -> Void
+class SCNSceneSource : Object {
+  init?(url: URL, options: [String : AnyObject]? = [:])
+  init?(data: Data, options: [String : AnyObject]? = [:])
+  var url: URL? { get }
+  var data: Data? { get }
+  func scene(options options: [String : AnyObject]? = [:], statusHandler: SCNSceneSourceStatusHandler? = nil) -> SCNScene?
+  func scene(options options: [String : AnyObject]? = [:]) throws -> SCNScene
   func propertyForKey(key: String) -> AnyObject?
   func __entryWithIdentifier(uid: String, withClass entryClass: AnyClass) -> AnyObject?
-  func identifiersOfEntriesWithClass(entryClass: AnyClass) -> [String]
+  func identifiersOfEntriesWith(entryClass: AnyClass) -> [String]
   func entriesPassingTest(predicate: (AnyObject, String, UnsafeMutablePointer<ObjCBool>) -> Bool) -> [AnyObject]
   init()
 }
@@ -1354,65 +1354,65 @@ enum SCNBufferFrequency : Int {
   case PerNode
   case PerShadable
 }
-protocol SCNBufferStream : NSObjectProtocol {
+protocol SCNBufferStream : ObjectProtocol {
   func writeBytes(bytes: UnsafeMutablePointer<Void>, length: Int)
 }
 typealias SCNBufferBindingBlock = (SCNBufferStream, SCNNode, SCNShadable, SCNRenderer) -> Void
 typealias SCNBindingBlock = (UInt32, UInt32, SCNNode, SCNRenderer) -> Void
-protocol SCNShadable : NSObjectProtocol {
+protocol SCNShadable : ObjectProtocol {
   optional var program: SCNProgram? { get set }
-  optional func handleBindingOfSymbol(symbol: String, usingBlock block: SCNBindingBlock?)
-  optional func handleUnbindingOfSymbol(symbol: String, usingBlock block: SCNBindingBlock?)
+  optional func handleBindingOfSymbol(symbol: String, usingBlock block: SCNBindingBlock? = nil)
+  optional func handleUnbindingOfSymbol(symbol: String, usingBlock block: SCNBindingBlock? = nil)
   optional var shaderModifiers: [String : String]? { get set }
 }
 let SCNProgramMappingChannelKey: String
-class SCNProgram : NSObject, NSCopying, NSSecureCoding {
+class SCNProgram : Object, Copying, SecureCoding {
   var vertexShader: String?
   var fragmentShader: String?
   var vertexFunctionName: String?
   var fragmentFunctionName: String?
   func handleBindingOfBufferNamed(name: String, frequency: SCNBufferFrequency, usingBlock block: SCNBufferBindingBlock)
-  var opaque: Bool
-  func setSemantic(semantic: String?, forSymbol symbol: String, options: [String : AnyObject]?)
+  var isOpaque: Bool
+  func setSemantic(semantic: String?, forSymbol symbol: String, options: [String : AnyObject]? = [:])
   func semanticForSymbol(symbol: String) -> String?
   unowned(unsafe) var delegate: @sil_unmanaged SCNProgramDelegate?
   var library: MTLLibrary?
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-protocol SCNProgramDelegate : NSObjectProtocol {
-  optional func program(program: SCNProgram, handleError error: NSError)
+protocol SCNProgramDelegate : ObjectProtocol {
+  optional func program(program: SCNProgram, handleError error: Error)
 }
 let SCNShaderModifierEntryPointGeometry: String
 let SCNShaderModifierEntryPointSurface: String
 let SCNShaderModifierEntryPointLightingModel: String
 let SCNShaderModifierEntryPointFragment: String
-class SCNSkinner : NSObject, NSSecureCoding {
+class SCNSkinner : Object, SecureCoding {
   var skeleton: SCNNode?
-  convenience init(baseGeometry: SCNGeometry?, bones: [SCNNode], boneInverseBindTransforms: [NSValue]?, boneWeights: SCNGeometrySource, boneIndices: SCNGeometrySource)
+  convenience init(baseGeometry: SCNGeometry?, bones: [SCNNode], boneInverseBindTransforms: [Value]?, boneWeights: SCNGeometrySource, boneIndices: SCNGeometrySource)
   var baseGeometry: SCNGeometry?
   var baseGeometryBindTransform: SCNMatrix4
-  var boneInverseBindTransforms: [NSValue]? { get }
+  var boneInverseBindTransforms: [Value]? { get }
   var bones: [SCNNode] { get }
   var boneWeights: SCNGeometrySource { get }
   var boneIndices: SCNGeometrySource { get }
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class SCNTechnique : NSObject, SCNAnimatable, NSCopying, NSSecureCoding {
+class SCNTechnique : Object, SCNAnimatable, Copying, SecureCoding {
    init?(dictionary: [String : AnyObject])
    init?(bySequencingTechniques techniques: [SCNTechnique])
-  func handleBindingOfSymbol(symbol: String, usingBlock block: SCNBindingBlock?)
+  func handleBindingOfSymbol(symbol: String, usingBlock block: SCNBindingBlock? = nil)
   var dictionaryRepresentation: [String : AnyObject] { get }
   subscript (key: AnyObject) -> AnyObject? { get }
-  func setObject(obj: AnyObject?, forKeyedSubscript key: NSCopying)
+  func setObject(obj: AnyObject?, forKeyedSubscript key: Copying)
   init()
-  func addAnimation(animation: CAAnimation, forKey key: String?)
+  func add(animation: CAAnimation, forKey key: String?)
   func removeAllAnimations()
   func removeAnimationForKey(key: String)
   var animationKeys: [String] { get }
@@ -1421,15 +1421,15 @@ class SCNTechnique : NSObject, SCNAnimatable, NSCopying, NSSecureCoding {
   func resumeAnimationForKey(key: String)
   func isAnimationForKeyPaused(key: String) -> Bool
   func removeAnimationForKey(key: String, fadeOutDuration duration: CGFloat)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-protocol SCNTechniqueSupport : NSObjectProtocol {
+protocol SCNTechniqueSupport : ObjectProtocol {
   @NSCopying var technique: SCNTechnique? { get set }
 }
-class SCNTransaction : NSObject {
+class SCNTransaction : Object {
   class func begin()
   class func commit()
   class func flush()
@@ -1458,7 +1458,7 @@ let SCNPreferredRenderingAPIKey: String
 let SCNPreferredDeviceKey: String
 let SCNPreferLowPowerDeviceKey: String
 class SCNView : UIView, SCNSceneRenderer, SCNTechniqueSupport {
-  init(frame: CGRect, options: [String : AnyObject]?)
+  init(frame: CGRect, options: [String : AnyObject]? = [:])
   var scene: SCNScene?
   var allowsCameraControl: Bool
   func snapshot() -> UIImage
@@ -1469,22 +1469,22 @@ class SCNView : UIView, SCNSceneRenderer, SCNTechniqueSupport {
   var eaglContext: EAGLContext?
   var antialiasingMode: SCNAntialiasingMode
   init(frame: CGRect)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init()
-  var sceneTime: NSTimeInterval
+  var sceneTime: TimeInterval
   unowned(unsafe) var delegate: @sil_unmanaged SCNSceneRendererDelegate?
-  func hitTest(point: CGPoint, options: [String : AnyObject]?) -> [SCNHitTestResult]
+  func hitTest(point: CGPoint, options: [String : AnyObject]? = [:]) -> [SCNHitTestResult]
   func isNodeInsideFrustum(node: SCNNode, withPointOfView pointOfView: SCNNode) -> Bool
   func nodesInsideFrustumWithPointOfView(pointOfView: SCNNode) -> [SCNNode]
   func projectPoint(point: SCNVector3) -> SCNVector3
   func unprojectPoint(point: SCNVector3) -> SCNVector3
-  var playing: Bool
+  var isPlaying: Bool
   var loops: Bool
   var pointOfView: SCNNode?
   var autoenablesDefaultLighting: Bool
-  var jitteringEnabled: Bool
-  func prepareObject(object: AnyObject, shouldAbortBlock block: (() -> Bool)?) -> Bool
-  func prepareObjects(objects: [AnyObject], withCompletionHandler completionHandler: ((Bool) -> Void)?)
+  var isJitteringEnabled: Bool
+  func prepare(object: AnyObject, shouldAbortBlock block: (() -> Bool)? = nil) -> Bool
+  func prepare(objects: [AnyObject], withCompletionHandler completionHandler: ((Bool) -> Void)? = nil)
   var showsStatistics: Bool
   var debugOptions: SCNDebugOptions
   var renderingAPI: SCNRenderingAPI { get }
@@ -1577,13 +1577,13 @@ func SCNVector4FromGLKVector4(vector: GLKVector4) -> SCNVector4
 func SCNVector4ToGLKVector4(vector: SCNVector4) -> GLKVector4
 func SCNMatrix4ToGLKMatrix4(mat: SCNMatrix4) -> GLKMatrix4
 func SCNMatrix4FromGLKMatrix4(mat: GLKMatrix4) -> SCNMatrix4
-extension NSValue {
-   init(SCNVector3 v: SCNVector3)
-   init(SCNVector4 v: SCNVector4)
-   init(SCNMatrix4 v: SCNMatrix4)
-  var SCNVector3Value: SCNVector3 { get }
-  var SCNVector4Value: SCNVector4 { get }
-  var SCNMatrix4Value: SCNMatrix4 { get }
+extension Value {
+   init(scnVector3 v: SCNVector3)
+   init(scnVector4 v: SCNVector4)
+   init(scnMatrix4 v: SCNMatrix4)
+  var scnVector3Value: SCNVector3 { get }
+  var scnVector4Value: SCNVector4 { get }
+  var scnMatrix4Value: SCNMatrix4 { get }
 }
 let SCNErrorDomain: String
 var SCNProgramCompilationError: Int { get }

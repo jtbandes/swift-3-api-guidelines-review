@@ -825,7 +825,7 @@ typealias la_norm_t = UInt
 func la_norm_as_float(vector: la_object_t, _ vector_norm: la_norm_t) -> Float
 func la_norm_as_double(vector: la_object_t, _ vector_norm: la_norm_t) -> Double
 func la_normalized_vector(vector: la_object_t, _ vector_norm: la_norm_t) -> la_object_t!
-protocol OS_la_object : NSObjectProtocol {
+protocol OS_la_object : ObjectProtocol {
 }
 typealias la_object_t = OS_la_object
 func la_retain(object: la_object_t) -> la_object_t!

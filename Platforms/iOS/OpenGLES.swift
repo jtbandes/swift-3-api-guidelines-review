@@ -9,19 +9,19 @@ enum EAGLRenderingAPI : UInt {
   case OpenGLES3
 }
 func EAGLGetVersion(major: UnsafeMutablePointer<UInt32>, _ minor: UnsafeMutablePointer<UInt32>)
-class EAGLSharegroup : NSObject {
+class EAGLSharegroup : Object {
   var debugLabel: String!
   init()
 }
-class EAGLContext : NSObject {
-  convenience init!(API api: EAGLRenderingAPI)
-  init!(API api: EAGLRenderingAPI, sharegroup: EAGLSharegroup!)
+class EAGLContext : Object {
+  convenience init!(api: EAGLRenderingAPI)
+  init!(api: EAGLRenderingAPI, sharegroup: EAGLSharegroup!)
   class func setCurrentContext(context: EAGLContext!) -> Bool
-  class func currentContext() -> EAGLContext!
-  var API: EAGLRenderingAPI { get }
+  class func current() -> EAGLContext!
+  var api: EAGLRenderingAPI { get }
   var sharegroup: EAGLSharegroup! { get }
   var debugLabel: String!
-  var multiThreaded: Bool
+  var isMultiThreaded: Bool
 }
 let kEAGLDrawablePropertyRetainedBacking: String
 let kEAGLDrawablePropertyColorFormat: String
@@ -29,10 +29,10 @@ let kEAGLColorFormatRGBA8: String
 let kEAGLColorFormatRGB565: String
 let kEAGLColorFormatSRGBA8: String
 protocol EAGLDrawable {
-  var drawableProperties: [NSObject : AnyObject]! { get set }
+  var drawableProperties: [Object : AnyObject]! { get set }
 }
 extension EAGLContext {
-  func renderbufferStorage(target: Int, fromDrawable drawable: EAGLDrawable!) -> Bool
+  func renderbufferStorage(target: Int, from drawable: EAGLDrawable!) -> Bool
   func presentRenderbuffer(target: Int) -> Bool
 }
 var GL_VERSION_ES_CM_1_0: Int32 { get }

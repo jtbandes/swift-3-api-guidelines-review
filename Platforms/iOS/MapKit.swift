@@ -1,5 +1,5 @@
 
-protocol MKAnnotation : NSObjectProtocol {
+protocol MKAnnotation : ObjectProtocol {
   var coordinate: CLLocationCoordinate2D { get }
   optional var title: String? { get }
   optional var subtitle: String? { get }
@@ -22,23 +22,23 @@ class MKAnnotationView : UIView {
   var image: UIImage?
   var centerOffset: CGPoint
   var calloutOffset: CGPoint
-  var enabled: Bool
-  var highlighted: Bool
-  var selected: Bool
+  var isEnabled: Bool
+  var isHighlighted: Bool
+  var isSelected: Bool
   func setSelected(selected: Bool, animated: Bool)
   var canShowCallout: Bool
   var leftCalloutAccessoryView: UIView?
   var rightCalloutAccessoryView: UIView?
   var detailCalloutAccessoryView: UIView?
-  var draggable: Bool
+  var isDraggable: Bool
   var dragState: MKAnnotationViewDragState
   func setDragState(newDragState: MKAnnotationViewDragState, animated: Bool)
   init(frame: CGRect)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
 class MKCircle : MKShape, MKOverlay {
-  convenience init(centerCoordinate coord: CLLocationCoordinate2D, radius: CLLocationDistance)
+  convenience init(center coord: CLLocationCoordinate2D, radius: CLLocationDistance)
   convenience init(mapRect: MKMapRect)
   var coordinate: CLLocationCoordinate2D { get }
   var radius: CLLocationDistance { get }
@@ -55,20 +55,20 @@ class MKCircleRenderer : MKOverlayPathRenderer {
 }
 class MKCircleView : MKOverlayPathView {
   convenience init(frame: CGRect)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
-typealias MKDirectionsHandler = (MKDirectionsResponse?, NSError?) -> Void
-typealias MKETAHandler = (MKETAResponse?, NSError?) -> Void
-class MKDirections : NSObject {
+typealias MKDirectionsHandler = (MKDirectionsResponse?, Error?) -> Void
+typealias MKETAHandler = (MKETAResponse?, Error?) -> Void
+class MKDirections : Object {
   init(request: MKDirectionsRequest)
-  func calculateDirectionsWithCompletionHandler(completionHandler: MKDirectionsHandler)
+  func calculateWithCompletionHandler(completionHandler: MKDirectionsHandler)
   func calculateETAWithCompletionHandler(completionHandler: MKETAHandler)
   func cancel()
-  var calculating: Bool { get }
+  var isCalculating: Bool { get }
   convenience init()
 }
-class MKDirectionsRequest : NSObject {
+class MKDirectionsRequest : Object {
   var source: MKMapItem?
   var destination: MKMapItem?
   init()
@@ -76,30 +76,30 @@ class MKDirectionsRequest : NSObject {
 extension MKDirectionsRequest {
   var transportType: MKDirectionsTransportType
   var requestsAlternateRoutes: Bool
-  @NSCopying var departureDate: NSDate?
-  @NSCopying var arrivalDate: NSDate?
+  @NSCopying var departureDate: Date?
+  @NSCopying var arrivalDate: Date?
 }
 extension MKDirectionsRequest {
-  init(contentsOfURL url: NSURL)
-  class func isDirectionsRequestURL(url: NSURL) -> Bool
+  init(contentsOf url: URL)
+  class func isDirectionsRequest(url: URL) -> Bool
 }
-class MKDirectionsResponse : NSObject {
+class MKDirectionsResponse : Object {
   var source: MKMapItem { get }
   var destination: MKMapItem { get }
   var routes: [MKRoute] { get }
   init()
 }
-class MKRoute : NSObject {
+class MKRoute : Object {
   var name: String { get }
   var advisoryNotices: [String] { get }
   var distance: CLLocationDistance { get }
-  var expectedTravelTime: NSTimeInterval { get }
+  var expectedTravelTime: TimeInterval { get }
   var transportType: MKDirectionsTransportType { get }
   var polyline: MKPolyline { get }
   var steps: [MKRouteStep] { get }
   init()
 }
-class MKRouteStep : NSObject {
+class MKRouteStep : Object {
   var instructions: String { get }
   var notice: String? { get }
   var polyline: MKPolyline { get }
@@ -107,13 +107,13 @@ class MKRouteStep : NSObject {
   var transportType: MKDirectionsTransportType { get }
   init()
 }
-class MKETAResponse : NSObject {
+class MKETAResponse : Object {
   var source: MKMapItem { get }
   var destination: MKMapItem { get }
-  var expectedTravelTime: NSTimeInterval { get }
+  var expectedTravelTime: TimeInterval { get }
   var distance: CLLocationDistance { get }
-  var expectedArrivalDate: NSDate { get }
-  var expectedDepartureDate: NSDate { get }
+  var expectedArrivalDate: Date { get }
+  var expectedDepartureDate: Date { get }
   var transportType: MKDirectionsTransportType { get }
   init()
 }
@@ -125,14 +125,14 @@ struct MKDirectionsTransportType : OptionSetType {
   static var Transit: MKDirectionsTransportType { get }
   static var Any: MKDirectionsTransportType { get }
 }
-class MKDistanceFormatter : NSFormatter {
+class MKDistanceFormatter : Formatter {
   func stringFromDistance(distance: CLLocationDistance) -> String
-  func distanceFromString(distance: String) -> CLLocationDistance
-  @NSCopying var locale: NSLocale!
+  func distanceFrom(distance: String) -> CLLocationDistance
+  @NSCopying var locale: Locale!
   var units: MKDistanceFormatterUnits
   var unitStyle: MKDistanceFormatterUnitStyle
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 enum MKDistanceFormatterUnits : UInt {
   init?(rawValue: UInt)
@@ -221,36 +221,36 @@ func MKMapRectIntersectsRect(rect1: MKMapRect, _ rect2: MKMapRect) -> Bool
 func MKCoordinateRegionForMapRect(rect: MKMapRect) -> MKCoordinateRegion
 func MKMapRectSpans180thMeridian(rect: MKMapRect) -> Bool
 func MKMapRectRemainder(rect: MKMapRect) -> MKMapRect
-extension NSValue {
-   init(MKCoordinate coordinate: CLLocationCoordinate2D)
-   init(MKCoordinateSpan span: MKCoordinateSpan)
-  var MKCoordinateValue: CLLocationCoordinate2D { get }
-  var MKCoordinateSpanValue: MKCoordinateSpan { get }
+extension Value {
+   init(mkCoordinate coordinate: CLLocationCoordinate2D)
+   init(mkCoordinateSpan span: MKCoordinateSpan)
+  var mkCoordinateValue: CLLocationCoordinate2D { get }
+  var mkCoordinateSpanValue: MKCoordinateSpan { get }
 }
-class MKMapCamera : NSObject, NSSecureCoding, NSCopying {
+class MKMapCamera : Object, SecureCoding, Copying {
   var centerCoordinate: CLLocationCoordinate2D
   var heading: CLLocationDirection
   var pitch: CGFloat
   var altitude: CLLocationDistance
-  convenience init(lookingAtCenterCoordinate centerCoordinate: CLLocationCoordinate2D, fromEyeCoordinate eyeCoordinate: CLLocationCoordinate2D, eyeAltitude: CLLocationDistance)
-  convenience init(lookingAtCenterCoordinate centerCoordinate: CLLocationCoordinate2D, fromDistance distance: CLLocationDistance, pitch: CGFloat, heading: CLLocationDirection)
+  convenience init(lookingAtCenter centerCoordinate: CLLocationCoordinate2D, fromEyeCoordinate eyeCoordinate: CLLocationCoordinate2D, eyeAltitude: CLLocationDistance)
+  convenience init(lookingAtCenter centerCoordinate: CLLocationCoordinate2D, fromDistance distance: CLLocationDistance, pitch: CGFloat, heading: CLLocationDirection)
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class MKMapItem : NSObject {
+class MKMapItem : Object {
   var placemark: MKPlacemark { get }
   var isCurrentLocation: Bool { get }
   var name: String?
   var phoneNumber: String?
-  var url: NSURL?
-  @NSCopying var timeZone: NSTimeZone?
-  class func mapItemForCurrentLocation() -> MKMapItem
+  var url: URL?
+  @NSCopying var timeZone: TimeZone?
+  class func forCurrentLocation() -> MKMapItem
   init(placemark: MKPlacemark)
-  func openInMapsWithLaunchOptions(launchOptions: [String : AnyObject]?) -> Bool
-  class func openMapsWithItems(mapItems: [MKMapItem], launchOptions: [String : AnyObject]?) -> Bool
+  func openInMapsWithLaunchOptions(launchOptions: [String : AnyObject]? = [:]) -> Bool
+  class func openMapsWith(mapItems: [MKMapItem], launchOptions: [String : AnyObject]? = [:]) -> Bool
   init()
 }
 let MKLaunchOptionsDirectionsModeKey: String
@@ -262,12 +262,12 @@ let MKLaunchOptionsDirectionsModeTransit: String
 let MKLaunchOptionsMapCenterKey: String
 let MKLaunchOptionsMapSpanKey: String
 let MKLaunchOptionsCameraKey: String
-class MKMapSnapshot : NSObject {
+class MKMapSnapshot : Object {
   var image: UIImage { get }
-  func pointForCoordinate(coordinate: CLLocationCoordinate2D) -> CGPoint
+  func pointFor(coordinate: CLLocationCoordinate2D) -> CGPoint
   init()
 }
-class MKMapSnapshotOptions : NSObject, NSCopying {
+class MKMapSnapshotOptions : Object, Copying {
   @NSCopying var camera: MKMapCamera
   var mapRect: MKMapRect
   var region: MKCoordinateRegion
@@ -277,15 +277,15 @@ class MKMapSnapshotOptions : NSObject, NSCopying {
   var size: CGSize
   var scale: CGFloat
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-typealias MKMapSnapshotCompletionHandler = (MKMapSnapshot?, NSError?) -> Void
-class MKMapSnapshotter : NSObject {
+typealias MKMapSnapshotCompletionHandler = (MKMapSnapshot?, Error?) -> Void
+class MKMapSnapshotter : Object {
   init(options: MKMapSnapshotOptions)
   func startWithCompletionHandler(completionHandler: MKMapSnapshotCompletionHandler)
-  func startWithQueue(queue: dispatch_queue_t, completionHandler: MKMapSnapshotCompletionHandler)
+  func startWith(queue: dispatch_queue_t, completionHandler: MKMapSnapshotCompletionHandler)
   func cancel()
-  var loading: Bool { get }
+  var isLoading: Bool { get }
   convenience init()
 }
 enum MKUserTrackingMode : Int {
@@ -295,30 +295,30 @@ enum MKUserTrackingMode : Int {
   case Follow
   case FollowWithHeading
 }
-class MKMapView : UIView, NSCoding {
+class MKMapView : UIView, Coding {
   weak var delegate: @sil_weak MKMapViewDelegate?
   var mapType: MKMapType
   var region: MKCoordinateRegion
   func setRegion(region: MKCoordinateRegion, animated: Bool)
   var centerCoordinate: CLLocationCoordinate2D
-  func setCenterCoordinate(coordinate: CLLocationCoordinate2D, animated: Bool)
+  func setCenter(coordinate: CLLocationCoordinate2D, animated: Bool)
   func regionThatFits(region: MKCoordinateRegion) -> MKCoordinateRegion
   var visibleMapRect: MKMapRect
   func setVisibleMapRect(mapRect: MKMapRect, animated animate: Bool)
   func mapRectThatFits(mapRect: MKMapRect) -> MKMapRect
-  func _handleSelectionAtPoint(locationInView: CGPoint)
+  func _handleSelectionAt(locationInView: CGPoint)
   func setVisibleMapRect(mapRect: MKMapRect, edgePadding insets: UIEdgeInsets, animated animate: Bool)
   func mapRectThatFits(mapRect: MKMapRect, edgePadding insets: UIEdgeInsets) -> MKMapRect
   @NSCopying var camera: MKMapCamera
   func setCamera(camera: MKMapCamera, animated: Bool)
-  func convertCoordinate(coordinate: CLLocationCoordinate2D, toPointToView view: UIView?) -> CGPoint
-  func convertPoint(point: CGPoint, toCoordinateFromView view: UIView?) -> CLLocationCoordinate2D
-  func convertRegion(region: MKCoordinateRegion, toRectToView view: UIView?) -> CGRect
-  func convertRect(rect: CGRect, toRegionFromView view: UIView?) -> MKCoordinateRegion
-  var zoomEnabled: Bool
-  var scrollEnabled: Bool
-  var rotateEnabled: Bool
-  var pitchEnabled: Bool
+  func convert(coordinate: CLLocationCoordinate2D, toPointTo view: UIView?) -> CGPoint
+  func convert(point: CGPoint, toCoordinateFrom view: UIView?) -> CLLocationCoordinate2D
+  func convertRegion(region: MKCoordinateRegion, toRectTo view: UIView?) -> CGRect
+  func convert(rect: CGRect, toRegionFrom view: UIView?) -> MKCoordinateRegion
+  var isZoomEnabled: Bool
+  var isScrollEnabled: Bool
+  var isRotateEnabled: Bool
+  var isPitchEnabled: Bool
   var showsCompass: Bool
   var showsScale: Bool
   var showsPointsOfInterest: Bool
@@ -328,14 +328,14 @@ class MKMapView : UIView, NSCoding {
   var userLocation: MKUserLocation { get }
   var userTrackingMode: MKUserTrackingMode
   func setUserTrackingMode(mode: MKUserTrackingMode, animated: Bool)
-  var userLocationVisible: Bool { get }
+  var isUserLocationVisible: Bool { get }
   func addAnnotation(annotation: MKAnnotation)
   func addAnnotations(annotations: [MKAnnotation])
   func removeAnnotation(annotation: MKAnnotation)
   func removeAnnotations(annotations: [MKAnnotation])
   var annotations: [MKAnnotation] { get }
-  func annotationsInMapRect(mapRect: MKMapRect) -> Set<NSObject>
-  func viewForAnnotation(annotation: MKAnnotation) -> MKAnnotationView?
+  func annotationsIn(mapRect: MKMapRect) -> Set<Object>
+  func viewFor(annotation: MKAnnotation) -> MKAnnotationView?
   func dequeueReusableAnnotationViewWithIdentifier(identifier: String) -> MKAnnotationView?
   func selectAnnotation(annotation: MKAnnotation, animated: Bool)
   func deselectAnnotation(annotation: MKAnnotation?, animated: Bool)
@@ -343,7 +343,7 @@ class MKMapView : UIView, NSCoding {
   var annotationVisibleRect: CGRect { get }
   func showAnnotations(annotations: [MKAnnotation], animated: Bool)
   init(frame: CGRect)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
 enum MKOverlayLevel : Int {
@@ -353,43 +353,43 @@ enum MKOverlayLevel : Int {
   case AboveLabels
 }
 extension MKMapView {
-  func addOverlay(overlay: MKOverlay, level: MKOverlayLevel)
+  func add(overlay: MKOverlay, level: MKOverlayLevel)
   func addOverlays(overlays: [MKOverlay], level: MKOverlayLevel)
-  func removeOverlay(overlay: MKOverlay)
+  func remove(overlay: MKOverlay)
   func removeOverlays(overlays: [MKOverlay])
-  func insertOverlay(overlay: MKOverlay, atIndex index: Int, level: MKOverlayLevel)
-  func insertOverlay(overlay: MKOverlay, aboveOverlay sibling: MKOverlay)
-  func insertOverlay(overlay: MKOverlay, belowOverlay sibling: MKOverlay)
+  func insert(overlay: MKOverlay, at index: Int, level: MKOverlayLevel)
+  func insert(overlay: MKOverlay, above sibling: MKOverlay)
+  func insert(overlay: MKOverlay, below sibling: MKOverlay)
   func exchangeOverlay(overlay1: MKOverlay, withOverlay overlay2: MKOverlay)
   var overlays: [MKOverlay] { get }
-  func overlaysInLevel(level: MKOverlayLevel) -> [MKOverlay]
-  func rendererForOverlay(overlay: MKOverlay) -> MKOverlayRenderer?
-  func addOverlay(overlay: MKOverlay)
+  func overlaysIn(level: MKOverlayLevel) -> [MKOverlay]
+  func rendererFor(overlay: MKOverlay) -> MKOverlayRenderer?
+  func add(overlay: MKOverlay)
   func addOverlays(overlays: [MKOverlay])
-  func insertOverlay(overlay: MKOverlay, atIndex index: Int)
-  func exchangeOverlayAtIndex(index1: Int, withOverlayAtIndex index2: Int)
+  func insert(overlay: MKOverlay, at index: Int)
+  func exchangeOverlayAt(index1: Int, withOverlayAt index2: Int)
 }
-protocol MKMapViewDelegate : NSObjectProtocol {
+protocol MKMapViewDelegate : ObjectProtocol {
   optional func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool)
   optional func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool)
   optional func mapViewWillStartLoadingMap(mapView: MKMapView)
   optional func mapViewDidFinishLoadingMap(mapView: MKMapView)
-  optional func mapViewDidFailLoadingMap(mapView: MKMapView, withError error: NSError)
+  optional func mapViewDidFailLoadingMap(mapView: MKMapView, withError error: Error)
   optional func mapViewWillStartRenderingMap(mapView: MKMapView)
   optional func mapViewDidFinishRenderingMap(mapView: MKMapView, fullyRendered: Bool)
-  optional func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView?
-  optional func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView])
+  optional func mapView(mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
+  optional func mapView(mapView: MKMapView, didAdd views: [MKAnnotationView])
   optional func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl)
-  optional func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView)
-  optional func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView)
+  optional func mapView(mapView: MKMapView, didSelect view: MKAnnotationView)
+  optional func mapView(mapView: MKMapView, didDeselect view: MKAnnotationView)
   optional func mapViewWillStartLocatingUser(mapView: MKMapView)
   optional func mapViewDidStopLocatingUser(mapView: MKMapView)
   optional func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation)
-  optional func mapView(mapView: MKMapView, didFailToLocateUserWithError error: NSError)
-  optional func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState)
-  optional func mapView(mapView: MKMapView, didChangeUserTrackingMode mode: MKUserTrackingMode, animated: Bool)
-  optional func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer
-  optional func mapView(mapView: MKMapView, didAddOverlayRenderers renderers: [MKOverlayRenderer])
+  optional func mapView(mapView: MKMapView, didFailToLocateUserWithError error: Error)
+  optional func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState)
+  optional func mapView(mapView: MKMapView, didChange mode: MKUserTrackingMode, animated: Bool)
+  optional func mapView(mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer
+  optional func mapView(mapView: MKMapView, didAdd renderers: [MKOverlayRenderer])
 }
 class MKMultiPoint : MKShape {
   func points() -> UnsafeMutablePointer<MKMapPoint>
@@ -411,41 +411,41 @@ class MKOverlayPathRenderer : MKOverlayRenderer {
   var lineCap: CGLineCap
   var miterLimit: CGFloat
   var lineDashPhase: CGFloat
-  var lineDashPattern: [NSNumber]?
+  var lineDashPattern: [Number]?
   func createPath()
   var path: CGPath!
   func invalidatePath()
-  func applyStrokePropertiesToContext(context: CGContext, atZoomScale zoomScale: MKZoomScale)
-  func applyFillPropertiesToContext(context: CGContext, atZoomScale zoomScale: MKZoomScale)
-  func strokePath(path: CGPath, inContext context: CGContext)
-  func fillPath(path: CGPath, inContext context: CGContext)
+  func applyStrokePropertiesTo(context: CGContext, atZoomScale zoomScale: MKZoomScale)
+  func applyFillPropertiesTo(context: CGContext, atZoomScale zoomScale: MKZoomScale)
+  func strokePath(path: CGPath, in context: CGContext)
+  func fillPath(path: CGPath, in context: CGContext)
   init(overlay: MKOverlay)
   convenience init()
 }
 class MKOverlayPathView : MKOverlayView {
   convenience init(frame: CGRect)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
-class MKOverlayRenderer : NSObject {
+class MKOverlayRenderer : Object {
   init(overlay: MKOverlay)
   var overlay: MKOverlay { get }
-  func pointForMapPoint(mapPoint: MKMapPoint) -> CGPoint
-  func mapPointForPoint(point: CGPoint) -> MKMapPoint
-  func rectForMapRect(mapRect: MKMapRect) -> CGRect
-  func mapRectForRect(rect: CGRect) -> MKMapRect
-  func canDrawMapRect(mapRect: MKMapRect, zoomScale: MKZoomScale) -> Bool
-  func drawMapRect(mapRect: MKMapRect, zoomScale: MKZoomScale, inContext context: CGContext)
+  func pointFor(mapPoint: MKMapPoint) -> CGPoint
+  func mapPointFor(point: CGPoint) -> MKMapPoint
+  func rectFor(mapRect: MKMapRect) -> CGRect
+  func mapRectFor(rect: CGRect) -> MKMapRect
+  func canDraw(mapRect: MKMapRect, zoomScale: MKZoomScale) -> Bool
+  func draw(mapRect: MKMapRect, zoomScale: MKZoomScale, in context: CGContext)
   func setNeedsDisplay()
-  func setNeedsDisplayInMapRect(mapRect: MKMapRect)
-  func setNeedsDisplayInMapRect(mapRect: MKMapRect, zoomScale: MKZoomScale)
+  func setNeedsDisplayIn(mapRect: MKMapRect)
+  func setNeedsDisplayIn(mapRect: MKMapRect, zoomScale: MKZoomScale)
   var alpha: CGFloat
   var contentScaleFactor: CGFloat { get }
   convenience init()
 }
 class MKOverlayView : UIView {
   convenience init(frame: CGRect)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
 func MKRoadWidthAtZoomScale(zoomScale: MKZoomScale) -> CGFloat
@@ -465,7 +465,7 @@ class MKPinAnnotationView : MKAnnotationView {
   var pinColor: MKPinAnnotationColor
   init(annotation: MKAnnotation?, reuseIdentifier: String?)
   init(frame: CGRect)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
 class MKPlacemark : CLPlacemark, MKAnnotation {
@@ -473,7 +473,7 @@ class MKPlacemark : CLPlacemark, MKAnnotation {
   var countryCode: String? { get }
   init(placemark: CLPlacemark)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   var coordinate: CLLocationCoordinate2D { get }
   var title: String? { get }
   var subtitle: String? { get }
@@ -502,7 +502,7 @@ class MKPolygonRenderer : MKOverlayPathRenderer {
 }
 class MKPolygonView : MKOverlayPathView {
   convenience init(frame: CGRect)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
 class MKPolyline : MKMultiPoint, MKOverlay {
@@ -522,10 +522,10 @@ class MKPolylineRenderer : MKOverlayPathRenderer {
 }
 class MKPolylineView : MKOverlayPathView {
   convenience init(frame: CGRect)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
-class MKShape : NSObject, MKAnnotation {
+class MKShape : Object, MKAnnotation {
   var title: String?
   var subtitle: String?
   init()
@@ -550,8 +550,8 @@ enum MKErrorCode : UInt {
   case PlacemarkNotFound
   case DirectionsNotFound
 }
-class MKUserLocation : NSObject, MKAnnotation {
-  var updating: Bool { get }
+class MKUserLocation : Object, MKAnnotation {
+  var isUpdating: Bool { get }
   var location: CLLocation? { get }
   var heading: CLHeading? { get }
   var title: String?
@@ -563,7 +563,7 @@ class MKUserTrackingBarButtonItem : UIBarButtonItem {
   init(mapView: MKMapView?)
   var mapView: MKMapView?
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init(image: UIImage?, style: UIBarButtonItemStyle, target: AnyObject?, action: Selector)
   convenience init(image: UIImage?, landscapeImagePhone: UIImage?, style: UIBarButtonItemStyle, target: AnyObject?, action: Selector)
   convenience init(title: String?, style: UIBarButtonItemStyle, target: AnyObject?, action: Selector)

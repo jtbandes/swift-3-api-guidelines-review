@@ -154,23 +154,23 @@ var ABPropertyUnsupportedBySourceError: Int { get }
 var ABPropertyReadOnlyError: Int { get }
 let ABAddressBookErrorDomain: String
 let ABMultiValueIdentifiersErrorKey: String
-class ABAddressBook : NSObject {
-  class func sharedAddressBook() -> ABAddressBook!
-  func recordsMatchingSearchElement(search: ABSearchElement!) -> [AnyObject]!
+class ABAddressBook : Object {
+  class func shared() -> ABAddressBook!
+  func recordsMatching(search: ABSearchElement!) -> [AnyObject]!
   func save() -> Bool
   func saveAndReturnError() throws
   func hasUnsavedChanges() -> Bool
   func me() -> ABPerson!
   func setMe(moi: ABPerson!)
   func recordForUniqueId(uniqueId: String!) -> ABRecord!
-  func addRecord(record: ABRecord!, error: ()) throws
-  func addRecord(record: ABRecord!) -> Bool
-  func removeRecord(record: ABRecord!, error: ()) throws
-  func removeRecord(record: ABRecord!) -> Bool
+  func add(record: ABRecord!, error: ()) throws
+  func add(record: ABRecord!) -> Bool
+  func remove(record: ABRecord!, error: ()) throws
+  func remove(record: ABRecord!) -> Bool
   func people() -> [AnyObject]!
   func groups() -> [AnyObject]!
   func recordClassFromUniqueId(uniqueId: String!) -> String!
-  func formattedAddressFromDictionary(address: [NSObject : AnyObject]!) -> NSAttributedString!
+  func formattedAddressFrom(address: [Object : AnyObject]!) -> AttributedString!
   func defaultCountryCode() -> String!
   func defaultNameOrdering() -> Int
   init()
@@ -313,7 +313,7 @@ class ABGroup : ABRecord {
   init!(addressBook: ABAddressBook!)
 }
 extension ABGroup {
-  class func addPropertiesAndTypes(properties: [NSObject : AnyObject]!) -> Int
+  class func addPropertiesAndTypes(properties: [Object : AnyObject]!) -> Int
   class func removeProperties(properties: [AnyObject]!) -> Int
   class func properties() -> [AnyObject]!
   class func typeOfProperty(property: String!) -> ABPropertyType
@@ -321,36 +321,36 @@ extension ABGroup {
 extension ABGroup {
   class func searchElementForProperty(property: String!, label: String!, key: String!, value: AnyObject!, comparison: ABSearchComparison) -> ABSearchElement!
 }
-protocol ABImageClient : NSObjectProtocol {
-  func consumeImageData(data: NSData!, forTag tag: Int)
+protocol ABImageClient : ObjectProtocol {
+  func consumeImageData(data: Data!, forTag tag: Int)
 }
 extension ABPerson {
-  func setImageData(data: NSData!) -> Bool
-  func imageData() -> NSData!
-  func beginLoadingImageDataForClient(client: ABImageClient!) -> Int
+  func setImageData(data: Data!) -> Bool
+  func imageData() -> Data!
+  func beginLoadingImageDataFor(client: ABImageClient!) -> Int
   class func cancelLoadingImageDataForTag(tag: Int)
 }
-class ABMultiValue : NSObject, NSCopying, NSMutableCopying, NSFastEnumeration {
+class ABMultiValue : Object, Copying, MutableCopying, FastEnumeration {
   func count() -> Int
-  func valueAtIndex(index: Int) -> AnyObject!
-  func labelAtIndex(index: Int) -> String!
-  func identifierAtIndex(index: Int) -> String!
+  func valueAt(index: Int) -> AnyObject!
+  func labelAt(index: Int) -> String!
+  func identifierAt(index: Int) -> String!
   func indexForIdentifier(identifier: String!) -> Int
   func primaryIdentifier() -> String!
   func propertyType() -> ABPropertyType
   func valueForIdentifier(identifier: String!) -> AnyObject!
   func labelForIdentifier(identifier: String!) -> AnyObject!
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
-  func countByEnumeratingWithState(state: UnsafeMutablePointer<NSFastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
+  func countByEnumeratingWith(state: UnsafeMutablePointer<FastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
 }
 class ABMutableMultiValue : ABMultiValue {
-  func addValue(value: AnyObject!, withLabel label: String!) -> String!
-  func insertValue(value: AnyObject!, withLabel label: String!, atIndex index: Int) -> String!
-  func removeValueAndLabelAtIndex(index: Int) -> Bool
-  func replaceValueAtIndex(index: Int, withValue value: AnyObject!) -> Bool
-  func replaceLabelAtIndex(index: Int, withLabel label: String!) -> Bool
+  func add(value: AnyObject!, withLabel label: String!) -> String!
+  func insert(value: AnyObject!, withLabel label: String!, at index: Int) -> String!
+  func removeAndLabelAt(index: Int) -> Bool
+  func replaceAt(index: Int, withValue value: AnyObject!) -> Bool
+  func replaceLabelAt(index: Int, withLabel label: String!) -> Bool
   func setPrimaryIdentifier(identifier: String!) -> Bool
   init()
 }
@@ -361,7 +361,7 @@ class ABPerson : ABRecord {
   init!(addressBook: ABAddressBook!)
 }
 extension ABPerson {
-  class func addPropertiesAndTypes(properties: [NSObject : AnyObject]!) -> Int
+  class func addPropertiesAndTypes(properties: [Object : AnyObject]!) -> Int
   class func removeProperties(properties: [AnyObject]!) -> Int
   class func properties() -> [AnyObject]!
   class func typeOfProperty(property: String!) -> ABPropertyType
@@ -370,10 +370,10 @@ extension ABPerson {
   class func searchElementForProperty(property: String!, label: String!, key: String!, value: AnyObject!, comparison: ABSearchComparison) -> ABSearchElement!
 }
 extension ABPerson {
-  init!(VCardRepresentation vCardData: NSData!)
-  func vCardRepresentation() -> NSData!
+  init!(vCardRepresentation vCardData: Data!)
+  func vCardRepresentation() -> Data!
 }
-class ABRecord : NSObject {
+class ABRecord : Object {
   init!()
   init!(addressBook: ABAddressBook!)
   func valueForProperty(property: String!) -> AnyObject!
@@ -386,7 +386,7 @@ extension ABRecord {
   var uniqueId: String! { get }
   var displayName: String! { get }
 }
-class ABSearchElement : NSObject {
+class ABSearchElement : Object {
    init!(forConjunction conjuction: ABSearchConjunction, children: [AnyObject]!)
   func matchesRecord(record: ABRecord!) -> Bool
   init()

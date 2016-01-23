@@ -3360,7 +3360,7 @@ protocol IOBluetoothDeviceAsyncCallbacks {
   func connectionComplete(device: IOBluetoothDevice!, status: IOReturn)
   func sdpQueryComplete(device: IOBluetoothDevice!, status: IOReturn)
 }
-class IOBluetoothDevice : IOBluetoothObject, NSCoding, NSSecureCoding {
+class IOBluetoothDevice : IOBluetoothObject, Coding, SecureCoding {
   class func registerForConnectNotifications(observer: AnyObject!, selector inSelector: Selector) -> IOBluetoothUserNotification!
   func registerForDisconnectNotification(observer: AnyObject!, selector inSelector: Selector) -> IOBluetoothUserNotification!
   convenience init!(address: UnsafePointer<BluetoothDeviceAddress>)
@@ -3376,15 +3376,15 @@ class IOBluetoothDevice : IOBluetoothObject, NSCoding, NSSecureCoding {
   var deviceClassMinor: BluetoothDeviceClassMinor { get }
   var name: String! { get }
   var nameOrAddress: String! { get }
-  var lastNameUpdate: NSDate! { get }
+  var lastNameUpdate: Date! { get }
   func getAddress() -> UnsafePointer<BluetoothDeviceAddress>
   var addressString: String! { get }
   func getPageScanRepetitionMode() -> BluetoothPageScanRepetitionMode
   func getPageScanPeriodMode() -> BluetoothPageScanPeriodMode
   func getPageScanMode() -> BluetoothPageScanMode
   func getClockOffset() -> BluetoothClockOffset
-  func getLastInquiryUpdate() -> NSDate!
-  func RSSI() -> BluetoothHCIRSSIValue
+  func getLastInquiryUpdate() -> Date!
+  func rssi() -> BluetoothHCIRSSIValue
   func rawRSSI() -> BluetoothHCIRSSIValue
   func isConnected() -> Bool
   func openConnection() -> IOReturn
@@ -3401,26 +3401,26 @@ class IOBluetoothDevice : IOBluetoothObject, NSCoding, NSSecureCoding {
   func performSDPQuery(target: AnyObject!) -> IOReturn
   func performSDPQuery(target: AnyObject!, uuids uuidArray: [AnyObject]!) -> IOReturn
   var services: [AnyObject]! { get }
-  func getLastServicesUpdate() -> NSDate!
-  func getServiceRecordForUUID(sdpUUID: IOBluetoothSDPUUID!) -> IOBluetoothSDPServiceRecord!
+  func getLastServicesUpdate() -> Date!
+  func getServiceRecordFor(sdpUUID: IOBluetoothSDPUUID!) -> IOBluetoothSDPServiceRecord!
   class func favoriteDevices() -> [AnyObject]!
   func isFavorite() -> Bool
   func addToFavorites() -> IOReturn
   func removeFromFavorites() -> IOReturn
   class func recentDevices(numDevices: UInt) -> [AnyObject]!
-  func recentAccessDate() -> NSDate!
+  func recentAccessDate() -> Date!
   class func pairedDevices() -> [AnyObject]!
   func isPaired() -> Bool
   func setSupervisionTimeout(timeout: UInt16) -> IOReturn
-  func openL2CAPChannelSync(newChannel: AutoreleasingUnsafeMutablePointer<IOBluetoothL2CAPChannel?>, withPSM psm: BluetoothL2CAPPSM, withConfiguration channelConfiguration: [NSObject : AnyObject]!, delegate channelDelegate: AnyObject!) -> IOReturn
-  func openL2CAPChannelAsync(newChannel: AutoreleasingUnsafeMutablePointer<IOBluetoothL2CAPChannel?>, withPSM psm: BluetoothL2CAPPSM, withConfiguration channelConfiguration: [NSObject : AnyObject]!, delegate channelDelegate: AnyObject!) -> IOReturn
-  func awakeAfterUsingCoder(coder: NSCoder!) -> AnyObject!
+  func openL2CAPChannelSync(newChannel: AutoreleasingUnsafeMutablePointer<IOBluetoothL2CAPChannel?>, withPSM psm: BluetoothL2CAPPSM, withConfiguration channelConfiguration: [Object : AnyObject]!, delegate channelDelegate: AnyObject!) -> IOReturn
+  func openL2CAPChannelAsync(newChannel: AutoreleasingUnsafeMutablePointer<IOBluetoothL2CAPChannel?>, withPSM psm: BluetoothL2CAPPSM, withConfiguration channelConfiguration: [Object : AnyObject]!, delegate channelDelegate: AnyObject!) -> IOReturn
+  func awakeAfterUsing(coder: Coder!) -> AnyObject!
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
   class func supportsSecureCoding() -> Bool
 }
-class IOBluetoothDeviceInquiry : NSObject {
+class IOBluetoothDeviceInquiry : Object {
   unowned(unsafe) var delegate: @sil_unmanaged AnyObject!
   init!(delegate: AnyObject!)
   func start() -> IOReturn
@@ -3440,18 +3440,18 @@ protocol IOBluetoothDeviceInquiryDelegate {
   optional func deviceInquiryDeviceNameUpdated(sender: IOBluetoothDeviceInquiry!, device: IOBluetoothDevice!, devicesRemaining: UInt32)
   optional func deviceInquiryComplete(sender: IOBluetoothDeviceInquiry!, error: IOReturn, aborted: Bool)
 }
-class IOBluetoothDevicePair : NSObject {
+class IOBluetoothDevicePair : Object {
   unowned(unsafe) var delegate: @sil_unmanaged AnyObject!
   convenience init!(device: IOBluetoothDevice!)
   func start() -> IOReturn
   func stop()
   func device() -> IOBluetoothDevice!
   func setDevice(inDevice: IOBluetoothDevice!)
-  func replyPINCode(PINCodeSize: Int, PINCode: UnsafeMutablePointer<BluetoothPINCode>)
+  func replyPINCode(PINCodeSize: Int, pinCode PINCode: UnsafeMutablePointer<BluetoothPINCode>)
   func replyUserConfirmation(reply: Bool)
   init()
 }
-protocol IOBluetoothDevicePairDelegate : NSObjectProtocol {
+protocol IOBluetoothDevicePairDelegate : ObjectProtocol {
   optional func devicePairingStarted(sender: AnyObject!)
   optional func devicePairingConnecting(sender: AnyObject!)
   optional func devicePairingPINCodeRequest(sender: AnyObject!)
@@ -3525,18 +3525,18 @@ let IOBluetoothPDUProtocolID: String
 let IOBluetoothPDUTimestamp: String
 let IOBluetoothPDUEncoding: String
 let IOBluetoothPDUUserData: String
-class IOBluetoothHandsFree : NSObject {
+class IOBluetoothHandsFree : Object {
   var supportedFeatures: UInt32
   var inputVolume: Float
-  var inputMuted: Bool
+  var isInputMuted: Bool
   var outputVolume: Float
-  var outputMuted: Bool
+  var isOutputMuted: Bool
   var device: IOBluetoothDevice! { get }
   var deviceSupportedFeatures: UInt32 { get }
   var deviceSupportedSMSServices: UInt32 { get }
   var deviceCallHoldModes: UInt32 { get }
-  var SMSMode: IOBluetoothSMSMode { get }
-  var SMSEnabled: Bool { get }
+  var smsMode: IOBluetoothSMSMode { get }
+  var isSMSEnabled: Bool { get }
   unowned(unsafe) var delegate: @sil_unmanaged IOBluetoothHandsFreeDelegate!
   func indicator(indicatorName: String!) -> Int32
   func setIndicator(indicatorName: String!, value indicatorValue: Int32)
@@ -3549,17 +3549,17 @@ class IOBluetoothHandsFree : NSObject {
   func isSCOConnected() -> Bool
   init()
 }
-protocol IOBluetoothHandsFreeDelegate : NSObjectProtocol {
-  optional func handsFree(device: IOBluetoothHandsFree!, connected status: NSNumber!)
-  optional func handsFree(device: IOBluetoothHandsFree!, disconnected status: NSNumber!)
-  optional func handsFree(device: IOBluetoothHandsFree!, scoConnectionOpened status: NSNumber!)
-  optional func handsFree(device: IOBluetoothHandsFree!, scoConnectionClosed status: NSNumber!)
+protocol IOBluetoothHandsFreeDelegate : ObjectProtocol {
+  optional func handsFree(device: IOBluetoothHandsFree!, connected status: Number!)
+  optional func handsFree(device: IOBluetoothHandsFree!, disconnected status: Number!)
+  optional func handsFree(device: IOBluetoothHandsFree!, scoConnectionOpened status: Number!)
+  optional func handsFree(device: IOBluetoothHandsFree!, scoConnectionClosed status: Number!)
 }
 extension IOBluetoothDevice {
   func handsFreeAudioGatewayServiceRecord() -> IOBluetoothSDPServiceRecord!
-  var handsFreeAudioGateway: Bool { get }
+  var isHandsFreeAudioGateway: Bool { get }
   func handsFreeDeviceServiceRecord() -> IOBluetoothSDPServiceRecord!
-  var handsFreeDevice: Bool { get }
+  var isHandsFreeDevice: Bool { get }
 }
 extension IOBluetoothSDPServiceRecord {
   func handsFreeSupportedFeatures() -> UInt16
@@ -3574,8 +3574,8 @@ class IOBluetoothHandsFreeAudioGateway : IOBluetoothHandsFree {
   init()
 }
 protocol IOBluetoothHandsFreeAudioGatewayDelegate {
-  optional func handsFree(device: IOBluetoothHandsFreeAudioGateway!, hangup: NSNumber!)
-  optional func handsFree(device: IOBluetoothHandsFreeAudioGateway!, redial: NSNumber!)
+  optional func handsFree(device: IOBluetoothHandsFreeAudioGateway!, hangup: Number!)
+  optional func handsFree(device: IOBluetoothHandsFreeAudioGateway!, redial: Number!)
 }
 class IOBluetoothHandsFreeDevice : IOBluetoothHandsFree {
   init!(device: IOBluetoothDevice!, delegate: AnyObject!)
@@ -3603,31 +3603,31 @@ class IOBluetoothHandsFreeDevice : IOBluetoothHandsFree {
   init()
 }
 protocol IOBluetoothHandsFreeDeviceDelegate : IOBluetoothHandsFreeDelegate {
-  optional func handsFree(device: IOBluetoothHandsFreeDevice!, isServiceAvailable: NSNumber!)
-  optional func handsFree(device: IOBluetoothHandsFreeDevice!, isCallActive: NSNumber!)
-  optional func handsFree(device: IOBluetoothHandsFreeDevice!, callSetupMode: NSNumber!)
-  optional func handsFree(device: IOBluetoothHandsFreeDevice!, callHoldState: NSNumber!)
-  optional func handsFree(device: IOBluetoothHandsFreeDevice!, signalStrength: NSNumber!)
-  optional func handsFree(device: IOBluetoothHandsFreeDevice!, isRoaming: NSNumber!)
-  optional func handsFree(device: IOBluetoothHandsFreeDevice!, batteryCharge: NSNumber!)
+  optional func handsFree(device: IOBluetoothHandsFreeDevice!, isServiceAvailable: Number!)
+  optional func handsFree(device: IOBluetoothHandsFreeDevice!, isCallActive: Number!)
+  optional func handsFree(device: IOBluetoothHandsFreeDevice!, callSetupMode: Number!)
+  optional func handsFree(device: IOBluetoothHandsFreeDevice!, callHoldState: Number!)
+  optional func handsFree(device: IOBluetoothHandsFreeDevice!, signalStrength: Number!)
+  optional func handsFree(device: IOBluetoothHandsFreeDevice!, isRoaming: Number!)
+  optional func handsFree(device: IOBluetoothHandsFreeDevice!, batteryCharge: Number!)
   optional func handsFree(device: IOBluetoothHandsFreeDevice!, incomingCallFrom number: String!)
-  optional func handsFree(device: IOBluetoothHandsFreeDevice!, ringAttempt: NSNumber!)
-  optional func handsFree(device: IOBluetoothHandsFreeDevice!, currentCall: [NSObject : AnyObject]!)
+  optional func handsFree(device: IOBluetoothHandsFreeDevice!, ringAttempt: Number!)
+  optional func handsFree(device: IOBluetoothHandsFreeDevice!, currentCall: [Object : AnyObject]!)
   optional func handsFree(device: IOBluetoothHandsFreeDevice!, subscriberNumber: String!)
-  optional func handsFree(device: IOBluetoothHandsFreeDevice!, incomingSMS sms: [NSObject : AnyObject]!)
+  optional func handsFree(device: IOBluetoothHandsFreeDevice!, incomingSMS sms: [Object : AnyObject]!)
   optional func handsFree(device: IOBluetoothHandsFreeDevice!, unhandledResultCode resultCode: String!)
 }
-class IOBluetoothHostController : NSObject {
+class IOBluetoothHostController : Object {
   unowned(unsafe) var delegate: @sil_unmanaged AnyObject!
   class func defaultController() -> Self!
   var powerState: BluetoothHCIPowerState { get }
   func classOfDevice() -> BluetoothClassOfDevice
-  func setClassOfDevice(classOfDevice: BluetoothClassOfDevice, forTimeInterval seconds: NSTimeInterval) -> IOReturn
+  func setClassOfDevice(classOfDevice: BluetoothClassOfDevice, forTimeInterval seconds: TimeInterval) -> IOReturn
   func addressAsString() -> String!
   func nameAsString() -> String!
   init()
 }
-extension NSObject {
+extension Object {
   class func readRSSIForDeviceComplete(controller: AnyObject!, device: IOBluetoothDevice!, info: UnsafeMutablePointer<BluetoothHCIRSSIInfo>, error: IOReturn)
   func readRSSIForDeviceComplete(controller: AnyObject!, device: IOBluetoothDevice!, info: UnsafeMutablePointer<BluetoothHCIRSSIInfo>, error: IOReturn)
   class func readLinkQualityForDeviceComplete(controller: AnyObject!, device: IOBluetoothDevice!, info: UnsafeMutablePointer<BluetoothHCILinkQualityInfo>, error: IOReturn)
@@ -3670,28 +3670,28 @@ struct IOBluetoothL2CAPChannelEvent {
 }
 typealias IOBluetoothL2CAPChannelIncomingDataListener = @convention(c) (IOBluetoothL2CAPChannel!, UnsafeMutablePointer<Void>, UInt16, UnsafeMutablePointer<Void>) -> Void
 typealias IOBluetoothL2CAPChannelIncomingEventListener = @convention(c) (IOBluetoothL2CAPChannel!, UnsafeMutablePointer<Void>, UnsafeMutablePointer<IOBluetoothL2CAPChannelEvent>) -> Void
-class IOBluetoothL2CAPChannel : IOBluetoothObject, NSPortDelegate {
+class IOBluetoothL2CAPChannel : IOBluetoothObject, PortDelegate {
   class func registerForChannelOpenNotifications(object: AnyObject!, selector: Selector) -> IOBluetoothUserNotification!
   class func registerForChannelOpenNotifications(object: AnyObject!, selector: Selector, withPSM psm: BluetoothL2CAPPSM, direction inDirection: IOBluetoothUserNotificationChannelDirection) -> IOBluetoothUserNotification!
   class func withObjectID(objectID: IOBluetoothObjectID) -> Self!
-  func closeChannel() -> IOReturn
+  func close() -> IOReturn
   var outgoingMTU: BluetoothL2CAPMTU { get }
   var incomingMTU: BluetoothL2CAPMTU { get }
   func requestRemoteMTU(remoteMTU: BluetoothL2CAPMTU) -> IOReturn
   func writeAsync(data: UnsafeMutablePointer<Void>, length: UInt16, refcon: UnsafeMutablePointer<Void>) -> IOReturn
   func writeSync(data: UnsafeMutablePointer<Void>, length: UInt16) -> IOReturn
   func setDelegate(channelDelegate: AnyObject!) -> IOReturn
-  func setDelegate(channelDelegate: AnyObject!, withConfiguration channelConfiguration: [NSObject : AnyObject]!) -> IOReturn
+  func setDelegate(channelDelegate: AnyObject!, withConfiguration channelConfiguration: [Object : AnyObject]!) -> IOReturn
   func delegate() -> AnyObject!
   var device: IOBluetoothDevice! { get }
   var objectID: IOBluetoothObjectID { get }
-  var PSM: BluetoothL2CAPPSM { get }
+  var psm: BluetoothL2CAPPSM { get }
   var localChannelID: BluetoothL2CAPChannelID { get }
   var remoteChannelID: BluetoothL2CAPChannelID { get }
   func isIncoming() -> Bool
   func registerForChannelCloseNotification(observer: AnyObject!, selector inSelector: Selector) -> IOBluetoothUserNotification!
   init()
-  func handlePortMessage(message: NSPortMessage)
+  func handle(message: PortMessage)
 }
 protocol IOBluetoothL2CAPChannelDelegate {
   optional func l2capChannelData(l2capChannel: IOBluetoothL2CAPChannel!, data dataPointer: UnsafeMutablePointer<Void>, length dataLength: Int)
@@ -3703,13 +3703,13 @@ protocol IOBluetoothL2CAPChannelDelegate {
 }
 let IOBluetoothL2CAPChannelPublishedNotification: String
 let IOBluetoothL2CAPChannelTerminatedNotification: String
-extension NSObject {
+extension Object {
 }
 class IOBluetoothOBEXSession : OBEXSession, IOBluetoothRFCOMMChannelDelegate {
   class func withSDPServiceRecord(inSDPServiceRecord: IOBluetoothSDPServiceRecord!) -> Self!
   class func withDevice(inDevice: IOBluetoothDevice!, channelID inRFCOMMChannelID: BluetoothRFCOMMChannelID) -> Self!
   class func withIncomingRFCOMMChannel(inChannel: IOBluetoothRFCOMMChannel!, eventSelector inEventSelector: Selector, selectorTarget inEventSelectorTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> Self!
-  init!(SDPServiceRecord inSDPServiceRecord: IOBluetoothSDPServiceRecord!)
+  init!(sdpServiceRecord inSDPServiceRecord: IOBluetoothSDPServiceRecord!)
   init!(device inDevice: IOBluetoothDevice!, channelID inChannelID: BluetoothRFCOMMChannelID)
   init!(incomingRFCOMMChannel inChannel: IOBluetoothRFCOMMChannel!, eventSelector inEventSelector: Selector, selectorTarget inEventSelectorTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>)
   func getRFCOMMChannel() -> IOBluetoothRFCOMMChannel!
@@ -3732,18 +3732,18 @@ class IOBluetoothOBEXSession : OBEXSession, IOBluetoothRFCOMMChannelDelegate {
   func rfcommChannelWriteComplete(rfcommChannel: IOBluetoothRFCOMMChannel!, refcon: UnsafeMutablePointer<Void>, status error: IOReturn)
   func rfcommChannelQueueSpaceAvailable(rfcommChannel: IOBluetoothRFCOMMChannel!)
 }
-class IOBluetoothObject : NSObject, NSCopying {
+class IOBluetoothObject : Object, Copying {
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 var kBluetoothTargetDoesNotRespondToCallbackExceptionName: String { get }
-class IOBluetoothRFCOMMChannel : IOBluetoothObject, NSPortDelegate {
+class IOBluetoothRFCOMMChannel : IOBluetoothObject, PortDelegate {
   class func registerForChannelOpenNotifications(object: AnyObject!, selector: Selector) -> IOBluetoothUserNotification!
   class func registerForChannelOpenNotifications(object: AnyObject!, selector: Selector, withChannelID channelID: BluetoothRFCOMMChannelID, direction inDirection: IOBluetoothUserNotificationChannelDirection) -> IOBluetoothUserNotification!
   class func withRFCOMMChannelRef(rfcommChannelRef: IOBluetoothRFCOMMChannel!) -> Self!
   class func withObjectID(objectID: IOBluetoothObjectID) -> Self!
-  func getRFCOMMChannelRef() -> Unmanaged<IOBluetoothRFCOMMChannel>!
-  func closeChannel() -> IOReturn
+  func getRef() -> Unmanaged<IOBluetoothRFCOMMChannel>!
+  func close() -> IOReturn
   func isOpen() -> Bool
   func getMTU() -> BluetoothRFCOMMMTU
   func isTransmissionPaused() -> Bool
@@ -3753,13 +3753,13 @@ class IOBluetoothRFCOMMChannel : IOBluetoothObject, NSPortDelegate {
   func sendRemoteLineStatus(lineStatus: BluetoothRFCOMMLineStatus) -> IOReturn
   func setDelegate(delegate: AnyObject!) -> IOReturn
   func delegate() -> AnyObject!
-  func getChannelID() -> BluetoothRFCOMMChannelID
+  func getID() -> BluetoothRFCOMMChannelID
   func isIncoming() -> Bool
   func getDevice() -> IOBluetoothDevice!
   func getObjectID() -> IOBluetoothObjectID
   func registerForChannelCloseNotification(observer: AnyObject!, selector inSelector: Selector) -> IOBluetoothUserNotification!
   init()
-  func handlePortMessage(message: NSPortMessage)
+  func handle(message: PortMessage)
 }
 protocol IOBluetoothRFCOMMChannelDelegate {
   optional func rfcommChannelData(rfcommChannel: IOBluetoothRFCOMMChannel!, data dataPointer: UnsafeMutablePointer<Void>, length dataLength: Int)
@@ -3770,98 +3770,98 @@ protocol IOBluetoothRFCOMMChannelDelegate {
   optional func rfcommChannelWriteComplete(rfcommChannel: IOBluetoothRFCOMMChannel!, refcon: UnsafeMutablePointer<Void>, status error: IOReturn)
   optional func rfcommChannelQueueSpaceAvailable(rfcommChannel: IOBluetoothRFCOMMChannel!)
 }
-class IOBluetoothSDPDataElement : NSObject, NSCoding {
-  class func withElementValue(element: NSObject!) -> Self!
-  class func withType(type: BluetoothSDPDataElementTypeDescriptor, sizeDescriptor newSizeDescriptor: BluetoothSDPDataElementSizeDescriptor, size newSize: UInt32, value newValue: NSObject!) -> Self!
+class IOBluetoothSDPDataElement : Object, Coding {
+  class func withElementValue(element: Object!) -> Self!
+  class func withType(type: BluetoothSDPDataElementTypeDescriptor, sizeDescriptor newSizeDescriptor: BluetoothSDPDataElementSizeDescriptor, size newSize: UInt32, value newValue: Object!) -> Self!
   class func withSDPDataElementRef(sdpDataElementRef: IOBluetoothSDPDataElement!) -> Self!
-  init!(elementValue element: NSObject!)
-  init!(type newType: BluetoothSDPDataElementTypeDescriptor, sizeDescriptor newSizeDescriptor: BluetoothSDPDataElementSizeDescriptor, size newSize: UInt32, value newValue: NSObject!)
-  func getSDPDataElementRef() -> Unmanaged<IOBluetoothSDPDataElement>!
+  init!(elementValue element: Object!)
+  init!(type newType: BluetoothSDPDataElementTypeDescriptor, sizeDescriptor newSizeDescriptor: BluetoothSDPDataElementSizeDescriptor, size newSize: UInt32, value newValue: Object!)
+  func getRef() -> Unmanaged<IOBluetoothSDPDataElement>!
   func getTypeDescriptor() -> BluetoothSDPDataElementTypeDescriptor
   func getSizeDescriptor() -> BluetoothSDPDataElementSizeDescriptor
   func getSize() -> UInt32
-  func getNumberValue() -> NSNumber!
-  func getDataValue() -> NSData!
+  func getNumberValue() -> Number!
+  func getDataValue() -> Data!
   func getStringValue() -> String!
   func getArrayValue() -> [AnyObject]!
   func getUUIDValue() -> IOBluetoothSDPUUID!
-  func getValue() -> NSObject!
-  func containsDataElement(dataElement: IOBluetoothSDPDataElement!) -> Bool
-  func containsValue(cmpValue: NSObject!) -> Bool
+  func getValue() -> Object!
+  func contains(dataElement: IOBluetoothSDPDataElement!) -> Bool
+  func containsValue(cmpValue: Object!) -> Bool
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class IOBluetoothSDPServiceAttribute : NSObject, NSCoding {
-  class func withID(newAttributeID: BluetoothSDPServiceAttributeID, attributeElementValue: NSObject!) -> Self!
+class IOBluetoothSDPServiceAttribute : Object, Coding {
+  class func withID(newAttributeID: BluetoothSDPServiceAttributeID, attributeElementValue: Object!) -> Self!
   class func withID(newAttributeID: BluetoothSDPServiceAttributeID, attributeElement: IOBluetoothSDPDataElement!) -> Self!
-  init!(ID newAttributeID: BluetoothSDPServiceAttributeID, attributeElementValue: NSObject!)
-  init!(ID newAttributeID: BluetoothSDPServiceAttributeID, attributeElement: IOBluetoothSDPDataElement!)
-  func getAttributeID() -> BluetoothSDPServiceAttributeID
+  init!(id newAttributeID: BluetoothSDPServiceAttributeID, attributeElementValue: Object!)
+  init!(id newAttributeID: BluetoothSDPServiceAttributeID, attributeElement: IOBluetoothSDPDataElement!)
+  func getID() -> BluetoothSDPServiceAttributeID
   func getDataElement() -> IOBluetoothSDPDataElement!
   func getIDDataElement() -> IOBluetoothSDPDataElement!
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class IOBluetoothSDPServiceRecord : NSObject, NSCoding {
-  class func publishedServiceRecordWithDictionary(serviceDict: [NSObject : AnyObject]!) -> Self!
-  func removeServiceRecord() -> IOReturn
-  class func withServiceDictionary(serviceDict: [NSObject : AnyObject]!, device: IOBluetoothDevice!) -> Self!
-  init!(serviceDictionary serviceDict: [NSObject : AnyObject]!, device: IOBluetoothDevice!)
+class IOBluetoothSDPServiceRecord : Object, Coding {
+  class func publishedServiceRecordWith(serviceDict: [Object : AnyObject]!) -> Self!
+  func remove() -> IOReturn
+  class func withServiceDictionary(serviceDict: [Object : AnyObject]!, device: IOBluetoothDevice!) -> Self!
+  init!(serviceDictionary serviceDict: [Object : AnyObject]!, device: IOBluetoothDevice!)
   class func withSDPServiceRecordRef(sdpServiceRecordRef: IOBluetoothSDPServiceRecord!) -> Self!
-  func getSDPServiceRecordRef() -> Unmanaged<IOBluetoothSDPServiceRecord>!
+  func getRef() -> Unmanaged<IOBluetoothSDPServiceRecord>!
   var device: IOBluetoothDevice! { get }
-  var attributes: [NSObject : AnyObject]! { get }
+  var attributes: [Object : AnyObject]! { get }
   func getAttributeDataElement(attributeID: BluetoothSDPServiceAttributeID) -> IOBluetoothSDPDataElement!
   func getServiceName() -> String!
   func getRFCOMMChannelID(rfcommChannelID: UnsafeMutablePointer<BluetoothRFCOMMChannelID>) -> IOReturn
   func getL2CAPPSM(outPSM: UnsafeMutablePointer<BluetoothL2CAPPSM>) -> IOReturn
-  func getServiceRecordHandle(outServiceRecordHandle: UnsafeMutablePointer<BluetoothSDPServiceRecordHandle>) -> IOReturn
+  func getHandle(outServiceRecordHandle: UnsafeMutablePointer<BluetoothSDPServiceRecordHandle>) -> IOReturn
   func matchesUUID16(uuid16: BluetoothSDPUUID16) -> Bool
   func matchesUUIDArray(uuidArray: [AnyObject]!) -> Bool
-  func matchesSearchArray(searchArray: [AnyObject]!) -> Bool
-  func hasServiceFromArray(array: [AnyObject]!) -> Bool
+  func matchesSearch(searchArray: [AnyObject]!) -> Bool
+  func hasServiceFrom(array: [AnyObject]!) -> Bool
   var sortedAttributes: [AnyObject]! { get }
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class IOBluetoothSDPUUID : NSData {
+class IOBluetoothSDPUUID : Data {
   class func uuidWithBytes(bytes: UnsafePointer<Void>, length: UInt32) -> Self!
-  class func uuidWithData(data: NSData!) -> Self!
+  class func uuidWith(data: Data!) -> Self!
   class func uuid16(uuid16: BluetoothSDPUUID16) -> Self!
   class func uuid32(uuid32: BluetoothSDPUUID32) -> Self!
-  init!(UUID16 uuid16: BluetoothSDPUUID16)
-  init!(UUID32 uuid32: BluetoothSDPUUID32)
-  func getUUIDWithLength(newLength: UInt32) -> Self!
-  func isEqualToUUID(otherUUID: IOBluetoothSDPUUID!) -> Bool
+  init!(uuid16: BluetoothSDPUUID16)
+  init!(uuid32: BluetoothSDPUUID32)
+  func getWithLength(newLength: UInt32) -> Self!
+  func isEqualTo(otherUUID: IOBluetoothSDPUUID!) -> Bool
   func classForCoder() -> AnyClass!
   func classForArchiver() -> AnyClass!
   func classForPortCoder() -> AnyClass!
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   init?(contentsOfMappedFile path: String)
-  init?(base64EncodedString base64String: String, options: NSDataBase64DecodingOptions)
-  init?(base64EncodedData base64Data: NSData, options: NSDataBase64DecodingOptions)
+  init?(base64EncodedString base64String: String, options: DataBase64DecodingOptions = [])
+  init?(base64EncodedData base64Data: Data, options: DataBase64DecodingOptions = [])
   init(bytes: UnsafePointer<Void>, length: Int)
   init(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length: Int)
   init(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length: Int, freeWhenDone b: Bool)
-  init(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length: Int, deallocator: ((UnsafeMutablePointer<Void>, Int) -> Void)?)
-  init(contentsOfFile path: String, options readOptionsMask: NSDataReadingOptions) throws
-  init(contentsOfURL url: NSURL, options readOptionsMask: NSDataReadingOptions) throws
+  init(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length: Int, deallocator: ((UnsafeMutablePointer<Void>, Int) -> Void)? = nil)
+  init(contentsOfFile path: String, options readOptionsMask: DataReadingOptions = []) throws
+  init(contentsOf url: URL, options readOptionsMask: DataReadingOptions = []) throws
   init?(contentsOfFile path: String)
-  init?(contentsOfURL url: NSURL)
-  init(data: NSData)
+  init?(contentsOf url: URL)
+  init(data: Data)
 }
-class IOBluetoothUserNotification : NSObject {
+class IOBluetoothUserNotification : Object {
   func unregister()
   init()
 }
-extension NSMutableDictionary {
-  convenience init!(OBEXHeadersData inHeadersData: UnsafePointer<Void>, headersDataSize inDataSize: Int)
-  convenience init!(OBEXHeadersData inHeadersData: NSData!)
-  func getHeaderBytes() -> NSMutableData!
+extension MutableDictionary {
+  convenience init!(obexHeadersData inHeadersData: UnsafePointer<Void>, headersDataSize inDataSize: Int)
+  convenience init!(obexHeadersData inHeadersData: Data!)
+  func getHeaderBytes() -> MutableData!
   func addTargetHeader(inHeaderData: UnsafePointer<Void>, length inHeaderDataLength: UInt32) -> OBEXError
   func addHTTPHeader(inHeaderData: UnsafePointer<Void>, length inHeaderDataLength: UInt32) -> OBEXError
   func addBodyHeader(inHeaderData: UnsafePointer<Void>, length inHeaderDataLength: UInt32, endOfBody isEndOfBody: Bool) -> OBEXError
@@ -3883,10 +3883,10 @@ extension NSMutableDictionary {
   func addImageHandleHeader(type: String!) -> OBEXError
   func addImageDescriptorHeader(inHeaderData: UnsafePointer<Void>, length inHeaderDataLength: UInt32) -> OBEXError
 }
-class OBEXFileTransferServices : NSObject {
+class OBEXFileTransferServices : Object {
   unowned(unsafe) var delegate: @sil_unmanaged AnyObject!
   class func withOBEXSession(inOBEXSession: IOBluetoothOBEXSession!) -> Self!
-  init!(OBEXSession inOBEXSession: IOBluetoothOBEXSession!)
+  init!(obexSession inOBEXSession: IOBluetoothOBEXSession!)
   func currentPath() -> String!
   func isBusy() -> Bool
   func isConnected() -> Bool
@@ -3901,12 +3901,12 @@ class OBEXFileTransferServices : NSObject {
   func retrieveFolderListing() -> OBEXError
   func sendFile(inLocalPathAndName: String!) -> OBEXError
   func copyRemoteFile(inRemoteFileName: String!, toLocalPath inLocalPathAndName: String!) -> OBEXError
-  func sendData(inData: NSData!, type inType: String!, name inName: String!) -> OBEXError
+  func send(inData: Data!, type inType: String!, name inName: String!) -> OBEXError
   func getDefaultVCard(inLocalPathAndName: String!) -> OBEXError
   func abort() -> OBEXError
   init()
 }
-extension NSObject {
+extension Object {
   class func fileTransferServicesConnectionComplete(inServices: OBEXFileTransferServices!, error inError: OBEXError)
   func fileTransferServicesConnectionComplete(inServices: OBEXFileTransferServices!, error inError: OBEXError)
   class func fileTransferServicesDisconnectionComplete(inServices: OBEXFileTransferServices!, error inError: OBEXError)
@@ -3923,12 +3923,12 @@ extension NSObject {
   func fileTransferServicesRetrieveFolderListingComplete(inServices: OBEXFileTransferServices!, error inError: OBEXError, listing inListing: [AnyObject]!)
   class func fileTransferServicesFilePreparationComplete(inServices: OBEXFileTransferServices!, error inError: OBEXError)
   func fileTransferServicesFilePreparationComplete(inServices: OBEXFileTransferServices!, error inError: OBEXError)
-  class func fileTransferServicesSendFileProgress(inServices: OBEXFileTransferServices!, transferProgress inProgressDescription: [NSObject : AnyObject]!)
-  func fileTransferServicesSendFileProgress(inServices: OBEXFileTransferServices!, transferProgress inProgressDescription: [NSObject : AnyObject]!)
+  class func fileTransferServicesSendFileProgress(inServices: OBEXFileTransferServices!, transferProgress inProgressDescription: [Object : AnyObject]!)
+  func fileTransferServicesSendFileProgress(inServices: OBEXFileTransferServices!, transferProgress inProgressDescription: [Object : AnyObject]!)
   class func fileTransferServicesSendFileComplete(inServices: OBEXFileTransferServices!, error inError: OBEXError)
   func fileTransferServicesSendFileComplete(inServices: OBEXFileTransferServices!, error inError: OBEXError)
-  class func fileTransferServicesCopyRemoteFileProgress(inServices: OBEXFileTransferServices!, transferProgress inProgressDescription: [NSObject : AnyObject]!)
-  func fileTransferServicesCopyRemoteFileProgress(inServices: OBEXFileTransferServices!, transferProgress inProgressDescription: [NSObject : AnyObject]!)
+  class func fileTransferServicesCopyRemoteFileProgress(inServices: OBEXFileTransferServices!, transferProgress inProgressDescription: [Object : AnyObject]!)
+  func fileTransferServicesCopyRemoteFileProgress(inServices: OBEXFileTransferServices!, transferProgress inProgressDescription: [Object : AnyObject]!)
   class func fileTransferServicesCopyRemoteFileComplete(inServices: OBEXFileTransferServices!, error inError: OBEXError)
   func fileTransferServicesCopyRemoteFileComplete(inServices: OBEXFileTransferServices!, error inError: OBEXError)
 }
@@ -3950,19 +3950,19 @@ struct FTSFileType : RawRepresentable, Equatable {
 var kFTSFileTypeFolder: FTSFileType { get }
 var kFTSFileTypeFile: FTSFileType { get }
 typealias PrivOBEXSessionDataRef = COpaquePointer
-class OBEXSession : NSObject {
-  func OBEXConnect(inFlags: OBEXFlags, maxPacketLength inMaxPacketLength: OBEXMaxPacketLength, optionalHeaders inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
-  func OBEXDisconnect(inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
-  func OBEXPut(isFinalChunk: Bool, headersData inHeadersData: UnsafeMutablePointer<Void>, headersDataLength inHeadersDataLength: Int, bodyData inBodyData: UnsafeMutablePointer<Void>, bodyDataLength inBodyDataLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
-  func OBEXGet(isFinalChunk: Bool, headers inHeaders: UnsafeMutablePointer<Void>, headersLength inHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
-  func OBEXAbort(inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
-  func OBEXSetPath(inFlags: OBEXFlags, constants inConstants: OBEXConstants, optionalHeaders inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
-  func OBEXConnectResponse(inResponseOpCode: OBEXOpCode, flags inFlags: OBEXFlags, maxPacketLength inMaxPacketLength: OBEXMaxPacketLength, optionalHeaders inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
-  func OBEXDisconnectResponse(inResponseOpCode: OBEXOpCode, optionalHeaders inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
-  func OBEXPutResponse(inResponseOpCode: OBEXOpCode, optionalHeaders inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
-  func OBEXGetResponse(inResponseOpCode: OBEXOpCode, optionalHeaders inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
-  func OBEXAbortResponse(inResponseOpCode: OBEXOpCode, optionalHeaders inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
-  func OBEXSetPathResponse(inResponseOpCode: OBEXOpCode, optionalHeaders inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
+class OBEXSession : Object {
+  func obexConnect(inFlags: OBEXFlags, maxPacketLength inMaxPacketLength: OBEXMaxPacketLength, optionalHeaders inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
+  func obexDisconnect(inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
+  func obexPut(isFinalChunk: Bool, headersData inHeadersData: UnsafeMutablePointer<Void>, headersDataLength inHeadersDataLength: Int, bodyData inBodyData: UnsafeMutablePointer<Void>, bodyDataLength inBodyDataLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
+  func obexGet(isFinalChunk: Bool, headers inHeaders: UnsafeMutablePointer<Void>, headersLength inHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
+  func obexAbort(inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
+  func obexSetPath(inFlags: OBEXFlags, constants inConstants: OBEXConstants, optionalHeaders inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
+  func obexConnectResponse(inResponseOpCode: OBEXOpCode, flags inFlags: OBEXFlags, maxPacketLength inMaxPacketLength: OBEXMaxPacketLength, optionalHeaders inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
+  func obexDisconnectResponse(inResponseOpCode: OBEXOpCode, optionalHeaders inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
+  func obexPutResponse(inResponseOpCode: OBEXOpCode, optionalHeaders inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
+  func obexGetResponse(inResponseOpCode: OBEXOpCode, optionalHeaders inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
+  func obexAbortResponse(inResponseOpCode: OBEXOpCode, optionalHeaders inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
+  func obexSetPathResponse(inResponseOpCode: OBEXOpCode, optionalHeaders inOptionalHeaders: UnsafeMutablePointer<Void>, optionalHeadersLength inOptionalHeadersLength: Int, eventSelector inSelector: Selector, selectorTarget inTarget: AnyObject!, refCon inUserRefCon: UnsafeMutablePointer<Void>) -> OBEXError
   func getAvailableCommandPayloadLength(inOpCode: OBEXOpCode) -> OBEXMaxPacketLength
   func getAvailableCommandResponsePayloadLength(inOpCode: OBEXOpCode) -> OBEXMaxPacketLength
   func getMaxPacketLength() -> OBEXMaxPacketLength

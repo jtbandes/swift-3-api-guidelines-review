@@ -1,7 +1,7 @@
 
 var EAConnectionIDNone: Int { get }
-class EAAccessory : NSObject {
-  var connected: Bool { get }
+class EAAccessory : Object {
+  var isConnected: Bool { get }
   var connectionID: Int { get }
   var manufacturer: String { get }
   var name: String { get }
@@ -14,7 +14,7 @@ class EAAccessory : NSObject {
   unowned(unsafe) var delegate: @sil_unmanaged EAAccessoryDelegate?
   init()
 }
-protocol EAAccessoryDelegate : NSObjectProtocol {
+protocol EAAccessoryDelegate : ObjectProtocol {
   optional func accessoryDidDisconnect(accessory: EAAccessory)
 }
 enum EABluetoothAccessoryPickerErrorCode : Int {
@@ -26,25 +26,25 @@ enum EABluetoothAccessoryPickerErrorCode : Int {
   case ResultFailed
 }
 let EABluetoothAccessoryPickerErrorDomain: String
-typealias EABluetoothAccessoryPickerCompletion = (NSError?) -> Void
+typealias EABluetoothAccessoryPickerCompletion = (Error?) -> Void
 let EAAccessoryDidConnectNotification: String
 let EAAccessoryDidDisconnectNotification: String
 let EAAccessoryKey: String
 let EAAccessorySelectedKey: String
-class EAAccessoryManager : NSObject {
-  class func sharedAccessoryManager() -> EAAccessoryManager
-  func showBluetoothAccessoryPickerWithNameFilter(predicate: NSPredicate?, completion: EABluetoothAccessoryPickerCompletion?)
+class EAAccessoryManager : Object {
+  class func shared() -> EAAccessoryManager
+  func showBluetoothAccessoryPickerWithNameFilter(predicate: Predicate?, completion: EABluetoothAccessoryPickerCompletion? = nil)
   func registerForLocalNotifications()
   func unregisterForLocalNotifications()
   var connectedAccessories: [EAAccessory] { get }
   init()
 }
-class EASession : NSObject {
+class EASession : Object {
   init(accessory: EAAccessory, forProtocol protocolString: String)
   var accessory: EAAccessory { get }
   var protocolString: String { get }
-  var inputStream: NSInputStream? { get }
-  var outputStream: NSOutputStream? { get }
+  var inputStream: InputStream? { get }
+  var outputStream: OutputStream? { get }
   init()
 }
 struct EAWiFiUnconfiguredAccessoryProperties : OptionSetType {
@@ -54,7 +54,7 @@ struct EAWiFiUnconfiguredAccessoryProperties : OptionSetType {
   static var PropertySupportsAirPrint: EAWiFiUnconfiguredAccessoryProperties { get }
   static var PropertySupportsHomeKit: EAWiFiUnconfiguredAccessoryProperties { get }
 }
-class EAWiFiUnconfiguredAccessory : NSObject {
+class EAWiFiUnconfiguredAccessory : Object {
   var name: String { get }
   var manufacturer: String { get }
   var model: String { get }
@@ -78,15 +78,15 @@ enum EAWiFiUnconfiguredAccessoryConfigurationStatus : Int {
   case UserCancelledConfiguration
   case Failed
 }
-class EAWiFiUnconfiguredAccessoryBrowser : NSObject {
+class EAWiFiUnconfiguredAccessoryBrowser : Object {
   weak var delegate: @sil_weak EAWiFiUnconfiguredAccessoryBrowserDelegate?
   var unconfiguredAccessories: Set<EAWiFiUnconfiguredAccessory> { get }
   init(delegate: EAWiFiUnconfiguredAccessoryBrowserDelegate?, queue: dispatch_queue_t?)
-  func startSearchingForUnconfiguredAccessoriesMatchingPredicate(predicate: NSPredicate?)
+  func startSearchingForUnconfiguredAccessoriesMatching(predicate: Predicate?)
   func stopSearchingForUnconfiguredAccessories()
   convenience init()
 }
-protocol EAWiFiUnconfiguredAccessoryBrowserDelegate : NSObjectProtocol {
+protocol EAWiFiUnconfiguredAccessoryBrowserDelegate : ObjectProtocol {
   func accessoryBrowser(browser: EAWiFiUnconfiguredAccessoryBrowser, didUpdateState state: EAWiFiUnconfiguredAccessoryBrowserState)
   func accessoryBrowser(browser: EAWiFiUnconfiguredAccessoryBrowser, didFindUnconfiguredAccessories accessories: Set<EAWiFiUnconfiguredAccessory>)
   func accessoryBrowser(browser: EAWiFiUnconfiguredAccessoryBrowser, didRemoveUnconfiguredAccessories accessories: Set<EAWiFiUnconfiguredAccessory>)

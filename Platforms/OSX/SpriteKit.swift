@@ -1,13 +1,13 @@
 
 class SK3DNode : SKNode {
   init(viewportSize: CGSize)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   var viewportSize: CGSize
-  var sceneTime: NSTimeInterval
-  func hitTest(point: CGPoint, options: [String : AnyObject]?) -> [AnyObject]
+  var sceneTime: TimeInterval
+  func hitTest(point: CGPoint, options: [String : AnyObject]? = [:]) -> [AnyObject]
   func projectPoint(point: vector_float3) -> vector_float3
   func unprojectPoint(point: vector_float3) -> vector_float3
-  var playing: Bool
+  var isPlaying: Bool
   var loops: Bool
   var autoenablesDefaultLighting: Bool
   convenience init()
@@ -22,168 +22,168 @@ enum SKActionTimingMode : Int {
   case EaseInEaseOut
 }
 typealias SKActionTimingFunction = (Float) -> Float
-class SKAction : NSObject, NSCopying, NSCoding {
-  var duration: NSTimeInterval
+class SKAction : Object, Copying, Coding {
+  var duration: TimeInterval
   var timingMode: SKActionTimingMode
   var timingFunction: SKActionTimingFunction
   var speed: CGFloat
-  func reversedAction() -> SKAction
+  func reversed() -> SKAction
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 extension SKAction {
-  class func moveBy(delta: CGVector, duration sec: NSTimeInterval) -> SKAction
-  class func moveByX(deltaX: CGFloat, y deltaY: CGFloat, duration sec: NSTimeInterval) -> SKAction
-  class func moveTo(location: CGPoint, duration sec: NSTimeInterval) -> SKAction
-  class func moveToX(x: CGFloat, duration sec: NSTimeInterval) -> SKAction
-  class func moveToY(y: CGFloat, duration sec: NSTimeInterval) -> SKAction
-  class func rotateByAngle(radians: CGFloat, duration sec: NSTimeInterval) -> SKAction
-  class func rotateToAngle(radians: CGFloat, duration sec: NSTimeInterval) -> SKAction
-  class func rotateToAngle(radians: CGFloat, duration sec: NSTimeInterval, shortestUnitArc: Bool) -> SKAction
-  class func resizeByWidth(width: CGFloat, height: CGFloat, duration: NSTimeInterval) -> SKAction
-  class func resizeToWidth(width: CGFloat, height: CGFloat, duration: NSTimeInterval) -> SKAction
-  class func resizeToWidth(width: CGFloat, duration: NSTimeInterval) -> SKAction
-  class func resizeToHeight(height: CGFloat, duration: NSTimeInterval) -> SKAction
-  class func scaleBy(scale: CGFloat, duration sec: NSTimeInterval) -> SKAction
-  class func scaleXBy(xScale: CGFloat, y yScale: CGFloat, duration sec: NSTimeInterval) -> SKAction
-  class func scaleTo(scale: CGFloat, duration sec: NSTimeInterval) -> SKAction
-  class func scaleXTo(xScale: CGFloat, y yScale: CGFloat, duration sec: NSTimeInterval) -> SKAction
-  class func scaleXTo(scale: CGFloat, duration sec: NSTimeInterval) -> SKAction
-  class func scaleYTo(scale: CGFloat, duration sec: NSTimeInterval) -> SKAction
+  class func moveBy(delta: CGVector, duration sec: TimeInterval) -> SKAction
+  class func moveByX(deltaX: CGFloat, y deltaY: CGFloat, duration sec: TimeInterval) -> SKAction
+  class func moveTo(location: CGPoint, duration sec: TimeInterval) -> SKAction
+  class func moveToX(x: CGFloat, duration sec: TimeInterval) -> SKAction
+  class func moveToY(y: CGFloat, duration sec: TimeInterval) -> SKAction
+  class func rotateByAngle(radians: CGFloat, duration sec: TimeInterval) -> SKAction
+  class func rotateToAngle(radians: CGFloat, duration sec: TimeInterval) -> SKAction
+  class func rotateToAngle(radians: CGFloat, duration sec: TimeInterval, shortestUnitArc: Bool) -> SKAction
+  class func resizeByWidth(width: CGFloat, height: CGFloat, duration: TimeInterval) -> SKAction
+  class func resizeToWidth(width: CGFloat, height: CGFloat, duration: TimeInterval) -> SKAction
+  class func resizeToWidth(width: CGFloat, duration: TimeInterval) -> SKAction
+  class func resizeToHeight(height: CGFloat, duration: TimeInterval) -> SKAction
+  class func scaleBy(scale: CGFloat, duration sec: TimeInterval) -> SKAction
+  class func scaleXBy(xScale: CGFloat, y yScale: CGFloat, duration sec: TimeInterval) -> SKAction
+  class func scaleTo(scale: CGFloat, duration sec: TimeInterval) -> SKAction
+  class func scaleXTo(xScale: CGFloat, y yScale: CGFloat, duration sec: TimeInterval) -> SKAction
+  class func scaleXTo(scale: CGFloat, duration sec: TimeInterval) -> SKAction
+  class func scaleYTo(scale: CGFloat, duration sec: TimeInterval) -> SKAction
   class func sequence(actions: [SKAction]) -> SKAction
   class func group(actions: [SKAction]) -> SKAction
   class func repeatAction(action: SKAction, count: Int) -> SKAction
-  class func repeatActionForever(action: SKAction) -> SKAction
-  class func fadeInWithDuration(sec: NSTimeInterval) -> SKAction
-  class func fadeOutWithDuration(sec: NSTimeInterval) -> SKAction
-  class func fadeAlphaBy(factor: CGFloat, duration sec: NSTimeInterval) -> SKAction
-  class func fadeAlphaTo(alpha: CGFloat, duration sec: NSTimeInterval) -> SKAction
+  class func repeatForever(action: SKAction) -> SKAction
+  class func fadeInWithDuration(sec: TimeInterval) -> SKAction
+  class func fadeOutWithDuration(sec: TimeInterval) -> SKAction
+  class func fadeAlphaBy(factor: CGFloat, duration sec: TimeInterval) -> SKAction
+  class func fadeAlphaTo(alpha: CGFloat, duration sec: TimeInterval) -> SKAction
   class func hide() -> SKAction
   class func unhide() -> SKAction
   class func setTexture(texture: SKTexture) -> SKAction
   class func setNormalTexture(texture: SKTexture) -> SKAction
   class func setTexture(texture: SKTexture, resize: Bool) -> SKAction
   class func setNormalTexture(texture: SKTexture, resize: Bool) -> SKAction
-  class func animateWithTextures(textures: [SKTexture], timePerFrame sec: NSTimeInterval) -> SKAction
-  class func animateWithNormalTextures(textures: [SKTexture], timePerFrame sec: NSTimeInterval) -> SKAction
-  class func animateWithTextures(textures: [SKTexture], timePerFrame sec: NSTimeInterval, resize: Bool, restore: Bool) -> SKAction
-  class func animateWithNormalTextures(textures: [SKTexture], timePerFrame sec: NSTimeInterval, resize: Bool, restore: Bool) -> SKAction
+  class func animateWith(textures: [SKTexture], timePerFrame sec: TimeInterval) -> SKAction
+  class func animateWithNormalTextures(textures: [SKTexture], timePerFrame sec: TimeInterval) -> SKAction
+  class func animateWith(textures: [SKTexture], timePerFrame sec: TimeInterval, resize: Bool, restore: Bool) -> SKAction
+  class func animateWithNormalTextures(textures: [SKTexture], timePerFrame sec: TimeInterval, resize: Bool, restore: Bool) -> SKAction
   class func playSoundFileNamed(soundFile: String, waitForCompletion wait: Bool) -> SKAction
-  class func colorizeWithColor(color: NSColor, colorBlendFactor: CGFloat, duration sec: NSTimeInterval) -> SKAction
-  class func colorizeWithColorBlendFactor(colorBlendFactor: CGFloat, duration sec: NSTimeInterval) -> SKAction
-  class func falloffTo(falloff: Float, duration sec: NSTimeInterval) -> SKAction
-  class func falloffBy(falloff: Float, duration sec: NSTimeInterval) -> SKAction
-  class func followPath(path: CGPath, duration sec: NSTimeInterval) -> SKAction
-  class func followPath(path: CGPath, asOffset offset: Bool, orientToPath orient: Bool, duration sec: NSTimeInterval) -> SKAction
-  class func followPath(path: CGPath, speed: CGFloat) -> SKAction
-  class func followPath(path: CGPath, asOffset offset: Bool, orientToPath orient: Bool, speed: CGFloat) -> SKAction
-  class func speedBy(speed: CGFloat, duration sec: NSTimeInterval) -> SKAction
-  class func speedTo(speed: CGFloat, duration sec: NSTimeInterval) -> SKAction
-  class func reachTo(position: CGPoint, rootNode root: SKNode, duration sec: NSTimeInterval) -> SKAction
+  class func colorizeWith(color: NSColor, colorBlendFactor: CGFloat, duration sec: TimeInterval) -> SKAction
+  class func colorizeWithColorBlendFactor(colorBlendFactor: CGFloat, duration sec: TimeInterval) -> SKAction
+  class func falloffTo(falloff: Float, duration sec: TimeInterval) -> SKAction
+  class func falloffBy(falloff: Float, duration sec: TimeInterval) -> SKAction
+  class func follow(path: CGPath, duration sec: TimeInterval) -> SKAction
+  class func follow(path: CGPath, asOffset offset: Bool, orientToPath orient: Bool, duration sec: TimeInterval) -> SKAction
+  class func follow(path: CGPath, speed: CGFloat) -> SKAction
+  class func follow(path: CGPath, asOffset offset: Bool, orientToPath orient: Bool, speed: CGFloat) -> SKAction
+  class func speedBy(speed: CGFloat, duration sec: TimeInterval) -> SKAction
+  class func speedTo(speed: CGFloat, duration sec: TimeInterval) -> SKAction
+  class func reachTo(position: CGPoint, rootNode root: SKNode, duration sec: TimeInterval) -> SKAction
   class func reachTo(position: CGPoint, rootNode root: SKNode, velocity: CGFloat) -> SKAction
-  class func reachToNode(node: SKNode, rootNode root: SKNode, duration sec: NSTimeInterval) -> SKAction
-  class func reachToNode(node: SKNode, rootNode root: SKNode, velocity: CGFloat) -> SKAction
-  class func strengthTo(strength: Float, duration sec: NSTimeInterval) -> SKAction
-  class func strengthBy(strength: Float, duration sec: NSTimeInterval) -> SKAction
-  class func waitForDuration(sec: NSTimeInterval) -> SKAction
-  class func waitForDuration(sec: NSTimeInterval, withRange durationRange: NSTimeInterval) -> SKAction
+  class func reachTo(node: SKNode, rootNode root: SKNode, duration sec: TimeInterval) -> SKAction
+  class func reachTo(node: SKNode, rootNode root: SKNode, velocity: CGFloat) -> SKAction
+  class func strengthTo(strength: Float, duration sec: TimeInterval) -> SKAction
+  class func strengthBy(strength: Float, duration sec: TimeInterval) -> SKAction
+  class func waitForDuration(sec: TimeInterval) -> SKAction
+  class func waitForDuration(sec: TimeInterval, withRange durationRange: TimeInterval) -> SKAction
   class func removeFromParent() -> SKAction
-  class func performSelector(selector: Selector, onTarget target: AnyObject) -> SKAction
-  class func runBlock(block: dispatch_block_t) -> SKAction
-  class func runBlock(block: dispatch_block_t, queue: dispatch_queue_t) -> SKAction
-  class func runAction(action: SKAction, onChildWithName name: String) -> SKAction
-  class func customActionWithDuration(seconds: NSTimeInterval, actionBlock block: (SKNode, CGFloat) -> Void) -> SKAction
+  class func perform(selector: Selector, onTarget target: AnyObject) -> SKAction
+  class func run(block: dispatch_block_t) -> SKAction
+  class func run(block: dispatch_block_t, queue: dispatch_queue_t) -> SKAction
+  class func run(action: SKAction, onChildWithName name: String) -> SKAction
+  class func customActionWithDuration(seconds: TimeInterval, actionBlock block: (SKNode, CGFloat) -> Void) -> SKAction
    init?(named name: String)
-   init?(named name: String, duration sec: NSTimeInterval)
-   init?(named name: String, fromURL url: NSURL)
-   init?(named name: String, fromURL url: NSURL, duration sec: NSTimeInterval)
+   init?(named name: String, duration sec: TimeInterval)
+   init?(named name: String, from url: URL)
+   init?(named name: String, from url: URL, duration sec: TimeInterval)
 }
 extension SKAction {
-  class func changeChargeTo(v: Float, duration: NSTimeInterval) -> SKAction
-  class func changeChargeBy(v: Float, duration: NSTimeInterval) -> SKAction
-  class func changeMassTo(v: Float, duration: NSTimeInterval) -> SKAction
-  class func changeMassBy(v: Float, duration: NSTimeInterval) -> SKAction
-  class func applyForce(force: CGVector, duration sec: NSTimeInterval) -> SKAction
-  class func applyForce(force: CGVector, atPoint point: CGPoint, duration sec: NSTimeInterval) -> SKAction
-  class func applyTorque(torque: CGFloat, duration sec: NSTimeInterval) -> SKAction
-  class func applyImpulse(impulse: CGVector, duration sec: NSTimeInterval) -> SKAction
-  class func applyImpulse(impulse: CGVector, atPoint point: CGPoint, duration sec: NSTimeInterval) -> SKAction
-  class func applyAngularImpulse(impulse: CGFloat, duration sec: NSTimeInterval) -> SKAction
+  class func changeChargeTo(v: Float, duration: TimeInterval) -> SKAction
+  class func changeChargeBy(v: Float, duration: TimeInterval) -> SKAction
+  class func changeMassTo(v: Float, duration: TimeInterval) -> SKAction
+  class func changeMassBy(v: Float, duration: TimeInterval) -> SKAction
+  class func applyForce(force: CGVector, duration sec: TimeInterval) -> SKAction
+  class func applyForce(force: CGVector, at point: CGPoint, duration sec: TimeInterval) -> SKAction
+  class func applyTorque(torque: CGFloat, duration sec: TimeInterval) -> SKAction
+  class func applyImpulse(impulse: CGVector, duration sec: TimeInterval) -> SKAction
+  class func applyImpulse(impulse: CGVector, at point: CGPoint, duration sec: TimeInterval) -> SKAction
+  class func applyAngularImpulse(impulse: CGFloat, duration sec: TimeInterval) -> SKAction
 }
 extension SKAction {
   class func play() -> SKAction
   class func pause() -> SKAction
   class func stop() -> SKAction
-  class func changePlaybackRateTo(v: Float, duration: NSTimeInterval) -> SKAction
-  class func changePlaybackRateBy(v: Float, duration: NSTimeInterval) -> SKAction
+  class func changePlaybackRateTo(v: Float, duration: TimeInterval) -> SKAction
+  class func changePlaybackRateBy(v: Float, duration: TimeInterval) -> SKAction
 }
 extension SKAction {
-  class func changeVolumeTo(v: Float, duration: NSTimeInterval) -> SKAction
-  class func changeVolumeBy(v: Float, duration: NSTimeInterval) -> SKAction
+  class func changeVolumeTo(v: Float, duration: TimeInterval) -> SKAction
+  class func changeVolumeBy(v: Float, duration: TimeInterval) -> SKAction
 }
-class SKAudioNode : SKNode, NSCoding {
-  init?(coder aDecoder: NSCoder)
+class SKAudioNode : SKNode, Coding {
+  init?(coder aDecoder: Coder)
   convenience init(fileNamed name: String)
-  convenience init(URL url: NSURL)
+  convenience init(url: URL)
   var autoplayLooped: Bool
-  var positional: Bool
+  var isPositional: Bool
   convenience init()
 }
 extension SKAction {
-  class func stereoPanTo(v: Float, duration: NSTimeInterval) -> SKAction
-  class func stereoPanBy(v: Float, duration: NSTimeInterval) -> SKAction
-  class func changeReverbTo(v: Float, duration: NSTimeInterval) -> SKAction
-  class func changeReverbBy(v: Float, duration: NSTimeInterval) -> SKAction
-  class func changeObstructionTo(v: Float, duration: NSTimeInterval) -> SKAction
-  class func changeObstructionBy(v: Float, duration: NSTimeInterval) -> SKAction
-  class func changeOcclusionTo(v: Float, duration: NSTimeInterval) -> SKAction
-  class func changeOcclusionBy(v: Float, duration: NSTimeInterval) -> SKAction
+  class func stereoPanTo(v: Float, duration: TimeInterval) -> SKAction
+  class func stereoPanBy(v: Float, duration: TimeInterval) -> SKAction
+  class func changeReverbTo(v: Float, duration: TimeInterval) -> SKAction
+  class func changeReverbBy(v: Float, duration: TimeInterval) -> SKAction
+  class func changeObstructionTo(v: Float, duration: TimeInterval) -> SKAction
+  class func changeObstructionBy(v: Float, duration: TimeInterval) -> SKAction
+  class func changeOcclusionTo(v: Float, duration: TimeInterval) -> SKAction
+  class func changeOcclusionBy(v: Float, duration: TimeInterval) -> SKAction
 }
 class SKCameraNode : SKNode {
-  func containsNode(node: SKNode) -> Bool
+  func contains(node: SKNode) -> Bool
   func containedNodeSet() -> Set<SKNode>
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init?(fileNamed filename: String)
 }
-class SKRange : NSObject, NSCoding, NSCopying {
+class SKRange : Object, Coding, Copying {
   init(lowerLimit lower: CGFloat, upperLimit upper: CGFloat)
   convenience init(lowerLimit lower: CGFloat)
   convenience init(upperLimit upper: CGFloat)
   convenience init(constantValue value: CGFloat)
   convenience init(value: CGFloat, variance: CGFloat)
-  class func rangeWithNoLimits() -> Self
+  class func withNoLimits() -> Self
   var lowerLimit: CGFloat
   var upperLimit: CGFloat
   convenience init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class SKConstraint : NSObject, NSCoding, NSCopying {
+class SKConstraint : Object, Coding, Copying {
   var enabled: Bool
   var referenceNode: SKNode?
   class func positionX(range: SKRange) -> Self
   class func positionY(range: SKRange) -> Self
   class func positionX(xRange: SKRange, y yRange: SKRange) -> Self
-  class func distance(range: SKRange, toNode node: SKNode) -> Self
-  class func distance(range: SKRange, toPoint point: CGPoint) -> Self
-  class func distance(range: SKRange, toPoint point: CGPoint, inNode node: SKNode) -> Self
+  class func distance(range: SKRange, to node: SKNode) -> Self
+  class func distance(range: SKRange, to point: CGPoint) -> Self
+  class func distance(range: SKRange, to point: CGPoint, in node: SKNode) -> Self
   class func zRotation(zRange: SKRange) -> Self
-  class func orientToNode(node: SKNode, offset radians: SKRange) -> Self
-  class func orientToPoint(point: CGPoint, offset radians: SKRange) -> Self
-  class func orientToPoint(point: CGPoint, inNode node: SKNode, offset radians: SKRange) -> Self
+  class func orientTo(node: SKNode, offset radians: SKRange) -> Self
+  class func orientTo(point: CGPoint, offset radians: SKRange) -> Self
+  class func orientTo(point: CGPoint, in node: SKNode, offset radians: SKRange) -> Self
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 class SKCropNode : SKNode {
   var maskNode: SKNode?
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init?(fileNamed filename: String)
 }
 class SKEffectNode : SKNode {
@@ -194,7 +194,7 @@ class SKEffectNode : SKNode {
   var blendMode: SKBlendMode
   var shader: SKShader?
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init?(fileNamed filename: String)
 }
 enum SKParticleRenderOrder : UInt {
@@ -205,7 +205,7 @@ enum SKParticleRenderOrder : UInt {
   case DontCare
 }
 class SKEmitterNode : SKNode {
-  func advanceSimulationTime(sec: NSTimeInterval)
+  func advanceSimulationTime(sec: TimeInterval)
   func resetSimulation()
   var particleTexture: SKTexture?
   var particleBlendMode: SKBlendMode
@@ -256,7 +256,7 @@ class SKEmitterNode : SKNode {
   var particleZPositionRange: CGFloat
   var particleZPositionSpeed: CGFloat
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init?(fileNamed filename: String)
 }
 class SKFieldNode : SKNode {
@@ -264,8 +264,8 @@ class SKFieldNode : SKNode {
   var strength: Float
   var falloff: Float
   var minimumRadius: Float
-  var enabled: Bool
-  var exclusive: Bool
+  var isEnabled: Bool
+  var isExclusive: Bool
   var categoryBitMask: UInt32
   var direction: vector_float3
   var smoothness: Float
@@ -276,7 +276,7 @@ class SKFieldNode : SKNode {
   class func radialGravityField() -> SKFieldNode
   class func linearGravityFieldWithVector(direction: vector_float3) -> SKFieldNode
   class func velocityFieldWithVector(direction: vector_float3) -> SKFieldNode
-  class func velocityFieldWithTexture(velocityTexture: SKTexture) -> SKFieldNode
+  class func velocityFieldWith(velocityTexture: SKTexture) -> SKFieldNode
   class func noiseFieldWithSmoothness(smoothness: CGFloat, animationSpeed speed: CGFloat) -> SKFieldNode
   class func turbulenceFieldWithSmoothness(smoothness: CGFloat, animationSpeed speed: CGFloat) -> SKFieldNode
   class func springField() -> SKFieldNode
@@ -284,10 +284,10 @@ class SKFieldNode : SKNode {
   class func magneticField() -> SKFieldNode
   class func customFieldWithEvaluationBlock(block: SKFieldForceEvaluator) -> SKFieldNode
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init?(fileNamed filename: String)
 }
-typealias SKFieldForceEvaluator = (vector_float3, vector_float3, Float, Float, NSTimeInterval) -> vector_float3
+typealias SKFieldForceEvaluator = (vector_float3, vector_float3, Float, Float, TimeInterval) -> vector_float3
 enum SKInterpolationMode : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -301,25 +301,25 @@ enum SKRepeatMode : Int {
   case Clamp
   case Loop
 }
-class SKKeyframeSequence : NSObject, NSCoding, NSCopying {
-  init(keyframeValues values: [AnyObject], times: [NSNumber])
+class SKKeyframeSequence : Object, Coding, Copying {
+  init(keyframeValues values: [AnyObject], times: [Number])
   convenience init(capacity numItems: Int)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   func count() -> Int
   func addKeyframeValue(value: AnyObject, time: CGFloat)
   func removeLastKeyframe()
-  func removeKeyframeAtIndex(index: Int)
+  func removeKeyframeAt(index: Int)
   func setKeyframeValue(value: AnyObject, forIndex index: Int)
   func setKeyframeTime(time: CGFloat, forIndex index: Int)
   func setKeyframeValue(value: AnyObject, time: CGFloat, forIndex index: Int)
-  func getKeyframeValueForIndex(index: Int) -> AnyObject
-  func getKeyframeTimeForIndex(index: Int) -> CGFloat
+  func getKeyframeValueFor(index: Int) -> AnyObject
+  func getKeyframeTimeFor(index: Int) -> CGFloat
   func sampleAtTime(time: CGFloat) -> AnyObject?
   var interpolationMode: SKInterpolationMode
   var repeatMode: SKRepeatMode
   convenience init()
-  func encodeWithCoder(aCoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 enum SKLabelVerticalAlignmentMode : Int {
   init?(rawValue: Int)
@@ -349,35 +349,35 @@ class SKLabelNode : SKNode {
   var color: NSColor?
   var blendMode: SKBlendMode
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init?(fileNamed filename: String)
 }
 class SKLightNode : SKNode {
-  var enabled: Bool
+  var isEnabled: Bool
   var lightColor: NSColor
   var ambientColor: NSColor
   var shadowColor: NSColor
   var falloff: CGFloat
   var categoryBitMask: UInt32
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init?(fileNamed filename: String)
 }
 class SKMutableTexture : SKTexture {
   init(size: CGSize)
   init(size: CGSize, pixelFormat format: Int32)
-  func modifyPixelDataWithBlock(block: (UnsafeMutablePointer<Void>, Int) -> Void)
+  func modifyPixelDataWith(block: (UnsafeMutablePointer<Void>, Int) -> Void)
   convenience init(imageNamed name: String)
-  convenience init(rect: CGRect, inTexture texture: SKTexture)
+  convenience init(rect: CGRect, in texture: SKTexture)
   convenience init(vectorNoiseWithSmoothness smoothness: CGFloat, size: CGSize)
   convenience init(noiseWithSmoothness smoothness: CGFloat, size: CGSize, grayscale: Bool)
-  convenience init(CGImage image: CGImage)
+  convenience init(cgImage image: CGImage)
   convenience init(image: NSImage)
-  convenience init(data pixelData: NSData, size: CGSize)
-  convenience init(data pixelData: NSData, size: CGSize, flipped: Bool)
-  convenience init(data pixelData: NSData, size: CGSize, rowLength: UInt32, alignment: UInt32)
+  convenience init(data pixelData: Data, size: CGSize)
+  convenience init(data pixelData: Data, size: CGSize, flipped: Bool)
+  convenience init(data pixelData: Data, size: CGSize, rowLength: UInt32, alignment: UInt32)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 enum SKBlendMode : Int {
   init?(rawValue: Int)
@@ -390,9 +390,9 @@ enum SKBlendMode : Int {
   case Screen
   case Replace
 }
-class SKNode : NSResponder, NSCopying, NSCoding {
+class SKNode : NSResponder, Copying, Coding {
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init?(fileNamed filename: String)
   var frame: CGRect { get }
   func calculateAccumulatedFrame() -> CGRect
@@ -403,21 +403,21 @@ class SKNode : NSResponder, NSCopying, NSCoding {
   var yScale: CGFloat
   var speed: CGFloat
   var alpha: CGFloat
-  var paused: Bool
-  var hidden: Bool
-  var userInteractionEnabled: Bool
+  var isPaused: Bool
+  var isHidden: Bool
+  var isUserInteractionEnabled: Bool
   var parent: SKNode? { get }
   var children: [SKNode] { get }
   var name: String?
   var scene: SKScene? { get }
   var physicsBody: SKPhysicsBody?
-  var userData: NSMutableDictionary?
+  var userData: MutableDictionary?
   @NSCopying var reachConstraints: SKReachConstraints?
   var constraints: [SKConstraint]?
   func setScale(scale: CGFloat)
   func addChild(node: SKNode)
-  func insertChild(node: SKNode, atIndex index: Int)
-  func removeChildrenInArray(nodes: [SKNode])
+  func insertChild(node: SKNode, at index: Int)
+  func removeChildrenIn(nodes: [SKNode])
   func removeAllChildren()
   func removeFromParent()
   func moveToParent(parent: SKNode)
@@ -425,46 +425,46 @@ class SKNode : NSResponder, NSCopying, NSCoding {
   func enumerateChildNodesWithName(name: String, usingBlock block: (SKNode, UnsafeMutablePointer<ObjCBool>) -> Void)
   subscript (name: String) -> [SKNode] { get }
   func inParentHierarchy(parent: SKNode) -> Bool
-  func runAction(action: SKAction)
-  func runAction(action: SKAction, completion block: () -> Void)
-  func runAction(action: SKAction, withKey key: String)
+  func run(action: SKAction)
+  func run(action: SKAction, completion block: () -> Void)
+  func run(action: SKAction, withKey key: String)
   func hasActions() -> Bool
   func actionForKey(key: String) -> SKAction?
   func removeActionForKey(key: String)
   func removeAllActions()
-  func containsPoint(p: CGPoint) -> Bool
-  func nodeAtPoint(p: CGPoint) -> SKNode
-  func nodesAtPoint(p: CGPoint) -> [SKNode]
-  func convertPoint(point: CGPoint, fromNode node: SKNode) -> CGPoint
-  func convertPoint(point: CGPoint, toNode node: SKNode) -> CGPoint
+  func contains(p: CGPoint) -> Bool
+  func atPoint(p: CGPoint) -> SKNode
+  func nodesAt(p: CGPoint) -> [SKNode]
+  func convert(point: CGPoint, from node: SKNode) -> CGPoint
+  func convert(point: CGPoint, to node: SKNode) -> CGPoint
   func intersectsNode(node: SKNode) -> Bool
-  func isEqualToNode(node: SKNode) -> Bool
+  func isEqualTo(node: SKNode) -> Bool
   class func obstaclesFromSpriteTextures(sprites: [SKNode], accuracy: Float) -> [AnyObject]
   class func obstaclesFromNodeBounds(nodes: [SKNode]) -> [AnyObject]
   class func obstaclesFromNodePhysicsBodies(nodes: [SKNode]) -> [AnyObject]
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 extension NSEvent {
-  func locationInNode(node: SKNode) -> CGPoint
+  func locationIn(node: SKNode) -> CGPoint
 }
-class SKPhysicsBody : NSObject, NSCopying, NSCoding {
+class SKPhysicsBody : Object, Copying, Coding {
    init(circleOfRadius r: CGFloat)
    init(circleOfRadius r: CGFloat, center: CGPoint)
-   init(rectangleOfSize s: CGSize)
-   init(rectangleOfSize s: CGSize, center: CGPoint)
-   init(polygonFromPath path: CGPath)
-   init(edgeFromPoint p1: CGPoint, toPoint p2: CGPoint)
-   init(edgeChainFromPath path: CGPath)
-   init(edgeLoopFromPath path: CGPath)
-   init(edgeLoopFromRect rect: CGRect)
+   init(rectangleOf s: CGSize)
+   init(rectangleOf s: CGSize, center: CGPoint)
+   init(polygonFrom path: CGPath)
+   init(edgeFrom p1: CGPoint, to p2: CGPoint)
+   init(edgeChainFrom path: CGPath)
+   init(edgeLoopFrom path: CGPath)
+   init(edgeLoopFrom rect: CGRect)
    init(texture: SKTexture, size: CGSize)
    init(texture: SKTexture, alphaThreshold: Float, size: CGSize)
    init(bodies: [SKPhysicsBody])
-  var dynamic: Bool
+  var isDynamic: Bool
   var usesPreciseCollisionDetection: Bool
   var allowsRotation: Bool
   var pinned: Bool
-  var resting: Bool
+  var isResting: Bool
   var friction: CGFloat
   var charge: CGFloat
   var restitution: CGFloat
@@ -483,18 +483,18 @@ class SKPhysicsBody : NSObject, NSCopying, NSCoding {
   var velocity: CGVector
   var angularVelocity: CGFloat
   func applyForce(force: CGVector)
-  func applyForce(force: CGVector, atPoint point: CGPoint)
+  func applyForce(force: CGVector, at point: CGPoint)
   func applyTorque(torque: CGFloat)
   func applyImpulse(impulse: CGVector)
-  func applyImpulse(impulse: CGVector, atPoint point: CGPoint)
+  func applyImpulse(impulse: CGVector, at point: CGPoint)
   func applyAngularImpulse(impulse: CGFloat)
   func allContactedBodies() -> [SKPhysicsBody]
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class SKPhysicsContact : NSObject {
+class SKPhysicsContact : Object {
   var bodyA: SKPhysicsBody { get }
   var bodyB: SKPhysicsBody { get }
   var contactPoint: CGPoint { get }
@@ -502,14 +502,14 @@ class SKPhysicsContact : NSObject {
   var collisionImpulse: CGFloat { get }
   init()
 }
-class SKPhysicsJoint : NSObject, NSCoding {
+class SKPhysicsJoint : Object, Coding {
   var bodyA: SKPhysicsBody
   var bodyB: SKPhysicsBody
   var reactionForce: CGVector { get }
   var reactionTorque: CGFloat { get }
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 class SKPhysicsJointPin : SKPhysicsJoint {
   class func jointWithBodyA(bodyA: SKPhysicsBody, bodyB: SKPhysicsBody, anchor: CGPoint) -> SKPhysicsJointPin
@@ -519,19 +519,19 @@ class SKPhysicsJointPin : SKPhysicsJoint {
   var frictionTorque: CGFloat
   var rotationSpeed: CGFloat
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class SKPhysicsJointSpring : SKPhysicsJoint {
   class func jointWithBodyA(bodyA: SKPhysicsBody, bodyB: SKPhysicsBody, anchorA: CGPoint, anchorB: CGPoint) -> SKPhysicsJointSpring
   var damping: CGFloat
   var frequency: CGFloat
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class SKPhysicsJointFixed : SKPhysicsJoint {
   class func jointWithBodyA(bodyA: SKPhysicsBody, bodyB: SKPhysicsBody, anchor: CGPoint) -> SKPhysicsJointFixed
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class SKPhysicsJointSliding : SKPhysicsJoint {
   class func jointWithBodyA(bodyA: SKPhysicsBody, bodyB: SKPhysicsBody, anchor: CGPoint, axis: CGVector) -> SKPhysicsJointSliding
@@ -539,69 +539,69 @@ class SKPhysicsJointSliding : SKPhysicsJoint {
   var lowerDistanceLimit: CGFloat
   var upperDistanceLimit: CGFloat
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class SKPhysicsJointLimit : SKPhysicsJoint {
   var maxLength: CGFloat
   class func jointWithBodyA(bodyA: SKPhysicsBody, bodyB: SKPhysicsBody, anchorA: CGPoint, anchorB: CGPoint) -> SKPhysicsJointLimit
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-protocol SKPhysicsContactDelegate : NSObjectProtocol {
-  optional func didBeginContact(contact: SKPhysicsContact)
-  optional func didEndContact(contact: SKPhysicsContact)
+protocol SKPhysicsContactDelegate : ObjectProtocol {
+  optional func didBegin(contact: SKPhysicsContact)
+  optional func didEnd(contact: SKPhysicsContact)
 }
-class SKPhysicsWorld : NSObject, NSCoding {
+class SKPhysicsWorld : Object, Coding {
   var gravity: CGVector
   var speed: CGFloat
   unowned(unsafe) var contactDelegate: @sil_unmanaged SKPhysicsContactDelegate?
-  func addJoint(joint: SKPhysicsJoint)
-  func removeJoint(joint: SKPhysicsJoint)
+  func add(joint: SKPhysicsJoint)
+  func remove(joint: SKPhysicsJoint)
   func removeAllJoints()
   func sampleFieldsAt(position: vector_float3) -> vector_float3
-  func bodyAtPoint(point: CGPoint) -> SKPhysicsBody?
-  func bodyInRect(rect: CGRect) -> SKPhysicsBody?
+  func bodyAt(point: CGPoint) -> SKPhysicsBody?
+  func bodyIn(rect: CGRect) -> SKPhysicsBody?
   func bodyAlongRayStart(start: CGPoint, end: CGPoint) -> SKPhysicsBody?
-  func enumerateBodiesAtPoint(point: CGPoint, usingBlock block: (SKPhysicsBody, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func enumerateBodiesInRect(rect: CGRect, usingBlock block: (SKPhysicsBody, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func enumerateBodiesAt(point: CGPoint, usingBlock block: (SKPhysicsBody, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func enumerateBodiesIn(rect: CGRect, usingBlock block: (SKPhysicsBody, UnsafeMutablePointer<ObjCBool>) -> Void)
   func enumerateBodiesAlongRayStart(start: CGPoint, end: CGPoint, usingBlock block: (SKPhysicsBody, CGPoint, CGVector, UnsafeMutablePointer<ObjCBool>) -> Void)
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class SKReachConstraints : NSObject, NSCoding {
+class SKReachConstraints : Object, Coding {
   var lowerAngleLimit: CGFloat
   var upperAngleLimit: CGFloat
   init(lowerAngleLimit: CGFloat, upperAngleLimit: CGFloat)
   convenience init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 class SKReferenceNode : SKNode {
-  init(URL url: NSURL?)
+  init(url: URL?)
   init(fileNamed fileName: String?)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init(fileNamed fileName: String)
-  convenience init(URL referenceURL: NSURL)
-  func didLoadReferenceNode(node: SKNode?)
-  func resolveReferenceNode()
+  convenience init(url referenceURL: URL)
+  func didLoad(node: SKNode?)
+  func resolve()
   convenience init()
 }
-class SKRegion : NSObject, NSCopying, NSCoding {
+class SKRegion : Object, Copying, Coding {
   var path: CGPath? { get }
-  class func infiniteRegion() -> Self
+  class func infinite() -> Self
   init(radius: Float)
   init(size: CGSize)
   init(path: CGPath)
-  func inverseRegion() -> Self
-  func regionByUnionWithRegion(region: SKRegion) -> Self
-  func regionByDifferenceFromRegion(region: SKRegion) -> Self
-  func regionByIntersectionWithRegion(region: SKRegion) -> Self
-  func containsPoint(point: CGPoint) -> Bool
+  func inverse() -> Self
+  func byUnionWith(region: SKRegion) -> Self
+  func byDifferenceFrom(region: SKRegion) -> Self
+  func byIntersectionWith(region: SKRegion) -> Self
+  func contains(point: CGPoint) -> Bool
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 enum SKSceneScaleMode : Int {
   init?(rawValue: Int)
@@ -611,12 +611,12 @@ enum SKSceneScaleMode : Int {
   case AspectFit
   case ResizeFill
 }
-protocol SKSceneDelegate : NSObjectProtocol {
-  optional func update(currentTime: NSTimeInterval, forScene scene: SKScene)
-  optional func didEvaluateActionsForScene(scene: SKScene)
-  optional func didSimulatePhysicsForScene(scene: SKScene)
-  optional func didApplyConstraintsForScene(scene: SKScene)
-  optional func didFinishUpdateForScene(scene: SKScene)
+protocol SKSceneDelegate : ObjectProtocol {
+  optional func update(currentTime: TimeInterval, forScene scene: SKScene)
+  optional func didEvaluateActionsFor(scene: SKScene)
+  optional func didSimulatePhysicsFor(scene: SKScene)
+  optional func didApplyConstraintsFor(scene: SKScene)
+  optional func didFinishUpdateFor(scene: SKScene)
 }
 class SKScene : SKEffectNode {
   init(size: CGSize)
@@ -631,19 +631,19 @@ class SKScene : SKEffectNode {
   func convertPointFromView(point: CGPoint) -> CGPoint
   func convertPointToView(point: CGPoint) -> CGPoint
   weak var view: @sil_weak SKView? { get }
-  func update(currentTime: NSTimeInterval)
+  func update(currentTime: TimeInterval)
   func didEvaluateActions()
   func didSimulatePhysics()
   func didApplyConstraints()
   func didFinishUpdate()
-  func didMoveToView(view: SKView)
-  func willMoveFromView(view: SKView)
+  func didMoveTo(view: SKView)
+  func willMoveFrom(view: SKView)
   func didChangeSize(oldSize: CGSize)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init?(fileNamed filename: String)
 }
-class SKShader : NSObject, NSCopying, NSCoding {
+class SKShader : Object, Copying, Coding {
   init(source: String)
   init(source: String, uniforms: [SKUniform])
   convenience init(fileNamed name: String)
@@ -653,27 +653,27 @@ class SKShader : NSObject, NSCopying, NSCoding {
   func uniformNamed(name: String) -> SKUniform?
   func removeUniformNamed(name: String)
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 class SKShapeNode : SKNode {
   convenience init(path: CGPath)
   convenience init(path: CGPath, centered: Bool)
   convenience init(rect: CGRect)
-  convenience init(rectOfSize size: CGSize)
+  convenience init(rectOf size: CGSize)
   convenience init(rect: CGRect, cornerRadius: CGFloat)
-  convenience init(rectOfSize size: CGSize, cornerRadius: CGFloat)
+  convenience init(rectOf size: CGSize, cornerRadius: CGFloat)
   convenience init(circleOfRadius radius: CGFloat)
-  convenience init(ellipseInRect rect: CGRect)
-  convenience init(ellipseOfSize size: CGSize)
+  convenience init(ellipseIn rect: CGRect)
+  convenience init(ellipseOf size: CGSize)
   convenience init(points: UnsafeMutablePointer<CGPoint>, count numPoints: Int)
   convenience init(splinePoints points: UnsafeMutablePointer<CGPoint>, count numPoints: Int)
   var path: CGPath?
   var strokeColor: NSColor
   var fillColor: NSColor
   var blendMode: SKBlendMode
-  var antialiased: Bool
+  var isAntialiased: Bool
   var lineWidth: CGFloat
   var glowWidth: CGFloat
   var lineCap: CGLineCap
@@ -685,7 +685,7 @@ class SKShapeNode : SKNode {
   var strokeTexture: SKTexture?
   var strokeShader: SKShader?
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init?(fileNamed filename: String)
 }
 extension SKShapeNode : _Reflectable {
@@ -700,7 +700,7 @@ class SKSpriteNode : SKNode {
   convenience init(texture: SKTexture?)
   convenience init(imageNamed name: String)
   convenience init(color: NSColor, size: CGSize)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   var texture: SKTexture?
   var normalTexture: SKTexture?
   var lightingBitMask: UInt32
@@ -726,46 +726,46 @@ enum SKTextureFilteringMode : Int {
   case Nearest
   case Linear
 }
-class SKTexture : NSObject, NSCopying, NSCoding {
+class SKTexture : Object, Copying, Coding {
   convenience init(imageNamed name: String)
-  convenience init(rect: CGRect, inTexture texture: SKTexture)
+  convenience init(rect: CGRect, in texture: SKTexture)
   convenience init(vectorNoiseWithSmoothness smoothness: CGFloat, size: CGSize)
   convenience init(noiseWithSmoothness smoothness: CGFloat, size: CGSize, grayscale: Bool)
-  convenience init(CGImage image: CGImage)
+  convenience init(cgImage image: CGImage)
   convenience init(image: NSImage)
-  convenience init(data pixelData: NSData, size: CGSize)
-  convenience init(data pixelData: NSData, size: CGSize, flipped: Bool)
-  convenience init(data pixelData: NSData, size: CGSize, rowLength: UInt32, alignment: UInt32)
-  func textureByApplyingCIFilter(filter: CIFilter) -> Self
-  func textureByGeneratingNormalMap() -> Self
-  func textureByGeneratingNormalMapWithSmoothness(smoothness: CGFloat, contrast: CGFloat) -> Self
+  convenience init(data pixelData: Data, size: CGSize)
+  convenience init(data pixelData: Data, size: CGSize, flipped: Bool)
+  convenience init(data pixelData: Data, size: CGSize, rowLength: UInt32, alignment: UInt32)
+  func applying(filter: CIFilter) -> Self
+  func generatingNormalMap() -> Self
+  func generatingNormalMapWithSmoothness(smoothness: CGFloat, contrast: CGFloat) -> Self
   func textureRect() -> CGRect
   func size() -> CGSize
   var filteringMode: SKTextureFilteringMode
   var usesMipmaps: Bool
-  func CGImage() -> CGImage
-  class func preloadTextures(textures: [SKTexture], withCompletionHandler completionHandler: () -> Void)
+  func cgImage() -> CGImage
+  class func preload(textures: [SKTexture], withCompletionHandler completionHandler: () -> Void)
   func preloadWithCompletionHandler(completionHandler: () -> Void)
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 extension SKTexture : _Reflectable {
   /// Returns a mirror that reflects `self`.
   func _getMirror() -> _MirrorType
 }
-class SKTextureAtlas : NSObject, NSCoding {
+class SKTextureAtlas : Object, Coding {
   convenience init(named name: String)
   convenience init(dictionary properties: [String : AnyObject])
   func textureNamed(name: String) -> SKTexture
   class func preloadTextureAtlases(textureAtlases: [SKTextureAtlas], withCompletionHandler completionHandler: () -> Void)
-  class func preloadTextureAtlasesNamed(atlasNames: [String], withCompletionHandler completionHandler: (NSError?, [SKTextureAtlas]) -> Void)
+  class func preloadTextureAtlasesNamed(atlasNames: [String], withCompletionHandler completionHandler: (Error?, [SKTextureAtlas]) -> Void)
   func preloadWithCompletionHandler(completionHandler: () -> Void)
   var textureNames: [String] { get }
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 extension SKTextureAtlas : _Reflectable {
   /// Returns a mirror that reflects `self`.
@@ -779,25 +779,25 @@ enum SKTransitionDirection : Int {
   case Right
   case Left
 }
-class SKTransition : NSObject, NSCopying {
-  class func crossFadeWithDuration(sec: NSTimeInterval) -> SKTransition
-  class func fadeWithDuration(sec: NSTimeInterval) -> SKTransition
-  class func fadeWithColor(color: NSColor, duration sec: NSTimeInterval) -> SKTransition
-  class func flipHorizontalWithDuration(sec: NSTimeInterval) -> SKTransition
-  class func flipVerticalWithDuration(sec: NSTimeInterval) -> SKTransition
-  class func revealWithDirection(direction: SKTransitionDirection, duration sec: NSTimeInterval) -> SKTransition
-  class func moveInWithDirection(direction: SKTransitionDirection, duration sec: NSTimeInterval) -> SKTransition
-  class func pushWithDirection(direction: SKTransitionDirection, duration sec: NSTimeInterval) -> SKTransition
-  class func doorsOpenHorizontalWithDuration(sec: NSTimeInterval) -> SKTransition
-  class func doorsOpenVerticalWithDuration(sec: NSTimeInterval) -> SKTransition
-  class func doorsCloseHorizontalWithDuration(sec: NSTimeInterval) -> SKTransition
-  class func doorsCloseVerticalWithDuration(sec: NSTimeInterval) -> SKTransition
-  class func doorwayWithDuration(sec: NSTimeInterval) -> SKTransition
-   init(CIFilter filter: CIFilter, duration sec: NSTimeInterval)
+class SKTransition : Object, Copying {
+  class func crossFadeWithDuration(sec: TimeInterval) -> SKTransition
+  class func fadeWithDuration(sec: TimeInterval) -> SKTransition
+  class func fadeWith(color: NSColor, duration sec: TimeInterval) -> SKTransition
+  class func flipHorizontalWithDuration(sec: TimeInterval) -> SKTransition
+  class func flipVerticalWithDuration(sec: TimeInterval) -> SKTransition
+  class func revealWith(direction: SKTransitionDirection, duration sec: TimeInterval) -> SKTransition
+  class func moveInWith(direction: SKTransitionDirection, duration sec: TimeInterval) -> SKTransition
+  class func pushWith(direction: SKTransitionDirection, duration sec: TimeInterval) -> SKTransition
+  class func doorsOpenHorizontalWithDuration(sec: TimeInterval) -> SKTransition
+  class func doorsOpenVerticalWithDuration(sec: TimeInterval) -> SKTransition
+  class func doorsCloseHorizontalWithDuration(sec: TimeInterval) -> SKTransition
+  class func doorsCloseVerticalWithDuration(sec: TimeInterval) -> SKTransition
+  class func doorwayWithDuration(sec: TimeInterval) -> SKTransition
+   init(ciFilter filter: CIFilter, duration sec: TimeInterval)
   var pausesIncomingScene: Bool
   var pausesOutgoingScene: Bool
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 enum SKUniformType : Int {
   init?(rawValue: Int)
@@ -812,7 +812,7 @@ enum SKUniformType : Int {
   case FloatMatrix4
   case Texture
 }
-class SKUniform : NSObject, NSCopying, NSCoding {
+class SKUniform : Object, Copying, Coding {
   convenience init(name: String, texture: SKTexture)
   var name: String { get }
   var uniformType: SKUniformType { get }
@@ -827,24 +827,24 @@ class SKUniform : NSObject, NSCopying, NSCoding {
   init(name: String)
   init(name: String, texture: SKTexture?)
   init(name: String, float value: Float)
-  init(name: String, floatVector2 value: GLKVector2)
-  init(name: String, floatVector3 value: GLKVector3)
-  init(name: String, floatVector4 value: GLKVector4)
-  init(name: String, floatMatrix2 value: GLKMatrix2)
-  init(name: String, floatMatrix3 value: GLKMatrix3)
-  init(name: String, floatMatrix4 value: GLKMatrix4)
+  init(name: String, float value: GLKVector2)
+  init(name: String, float value: GLKVector3)
+  init(name: String, float value: GLKVector4)
+  init(name: String, float value: GLKMatrix2)
+  init(name: String, float value: GLKMatrix3)
+  init(name: String, float value: GLKMatrix4)
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 var SK_VERSION: Int32 { get }
 class SKVideoNode : SKNode {
   init(videoFileNamed videoFile: String)
   init(fileNamed videoFile: String)
-  init(videoURL url: NSURL)
-  init(URL url: NSURL)
-  init?(coder aDecoder: NSCoder)
+  init(videoURL url: URL)
+  init(url: URL)
+  init?(coder aDecoder: Coder)
   func play()
   func pause()
   var size: CGSize
@@ -852,14 +852,14 @@ class SKVideoNode : SKNode {
   convenience init()
 }
 class SKView : NSView {
-  var paused: Bool
+  var isPaused: Bool
   var showsFPS: Bool
   var showsDrawCount: Bool
   var showsNodeCount: Bool
   var showsQuadCount: Bool
   var showsPhysics: Bool
   var showsFields: Bool
-  var asynchronous: Bool
+  var isAsynchronous: Bool
   var allowsTransparency: Bool
   var ignoresSiblingOrder: Bool
   var shouldCullNonVisibleNodes: Bool
@@ -867,11 +867,11 @@ class SKView : NSView {
   func presentScene(scene: SKScene?)
   func presentScene(scene: SKScene, transition: SKTransition)
   var scene: SKScene? { get }
-  func textureFromNode(node: SKNode) -> SKTexture?
-  func textureFromNode(node: SKNode, crop: CGRect) -> SKTexture?
-  func convertPoint(point: CGPoint, toScene scene: SKScene) -> CGPoint
-  func convertPoint(point: CGPoint, fromScene scene: SKScene) -> CGPoint
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  func textureFrom(node: SKNode) -> SKTexture?
+  func textureFrom(node: SKNode, crop: CGRect) -> SKTexture?
+  func convert(point: CGPoint, to scene: SKScene) -> CGPoint
+  func convert(point: CGPoint, from scene: SKScene) -> CGPoint
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }

@@ -7,9 +7,9 @@ enum AMLogLevel : UInt {
   case Warn
   case Error
 }
-class AMAction : NSObject {
+class AMAction : Object {
   init?(definition dict: [String : AnyObject], fromArchive archived: Bool)
-  init(contentsOfURL fileURL: NSURL) throws
+  init(contentsOf fileURL: URL) throws
   var name: String { get }
   var ignoresInput: Bool { get }
   var selectedInputType: String?
@@ -18,79 +18,79 @@ class AMAction : NSObject {
   func runWithInput(input: AnyObject?) throws -> AnyObject
   func runAsynchronouslyWithInput(input: AnyObject?)
   func willFinishRunning()
-  func finishRunningWithError(error: NSError?)
+  func finishRunningWithError(error: Error?)
   var output: AnyObject?
   func stop()
   func reset()
-  func writeToDictionary(dictionary: NSMutableDictionary)
+  func writeTo(dictionary: MutableDictionary)
   func opened()
   func activated()
   func closed()
   func updateParameters()
   func parametersUpdated()
-  var stopped: Bool { get }
+  var isStopped: Bool { get }
   init()
 }
 class AMAppleScriptAction : AMBundleAction {
   var script: OSAScript
   init?(definition dict: [String : AnyObject], fromArchive archived: Bool)
-  init(contentsOfURL fileURL: NSURL) throws
+  init(contentsOf fileURL: URL) throws
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class AMBundleAction : AMAction, NSCoding, NSCopying {
+class AMBundleAction : AMAction, Coding, Copying {
   func awakeFromBundle()
   var hasView: Bool { get }
   var view: NSView? { get }
-  var bundle: NSBundle { get }
-  var parameters: NSMutableDictionary?
+  var bundle: Bundle { get }
+  var parameters: MutableDictionary?
   init?(definition dict: [String : AnyObject], fromArchive archived: Bool)
-  init(contentsOfURL fileURL: NSURL) throws
+  init(contentsOf fileURL: URL) throws
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 class AMShellScriptAction : AMBundleAction {
   var remapLineEndings: Bool { get }
   var inputFieldSeparator: String { get }
   var outputFieldSeparator: String { get }
   init?(definition dict: [String : AnyObject], fromArchive archived: Bool)
-  init(contentsOfURL fileURL: NSURL) throws
+  init(contentsOf fileURL: URL) throws
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class AMWorkflow : NSObject, NSCopying {
-  class func runWorkflowAtURL(fileURL: NSURL, withInput input: AnyObject?) throws -> AnyObject
+class AMWorkflow : Object, Copying {
+  class func runAt(fileURL: URL, withInput input: AnyObject?) throws -> AnyObject
   init()
-  convenience init(contentsOfURL fileURL: NSURL) throws
-  func writeToURL(fileURL: NSURL) throws
+  convenience init(contentsOf fileURL: URL) throws
+  func writeTo(fileURL: URL) throws
   func setValue(value: AnyObject?, forVariableWithName variableName: String) -> Bool
   func valueForVariableWithName(variableName: String) -> AnyObject
   func addAction(action: AMAction)
   func removeAction(action: AMAction)
-  func insertAction(action: AMAction, atIndex index: Int)
-  func moveActionAtIndex(startIndex: Int, toIndex endIndex: Int)
-  @NSCopying var fileURL: NSURL? { get }
+  func insertAction(action: AMAction, at index: Int)
+  func moveActionAt(startIndex: Int, to endIndex: Int)
+  @NSCopying var fileURL: URL? { get }
   var actions: [AMAction] { get }
   var input: AnyObject?
   var output: AnyObject? { get }
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 class AMWorkflowController : NSController {
   var workflow: AMWorkflow?
   var workflowView: AMWorkflowView?
   unowned(unsafe) var delegate: @sil_unmanaged AnyObject?
   var canRun: Bool { get }
-  var running: Bool { get }
+  var isRunning: Bool { get }
   @IBAction func run(sender: AnyObject)
   @IBAction func stop(sender: AnyObject)
-  var paused: Bool { get }
+  var isPaused: Bool { get }
   @IBAction func pause(sender: AnyObject)
   @IBAction func step(sender: AnyObject)
   @IBAction func reset(sender: AnyObject)
   init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
 }
 struct __AMWorkflowControllerFlags {
   var shouldRunLocally: Int
@@ -122,7 +122,7 @@ struct __AMWorkflowControllerDelegateRespondTo {
   init()
   init(workflowControllerDidAddWorkflow: Int, workflowControllerDidRemoveWorkflow: Int, workflowControllerWillRun: Int, workflowControllerWillStep: Int, workflowControllerWillStop: Int, workflowControllerWillPause: Int, workflowControllerDidRun: Int, workflowControllerDidStep: Int, workflowControllerDidStop: Int, workflowControllerDidPause: Int, workflowControllerWillRunAction: Int, workflowControllerDidRunAction: Int, workflowControllerDidError: Int, workflowControllerDidLogMessageOfTypeFromAction: Int, workflowControllerWillRunConversion: Int, workflowControllerDidRunConversion: Int, workflowControllerDidResumeWithAction: Int, reserved: Int)
 }
-extension NSObject {
+extension Object {
   class func workflowControllerWillRun(controller: AMWorkflowController)
   func workflowControllerWillRun(controller: AMWorkflowController)
   class func workflowControllerWillStop(controller: AMWorkflowController)
@@ -131,18 +131,18 @@ extension NSObject {
   func workflowControllerDidRun(controller: AMWorkflowController)
   class func workflowControllerDidStop(controller: AMWorkflowController)
   func workflowControllerDidStop(controller: AMWorkflowController)
-  class func workflowController(controller: AMWorkflowController, willRunAction action: AMAction)
-  func workflowController(controller: AMWorkflowController, willRunAction action: AMAction)
-  class func workflowController(controller: AMWorkflowController, didRunAction action: AMAction)
-  func workflowController(controller: AMWorkflowController, didRunAction action: AMAction)
-  class func workflowController(controller: AMWorkflowController, didError error: NSError)
-  func workflowController(controller: AMWorkflowController, didError error: NSError)
+  class func workflowController(controller: AMWorkflowController, willRun action: AMAction)
+  func workflowController(controller: AMWorkflowController, willRun action: AMAction)
+  class func workflowController(controller: AMWorkflowController, didRun action: AMAction)
+  func workflowController(controller: AMWorkflowController, didRun action: AMAction)
+  class func workflowController(controller: AMWorkflowController, didError error: Error)
+  func workflowController(controller: AMWorkflowController, didError error: Error)
 }
 class AMWorkflowView : NSView {
-  var editable: Bool
+  var isEditable: Bool
   var workflowController: AMWorkflowController?
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 struct __AMWorkflowViewFlags {

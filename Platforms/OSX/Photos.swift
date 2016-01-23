@@ -1,25 +1,25 @@
 
-class PHAdjustmentData : NSObject {
-  init(formatIdentifier: String, formatVersion: String, data: NSData)
+class PHAdjustmentData : Object {
+  init(formatIdentifier: String, formatVersion: String, data: Data)
   var formatIdentifier: String { get }
   var formatVersion: String { get }
-  var data: NSData { get }
+  var data: Data { get }
   init()
 }
-class PHContentEditingInput : NSObject {
+class PHContentEditingInput : Object {
   var mediaType: PHAssetMediaType { get }
   var mediaSubtypes: PHAssetMediaSubtype { get }
-  @NSCopying var creationDate: NSDate? { get }
+  @NSCopying var creationDate: Date? { get }
   var uniformTypeIdentifier: String? { get }
   var adjustmentData: PHAdjustmentData { get }
-  @NSCopying var fullSizeImageURL: NSURL? { get }
+  @NSCopying var fullSizeImageURL: URL? { get }
   var fullSizeImageOrientation: Int32 { get }
   init()
 }
-class PHContentEditingOutput : NSObject {
+class PHContentEditingOutput : Object {
   init(contentEditingInput: PHContentEditingInput)
   var adjustmentData: PHAdjustmentData
-  @NSCopying var renderedContentURL: NSURL { get }
+  @NSCopying var renderedContentURL: URL { get }
   init()
 }
 enum PHAssetMediaType : Int {

@@ -1,4 +1,4 @@
 
-extension NSBundle {
+extension Bundle {
   func loadAppleScriptObjectiveCScripts()
 }

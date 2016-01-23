@@ -1,14 +1,14 @@
 
-class CKAsset : NSObject {
-  init(fileURL: NSURL)
-  @NSCopying var fileURL: NSURL { get }
+class CKAsset : Object {
+  init(fileURL: URL)
+  @NSCopying var fileURL: URL { get }
 }
 let CKOwnerDefaultName: String
-class CKContainer : NSObject {
+class CKContainer : Object {
   class func defaultContainer() -> CKContainer
    init(identifier containerIdentifier: String)
   var containerIdentifier: String? { get }
-  func addOperation(operation: CKOperation)
+  func add(operation: CKOperation)
 }
 extension CKContainer {
   var privateCloudDatabase: CKDatabase { get }
@@ -24,7 +24,7 @@ enum CKAccountStatus : Int {
 }
 let CKAccountChangedNotification: String
 extension CKContainer {
-  func accountStatusWithCompletionHandler(completionHandler: (CKAccountStatus, NSError?) -> Void)
+  func accountStatusWithCompletionHandler(completionHandler: (CKAccountStatus, Error?) -> Void)
 }
 struct CKApplicationPermissions : OptionSetType {
   init(rawValue: UInt)
@@ -39,33 +39,33 @@ enum CKApplicationPermissionStatus : Int {
   case Denied
   case Granted
 }
-typealias CKApplicationPermissionBlock = (CKApplicationPermissionStatus, NSError?) -> Void
+typealias CKApplicationPermissionBlock = (CKApplicationPermissionStatus, Error?) -> Void
 extension CKContainer {
   func statusForApplicationPermission(applicationPermission: CKApplicationPermissions, completionHandler: CKApplicationPermissionBlock)
   func requestApplicationPermission(applicationPermission: CKApplicationPermissions, completionHandler: CKApplicationPermissionBlock)
 }
 extension CKContainer {
-  func fetchUserRecordIDWithCompletionHandler(completionHandler: (CKRecordID?, NSError?) -> Void)
-  func discoverAllContactUserInfosWithCompletionHandler(completionHandler: ([CKDiscoveredUserInfo]?, NSError?) -> Void)
-  func discoverUserInfoWithEmailAddress(email: String, completionHandler: (CKDiscoveredUserInfo?, NSError?) -> Void)
-  func discoverUserInfoWithUserRecordID(userRecordID: CKRecordID, completionHandler: (CKDiscoveredUserInfo?, NSError?) -> Void)
+  func fetchUserRecordIDWithCompletionHandler(completionHandler: (CKRecordID?, Error?) -> Void)
+  func discoverAllContactUserInfosWithCompletionHandler(completionHandler: ([CKDiscoveredUserInfo]?, Error?) -> Void)
+  func discoverUserInfoWithEmailAddress(email: String, completionHandler: (CKDiscoveredUserInfo?, Error?) -> Void)
+  func discoverUserInfoWithUserRecordID(userRecordID: CKRecordID, completionHandler: (CKDiscoveredUserInfo?, Error?) -> Void)
 }
-class CKDatabase : NSObject {
-  func addOperation(operation: CKDatabaseOperation)
+class CKDatabase : Object {
+  func add(operation: CKDatabaseOperation)
 }
 extension CKDatabase {
-  func fetchRecordWithID(recordID: CKRecordID, completionHandler: (CKRecord?, NSError?) -> Void)
-  func saveRecord(record: CKRecord, completionHandler: (CKRecord?, NSError?) -> Void)
-  func deleteRecordWithID(recordID: CKRecordID, completionHandler: (CKRecordID?, NSError?) -> Void)
-  func performQuery(query: CKQuery, inZoneWithID zoneID: CKRecordZoneID?, completionHandler: ([CKRecord]?, NSError?) -> Void)
-  func fetchAllRecordZonesWithCompletionHandler(completionHandler: ([CKRecordZone]?, NSError?) -> Void)
-  func fetchRecordZoneWithID(zoneID: CKRecordZoneID, completionHandler: (CKRecordZone?, NSError?) -> Void)
-  func saveRecordZone(zone: CKRecordZone, completionHandler: (CKRecordZone?, NSError?) -> Void)
-  func deleteRecordZoneWithID(zoneID: CKRecordZoneID, completionHandler: (CKRecordZoneID?, NSError?) -> Void)
-  func fetchSubscriptionWithID(subscriptionID: String, completionHandler: (CKSubscription?, NSError?) -> Void)
-  func fetchAllSubscriptionsWithCompletionHandler(completionHandler: ([CKSubscription]?, NSError?) -> Void)
-  func saveSubscription(subscription: CKSubscription, completionHandler: (CKSubscription?, NSError?) -> Void)
-  func deleteSubscriptionWithID(subscriptionID: String, completionHandler: (String?, NSError?) -> Void)
+  func fetchRecordWith(recordID: CKRecordID, completionHandler: (CKRecord?, Error?) -> Void)
+  func save(record: CKRecord, completionHandler: (CKRecord?, Error?) -> Void)
+  func deleteRecordWith(recordID: CKRecordID, completionHandler: (CKRecordID?, Error?) -> Void)
+  func perform(query: CKQuery, inZoneWith zoneID: CKRecordZoneID?, completionHandler: ([CKRecord]?, Error?) -> Void)
+  func fetchAllRecordZonesWithCompletionHandler(completionHandler: ([CKRecordZone]?, Error?) -> Void)
+  func fetchRecordZoneWith(zoneID: CKRecordZoneID, completionHandler: (CKRecordZone?, Error?) -> Void)
+  func save(zone: CKRecordZone, completionHandler: (CKRecordZone?, Error?) -> Void)
+  func deleteRecordZoneWith(zoneID: CKRecordZoneID, completionHandler: (CKRecordZoneID?, Error?) -> Void)
+  func fetchSubscriptionWithID(subscriptionID: String, completionHandler: (CKSubscription?, Error?) -> Void)
+  func fetchAllSubscriptionsWithCompletionHandler(completionHandler: ([CKSubscription]?, Error?) -> Void)
+  func save(subscription: CKSubscription, completionHandler: (CKSubscription?, Error?) -> Void)
+  func deleteSubscriptionWithID(subscriptionID: String, completionHandler: (String?, Error?) -> Void)
 }
 class CKDatabaseOperation : CKOperation {
   var database: CKDatabase?
@@ -73,16 +73,16 @@ class CKDatabaseOperation : CKOperation {
 }
 class CKDiscoverAllContactsOperation : CKOperation {
   init()
-  var discoverAllContactsCompletionBlock: (([CKDiscoveredUserInfo]?, NSError?) -> Void)?
+  var discoverAllContactsCompletionBlock: (([CKDiscoveredUserInfo]?, Error?) -> Void)?
 }
 class CKDiscoverUserInfosOperation : CKOperation {
   init()
   convenience init(emailAddresses: [String]?, userRecordIDs: [CKRecordID]?)
   var emailAddresses: [String]?
   var userRecordIDs: [CKRecordID]?
-  var discoverUserInfosCompletionBlock: (([String : CKDiscoveredUserInfo]?, [CKRecordID : CKDiscoveredUserInfo]?, NSError?) -> Void)?
+  var discoverUserInfosCompletionBlock: (([String : CKDiscoveredUserInfo]?, [CKRecordID : CKDiscoveredUserInfo]?, Error?) -> Void)?
 }
-class CKDiscoveredUserInfo : NSObject {
+class CKDiscoveredUserInfo : Object {
   @NSCopying var userRecordID: CKRecordID? { get }
   var firstName: String? { get }
   var lastName: String? { get }
@@ -136,7 +136,7 @@ class CKFetchNotificationChangesOperation : CKOperation {
   var resultsLimit: Int
   var moreComing: Bool { get }
   var notificationChangedBlock: ((CKNotification) -> Void)?
-  var fetchNotificationChangesCompletionBlock: ((CKServerChangeToken?, NSError?) -> Void)?
+  var fetchNotificationChangesCompletionBlock: ((CKServerChangeToken?, Error?) -> Void)?
   init()
 }
 class CKFetchRecordChangesOperation : CKDatabaseOperation {
@@ -148,58 +148,58 @@ class CKFetchRecordChangesOperation : CKDatabaseOperation {
   var recordChangedBlock: ((CKRecord) -> Void)?
   var recordWithIDWasDeletedBlock: ((CKRecordID) -> Void)?
   var moreComing: Bool { get }
-  var fetchRecordChangesCompletionBlock: ((CKServerChangeToken?, NSData?, NSError?) -> Void)?
+  var fetchRecordChangesCompletionBlock: ((CKServerChangeToken?, Data?, Error?) -> Void)?
   init()
 }
 class CKFetchRecordZonesOperation : CKDatabaseOperation {
-  class func fetchAllRecordZonesOperation() -> Self
+  class func fetchAll() -> Self
   init()
   convenience init(recordZoneIDs zoneIDs: [CKRecordZoneID])
   var recordZoneIDs: [CKRecordZoneID]?
-  var fetchRecordZonesCompletionBlock: (([CKRecordZoneID : CKRecordZone]?, NSError?) -> Void)?
+  var fetchRecordZonesCompletionBlock: (([CKRecordZoneID : CKRecordZone]?, Error?) -> Void)?
 }
 class CKFetchRecordsOperation : CKDatabaseOperation {
   init()
   convenience init(recordIDs: [CKRecordID])
-  class func fetchCurrentUserRecordOperation() -> Self
+  class func fetchCurrentUserRecord() -> Self
   var recordIDs: [CKRecordID]?
   var desiredKeys: [String]?
   var perRecordProgressBlock: ((CKRecordID, Double) -> Void)?
-  var perRecordCompletionBlock: ((CKRecord?, CKRecordID?, NSError?) -> Void)?
-  var fetchRecordsCompletionBlock: (([CKRecordID : CKRecord]?, NSError?) -> Void)?
+  var perRecordCompletionBlock: ((CKRecord?, CKRecordID?, Error?) -> Void)?
+  var fetchRecordsCompletionBlock: (([CKRecordID : CKRecord]?, Error?) -> Void)?
 }
 class CKFetchSubscriptionsOperation : CKDatabaseOperation {
   init()
-  class func fetchAllSubscriptionsOperation() -> Self
+  class func fetchAll() -> Self
   convenience init(subscriptionIDs: [String])
   var subscriptionIDs: [String]?
-  var fetchSubscriptionCompletionBlock: (([String : CKSubscription]?, NSError?) -> Void)?
+  var fetchSubscriptionCompletionBlock: (([String : CKSubscription]?, Error?) -> Void)?
 }
-class CKLocationSortDescriptor : NSSortDescriptor, NSSecureCoding {
+class CKLocationSortDescriptor : SortDescriptor, SecureCoding {
   init(key: String, relativeLocation: CLLocation)
-  init(coder aDecoder: NSCoder)
+  init(coder aDecoder: Coder)
   @NSCopying var relativeLocation: CLLocation { get }
   convenience init(key: String?, ascending: Bool)
   convenience init(key: String?, ascending: Bool, selector: Selector)
-  convenience init(key: String?, ascending: Bool, comparator cmptr: NSComparator)
+  convenience init(key: String?, ascending: Bool, comparator cmptr: Comparator)
 }
 class CKMarkNotificationsReadOperation : CKOperation {
   init(notificationIDsToMarkRead notificationIDs: [CKNotificationID])
   var notificationIDs: [CKNotificationID]
-  var markNotificationsReadCompletionBlock: (([CKNotificationID]?, NSError?) -> Void)?
+  var markNotificationsReadCompletionBlock: (([CKNotificationID]?, Error?) -> Void)?
 }
 class CKModifyBadgeOperation : CKOperation {
   init()
   convenience init(badgeValue: Int)
   var badgeValue: Int
-  var modifyBadgeCompletionBlock: ((NSError?) -> Void)?
+  var modifyBadgeCompletionBlock: ((Error?) -> Void)?
 }
 class CKModifyRecordZonesOperation : CKDatabaseOperation {
   init()
   convenience init(recordZonesToSave: [CKRecordZone]?, recordZoneIDsToDelete: [CKRecordZoneID]?)
   var recordZonesToSave: [CKRecordZone]?
   var recordZoneIDsToDelete: [CKRecordZoneID]?
-  var modifyRecordZonesCompletionBlock: (([CKRecordZone]?, [CKRecordZoneID]?, NSError?) -> Void)?
+  var modifyRecordZonesCompletionBlock: (([CKRecordZone]?, [CKRecordZoneID]?, Error?) -> Void)?
 }
 enum CKRecordSavePolicy : Int {
   init?(rawValue: Int)
@@ -214,25 +214,25 @@ class CKModifyRecordsOperation : CKDatabaseOperation {
   var recordsToSave: [CKRecord]?
   var recordIDsToDelete: [CKRecordID]?
   var savePolicy: CKRecordSavePolicy
-  @NSCopying var clientChangeTokenData: NSData?
+  @NSCopying var clientChangeTokenData: Data?
   var atomic: Bool
   var perRecordProgressBlock: ((CKRecord, Double) -> Void)?
-  var perRecordCompletionBlock: ((CKRecord?, NSError?) -> Void)?
-  var modifyRecordsCompletionBlock: (([CKRecord]?, [CKRecordID]?, NSError?) -> Void)?
+  var perRecordCompletionBlock: ((CKRecord?, Error?) -> Void)?
+  var modifyRecordsCompletionBlock: (([CKRecord]?, [CKRecordID]?, Error?) -> Void)?
 }
 class CKModifySubscriptionsOperation : CKDatabaseOperation {
   init(subscriptionsToSave: [CKSubscription]?, subscriptionIDsToDelete: [String]?)
   var subscriptionsToSave: [CKSubscription]?
   var subscriptionIDsToDelete: [String]?
-  var modifySubscriptionsCompletionBlock: (([CKSubscription]?, [String]?, NSError?) -> Void)?
+  var modifySubscriptionsCompletionBlock: (([CKSubscription]?, [String]?, Error?) -> Void)?
   convenience init()
 }
-class CKNotificationID : NSObject, NSCopying, NSSecureCoding {
+class CKNotificationID : Object, Copying, SecureCoding {
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 enum CKNotificationType : Int {
   init?(rawValue: Int)
@@ -241,8 +241,8 @@ enum CKNotificationType : Int {
   case RecordZone
   case ReadNotification
 }
-class CKNotification : NSObject {
-  convenience init(fromRemoteNotificationDictionary notificationDictionary: [String : NSObject])
+class CKNotification : Object {
+  convenience init(fromRemoteNotificationDictionary notificationDictionary: [String : Object])
   var notificationType: CKNotificationType { get }
   @NSCopying var notificationID: CKNotificationID? { get }
   var containerIdentifier: String? { get }
@@ -252,7 +252,7 @@ class CKNotification : NSObject {
   var alertLocalizationArgs: [String]? { get }
   var alertActionLocalizationKey: String? { get }
   var alertLaunchImage: String? { get }
-  @NSCopying var badge: NSNumber? { get }
+  @NSCopying var badge: Number? { get }
   var soundName: String? { get }
   var subscriptionID: String? { get }
   var category: String? { get }
@@ -269,34 +269,34 @@ class CKQueryNotification : CKNotification {
   var recordFields: [String : CKRecordValue]? { get }
   @NSCopying var recordID: CKRecordID? { get }
   var isPublicDatabase: Bool { get }
-  convenience init(fromRemoteNotificationDictionary notificationDictionary: [String : NSObject])
+  convenience init(fromRemoteNotificationDictionary notificationDictionary: [String : Object])
 }
 class CKRecordZoneNotification : CKNotification {
   @NSCopying var recordZoneID: CKRecordZoneID? { get }
-  convenience init(fromRemoteNotificationDictionary notificationDictionary: [String : NSObject])
+  convenience init(fromRemoteNotificationDictionary notificationDictionary: [String : Object])
 }
-class CKOperation : NSOperation {
+class CKOperation : Operation {
   init()
   func activityStart() -> os_activity_t
   var container: CKContainer?
   var usesBackgroundSession: Bool
   var allowsCellularAccess: Bool
 }
-class CKQuery : NSObject, NSSecureCoding, NSCopying {
-  init(coder aDecoder: NSCoder)
-  init(recordType: String, predicate: NSPredicate)
+class CKQuery : Object, SecureCoding, Copying {
+  init(coder aDecoder: Coder)
+  init(recordType: String, predicate: Predicate)
   var recordType: String { get }
-  @NSCopying var predicate: NSPredicate { get }
-  var sortDescriptors: [NSSortDescriptor]?
+  @NSCopying var predicate: Predicate { get }
+  var sortDescriptors: [SortDescriptor]?
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class CKQueryCursor : NSObject, NSCopying, NSSecureCoding {
-  func copyWithZone(zone: NSZone) -> AnyObject
+class CKQueryCursor : Object, Copying, SecureCoding {
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let CKQueryOperationMaximumResults: Int
 class CKQueryOperation : CKDatabaseOperation {
@@ -309,12 +309,12 @@ class CKQueryOperation : CKDatabaseOperation {
   var resultsLimit: Int
   var desiredKeys: [String]?
   var recordFetchedBlock: ((CKRecord) -> Void)?
-  var queryCompletionBlock: ((CKQueryCursor?, NSError?) -> Void)?
+  var queryCompletionBlock: ((CKQueryCursor?, Error?) -> Void)?
 }
 let CKRecordTypeUserRecord: String
-protocol CKRecordValue : NSObjectProtocol {
+protocol CKRecordValue : ObjectProtocol {
 }
-class CKRecord : NSObject, NSSecureCoding, NSCopying {
+class CKRecord : Object, SecureCoding, Copying {
   init(recordType: String)
   init(recordType: String, recordID: CKRecordID)
   init(recordType: String, zoneID: CKRecordZoneID)
@@ -322,30 +322,30 @@ class CKRecord : NSObject, NSSecureCoding, NSCopying {
   @NSCopying var recordID: CKRecordID { get }
   var recordChangeTag: String? { get }
   @NSCopying var creatorUserRecordID: CKRecordID? { get }
-  @NSCopying var creationDate: NSDate? { get }
+  @NSCopying var creationDate: Date? { get }
   @NSCopying var lastModifiedUserRecordID: CKRecordID? { get }
-  @NSCopying var modificationDate: NSDate? { get }
+  @NSCopying var modificationDate: Date? { get }
   func objectForKey(key: String) -> CKRecordValue?
   func setObject(object: CKRecordValue?, forKey key: String)
   func allKeys() -> [String]
   func allTokens() -> [String]
   subscript (key: String) -> CKRecordValue?
   func changedKeys() -> [String]
-  func encodeSystemFieldsWithCoder(coder: NSCoder)
+  func encodeSystemFieldsWith(coder: Coder)
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 extension NSString : CKRecordValue {
 }
-extension NSNumber : CKRecordValue {
+extension Number : CKRecordValue {
 }
 extension NSArray : CKRecordValue {
 }
-extension NSDate : CKRecordValue {
+extension Date : CKRecordValue {
 }
-extension NSData : CKRecordValue {
+extension Data : CKRecordValue {
 }
 extension CKReference : CKRecordValue {
 }
@@ -353,15 +353,15 @@ extension CKAsset : CKRecordValue {
 }
 extension CLLocation : CKRecordValue {
 }
-class CKRecordID : NSObject, NSSecureCoding, NSCopying {
+class CKRecordID : Object, SecureCoding, Copying {
   convenience init(recordName: String)
   init(recordName: String, zoneID: CKRecordZoneID)
   var recordName: String { get }
   var zoneID: CKRecordZoneID { get }
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 struct CKRecordZoneCapabilities : OptionSetType {
   init(rawValue: UInt)
@@ -370,25 +370,25 @@ struct CKRecordZoneCapabilities : OptionSetType {
   static var Atomic: CKRecordZoneCapabilities { get }
 }
 let CKRecordZoneDefaultName: String
-class CKRecordZone : NSObject, NSSecureCoding, NSCopying {
+class CKRecordZone : Object, SecureCoding, Copying {
   class func defaultRecordZone() -> CKRecordZone
   init(zoneName: String)
   init(zoneID: CKRecordZoneID)
   var zoneID: CKRecordZoneID { get }
   var capabilities: CKRecordZoneCapabilities { get }
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class CKRecordZoneID : NSObject, NSSecureCoding, NSCopying {
+class CKRecordZoneID : Object, SecureCoding, Copying {
   init(zoneName: String, ownerName: String)
   var zoneName: String { get }
   var ownerName: String { get }
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 enum CKReferenceAction : UInt {
   init?(rawValue: UInt)
@@ -396,21 +396,21 @@ enum CKReferenceAction : UInt {
   case None
   case DeleteSelf
 }
-class CKReference : NSObject, NSSecureCoding, NSCopying {
+class CKReference : Object, SecureCoding, Copying {
   init(recordID: CKRecordID, action: CKReferenceAction)
   convenience init(record: CKRecord, action: CKReferenceAction)
   var referenceAction: CKReferenceAction { get }
   @NSCopying var recordID: CKRecordID { get }
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class CKServerChangeToken : NSObject, NSCopying, NSSecureCoding {
-  func copyWithZone(zone: NSZone) -> AnyObject
+class CKServerChangeToken : Object, Copying, SecureCoding {
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 enum CKSubscriptionType : Int {
   init?(rawValue: Int)
@@ -426,24 +426,24 @@ struct CKSubscriptionOptions : OptionSetType {
   static var FiresOnRecordDeletion: CKSubscriptionOptions { get }
   static var FiresOnce: CKSubscriptionOptions { get }
 }
-class CKSubscription : NSObject, NSSecureCoding, NSCopying {
-  init(coder aDecoder: NSCoder)
-  convenience init(recordType: String, predicate: NSPredicate, options subscriptionOptions: CKSubscriptionOptions)
-  init(recordType: String, predicate: NSPredicate, subscriptionID: String, options subscriptionOptions: CKSubscriptionOptions)
-  convenience init(zoneID: CKRecordZoneID, options subscriptionOptions: CKSubscriptionOptions)
-  init(zoneID: CKRecordZoneID, subscriptionID: String, options subscriptionOptions: CKSubscriptionOptions)
+class CKSubscription : Object, SecureCoding, Copying {
+  init(coder aDecoder: Coder)
+  convenience init(recordType: String, predicate: Predicate, options subscriptionOptions: CKSubscriptionOptions = [])
+  init(recordType: String, predicate: Predicate, subscriptionID: String, options subscriptionOptions: CKSubscriptionOptions = [])
+  convenience init(zoneID: CKRecordZoneID, options subscriptionOptions: CKSubscriptionOptions = [])
+  init(zoneID: CKRecordZoneID, subscriptionID: String, options subscriptionOptions: CKSubscriptionOptions = [])
   var subscriptionID: String { get }
   var subscriptionType: CKSubscriptionType { get }
   var recordType: String? { get }
-  @NSCopying var predicate: NSPredicate? { get }
+  @NSCopying var predicate: Predicate? { get }
   var subscriptionOptions: CKSubscriptionOptions { get }
   @NSCopying var notificationInfo: CKNotificationInfo?
   @NSCopying var zoneID: CKRecordZoneID?
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class CKNotificationInfo : NSObject, NSSecureCoding, NSCopying {
+class CKNotificationInfo : Object, SecureCoding, Copying {
   var alertBody: String?
   var alertLocalizationKey: String?
   var alertLocalizationArgs: [String]?
@@ -456,7 +456,7 @@ class CKNotificationInfo : NSObject, NSSecureCoding, NSCopying {
   var category: String?
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }

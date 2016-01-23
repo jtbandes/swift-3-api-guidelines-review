@@ -14,25 +14,25 @@ enum RPRecordingErrorCode : Int {
 }
 class RPPreviewViewController : UIViewController {
   weak var previewControllerDelegate: @sil_weak RPPreviewViewControllerDelegate?
-  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder aDecoder: NSCoder)
+  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
-protocol RPPreviewViewControllerDelegate : NSObjectProtocol {
+protocol RPPreviewViewControllerDelegate : ObjectProtocol {
   optional func previewControllerDidFinish(previewController: RPPreviewViewController)
   optional func previewController(previewController: RPPreviewViewController, didFinishWithActivityTypes activityTypes: Set<String>)
 }
-class RPScreenRecorder : NSObject {
-  class func sharedRecorder() -> RPScreenRecorder
-  func startRecordingWithMicrophoneEnabled(microphoneEnabled: Bool, handler: ((NSError?) -> Void)?)
-  func stopRecordingWithHandler(handler: ((RPPreviewViewController?, NSError?) -> Void)?)
+class RPScreenRecorder : Object {
+  class func shared() -> RPScreenRecorder
+  func startRecordingWithMicrophoneEnabled(microphoneEnabled: Bool, handler: ((Error?) -> Void)? = nil)
+  func stopRecording(handler handler: ((RPPreviewViewController?, Error?) -> Void)? = nil)
   func discardRecordingWithHandler(handler: () -> Void)
   weak var delegate: @sil_weak RPScreenRecorderDelegate?
-  var recording: Bool { get }
-  var microphoneEnabled: Bool { get }
-  var available: Bool { get }
+  var isRecording: Bool { get }
+  var isMicrophoneEnabled: Bool { get }
+  var isAvailable: Bool { get }
 }
-protocol RPScreenRecorderDelegate : NSObjectProtocol {
-  optional func screenRecorder(screenRecorder: RPScreenRecorder, didStopRecordingWithError error: NSError, previewViewController: RPPreviewViewController?)
+protocol RPScreenRecorderDelegate : ObjectProtocol {
+  optional func screenRecorder(screenRecorder: RPScreenRecorder, didStopRecordingWithError error: Error, previewViewController: RPPreviewViewController?)
   optional func screenRecorderDidChangeAvailability(screenRecorder: RPScreenRecorder)
 }

@@ -1,7 +1,7 @@
 
-protocol PHContentEditingController : NSObjectProtocol {
-  func canHandleAdjustmentData(adjustmentData: PHAdjustmentData!) -> Bool
-  func startContentEditingWithInput(contentEditingInput: PHContentEditingInput!, placeholderImage: UIImage!)
+protocol PHContentEditingController : ObjectProtocol {
+  func canHandle(adjustmentData: PHAdjustmentData!) -> Bool
+  func startContentEditingWith(contentEditingInput: PHContentEditingInput!, placeholderImage: UIImage!)
   func finishContentEditingWithCompletionHandler(completionHandler: ((PHContentEditingOutput!) -> Void)!)
   func cancelContentEditing()
   var shouldShowCancelConfirmation: Bool { get }
@@ -23,21 +23,21 @@ enum PHLivePhotoViewPlaybackStyle : Int {
 }
 class PHLivePhotoView : UIView {
   /// System badge images representing Live Photo content
-  class func livePhotoBadgeImageWithOptions(badgeOptions: PHLivePhotoBadgeOptions) -> UIImage
+  class func livePhotoBadgeImage(options badgeOptions: PHLivePhotoBadgeOptions = []) -> UIImage
   weak var delegate: @sil_weak PHLivePhotoViewDelegate?
   /// Live photo displayed in the receiver.
   var livePhoto: PHLivePhoto?
   /// Indicates whether the audio of the Live Photo is muted.
-  var muted: Bool
+  var isMuted: Bool
   /// Gesture used to trigger playback. By default, added to the receiver. Can be moved to a different view.
   var playbackGestureRecognizer: UIGestureRecognizer { get }
-  func startPlaybackWithStyle(playbackStyle: PHLivePhotoViewPlaybackStyle)
+  func startPlaybackWith(playbackStyle: PHLivePhotoViewPlaybackStyle)
   func stopPlayback()
   init(frame: CGRect)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
-protocol PHLivePhotoViewDelegate : NSObjectProtocol {
-  optional func livePhotoView(livePhotoView: PHLivePhotoView, willBeginPlaybackWithStyle playbackStyle: PHLivePhotoViewPlaybackStyle)
-  optional func livePhotoView(livePhotoView: PHLivePhotoView, didEndPlaybackWithStyle playbackStyle: PHLivePhotoViewPlaybackStyle)
+protocol PHLivePhotoViewDelegate : ObjectProtocol {
+  optional func livePhotoView(livePhotoView: PHLivePhotoView, willBeginPlaybackWith playbackStyle: PHLivePhotoViewPlaybackStyle)
+  optional func livePhotoView(livePhotoView: PHLivePhotoView, didEndPlaybackWith playbackStyle: PHLivePhotoViewPlaybackStyle)
 }

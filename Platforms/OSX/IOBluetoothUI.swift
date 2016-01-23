@@ -20,7 +20,7 @@ func IOBluetoothGetDeviceSelectorController() -> Unmanaged<IOBluetoothDeviceSele
 class IOBluetoothDeviceSelectorController : NSWindowController {
   class func deviceSelector() -> IOBluetoothDeviceSelectorController!
   func runModal() -> Int32
-  func beginSheetModalForWindow(sheetWindow: NSWindow!, modalDelegate: AnyObject!, didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>) -> IOReturn
+  func beginSheetModalFor(sheetWindow: NSWindow!, modalDelegate: AnyObject!, didEnd didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>) -> IOReturn
   func getResults() -> [AnyObject]!
   func setOptions(options: IOBluetoothServiceBrowserControllerOptions)
   func getOptions() -> IOBluetoothServiceBrowserControllerOptions
@@ -40,17 +40,17 @@ class IOBluetoothDeviceSelectorController : NSWindowController {
   func setCancel(prompt: String!)
   func getCancel() -> String!
   init(window: NSWindow?)
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init(windowNibName: String)
   convenience init(windowNibName: String, owner: AnyObject)
   convenience init(windowNibPath: String, owner: AnyObject)
   convenience init()
 }
 class IOBluetoothObjectPushUIController : NSWindowController {
-  init!(objectPushWithBluetoothDevice inDevice: IOBluetoothDevice!, withFiles inFiles: [AnyObject]!, delegate inDelegate: AnyObject!)
+  init!(objectPushWith inDevice: IOBluetoothDevice!, withFiles inFiles: [AnyObject]!, delegate inDelegate: AnyObject!)
   func runModal()
   func runPanel()
-  func beginSheetModalForWindow(sheetWindow: NSWindow!, modalDelegate: AnyObject!, didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>) -> IOReturn
+  func beginSheetModalFor(sheetWindow: NSWindow!, modalDelegate: AnyObject!, didEnd didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>) -> IOReturn
   func stop()
   func setTitle(windowTitle: String!)
   func getTitle() -> String!
@@ -58,7 +58,7 @@ class IOBluetoothObjectPushUIController : NSWindowController {
   func getDevice() -> IOBluetoothDevice!
   func isTransferInProgress() -> Bool
   init(window: NSWindow?)
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init(windowNibName: String)
   convenience init(windowNibName: String, owner: AnyObject)
   convenience init(windowNibPath: String, owner: AnyObject)
@@ -81,7 +81,7 @@ class IOBluetoothPairingController : NSWindowController {
   func setPrompt(prompt: String!)
   func getPrompt() -> String!
   init(window: NSWindow?)
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init(windowNibName: String)
   convenience init(windowNibName: String, owner: AnyObject)
   convenience init(windowNibPath: String, owner: AnyObject)
@@ -109,29 +109,29 @@ class IOBluetoothPasskeyDisplay : NSView {
   func advancePasskeyIndicator()
   func retreatPasskeyIndicator()
   func resetPasskeyIndicator()
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 class IOBluetoothAccessibilityIgnoredTextFieldCell : NSTextFieldCell {
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class IOBluetoothAccessibilityIgnoredImageCell : NSImageCell {
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class IOBluetoothServiceBrowserController : NSWindowController {
    init!(_ inOptions: IOBluetoothServiceBrowserControllerOptions)
   class func withServiceBrowserControllerRef(serviceBrowserControllerRef: IOBluetoothServiceBrowserController!) -> IOBluetoothServiceBrowserController!
-  func getServiceBrowserControllerRef() -> Unmanaged<IOBluetoothServiceBrowserController>!
+  func getRef() -> Unmanaged<IOBluetoothServiceBrowserController>!
   func setOptions(inOptions: IOBluetoothServiceBrowserControllerOptions)
   func runModal() -> Int32
-  func beginSheetModalForWindow(sheetWindow: NSWindow!, modalDelegate: AnyObject!, didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>) -> IOReturn
+  func beginSheetModalFor(sheetWindow: NSWindow!, modalDelegate: AnyObject!, didEnd didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>) -> IOReturn
   func getResults() -> [AnyObject]!
   func getOptions() -> IOBluetoothServiceBrowserControllerOptions
   func setSearchAttributes(searchAttributes: UnsafePointer<IOBluetoothDeviceSearchAttributes>)
@@ -146,7 +146,7 @@ class IOBluetoothServiceBrowserController : NSWindowController {
   func setPrompt(prompt: String!)
   func getPrompt() -> String!
   init(window: NSWindow?)
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init(windowNibName: String)
   convenience init(windowNibName: String, owner: AnyObject)
   convenience init(windowNibPath: String, owner: AnyObject)

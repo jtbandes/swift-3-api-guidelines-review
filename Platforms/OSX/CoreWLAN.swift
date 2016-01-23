@@ -1,48 +1,48 @@
 
-class CWChannel : NSObject, NSCopying, NSSecureCoding {
+class CWChannel : Object, Copying, SecureCoding {
   var channelNumber: Int { get }
   var channelWidth: CWChannelWidth { get }
   var channelBand: CWChannelBand { get }
-  func isEqualToChannel(channel: CWChannel) -> Bool
+  func isEqualTo(channel: CWChannel) -> Bool
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class CWConfiguration : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
-  @NSCopying var networkProfiles: NSOrderedSet { get }
+class CWConfiguration : Object, Copying, MutableCopying, SecureCoding {
+  @NSCopying var networkProfiles: OrderedSet { get }
   var requireAdministratorForAssociation: Bool { get }
   var requireAdministratorForPower: Bool { get }
   var requireAdministratorForIBSSMode: Bool { get }
   var rememberJoinedNetworks: Bool { get }
   init()
   init(configuration: CWConfiguration)
-  func isEqualToConfiguration(configuration: CWConfiguration) -> Bool
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func isEqualTo(configuration: CWConfiguration) -> Bool
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 class CWMutableConfiguration : CWConfiguration {
-  @NSCopying var networkProfiles: NSOrderedSet
+  @NSCopying var networkProfiles: OrderedSet
   var requireAdministratorForAssociation: Bool
   var requireAdministratorForPower: Bool
   var requireAdministratorForIBSSMode: Bool
   var rememberJoinedNetworks: Bool
   init()
   init(configuration: CWConfiguration)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class CWInterface : NSObject {
+class CWInterface : Object {
   var interfaceName: String? { get }
   func powerOn() -> Bool
   func supportedWLANChannels() -> Set<CWChannel>?
   func wlanChannel() -> CWChannel?
   func activePHYMode() -> CWPHYMode
   func ssid() -> String?
-  func ssidData() -> NSData?
+  func ssidData() -> Data?
   func bssid() -> String?
   func rssiValue() -> Int
   func noiseMeasurement() -> Int
@@ -60,55 +60,55 @@ class CWInterface : NSObject {
   init(interfaceName name: String)
   func setPower(power: Bool) throws
   func setWLANChannel(channel: CWChannel) throws
-  func setPairwiseMasterKey(key: NSData?) throws
-  func setWEPKey(key: NSData?, flags: CWCipherKeyFlags, index: Int) throws
-  func scanForNetworksWithSSID(ssid: NSData?) throws -> Set<CWNetwork>
+  func setPairwiseMasterKey(key: Data?) throws
+  func setWEPKey(key: Data?, flags: CWCipherKeyFlags, index: Int) throws
+  func scanForNetworksWithSSID(ssid: Data?) throws -> Set<CWNetwork>
   func scanForNetworksWithName(networkName: String?) throws -> Set<CWNetwork>
-  func associateToNetwork(network: CWNetwork, password: String?) throws
+  func associateTo(network: CWNetwork, password: String?) throws
   func disassociate()
   func associateToEnterpriseNetwork(network: CWNetwork, identity: SecIdentity?, username: String?, password: String?) throws
-  func startIBSSModeWithSSID(ssidData: NSData, security: CWIBSSModeSecurity, channel: Int, password: String?) throws
+  func startIBSSModeWithSSID(ssidData: Data, security: CWIBSSModeSecurity, channel: Int, password: String?) throws
   init()
 }
-class CWNetwork : NSObject, NSCopying, NSSecureCoding {
+class CWNetwork : Object, Copying, SecureCoding {
   var ssid: String? { get }
-  var ssidData: NSData? { get }
+  var ssidData: Data? { get }
   var bssid: String? { get }
   var wlanChannel: CWChannel { get }
   var rssiValue: Int { get }
   var noiseMeasurement: Int { get }
-  var informationElementData: NSData? { get }
+  var informationElementData: Data? { get }
   var countryCode: String? { get }
   var beaconInterval: Int { get }
   var ibss: Bool { get }
-  func isEqualToNetwork(network: CWNetwork) -> Bool
+  func isEqualTo(network: CWNetwork) -> Bool
   func supportsSecurity(security: CWSecurity) -> Bool
   func supportsPHYMode(phyMode: CWPHYMode) -> Bool
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class CWNetworkProfile : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
+class CWNetworkProfile : Object, Copying, MutableCopying, SecureCoding {
   var ssid: String? { get }
-  @NSCopying var ssidData: NSData? { get }
+  @NSCopying var ssidData: Data? { get }
   var security: CWSecurity { get }
   init()
   init(networkProfile: CWNetworkProfile)
-  func isEqualToNetworkProfile(networkProfile: CWNetworkProfile) -> Bool
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func isEqualTo(networkProfile: CWNetworkProfile) -> Bool
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 class CWMutableNetworkProfile : CWNetworkProfile {
-  @NSCopying var ssidData: NSData
+  @NSCopying var ssidData: Data
   var security: CWSecurity
   init()
   init(networkProfile: CWNetworkProfile)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 protocol CWEventDelegate {
   optional func clientConnectionInterrupted()
@@ -122,16 +122,16 @@ protocol CWEventDelegate {
   optional func modeDidChangeForWiFiInterfaceWithName(interfaceName: String)
   optional func scanCacheUpdatedForWiFiInterfaceWithName(interfaceName: String)
 }
-class CWWiFiClient : NSObject {
+class CWWiFiClient : Object {
   weak var delegate: @sil_weak AnyObject?
-  class func sharedWiFiClient() -> CWWiFiClient
+  class func shared() -> CWWiFiClient
   init?()
   func interface() -> CWInterface?
   class func interfaceNames() -> [String]?
   func interfaceWithName(interfaceName: String?) -> CWInterface?
   func interfaces() -> [CWInterface]?
-  func startMonitoringEventWithType(type: CWEventType) throws
-  func stopMonitoringEventWithType(type: CWEventType) throws
+  func startMonitoringEventWith(type: CWEventType) throws
+  func stopMonitoringEventWith(type: CWEventType) throws
   func stopMonitoringAllEvents() throws
 }
 let CWErrorDomain: String
@@ -270,13 +270,13 @@ enum CWEventType : Int {
   case ScanCacheUpdated
   case Unknown
 }
-func CWKeychainFindWiFiPassword(domain: CWKeychainDomain, _ ssid: NSData, _ password: AutoreleasingUnsafeMutablePointer<NSString?>) -> OSStatus
-func CWKeychainSetWiFiPassword(domain: CWKeychainDomain, _ ssid: NSData, _ password: String) -> OSStatus
-func CWKeychainDeleteWiFiPassword(domain: CWKeychainDomain, _ ssid: NSData) -> OSStatus
-func CWKeychainFindWiFiEAPUsernameAndPassword(domain: CWKeychainDomain, _ ssid: NSData, _ username: AutoreleasingUnsafeMutablePointer<NSString?>, _ password: AutoreleasingUnsafeMutablePointer<NSString?>) -> OSStatus
-func CWKeychainSetWiFiEAPUsernameAndPassword(domain: CWKeychainDomain, _ ssid: NSData, _ username: String?, _ password: String?) -> OSStatus
-func CWKeychainDeleteWiFiEAPUsernameAndPassword(domain: CWKeychainDomain, _ ssid: NSData) -> OSStatus
-func CWKeychainCopyWiFiEAPIdentity(domain: CWKeychainDomain, _ ssid: NSData, _ identity: UnsafeMutablePointer<Unmanaged<SecIdentity>?>) -> OSStatus
-func CWKeychainSetWiFiEAPIdentity(domain: CWKeychainDomain, _ ssid: NSData, _ identity: SecIdentity?) -> OSStatus
+func CWKeychainFindWiFiPassword(domain: CWKeychainDomain, _ ssid: Data, _ password: AutoreleasingUnsafeMutablePointer<NSString?>) -> OSStatus
+func CWKeychainSetWiFiPassword(domain: CWKeychainDomain, _ ssid: Data, _ password: String) -> OSStatus
+func CWKeychainDeleteWiFiPassword(domain: CWKeychainDomain, _ ssid: Data) -> OSStatus
+func CWKeychainFindWiFiEAPUsernameAndPassword(domain: CWKeychainDomain, _ ssid: Data, _ username: AutoreleasingUnsafeMutablePointer<NSString?>, _ password: AutoreleasingUnsafeMutablePointer<NSString?>) -> OSStatus
+func CWKeychainSetWiFiEAPUsernameAndPassword(domain: CWKeychainDomain, _ ssid: Data, _ username: String?, _ password: String?) -> OSStatus
+func CWKeychainDeleteWiFiEAPUsernameAndPassword(domain: CWKeychainDomain, _ ssid: Data) -> OSStatus
+func CWKeychainCopyWiFiEAPIdentity(domain: CWKeychainDomain, _ ssid: Data, _ identity: UnsafeMutablePointer<Unmanaged<SecIdentity>?>) -> OSStatus
+func CWKeychainSetWiFiEAPIdentity(domain: CWKeychainDomain, _ ssid: Data, _ identity: SecIdentity?) -> OSStatus
 func CWKeychainCopyEAPIdentityList(list: UnsafeMutablePointer<Unmanaged<CFArray>?>) -> OSStatus
 func CWMergeNetworks(networks: Set<CWNetwork>) -> Set<CWNetwork>

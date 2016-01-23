@@ -1,5 +1,5 @@
 
-class NCWidgetController : NSObject {
+class NCWidgetController : Object {
   class func widgetController() -> Self!
   class func defaultWidgetController() -> NCWidgetController!
   func setHasContent(flag: Bool, forWidgetWithBundleIdentifier bundleID: String!)
@@ -13,12 +13,12 @@ class NCWidgetListViewController : NSViewController {
   var editing: Bool
   var showsAddButtonWhenEditing: Bool
   func viewControllerAtRow(row: Int, makeIfNecessary makeIfNecesary: Bool) -> NSViewController!
-  func rowForViewController(viewController: NSViewController!) -> Int
-  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder: NSCoder)
+  func rowFor(viewController: NSViewController!) -> Int
+  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder: Coder)
   convenience init()
 }
-protocol NCWidgetListViewDelegate : NSObjectProtocol {
+protocol NCWidgetListViewDelegate : ObjectProtocol {
   func widgetList(list: NCWidgetListViewController!, viewControllerForRow row: Int) -> NSViewController!
   optional func widgetListPerformAddAction(list: NCWidgetListViewController!)
   optional func widgetList(list: NCWidgetListViewController!, shouldReorderRow row: Int) -> Bool
@@ -33,15 +33,15 @@ enum NCUpdateResult : UInt {
   case NoData
   case Failed
 }
-protocol NCWidgetProviding : NSExtensionRequestHandling {
+protocol NCWidgetProviding : ExtensionRequestHandling {
   optional func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!)
-  optional func widgetMarginInsetsForProposedMarginInsets(defaultMarginInset: NSEdgeInsets) -> NSEdgeInsets
+  optional func widgetMarginInsetsForProposedMarginInsets(defaultMarginInset: EdgeInsets) -> EdgeInsets
   optional var widgetAllowsEditing: Bool { get }
   optional func widgetDidBeginEditing()
   optional func widgetDidEndEditing()
 }
 extension NSViewController {
-  func presentViewControllerInWidget(viewController: NSViewController!)
+  func presentInWidget(viewController: NSViewController!)
 }
 class NCWidgetSearchViewController : NSViewController {
   @IBOutlet weak var delegate: @sil_weak NCWidgetSearchViewDelegate!
@@ -49,11 +49,11 @@ class NCWidgetSearchViewController : NSViewController {
   var searchDescription: String!
   var searchResultsPlaceholderString: String!
   var searchResultKeyPath: String!
-  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder: NSCoder)
+  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder: Coder)
   convenience init()
 }
-protocol NCWidgetSearchViewDelegate : NSObjectProtocol {
+protocol NCWidgetSearchViewDelegate : ObjectProtocol {
   func widgetSearch(controller: NCWidgetSearchViewController!, searchForTerm searchTerm: String!, maxResults max: Int)
   func widgetSearchTermCleared(controller: NCWidgetSearchViewController!)
   func widgetSearch(controller: NCWidgetSearchViewController!, resultSelected object: AnyObject!)

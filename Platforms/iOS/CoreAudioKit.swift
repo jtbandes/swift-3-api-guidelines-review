@@ -1,7 +1,7 @@
 
-class AUViewController : UIViewController, NSExtensionRequestHandling {
-  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder aDecoder: NSCoder)
+class AUViewController : UIViewController, ExtensionRequestHandling {
+  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
 extension AUAudioUnit {
@@ -9,28 +9,28 @@ extension AUAudioUnit {
 }
 class CABTMIDICentralViewController : UITableViewController {
   init(style: UITableViewStyle)
-  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder aDecoder: NSCoder)
+  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
 class CABTMIDILocalPeripheralViewController : UIViewController {
-  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder aDecoder: NSCoder)
+  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
 class CAInterAppAudioSwitcherView : UIView {
-  var showingAppNames: Bool
+  var isShowingAppNames: Bool
   func setOutputAudioUnit(au: AudioUnit)
   func contentWidth() -> CGFloat
   init(frame: CGRect)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
 class CAInterAppAudioTransportView : UIView {
-  var enabled: Bool
-  var playing: Bool { get }
-  var recording: Bool { get }
-  var connected: Bool { get }
+  var isEnabled: Bool
+  var isPlaying: Bool { get }
+  var isRecording: Bool { get }
+  var isConnected: Bool { get }
   var labelColor: UIColor
   var currentTimeLabelFont: UIFont
   var rewindButtonColor: UIColor
@@ -39,6 +39,6 @@ class CAInterAppAudioTransportView : UIView {
   var recordButtonColor: UIColor
   func setOutputAudioUnit(au: AudioUnit)
   init(frame: CGRect)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init()
 }

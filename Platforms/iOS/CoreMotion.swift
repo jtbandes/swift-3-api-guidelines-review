@@ -9,20 +9,20 @@ struct CMAcceleration {
 class CMAccelerometerData : CMLogItem {
   var acceleration: CMAcceleration { get }
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-typealias CMAltitudeHandler = (CMAltitudeData?, NSError?) -> Void
-class CMAltimeter : NSObject {
+typealias CMAltitudeHandler = (CMAltitudeData?, Error?) -> Void
+class CMAltimeter : Object {
   class func isRelativeAltitudeAvailable() -> Bool
-  func startRelativeAltitudeUpdatesToQueue(queue: NSOperationQueue, withHandler handler: CMAltitudeHandler)
+  func startRelativeAltitudeUpdatesTo(queue: OperationQueue, withHandler handler: CMAltitudeHandler)
   func stopRelativeAltitudeUpdates()
   init()
 }
 class CMAltitudeData : CMLogItem {
-  var relativeAltitude: NSNumber { get }
-  var pressure: NSNumber { get }
+  var relativeAltitude: Number { get }
+  var pressure: Number { get }
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 struct CMRotationMatrix {
   var m11: Double
@@ -53,18 +53,18 @@ struct CMAttitudeReferenceFrame : OptionSetType {
   static var XMagneticNorthZVertical: CMAttitudeReferenceFrame { get }
   static var XTrueNorthZVertical: CMAttitudeReferenceFrame { get }
 }
-class CMAttitude : NSObject, NSCopying, NSSecureCoding {
+class CMAttitude : Object, Copying, SecureCoding {
   var roll: Double { get }
   var pitch: Double { get }
   var yaw: Double { get }
   var rotationMatrix: CMRotationMatrix { get }
   var quaternion: CMQuaternion { get }
-  func multiplyByInverseOfAttitude(attitude: CMAttitude)
+  func multiplyByInverseOf(attitude: CMAttitude)
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 struct CMMagneticFieldCalibrationAccuracy : RawRepresentable, Equatable {
   init(_ rawValue: Int32)
@@ -88,7 +88,7 @@ class CMDeviceMotion : CMLogItem {
   var userAcceleration: CMAcceleration { get }
   var magneticField: CMCalibratedMagneticField { get }
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 struct CMError : RawRepresentable, Equatable {
   init(_ rawValue: UInt32)
@@ -118,15 +118,15 @@ struct CMRotationRate {
 class CMGyroData : CMLogItem {
   var rotationRate: CMRotationRate { get }
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class CMLogItem : NSObject, NSSecureCoding, NSCopying {
-  var timestamp: NSTimeInterval { get }
+class CMLogItem : Object, SecureCoding, Copying {
+  var timestamp: TimeInterval { get }
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 struct CMMagneticField {
   var x: Double
@@ -138,7 +138,7 @@ struct CMMagneticField {
 class CMMagnetometerData : CMLogItem {
   var magneticField: CMMagneticField { get }
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 enum CMMotionActivityConfidence : Int {
   init?(rawValue: Int)
@@ -149,7 +149,7 @@ enum CMMotionActivityConfidence : Int {
 }
 class CMMotionActivity : CMLogItem {
   var confidence: CMMotionActivityConfidence { get }
-  var startDate: NSDate { get }
+  var startDate: Date { get }
   var unknown: Bool { get }
   var stationary: Bool { get }
   var walking: Bool { get }
@@ -157,108 +157,108 @@ class CMMotionActivity : CMLogItem {
   var automotive: Bool { get }
   var cycling: Bool { get }
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 typealias CMMotionActivityHandler = (CMMotionActivity?) -> Void
-typealias CMMotionActivityQueryHandler = ([CMMotionActivity]?, NSError?) -> Void
-class CMMotionActivityManager : NSObject {
+typealias CMMotionActivityQueryHandler = ([CMMotionActivity]?, Error?) -> Void
+class CMMotionActivityManager : Object {
   class func isActivityAvailable() -> Bool
-  func queryActivityStartingFromDate(start: NSDate, toDate end: NSDate, toQueue queue: NSOperationQueue, withHandler handler: CMMotionActivityQueryHandler)
-  func startActivityUpdatesToQueue(queue: NSOperationQueue, withHandler handler: CMMotionActivityHandler)
+  func queryActivityStartingFrom(start: Date, to end: Date, to queue: OperationQueue, withHandler handler: CMMotionActivityQueryHandler)
+  func startActivityUpdatesTo(queue: OperationQueue, withHandler handler: CMMotionActivityHandler)
   func stopActivityUpdates()
   init()
 }
-typealias CMAccelerometerHandler = (CMAccelerometerData?, NSError?) -> Void
-typealias CMGyroHandler = (CMGyroData?, NSError?) -> Void
-typealias CMDeviceMotionHandler = (CMDeviceMotion?, NSError?) -> Void
-typealias CMMagnetometerHandler = (CMMagnetometerData?, NSError?) -> Void
-class CMMotionManager : NSObject {
-  var accelerometerUpdateInterval: NSTimeInterval
-  var accelerometerAvailable: Bool { get }
-  var accelerometerActive: Bool { get }
+typealias CMAccelerometerHandler = (CMAccelerometerData?, Error?) -> Void
+typealias CMGyroHandler = (CMGyroData?, Error?) -> Void
+typealias CMDeviceMotionHandler = (CMDeviceMotion?, Error?) -> Void
+typealias CMMagnetometerHandler = (CMMagnetometerData?, Error?) -> Void
+class CMMotionManager : Object {
+  var accelerometerUpdateInterval: TimeInterval
+  var isAccelerometerAvailable: Bool { get }
+  var isAccelerometerActive: Bool { get }
   var accelerometerData: CMAccelerometerData? { get }
   func startAccelerometerUpdates()
-  func startAccelerometerUpdatesToQueue(queue: NSOperationQueue, withHandler handler: CMAccelerometerHandler)
+  func startAccelerometerUpdatesTo(queue: OperationQueue, withHandler handler: CMAccelerometerHandler)
   func stopAccelerometerUpdates()
-  var gyroUpdateInterval: NSTimeInterval
-  var gyroAvailable: Bool { get }
-  var gyroActive: Bool { get }
+  var gyroUpdateInterval: TimeInterval
+  var isGyroAvailable: Bool { get }
+  var isGyroActive: Bool { get }
   var gyroData: CMGyroData? { get }
   func startGyroUpdates()
-  func startGyroUpdatesToQueue(queue: NSOperationQueue, withHandler handler: CMGyroHandler)
+  func startGyroUpdatesTo(queue: OperationQueue, withHandler handler: CMGyroHandler)
   func stopGyroUpdates()
-  var magnetometerUpdateInterval: NSTimeInterval
-  var magnetometerAvailable: Bool { get }
-  var magnetometerActive: Bool { get }
+  var magnetometerUpdateInterval: TimeInterval
+  var isMagnetometerAvailable: Bool { get }
+  var isMagnetometerActive: Bool { get }
   var magnetometerData: CMMagnetometerData? { get }
   func startMagnetometerUpdates()
-  func startMagnetometerUpdatesToQueue(queue: NSOperationQueue, withHandler handler: CMMagnetometerHandler)
+  func startMagnetometerUpdatesTo(queue: OperationQueue, withHandler handler: CMMagnetometerHandler)
   func stopMagnetometerUpdates()
-  var deviceMotionUpdateInterval: NSTimeInterval
+  var deviceMotionUpdateInterval: TimeInterval
   class func availableAttitudeReferenceFrames() -> CMAttitudeReferenceFrame
   var attitudeReferenceFrame: CMAttitudeReferenceFrame { get }
-  var deviceMotionAvailable: Bool { get }
-  var deviceMotionActive: Bool { get }
+  var isDeviceMotionAvailable: Bool { get }
+  var isDeviceMotionActive: Bool { get }
   var deviceMotion: CMDeviceMotion? { get }
   func startDeviceMotionUpdates()
-  func startDeviceMotionUpdatesToQueue(queue: NSOperationQueue, withHandler handler: CMDeviceMotionHandler)
-  func startDeviceMotionUpdatesUsingReferenceFrame(referenceFrame: CMAttitudeReferenceFrame)
-  func startDeviceMotionUpdatesUsingReferenceFrame(referenceFrame: CMAttitudeReferenceFrame, toQueue queue: NSOperationQueue, withHandler handler: CMDeviceMotionHandler)
+  func startDeviceMotionUpdatesTo(queue: OperationQueue, withHandler handler: CMDeviceMotionHandler)
+  func startDeviceMotionUpdatesUsing(referenceFrame: CMAttitudeReferenceFrame)
+  func startDeviceMotionUpdatesUsing(referenceFrame: CMAttitudeReferenceFrame, to queue: OperationQueue, withHandler handler: CMDeviceMotionHandler)
   func stopDeviceMotionUpdates()
   var showsDeviceMovementDisplay: Bool
   init()
 }
-class CMPedometerData : NSObject, NSSecureCoding, NSCopying {
-  var startDate: NSDate { get }
-  var endDate: NSDate { get }
-  var numberOfSteps: NSNumber { get }
-  var distance: NSNumber? { get }
-  var floorsAscended: NSNumber? { get }
-  var floorsDescended: NSNumber? { get }
-  var currentPace: NSNumber? { get }
-  var currentCadence: NSNumber? { get }
+class CMPedometerData : Object, SecureCoding, Copying {
+  var startDate: Date { get }
+  var endDate: Date { get }
+  var numberOfSteps: Number { get }
+  var distance: Number? { get }
+  var floorsAscended: Number? { get }
+  var floorsDescended: Number? { get }
+  var currentPace: Number? { get }
+  var currentCadence: Number? { get }
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-typealias CMPedometerHandler = (CMPedometerData?, NSError?) -> Void
-class CMPedometer : NSObject {
+typealias CMPedometerHandler = (CMPedometerData?, Error?) -> Void
+class CMPedometer : Object {
   class func isStepCountingAvailable() -> Bool
   class func isDistanceAvailable() -> Bool
   class func isFloorCountingAvailable() -> Bool
   class func isPaceAvailable() -> Bool
   class func isCadenceAvailable() -> Bool
-  func queryPedometerDataFromDate(start: NSDate, toDate end: NSDate, withHandler handler: CMPedometerHandler)
-  func startPedometerUpdatesFromDate(start: NSDate, withHandler handler: CMPedometerHandler)
-  func stopPedometerUpdates()
+  func queryPedometerDataFrom(start: Date, to end: Date, withHandler handler: CMPedometerHandler)
+  func startUpdatesFrom(start: Date, withHandler handler: CMPedometerHandler)
+  func stopUpdates()
   init()
 }
 class CMRecordedAccelerometerData : CMAccelerometerData {
   var identifier: UInt64 { get }
-  var startDate: NSDate { get }
+  var startDate: Date { get }
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class CMSensorDataList : NSObject, NSFastEnumeration {
+class CMSensorDataList : Object, FastEnumeration {
   init()
-  func countByEnumeratingWithState(state: UnsafeMutablePointer<NSFastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
+  func countByEnumeratingWith(state: UnsafeMutablePointer<FastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
 }
-class CMSensorRecorder : NSObject {
+class CMSensorRecorder : Object {
   class func isAccelerometerRecordingAvailable() -> Bool
   class func isAuthorizedForRecording() -> Bool
   func accelerometerDataSince(identifier: UInt64) -> CMSensorDataList?
-  func accelerometerDataFrom(fromDate: NSDate, to toDate: NSDate) -> CMSensorDataList?
-  func recordAccelerometerFor(duration: NSTimeInterval)
+  func accelerometerDataFrom(fromDate: Date, to toDate: Date) -> CMSensorDataList?
+  func recordAccelerometerFor(duration: TimeInterval)
   init()
 }
-typealias CMStepQueryHandler = (Int, NSError?) -> Void
-typealias CMStepUpdateHandler = (Int, NSDate, NSError?) -> Void
-class CMStepCounter : NSObject {
+typealias CMStepQueryHandler = (Int, Error?) -> Void
+typealias CMStepUpdateHandler = (Int, Date, Error?) -> Void
+class CMStepCounter : Object {
   class func isStepCountingAvailable() -> Bool
-  func queryStepCountStartingFrom(start: NSDate, to end: NSDate, toQueue queue: NSOperationQueue, withHandler handler: CMStepQueryHandler)
-  func startStepCountingUpdatesToQueue(queue: NSOperationQueue, updateOn stepCounts: Int, withHandler handler: CMStepUpdateHandler)
+  func queryStepCountStartingFrom(start: Date, to end: Date, to queue: OperationQueue, withHandler handler: CMStepQueryHandler)
+  func startStepCountingUpdatesTo(queue: OperationQueue, updateOn stepCounts: Int, withHandler handler: CMStepUpdateHandler)
   func stopStepCountingUpdates()
   init()
 }

@@ -1,17 +1,17 @@
 
-class CNContactPicker : NSObject {
+class CNContactPicker : Object {
   var displayedKeys: [String]
   weak var delegate: @sil_weak CNContactPickerDelegate?
-  func showRelativeToRect(positioningRect: NSRect, ofView positioningView: NSView, preferredEdge: NSRectEdge)
+  func showRelativeTo(positioningRect: Rect, of positioningView: NSView, preferredEdge: RectEdge)
   func close()
   init()
 }
-protocol CNContactPickerDelegate : NSObjectProtocol {
+protocol CNContactPickerDelegate : ObjectProtocol {
   optional func contactPickerWillClose(picker: CNContactPicker)
   optional func contactPickerDidClose(picker: CNContactPicker)
 }
 class CNContactViewController : NSViewController {
-  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder: NSCoder)
+  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder: Coder)
   convenience init()
 }

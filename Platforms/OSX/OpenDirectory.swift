@@ -570,7 +570,7 @@ var kODErrorPluginOperationNotSupported: ODFrameworkErrors { get }
 var kODErrorPluginError: ODFrameworkErrors { get }
 var kODErrorDaemonError: ODFrameworkErrors { get }
 var kODErrorPluginOperationTimeout: ODFrameworkErrors { get }
-class ODAttributeMap : NSObject {
+class ODAttributeMap : Object {
   var customQueryFunction: String!
   var customTranslationFunction: String!
   var customAttributes: [AnyObject]!
@@ -591,7 +591,7 @@ var ODPacketEncryptionSSL: Int { get }
 let ODTrustTypeJoined: String
 let ODTrustTypeUsingCredentials: String
 let ODTrustTypeAnonymous: String
-class ODConfiguration : NSObject {
+class ODConfiguration : Object {
   var nodeName: String!
   var comment: String!
   var defaultMappings: ODMappings!
@@ -623,7 +623,7 @@ class ODConfiguration : NSObject {
   func removeTrustUsingUsername(username: String!, password: String!, deleteTrustAccount deleteAccount: Bool) throws
   init()
 }
-class ODMappings : NSObject {
+class ODMappings : Object {
   var comment: String!
   var templateName: String!
   var identifier: String!
@@ -634,7 +634,7 @@ class ODMappings : NSObject {
   func setRecordMap(map: ODRecordMap!, forStandardRecordType stdType: String!)
   init()
 }
-class ODModuleEntry : NSObject {
+class ODModuleEntry : Object {
   var mappings: ODMappings!
   var supportedOptions: [AnyObject]! { get }
   var name: String!
@@ -645,50 +645,50 @@ class ODModuleEntry : NSObject {
   func option(optionName: String!) -> AnyObject!
   init()
 }
-class ODNode : NSObject {
+class ODNode : Object {
   init(session inSession: ODSession!, type inType: ODNodeType) throws
   init(session inSession: ODSession!, name inName: String!) throws
   func subnodeNames() throws -> [AnyObject]
   func unreachableSubnodeNames() throws -> [AnyObject]
   var nodeName: String! { get }
-  func nodeDetailsForKeys(inKeys: [AnyObject]!) throws -> [NSObject : AnyObject]
+  func nodeDetailsForKeys(inKeys: [AnyObject]!) throws -> [Object : AnyObject]
   func supportedRecordTypes() throws -> [AnyObject]
   func supportedAttributesForRecordType(inRecordType: String!) throws -> [AnyObject]
   func setCredentialsWithRecordType(inRecordType: String!, recordName inRecordName: String!, password inPassword: String!) throws
   func setCredentialsWithRecordType(inRecordType: String!, authenticationType inType: String!, authenticationItems inItems: [AnyObject]!, continueItems outItems: AutoreleasingUnsafeMutablePointer<NSArray?>, context outContext: AutoreleasingUnsafeMutablePointer<AnyObject?>) throws
   func setCredentialsUsingKerberosCache(inCacheName: String!) throws
-  func createRecordWithRecordType(inRecordType: String!, name inRecordName: String!, attributes inAttributes: [NSObject : AnyObject]!) throws -> ODRecord
+  func createRecordWithRecordType(inRecordType: String!, name inRecordName: String!, attributes inAttributes: [Object : AnyObject]! = [:]) throws -> ODRecord
   func recordWithRecordType(inRecordType: String!, name inRecordName: String!, attributes inAttributes: AnyObject!) throws -> ODRecord
-  func customCall(inCustomCode: Int, sendData inSendData: NSData!) throws -> NSData
+  func customCall(inCustomCode: Int, send inSendData: Data!) throws -> Data
   func customFunction(function: String!, payload: AnyObject!) throws -> AnyObject
   var configuration: ODConfiguration! { get }
-  func policies() throws -> [NSObject : AnyObject]
-  func supportedPolicies() throws -> [NSObject : AnyObject]
-  func setPolicies(policies: [NSObject : AnyObject]!) throws
+  func policies() throws -> [Object : AnyObject]
+  func supportedPolicies() throws -> [Object : AnyObject]
+  func setPolicies(policies: [Object : AnyObject]!) throws
   func setPolicy(policy: ODPolicyType!, value: AnyObject!) throws
-  func removePolicy(policy: ODPolicyType!) throws
-  func addAccountPolicy(policy: [NSObject : AnyObject]!, toCategory category: String!) throws
-  func removeAccountPolicy(policy: [NSObject : AnyObject]!, fromCategory category: String!) throws
-  func setAccountPolicies(policies: [NSObject : AnyObject]!) throws
-  func accountPolicies() throws -> [NSObject : AnyObject]
+  func remove(policy: ODPolicyType!) throws
+  func addAccountPolicy(policy: [Object : AnyObject]!, toCategory category: String!) throws
+  func removeAccountPolicy(policy: [Object : AnyObject]!, fromCategory category: String!) throws
+  func setAccountPolicies(policies: [Object : AnyObject]!) throws
+  func accountPolicies() throws -> [Object : AnyObject]
   func passwordContentCheck(password: String!, forRecordName recordName: String!) throws
   init()
 }
-protocol ODQueryDelegate : NSObjectProtocol {
-  func query(inQuery: ODQuery!, foundResults inResults: [AnyObject]!, error inError: NSError!)
+protocol ODQueryDelegate : ObjectProtocol {
+  func query(inQuery: ODQuery!, foundResults inResults: [AnyObject]!, error inError: Error!)
 }
-class ODQuery : NSObject, NSCopying {
+class ODQuery : Object, Copying {
   init(node inNode: ODNode!, forRecordTypes inRecordTypeOrList: AnyObject!, attribute inAttribute: String!, matchType inMatchType: ODMatchType, queryValues inQueryValueOrList: AnyObject!, returnAttributes inReturnAttributeOrList: AnyObject!, maximumResults inMaximumResults: Int) throws
   func resultsAllowingPartial(inAllowPartialResults: Bool) throws -> [AnyObject]
   unowned(unsafe) var delegate: @sil_unmanaged ODQueryDelegate!
-  func scheduleInRunLoop(inRunLoop: NSRunLoop!, forMode inMode: String!)
-  func removeFromRunLoop(inRunLoop: NSRunLoop!, forMode inMode: String!)
+  func scheduleIn(inRunLoop: RunLoop!, forMode inMode: String!)
+  func removeFrom(inRunLoop: RunLoop!, forMode inMode: String!)
   func synchronize()
-  var operationQueue: NSOperationQueue!
+  var operationQueue: OperationQueue!
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class ODRecord : NSObject {
+class ODRecord : Object {
   func setNodeCredentials(inUsername: String!, password inPassword: String!) throws
   func setNodeCredentialsWithRecordType(inRecordType: String!, authenticationType inType: String!, authenticationItems inItems: [AnyObject]!, continueItems outItems: AutoreleasingUnsafeMutablePointer<NSArray?>, context outContext: AutoreleasingUnsafeMutablePointer<AnyObject?>) throws
   func verifyPassword(inPassword: String!) throws
@@ -697,23 +697,23 @@ class ODRecord : NSObject {
   func synchronize() throws
   var recordType: String! { get }
   var recordName: String! { get }
-  func recordDetailsForAttributes(inAttributes: [AnyObject]!) throws -> [NSObject : AnyObject]
+  func recordDetailsForAttributes(inAttributes: [AnyObject]!) throws -> [Object : AnyObject]
   func valuesForAttribute(inAttribute: String!) throws -> [AnyObject]
   func setValue(inValueOrValues: AnyObject!, forAttribute inAttribute: String!) throws
   func removeValuesForAttribute(inAttribute: String!) throws
   func addValue(inValue: AnyObject!, toAttribute inAttribute: String!) throws
   func removeValue(inValue: AnyObject!, fromAttribute inAttribute: String!) throws
-  func deleteRecord() throws
-  func policies() throws -> [NSObject : AnyObject]
-  func effectivePolicies() throws -> [NSObject : AnyObject]
-  func supportedPolicies() throws -> [NSObject : AnyObject]
-  func setPolicies(policies: [NSObject : AnyObject]!) throws
+  func delete() throws
+  func policies() throws -> [Object : AnyObject]
+  func effectivePolicies() throws -> [Object : AnyObject]
+  func supportedPolicies() throws -> [Object : AnyObject]
+  func setPolicies(policies: [Object : AnyObject]!) throws
   func setPolicy(policy: ODPolicyType!, value: AnyObject!) throws
-  func removePolicy(policy: ODPolicyType!) throws
-  func addAccountPolicy(policy: [NSObject : AnyObject]!, toCategory category: String!) throws
-  func removeAccountPolicy(policy: [NSObject : AnyObject]!, fromCategory category: String!) throws
-  func setAccountPolicies(policies: [NSObject : AnyObject]!) throws
-  func accountPolicies() throws -> [NSObject : AnyObject]
+  func remove(policy: ODPolicyType!) throws
+  func addAccountPolicy(policy: [Object : AnyObject]!, toCategory category: String!) throws
+  func removeAccountPolicy(policy: [Object : AnyObject]!, fromCategory category: String!) throws
+  func setAccountPolicies(policies: [Object : AnyObject]!) throws
+  func accountPolicies() throws -> [Object : AnyObject]
   func authenticationAllowed() throws
   func passwordChangeAllowed(newPassword: String!) throws
   func willPasswordExpire(willExpireIn: UInt64) -> Bool
@@ -727,10 +727,10 @@ extension ODRecord {
   func removeMemberRecord(inRecord: ODRecord!) throws
   func isMemberRecord(inRecord: ODRecord!) throws
 }
-class ODRecordMap : NSObject {
+class ODRecordMap : Object {
   var native: String!
-  var odPredicate: [NSObject : AnyObject]!
-  var attributes: [NSObject : AnyObject]! { get }
+  var odPredicate: [Object : AnyObject]!
+  var attributes: [Object : AnyObject]! { get }
   var standardAttributeTypes: [AnyObject]! { get }
   func attributeMapForStandardAttribute(standardAttribute: String!) -> ODAttributeMap!
   func setAttributeMap(attributeMap: ODAttributeMap!, forStandardAttribute standardAttribute: String!)
@@ -740,9 +740,9 @@ let ODSessionProxyAddress: String
 let ODSessionProxyPort: String
 let ODSessionProxyUsername: String
 let ODSessionProxyPassword: String
-class ODSession : NSObject {
+class ODSession : Object {
   class func defaultSession() -> ODSession!
-  init(options inOptions: [NSObject : AnyObject]!) throws
+  init(options inOptions: [Object : AnyObject]! = [:]) throws
   func nodeNames() throws -> [AnyObject]
   var configurationTemplateNames: [AnyObject]! { get }
   var mappingTemplateNames: [AnyObject]! { get }

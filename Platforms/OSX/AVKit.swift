@@ -3,8 +3,8 @@ class AVCaptureView : NSView {
   weak var delegate: @sil_weak AVCaptureViewDelegate?
   var controlsStyle: AVCaptureViewControlsStyle
   var videoGravity: String
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 enum AVCaptureViewControlsStyle : Int {
@@ -15,16 +15,16 @@ enum AVCaptureViewControlsStyle : Int {
   case InlineDeviceSelection
   static var Default: AVCaptureViewControlsStyle { get }
 }
-protocol AVCaptureViewDelegate : NSObjectProtocol {
+protocol AVCaptureViewDelegate : ObjectProtocol {
 }
 class AVPlayerView : NSView {
   var controlsStyle: AVPlayerViewControlsStyle
   var videoGravity: String
-  var readyForDisplay: Bool { get }
-  var videoBounds: NSRect { get }
+  var isReadyForDisplay: Bool { get }
+  var videoBounds: Rect { get }
   var contentOverlayView: NSView? { get }
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 enum AVPlayerViewControlsStyle : Int {
@@ -44,7 +44,7 @@ extension AVPlayerView {
 }
 extension AVPlayerView {
   var canBeginTrimming: Bool { get }
-  func beginTrimmingWithCompletionHandler(handler: ((AVPlayerViewTrimResult) -> Void)?)
+  func beginTrimming(completionHandler handler: ((AVPlayerViewTrimResult) -> Void)? = nil)
 }
 enum AVPlayerViewTrimResult : Int {
   init?(rawValue: Int)

@@ -1,72 +1,72 @@
 
-var NSFileNoSuchFileError: Int { get }
-var NSFileLockingError: Int { get }
-var NSFileReadUnknownError: Int { get }
-var NSFileReadNoPermissionError: Int { get }
-var NSFileReadInvalidFileNameError: Int { get }
-var NSFileReadCorruptFileError: Int { get }
-var NSFileReadNoSuchFileError: Int { get }
-var NSFileReadInapplicableStringEncodingError: Int { get }
-var NSFileReadUnsupportedSchemeError: Int { get }
-var NSFileReadTooLargeError: Int { get }
-var NSFileReadUnknownStringEncodingError: Int { get }
-var NSFileWriteUnknownError: Int { get }
-var NSFileWriteNoPermissionError: Int { get }
-var NSFileWriteInvalidFileNameError: Int { get }
-var NSFileWriteFileExistsError: Int { get }
-var NSFileWriteInapplicableStringEncodingError: Int { get }
-var NSFileWriteUnsupportedSchemeError: Int { get }
-var NSFileWriteOutOfSpaceError: Int { get }
-var NSFileWriteVolumeReadOnlyError: Int { get }
-var NSFileManagerUnmountUnknownError: Int { get }
-var NSFileManagerUnmountBusyError: Int { get }
-var NSKeyValueValidationError: Int { get }
-var NSFormattingError: Int { get }
-var NSUserCancelledError: Int { get }
-var NSFeatureUnsupportedError: Int { get }
-var NSExecutableNotLoadableError: Int { get }
-var NSExecutableArchitectureMismatchError: Int { get }
-var NSExecutableRuntimeMismatchError: Int { get }
-var NSExecutableLoadError: Int { get }
-var NSExecutableLinkError: Int { get }
-var NSFileErrorMinimum: Int { get }
-var NSFileErrorMaximum: Int { get }
-var NSValidationErrorMinimum: Int { get }
-var NSValidationErrorMaximum: Int { get }
-var NSExecutableErrorMinimum: Int { get }
-var NSExecutableErrorMaximum: Int { get }
-var NSFormattingErrorMinimum: Int { get }
-var NSFormattingErrorMaximum: Int { get }
-var NSPropertyListReadCorruptError: Int { get }
-var NSPropertyListReadUnknownVersionError: Int { get }
-var NSPropertyListReadStreamError: Int { get }
-var NSPropertyListWriteStreamError: Int { get }
-var NSPropertyListWriteInvalidError: Int { get }
-var NSPropertyListErrorMinimum: Int { get }
-var NSPropertyListErrorMaximum: Int { get }
-var NSXPCConnectionInterrupted: Int { get }
-var NSXPCConnectionInvalid: Int { get }
-var NSXPCConnectionReplyInvalid: Int { get }
-var NSXPCConnectionErrorMinimum: Int { get }
-var NSXPCConnectionErrorMaximum: Int { get }
-var NSUbiquitousFileUnavailableError: Int { get }
-var NSUbiquitousFileNotUploadedDueToQuotaError: Int { get }
-var NSUbiquitousFileUbiquityServerNotAvailable: Int { get }
-var NSUbiquitousFileErrorMinimum: Int { get }
-var NSUbiquitousFileErrorMaximum: Int { get }
-var NSUserActivityHandoffFailedError: Int { get }
-var NSUserActivityConnectionUnavailableError: Int { get }
-var NSUserActivityRemoteApplicationTimedOutError: Int { get }
-var NSUserActivityHandoffUserInfoTooLargeError: Int { get }
-var NSUserActivityErrorMinimum: Int { get }
-var NSUserActivityErrorMaximum: Int { get }
-var NSCoderReadCorruptError: Int { get }
-var NSCoderValueNotFoundError: Int { get }
-var NSCoderErrorMinimum: Int { get }
-var NSCoderErrorMaximum: Int { get }
-var NSBundleErrorMinimum: Int { get }
-var NSBundleErrorMaximum: Int { get }
-struct NSAffineTransformStruct {
+var fileNoSuchFileError: Int { get }
+var fileLockingError: Int { get }
+var fileReadUnknownError: Int { get }
+var fileReadNoPermissionError: Int { get }
+var fileReadInvalidFileNameError: Int { get }
+var fileReadCorruptFileError: Int { get }
+var fileReadNoSuchFileError: Int { get }
+var fileReadInapplicableStringEncodingError: Int { get }
+var fileReadUnsupportedSchemeError: Int { get }
+var fileReadTooLargeError: Int { get }
+var fileReadUnknownStringEncodingError: Int { get }
+var fileWriteUnknownError: Int { get }
+var fileWriteNoPermissionError: Int { get }
+var fileWriteInvalidFileNameError: Int { get }
+var fileWriteFileExistsError: Int { get }
+var fileWriteInapplicableStringEncodingError: Int { get }
+var fileWriteUnsupportedSchemeError: Int { get }
+var fileWriteOutOfSpaceError: Int { get }
+var fileWriteVolumeReadOnlyError: Int { get }
+var fileManagerUnmountUnknownError: Int { get }
+var fileManagerUnmountBusyError: Int { get }
+var keyValueValidationError: Int { get }
+var formattingError: Int { get }
+var userCancelledError: Int { get }
+var featureUnsupportedError: Int { get }
+var executableNotLoadableError: Int { get }
+var executableArchitectureMismatchError: Int { get }
+var executableRuntimeMismatchError: Int { get }
+var executableLoadError: Int { get }
+var executableLinkError: Int { get }
+var fileErrorMinimum: Int { get }
+var fileErrorMaximum: Int { get }
+var validationErrorMinimum: Int { get }
+var validationErrorMaximum: Int { get }
+var executableErrorMinimum: Int { get }
+var executableErrorMaximum: Int { get }
+var formattingErrorMinimum: Int { get }
+var formattingErrorMaximum: Int { get }
+var propertyListReadCorruptError: Int { get }
+var propertyListReadUnknownVersionError: Int { get }
+var propertyListReadStreamError: Int { get }
+var propertyListWriteStreamError: Int { get }
+var propertyListWriteInvalidError: Int { get }
+var propertyListErrorMinimum: Int { get }
+var propertyListErrorMaximum: Int { get }
+var XPCConnectionInterrupted: Int { get }
+var XPCConnectionInvalid: Int { get }
+var XPCConnectionReplyInvalid: Int { get }
+var XPCConnectionErrorMinimum: Int { get }
+var XPCConnectionErrorMaximum: Int { get }
+var ubiquitousFileUnavailableError: Int { get }
+var ubiquitousFileNotUploadedDueToQuotaError: Int { get }
+var ubiquitousFileUbiquityServerNotAvailable: Int { get }
+var ubiquitousFileErrorMinimum: Int { get }
+var ubiquitousFileErrorMaximum: Int { get }
+var userActivityHandoffFailedError: Int { get }
+var userActivityConnectionUnavailableError: Int { get }
+var userActivityRemoteApplicationTimedOutError: Int { get }
+var userActivityHandoffUserInfoTooLargeError: Int { get }
+var userActivityErrorMinimum: Int { get }
+var userActivityErrorMaximum: Int { get }
+var coderReadCorruptError: Int { get }
+var coderValueNotFoundError: Int { get }
+var coderErrorMinimum: Int { get }
+var coderErrorMaximum: Int { get }
+var bundleErrorMinimum: Int { get }
+var bundleErrorMaximum: Int { get }
+struct AffineTransformStruct {
   var m11: CGFloat
   var m12: CGFloat
   var m21: CGFloat
@@ -76,8 +76,8 @@ struct NSAffineTransformStruct {
   init()
   init(m11: CGFloat, m12: CGFloat, m21: CGFloat, m22: CGFloat, tX: CGFloat, tY: CGFloat)
 }
-class NSAffineTransform : NSObject, NSCopying, NSSecureCoding {
-  convenience init(transform: NSAffineTransform)
+class AffineTransform : Object, Copying, SecureCoding {
+  convenience init(transform: AffineTransform)
   init()
   func translateXBy(deltaX: CGFloat, yBy deltaY: CGFloat)
   func rotateByDegrees(angle: CGFloat)
@@ -85,168 +85,168 @@ class NSAffineTransform : NSObject, NSCopying, NSSecureCoding {
   func scaleBy(scale: CGFloat)
   func scaleXBy(scaleX: CGFloat, yBy scaleY: CGFloat)
   func invert()
-  func appendTransform(transform: NSAffineTransform)
-  func prependTransform(transform: NSAffineTransform)
-  func transformPoint(aPoint: NSPoint) -> NSPoint
-  func transformSize(aSize: NSSize) -> NSSize
-  var transformStruct: NSAffineTransformStruct
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func append(transform: AffineTransform)
+  func prependTransform(transform: AffineTransform)
+  func transform(aPoint: Point) -> Point
+  func transform(aSize: Size) -> Size
+  var transformStruct: AffineTransformStruct
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-struct NSAppleEventSendOptions : OptionSetType {
+struct AppleEventSendOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var NoReply: NSAppleEventSendOptions { get }
-  static var QueueReply: NSAppleEventSendOptions { get }
-  static var WaitForReply: NSAppleEventSendOptions { get }
-  static var NeverInteract: NSAppleEventSendOptions { get }
-  static var CanInteract: NSAppleEventSendOptions { get }
-  static var AlwaysInteract: NSAppleEventSendOptions { get }
-  static var CanSwitchLayer: NSAppleEventSendOptions { get }
-  static var DontRecord: NSAppleEventSendOptions { get }
-  static var DontExecute: NSAppleEventSendOptions { get }
-  static var DontAnnotate: NSAppleEventSendOptions { get }
-  static var DefaultOptions: NSAppleEventSendOptions { get }
+  static var NoReply: AppleEventSendOptions { get }
+  static var QueueReply: AppleEventSendOptions { get }
+  static var WaitForReply: AppleEventSendOptions { get }
+  static var NeverInteract: AppleEventSendOptions { get }
+  static var CanInteract: AppleEventSendOptions { get }
+  static var AlwaysInteract: AppleEventSendOptions { get }
+  static var CanSwitchLayer: AppleEventSendOptions { get }
+  static var DontRecord: AppleEventSendOptions { get }
+  static var DontExecute: AppleEventSendOptions { get }
+  static var DontAnnotate: AppleEventSendOptions { get }
+  static var DefaultOptions: AppleEventSendOptions { get }
 }
-class NSAppleEventDescriptor : NSObject, NSCopying, NSSecureCoding {
-  class func nullDescriptor() -> NSAppleEventDescriptor
+class AppleEventDescriptor : Object, Copying, SecureCoding {
+  class func null() -> AppleEventDescriptor
    init(boolean: Bool)
    init(enumCode enumerator: OSType)
    init(int32 signedInt: Int32)
    init(double doubleValue: Double)
    init(typeCode: OSType)
    init(string: String)
-   init(date: NSDate)
-   init(fileURL: NSURL)
-  class func appleEventWithEventClass(eventClass: AEEventClass, eventID: AEEventID, targetDescriptor: NSAppleEventDescriptor?, returnID: AEReturnID, transactionID: AETransactionID) -> NSAppleEventDescriptor
-  class func listDescriptor() -> NSAppleEventDescriptor
-  class func recordDescriptor() -> NSAppleEventDescriptor
-  class func currentProcessDescriptor() -> NSAppleEventDescriptor
+   init(date: Date)
+   init(fileURL: URL)
+  class func appleEventWithEventClass(eventClass: AEEventClass, eventID: AEEventID, targetDescriptor: AppleEventDescriptor?, returnID: AEReturnID, transactionID: AETransactionID) -> AppleEventDescriptor
+  class func list() -> AppleEventDescriptor
+  class func record() -> AppleEventDescriptor
+  class func currentProcess() -> AppleEventDescriptor
    init(processIdentifier: pid_t)
    init(bundleIdentifier: String)
-   init(applicationURL: NSURL)
-  init(AEDescNoCopy aeDesc: UnsafePointer<AEDesc>)
+   init(applicationURL: URL)
+  init(aeDescNoCopy aeDesc: UnsafePointer<AEDesc>)
   convenience init?(descriptorType: DescType, bytes: UnsafePointer<Void>, length byteCount: Int)
-  convenience init?(descriptorType: DescType, data: NSData?)
-  convenience init(eventClass: AEEventClass, eventID: AEEventID, targetDescriptor: NSAppleEventDescriptor?, returnID: AEReturnID, transactionID: AETransactionID)
+  convenience init?(descriptorType: DescType, data: Data?)
+  convenience init(eventClass: AEEventClass, eventID: AEEventID, targetDescriptor: AppleEventDescriptor?, returnID: AEReturnID, transactionID: AETransactionID)
   convenience init(listDescriptor: ())
   convenience init(recordDescriptor: ())
   var aeDesc: UnsafePointer<AEDesc> { get }
   var descriptorType: DescType { get }
-  @NSCopying var data: NSData { get }
+  @NSCopying var data: Data { get }
   var booleanValue: Bool { get }
   var enumCodeValue: OSType { get }
   var int32Value: Int32 { get }
   var doubleValue: Double { get }
   var typeCodeValue: OSType { get }
   var stringValue: String? { get }
-  @NSCopying var dateValue: NSDate? { get }
-  @NSCopying var fileURLValue: NSURL? { get }
+  @NSCopying var dateValue: Date? { get }
+  @NSCopying var fileURLValue: URL? { get }
   var eventClass: AEEventClass { get }
   var eventID: AEEventID { get }
   var returnID: AEReturnID { get }
   var transactionID: AETransactionID { get }
-  func setParamDescriptor(descriptor: NSAppleEventDescriptor, forKeyword keyword: AEKeyword)
-  func paramDescriptorForKeyword(keyword: AEKeyword) -> NSAppleEventDescriptor?
+  func setParamDescriptor(descriptor: AppleEventDescriptor, forKeyword keyword: AEKeyword)
+  func paramDescriptorForKeyword(keyword: AEKeyword) -> AppleEventDescriptor?
   func removeParamDescriptorWithKeyword(keyword: AEKeyword)
-  func setAttributeDescriptor(descriptor: NSAppleEventDescriptor, forKeyword keyword: AEKeyword)
-  func attributeDescriptorForKeyword(keyword: AEKeyword) -> NSAppleEventDescriptor?
-  func sendEventWithOptions(sendOptions: NSAppleEventSendOptions, timeout timeoutInSeconds: NSTimeInterval) throws -> NSAppleEventDescriptor
+  func setAttributeDescriptor(descriptor: AppleEventDescriptor, forKeyword keyword: AEKeyword)
+  func attributeDescriptorForKeyword(keyword: AEKeyword) -> AppleEventDescriptor?
+  func sendEvent(options sendOptions: AppleEventSendOptions = [], timeout timeoutInSeconds: TimeInterval) throws -> AppleEventDescriptor
   var isRecordDescriptor: Bool { get }
   var numberOfItems: Int { get }
-  func insertDescriptor(descriptor: NSAppleEventDescriptor, atIndex index: Int)
-  func descriptorAtIndex(index: Int) -> NSAppleEventDescriptor?
-  func removeDescriptorAtIndex(index: Int)
-  func setDescriptor(descriptor: NSAppleEventDescriptor, forKeyword keyword: AEKeyword)
-  func descriptorForKeyword(keyword: AEKeyword) -> NSAppleEventDescriptor?
-  func removeDescriptorWithKeyword(keyword: AEKeyword)
-  func keywordForDescriptorAtIndex(index: Int) -> AEKeyword
-  func coerceToDescriptorType(descriptorType: DescType) -> NSAppleEventDescriptor?
+  func insert(descriptor: AppleEventDescriptor, at index: Int)
+  func atIndex(index: Int) -> AppleEventDescriptor?
+  func removeAt(index: Int)
+  func setDescriptor(descriptor: AppleEventDescriptor, forKeyword keyword: AEKeyword)
+  func forKeyword(keyword: AEKeyword) -> AppleEventDescriptor?
+  func removeWithKeyword(keyword: AEKeyword)
+  func keywordForDescriptorAt(index: Int) -> AEKeyword
+  func coerceToDescriptorType(descriptorType: DescType) -> AppleEventDescriptor?
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-typealias NSAppleEventManagerSuspensionID = COpaquePointer
-let NSAppleEventTimeOutDefault: Double
-let NSAppleEventTimeOutNone: Double
-let NSAppleEventManagerWillProcessFirstEventNotification: String
-class NSAppleEventManager : NSObject {
-  class func sharedAppleEventManager() -> NSAppleEventManager
+typealias AppleEventManagerSuspensionID = COpaquePointer
+let appleEventTimeOutDefault: Double
+let appleEventTimeOutNone: Double
+let appleEventManagerWillProcessFirstEventNotification: String
+class AppleEventManager : Object {
+  class func shared() -> AppleEventManager
   func setEventHandler(handler: AnyObject, andSelector handleEventSelector: Selector, forEventClass eventClass: AEEventClass, andEventID eventID: AEEventID)
   func removeEventHandlerForEventClass(eventClass: AEEventClass, andEventID eventID: AEEventID)
   func dispatchRawAppleEvent(theAppleEvent: UnsafePointer<AppleEvent>, withRawReply theReply: UnsafeMutablePointer<AppleEvent>, handlerRefCon: SRefCon) -> OSErr
-  var currentAppleEvent: NSAppleEventDescriptor? { get }
-  var currentReplyAppleEvent: NSAppleEventDescriptor? { get }
-  func suspendCurrentAppleEvent() -> NSAppleEventManagerSuspensionID
-  func appleEventForSuspensionID(suspensionID: NSAppleEventManagerSuspensionID) -> NSAppleEventDescriptor
-  func replyAppleEventForSuspensionID(suspensionID: NSAppleEventManagerSuspensionID) -> NSAppleEventDescriptor
-  func setCurrentAppleEventAndReplyEventWithSuspensionID(suspensionID: NSAppleEventManagerSuspensionID)
-  func resumeWithSuspensionID(suspensionID: NSAppleEventManagerSuspensionID)
+  var currentAppleEvent: AppleEventDescriptor? { get }
+  var currentReplyAppleEvent: AppleEventDescriptor? { get }
+  func suspendCurrentAppleEvent() -> AppleEventManagerSuspensionID
+  func appleEventForSuspensionID(suspensionID: AppleEventManagerSuspensionID) -> AppleEventDescriptor
+  func replyAppleEventForSuspensionID(suspensionID: AppleEventManagerSuspensionID) -> AppleEventDescriptor
+  func setCurrentAppleEventAndReplyEventWithSuspensionID(suspensionID: AppleEventManagerSuspensionID)
+  func resumeWithSuspensionID(suspensionID: AppleEventManagerSuspensionID)
   init()
 }
-let NSAppleScriptErrorMessage: String
-let NSAppleScriptErrorNumber: String
-let NSAppleScriptErrorAppName: String
-let NSAppleScriptErrorBriefMessage: String
-let NSAppleScriptErrorRange: String
-class NSAppleScript : NSObject, NSCopying {
-  init?(contentsOfURL url: NSURL, error errorInfo: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
+let appleScriptErrorMessage: String
+let appleScriptErrorNumber: String
+let appleScriptErrorAppName: String
+let appleScriptErrorBriefMessage: String
+let appleScriptErrorRange: String
+class AppleScript : Object, Copying {
+  init?(contentsOf url: URL, error errorInfo: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
   init?(source: String)
   var source: String? { get }
-  var compiled: Bool { get }
+  var isCompiled: Bool { get }
   func compileAndReturnError(errorInfo: AutoreleasingUnsafeMutablePointer<NSDictionary?>) -> Bool
-  func executeAndReturnError(errorInfo: AutoreleasingUnsafeMutablePointer<NSDictionary?>) -> NSAppleEventDescriptor
-  func executeAppleEvent(event: NSAppleEventDescriptor, error errorInfo: AutoreleasingUnsafeMutablePointer<NSDictionary?>) -> NSAppleEventDescriptor
+  func executeAndReturnError(errorInfo: AutoreleasingUnsafeMutablePointer<NSDictionary?>) -> AppleEventDescriptor
+  func executeAppleEvent(event: AppleEventDescriptor, error errorInfo: AutoreleasingUnsafeMutablePointer<NSDictionary?>) -> AppleEventDescriptor
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class NSArchiver : NSCoder {
-  init(forWritingWithMutableData mdata: NSMutableData)
-  var archiverData: NSMutableData { get }
+class Archiver : Coder {
+  init(forWritingWith mdata: MutableData)
+  var archiverData: MutableData { get }
   func encodeRootObject(rootObject: AnyObject)
   func encodeConditionalObject(object: AnyObject?)
-  class func archivedDataWithRootObject(rootObject: AnyObject) -> NSData
+  class func archivedDataWithRootObject(rootObject: AnyObject) -> Data
   class func archiveRootObject(rootObject: AnyObject, toFile path: String) -> Bool
   func encodeClassName(trueName: String, intoClassName inArchiveName: String)
   func classNameEncodedForTrueClassName(trueName: String) -> String?
-  func replaceObject(object: AnyObject, withObject newObject: AnyObject)
+  func replace(object: AnyObject, withObject newObject: AnyObject)
   convenience init()
 }
-class NSUnarchiver : NSCoder {
-  init?(forReadingWithData data: NSData)
-  var atEnd: Bool { get }
+class Unarchiver : Coder {
+  init?(forReadingWith data: Data)
+  var isAtEnd: Bool { get }
   var systemVersion: UInt32 { get }
-  class func unarchiveObjectWithData(data: NSData) -> AnyObject?
+  class func unarchiveObjectWith(data: Data) -> AnyObject?
   class func unarchiveObjectWithFile(path: String) -> AnyObject?
   class func decodeClassName(inArchiveName: String, asClassName trueName: String)
   func decodeClassName(inArchiveName: String, asClassName trueName: String)
   class func classNameDecodedForArchiveClassName(inArchiveName: String) -> String
   func classNameDecodedForArchiveClassName(inArchiveName: String) -> String
-  func replaceObject(object: AnyObject, withObject newObject: AnyObject)
+  func replace(object: AnyObject, withObject newObject: AnyObject)
   convenience init()
 }
-let NSInconsistentArchiveException: String
-extension NSObject {
+let inconsistentArchiveException: String
+extension Object {
   var classForArchiver: AnyClass? { get }
-  class func replacementObjectForArchiver(archiver: NSArchiver) -> AnyObject?
-  func replacementObjectForArchiver(archiver: NSArchiver) -> AnyObject?
+  class func replacementObjectFor(archiver: Archiver) -> AnyObject?
+  func replacementObjectFor(archiver: Archiver) -> AnyObject?
   class func classForArchiver() -> AnyClass?
 }
-class NSArray : NSObject, NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration {
+class NSArray : Object, Copying, MutableCopying, SecureCoding, FastEnumeration {
   var count: Int { get }
-  func objectAtIndex(index: Int) -> AnyObject
+  func objectAt(index: Int) -> AnyObject
   init()
   init(objects: UnsafePointer<AnyObject?>, count cnt: Int)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  func countByEnumeratingWithState(state: UnsafeMutablePointer<NSFastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
+  func encodeWith(aCoder: Coder)
+  func countByEnumeratingWith(state: UnsafeMutablePointer<FastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
 }
 extension NSArray : ArrayLiteralConvertible {
   /// Create an instance initialized with `elements`.
@@ -281,195 +281,195 @@ extension NSArray : _Reflectable {
   func _getMirror() -> _MirrorType
 }
 extension NSArray {
-  func arrayByAddingObject(anObject: AnyObject) -> [AnyObject]
-  func arrayByAddingObjectsFromArray(otherArray: [AnyObject]) -> [AnyObject]
-  func componentsJoinedByString(separator: String) -> String
-  func containsObject(anObject: AnyObject) -> Bool
+  func adding(anObject: AnyObject) -> [AnyObject]
+  func addingObjectsFrom(otherArray: [AnyObject]) -> [AnyObject]
+  func componentsJoinedBy(separator: String) -> String
+  func contains(anObject: AnyObject) -> Bool
   var description: String { get }
   func descriptionWithLocale(locale: AnyObject?) -> String
   func descriptionWithLocale(locale: AnyObject?, indent level: Int) -> String
-  func firstObjectCommonWithArray(otherArray: [AnyObject]) -> AnyObject?
+  func firstObjectCommonWith(otherArray: [AnyObject]) -> AnyObject?
   func getObjects(objects: AutoreleasingUnsafeMutablePointer<AnyObject?>, range: NSRange)
-  func indexOfObject(anObject: AnyObject) -> Int
-  func indexOfObject(anObject: AnyObject, inRange range: NSRange) -> Int
+  func indexOf(anObject: AnyObject) -> Int
+  func indexOf(anObject: AnyObject, in range: NSRange) -> Int
   func indexOfObjectIdenticalTo(anObject: AnyObject) -> Int
-  func indexOfObjectIdenticalTo(anObject: AnyObject, inRange range: NSRange) -> Int
-  func isEqualToArray(otherArray: [AnyObject]) -> Bool
+  func indexOfObjectIdenticalTo(anObject: AnyObject, in range: NSRange) -> Int
+  func isEqualTo(otherArray: [AnyObject]) -> Bool
   var firstObject: AnyObject? { get }
   var lastObject: AnyObject? { get }
-  func objectEnumerator() -> NSEnumerator
-  func reverseObjectEnumerator() -> NSEnumerator
-  @NSCopying var sortedArrayHint: NSData { get }
-  func sortedArrayUsingFunction(comparator: @convention(c) (AnyObject, AnyObject, UnsafeMutablePointer<Void>) -> Int, context: UnsafeMutablePointer<Void>) -> [AnyObject]
-  func sortedArrayUsingFunction(comparator: @convention(c) (AnyObject, AnyObject, UnsafeMutablePointer<Void>) -> Int, context: UnsafeMutablePointer<Void>, hint: NSData?) -> [AnyObject]
-  func sortedArrayUsingSelector(comparator: Selector) -> [AnyObject]
-  func subarrayWithRange(range: NSRange) -> [AnyObject]
+  func objectEnumerator() -> Enumerator
+  func reverseObjectEnumerator() -> Enumerator
+  @NSCopying var sortedArrayHint: Data { get }
+  func sortedArrayUsing(comparator: @convention(c) (AnyObject, AnyObject, UnsafeMutablePointer<Void>) -> Int, context: UnsafeMutablePointer<Void>) -> [AnyObject]
+  func sortedArrayUsing(comparator: @convention(c) (AnyObject, AnyObject, UnsafeMutablePointer<Void>) -> Int, context: UnsafeMutablePointer<Void>, hint: Data?) -> [AnyObject]
+  func sortedArrayUsing(comparator: Selector) -> [AnyObject]
+  func subarrayWith(range: NSRange) -> [AnyObject]
   func writeToFile(path: String, atomically useAuxiliaryFile: Bool) -> Bool
-  func writeToURL(url: NSURL, atomically: Bool) -> Bool
-  func objectsAtIndexes(indexes: NSIndexSet) -> [AnyObject]
+  func writeTo(url: URL, atomically: Bool) -> Bool
+  func objectsAt(indexes: IndexSet) -> [AnyObject]
   subscript (idx: Int) -> AnyObject { get }
-  func enumerateObjectsUsingBlock(block: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func enumerateObjectsWithOptions(opts: NSEnumerationOptions, usingBlock block: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func enumerateObjectsAtIndexes(s: NSIndexSet, options opts: NSEnumerationOptions, usingBlock block: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func enumerateObjectsUsing(block: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func enumerateObjects(options opts: EnumerationOptions = [], usingBlock block: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func enumerateObjectsAt(s: IndexSet, options opts: EnumerationOptions = [], usingBlock block: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
   func indexOfObjectPassingTest(predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Int
-  func indexOfObjectWithOptions(opts: NSEnumerationOptions, passingTest predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Int
-  func indexOfObjectAtIndexes(s: NSIndexSet, options opts: NSEnumerationOptions, passingTest predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Int
-  func indexesOfObjectsPassingTest(predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> NSIndexSet
-  func indexesOfObjectsWithOptions(opts: NSEnumerationOptions, passingTest predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> NSIndexSet
-  func indexesOfObjectsAtIndexes(s: NSIndexSet, options opts: NSEnumerationOptions, passingTest predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> NSIndexSet
-  func sortedArrayUsingComparator(cmptr: NSComparator) -> [AnyObject]
-  func sortedArrayWithOptions(opts: NSSortOptions, usingComparator cmptr: NSComparator) -> [AnyObject]
-  func indexOfObject(obj: AnyObject, inSortedRange r: NSRange, options opts: NSBinarySearchingOptions, usingComparator cmp: NSComparator) -> Int
+  func indexOfObject(options opts: EnumerationOptions = [], passingTest predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Int
+  func indexOfObjectAt(s: IndexSet, options opts: EnumerationOptions = [], passingTest predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Int
+  func indexesOfObjectsPassingTest(predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> IndexSet
+  func indexesOfObjects(options opts: EnumerationOptions = [], passingTest predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> IndexSet
+  func indexesOfObjectsAt(s: IndexSet, options opts: EnumerationOptions = [], passingTest predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> IndexSet
+  func sortedArrayUsingComparator(cmptr: Comparator) -> [AnyObject]
+  func sortedArray(options opts: SortOptions = [], usingComparator cmptr: Comparator) -> [AnyObject]
+  func indexOf(obj: AnyObject, inSortedRange r: NSRange, options opts: BinarySearchingOptions = [], usingComparator cmp: Comparator) -> Int
 }
-struct NSBinarySearchingOptions : OptionSetType {
+struct BinarySearchingOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var FirstEqual: NSBinarySearchingOptions { get }
-  static var LastEqual: NSBinarySearchingOptions { get }
-  static var InsertionIndex: NSBinarySearchingOptions { get }
+  static var FirstEqual: BinarySearchingOptions { get }
+  static var LastEqual: BinarySearchingOptions { get }
+  static var InsertionIndex: BinarySearchingOptions { get }
 }
 extension NSArray {
   convenience init(object anObject: AnyObject)
   convenience init(array: [AnyObject])
   convenience init(array: [AnyObject], copyItems flag: Bool)
   convenience init?(contentsOfFile path: String)
-  convenience init?(contentsOfURL url: NSURL)
+  convenience init?(contentsOf url: URL)
 }
 extension NSArray {
   func getObjects(objects: AutoreleasingUnsafeMutablePointer<AnyObject?>)
 }
-class NSMutableArray : NSArray {
-  func addObject(anObject: AnyObject)
-  func insertObject(anObject: AnyObject, atIndex index: Int)
+class MutableArray : NSArray {
+  func add(anObject: AnyObject)
+  func insert(anObject: AnyObject, at index: Int)
   func removeLastObject()
-  func removeObjectAtIndex(index: Int)
-  func replaceObjectAtIndex(index: Int, withObject anObject: AnyObject)
+  func removeObjectAt(index: Int)
+  func replaceObjectAt(index: Int, withObject anObject: AnyObject)
   init()
   init(capacity numItems: Int)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init(objects: UnsafePointer<AnyObject?>, count cnt: Int)
   convenience init(object anObject: AnyObject)
   convenience init(array: [AnyObject])
   convenience init(array: [AnyObject], copyItems flag: Bool)
 }
-extension NSMutableArray {
-  func addObjectsFromArray(otherArray: [AnyObject])
-  func exchangeObjectAtIndex(idx1: Int, withObjectAtIndex idx2: Int)
+extension MutableArray {
+  func addObjectsFrom(otherArray: [AnyObject])
+  func exchangeObjectAt(idx1: Int, withObjectAt idx2: Int)
   func removeAllObjects()
-  func removeObject(anObject: AnyObject, inRange range: NSRange)
-  func removeObject(anObject: AnyObject)
-  func removeObjectIdenticalTo(anObject: AnyObject, inRange range: NSRange)
+  func remove(anObject: AnyObject, in range: NSRange)
+  func remove(anObject: AnyObject)
+  func removeObjectIdenticalTo(anObject: AnyObject, in range: NSRange)
   func removeObjectIdenticalTo(anObject: AnyObject)
-  func removeObjectsInArray(otherArray: [AnyObject])
-  func removeObjectsInRange(range: NSRange)
-  func replaceObjectsInRange(range: NSRange, withObjectsFromArray otherArray: [AnyObject], range otherRange: NSRange)
-  func replaceObjectsInRange(range: NSRange, withObjectsFromArray otherArray: [AnyObject])
+  func removeObjectsIn(otherArray: [AnyObject])
+  func removeObjectsIn(range: NSRange)
+  func replaceObjectsIn(range: NSRange, withObjectsFrom otherArray: [AnyObject], range otherRange: NSRange)
+  func replaceObjectsIn(range: NSRange, withObjectsFrom otherArray: [AnyObject])
   func setArray(otherArray: [AnyObject])
-  func sortUsingFunction(compare: @convention(c) (AnyObject, AnyObject, UnsafeMutablePointer<Void>) -> Int, context: UnsafeMutablePointer<Void>)
-  func sortUsingSelector(comparator: Selector)
-  func insertObjects(objects: [AnyObject], atIndexes indexes: NSIndexSet)
-  func removeObjectsAtIndexes(indexes: NSIndexSet)
-  func replaceObjectsAtIndexes(indexes: NSIndexSet, withObjects objects: [AnyObject])
+  func sortUsing(compare: @convention(c) (AnyObject, AnyObject, UnsafeMutablePointer<Void>) -> Int, context: UnsafeMutablePointer<Void>)
+  func sortUsing(comparator: Selector)
+  func insert(objects: [AnyObject], at indexes: IndexSet)
+  func removeObjectsAt(indexes: IndexSet)
+  func replaceObjectsAt(indexes: IndexSet, withObjects objects: [AnyObject])
   subscript (idx: Int) -> AnyObject
-  func sortUsingComparator(cmptr: NSComparator)
-  func sortWithOptions(opts: NSSortOptions, usingComparator cmptr: NSComparator)
+  func sortUsingComparator(cmptr: Comparator)
+  func sort(options opts: SortOptions = [], usingComparator cmptr: Comparator)
 }
-extension NSMutableArray {
+extension MutableArray {
   convenience init?(contentsOfFile path: String)
-  convenience init?(contentsOfURL url: NSURL)
+  convenience init?(contentsOf url: URL)
 }
-class NSAttributedString : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
+class AttributedString : Object, Copying, MutableCopying, SecureCoding {
   var string: String { get }
-  func attributesAtIndex(location: Int, effectiveRange range: NSRangePointer) -> [String : AnyObject]
+  func attributesAt(location: Int, effectiveRange range: RangePointer) -> [String : AnyObject]
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-extension NSAttributedString {
+extension AttributedString {
   var length: Int { get }
-  func attribute(attrName: String, atIndex location: Int, effectiveRange range: NSRangePointer) -> AnyObject?
-  func attributedSubstringFromRange(range: NSRange) -> NSAttributedString
-  func attributesAtIndex(location: Int, longestEffectiveRange range: NSRangePointer, inRange rangeLimit: NSRange) -> [String : AnyObject]
-  func attribute(attrName: String, atIndex location: Int, longestEffectiveRange range: NSRangePointer, inRange rangeLimit: NSRange) -> AnyObject?
-  func isEqualToAttributedString(other: NSAttributedString) -> Bool
+  func attribute(attrName: String, at location: Int, effectiveRange range: RangePointer) -> AnyObject?
+  func attributedSubstringFrom(range: NSRange) -> AttributedString
+  func attributesAt(location: Int, longestEffectiveRange range: RangePointer, in rangeLimit: NSRange) -> [String : AnyObject]
+  func attribute(attrName: String, at location: Int, longestEffectiveRange range: RangePointer, in rangeLimit: NSRange) -> AnyObject?
+  func isEqualTo(other: AttributedString) -> Bool
   init(string str: String)
-  init(string str: String, attributes attrs: [String : AnyObject]?)
-  init(attributedString attrStr: NSAttributedString)
-  func enumerateAttributesInRange(enumerationRange: NSRange, options opts: NSAttributedStringEnumerationOptions, usingBlock block: ([String : AnyObject], NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func enumerateAttribute(attrName: String, inRange enumerationRange: NSRange, options opts: NSAttributedStringEnumerationOptions, usingBlock block: (AnyObject?, NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
+  init(string str: String, attributes attrs: [String : AnyObject]? = [:])
+  init(attributedString attrStr: AttributedString)
+  func enumerateAttributesIn(enumerationRange: NSRange, options opts: AttributedStringEnumerationOptions = [], usingBlock block: ([String : AnyObject], NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func enumerateAttribute(attrName: String, in enumerationRange: NSRange, options opts: AttributedStringEnumerationOptions = [], usingBlock block: (AnyObject?, NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
 }
-struct NSAttributedStringEnumerationOptions : OptionSetType {
+struct AttributedStringEnumerationOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var Reverse: NSAttributedStringEnumerationOptions { get }
-  static var LongestEffectiveRangeNotRequired: NSAttributedStringEnumerationOptions { get }
+  static var Reverse: AttributedStringEnumerationOptions { get }
+  static var LongestEffectiveRangeNotRequired: AttributedStringEnumerationOptions { get }
 }
-class NSMutableAttributedString : NSAttributedString {
-  func replaceCharactersInRange(range: NSRange, withString str: String)
-  func setAttributes(attrs: [String : AnyObject]?, range: NSRange)
+class MutableAttributedString : AttributedString {
+  func replaceCharactersIn(range: NSRange, withString str: String)
+  func setAttributes(attrs: [String : AnyObject]? = [:], range: NSRange)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   init(string str: String)
-  init(string str: String, attributes attrs: [String : AnyObject]?)
-  init(attributedString attrStr: NSAttributedString)
+  init(string str: String, attributes attrs: [String : AnyObject]? = [:])
+  init(attributedString attrStr: AttributedString)
 }
-extension NSMutableAttributedString {
-  var mutableString: NSMutableString { get }
+extension MutableAttributedString {
+  var mutableString: MutableString { get }
   func addAttribute(name: String, value: AnyObject, range: NSRange)
-  func addAttributes(attrs: [String : AnyObject], range: NSRange)
+  func addAttributes(attrs: [String : AnyObject] = [:], range: NSRange)
   func removeAttribute(name: String, range: NSRange)
-  func replaceCharactersInRange(range: NSRange, withAttributedString attrString: NSAttributedString)
-  func insertAttributedString(attrString: NSAttributedString, atIndex loc: Int)
-  func appendAttributedString(attrString: NSAttributedString)
-  func deleteCharactersInRange(range: NSRange)
-  func setAttributedString(attrString: NSAttributedString)
+  func replaceCharactersIn(range: NSRange, withAttributedString attrString: AttributedString)
+  func insert(attrString: AttributedString, at loc: Int)
+  func append(attrString: AttributedString)
+  func deleteCharactersIn(range: NSRange)
+  func setAttributedString(attrString: AttributedString)
   func beginEditing()
   func endEditing()
 }
-enum NSBackgroundActivityResult : Int {
+enum BackgroundActivityResult : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case Finished
   case Deferred
 }
-typealias NSBackgroundActivityCompletionHandler = (NSBackgroundActivityResult) -> Void
-class NSBackgroundActivityScheduler : NSObject {
+typealias BackgroundActivityCompletionHandler = (BackgroundActivityResult) -> Void
+class BackgroundActivityScheduler : Object {
   init(identifier: String)
   var identifier: String { get }
-  var qualityOfService: NSQualityOfService
+  var qualityOfService: QualityOfService
   var repeats: Bool
-  var interval: NSTimeInterval
-  var tolerance: NSTimeInterval
-  func scheduleWithBlock(block: (NSBackgroundActivityCompletionHandler) -> Void)
+  var interval: TimeInterval
+  var tolerance: TimeInterval
+  func scheduleWith(block: (BackgroundActivityCompletionHandler) -> Void)
   func invalidate()
   var shouldDefer: Bool { get }
   convenience init()
 }
-class NSBundle : NSObject {
-  class func mainBundle() -> NSBundle
+class Bundle : Object {
+  class func main() -> Bundle
   init?(path: String)
-  convenience init?(URL url: NSURL)
+  convenience init?(url: URL)
    init(forClass aClass: AnyClass)
    init?(identifier: String)
-  class func allBundles() -> [NSBundle]
-  class func allFrameworks() -> [NSBundle]
+  class func allBundles() -> [Bundle]
+  class func allFrameworks() -> [Bundle]
   func load() -> Bool
-  var loaded: Bool { get }
+  var isLoaded: Bool { get }
   func unload() -> Bool
   func preflight() throws
   func loadAndReturnError() throws
-  @NSCopying var bundleURL: NSURL { get }
-  @NSCopying var resourceURL: NSURL? { get }
-  @NSCopying var executableURL: NSURL? { get }
-  func URLForAuxiliaryExecutable(executableName: String) -> NSURL?
-  @NSCopying var privateFrameworksURL: NSURL? { get }
-  @NSCopying var sharedFrameworksURL: NSURL? { get }
-  @NSCopying var sharedSupportURL: NSURL? { get }
-  @NSCopying var builtInPlugInsURL: NSURL? { get }
-  @NSCopying var appStoreReceiptURL: NSURL? { get }
+  @NSCopying var bundleURL: URL { get }
+  @NSCopying var resourceURL: URL? { get }
+  @NSCopying var executableURL: URL? { get }
+  func urlForAuxiliaryExecutable(executableName: String) -> URL?
+  @NSCopying var privateFrameworksURL: URL? { get }
+  @NSCopying var sharedFrameworksURL: URL? { get }
+  @NSCopying var sharedSupportURL: URL? { get }
+  @NSCopying var builtInPlugInsURL: URL? { get }
+  @NSCopying var appStoreReceiptURL: URL? { get }
   var bundlePath: String { get }
   var resourcePath: String? { get }
   var executablePath: String? { get }
@@ -478,13 +478,13 @@ class NSBundle : NSObject {
   var sharedFrameworksPath: String? { get }
   var sharedSupportPath: String? { get }
   var builtInPlugInsPath: String? { get }
-  class func URLForResource(name: String?, withExtension ext: String?, subdirectory subpath: String?, inBundleWithURL bundleURL: NSURL) -> NSURL?
-  class func URLsForResourcesWithExtension(ext: String?, subdirectory subpath: String?, inBundleWithURL bundleURL: NSURL) -> [NSURL]?
-  func URLForResource(name: String?, withExtension ext: String?) -> NSURL?
-  func URLForResource(name: String?, withExtension ext: String?, subdirectory subpath: String?) -> NSURL?
-  func URLForResource(name: String?, withExtension ext: String?, subdirectory subpath: String?, localization localizationName: String?) -> NSURL?
-  func URLsForResourcesWithExtension(ext: String?, subdirectory subpath: String?) -> [NSURL]?
-  func URLsForResourcesWithExtension(ext: String?, subdirectory subpath: String?, localization localizationName: String?) -> [NSURL]?
+  class func urlForResource(name: String?, withExtension ext: String?, subdirectory subpath: String?, inBundleWith bundleURL: URL) -> URL?
+  class func urLsForResourcesWithExtension(ext: String?, subdirectory subpath: String?, inBundleWith bundleURL: URL) -> [URL]?
+  func urlForResource(name: String?, withExtension ext: String?) -> URL?
+  func urlForResource(name: String?, withExtension ext: String?, subdirectory subpath: String?) -> URL?
+  func urlForResource(name: String?, withExtension ext: String?, subdirectory subpath: String?, localization localizationName: String?) -> URL?
+  func urLsForResourcesWithExtension(ext: String?, subdirectory subpath: String?) -> [URL]?
+  func urLsForResourcesWithExtension(ext: String?, subdirectory subpath: String?, localization localizationName: String?) -> [URL]?
   class func pathForResource(name: String?, ofType ext: String?, inDirectory bundlePath: String) -> String?
   class func pathsForResourcesOfType(ext: String?, inDirectory bundlePath: String) -> [String]
   func pathForResource(name: String?, ofType ext: String?) -> String?
@@ -502,38 +502,38 @@ class NSBundle : NSObject {
   var preferredLocalizations: [String] { get }
   var localizations: [String] { get }
   var developmentLocalization: String? { get }
-  class func preferredLocalizationsFromArray(localizationsArray: [String]) -> [String]
-  class func preferredLocalizationsFromArray(localizationsArray: [String], forPreferences preferencesArray: [String]?) -> [String]
-  var executableArchitectures: [NSNumber]? { get }
+  class func preferredLocalizationsFrom(localizationsArray: [String]) -> [String]
+  class func preferredLocalizationsFrom(localizationsArray: [String], forPreferences preferencesArray: [String]?) -> [String]
+  var executableArchitectures: [Number]? { get }
   convenience init()
 }
-var NSBundleExecutableArchitectureI386: Int { get }
-var NSBundleExecutableArchitecturePPC: Int { get }
-var NSBundleExecutableArchitectureX86_64: Int { get }
-var NSBundleExecutableArchitecturePPC64: Int { get }
+var bundleExecutableArchitectureI386: Int { get }
+var bundleExecutableArchitecturePPC: Int { get }
+var bundleExecutableArchitectureX86_64: Int { get }
+var bundleExecutableArchitecturePPC64: Int { get }
 extension NSString {
   func variantFittingPresentationWidth(width: Int) -> String
 }
-let NSBundleDidLoadNotification: String
-let NSLoadedClasses: String
-extension NSBundle {
+let bundleDidLoadNotification: String
+let loadedClasses: String
+extension Bundle {
 }
-struct NSByteCountFormatterUnits : OptionSetType {
+struct ByteCountFormatterUnits : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var UseDefault: NSByteCountFormatterUnits { get }
-  static var UseBytes: NSByteCountFormatterUnits { get }
-  static var UseKB: NSByteCountFormatterUnits { get }
-  static var UseMB: NSByteCountFormatterUnits { get }
-  static var UseGB: NSByteCountFormatterUnits { get }
-  static var UseTB: NSByteCountFormatterUnits { get }
-  static var UsePB: NSByteCountFormatterUnits { get }
-  static var UseEB: NSByteCountFormatterUnits { get }
-  static var UseZB: NSByteCountFormatterUnits { get }
-  static var UseYBOrHigher: NSByteCountFormatterUnits { get }
-  static var UseAll: NSByteCountFormatterUnits { get }
+  static var UseDefault: ByteCountFormatterUnits { get }
+  static var UseBytes: ByteCountFormatterUnits { get }
+  static var UseKB: ByteCountFormatterUnits { get }
+  static var UseMB: ByteCountFormatterUnits { get }
+  static var UseGB: ByteCountFormatterUnits { get }
+  static var UseTB: ByteCountFormatterUnits { get }
+  static var UsePB: ByteCountFormatterUnits { get }
+  static var UseEB: ByteCountFormatterUnits { get }
+  static var UseZB: ByteCountFormatterUnits { get }
+  static var UseYBOrHigher: ByteCountFormatterUnits { get }
+  static var UseAll: ByteCountFormatterUnits { get }
 }
-enum NSByteCountFormatterCountStyle : Int {
+enum ByteCountFormatterCountStyle : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case File
@@ -541,158 +541,158 @@ enum NSByteCountFormatterCountStyle : Int {
   case Decimal
   case Binary
 }
-class NSByteCountFormatter : NSFormatter {
-  class func stringFromByteCount(byteCount: Int64, countStyle: NSByteCountFormatterCountStyle) -> String
+class ByteCountFormatter : Formatter {
+  class func stringFromByteCount(byteCount: Int64, countStyle: ByteCountFormatterCountStyle) -> String
   func stringFromByteCount(byteCount: Int64) -> String
-  var allowedUnits: NSByteCountFormatterUnits
-  var countStyle: NSByteCountFormatterCountStyle
+  var allowedUnits: ByteCountFormatterUnits
+  var countStyle: ByteCountFormatterCountStyle
   var allowsNonnumericFormatting: Bool
   var includesUnit: Bool
   var includesCount: Bool
   var includesActualByteCount: Bool
-  var adaptive: Bool
+  var isAdaptive: Bool
   var zeroPadsFractionDigits: Bool
-  var formattingContext: NSFormattingContext
+  var formattingContext: FormattingContext
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-var NS_UnknownByteOrder: Int { get }
-var NS_LittleEndian: Int { get }
-var NS_BigEndian: Int { get }
-func NSHostByteOrder() -> Int
-func NSSwapShort(inv: UInt16) -> UInt16
-func NSSwapInt(inv: UInt32) -> UInt32
-func NSSwapLong(inv: UInt) -> UInt
-func NSSwapLongLong(inv: UInt64) -> UInt64
-func NSSwapBigShortToHost(x: UInt16) -> UInt16
-func NSSwapBigIntToHost(x: UInt32) -> UInt32
-func NSSwapBigLongToHost(x: UInt) -> UInt
-func NSSwapBigLongLongToHost(x: UInt64) -> UInt64
-func NSSwapHostShortToBig(x: UInt16) -> UInt16
-func NSSwapHostIntToBig(x: UInt32) -> UInt32
-func NSSwapHostLongToBig(x: UInt) -> UInt
-func NSSwapHostLongLongToBig(x: UInt64) -> UInt64
-func NSSwapLittleShortToHost(x: UInt16) -> UInt16
-func NSSwapLittleIntToHost(x: UInt32) -> UInt32
-func NSSwapLittleLongToHost(x: UInt) -> UInt
-func NSSwapLittleLongLongToHost(x: UInt64) -> UInt64
-func NSSwapHostShortToLittle(x: UInt16) -> UInt16
-func NSSwapHostIntToLittle(x: UInt32) -> UInt32
-func NSSwapHostLongToLittle(x: UInt) -> UInt
-func NSSwapHostLongLongToLittle(x: UInt64) -> UInt64
-struct NSSwappedFloat {
+var _UnknownByteOrder: Int { get }
+var _LittleEndian: Int { get }
+var _BigEndian: Int { get }
+func hostByteOrder() -> Int
+func swapShort(inv: UInt16) -> UInt16
+func swapInt(inv: UInt32) -> UInt32
+func swapLong(inv: UInt) -> UInt
+func swapLongLong(inv: UInt64) -> UInt64
+func swapBigShortToHost(x: UInt16) -> UInt16
+func swapBigIntToHost(x: UInt32) -> UInt32
+func swapBigLongToHost(x: UInt) -> UInt
+func swapBigLongLongToHost(x: UInt64) -> UInt64
+func swapHostShortToBig(x: UInt16) -> UInt16
+func swapHostIntToBig(x: UInt32) -> UInt32
+func swapHostLongToBig(x: UInt) -> UInt
+func swapHostLongLongToBig(x: UInt64) -> UInt64
+func swapLittleShortToHost(x: UInt16) -> UInt16
+func swapLittleIntToHost(x: UInt32) -> UInt32
+func swapLittleLongToHost(x: UInt) -> UInt
+func swapLittleLongLongToHost(x: UInt64) -> UInt64
+func swapHostShortToLittle(x: UInt16) -> UInt16
+func swapHostIntToLittle(x: UInt32) -> UInt32
+func swapHostLongToLittle(x: UInt) -> UInt
+func swapHostLongLongToLittle(x: UInt64) -> UInt64
+struct SwappedFloat {
   var v: UInt32
   init()
   init(v: UInt32)
 }
-struct NSSwappedDouble {
+struct SwappedDouble {
   var v: UInt64
   init()
   init(v: UInt64)
 }
-func NSConvertHostFloatToSwapped(x: Float) -> NSSwappedFloat
-func NSConvertSwappedFloatToHost(x: NSSwappedFloat) -> Float
-func NSConvertHostDoubleToSwapped(x: Double) -> NSSwappedDouble
-func NSConvertSwappedDoubleToHost(x: NSSwappedDouble) -> Double
-func NSSwapFloat(x: NSSwappedFloat) -> NSSwappedFloat
-func NSSwapDouble(x: NSSwappedDouble) -> NSSwappedDouble
-func NSSwapBigDoubleToHost(x: NSSwappedDouble) -> Double
-func NSSwapBigFloatToHost(x: NSSwappedFloat) -> Float
-func NSSwapHostDoubleToBig(x: Double) -> NSSwappedDouble
-func NSSwapHostFloatToBig(x: Float) -> NSSwappedFloat
-func NSSwapLittleDoubleToHost(x: NSSwappedDouble) -> Double
-func NSSwapLittleFloatToHost(x: NSSwappedFloat) -> Float
-func NSSwapHostDoubleToLittle(x: Double) -> NSSwappedDouble
-func NSSwapHostFloatToLittle(x: Float) -> NSSwappedFloat
-class NSCache : NSObject {
+func convertHostFloatToSwapped(x: Float) -> SwappedFloat
+func convertSwappedFloatToHost(x: SwappedFloat) -> Float
+func convertHostDoubleToSwapped(x: Double) -> SwappedDouble
+func convertSwappedDoubleToHost(x: SwappedDouble) -> Double
+func swapFloat(x: SwappedFloat) -> SwappedFloat
+func swapDouble(x: SwappedDouble) -> SwappedDouble
+func swapBigDoubleToHost(x: SwappedDouble) -> Double
+func swapBigFloatToHost(x: SwappedFloat) -> Float
+func swapHostDoubleToBig(x: Double) -> SwappedDouble
+func swapHostFloatToBig(x: Float) -> SwappedFloat
+func swapLittleDoubleToHost(x: SwappedDouble) -> Double
+func swapLittleFloatToHost(x: SwappedFloat) -> Float
+func swapHostDoubleToLittle(x: Double) -> SwappedDouble
+func swapHostFloatToLittle(x: Float) -> SwappedFloat
+class Cache : Object {
   var name: String
-  unowned(unsafe) var delegate: @sil_unmanaged NSCacheDelegate?
-  func objectForKey(key: AnyObject) -> AnyObject?
+  unowned(unsafe) var delegate: @sil_unmanaged CacheDelegate?
+  func objectFor(key: AnyObject) -> AnyObject?
   func setObject(obj: AnyObject, forKey key: AnyObject)
   func setObject(obj: AnyObject, forKey key: AnyObject, cost g: Int)
-  func removeObjectForKey(key: AnyObject)
+  func removeObjectFor(key: AnyObject)
   func removeAllObjects()
   var totalCostLimit: Int
   var countLimit: Int
   var evictsObjectsWithDiscardedContent: Bool
   init()
 }
-protocol NSCacheDelegate : NSObjectProtocol {
-  optional func cache(cache: NSCache, willEvictObject obj: AnyObject)
+protocol CacheDelegate : ObjectProtocol {
+  optional func cache(cache: Cache, willEvictObject obj: AnyObject)
 }
-let NSCalendarIdentifierGregorian: String
-let NSCalendarIdentifierBuddhist: String
-let NSCalendarIdentifierChinese: String
-let NSCalendarIdentifierCoptic: String
-let NSCalendarIdentifierEthiopicAmeteMihret: String
-let NSCalendarIdentifierEthiopicAmeteAlem: String
-let NSCalendarIdentifierHebrew: String
-let NSCalendarIdentifierISO8601: String
-let NSCalendarIdentifierIndian: String
-let NSCalendarIdentifierIslamic: String
-let NSCalendarIdentifierIslamicCivil: String
-let NSCalendarIdentifierJapanese: String
-let NSCalendarIdentifierPersian: String
-let NSCalendarIdentifierRepublicOfChina: String
-let NSCalendarIdentifierIslamicTabular: String
-let NSCalendarIdentifierIslamicUmmAlQura: String
-struct NSCalendarUnit : OptionSetType {
+let calendarIdentifierGregorian: String
+let calendarIdentifierBuddhist: String
+let calendarIdentifierChinese: String
+let calendarIdentifierCoptic: String
+let calendarIdentifierEthiopicAmeteMihret: String
+let calendarIdentifierEthiopicAmeteAlem: String
+let calendarIdentifierHebrew: String
+let calendarIdentifierISO8601: String
+let calendarIdentifierIndian: String
+let calendarIdentifierIslamic: String
+let calendarIdentifierIslamicCivil: String
+let calendarIdentifierJapanese: String
+let calendarIdentifierPersian: String
+let calendarIdentifierRepublicOfChina: String
+let calendarIdentifierIslamicTabular: String
+let calendarIdentifierIslamicUmmAlQura: String
+struct CalendarUnit : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var Era: NSCalendarUnit { get }
-  static var Year: NSCalendarUnit { get }
-  static var Month: NSCalendarUnit { get }
-  static var Day: NSCalendarUnit { get }
-  static var Hour: NSCalendarUnit { get }
-  static var Minute: NSCalendarUnit { get }
-  static var Second: NSCalendarUnit { get }
-  static var Weekday: NSCalendarUnit { get }
-  static var WeekdayOrdinal: NSCalendarUnit { get }
-  static var Quarter: NSCalendarUnit { get }
-  static var WeekOfMonth: NSCalendarUnit { get }
-  static var WeekOfYear: NSCalendarUnit { get }
-  static var YearForWeekOfYear: NSCalendarUnit { get }
-  static var Nanosecond: NSCalendarUnit { get }
-  static var Calendar: NSCalendarUnit { get }
-  static var TimeZone: NSCalendarUnit { get }
-  static var NSEraCalendarUnit: NSCalendarUnit { get }
-  static var NSYearCalendarUnit: NSCalendarUnit { get }
-  static var NSMonthCalendarUnit: NSCalendarUnit { get }
-  static var NSDayCalendarUnit: NSCalendarUnit { get }
-  static var NSHourCalendarUnit: NSCalendarUnit { get }
-  static var NSMinuteCalendarUnit: NSCalendarUnit { get }
-  static var NSSecondCalendarUnit: NSCalendarUnit { get }
-  static var NSWeekCalendarUnit: NSCalendarUnit { get }
-  static var NSWeekdayCalendarUnit: NSCalendarUnit { get }
-  static var NSWeekdayOrdinalCalendarUnit: NSCalendarUnit { get }
-  static var NSQuarterCalendarUnit: NSCalendarUnit { get }
-  static var NSWeekOfMonthCalendarUnit: NSCalendarUnit { get }
-  static var NSWeekOfYearCalendarUnit: NSCalendarUnit { get }
-  static var NSYearForWeekOfYearCalendarUnit: NSCalendarUnit { get }
-  static var NSCalendarCalendarUnit: NSCalendarUnit { get }
-  static var NSTimeZoneCalendarUnit: NSCalendarUnit { get }
+  static var Era: CalendarUnit { get }
+  static var Year: CalendarUnit { get }
+  static var Month: CalendarUnit { get }
+  static var Day: CalendarUnit { get }
+  static var Hour: CalendarUnit { get }
+  static var Minute: CalendarUnit { get }
+  static var Second: CalendarUnit { get }
+  static var Weekday: CalendarUnit { get }
+  static var WeekdayOrdinal: CalendarUnit { get }
+  static var Quarter: CalendarUnit { get }
+  static var WeekOfMonth: CalendarUnit { get }
+  static var WeekOfYear: CalendarUnit { get }
+  static var YearForWeekOfYear: CalendarUnit { get }
+  static var Nanosecond: CalendarUnit { get }
+  static var Calendar: CalendarUnit { get }
+  static var TimeZone: CalendarUnit { get }
+  static var eraCalendarUnit: CalendarUnit { get }
+  static var yearCalendarUnit: CalendarUnit { get }
+  static var monthCalendarUnit: CalendarUnit { get }
+  static var dayCalendarUnit: CalendarUnit { get }
+  static var hourCalendarUnit: CalendarUnit { get }
+  static var minuteCalendarUnit: CalendarUnit { get }
+  static var secondCalendarUnit: CalendarUnit { get }
+  static var weekCalendarUnit: CalendarUnit { get }
+  static var weekdayCalendarUnit: CalendarUnit { get }
+  static var weekdayOrdinalCalendarUnit: CalendarUnit { get }
+  static var quarterCalendarUnit: CalendarUnit { get }
+  static var weekOfMonthCalendarUnit: CalendarUnit { get }
+  static var weekOfYearCalendarUnit: CalendarUnit { get }
+  static var yearForWeekOfYearCalendarUnit: CalendarUnit { get }
+  static var calendarCalendarUnit: CalendarUnit { get }
+  static var timeZoneCalendarUnit: CalendarUnit { get }
 }
-struct NSCalendarOptions : OptionSetType {
+struct CalendarOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var WrapComponents: NSCalendarOptions { get }
-  static var MatchStrictly: NSCalendarOptions { get }
-  static var SearchBackwards: NSCalendarOptions { get }
-  static var MatchPreviousTimePreservingSmallerUnits: NSCalendarOptions { get }
-  static var MatchNextTimePreservingSmallerUnits: NSCalendarOptions { get }
-  static var MatchNextTime: NSCalendarOptions { get }
-  static var MatchFirst: NSCalendarOptions { get }
-  static var MatchLast: NSCalendarOptions { get }
+  static var WrapComponents: CalendarOptions { get }
+  static var MatchStrictly: CalendarOptions { get }
+  static var SearchBackwards: CalendarOptions { get }
+  static var MatchPreviousTimePreservingSmallerUnits: CalendarOptions { get }
+  static var MatchNextTimePreservingSmallerUnits: CalendarOptions { get }
+  static var MatchNextTime: CalendarOptions { get }
+  static var MatchFirst: CalendarOptions { get }
+  static var MatchLast: CalendarOptions { get }
 }
-var NSWrapCalendarComponents: Int { get }
-class NSCalendar : NSObject, NSCopying, NSSecureCoding {
-  class func currentCalendar() -> NSCalendar
-  class func autoupdatingCurrentCalendar() -> NSCalendar
+var wrapCalendarComponents: Int { get }
+class Calendar : Object, Copying, SecureCoding {
+  class func current() -> Calendar
+  class func autoupdatingCurrent() -> Calendar
    init?(identifier calendarIdentifierConstant: String)
   init?(calendarIdentifier ident: String)
   var calendarIdentifier: String { get }
-  @NSCopying var locale: NSLocale?
-  @NSCopying var timeZone: NSTimeZone
+  @NSCopying var locale: Locale?
+  @NSCopying var timeZone: TimeZone
   var firstWeekday: Int
   var minimumDaysInFirstWeek: Int
   var eraSymbols: [String] { get }
@@ -713,54 +713,54 @@ class NSCalendar : NSObject, NSCopying, NSSecureCoding {
   var shortQuarterSymbols: [String] { get }
   var standaloneQuarterSymbols: [String] { get }
   var shortStandaloneQuarterSymbols: [String] { get }
-  var AMSymbol: String { get }
-  var PMSymbol: String { get }
-  func minimumRangeOfUnit(unit: NSCalendarUnit) -> NSRange
-  func maximumRangeOfUnit(unit: NSCalendarUnit) -> NSRange
-  func rangeOfUnit(smaller: NSCalendarUnit, inUnit larger: NSCalendarUnit, forDate date: NSDate) -> NSRange
-  func ordinalityOfUnit(smaller: NSCalendarUnit, inUnit larger: NSCalendarUnit, forDate date: NSDate) -> Int
-  func rangeOfUnit(unit: NSCalendarUnit, startDate datep: AutoreleasingUnsafeMutablePointer<NSDate?>, interval tip: UnsafeMutablePointer<NSTimeInterval>, forDate date: NSDate) -> Bool
-  func dateFromComponents(comps: NSDateComponents) -> NSDate?
-  func components(unitFlags: NSCalendarUnit, fromDate date: NSDate) -> NSDateComponents
-  func dateByAddingComponents(comps: NSDateComponents, toDate date: NSDate, options opts: NSCalendarOptions) -> NSDate?
-  func components(unitFlags: NSCalendarUnit, fromDate startingDate: NSDate, toDate resultDate: NSDate, options opts: NSCalendarOptions) -> NSDateComponents
-  func getEra(eraValuePointer: UnsafeMutablePointer<Int>, year yearValuePointer: UnsafeMutablePointer<Int>, month monthValuePointer: UnsafeMutablePointer<Int>, day dayValuePointer: UnsafeMutablePointer<Int>, fromDate date: NSDate)
-  func getEra(eraValuePointer: UnsafeMutablePointer<Int>, yearForWeekOfYear yearValuePointer: UnsafeMutablePointer<Int>, weekOfYear weekValuePointer: UnsafeMutablePointer<Int>, weekday weekdayValuePointer: UnsafeMutablePointer<Int>, fromDate date: NSDate)
-  func getHour(hourValuePointer: UnsafeMutablePointer<Int>, minute minuteValuePointer: UnsafeMutablePointer<Int>, second secondValuePointer: UnsafeMutablePointer<Int>, nanosecond nanosecondValuePointer: UnsafeMutablePointer<Int>, fromDate date: NSDate)
-  func component(unit: NSCalendarUnit, fromDate date: NSDate) -> Int
-  func dateWithEra(eraValue: Int, year yearValue: Int, month monthValue: Int, day dayValue: Int, hour hourValue: Int, minute minuteValue: Int, second secondValue: Int, nanosecond nanosecondValue: Int) -> NSDate?
-  func dateWithEra(eraValue: Int, yearForWeekOfYear yearValue: Int, weekOfYear weekValue: Int, weekday weekdayValue: Int, hour hourValue: Int, minute minuteValue: Int, second secondValue: Int, nanosecond nanosecondValue: Int) -> NSDate?
-  func startOfDayForDate(date: NSDate) -> NSDate
-  func componentsInTimeZone(timezone: NSTimeZone, fromDate date: NSDate) -> NSDateComponents
-  func compareDate(date1: NSDate, toDate date2: NSDate, toUnitGranularity unit: NSCalendarUnit) -> NSComparisonResult
-  func isDate(date1: NSDate, equalToDate date2: NSDate, toUnitGranularity unit: NSCalendarUnit) -> Bool
-  func isDate(date1: NSDate, inSameDayAsDate date2: NSDate) -> Bool
-  func isDateInToday(date: NSDate) -> Bool
-  func isDateInYesterday(date: NSDate) -> Bool
-  func isDateInTomorrow(date: NSDate) -> Bool
-  func isDateInWeekend(date: NSDate) -> Bool
-  func rangeOfWeekendStartDate(datep: AutoreleasingUnsafeMutablePointer<NSDate?>, interval tip: UnsafeMutablePointer<NSTimeInterval>, containingDate date: NSDate) -> Bool
-  func nextWeekendStartDate(datep: AutoreleasingUnsafeMutablePointer<NSDate?>, interval tip: UnsafeMutablePointer<NSTimeInterval>, options: NSCalendarOptions, afterDate date: NSDate) -> Bool
-  func components(unitFlags: NSCalendarUnit, fromDateComponents startingDateComp: NSDateComponents, toDateComponents resultDateComp: NSDateComponents, options: NSCalendarOptions) -> NSDateComponents
-  func dateByAddingUnit(unit: NSCalendarUnit, value: Int, toDate date: NSDate, options: NSCalendarOptions) -> NSDate?
-  func enumerateDatesStartingAfterDate(start: NSDate, matchingComponents comps: NSDateComponents, options opts: NSCalendarOptions, usingBlock block: (NSDate?, Bool, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func nextDateAfterDate(date: NSDate, matchingComponents comps: NSDateComponents, options: NSCalendarOptions) -> NSDate?
-  func nextDateAfterDate(date: NSDate, matchingUnit unit: NSCalendarUnit, value: Int, options: NSCalendarOptions) -> NSDate?
-  func nextDateAfterDate(date: NSDate, matchingHour hourValue: Int, minute minuteValue: Int, second secondValue: Int, options: NSCalendarOptions) -> NSDate?
-  func dateBySettingUnit(unit: NSCalendarUnit, value v: Int, ofDate date: NSDate, options opts: NSCalendarOptions) -> NSDate?
-  func dateBySettingHour(h: Int, minute m: Int, second s: Int, ofDate date: NSDate, options opts: NSCalendarOptions) -> NSDate?
-  func date(date: NSDate, matchesComponents components: NSDateComponents) -> Bool
-  func copyWithZone(zone: NSZone) -> AnyObject
+  var amSymbol: String { get }
+  var pmSymbol: String { get }
+  func minimumRangeOf(unit: CalendarUnit) -> NSRange
+  func maximumRangeOf(unit: CalendarUnit) -> NSRange
+  func rangeOf(smaller: CalendarUnit, in larger: CalendarUnit, forDate date: Date) -> NSRange
+  func ordinalityOf(smaller: CalendarUnit, in larger: CalendarUnit, forDate date: Date) -> Int
+  func rangeOf(unit: CalendarUnit, start datep: AutoreleasingUnsafeMutablePointer<Date?>, interval tip: UnsafeMutablePointer<TimeInterval>, forDate date: Date) -> Bool
+  func dateFrom(comps: DateComponents) -> Date?
+  func components(unitFlags: CalendarUnit, from date: Date) -> DateComponents
+  func dateByAdding(comps: DateComponents, to date: Date, options opts: CalendarOptions = []) -> Date?
+  func components(unitFlags: CalendarUnit, from startingDate: Date, to resultDate: Date, options opts: CalendarOptions = []) -> DateComponents
+  func getEra(eraValuePointer: UnsafeMutablePointer<Int>, year yearValuePointer: UnsafeMutablePointer<Int>, month monthValuePointer: UnsafeMutablePointer<Int>, day dayValuePointer: UnsafeMutablePointer<Int>, from date: Date)
+  func getEra(eraValuePointer: UnsafeMutablePointer<Int>, yearForWeekOfYear yearValuePointer: UnsafeMutablePointer<Int>, weekOfYear weekValuePointer: UnsafeMutablePointer<Int>, weekday weekdayValuePointer: UnsafeMutablePointer<Int>, from date: Date)
+  func getHour(hourValuePointer: UnsafeMutablePointer<Int>, minute minuteValuePointer: UnsafeMutablePointer<Int>, second secondValuePointer: UnsafeMutablePointer<Int>, nanosecond nanosecondValuePointer: UnsafeMutablePointer<Int>, from date: Date)
+  func component(unit: CalendarUnit, from date: Date) -> Int
+  func dateWithEra(eraValue: Int, year yearValue: Int, month monthValue: Int, day dayValue: Int, hour hourValue: Int, minute minuteValue: Int, second secondValue: Int, nanosecond nanosecondValue: Int) -> Date?
+  func dateWithEra(eraValue: Int, yearForWeekOfYear yearValue: Int, weekOfYear weekValue: Int, weekday weekdayValue: Int, hour hourValue: Int, minute minuteValue: Int, second secondValue: Int, nanosecond nanosecondValue: Int) -> Date?
+  func startOfDayFor(date: Date) -> Date
+  func componentsIn(timezone: TimeZone, from date: Date) -> DateComponents
+  func compare(date1: Date, to date2: Date, toUnitGranularity unit: CalendarUnit) -> ComparisonResult
+  func isDate(date1: Date, equalTo date2: Date, toUnitGranularity unit: CalendarUnit) -> Bool
+  func isDate(date1: Date, inSameDayAs date2: Date) -> Bool
+  func isDateInToday(date: Date) -> Bool
+  func isDateInYesterday(date: Date) -> Bool
+  func isDateInTomorrow(date: Date) -> Bool
+  func isDateInWeekend(date: Date) -> Bool
+  func rangeOfWeekendStart(datep: AutoreleasingUnsafeMutablePointer<Date?>, interval tip: UnsafeMutablePointer<TimeInterval>, containing date: Date) -> Bool
+  func nextWeekendStart(datep: AutoreleasingUnsafeMutablePointer<Date?>, interval tip: UnsafeMutablePointer<TimeInterval>, options: CalendarOptions = [], after date: Date) -> Bool
+  func components(unitFlags: CalendarUnit, from startingDateComp: DateComponents, to resultDateComp: DateComponents, options: CalendarOptions = []) -> DateComponents
+  func dateByAdding(unit: CalendarUnit, value: Int, to date: Date, options: CalendarOptions = []) -> Date?
+  func enumerateDatesStartingAfter(start: Date, matching comps: DateComponents, options opts: CalendarOptions = [], usingBlock block: (Date?, Bool, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func nextDateAfter(date: Date, matching comps: DateComponents, options: CalendarOptions = []) -> Date?
+  func nextDateAfter(date: Date, matching unit: CalendarUnit, value: Int, options: CalendarOptions = []) -> Date?
+  func nextDateAfter(date: Date, matchingHour hourValue: Int, minute minuteValue: Int, second secondValue: Int, options: CalendarOptions = []) -> Date?
+  func dateBySettingUnit(unit: CalendarUnit, value v: Int, of date: Date, options opts: CalendarOptions = []) -> Date?
+  func dateBySettingHour(h: Int, minute m: Int, second s: Int, of date: Date, options opts: CalendarOptions = []) -> Date?
+  func date(date: Date, matchesComponents components: DateComponents) -> Bool
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-let NSCalendarDayChangedNotification: String
-var NSDateComponentUndefined: Int { get }
-var NSUndefinedDateComponent: Int { get }
-class NSDateComponents : NSObject, NSCopying, NSSecureCoding {
-  @NSCopying var calendar: NSCalendar?
-  @NSCopying var timeZone: NSTimeZone?
+let calendarDayChangedNotification: String
+var dateComponentUndefined: Int { get }
+var undefinedDateComponent: Int { get }
+class DateComponents : Object, Copying, SecureCoding {
+  @NSCopying var calendar: Calendar?
+  @NSCopying var timeZone: TimeZone?
   var era: Int
   var year: Int
   var month: Int
@@ -775,91 +775,91 @@ class NSDateComponents : NSObject, NSCopying, NSSecureCoding {
   var weekOfMonth: Int
   var weekOfYear: Int
   var yearForWeekOfYear: Int
-  var leapMonth: Bool
-  @NSCopying var date: NSDate? { get }
-  func setValue(value: Int, forComponent unit: NSCalendarUnit)
-  func valueForComponent(unit: NSCalendarUnit) -> Int
-  var validDate: Bool { get }
-  func isValidDateInCalendar(calendar: NSCalendar) -> Bool
+  var isLeapMonth: Bool
+  @NSCopying var date: Date? { get }
+  func setValue(value: Int, forComponent unit: CalendarUnit)
+  func valueForComponent(unit: CalendarUnit) -> Int
+  var isValidDate: Bool { get }
+  func isValidDateIn(calendar: Calendar) -> Bool
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-extension NSDate {
+extension Date {
   class func dateWithNaturalLanguageString(string: String, locale: AnyObject?) -> AnyObject?
   class func dateWithNaturalLanguageString(string: String) -> AnyObject?
-  class func dateWithString(aString: String) -> AnyObject
-  func dateWithCalendarFormat(format: String?, timeZone aTimeZone: NSTimeZone?) -> NSCalendarDate
-  func descriptionWithCalendarFormat(format: String?, timeZone aTimeZone: NSTimeZone?, locale: AnyObject?) -> String?
+  class func dateWith(aString: String) -> AnyObject
+  func dateWithCalendarFormat(format: String?, timeZone aTimeZone: TimeZone?) -> CalendarDate
+  func descriptionWithCalendarFormat(format: String?, timeZone aTimeZone: TimeZone?, locale: AnyObject?) -> String?
   convenience init?(string description: String)
 }
-var NSOpenStepUnicodeReservedBase: Int { get }
-class NSCharacterSet : NSObject, NSCopying, NSMutableCopying, NSCoding {
-  class func controlCharacterSet() -> NSCharacterSet
-  class func whitespaceCharacterSet() -> NSCharacterSet
-  class func whitespaceAndNewlineCharacterSet() -> NSCharacterSet
-  class func decimalDigitCharacterSet() -> NSCharacterSet
-  class func letterCharacterSet() -> NSCharacterSet
-  class func lowercaseLetterCharacterSet() -> NSCharacterSet
-  class func uppercaseLetterCharacterSet() -> NSCharacterSet
-  class func nonBaseCharacterSet() -> NSCharacterSet
-  class func alphanumericCharacterSet() -> NSCharacterSet
-  class func decomposableCharacterSet() -> NSCharacterSet
-  class func illegalCharacterSet() -> NSCharacterSet
-  class func punctuationCharacterSet() -> NSCharacterSet
-  class func capitalizedLetterCharacterSet() -> NSCharacterSet
-  class func symbolCharacterSet() -> NSCharacterSet
-  class func newlineCharacterSet() -> NSCharacterSet
+var openStepUnicodeReservedBase: Int { get }
+class CharacterSet : Object, Copying, MutableCopying, Coding {
+  class func control() -> CharacterSet
+  class func whitespace() -> CharacterSet
+  class func whitespaceAndNewline() -> CharacterSet
+  class func decimalDigit() -> CharacterSet
+  class func letter() -> CharacterSet
+  class func lowercaseLetter() -> CharacterSet
+  class func uppercaseLetter() -> CharacterSet
+  class func nonBase() -> CharacterSet
+  class func alphanumeric() -> CharacterSet
+  class func decomposable() -> CharacterSet
+  class func illegal() -> CharacterSet
+  class func punctuation() -> CharacterSet
+  class func capitalizedLetter() -> CharacterSet
+  class func symbol() -> CharacterSet
+  class func newline() -> CharacterSet
    init(range aRange: NSRange)
-   init(charactersInString aString: String)
-   init(bitmapRepresentation data: NSData)
+   init(charactersIn aString: String)
+   init(bitmapRepresentation data: Data)
    init?(contentsOfFile fName: String)
-  init(coder aDecoder: NSCoder)
+  init(coder aDecoder: Coder)
   func characterIsMember(aCharacter: unichar) -> Bool
-  @NSCopying var bitmapRepresentation: NSData { get }
-  @NSCopying var invertedSet: NSCharacterSet { get }
+  @NSCopying var bitmapRepresentation: Data { get }
+  @NSCopying var inverted: CharacterSet { get }
   func longCharacterIsMember(theLongChar: UTF32Char) -> Bool
-  func isSupersetOfSet(theOtherSet: NSCharacterSet) -> Bool
+  func isSupersetOf(theOtherSet: CharacterSet) -> Bool
   func hasMemberInPlane(thePlane: UInt8) -> Bool
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
 }
-class NSMutableCharacterSet : NSCharacterSet, NSCopying, NSMutableCopying {
-  func addCharactersInRange(aRange: NSRange)
-  func removeCharactersInRange(aRange: NSRange)
-  func addCharactersInString(aString: String)
-  func removeCharactersInString(aString: String)
-  func formUnionWithCharacterSet(otherSet: NSCharacterSet)
-  func formIntersectionWithCharacterSet(otherSet: NSCharacterSet)
+class MutableCharacterSet : CharacterSet, Copying, MutableCopying {
+  func addCharactersIn(aRange: NSRange)
+  func removeCharactersIn(aRange: NSRange)
+  func addCharactersIn(aString: String)
+  func removeCharactersIn(aString: String)
+  func formUnionWith(otherSet: CharacterSet)
+  func formIntersectionWith(otherSet: CharacterSet)
   func invert()
-  class func controlCharacterSet() -> NSMutableCharacterSet
-  class func whitespaceCharacterSet() -> NSMutableCharacterSet
-  class func whitespaceAndNewlineCharacterSet() -> NSMutableCharacterSet
-  class func decimalDigitCharacterSet() -> NSMutableCharacterSet
-  class func letterCharacterSet() -> NSMutableCharacterSet
-  class func lowercaseLetterCharacterSet() -> NSMutableCharacterSet
-  class func uppercaseLetterCharacterSet() -> NSMutableCharacterSet
-  class func nonBaseCharacterSet() -> NSMutableCharacterSet
-  class func alphanumericCharacterSet() -> NSMutableCharacterSet
-  class func decomposableCharacterSet() -> NSMutableCharacterSet
-  class func illegalCharacterSet() -> NSMutableCharacterSet
-  class func punctuationCharacterSet() -> NSMutableCharacterSet
-  class func capitalizedLetterCharacterSet() -> NSMutableCharacterSet
-  class func symbolCharacterSet() -> NSMutableCharacterSet
-  class func newlineCharacterSet() -> NSMutableCharacterSet
+  class func control() -> MutableCharacterSet
+  class func whitespace() -> MutableCharacterSet
+  class func whitespaceAndNewline() -> MutableCharacterSet
+  class func decimalDigit() -> MutableCharacterSet
+  class func letter() -> MutableCharacterSet
+  class func lowercaseLetter() -> MutableCharacterSet
+  class func uppercaseLetter() -> MutableCharacterSet
+  class func nonBase() -> MutableCharacterSet
+  class func alphanumeric() -> MutableCharacterSet
+  class func decomposable() -> MutableCharacterSet
+  class func illegal() -> MutableCharacterSet
+  class func punctuation() -> MutableCharacterSet
+  class func capitalizedLetter() -> MutableCharacterSet
+  class func symbol() -> MutableCharacterSet
+  class func newline() -> MutableCharacterSet
    init(range aRange: NSRange)
-   init(charactersInString aString: String)
-   init(bitmapRepresentation data: NSData)
+   init(charactersIn aString: String)
+   init(bitmapRepresentation data: Data)
    init?(contentsOfFile fName: String)
-  init(coder aDecoder: NSCoder)
+  init(coder aDecoder: Coder)
   convenience init()
 }
-class NSClassDescription : NSObject {
-  class func registerClassDescription(description: NSClassDescription, forClass aClass: AnyClass)
+class ClassDescription : Object {
+  class func register(description: ClassDescription, forClass aClass: AnyClass)
   class func invalidateClassDescriptionCache()
    init?(forClass aClass: AnyClass)
   var attributeKeys: [String] { get }
@@ -868,30 +868,30 @@ class NSClassDescription : NSObject {
   func inverseForRelationshipKey(relationshipKey: String) -> String?
   init()
 }
-extension NSObject {
-  @NSCopying var classDescription: NSClassDescription { get }
+extension Object {
+  @NSCopying var classDescription: ClassDescription { get }
   var attributeKeys: [String] { get }
   var toOneRelationshipKeys: [String] { get }
   var toManyRelationshipKeys: [String] { get }
   class func inverseForRelationshipKey(relationshipKey: String) -> String?
   func inverseForRelationshipKey(relationshipKey: String) -> String?
-  class func classDescription() -> NSClassDescription
+  class func classDescription() -> ClassDescription
   class func attributeKeys() -> [String]
   class func toOneRelationshipKeys() -> [String]
   class func toManyRelationshipKeys() -> [String]
 }
-let NSClassDescriptionNeededForClassNotification: String
-class NSCoder : NSObject {
+let classDescriptionNeededForClassNotification: String
+class Coder : Object {
   func encodeValueOfObjCType(type: UnsafePointer<Int8>, at addr: UnsafePointer<Void>)
-  func encodeDataObject(data: NSData)
+  func encodeDataObject(data: Data)
   func decodeValueOfObjCType(type: UnsafePointer<Int8>, at data: UnsafeMutablePointer<Void>)
-  func decodeDataObject() -> NSData?
+  func decodeDataObject() -> Data?
   func versionForClassName(className: String) -> Int
   init()
 }
-extension NSCoder {
+extension Coder {
   @warn_unused_result
-  func decodeObjectOfClass<DecodedObjectType : NSCoding where DecodedObjectType : NSObject>(cls: DecodedObjectType.Type, forKey key: String) -> DecodedObjectType?
+  func decodeObjectOfClass<DecodedObjectType : Coding where DecodedObjectType : NSObject>(cls: DecodedObjectType.Type, forKey key: String) -> DecodedObjectType?
   @warn_unused_result
   @nonobjc func decodeObjectOfClasses(classes: NSSet?, forKey key: String) -> AnyObject?
   @warn_unused_result
@@ -899,12 +899,12 @@ extension NSCoder {
   @warn_unused_result
   func decodeTopLevelObjectForKey(key: String) throws -> AnyObject?
   @warn_unused_result
-  func decodeTopLevelObjectOfClass<DecodedObjectType : NSCoding where DecodedObjectType : NSObject>(cls: DecodedObjectType.Type, forKey key: String) throws -> DecodedObjectType?
+  func decodeTopLevelObjectOfClass<DecodedObjectType : Coding where DecodedObjectType : NSObject>(cls: DecodedObjectType.Type, forKey key: String) throws -> DecodedObjectType?
   @warn_unused_result
   func decodeTopLevelObjectOfClasses(classes: NSSet?, forKey key: String) throws -> AnyObject?
 }
-extension NSCoder {
-  func encodeObject(object: AnyObject?)
+extension Coder {
+  func encode(object: AnyObject?)
   func encodeRootObject(rootObject: AnyObject)
   func encodeBycopyObject(anObject: AnyObject?)
   func encodeByrefObject(anObject: AnyObject?)
@@ -918,14 +918,14 @@ extension NSCoder {
   func decodePropertyList() -> AnyObject?
   var systemVersion: UInt32 { get }
   var allowsKeyedCoding: Bool { get }
-  func encodeObject(objv: AnyObject?, forKey key: String)
+  func encode(objv: AnyObject?, forKey key: String)
   func encodeConditionalObject(objv: AnyObject?, forKey key: String)
-  func encodeBool(boolv: Bool, forKey key: String)
-  func encodeInt(intv: Int32, forKey key: String)
-  func encodeInt32(intv: Int32, forKey key: String)
-  func encodeInt64(intv: Int64, forKey key: String)
-  func encodeFloat(realv: Float, forKey key: String)
-  func encodeDouble(realv: Double, forKey key: String)
+  func encode(boolv: Bool, forKey key: String)
+  func encode(intv: Int32, forKey key: String)
+  func encode(intv: Int32, forKey key: String)
+  func encode(intv: Int64, forKey key: String)
+  func encode(realv: Float, forKey key: String)
+  func encode(realv: Double, forKey key: String)
   func encodeBytes(bytesp: UnsafePointer<UInt8>, length lenv: Int, forKey key: String)
   func containsValueForKey(key: String) -> Bool
   func decodeObjectForKey(key: String) -> AnyObject?
@@ -936,31 +936,31 @@ extension NSCoder {
   func decodeFloatForKey(key: String) -> Float
   func decodeDoubleForKey(key: String) -> Double
   func decodeBytesForKey(key: String, returnedLength lengthp: UnsafeMutablePointer<Int>) -> UnsafePointer<UInt8>
-  func encodeInteger(intv: Int, forKey key: String)
+  func encode(intv: Int, forKey key: String)
   func decodeIntegerForKey(key: String) -> Int
   var requiresSecureCoding: Bool { get }
-  func __decodeObjectOfClasses(classes: Set<NSObject>?, forKey key: String) -> AnyObject?
+  func __decodeObjectOfClasses(classes: Set<Object>?, forKey key: String) -> AnyObject?
   func decodePropertyListForKey(key: String) -> AnyObject?
-  var allowedClasses: Set<NSObject>? { get }
-  func failWithError(error: NSError)
+  var allowedClasses: Set<Object>? { get }
+  func failWithError(error: Error)
 }
-extension NSCoder {
+extension Coder {
 }
-struct NSComparisonPredicateOptions : OptionSetType {
+struct ComparisonPredicateOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var CaseInsensitivePredicateOption: NSComparisonPredicateOptions { get }
-  static var DiacriticInsensitivePredicateOption: NSComparisonPredicateOptions { get }
-  static var NormalizedPredicateOption: NSComparisonPredicateOptions { get }
+  static var CaseInsensitivePredicateOption: ComparisonPredicateOptions { get }
+  static var DiacriticInsensitivePredicateOption: ComparisonPredicateOptions { get }
+  static var NormalizedPredicateOption: ComparisonPredicateOptions { get }
 }
-enum NSComparisonPredicateModifier : UInt {
+enum ComparisonPredicateModifier : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case DirectPredicateModifier
   case AllPredicateModifier
   case AnyPredicateModifier
 }
-enum NSPredicateOperatorType : UInt {
+enum PredicateOperatorType : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case LessThanPredicateOperatorType
@@ -978,161 +978,161 @@ enum NSPredicateOperatorType : UInt {
   case ContainsPredicateOperatorType
   case BetweenPredicateOperatorType
 }
-class NSComparisonPredicate : NSPredicate {
-  init(leftExpression lhs: NSExpression, rightExpression rhs: NSExpression, modifier: NSComparisonPredicateModifier, type: NSPredicateOperatorType, options: NSComparisonPredicateOptions)
-  init(leftExpression lhs: NSExpression, rightExpression rhs: NSExpression, customSelector selector: Selector)
-  init?(coder: NSCoder)
-  var predicateOperatorType: NSPredicateOperatorType { get }
-  var comparisonPredicateModifier: NSComparisonPredicateModifier { get }
-  var leftExpression: NSExpression { get }
-  var rightExpression: NSExpression { get }
+class ComparisonPredicate : Predicate {
+  init(leftExpression lhs: Expression, rightExpression rhs: Expression, modifier: ComparisonPredicateModifier, type: PredicateOperatorType, options: ComparisonPredicateOptions = [])
+  init(leftExpression lhs: Expression, rightExpression rhs: Expression, customSelector selector: Selector)
+  init?(coder: Coder)
+  var predicateOperatorType: PredicateOperatorType { get }
+  var comparisonPredicateModifier: ComparisonPredicateModifier { get }
+  var leftExpression: Expression { get }
+  var rightExpression: Expression { get }
   var customSelector: Selector { get }
-  var options: NSComparisonPredicateOptions { get }
+  var options: ComparisonPredicateOptions { get }
   convenience init()
 }
-enum NSCompoundPredicateType : UInt {
+enum CompoundPredicateType : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case NotPredicateType
   case AndPredicateType
   case OrPredicateType
 }
-class NSCompoundPredicate : NSPredicate {
-  init(type: NSCompoundPredicateType, subpredicates: [NSPredicate])
-  init?(coder: NSCoder)
-  var compoundPredicateType: NSCompoundPredicateType { get }
+class CompoundPredicate : Predicate {
+  init(type: CompoundPredicateType, subpredicates: [Predicate])
+  init?(coder: Coder)
+  var compoundPredicateType: CompoundPredicateType { get }
   var subpredicates: [AnyObject] { get }
-   init(andPredicateWithSubpredicates subpredicates: [NSPredicate])
-   init(orPredicateWithSubpredicates subpredicates: [NSPredicate])
-   init(notPredicateWithSubpredicate predicate: NSPredicate)
+   init(andPredicateWithSubpredicates subpredicates: [Predicate])
+   init(orPredicateWithSubpredicates subpredicates: [Predicate])
+   init(notPredicateWithSubpredicate predicate: Predicate)
   convenience init()
 }
-struct NSDataReadingOptions : OptionSetType {
+struct DataReadingOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var DataReadingMappedIfSafe: NSDataReadingOptions { get }
-  static var DataReadingUncached: NSDataReadingOptions { get }
-  static var DataReadingMappedAlways: NSDataReadingOptions { get }
-  static var DataReadingMapped: NSDataReadingOptions { get }
-  static var MappedRead: NSDataReadingOptions { get }
-  static var UncachedRead: NSDataReadingOptions { get }
+  static var DataReadingMappedIfSafe: DataReadingOptions { get }
+  static var DataReadingUncached: DataReadingOptions { get }
+  static var DataReadingMappedAlways: DataReadingOptions { get }
+  static var DataReadingMapped: DataReadingOptions { get }
+  static var MappedRead: DataReadingOptions { get }
+  static var UncachedRead: DataReadingOptions { get }
 }
-struct NSDataWritingOptions : OptionSetType {
+struct DataWritingOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var DataWritingAtomic: NSDataWritingOptions { get }
-  static var DataWritingWithoutOverwriting: NSDataWritingOptions { get }
-  static var AtomicWrite: NSDataWritingOptions { get }
+  static var DataWritingAtomic: DataWritingOptions { get }
+  static var DataWritingWithoutOverwriting: DataWritingOptions { get }
+  static var AtomicWrite: DataWritingOptions { get }
 }
-struct NSDataSearchOptions : OptionSetType {
+struct DataSearchOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var Backwards: NSDataSearchOptions { get }
-  static var Anchored: NSDataSearchOptions { get }
+  static var Backwards: DataSearchOptions { get }
+  static var Anchored: DataSearchOptions { get }
 }
-struct NSDataBase64EncodingOptions : OptionSetType {
+struct DataBase64EncodingOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var Encoding64CharacterLineLength: NSDataBase64EncodingOptions { get }
-  static var Encoding76CharacterLineLength: NSDataBase64EncodingOptions { get }
-  static var EncodingEndLineWithCarriageReturn: NSDataBase64EncodingOptions { get }
-  static var EncodingEndLineWithLineFeed: NSDataBase64EncodingOptions { get }
+  static var Encoding64CharacterLineLength: DataBase64EncodingOptions { get }
+  static var Encoding76CharacterLineLength: DataBase64EncodingOptions { get }
+  static var EncodingEndLineWithCarriageReturn: DataBase64EncodingOptions { get }
+  static var EncodingEndLineWithLineFeed: DataBase64EncodingOptions { get }
 }
-struct NSDataBase64DecodingOptions : OptionSetType {
+struct DataBase64DecodingOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var IgnoreUnknownCharacters: NSDataBase64DecodingOptions { get }
+  static var IgnoreUnknownCharacters: DataBase64DecodingOptions { get }
 }
-class NSData : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
+class Data : Object, Copying, MutableCopying, SecureCoding {
   var length: Int { get }
   var bytes: UnsafePointer<Void> { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-extension NSData {
+extension Data {
   var description: String { get }
   func getBytes(buffer: UnsafeMutablePointer<Void>, length: Int)
   func getBytes(buffer: UnsafeMutablePointer<Void>, range: NSRange)
-  func isEqualToData(other: NSData) -> Bool
-  func subdataWithRange(range: NSRange) -> NSData
+  func isEqualTo(other: Data) -> Bool
+  func subdataWith(range: NSRange) -> Data
   func writeToFile(path: String, atomically useAuxiliaryFile: Bool) -> Bool
-  func writeToURL(url: NSURL, atomically: Bool) -> Bool
-  func writeToFile(path: String, options writeOptionsMask: NSDataWritingOptions) throws
-  func writeToURL(url: NSURL, options writeOptionsMask: NSDataWritingOptions) throws
-  func rangeOfData(dataToFind: NSData, options mask: NSDataSearchOptions, range searchRange: NSRange) -> NSRange
-  func enumerateByteRangesUsingBlock(block: (UnsafePointer<Void>, NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func writeTo(url: URL, atomically: Bool) -> Bool
+  func writeToFile(path: String, options writeOptionsMask: DataWritingOptions = []) throws
+  func writeTo(url: URL, options writeOptionsMask: DataWritingOptions = []) throws
+  func rangeOf(dataToFind: Data, options mask: DataSearchOptions = [], range searchRange: NSRange) -> NSRange
+  func enumerateByteRangesUsing(block: (UnsafePointer<Void>, NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
 }
-extension NSData {
+extension Data {
   init(bytes: UnsafePointer<Void>, length: Int)
   init(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length: Int)
   init(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length: Int, freeWhenDone b: Bool)
-  init(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length: Int, deallocator: ((UnsafeMutablePointer<Void>, Int) -> Void)?)
-  init(contentsOfFile path: String, options readOptionsMask: NSDataReadingOptions) throws
-  init(contentsOfURL url: NSURL, options readOptionsMask: NSDataReadingOptions) throws
+  init(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length: Int, deallocator: ((UnsafeMutablePointer<Void>, Int) -> Void)? = nil)
+  init(contentsOfFile path: String, options readOptionsMask: DataReadingOptions = []) throws
+  init(contentsOf url: URL, options readOptionsMask: DataReadingOptions = []) throws
   init?(contentsOfFile path: String)
-  init?(contentsOfURL url: NSURL)
-  init(data: NSData)
+  init?(contentsOf url: URL)
+  init(data: Data)
 }
-extension NSData {
-  init?(base64EncodedString base64String: String, options: NSDataBase64DecodingOptions)
-  func base64EncodedStringWithOptions(options: NSDataBase64EncodingOptions) -> String
-  init?(base64EncodedData base64Data: NSData, options: NSDataBase64DecodingOptions)
-  func base64EncodedDataWithOptions(options: NSDataBase64EncodingOptions) -> NSData
+extension Data {
+  init?(base64EncodedString base64String: String, options: DataBase64DecodingOptions = [])
+  func base64EncodedString(options options: DataBase64EncodingOptions = []) -> String
+  init?(base64EncodedData base64Data: Data, options: DataBase64DecodingOptions = [])
+  func base64EncodedData(options options: DataBase64EncodingOptions = []) -> Data
 }
-extension NSData {
+extension Data {
   func getBytes(buffer: UnsafeMutablePointer<Void>)
   class func dataWithContentsOfMappedFile(path: String) -> AnyObject?
   init?(contentsOfMappedFile path: String)
 }
-class NSMutableData : NSData {
+class MutableData : Data {
   var mutableBytes: UnsafeMutablePointer<Void> { get }
   var length: Int
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   init(bytes: UnsafePointer<Void>, length: Int)
   init(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length: Int)
   init(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length: Int, freeWhenDone b: Bool)
-  init(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length: Int, deallocator: ((UnsafeMutablePointer<Void>, Int) -> Void)?)
-  init(contentsOfFile path: String, options readOptionsMask: NSDataReadingOptions) throws
-  init(contentsOfURL url: NSURL, options readOptionsMask: NSDataReadingOptions) throws
+  init(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length: Int, deallocator: ((UnsafeMutablePointer<Void>, Int) -> Void)? = nil)
+  init(contentsOfFile path: String, options readOptionsMask: DataReadingOptions = []) throws
+  init(contentsOf url: URL, options readOptionsMask: DataReadingOptions = []) throws
   init?(contentsOfFile path: String)
-  init?(contentsOfURL url: NSURL)
-  init(data: NSData)
-  init?(base64EncodedString base64String: String, options: NSDataBase64DecodingOptions)
-  init?(base64EncodedData base64Data: NSData, options: NSDataBase64DecodingOptions)
+  init?(contentsOf url: URL)
+  init(data: Data)
+  init?(base64EncodedString base64String: String, options: DataBase64DecodingOptions = [])
+  init?(base64EncodedData base64Data: Data, options: DataBase64DecodingOptions = [])
   init?(contentsOfMappedFile path: String)
 }
-extension NSMutableData {
+extension MutableData {
   func appendBytes(bytes: UnsafePointer<Void>, length: Int)
-  func appendData(other: NSData)
+  func append(other: Data)
   func increaseLengthBy(extraLength: Int)
-  func replaceBytesInRange(range: NSRange, withBytes bytes: UnsafePointer<Void>)
-  func resetBytesInRange(range: NSRange)
-  func setData(data: NSData)
-  func replaceBytesInRange(range: NSRange, withBytes replacementBytes: UnsafePointer<Void>, length replacementLength: Int)
+  func replaceBytesIn(range: NSRange, withBytes bytes: UnsafePointer<Void>)
+  func resetBytesIn(range: NSRange)
+  func setData(data: Data)
+  func replaceBytesIn(range: NSRange, withBytes replacementBytes: UnsafePointer<Void>, length replacementLength: Int)
 }
-extension NSMutableData {
+extension MutableData {
   init?(capacity: Int)
   init?(length: Int)
 }
-class NSPurgeableData : NSMutableData, NSDiscardableContent {
+class PurgeableData : MutableData, DiscardableContent {
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   init(bytes: UnsafePointer<Void>, length: Int)
   init(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length: Int)
   init(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length: Int, freeWhenDone b: Bool)
-  init(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length: Int, deallocator: ((UnsafeMutablePointer<Void>, Int) -> Void)?)
-  init(contentsOfFile path: String, options readOptionsMask: NSDataReadingOptions) throws
-  init(contentsOfURL url: NSURL, options readOptionsMask: NSDataReadingOptions) throws
+  init(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length: Int, deallocator: ((UnsafeMutablePointer<Void>, Int) -> Void)? = nil)
+  init(contentsOfFile path: String, options readOptionsMask: DataReadingOptions = []) throws
+  init(contentsOf url: URL, options readOptionsMask: DataReadingOptions = []) throws
   init?(contentsOfFile path: String)
-  init?(contentsOfURL url: NSURL)
-  init(data: NSData)
-  init?(base64EncodedString base64String: String, options: NSDataBase64DecodingOptions)
-  init?(base64EncodedData base64Data: NSData, options: NSDataBase64DecodingOptions)
+  init?(contentsOf url: URL)
+  init(data: Data)
+  init?(base64EncodedString base64String: String, options: DataBase64DecodingOptions = [])
+  init?(base64EncodedData base64Data: Data, options: DataBase64DecodingOptions = [])
   init?(contentsOfMappedFile path: String)
   init?(capacity: Int)
   init?(length: Int)
@@ -1141,43 +1141,42 @@ class NSPurgeableData : NSMutableData, NSDiscardableContent {
   func discardContentIfPossible()
   func isContentDiscarded() -> Bool
 }
-let NSSystemClockDidChangeNotification: String
-typealias NSTimeInterval = Double
+let systemClockDidChangeNotification: String
+typealias TimeInterval = Double
 var NSTimeIntervalSince1970: Double { get }
-class NSDate : NSObject, NSCopying, NSSecureCoding {
-  var timeIntervalSinceReferenceDate: NSTimeInterval { get }
+class Date : Object, Copying, SecureCoding {
+  var timeIntervalSinceReferenceDate: TimeInterval { get }
   init()
-  init(timeIntervalSinceReferenceDate ti: NSTimeInterval)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  init(timeIntervalSinceReferenceDate ti: TimeInterval)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
+  func encodeWith(aCoder: Coder)
 }
-extension NSDate : _Reflectable {
-  /// Returns a mirror that reflects `self`.
+extension Date : _Reflectable {
   func _getMirror() -> _MirrorType
 }
-extension NSDate {
-  func timeIntervalSinceDate(anotherDate: NSDate) -> NSTimeInterval
-  var timeIntervalSinceNow: NSTimeInterval { get }
-  var timeIntervalSince1970: NSTimeInterval { get }
-  func dateByAddingTimeInterval(ti: NSTimeInterval) -> Self
-  func earlierDate(anotherDate: NSDate) -> NSDate
-  func laterDate(anotherDate: NSDate) -> NSDate
-  func compare(other: NSDate) -> NSComparisonResult
-  func isEqualToDate(otherDate: NSDate) -> Bool
+extension Date {
+  func timeIntervalSince(anotherDate: Date) -> TimeInterval
+  var timeIntervalSinceNow: TimeInterval { get }
+  var timeIntervalSince1970: TimeInterval { get }
+  func addingTimeInterval(ti: TimeInterval) -> Self
+  func earlierDate(anotherDate: Date) -> Date
+  func laterDate(anotherDate: Date) -> Date
+  func compare(other: Date) -> ComparisonResult
+  func isEqualTo(otherDate: Date) -> Bool
   var description: String { get }
   func descriptionWithLocale(locale: AnyObject?) -> String
-  class func timeIntervalSinceReferenceDate() -> NSTimeInterval
+  class func timeIntervalSinceReferenceDate() -> TimeInterval
 }
-extension NSDate {
-  class func distantFuture() -> NSDate
-  class func distantPast() -> NSDate
-  convenience init(timeIntervalSinceNow secs: NSTimeInterval)
-  convenience init(timeIntervalSince1970 secs: NSTimeInterval)
-  convenience init(timeInterval secsToBeAdded: NSTimeInterval, sinceDate date: NSDate)
+extension Date {
+  class func distantFuture() -> Date
+  class func distantPast() -> Date
+  convenience init(timeIntervalSinceNow secs: TimeInterval)
+  convenience init(timeIntervalSince1970 secs: TimeInterval)
+  convenience init(timeInterval secsToBeAdded: TimeInterval, since date: Date)
 }
-enum NSDateComponentsFormatterUnitsStyle : Int {
+enum DateComponentsFormatterUnitsStyle : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case Positional
@@ -1186,65 +1185,65 @@ enum NSDateComponentsFormatterUnitsStyle : Int {
   case Full
   case SpellOut
 }
-struct NSDateComponentsFormatterZeroFormattingBehavior : OptionSetType {
+struct DateComponentsFormatterZeroFormattingBehavior : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var None: NSDateComponentsFormatterZeroFormattingBehavior { get }
-  static var Default: NSDateComponentsFormatterZeroFormattingBehavior { get }
-  static var DropLeading: NSDateComponentsFormatterZeroFormattingBehavior { get }
-  static var DropMiddle: NSDateComponentsFormatterZeroFormattingBehavior { get }
-  static var DropTrailing: NSDateComponentsFormatterZeroFormattingBehavior { get }
-  static var DropAll: NSDateComponentsFormatterZeroFormattingBehavior { get }
-  static var Pad: NSDateComponentsFormatterZeroFormattingBehavior { get }
+  static var None: DateComponentsFormatterZeroFormattingBehavior { get }
+  static var Default: DateComponentsFormatterZeroFormattingBehavior { get }
+  static var DropLeading: DateComponentsFormatterZeroFormattingBehavior { get }
+  static var DropMiddle: DateComponentsFormatterZeroFormattingBehavior { get }
+  static var DropTrailing: DateComponentsFormatterZeroFormattingBehavior { get }
+  static var DropAll: DateComponentsFormatterZeroFormattingBehavior { get }
+  static var Pad: DateComponentsFormatterZeroFormattingBehavior { get }
 }
-class NSDateComponentsFormatter : NSFormatter {
+class DateComponentsFormatter : Formatter {
   func stringForObjectValue(obj: AnyObject) -> String?
-  func stringFromDateComponents(components: NSDateComponents) -> String?
-  func stringFromDate(startDate: NSDate, toDate endDate: NSDate) -> String?
-  func stringFromTimeInterval(ti: NSTimeInterval) -> String?
-  class func localizedStringFromDateComponents(components: NSDateComponents, unitsStyle: NSDateComponentsFormatterUnitsStyle) -> String?
-  var unitsStyle: NSDateComponentsFormatterUnitsStyle
-  var allowedUnits: NSCalendarUnit
-  var zeroFormattingBehavior: NSDateComponentsFormatterZeroFormattingBehavior
-  @NSCopying var calendar: NSCalendar?
+  func stringFrom(components: DateComponents) -> String?
+  func stringFrom(startDate: Date, to endDate: Date) -> String?
+  func stringFromTimeInterval(ti: TimeInterval) -> String?
+  class func localizedStringFrom(components: DateComponents, unitsStyle: DateComponentsFormatterUnitsStyle) -> String?
+  var unitsStyle: DateComponentsFormatterUnitsStyle
+  var allowedUnits: CalendarUnit
+  var zeroFormattingBehavior: DateComponentsFormatterZeroFormattingBehavior
+  @NSCopying var calendar: Calendar?
   var allowsFractionalUnits: Bool
   var maximumUnitCount: Int
   var collapsesLargestUnit: Bool
   var includesApproximationPhrase: Bool
   var includesTimeRemainingPhrase: Bool
-  var formattingContext: NSFormattingContext
+  var formattingContext: FormattingContext
   func getObjectValue(obj: AutoreleasingUnsafeMutablePointer<AnyObject?>, forString string: String, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class NSDateFormatter : NSFormatter {
-  var formattingContext: NSFormattingContext
+class DateFormatter : Formatter {
+  var formattingContext: FormattingContext
   func getObjectValue(obj: AutoreleasingUnsafeMutablePointer<AnyObject?>, forString string: String, range rangep: UnsafeMutablePointer<NSRange>) throws
-  func stringFromDate(date: NSDate) -> String
-  func dateFromString(string: String) -> NSDate?
-  class func localizedStringFromDate(date: NSDate, dateStyle dstyle: NSDateFormatterStyle, timeStyle tstyle: NSDateFormatterStyle) -> String
-  class func dateFormatFromTemplate(tmplate: String, options opts: Int, locale: NSLocale?) -> String?
-  class func defaultFormatterBehavior() -> NSDateFormatterBehavior
-  class func setDefaultFormatterBehavior(behavior: NSDateFormatterBehavior)
+  func stringFrom(date: Date) -> String
+  func dateFrom(string: String) -> Date?
+  class func localizedStringFrom(date: Date, dateStyle dstyle: DateFormatterStyle, time tstyle: DateFormatterStyle) -> String
+  class func dateFormatFromTemplate(tmplate: String, options opts: Int, locale: Locale?) -> String?
+  class func defaultFormatterBehavior() -> DateFormatterBehavior
+  class func setDefaultFormatterBehavior(behavior: DateFormatterBehavior)
   func setLocalizedDateFormatFromTemplate(dateFormatTemplate: String)
   var dateFormat: String!
-  var dateStyle: NSDateFormatterStyle
-  var timeStyle: NSDateFormatterStyle
-  @NSCopying var locale: NSLocale!
+  var dateStyle: DateFormatterStyle
+  var timeStyle: DateFormatterStyle
+  @NSCopying var locale: Locale!
   var generatesCalendarDates: Bool
-  var formatterBehavior: NSDateFormatterBehavior
-  @NSCopying var timeZone: NSTimeZone!
-  @NSCopying var calendar: NSCalendar!
-  var lenient: Bool
-  @NSCopying var twoDigitStartDate: NSDate?
-  @NSCopying var defaultDate: NSDate?
+  var formatterBehavior: DateFormatterBehavior
+  @NSCopying var timeZone: TimeZone!
+  @NSCopying var calendar: Calendar!
+  var isLenient: Bool
+  @NSCopying var twoDigitStartDate: Date?
+  @NSCopying var defaultDate: Date?
   var eraSymbols: [String]!
   var monthSymbols: [String]!
   var shortMonthSymbols: [String]!
   var weekdaySymbols: [String]!
   var shortWeekdaySymbols: [String]!
-  var AMSymbol: String!
-  var PMSymbol: String!
+  var amSymbol: String!
+  var pmSymbol: String!
   var longEraSymbols: [String]!
   var veryShortMonthSymbols: [String]!
   var standaloneMonthSymbols: [String]!
@@ -1258,12 +1257,12 @@ class NSDateFormatter : NSFormatter {
   var shortQuarterSymbols: [String]!
   var standaloneQuarterSymbols: [String]!
   var shortStandaloneQuarterSymbols: [String]!
-  @NSCopying var gregorianStartDate: NSDate?
+  @NSCopying var gregorianStartDate: Date?
   var doesRelativeDateFormatting: Bool
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-enum NSDateFormatterStyle : UInt {
+enum DateFormatterStyle : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case NoStyle
@@ -1272,16 +1271,16 @@ enum NSDateFormatterStyle : UInt {
   case LongStyle
   case FullStyle
 }
-enum NSDateFormatterBehavior : UInt {
+enum DateFormatterBehavior : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case BehaviorDefault
   case Behavior10_0
   case Behavior10_4
 }
-extension NSDateFormatter {
+extension DateFormatter {
 }
-enum NSDateIntervalFormatterStyle : UInt {
+enum DateIntervalFormatterStyle : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case NoStyle
@@ -1290,18 +1289,18 @@ enum NSDateIntervalFormatterStyle : UInt {
   case LongStyle
   case FullStyle
 }
-class NSDateIntervalFormatter : NSFormatter {
-  @NSCopying var locale: NSLocale!
-  @NSCopying var calendar: NSCalendar!
-  @NSCopying var timeZone: NSTimeZone!
+class DateIntervalFormatter : Formatter {
+  @NSCopying var locale: Locale!
+  @NSCopying var calendar: Calendar!
+  @NSCopying var timeZone: TimeZone!
   var dateTemplate: String!
-  var dateStyle: NSDateIntervalFormatterStyle
-  var timeStyle: NSDateIntervalFormatterStyle
-  func stringFromDate(fromDate: NSDate, toDate: NSDate) -> String
+  var dateStyle: DateIntervalFormatterStyle
+  var timeStyle: DateIntervalFormatterStyle
+  func stringFrom(fromDate: Date, to toDate: Date) -> String
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-enum NSRoundingMode : UInt {
+enum RoundingMode : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case RoundPlain
@@ -1309,7 +1308,7 @@ enum NSRoundingMode : UInt {
   case RoundUp
   case RoundBankers
 }
-enum NSCalculationError : UInt {
+enum CalculationError : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case NoError
@@ -1320,7 +1319,7 @@ enum NSCalculationError : UInt {
 }
 var NSDecimalMaxSize: Int32 { get }
 var NSDecimalNoScale: Int32 { get }
-struct NSDecimal {
+struct Decimal {
   var _exponent: Int32
   var _length: UInt32
   var _isNegative: UInt32
@@ -1330,59 +1329,59 @@ struct NSDecimal {
   init()
   init(_exponent: Int32, _length: UInt32, _isNegative: UInt32, _isCompact: UInt32, _reserved: UInt32, _mantissa: (UInt16, UInt16, UInt16, UInt16, UInt16, UInt16, UInt16, UInt16))
 }
-func NSDecimalIsNotANumber(dcm: UnsafePointer<NSDecimal>) -> Bool
-func NSDecimalCopy(destination: UnsafeMutablePointer<NSDecimal>, _ source: UnsafePointer<NSDecimal>)
-func NSDecimalCompact(number: UnsafeMutablePointer<NSDecimal>)
-func NSDecimalCompare(leftOperand: UnsafePointer<NSDecimal>, _ rightOperand: UnsafePointer<NSDecimal>) -> NSComparisonResult
-func NSDecimalRound(result: UnsafeMutablePointer<NSDecimal>, _ number: UnsafePointer<NSDecimal>, _ scale: Int, _ roundingMode: NSRoundingMode)
-func NSDecimalNormalize(number1: UnsafeMutablePointer<NSDecimal>, _ number2: UnsafeMutablePointer<NSDecimal>, _ roundingMode: NSRoundingMode) -> NSCalculationError
-func NSDecimalAdd(result: UnsafeMutablePointer<NSDecimal>, _ leftOperand: UnsafePointer<NSDecimal>, _ rightOperand: UnsafePointer<NSDecimal>, _ roundingMode: NSRoundingMode) -> NSCalculationError
-func NSDecimalSubtract(result: UnsafeMutablePointer<NSDecimal>, _ leftOperand: UnsafePointer<NSDecimal>, _ rightOperand: UnsafePointer<NSDecimal>, _ roundingMode: NSRoundingMode) -> NSCalculationError
-func NSDecimalMultiply(result: UnsafeMutablePointer<NSDecimal>, _ leftOperand: UnsafePointer<NSDecimal>, _ rightOperand: UnsafePointer<NSDecimal>, _ roundingMode: NSRoundingMode) -> NSCalculationError
-func NSDecimalDivide(result: UnsafeMutablePointer<NSDecimal>, _ leftOperand: UnsafePointer<NSDecimal>, _ rightOperand: UnsafePointer<NSDecimal>, _ roundingMode: NSRoundingMode) -> NSCalculationError
-func NSDecimalPower(result: UnsafeMutablePointer<NSDecimal>, _ number: UnsafePointer<NSDecimal>, _ power: Int, _ roundingMode: NSRoundingMode) -> NSCalculationError
-func NSDecimalMultiplyByPowerOf10(result: UnsafeMutablePointer<NSDecimal>, _ number: UnsafePointer<NSDecimal>, _ power: Int16, _ roundingMode: NSRoundingMode) -> NSCalculationError
-func NSDecimalString(dcm: UnsafePointer<NSDecimal>, _ locale: AnyObject?) -> String
-let NSDecimalNumberExactnessException: String
-let NSDecimalNumberOverflowException: String
-let NSDecimalNumberUnderflowException: String
-let NSDecimalNumberDivideByZeroException: String
-protocol NSDecimalNumberBehaviors {
-  func roundingMode() -> NSRoundingMode
+func decimalIsNotANumber(dcm: UnsafePointer<Decimal>) -> Bool
+func decimalCopy(destination: UnsafeMutablePointer<Decimal>, _ source: UnsafePointer<Decimal>)
+func decimalCompact(number: UnsafeMutablePointer<Decimal>)
+func decimalCompare(leftOperand: UnsafePointer<Decimal>, _ rightOperand: UnsafePointer<Decimal>) -> ComparisonResult
+func decimalRound(result: UnsafeMutablePointer<Decimal>, _ number: UnsafePointer<Decimal>, _ scale: Int, _ roundingMode: RoundingMode)
+func decimalNormalize(number1: UnsafeMutablePointer<Decimal>, _ number2: UnsafeMutablePointer<Decimal>, _ roundingMode: RoundingMode) -> CalculationError
+func decimalAdd(result: UnsafeMutablePointer<Decimal>, _ leftOperand: UnsafePointer<Decimal>, _ rightOperand: UnsafePointer<Decimal>, _ roundingMode: RoundingMode) -> CalculationError
+func decimalSubtract(result: UnsafeMutablePointer<Decimal>, _ leftOperand: UnsafePointer<Decimal>, _ rightOperand: UnsafePointer<Decimal>, _ roundingMode: RoundingMode) -> CalculationError
+func decimalMultiply(result: UnsafeMutablePointer<Decimal>, _ leftOperand: UnsafePointer<Decimal>, _ rightOperand: UnsafePointer<Decimal>, _ roundingMode: RoundingMode) -> CalculationError
+func decimalDivide(result: UnsafeMutablePointer<Decimal>, _ leftOperand: UnsafePointer<Decimal>, _ rightOperand: UnsafePointer<Decimal>, _ roundingMode: RoundingMode) -> CalculationError
+func decimalPower(result: UnsafeMutablePointer<Decimal>, _ number: UnsafePointer<Decimal>, _ power: Int, _ roundingMode: RoundingMode) -> CalculationError
+func decimalMultiplyByPowerOf10(result: UnsafeMutablePointer<Decimal>, _ number: UnsafePointer<Decimal>, _ power: Int16, _ roundingMode: RoundingMode) -> CalculationError
+func decimalString(dcm: UnsafePointer<Decimal>, _ locale: AnyObject?) -> String
+let decimalNumberExactnessException: String
+let decimalNumberOverflowException: String
+let decimalNumberUnderflowException: String
+let decimalNumberDivideByZeroException: String
+protocol DecimalNumberBehaviors {
+  func roundingMode() -> RoundingMode
   func scale() -> Int16
-  func exceptionDuringOperation(operation: Selector, error: NSCalculationError, leftOperand: NSDecimalNumber, rightOperand: NSDecimalNumber?) -> NSDecimalNumber?
+  func exceptionDuringOperation(operation: Selector, error: CalculationError, leftOperand: DecimalNumber, rightOperand: DecimalNumber?) -> DecimalNumber?
 }
-class NSDecimalNumber : NSNumber {
+class DecimalNumber : Number {
   convenience init(mantissa: UInt64, exponent: Int16, isNegative flag: Bool)
-  init(decimal dcm: NSDecimal)
+  init(decimal dcm: Decimal)
   convenience init(string numberValue: String?)
   convenience init(string numberValue: String?, locale: AnyObject?)
   func descriptionWithLocale(locale: AnyObject?) -> String
-  var decimalValue: NSDecimal { get }
-  class func zero() -> NSDecimalNumber
-  class func one() -> NSDecimalNumber
-  class func minimumDecimalNumber() -> NSDecimalNumber
-  class func maximumDecimalNumber() -> NSDecimalNumber
-  class func notANumber() -> NSDecimalNumber
-  func decimalNumberByAdding(decimalNumber: NSDecimalNumber) -> NSDecimalNumber
-  func decimalNumberByAdding(decimalNumber: NSDecimalNumber, withBehavior behavior: NSDecimalNumberBehaviors?) -> NSDecimalNumber
-  func decimalNumberBySubtracting(decimalNumber: NSDecimalNumber) -> NSDecimalNumber
-  func decimalNumberBySubtracting(decimalNumber: NSDecimalNumber, withBehavior behavior: NSDecimalNumberBehaviors?) -> NSDecimalNumber
-  func decimalNumberByMultiplyingBy(decimalNumber: NSDecimalNumber) -> NSDecimalNumber
-  func decimalNumberByMultiplyingBy(decimalNumber: NSDecimalNumber, withBehavior behavior: NSDecimalNumberBehaviors?) -> NSDecimalNumber
-  func decimalNumberByDividingBy(decimalNumber: NSDecimalNumber) -> NSDecimalNumber
-  func decimalNumberByDividingBy(decimalNumber: NSDecimalNumber, withBehavior behavior: NSDecimalNumberBehaviors?) -> NSDecimalNumber
-  func decimalNumberByRaisingToPower(power: Int) -> NSDecimalNumber
-  func decimalNumberByRaisingToPower(power: Int, withBehavior behavior: NSDecimalNumberBehaviors?) -> NSDecimalNumber
-  func decimalNumberByMultiplyingByPowerOf10(power: Int16) -> NSDecimalNumber
-  func decimalNumberByMultiplyingByPowerOf10(power: Int16, withBehavior behavior: NSDecimalNumberBehaviors?) -> NSDecimalNumber
-  func decimalNumberByRoundingAccordingToBehavior(behavior: NSDecimalNumberBehaviors?) -> NSDecimalNumber
-  func compare(decimalNumber: NSNumber) -> NSComparisonResult
-  class func setDefaultBehavior(behavior: NSDecimalNumberBehaviors)
-  class func defaultBehavior() -> NSDecimalNumberBehaviors
+  var decimalValue: Decimal { get }
+  class func zero() -> DecimalNumber
+  class func one() -> DecimalNumber
+  class func minimum() -> DecimalNumber
+  class func maximum() -> DecimalNumber
+  class func notA() -> DecimalNumber
+  func adding(decimalNumber: DecimalNumber) -> DecimalNumber
+  func adding(decimalNumber: DecimalNumber, withBehavior behavior: DecimalNumberBehaviors?) -> DecimalNumber
+  func subtracting(decimalNumber: DecimalNumber) -> DecimalNumber
+  func subtracting(decimalNumber: DecimalNumber, withBehavior behavior: DecimalNumberBehaviors?) -> DecimalNumber
+  func multiplyingBy(decimalNumber: DecimalNumber) -> DecimalNumber
+  func multiplyingBy(decimalNumber: DecimalNumber, withBehavior behavior: DecimalNumberBehaviors?) -> DecimalNumber
+  func dividingBy(decimalNumber: DecimalNumber) -> DecimalNumber
+  func dividingBy(decimalNumber: DecimalNumber, withBehavior behavior: DecimalNumberBehaviors?) -> DecimalNumber
+  func raisingToPower(power: Int) -> DecimalNumber
+  func raisingToPower(power: Int, withBehavior behavior: DecimalNumberBehaviors?) -> DecimalNumber
+  func multiplyingByPowerOf10(power: Int16) -> DecimalNumber
+  func multiplyingByPowerOf10(power: Int16, withBehavior behavior: DecimalNumberBehaviors?) -> DecimalNumber
+  func byRoundingAccordingToBehavior(behavior: DecimalNumberBehaviors?) -> DecimalNumber
+  func compare(decimalNumber: Number) -> ComparisonResult
+  class func setDefaultBehavior(behavior: DecimalNumberBehaviors)
+  class func defaultBehavior() -> DecimalNumberBehaviors
   var objCType: UnsafePointer<Int8> { get }
   var doubleValue: Double { get }
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init(char value: Int8)
   convenience init(unsignedChar value: UInt8)
   convenience init(short value: Int16)
@@ -1401,38 +1400,38 @@ class NSDecimalNumber : NSNumber {
   convenience init(bytes value: UnsafePointer<Void>, objCType type: UnsafePointer<Int8>)
   convenience init()
 }
-class NSDecimalNumberHandler : NSObject, NSDecimalNumberBehaviors, NSCoding {
-  class func defaultDecimalNumberHandler() -> NSDecimalNumberHandler
-  init(roundingMode: NSRoundingMode, scale: Int16, raiseOnExactness exact: Bool, raiseOnOverflow overflow: Bool, raiseOnUnderflow underflow: Bool, raiseOnDivideByZero divideByZero: Bool)
+class DecimalNumberHandler : Object, DecimalNumberBehaviors, Coding {
+  class func defaultDecimalNumberHandler() -> DecimalNumberHandler
+  init(roundingMode: RoundingMode, scale: Int16, raiseOnExactness exact: Bool, raiseOnOverflow overflow: Bool, raiseOnUnderflow underflow: Bool, raiseOnDivideByZero divideByZero: Bool)
   convenience init()
-  func roundingMode() -> NSRoundingMode
+  func roundingMode() -> RoundingMode
   func scale() -> Int16
-  func exceptionDuringOperation(operation: Selector, error: NSCalculationError, leftOperand: NSDecimalNumber, rightOperand: NSDecimalNumber?) -> NSDecimalNumber?
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func exceptionDuringOperation(operation: Selector, error: CalculationError, leftOperand: DecimalNumber, rightOperand: DecimalNumber?) -> DecimalNumber?
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-extension NSNumber {
-  var decimalValue: NSDecimal { get }
+extension Number {
+  var decimalValue: Decimal { get }
 }
-extension NSScanner {
-  func scanDecimal(dcm: UnsafeMutablePointer<NSDecimal>) -> Bool
+extension Scanner {
+  func scanDecimal(dcm: UnsafeMutablePointer<Decimal>) -> Bool
 }
-class NSDictionary : NSObject, NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration {
+class NSDictionary : Object, Copying, MutableCopying, SecureCoding, FastEnumeration {
   var count: Int { get }
-  func objectForKey(aKey: AnyObject) -> AnyObject?
-  func keyEnumerator() -> NSEnumerator
+  func objectFor(aKey: AnyObject) -> AnyObject?
+  func keyEnumerator() -> Enumerator
   init()
-  init(objects: UnsafePointer<AnyObject?>, forKeys keys: UnsafePointer<NSCopying?>, count cnt: Int)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  init(objects: UnsafePointer<AnyObject?>, forKeys keys: UnsafePointer<Copying?>, count cnt: Int)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  func countByEnumeratingWithState(state: UnsafeMutablePointer<NSFastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
+  func encodeWith(aCoder: Coder)
+  func countByEnumeratingWith(state: UnsafeMutablePointer<FastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
 }
 extension NSDictionary : DictionaryLiteralConvertible {
-  required convenience init(dictionaryLiteral elements: (NSCopying, AnyObject)...)
-  typealias Key = NSCopying
+  required convenience init(dictionaryLiteral elements: (Copying, AnyObject)...)
+  typealias Key = Copying
   typealias Value = AnyObject
 }
 extension NSDictionary : SequenceType {
@@ -1464,77 +1463,77 @@ extension NSDictionary : _Reflectable {
 }
 extension NSDictionary {
   var allKeys: [AnyObject] { get }
-  func allKeysForObject(anObject: AnyObject) -> [AnyObject]
+  func allKeysFor(anObject: AnyObject) -> [AnyObject]
   var allValues: [AnyObject] { get }
   var description: String { get }
   var descriptionInStringsFileFormat: String { get }
   func descriptionWithLocale(locale: AnyObject?) -> String
   func descriptionWithLocale(locale: AnyObject?, indent level: Int) -> String
-  func isEqualToDictionary(otherDictionary: [NSObject : AnyObject]) -> Bool
-  func objectEnumerator() -> NSEnumerator
-  func objectsForKeys(keys: [AnyObject], notFoundMarker marker: AnyObject) -> [AnyObject]
+  func isEqualTo(otherDictionary: [Object : AnyObject]) -> Bool
+  func objectEnumerator() -> Enumerator
+  func objectsFor(keys: [AnyObject], notFoundMarker marker: AnyObject) -> [AnyObject]
   func writeToFile(path: String, atomically useAuxiliaryFile: Bool) -> Bool
-  func writeToURL(url: NSURL, atomically: Bool) -> Bool
-  func keysSortedByValueUsingSelector(comparator: Selector) -> [AnyObject]
+  func writeTo(url: URL, atomically: Bool) -> Bool
+  func keysSortedByValueUsing(comparator: Selector) -> [AnyObject]
   func getObjects(objects: AutoreleasingUnsafeMutablePointer<AnyObject?>, andKeys keys: AutoreleasingUnsafeMutablePointer<AnyObject?>, count: Int)
-  subscript (key: NSCopying) -> AnyObject? { get }
-  func enumerateKeysAndObjectsUsingBlock(block: (AnyObject, AnyObject, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func enumerateKeysAndObjectsWithOptions(opts: NSEnumerationOptions, usingBlock block: (AnyObject, AnyObject, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func keysSortedByValueUsingComparator(cmptr: NSComparator) -> [AnyObject]
-  func keysSortedByValueWithOptions(opts: NSSortOptions, usingComparator cmptr: NSComparator) -> [AnyObject]
-  func keysOfEntriesPassingTest(predicate: (AnyObject, AnyObject, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Set<NSObject>
-  func keysOfEntriesWithOptions(opts: NSEnumerationOptions, passingTest predicate: (AnyObject, AnyObject, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Set<NSObject>
+  subscript (key: Copying) -> AnyObject? { get }
+  func enumerateKeysAndObjectsUsing(block: (AnyObject, AnyObject, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func enumerateKeysAndObjects(options opts: EnumerationOptions = [], usingBlock block: (AnyObject, AnyObject, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func keysSortedByValueUsingComparator(cmptr: Comparator) -> [AnyObject]
+  func keysSortedByValue(options opts: SortOptions = [], usingComparator cmptr: Comparator) -> [AnyObject]
+  func keysOfEntriesPassingTest(predicate: (AnyObject, AnyObject, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Set<Object>
+  func keysOfEntries(options opts: EnumerationOptions = [], passingTest predicate: (AnyObject, AnyObject, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Set<Object>
 }
 extension NSDictionary {
   /// This method is unsafe because it could potentially cause buffer overruns. You should use -getObjects:andKeys:count:
   func getObjects(objects: AutoreleasingUnsafeMutablePointer<AnyObject?>, andKeys keys: AutoreleasingUnsafeMutablePointer<AnyObject?>)
 }
 extension NSDictionary {
-  convenience init(object: AnyObject, forKey key: NSCopying)
-  convenience init(dictionary otherDictionary: [NSObject : AnyObject])
-  convenience init(dictionary otherDictionary: [NSObject : AnyObject], copyItems flag: Bool)
-  convenience init(objects: [AnyObject], forKeys keys: [NSCopying])
+  convenience init(object: AnyObject, forKey key: Copying)
+  convenience init(dictionary otherDictionary: [Object : AnyObject])
+  convenience init(dictionary otherDictionary: [Object : AnyObject], copyItems flag: Bool)
+  convenience init(objects: [AnyObject], forKeys keys: [Copying])
   convenience init?(contentsOfFile path: String)
-  convenience init?(contentsOfURL url: NSURL)
+  convenience init?(contentsOf url: URL)
 }
-class NSMutableDictionary : NSDictionary {
-  func removeObjectForKey(aKey: AnyObject)
-  func setObject(anObject: AnyObject, forKey aKey: NSCopying)
+class MutableDictionary : NSDictionary {
+  func removeObjectFor(aKey: AnyObject)
+  func setObject(anObject: AnyObject, forKey aKey: Copying)
   init()
   init(capacity numItems: Int)
-  init?(coder aDecoder: NSCoder)
-  convenience init(objects: UnsafePointer<AnyObject?>, forKeys keys: UnsafePointer<NSCopying?>, count cnt: Int)
-  convenience init(object: AnyObject, forKey key: NSCopying)
-  convenience init(dictionary otherDictionary: [NSObject : AnyObject])
-  convenience init(dictionary otherDictionary: [NSObject : AnyObject], copyItems flag: Bool)
-  convenience init(objects: [AnyObject], forKeys keys: [NSCopying])
+  init?(coder aDecoder: Coder)
+  convenience init(objects: UnsafePointer<AnyObject?>, forKeys keys: UnsafePointer<Copying?>, count cnt: Int)
+  convenience init(object: AnyObject, forKey key: Copying)
+  convenience init(dictionary otherDictionary: [Object : AnyObject])
+  convenience init(dictionary otherDictionary: [Object : AnyObject], copyItems flag: Bool)
+  convenience init(objects: [AnyObject], forKeys keys: [Copying])
 }
-extension NSMutableDictionary {
-  func addEntriesFromDictionary(otherDictionary: [NSObject : AnyObject])
+extension MutableDictionary {
+  func addEntriesFrom(otherDictionary: [Object : AnyObject])
   func removeAllObjects()
-  func removeObjectsForKeys(keyArray: [AnyObject])
-  func setDictionary(otherDictionary: [NSObject : AnyObject])
-  subscript (key: NSCopying) -> AnyObject?
+  func removeObjectsFor(keyArray: [AnyObject])
+  func setDictionary(otherDictionary: [Object : AnyObject])
+  subscript (key: Copying) -> AnyObject?
 }
-extension NSMutableDictionary {
+extension MutableDictionary {
   convenience init?(contentsOfFile path: String)
-  convenience init?(contentsOfURL url: NSURL)
+  convenience init?(contentsOf url: URL)
 }
 extension NSDictionary {
-  class func sharedKeySetForKeys(keys: [NSCopying]) -> AnyObject
+  class func sharedKeySetForKeys(keys: [Copying]) -> AnyObject
 }
-extension NSMutableDictionary {
+extension MutableDictionary {
    init(sharedKeySet keyset: AnyObject)
 }
-class NSDistributedLock : NSObject {
+class DistributedLock : Object {
   init?(path: String)
   func tryLock() -> Bool
   func unlock()
   func breakLock()
-  @NSCopying var lockDate: NSDate { get }
+  @NSCopying var lockDate: Date { get }
 }
-let NSLocalNotificationCenterType: String
-enum NSNotificationSuspensionBehavior : UInt {
+let localNotificationCenterType: String
+enum NotificationSuspensionBehavior : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case Drop
@@ -1542,28 +1541,28 @@ enum NSNotificationSuspensionBehavior : UInt {
   case Hold
   case DeliverImmediately
 }
-struct NSDistributedNotificationOptions : OptionSetType {
+struct DistributedNotificationOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var DeliverImmediately: NSDistributedNotificationOptions { get }
-  static var PostToAllSessions: NSDistributedNotificationOptions { get }
+  static var DeliverImmediately: DistributedNotificationOptions { get }
+  static var PostToAllSessions: DistributedNotificationOptions { get }
 }
-let NSNotificationDeliverImmediately: NSDistributedNotificationOptions
-let NSNotificationPostToAllSessions: NSDistributedNotificationOptions
-class NSDistributedNotificationCenter : NSNotificationCenter {
-  class func notificationCenterForType(notificationCenterType: String) -> NSDistributedNotificationCenter
-  class func defaultCenter() -> NSDistributedNotificationCenter
-  func addObserver(observer: AnyObject, selector: Selector, name: String?, object: String?, suspensionBehavior: NSNotificationSuspensionBehavior)
-  func postNotificationName(name: String, object: String?, userInfo: [NSObject : AnyObject]?, deliverImmediately: Bool)
-  func postNotificationName(name: String, object: String?, userInfo: [NSObject : AnyObject]?, options: NSDistributedNotificationOptions)
+let notificationDeliverImmediately: DistributedNotificationOptions
+let notificationPostToAllSessions: DistributedNotificationOptions
+class DistributedNotificationCenter : NotificationCenter {
+  class func forType(notificationCenterType: String) -> DistributedNotificationCenter
+  class func defaultCenter() -> DistributedNotificationCenter
+  func addObserver(observer: AnyObject, selector: Selector, name: String?, object: String?, suspensionBehavior: NotificationSuspensionBehavior)
+  func postNotificationName(name: String, object: String?, userInfo: [Object : AnyObject]? = [:], deliverImmediately: Bool)
+  func postNotificationName(name: String, object: String?, userInfo: [Object : AnyObject]? = [:], options: DistributedNotificationOptions = [])
   var suspended: Bool
   func addObserver(observer: AnyObject, selector aSelector: Selector, name aName: String?, object anObject: String?)
   func postNotificationName(aName: String, object anObject: String?)
-  func postNotificationName(aName: String, object anObject: String?, userInfo aUserInfo: [NSObject : AnyObject]?)
+  func postNotificationName(aName: String, object anObject: String?, userInfo aUserInfo: [Object : AnyObject]? = [:])
   func removeObserver(observer: AnyObject, name aName: String?, object anObject: String?)
   init()
 }
-enum NSEnergyFormatterUnit : Int {
+enum EnergyFormatterUnit : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case Joule
@@ -1571,19 +1570,19 @@ enum NSEnergyFormatterUnit : Int {
   case Calorie
   case Kilocalorie
 }
-class NSEnergyFormatter : NSFormatter {
-  @NSCopying var numberFormatter: NSNumberFormatter!
-  var unitStyle: NSFormattingUnitStyle
-  var forFoodEnergyUse: Bool
-  func stringFromValue(value: Double, unit: NSEnergyFormatterUnit) -> String
+class EnergyFormatter : Formatter {
+  @NSCopying var numberFormatter: NumberFormatter!
+  var unitStyle: FormattingUnitStyle
+  var isForFoodEnergyUse: Bool
+  func stringFromValue(value: Double, unit: EnergyFormatterUnit) -> String
   func stringFromJoules(numberInJoules: Double) -> String
-  func unitStringFromValue(value: Double, unit: NSEnergyFormatterUnit) -> String
-  func unitStringFromJoules(numberInJoules: Double, usedUnit unitp: UnsafeMutablePointer<NSEnergyFormatterUnit>) -> String
+  func unitStringFromValue(value: Double, unit: EnergyFormatterUnit) -> String
+  func unitStringFromJoules(numberInJoules: Double, usedUnit unitp: UnsafeMutablePointer<EnergyFormatterUnit>) -> String
   func getObjectValue(obj: AutoreleasingUnsafeMutablePointer<AnyObject?>, forString string: String, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-struct NSFastEnumerationState {
+struct FastEnumerationState {
   var state: UInt
   var itemsPtr: AutoreleasingUnsafeMutablePointer<AnyObject?>
   var mutationsPtr: UnsafeMutablePointer<UInt>
@@ -1591,106 +1590,103 @@ struct NSFastEnumerationState {
   init()
   init(state: UInt, itemsPtr: AutoreleasingUnsafeMutablePointer<AnyObject?>, mutationsPtr: UnsafeMutablePointer<UInt>, extra: (UInt, UInt, UInt, UInt, UInt))
 }
-protocol NSFastEnumeration {
-  func countByEnumeratingWithState(state: UnsafeMutablePointer<NSFastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
+protocol FastEnumeration {
+  func countByEnumeratingWith(state: UnsafeMutablePointer<FastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
 }
-class NSEnumerator : NSObject, NSFastEnumeration {
+class Enumerator : Object, FastEnumeration {
   func nextObject() -> AnyObject?
   init()
-  func countByEnumeratingWithState(state: UnsafeMutablePointer<NSFastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
+  func countByEnumeratingWith(state: UnsafeMutablePointer<FastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
 }
-extension NSEnumerator : SequenceType {
-  /// Return a *generator* over the *enumerator*.
-  ///
-  /// - Complexity: O(1).
+extension Enumerator : SequenceType {
   func generate() -> NSFastGenerator
   typealias Generator = NSFastGenerator
   typealias SubSequence = AnySequence<AnyObject>
 }
-extension NSEnumerator {
+extension Enumerator {
   var allObjects: [AnyObject] { get }
 }
-let NSCocoaErrorDomain: String
-let NSPOSIXErrorDomain: String
-let NSOSStatusErrorDomain: String
-let NSMachErrorDomain: String
-let NSUnderlyingErrorKey: String
-let NSLocalizedDescriptionKey: String
-let NSLocalizedFailureReasonErrorKey: String
-let NSLocalizedRecoverySuggestionErrorKey: String
-let NSLocalizedRecoveryOptionsErrorKey: String
-let NSRecoveryAttempterErrorKey: String
-let NSHelpAnchorErrorKey: String
-let NSStringEncodingErrorKey: String
-let NSURLErrorKey: String
-let NSFilePathErrorKey: String
-class NSError : NSObject, NSCopying, NSSecureCoding {
-  init(domain: String, code: Int, userInfo dict: [NSObject : AnyObject]?)
+let cocoaErrorDomain: String
+let POSIXErrorDomain: String
+let OSStatusErrorDomain: String
+let machErrorDomain: String
+let underlyingErrorKey: String
+let localizedDescriptionKey: String
+let localizedFailureReasonErrorKey: String
+let localizedRecoverySuggestionErrorKey: String
+let localizedRecoveryOptionsErrorKey: String
+let recoveryAttempterErrorKey: String
+let helpAnchorErrorKey: String
+let stringEncodingErrorKey: String
+let URLErrorKey: String
+let filePathErrorKey: String
+class Error : Object, Copying, SecureCoding {
+  init(domain: String, code: Int, userInfo dict: [Object : AnyObject]? = [:])
   var domain: String { get }
   var code: Int { get }
-  var userInfo: [NSObject : AnyObject] { get }
+  var userInfo: [Object : AnyObject] { get }
   var localizedDescription: String { get }
   var localizedFailureReason: String? { get }
   var localizedRecoverySuggestion: String? { get }
   var localizedRecoveryOptions: [String]? { get }
   var recoveryAttempter: AnyObject? { get }
   var helpAnchor: String? { get }
-  class func setUserInfoValueProviderForDomain(errorDomain: String, provider: ((NSError, String) -> AnyObject?)?)
-  class func userInfoValueProviderForDomain(errorDomain: String) -> ((NSError, String) -> AnyObject?)?
-  func copyWithZone(zone: NSZone) -> AnyObject
+  class func setUserInfoValueProviderForDomain(errorDomain: String, provider: ((Error, String) -> AnyObject?)? = nil)
+  class func userInfoValueProviderForDomain(errorDomain: String) -> ((Error, String) -> AnyObject?)?
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-extension NSError : ErrorType {
+extension Error : ErrorType {
   var _domain: String { get }
   var _code: Int { get }
 }
-extension NSObject {
-  class func attemptRecoveryFromError(error: NSError, optionIndex recoveryOptionIndex: Int, delegate: AnyObject?, didRecoverSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func attemptRecoveryFromError(error: NSError, optionIndex recoveryOptionIndex: Int, delegate: AnyObject?, didRecoverSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  class func attemptRecoveryFromError(error: NSError, optionIndex recoveryOptionIndex: Int) -> Bool
-  func attemptRecoveryFromError(error: NSError, optionIndex recoveryOptionIndex: Int) -> Bool
+extension Object {
+  class func attemptRecoveryFromError(error: Error, optionIndex recoveryOptionIndex: Int, delegate: AnyObject?, didRecoverSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func attemptRecoveryFromError(error: Error, optionIndex recoveryOptionIndex: Int, delegate: AnyObject?, didRecoverSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  class func attemptRecoveryFromError(error: Error, optionIndex recoveryOptionIndex: Int) -> Bool
+  func attemptRecoveryFromError(error: Error, optionIndex recoveryOptionIndex: Int) -> Bool
 }
-let NSGenericException: String
-let NSRangeException: String
-let NSInvalidArgumentException: String
-let NSInternalInconsistencyException: String
-let NSMallocException: String
-let NSObjectInaccessibleException: String
-let NSObjectNotAvailableException: String
-let NSDestinationInvalidException: String
-let NSPortTimeoutException: String
-let NSInvalidSendPortException: String
-let NSInvalidReceivePortException: String
-let NSPortSendException: String
-let NSPortReceiveException: String
-let NSOldStyleException: String
-class NSException : NSObject, NSCopying, NSCoding {
-  init(name aName: String, reason aReason: String?, userInfo aUserInfo: [NSObject : AnyObject]?)
+let genericException: String
+let rangeException: String
+let invalidArgumentException: String
+let internalInconsistencyException: String
+let mallocException: String
+let objectInaccessibleException: String
+let objectNotAvailableException: String
+let destinationInvalidException: String
+let portTimeoutException: String
+let invalidSendPortException: String
+let invalidReceivePortException: String
+let portSendException: String
+let portReceiveException: String
+let oldStyleException: String
+class Exception : Object, Copying, Coding {
+  init(name aName: String, reason aReason: String?, userInfo aUserInfo: [Object : AnyObject]? = [:])
   var name: String { get }
   var reason: String? { get }
-  var userInfo: [NSObject : AnyObject]? { get }
-  var callStackReturnAddresses: [NSNumber] { get }
+  var userInfo: [Object : AnyObject]? { get }
+  var callStackReturnAddresses: [Number] { get }
   var callStackSymbols: [String] { get }
   func raise()
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-extension NSException {
+extension Exception {
   class func raise(name: String, format: String, arguments argList: CVaListPointer)
 }
-typealias NSUncaughtExceptionHandler = (NSException) -> Void
-func NSGetUncaughtExceptionHandler() -> (@convention(c) (NSException) -> Void)?
-func NSSetUncaughtExceptionHandler(_: (@convention(c) (NSException) -> Void)?)
-let NSAssertionHandlerKey: String
-class NSAssertionHandler : NSObject {
-  class func currentHandler() -> NSAssertionHandler
+typealias UncaughtExceptionHandler = (Exception) -> Void
+func getUncaughtExceptionHandler() -> (@convention(c) (Exception) -> Void)?
+func setUncaughtExceptionHandler(_: (@convention(c) (Exception) -> Void)?)
+let assertionHandlerKey: String
+class AssertionHandler : Object {
+  class func current() -> AssertionHandler
   init()
 }
-enum NSExpressionType : UInt {
+enum ExpressionType : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case ConstantValueExpressionType
@@ -1707,47 +1703,47 @@ enum NSExpressionType : UInt {
   case BlockExpressionType
   case ConditionalExpressionType
 }
-class NSExpression : NSObject, NSSecureCoding, NSCopying {
+class Expression : Object, SecureCoding, Copying {
    init(format expressionFormat: String, argumentArray arguments: [AnyObject])
    init(format expressionFormat: String, arguments argList: CVaListPointer)
    init(forConstantValue obj: AnyObject?)
-  class func expressionForEvaluatedObject() -> NSExpression
+  class func forEvaluatedObject() -> Expression
    init(forVariable string: String)
    init(forKeyPath keyPath: String)
    init(forFunction name: String, arguments parameters: [AnyObject])
    init(forAggregate subexpressions: [AnyObject])
-   init(forUnionSet left: NSExpression, with right: NSExpression)
-   init(forIntersectSet left: NSExpression, with right: NSExpression)
-   init(forMinusSet left: NSExpression, with right: NSExpression)
-   init(forSubquery expression: NSExpression, usingIteratorVariable variable: String, predicate: AnyObject)
-   init(forFunction target: NSExpression, selectorName name: String, arguments parameters: [AnyObject]?)
-  class func expressionForAnyKey() -> NSExpression
-   init(forBlock block: (AnyObject?, [AnyObject], NSMutableDictionary?) -> AnyObject, arguments: [NSExpression]?)
-   init(forConditional predicate: NSPredicate, trueExpression: NSExpression, falseExpression: NSExpression)
-  init(expressionType type: NSExpressionType)
-  init?(coder: NSCoder)
-  var expressionType: NSExpressionType { get }
+   init(forUnionSet left: Expression, with right: Expression)
+   init(forIntersectSet left: Expression, with right: Expression)
+   init(forMinusSet left: Expression, with right: Expression)
+   init(forSubquery expression: Expression, usingIteratorVariable variable: String, predicate: AnyObject)
+   init(forFunction target: Expression, selectorName name: String, arguments parameters: [AnyObject]?)
+  class func forAnyKey() -> Expression
+   init(forBlock block: (AnyObject?, [AnyObject], MutableDictionary?) -> AnyObject, arguments: [Expression]?)
+   init(forConditional predicate: Predicate, trueExpression: Expression, falseExpression: Expression)
+  init(expressionType type: ExpressionType)
+  init?(coder: Coder)
+  var expressionType: ExpressionType { get }
   var constantValue: AnyObject { get }
   var keyPath: String { get }
   var function: String { get }
   var variable: String { get }
-  @NSCopying var operand: NSExpression { get }
-  var arguments: [NSExpression]? { get }
+  @NSCopying var operand: Expression { get }
+  var arguments: [Expression]? { get }
   var collection: AnyObject { get }
-  @NSCopying var predicate: NSPredicate { get }
-  @NSCopying var leftExpression: NSExpression { get }
-  @NSCopying var rightExpression: NSExpression { get }
-  @NSCopying var trueExpression: NSExpression { get }
-  @NSCopying var falseExpression: NSExpression { get }
-  var expressionBlock: (AnyObject?, [AnyObject], NSMutableDictionary?) -> AnyObject { get }
-  func expressionValueWithObject(object: AnyObject?, context: NSMutableDictionary?) -> AnyObject
+  @NSCopying var predicate: Predicate { get }
+  @NSCopying var left: Expression { get }
+  @NSCopying var right: Expression { get }
+  @NSCopying var trueExpression: Expression { get }
+  @NSCopying var falseExpression: Expression { get }
+  var expressionBlock: (AnyObject?, [AnyObject], MutableDictionary?) -> AnyObject { get }
+  func expressionValueWith(object: AnyObject?, context: MutableDictionary?) -> AnyObject
   func allowEvaluation()
   convenience init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-extension NSExpression {
+extension Expression {
   convenience init(format expressionFormat: String, _ args: CVarArgType...)
 }
 struct _expressionFlags {
@@ -1756,76 +1752,76 @@ struct _expressionFlags {
   init()
   init(_evaluationBlocked: UInt32, _reservedExpressionFlags: UInt32)
 }
-class NSExtensionContext : NSObject {
+class ExtensionContext : Object {
   var inputItems: [AnyObject] { get }
-  func completeRequestReturningItems(items: [AnyObject]?, completionHandler: ((Bool) -> Void)?)
-  func cancelRequestWithError(error: NSError)
-  func openURL(URL: NSURL, completionHandler: ((Bool) -> Void)?)
+  func completeRequestReturningItems(items: [AnyObject]?, completionHandler: ((Bool) -> Void)? = nil)
+  func cancelRequestWithError(error: Error)
+  func open(URL: URL, completionHandler: ((Bool) -> Void)? = nil)
   init()
 }
-let NSExtensionItemsAndErrorsKey: String
-class NSExtensionItem : NSObject, NSCopying, NSSecureCoding {
-  @NSCopying var attributedTitle: NSAttributedString?
-  @NSCopying var attributedContentText: NSAttributedString?
+let extensionItemsAndErrorsKey: String
+class ExtensionItem : Object, Copying, SecureCoding {
+  @NSCopying var attributedTitle: AttributedString?
+  @NSCopying var attributedContentText: AttributedString?
   var attachments: [AnyObject]?
-  var userInfo: [NSObject : AnyObject]?
+  var userInfo: [Object : AnyObject]?
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-let NSExtensionItemAttributedTitleKey: String
-let NSExtensionItemAttributedContentTextKey: String
-let NSExtensionItemAttachmentsKey: String
-protocol NSExtensionRequestHandling : NSObjectProtocol {
-  func beginRequestWithExtensionContext(context: NSExtensionContext)
+let extensionItemAttributedTitleKey: String
+let extensionItemAttributedContentTextKey: String
+let extensionItemAttachmentsKey: String
+protocol ExtensionRequestHandling : ObjectProtocol {
+  func beginRequestWith(context: ExtensionContext)
 }
-struct NSFileCoordinatorReadingOptions : OptionSetType {
+struct FileCoordinatorReadingOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var WithoutChanges: NSFileCoordinatorReadingOptions { get }
-  static var ResolvesSymbolicLink: NSFileCoordinatorReadingOptions { get }
-  static var ImmediatelyAvailableMetadataOnly: NSFileCoordinatorReadingOptions { get }
-  static var ForUploading: NSFileCoordinatorReadingOptions { get }
+  static var WithoutChanges: FileCoordinatorReadingOptions { get }
+  static var ResolvesSymbolicLink: FileCoordinatorReadingOptions { get }
+  static var ImmediatelyAvailableMetadataOnly: FileCoordinatorReadingOptions { get }
+  static var ForUploading: FileCoordinatorReadingOptions { get }
 }
-struct NSFileCoordinatorWritingOptions : OptionSetType {
+struct FileCoordinatorWritingOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var ForDeleting: NSFileCoordinatorWritingOptions { get }
-  static var ForMoving: NSFileCoordinatorWritingOptions { get }
-  static var ForMerging: NSFileCoordinatorWritingOptions { get }
-  static var ForReplacing: NSFileCoordinatorWritingOptions { get }
-  static var ContentIndependentMetadataOnly: NSFileCoordinatorWritingOptions { get }
+  static var ForDeleting: FileCoordinatorWritingOptions { get }
+  static var ForMoving: FileCoordinatorWritingOptions { get }
+  static var ForMerging: FileCoordinatorWritingOptions { get }
+  static var ForReplacing: FileCoordinatorWritingOptions { get }
+  static var ContentIndependentMetadataOnly: FileCoordinatorWritingOptions { get }
 }
-class NSFileAccessIntent : NSObject {
-  class func readingIntentWithURL(url: NSURL, options: NSFileCoordinatorReadingOptions) -> Self
-  class func writingIntentWithURL(url: NSURL, options: NSFileCoordinatorWritingOptions) -> Self
-  @NSCopying var URL: NSURL { get }
+class FileAccessIntent : Object {
+  class func readingIntentWith(url: URL, options: FileCoordinatorReadingOptions = []) -> Self
+  class func writingIntentWith(url: URL, options: FileCoordinatorWritingOptions = []) -> Self
+  @NSCopying var url: URL { get }
   init()
 }
-class NSFileCoordinator : NSObject {
-  class func addFilePresenter(filePresenter: NSFilePresenter)
-  class func removeFilePresenter(filePresenter: NSFilePresenter)
-  class func filePresenters() -> [NSFilePresenter]
-  init(filePresenter filePresenterOrNil: NSFilePresenter?)
+class FileCoordinator : Object {
+  class func addFilePresenter(filePresenter: FilePresenter)
+  class func removeFilePresenter(filePresenter: FilePresenter)
+  class func filePresenters() -> [FilePresenter]
+  init(filePresenter filePresenterOrNil: FilePresenter?)
   var purposeIdentifier: String
-  func coordinateAccessWithIntents(intents: [NSFileAccessIntent], queue: NSOperationQueue, byAccessor accessor: (NSError?) -> Void)
-  func coordinateReadingItemAtURL(url: NSURL, options: NSFileCoordinatorReadingOptions, error outError: NSErrorPointer, byAccessor reader: (NSURL) -> Void)
-  func coordinateWritingItemAtURL(url: NSURL, options: NSFileCoordinatorWritingOptions, error outError: NSErrorPointer, byAccessor writer: (NSURL) -> Void)
-  func coordinateReadingItemAtURL(readingURL: NSURL, options readingOptions: NSFileCoordinatorReadingOptions, writingItemAtURL writingURL: NSURL, options writingOptions: NSFileCoordinatorWritingOptions, error outError: NSErrorPointer, byAccessor readerWriter: (NSURL, NSURL) -> Void)
-  func coordinateWritingItemAtURL(url1: NSURL, options options1: NSFileCoordinatorWritingOptions, writingItemAtURL url2: NSURL, options options2: NSFileCoordinatorWritingOptions, error outError: NSErrorPointer, byAccessor writer: (NSURL, NSURL) -> Void)
-  func prepareForReadingItemsAtURLs(readingURLs: [NSURL], options readingOptions: NSFileCoordinatorReadingOptions, writingItemsAtURLs writingURLs: [NSURL], options writingOptions: NSFileCoordinatorWritingOptions, error outError: NSErrorPointer, byAccessor batchAccessor: (() -> Void) -> Void)
-  func itemAtURL(oldURL: NSURL, willMoveToURL newURL: NSURL)
-  func itemAtURL(oldURL: NSURL, didMoveToURL newURL: NSURL)
+  func coordinateAccessWith(intents: [FileAccessIntent], queue: OperationQueue, byAccessor accessor: (Error?) -> Void)
+  func coordinateReadingItemAt(url: URL, options: FileCoordinatorReadingOptions = [], error outError: ErrorPointer, byAccessor reader: (URL) -> Void)
+  func coordinateWritingItemAt(url: URL, options: FileCoordinatorWritingOptions = [], error outError: ErrorPointer, byAccessor writer: (URL) -> Void)
+  func coordinateReadingItemAt(readingURL: URL, options readingOptions: FileCoordinatorReadingOptions = [], writingItemAt writingURL: URL, options writingOptions: FileCoordinatorWritingOptions = [], error outError: ErrorPointer, byAccessor readerWriter: (URL, URL) -> Void)
+  func coordinateWritingItemAt(url1: URL, options options1: FileCoordinatorWritingOptions = [], writingItemAt url2: URL, options options2: FileCoordinatorWritingOptions = [], error outError: ErrorPointer, byAccessor writer: (URL, URL) -> Void)
+  func prepareForReadingItemsAtURLs(readingURLs: [URL], options readingOptions: FileCoordinatorReadingOptions = [], writingItemsAtURLs writingURLs: [URL], options writingOptions: FileCoordinatorWritingOptions = [], error outError: ErrorPointer, byAccessor batchAccessor: (() -> Void) -> Void)
+  func itemAt(oldURL: URL, willMoveTo newURL: URL)
+  func itemAt(oldURL: URL, didMoveTo newURL: URL)
   func cancel()
   convenience init()
 }
-class NSFileHandle : NSObject, NSSecureCoding {
-  @NSCopying var availableData: NSData { get }
-  func readDataToEndOfFile() -> NSData
-  func readDataOfLength(length: Int) -> NSData
-  func writeData(data: NSData)
+class FileHandle : Object, SecureCoding {
+  @NSCopying var availableData: Data { get }
+  func readDataToEndOfFile() -> Data
+  func readDataOfLength(length: Int) -> Data
+  func write(data: Data)
   var offsetInFile: UInt64 { get }
   func seekToEndOfFile() -> UInt64
   func seekToFileOffset(offset: UInt64)
@@ -1833,31 +1829,31 @@ class NSFileHandle : NSObject, NSSecureCoding {
   func synchronizeFile()
   func closeFile()
   init(fileDescriptor fd: Int32, closeOnDealloc closeopt: Bool)
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
+  func encodeWith(aCoder: Coder)
 }
-extension NSFileHandle {
-  class func fileHandleWithStandardInput() -> NSFileHandle
-  class func fileHandleWithStandardOutput() -> NSFileHandle
-  class func fileHandleWithStandardError() -> NSFileHandle
-  class func fileHandleWithNullDevice() -> NSFileHandle
+extension FileHandle {
+  class func withStandardInput() -> FileHandle
+  class func withStandardOutput() -> FileHandle
+  class func withStandardError() -> FileHandle
+  class func withNullDevice() -> FileHandle
   convenience init?(forReadingAtPath path: String)
   convenience init?(forWritingAtPath path: String)
   convenience init?(forUpdatingAtPath path: String)
-  convenience init(forReadingFromURL url: NSURL) throws
-  convenience init(forWritingToURL url: NSURL) throws
-  convenience init(forUpdatingURL url: NSURL) throws
+  convenience init(forReadingFrom url: URL) throws
+  convenience init(forWritingTo url: URL) throws
+  convenience init(forUpdatingURL url: URL) throws
 }
-let NSFileHandleOperationException: String
-let NSFileHandleReadCompletionNotification: String
-let NSFileHandleReadToEndOfFileCompletionNotification: String
-let NSFileHandleConnectionAcceptedNotification: String
-let NSFileHandleDataAvailableNotification: String
-let NSFileHandleNotificationDataItem: String
-let NSFileHandleNotificationFileHandleItem: String
-extension NSFileHandle {
+let fileHandleOperationException: String
+let fileHandleReadCompletionNotification: String
+let fileHandleReadToEndOfFileCompletionNotification: String
+let fileHandleConnectionAcceptedNotification: String
+let fileHandleDataAvailableNotification: String
+let fileHandleNotificationDataItem: String
+let fileHandleNotificationFileHandleItem: String
+extension FileHandle {
   func readInBackgroundAndNotifyForModes(modes: [String]?)
   func readInBackgroundAndNotify()
   func readToEndOfFileInBackgroundAndNotifyForModes(modes: [String]?)
@@ -1866,67 +1862,67 @@ extension NSFileHandle {
   func acceptConnectionInBackgroundAndNotify()
   func waitForDataInBackgroundAndNotifyForModes(modes: [String]?)
   func waitForDataInBackgroundAndNotify()
-  var readabilityHandler: ((NSFileHandle) -> Void)?
-  var writeabilityHandler: ((NSFileHandle) -> Void)?
+  var readabilityHandler: ((FileHandle) -> Void)?
+  var writeabilityHandler: ((FileHandle) -> Void)?
 }
-extension NSFileHandle {
+extension FileHandle {
   convenience init(fileDescriptor fd: Int32)
   var fileDescriptor: Int32 { get }
 }
-class NSPipe : NSObject {
-  var fileHandleForReading: NSFileHandle { get }
-  var fileHandleForWriting: NSFileHandle { get }
+class Pipe : Object {
+  var fileHandleForReading: FileHandle { get }
+  var fileHandleForWriting: FileHandle { get }
   init()
 }
 var NSFoundationVersionWithFileManagerResourceForkSupport: Int32 { get }
-struct NSVolumeEnumerationOptions : OptionSetType {
+struct VolumeEnumerationOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var SkipHiddenVolumes: NSVolumeEnumerationOptions { get }
-  static var ProduceFileReferenceURLs: NSVolumeEnumerationOptions { get }
+  static var SkipHiddenVolumes: VolumeEnumerationOptions { get }
+  static var ProduceFileReferenceURLs: VolumeEnumerationOptions { get }
 }
-struct NSDirectoryEnumerationOptions : OptionSetType {
+struct DirectoryEnumerationOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var SkipsSubdirectoryDescendants: NSDirectoryEnumerationOptions { get }
-  static var SkipsPackageDescendants: NSDirectoryEnumerationOptions { get }
-  static var SkipsHiddenFiles: NSDirectoryEnumerationOptions { get }
+  static var SkipsSubdirectoryDescendants: DirectoryEnumerationOptions { get }
+  static var SkipsPackageDescendants: DirectoryEnumerationOptions { get }
+  static var SkipsHiddenFiles: DirectoryEnumerationOptions { get }
 }
-struct NSFileManagerItemReplacementOptions : OptionSetType {
+struct FileManagerItemReplacementOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var UsingNewMetadataOnly: NSFileManagerItemReplacementOptions { get }
-  static var WithoutDeletingBackupItem: NSFileManagerItemReplacementOptions { get }
+  static var UsingNewMetadataOnly: FileManagerItemReplacementOptions { get }
+  static var WithoutDeletingBackupItem: FileManagerItemReplacementOptions { get }
 }
-enum NSURLRelationship : Int {
+enum URLRelationship : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case Contains
   case Same
   case Other
 }
-struct NSFileManagerUnmountOptions : OptionSetType {
+struct FileManagerUnmountOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var AllPartitionsAndEjectDisk: NSFileManagerUnmountOptions { get }
-  static var WithoutUI: NSFileManagerUnmountOptions { get }
+  static var AllPartitionsAndEjectDisk: FileManagerUnmountOptions { get }
+  static var WithoutUI: FileManagerUnmountOptions { get }
 }
-let NSFileManagerUnmountDissentingProcessIdentifierErrorKey: String
-let NSUbiquityIdentityDidChangeNotification: String
-class NSFileManager : NSObject {
-  class func defaultManager() -> NSFileManager
-  func mountedVolumeURLsIncludingResourceValuesForKeys(propertyKeys: [String]?, options: NSVolumeEnumerationOptions) -> [NSURL]?
-  func unmountVolumeAtURL(url: NSURL, options mask: NSFileManagerUnmountOptions, completionHandler: (NSError?) -> Void)
-  func contentsOfDirectoryAtURL(url: NSURL, includingPropertiesForKeys keys: [String]?, options mask: NSDirectoryEnumerationOptions) throws -> [NSURL]
-  func URLsForDirectory(directory: NSSearchPathDirectory, inDomains domainMask: NSSearchPathDomainMask) -> [NSURL]
-  func URLForDirectory(directory: NSSearchPathDirectory, inDomain domain: NSSearchPathDomainMask, appropriateForURL url: NSURL?, create shouldCreate: Bool) throws -> NSURL
-  func getRelationship(outRelationship: UnsafeMutablePointer<NSURLRelationship>, ofDirectoryAtURL directoryURL: NSURL, toItemAtURL otherURL: NSURL) throws
-  func getRelationship(outRelationship: UnsafeMutablePointer<NSURLRelationship>, ofDirectory directory: NSSearchPathDirectory, inDomain domainMask: NSSearchPathDomainMask, toItemAtURL url: NSURL) throws
-  func createDirectoryAtURL(url: NSURL, withIntermediateDirectories createIntermediates: Bool, attributes: [String : AnyObject]?) throws
-  func createSymbolicLinkAtURL(url: NSURL, withDestinationURL destURL: NSURL) throws
-  unowned(unsafe) var delegate: @sil_unmanaged NSFileManagerDelegate?
-  func setAttributes(attributes: [String : AnyObject], ofItemAtPath path: String) throws
-  func createDirectoryAtPath(path: String, withIntermediateDirectories createIntermediates: Bool, attributes: [String : AnyObject]?) throws
+let fileManagerUnmountDissentingProcessIdentifierErrorKey: String
+let ubiquityIdentityDidChangeNotification: String
+class FileManager : Object {
+  class func defaultManager() -> FileManager
+  func mountedVolumeURLsIncludingResourceValuesForKeys(propertyKeys: [String]?, options: VolumeEnumerationOptions = []) -> [URL]?
+  func unmountVolumeAt(url: URL, options mask: FileManagerUnmountOptions = [], completionHandler: (Error?) -> Void)
+  func contentsOfDirectoryAt(url: URL, includingPropertiesForKeys keys: [String]?, options mask: DirectoryEnumerationOptions = []) throws -> [URL]
+  func urLsFor(directory: SearchPathDirectory, inDomains domainMask: SearchPathDomainMask) -> [URL]
+  func urlFor(directory: SearchPathDirectory, inDomain domain: SearchPathDomainMask, appropriateFor url: URL?, create shouldCreate: Bool) throws -> URL
+  func getRelationship(outRelationship: UnsafeMutablePointer<URLRelationship>, ofDirectoryAt directoryURL: URL, toItemAt otherURL: URL) throws
+  func getRelationship(outRelationship: UnsafeMutablePointer<URLRelationship>, of directory: SearchPathDirectory, inDomain domainMask: SearchPathDomainMask, toItemAt url: URL) throws
+  func createDirectoryAt(url: URL, withIntermediateDirectories createIntermediates: Bool, attributes: [String : AnyObject]? = [:]) throws
+  func createSymbolicLinkAt(url: URL, withDestinationURL destURL: URL) throws
+  unowned(unsafe) var delegate: @sil_unmanaged FileManagerDelegate?
+  func setAttributes(attributes: [String : AnyObject] = [:], ofItemAtPath path: String) throws
+  func createDirectoryAtPath(path: String, withIntermediateDirectories createIntermediates: Bool, attributes: [String : AnyObject]? = [:]) throws
   func contentsOfDirectoryAtPath(path: String) throws -> [String]
   func subpathsOfDirectoryAtPath(path: String) throws -> [String]
   func attributesOfItemAtPath(path: String) throws -> [String : AnyObject]
@@ -1937,11 +1933,11 @@ class NSFileManager : NSObject {
   func moveItemAtPath(srcPath: String, toPath dstPath: String) throws
   func linkItemAtPath(srcPath: String, toPath dstPath: String) throws
   func removeItemAtPath(path: String) throws
-  func copyItemAtURL(srcURL: NSURL, toURL dstURL: NSURL) throws
-  func moveItemAtURL(srcURL: NSURL, toURL dstURL: NSURL) throws
-  func linkItemAtURL(srcURL: NSURL, toURL dstURL: NSURL) throws
-  func removeItemAtURL(URL: NSURL) throws
-  func trashItemAtURL(url: NSURL, resultingItemURL outResultingURL: AutoreleasingUnsafeMutablePointer<NSURL?>) throws
+  func copyItemAt(srcURL: URL, to dstURL: URL) throws
+  func moveItemAt(srcURL: URL, to dstURL: URL) throws
+  func linkItemAt(srcURL: URL, to dstURL: URL) throws
+  func removeItemAt(URL: URL) throws
+  func trashItemAt(url: URL, resultingItemURL outResultingURL: AutoreleasingUnsafeMutablePointer<URL?>) throws
   var currentDirectoryPath: String { get }
   func changeCurrentDirectoryPath(path: String) -> Bool
   func fileExistsAtPath(path: String) -> Bool
@@ -1953,45 +1949,45 @@ class NSFileManager : NSObject {
   func contentsEqualAtPath(path1: String, andPath path2: String) -> Bool
   func displayNameAtPath(path: String) -> String
   func componentsToDisplayForPath(path: String) -> [String]?
-  func enumeratorAtPath(path: String) -> NSDirectoryEnumerator?
-  func enumeratorAtURL(url: NSURL, includingPropertiesForKeys keys: [String]?, options mask: NSDirectoryEnumerationOptions, errorHandler handler: ((NSURL, NSError) -> Bool)?) -> NSDirectoryEnumerator?
+  func enumeratorAtPath(path: String) -> DirectoryEnumerator?
+  func enumeratorAt(url: URL, includingPropertiesForKeys keys: [String]?, options mask: DirectoryEnumerationOptions = [], errorHandler handler: ((URL, Error) -> Bool)? = nil) -> DirectoryEnumerator?
   func subpathsAtPath(path: String) -> [String]?
-  func contentsAtPath(path: String) -> NSData?
-  func createFileAtPath(path: String, contents data: NSData?, attributes attr: [String : AnyObject]?) -> Bool
+  func contentsAtPath(path: String) -> Data?
+  func createFileAtPath(path: String, contents data: Data?, attributes attr: [String : AnyObject]? = [:]) -> Bool
   func fileSystemRepresentationWithPath(path: String) -> UnsafePointer<Int8>
   func stringWithFileSystemRepresentation(str: UnsafePointer<Int8>, length len: Int) -> String
-  func replaceItemAtURL(originalItemURL: NSURL, withItemAtURL newItemURL: NSURL, backupItemName: String?, options: NSFileManagerItemReplacementOptions, resultingItemURL resultingURL: AutoreleasingUnsafeMutablePointer<NSURL?>) throws
-  func setUbiquitous(flag: Bool, itemAtURL url: NSURL, destinationURL: NSURL) throws
-  func isUbiquitousItemAtURL(url: NSURL) -> Bool
-  func startDownloadingUbiquitousItemAtURL(url: NSURL) throws
-  func evictUbiquitousItemAtURL(url: NSURL) throws
-  func URLForUbiquityContainerIdentifier(containerIdentifier: String?) -> NSURL?
-  func URLForPublishingUbiquitousItemAtURL(url: NSURL, expirationDate outDate: AutoreleasingUnsafeMutablePointer<NSDate?>) throws -> NSURL
-  @NSCopying var ubiquityIdentityToken: protocol<NSCoding, NSCopying, NSObjectProtocol>? { get }
-  func containerURLForSecurityApplicationGroupIdentifier(groupIdentifier: String) -> NSURL?
+  func replaceItemAt(originalItemURL: URL, withItemAt newItemURL: URL, backupItemName: String?, options: FileManagerItemReplacementOptions = [], resultingItemURL resultingURL: AutoreleasingUnsafeMutablePointer<URL?>) throws
+  func setUbiquitous(flag: Bool, itemAt url: URL, destinationURL: URL) throws
+  func isUbiquitousItemAt(url: URL) -> Bool
+  func startDownloadingUbiquitousItemAt(url: URL) throws
+  func evictUbiquitousItemAt(url: URL) throws
+  func urlForUbiquityContainerIdentifier(containerIdentifier: String?) -> URL?
+  func urlForPublishingUbiquitousItemAt(url: URL, expirationDate outDate: AutoreleasingUnsafeMutablePointer<Date?>) throws -> URL
+  @NSCopying var ubiquityIdentityToken: protocol<Coding, Copying, ObjectProtocol>? { get }
+  func containerURLForSecurityApplicationGroupIdentifier(groupIdentifier: String) -> URL?
   init()
 }
-extension NSObject {
+extension Object {
 }
-protocol NSFileManagerDelegate : NSObjectProtocol {
-  optional func fileManager(fileManager: NSFileManager, shouldCopyItemAtPath srcPath: String, toPath dstPath: String) -> Bool
-  optional func fileManager(fileManager: NSFileManager, shouldCopyItemAtURL srcURL: NSURL, toURL dstURL: NSURL) -> Bool
-  optional func fileManager(fileManager: NSFileManager, shouldProceedAfterError error: NSError, copyingItemAtPath srcPath: String, toPath dstPath: String) -> Bool
-  optional func fileManager(fileManager: NSFileManager, shouldProceedAfterError error: NSError, copyingItemAtURL srcURL: NSURL, toURL dstURL: NSURL) -> Bool
-  optional func fileManager(fileManager: NSFileManager, shouldMoveItemAtPath srcPath: String, toPath dstPath: String) -> Bool
-  optional func fileManager(fileManager: NSFileManager, shouldMoveItemAtURL srcURL: NSURL, toURL dstURL: NSURL) -> Bool
-  optional func fileManager(fileManager: NSFileManager, shouldProceedAfterError error: NSError, movingItemAtPath srcPath: String, toPath dstPath: String) -> Bool
-  optional func fileManager(fileManager: NSFileManager, shouldProceedAfterError error: NSError, movingItemAtURL srcURL: NSURL, toURL dstURL: NSURL) -> Bool
-  optional func fileManager(fileManager: NSFileManager, shouldLinkItemAtPath srcPath: String, toPath dstPath: String) -> Bool
-  optional func fileManager(fileManager: NSFileManager, shouldLinkItemAtURL srcURL: NSURL, toURL dstURL: NSURL) -> Bool
-  optional func fileManager(fileManager: NSFileManager, shouldProceedAfterError error: NSError, linkingItemAtPath srcPath: String, toPath dstPath: String) -> Bool
-  optional func fileManager(fileManager: NSFileManager, shouldProceedAfterError error: NSError, linkingItemAtURL srcURL: NSURL, toURL dstURL: NSURL) -> Bool
-  optional func fileManager(fileManager: NSFileManager, shouldRemoveItemAtPath path: String) -> Bool
-  optional func fileManager(fileManager: NSFileManager, shouldRemoveItemAtURL URL: NSURL) -> Bool
-  optional func fileManager(fileManager: NSFileManager, shouldProceedAfterError error: NSError, removingItemAtPath path: String) -> Bool
-  optional func fileManager(fileManager: NSFileManager, shouldProceedAfterError error: NSError, removingItemAtURL URL: NSURL) -> Bool
+protocol FileManagerDelegate : ObjectProtocol {
+  optional func fileManager(fileManager: FileManager, shouldCopyItemAtPath srcPath: String, toPath dstPath: String) -> Bool
+  optional func fileManager(fileManager: FileManager, shouldCopyItemAt srcURL: URL, to dstURL: URL) -> Bool
+  optional func fileManager(fileManager: FileManager, shouldProceedAfterError error: Error, copyingItemAtPath srcPath: String, toPath dstPath: String) -> Bool
+  optional func fileManager(fileManager: FileManager, shouldProceedAfterError error: Error, copyingItemAt srcURL: URL, to dstURL: URL) -> Bool
+  optional func fileManager(fileManager: FileManager, shouldMoveItemAtPath srcPath: String, toPath dstPath: String) -> Bool
+  optional func fileManager(fileManager: FileManager, shouldMoveItemAt srcURL: URL, to dstURL: URL) -> Bool
+  optional func fileManager(fileManager: FileManager, shouldProceedAfterError error: Error, movingItemAtPath srcPath: String, toPath dstPath: String) -> Bool
+  optional func fileManager(fileManager: FileManager, shouldProceedAfterError error: Error, movingItemAt srcURL: URL, to dstURL: URL) -> Bool
+  optional func fileManager(fileManager: FileManager, shouldLinkItemAtPath srcPath: String, toPath dstPath: String) -> Bool
+  optional func fileManager(fileManager: FileManager, shouldLinkItemAt srcURL: URL, to dstURL: URL) -> Bool
+  optional func fileManager(fileManager: FileManager, shouldProceedAfterError error: Error, linkingItemAtPath srcPath: String, toPath dstPath: String) -> Bool
+  optional func fileManager(fileManager: FileManager, shouldProceedAfterError error: Error, linkingItemAt srcURL: URL, to dstURL: URL) -> Bool
+  optional func fileManager(fileManager: FileManager, shouldRemoveItemAtPath path: String) -> Bool
+  optional func fileManager(fileManager: FileManager, shouldRemoveItemAt URL: URL) -> Bool
+  optional func fileManager(fileManager: FileManager, shouldProceedAfterError error: Error, removingItemAtPath path: String) -> Bool
+  optional func fileManager(fileManager: FileManager, shouldProceedAfterError error: Error, removingItemAt URL: URL) -> Bool
 }
-class NSDirectoryEnumerator : NSEnumerator {
+class DirectoryEnumerator : Enumerator {
   var fileAttributes: [String : AnyObject]? { get }
   var directoryAttributes: [String : AnyObject]? { get }
   func skipDescendents()
@@ -1999,39 +1995,39 @@ class NSDirectoryEnumerator : NSEnumerator {
   func skipDescendants()
   init()
 }
-let NSFileType: String
-let NSFileTypeDirectory: String
-let NSFileTypeRegular: String
-let NSFileTypeSymbolicLink: String
-let NSFileTypeSocket: String
-let NSFileTypeCharacterSpecial: String
-let NSFileTypeBlockSpecial: String
-let NSFileTypeUnknown: String
-let NSFileSize: String
-let NSFileModificationDate: String
-let NSFileReferenceCount: String
-let NSFileDeviceIdentifier: String
-let NSFileOwnerAccountName: String
-let NSFileGroupOwnerAccountName: String
-let NSFilePosixPermissions: String
-let NSFileSystemNumber: String
-let NSFileSystemFileNumber: String
-let NSFileExtensionHidden: String
-let NSFileHFSCreatorCode: String
-let NSFileHFSTypeCode: String
-let NSFileImmutable: String
-let NSFileAppendOnly: String
-let NSFileCreationDate: String
-let NSFileOwnerAccountID: String
-let NSFileGroupOwnerAccountID: String
-let NSFileBusy: String
-let NSFileSystemSize: String
-let NSFileSystemFreeSize: String
-let NSFileSystemNodes: String
-let NSFileSystemFreeNodes: String
+let fileType: String
+let fileTypeDirectory: String
+let fileTypeRegular: String
+let fileTypeSymbolicLink: String
+let fileTypeSocket: String
+let fileTypeCharacterSpecial: String
+let fileTypeBlockSpecial: String
+let fileTypeUnknown: String
+let fileSize: String
+let fileModificationDate: String
+let fileReferenceCount: String
+let fileDeviceIdentifier: String
+let fileOwnerAccountName: String
+let fileGroupOwnerAccountName: String
+let filePosixPermissions: String
+let fileSystemNumber: String
+let fileSystemFileNumber: String
+let fileExtensionHidden: String
+let fileHFSCreatorCode: String
+let fileHFSTypeCode: String
+let fileImmutable: String
+let fileAppendOnly: String
+let fileCreationDate: String
+let fileOwnerAccountID: String
+let fileGroupOwnerAccountID: String
+let fileBusy: String
+let fileSystemSize: String
+let fileSystemFreeSize: String
+let fileSystemNodes: String
+let fileSystemFreeNodes: String
 extension NSDictionary {
   func fileSize() -> UInt64
-  func fileModificationDate() -> NSDate?
+  func fileModificationDate() -> Date?
   func fileType() -> String?
   func filePosixPermissions() -> Int
   func fileOwnerAccountName() -> String?
@@ -2043,104 +2039,104 @@ extension NSDictionary {
   func fileHFSTypeCode() -> OSType
   func fileIsImmutable() -> Bool
   func fileIsAppendOnly() -> Bool
-  func fileCreationDate() -> NSDate?
-  func fileOwnerAccountID() -> NSNumber?
-  func fileGroupOwnerAccountID() -> NSNumber?
+  func fileCreationDate() -> Date?
+  func fileOwnerAccountID() -> Number?
+  func fileGroupOwnerAccountID() -> Number?
 }
-protocol NSFilePresenter : NSObjectProtocol {
-  @NSCopying var presentedItemURL: NSURL? { get }
-  var presentedItemOperationQueue: NSOperationQueue { get }
-  @NSCopying optional var primaryPresentedItemURL: NSURL? { get }
+protocol FilePresenter : ObjectProtocol {
+  @NSCopying var presentedItemURL: URL? { get }
+  var presentedItemOperationQueue: OperationQueue { get }
+  @NSCopying optional var primaryPresentedItemURL: URL? { get }
   optional func relinquishPresentedItemToReader(reader: ((() -> Void)?) -> Void)
   optional func relinquishPresentedItemToWriter(writer: ((() -> Void)?) -> Void)
-  optional func savePresentedItemChangesWithCompletionHandler(completionHandler: (NSError?) -> Void)
-  optional func accommodatePresentedItemDeletionWithCompletionHandler(completionHandler: (NSError?) -> Void)
-  optional func presentedItemDidMoveToURL(newURL: NSURL)
+  optional func savePresentedItemChangesWithCompletionHandler(completionHandler: (Error?) -> Void)
+  optional func accommodatePresentedItemDeletionWithCompletionHandler(completionHandler: (Error?) -> Void)
+  optional func presentedItemDidMoveTo(newURL: URL)
   optional func presentedItemDidChange()
-  optional func presentedItemDidGainVersion(version: NSFileVersion)
-  optional func presentedItemDidLoseVersion(version: NSFileVersion)
-  optional func presentedItemDidResolveConflictVersion(version: NSFileVersion)
-  optional func accommodatePresentedSubitemDeletionAtURL(url: NSURL, completionHandler: (NSError?) -> Void)
-  optional func presentedSubitemDidAppearAtURL(url: NSURL)
-  optional func presentedSubitemAtURL(oldURL: NSURL, didMoveToURL newURL: NSURL)
-  optional func presentedSubitemDidChangeAtURL(url: NSURL)
-  optional func presentedSubitemAtURL(url: NSURL, didGainVersion version: NSFileVersion)
-  optional func presentedSubitemAtURL(url: NSURL, didLoseVersion version: NSFileVersion)
-  optional func presentedSubitemAtURL(url: NSURL, didResolveConflictVersion version: NSFileVersion)
+  optional func presentedItemDidGainVersion(version: FileVersion)
+  optional func presentedItemDidLose(version: FileVersion)
+  optional func presentedItemDidResolveConflictVersion(version: FileVersion)
+  optional func accommodatePresentedSubitemDeletionAt(url: URL, completionHandler: (Error?) -> Void)
+  optional func presentedSubitemDidAppearAt(url: URL)
+  optional func presentedSubitemAt(oldURL: URL, didMoveTo newURL: URL)
+  optional func presentedSubitemDidChangeAt(url: URL)
+  optional func presentedSubitemAt(url: URL, didGainVersion version: FileVersion)
+  optional func presentedSubitemAt(url: URL, didLose version: FileVersion)
+  optional func presentedSubitemAt(url: URL, didResolveConflictVersion version: FileVersion)
 }
-struct NSFileVersionAddingOptions : OptionSetType {
+struct FileVersionAddingOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var ByMoving: NSFileVersionAddingOptions { get }
+  static var ByMoving: FileVersionAddingOptions { get }
 }
-struct NSFileVersionReplacingOptions : OptionSetType {
+struct FileVersionReplacingOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var ByMoving: NSFileVersionReplacingOptions { get }
+  static var ByMoving: FileVersionReplacingOptions { get }
 }
-class NSFileVersion : NSObject {
-  class func currentVersionOfItemAtURL(url: NSURL) -> NSFileVersion?
-  class func otherVersionsOfItemAtURL(url: NSURL) -> [NSFileVersion]?
-  class func unresolvedConflictVersionsOfItemAtURL(url: NSURL) -> [NSFileVersion]?
-  class func getNonlocalVersionsOfItemAtURL(url: NSURL, completionHandler: ([NSFileVersion]?, NSError?) -> Void)
-   init?(ofItemAtURL url: NSURL, forPersistentIdentifier persistentIdentifier: AnyObject)
-  class func addVersionOfItemAtURL(url: NSURL, withContentsOfURL contentsURL: NSURL, options: NSFileVersionAddingOptions) throws -> NSFileVersion
-  class func temporaryDirectoryURLForNewVersionOfItemAtURL(url: NSURL) -> NSURL
-  @NSCopying var URL: NSURL { get }
+class FileVersion : Object {
+  class func currentVersionOfItemAt(url: URL) -> FileVersion?
+  class func otherVersionsOfItemAt(url: URL) -> [FileVersion]?
+  class func unresolvedConflictVersionsOfItemAt(url: URL) -> [FileVersion]?
+  class func getNonlocalVersionsOfItemAt(url: URL, completionHandler: ([FileVersion]?, Error?) -> Void)
+   init?(ofItemAt url: URL, forPersistentIdentifier persistentIdentifier: AnyObject)
+  class func addOfItemAt(url: URL, withContentsOf contentsURL: URL, options: FileVersionAddingOptions = []) throws -> FileVersion
+  class func temporaryDirectoryURLForNewVersionOfItemAt(url: URL) -> URL
+  @NSCopying var url: URL { get }
   var localizedName: String? { get }
   var localizedNameOfSavingComputer: String? { get }
-  @NSCopying var modificationDate: NSDate? { get }
-  var persistentIdentifier: NSCoding { get }
-  var conflict: Bool { get }
-  var resolved: Bool
-  var discardable: Bool
+  @NSCopying var modificationDate: Date? { get }
+  var persistentIdentifier: Coding { get }
+  var isConflict: Bool { get }
+  var isResolved: Bool
+  var isDiscardable: Bool
   var hasLocalContents: Bool { get }
   var hasThumbnail: Bool { get }
-  func replaceItemAtURL(url: NSURL, options: NSFileVersionReplacingOptions) throws -> NSURL
+  func replaceItemAt(url: URL, options: FileVersionReplacingOptions = []) throws -> URL
   func remove() throws
-  class func removeOtherVersionsOfItemAtURL(url: NSURL) throws
+  class func removeOtherVersionsOfItemAt(url: URL) throws
   init()
 }
-struct NSFileWrapperReadingOptions : OptionSetType {
+struct FileWrapperReadingOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var Immediate: NSFileWrapperReadingOptions { get }
-  static var WithoutMapping: NSFileWrapperReadingOptions { get }
+  static var Immediate: FileWrapperReadingOptions { get }
+  static var WithoutMapping: FileWrapperReadingOptions { get }
 }
-struct NSFileWrapperWritingOptions : OptionSetType {
+struct FileWrapperWritingOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var Atomic: NSFileWrapperWritingOptions { get }
-  static var WithNameUpdating: NSFileWrapperWritingOptions { get }
+  static var Atomic: FileWrapperWritingOptions { get }
+  static var WithNameUpdating: FileWrapperWritingOptions { get }
 }
-class NSFileWrapper : NSObject, NSCoding {
-  init(URL url: NSURL, options: NSFileWrapperReadingOptions) throws
-  init(directoryWithFileWrappers childrenByPreferredName: [String : NSFileWrapper])
-  init(regularFileWithContents contents: NSData)
-  init(symbolicLinkWithDestinationURL url: NSURL)
-  init?(serializedRepresentation serializeRepresentation: NSData)
-  init?(coder inCoder: NSCoder)
-  var directory: Bool { get }
-  var regularFile: Bool { get }
-  var symbolicLink: Bool { get }
+class FileWrapper : Object, Coding {
+  init(url: URL, options: FileWrapperReadingOptions = []) throws
+  init(directoryWithFileWrappers childrenByPreferredName: [String : FileWrapper])
+  init(regularFileWithContents contents: Data)
+  init(symbolicLinkWithDestinationURL url: URL)
+  init?(serializedRepresentation serializeRepresentation: Data)
+  init?(coder inCoder: Coder)
+  var isDirectory: Bool { get }
+  var isRegularFile: Bool { get }
+  var isSymbolicLink: Bool { get }
   var preferredFilename: String?
   var filename: String?
   var fileAttributes: [String : AnyObject]
-  func matchesContentsOfURL(url: NSURL) -> Bool
-  func readFromURL(url: NSURL, options: NSFileWrapperReadingOptions) throws
-  func writeToURL(url: NSURL, options: NSFileWrapperWritingOptions, originalContentsURL: NSURL?) throws
-  @NSCopying var serializedRepresentation: NSData? { get }
-  func addFileWrapper(child: NSFileWrapper) -> String
-  func addRegularFileWithContents(data: NSData, preferredFilename fileName: String) -> String
-  func removeFileWrapper(child: NSFileWrapper)
-  var fileWrappers: [String : NSFileWrapper]? { get }
-  func keyForFileWrapper(child: NSFileWrapper) -> String?
-  @NSCopying var regularFileContents: NSData? { get }
-  @NSCopying var symbolicLinkDestinationURL: NSURL? { get }
+  func matchesContentsOf(url: URL) -> Bool
+  func readFrom(url: URL, options: FileWrapperReadingOptions = []) throws
+  func writeTo(url: URL, options: FileWrapperWritingOptions = [], originalContentsURL: URL?) throws
+  @NSCopying var serializedRepresentation: Data? { get }
+  func add(child: FileWrapper) -> String
+  func addRegularFileWithContents(data: Data, preferredFilename fileName: String) -> String
+  func remove(child: FileWrapper)
+  var fileWrappers: [String : FileWrapper]? { get }
+  func keyFor(child: FileWrapper) -> String?
+  @NSCopying var regularFileContents: Data? { get }
+  @NSCopying var symbolicLinkDestinationURL: URL? { get }
   convenience init()
-  func encodeWithCoder(aCoder: NSCoder)
+  func encodeWith(aCoder: Coder)
 }
-extension NSFileWrapper {
+extension FileWrapper {
   convenience init?(path: String)
   convenience init(symbolicLinkWithDestination path: String)
   func needsToBeUpdatedFromPath(path: String) -> Bool
@@ -2150,7 +2146,7 @@ extension NSFileWrapper {
   func addSymbolicLinkWithDestination(path: String, preferredFilename filename: String) -> String
   func symbolicLinkDestination() -> String
 }
-enum NSFormattingContext : Int {
+enum FormattingContext : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case Unknown
@@ -2160,35 +2156,35 @@ enum NSFormattingContext : Int {
   case BeginningOfSentence
   case MiddleOfSentence
 }
-enum NSFormattingUnitStyle : Int {
+enum FormattingUnitStyle : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case Short
   case Medium
   case Long
 }
-class NSFormatter : NSObject, NSCopying, NSCoding {
+class Formatter : Object, Copying, Coding {
   func stringForObjectValue(obj: AnyObject) -> String?
-  func attributedStringForObjectValue(obj: AnyObject, withDefaultAttributes attrs: [String : AnyObject]?) -> NSAttributedString?
+  func attributedStringForObjectValue(obj: AnyObject, withDefaultAttributes attrs: [String : AnyObject]? = [:]) -> AttributedString?
   func editingStringForObjectValue(obj: AnyObject) -> String?
   func getObjectValue(obj: AutoreleasingUnsafeMutablePointer<AnyObject?>, forString string: String, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
-  func isPartialStringValid(partialString: String, newEditingString newString: AutoreleasingUnsafeMutablePointer<NSString?>, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
-  func isPartialStringValid(partialStringPtr: AutoreleasingUnsafeMutablePointer<NSString?>, proposedSelectedRange proposedSelRangePtr: NSRangePointer, originalString origString: String, originalSelectedRange origSelRange: NSRange, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
+  func isPartialStringValid(partialString: String, newEditing newString: AutoreleasingUnsafeMutablePointer<NSString?>, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
+  func isPartialStringValid(partialStringPtr: AutoreleasingUnsafeMutablePointer<NSString?>, proposedSelectedRange proposedSelRangePtr: RangePointer, originalString origString: String, originalSelectedRange origSelRange: NSRange, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-typealias NSPoint = CGPoint
-typealias NSPointPointer = UnsafeMutablePointer<NSPoint>
-typealias NSPointArray = UnsafeMutablePointer<NSPoint>
-typealias NSSize = CGSize
-typealias NSSizePointer = UnsafeMutablePointer<NSSize>
-typealias NSSizeArray = UnsafeMutablePointer<NSSize>
-typealias NSRect = CGRect
-typealias NSRectPointer = UnsafeMutablePointer<NSRect>
-typealias NSRectArray = UnsafeMutablePointer<NSRect>
-enum NSRectEdge : UInt {
+typealias Point = CGPoint
+typealias PointPointer = UnsafeMutablePointer<Point>
+typealias PointArray = UnsafeMutablePointer<Point>
+typealias Size = CGSize
+typealias SizePointer = UnsafeMutablePointer<Size>
+typealias SizeArray = UnsafeMutablePointer<Size>
+typealias Rect = CGRect
+typealias RectPointer = UnsafeMutablePointer<Rect>
+typealias RectArray = UnsafeMutablePointer<Rect>
+enum RectEdge : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case MinX
@@ -2196,10 +2192,10 @@ enum NSRectEdge : UInt {
   case MaxX
   case MaxY
 }
-extension NSRectEdge {
+extension RectEdge {
   init(rectEdge: CGRectEdge)
 }
-struct NSEdgeInsets {
+struct EdgeInsets {
   var top: CGFloat
   var left: CGFloat
   var bottom: CGFloat
@@ -2207,242 +2203,242 @@ struct NSEdgeInsets {
   init()
   init(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat)
 }
-struct NSAlignmentOptions : OptionSetType {
+struct AlignmentOptions : OptionSetType {
   init(rawValue: UInt64)
   let rawValue: UInt64
-  static var AlignMinXInward: NSAlignmentOptions { get }
-  static var AlignMinYInward: NSAlignmentOptions { get }
-  static var AlignMaxXInward: NSAlignmentOptions { get }
-  static var AlignMaxYInward: NSAlignmentOptions { get }
-  static var AlignWidthInward: NSAlignmentOptions { get }
-  static var AlignHeightInward: NSAlignmentOptions { get }
-  static var AlignMinXOutward: NSAlignmentOptions { get }
-  static var AlignMinYOutward: NSAlignmentOptions { get }
-  static var AlignMaxXOutward: NSAlignmentOptions { get }
-  static var AlignMaxYOutward: NSAlignmentOptions { get }
-  static var AlignWidthOutward: NSAlignmentOptions { get }
-  static var AlignHeightOutward: NSAlignmentOptions { get }
-  static var AlignMinXNearest: NSAlignmentOptions { get }
-  static var AlignMinYNearest: NSAlignmentOptions { get }
-  static var AlignMaxXNearest: NSAlignmentOptions { get }
-  static var AlignMaxYNearest: NSAlignmentOptions { get }
-  static var AlignWidthNearest: NSAlignmentOptions { get }
-  static var AlignHeightNearest: NSAlignmentOptions { get }
-  static var AlignRectFlipped: NSAlignmentOptions { get }
-  static var AlignAllEdgesInward: NSAlignmentOptions { get }
-  static var AlignAllEdgesOutward: NSAlignmentOptions { get }
-  static var AlignAllEdgesNearest: NSAlignmentOptions { get }
+  static var AlignMinXInward: AlignmentOptions { get }
+  static var AlignMinYInward: AlignmentOptions { get }
+  static var AlignMaxXInward: AlignmentOptions { get }
+  static var AlignMaxYInward: AlignmentOptions { get }
+  static var AlignWidthInward: AlignmentOptions { get }
+  static var AlignHeightInward: AlignmentOptions { get }
+  static var AlignMinXOutward: AlignmentOptions { get }
+  static var AlignMinYOutward: AlignmentOptions { get }
+  static var AlignMaxXOutward: AlignmentOptions { get }
+  static var AlignMaxYOutward: AlignmentOptions { get }
+  static var AlignWidthOutward: AlignmentOptions { get }
+  static var AlignHeightOutward: AlignmentOptions { get }
+  static var AlignMinXNearest: AlignmentOptions { get }
+  static var AlignMinYNearest: AlignmentOptions { get }
+  static var AlignMaxXNearest: AlignmentOptions { get }
+  static var AlignMaxYNearest: AlignmentOptions { get }
+  static var AlignWidthNearest: AlignmentOptions { get }
+  static var AlignHeightNearest: AlignmentOptions { get }
+  static var AlignRectFlipped: AlignmentOptions { get }
+  static var AlignAllEdgesInward: AlignmentOptions { get }
+  static var AlignAllEdgesOutward: AlignmentOptions { get }
+  static var AlignAllEdgesNearest: AlignmentOptions { get }
 }
-let NSZeroPoint: NSPoint
-let NSZeroSize: NSSize
-let NSZeroRect: NSRect
-let NSEdgeInsetsZero: NSEdgeInsets
-func NSMakePoint(x: CGFloat, _ y: CGFloat) -> NSPoint
-func NSMakeSize(w: CGFloat, _ h: CGFloat) -> NSSize
-func NSMakeRect(x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> NSRect
-func NSMaxX(aRect: NSRect) -> CGFloat
-func NSMaxY(aRect: NSRect) -> CGFloat
-func NSMidX(aRect: NSRect) -> CGFloat
-func NSMidY(aRect: NSRect) -> CGFloat
-func NSMinX(aRect: NSRect) -> CGFloat
-func NSMinY(aRect: NSRect) -> CGFloat
-func NSWidth(aRect: NSRect) -> CGFloat
-func NSHeight(aRect: NSRect) -> CGFloat
-func NSRectFromCGRect(cgrect: CGRect) -> NSRect
-func NSRectToCGRect(nsrect: NSRect) -> CGRect
-func NSPointFromCGPoint(cgpoint: CGPoint) -> NSPoint
-func NSPointToCGPoint(nspoint: NSPoint) -> CGPoint
-func NSSizeFromCGSize(cgsize: CGSize) -> NSSize
-func NSSizeToCGSize(nssize: NSSize) -> CGSize
-func NSEdgeInsetsMake(top: CGFloat, _ left: CGFloat, _ bottom: CGFloat, _ right: CGFloat) -> NSEdgeInsets
-func NSEqualPoints(aPoint: NSPoint, _ bPoint: NSPoint) -> Bool
-func NSEqualSizes(aSize: NSSize, _ bSize: NSSize) -> Bool
-func NSEqualRects(aRect: NSRect, _ bRect: NSRect) -> Bool
-func NSIsEmptyRect(aRect: NSRect) -> Bool
-func NSEdgeInsetsEqual(aInsets: NSEdgeInsets, _ bInsets: NSEdgeInsets) -> Bool
-func NSInsetRect(aRect: NSRect, _ dX: CGFloat, _ dY: CGFloat) -> NSRect
-func NSIntegralRect(aRect: NSRect) -> NSRect
-func NSIntegralRectWithOptions(aRect: NSRect, _ opts: NSAlignmentOptions) -> NSRect
-func NSUnionRect(aRect: NSRect, _ bRect: NSRect) -> NSRect
-func NSIntersectionRect(aRect: NSRect, _ bRect: NSRect) -> NSRect
-func NSOffsetRect(aRect: NSRect, _ dX: CGFloat, _ dY: CGFloat) -> NSRect
-func NSDivideRect(inRect: NSRect, _ slice: UnsafeMutablePointer<NSRect>, _ rem: UnsafeMutablePointer<NSRect>, _ amount: CGFloat, _ edge: NSRectEdge)
-func NSPointInRect(aPoint: NSPoint, _ aRect: NSRect) -> Bool
-func NSMouseInRect(aPoint: NSPoint, _ aRect: NSRect, _ flipped: Bool) -> Bool
-func NSContainsRect(aRect: NSRect, _ bRect: NSRect) -> Bool
-func NSIntersectsRect(aRect: NSRect, _ bRect: NSRect) -> Bool
-func NSStringFromPoint(aPoint: NSPoint) -> String
-func NSStringFromSize(aSize: NSSize) -> String
-func NSStringFromRect(aRect: NSRect) -> String
-func NSPointFromString(aString: String) -> NSPoint
-func NSSizeFromString(aString: String) -> NSSize
-func NSRectFromString(aString: String) -> NSRect
-extension NSValue {
-   init(point: NSPoint)
-   init(size: NSSize)
-   init(rect: NSRect)
-   init(edgeInsets insets: NSEdgeInsets)
-  var pointValue: NSPoint { get }
-  var sizeValue: NSSize { get }
-  var rectValue: NSRect { get }
-  var edgeInsetsValue: NSEdgeInsets { get }
+let zeroPoint: Point
+let zeroSize: Size
+let zeroRect: Rect
+let edgeInsetsZero: EdgeInsets
+func makePoint(x: CGFloat, _ y: CGFloat) -> Point
+func makeSize(w: CGFloat, _ h: CGFloat) -> Size
+func makeRect(x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> Rect
+func maxX(aRect: Rect) -> CGFloat
+func maxY(aRect: Rect) -> CGFloat
+func midX(aRect: Rect) -> CGFloat
+func midY(aRect: Rect) -> CGFloat
+func minX(aRect: Rect) -> CGFloat
+func minY(aRect: Rect) -> CGFloat
+func width(aRect: Rect) -> CGFloat
+func height(aRect: Rect) -> CGFloat
+func rectFromCGRect(cgrect: CGRect) -> Rect
+func rectToCGRect(nsrect: Rect) -> CGRect
+func pointFromCGPoint(cgpoint: CGPoint) -> Point
+func pointToCGPoint(nspoint: Point) -> CGPoint
+func sizeFromCGSize(cgsize: CGSize) -> Size
+func sizeToCGSize(nssize: Size) -> CGSize
+func edgeInsetsMake(top: CGFloat, _ left: CGFloat, _ bottom: CGFloat, _ right: CGFloat) -> EdgeInsets
+func equalPoints(aPoint: Point, _ bPoint: Point) -> Bool
+func equalSizes(aSize: Size, _ bSize: Size) -> Bool
+func equalRects(aRect: Rect, _ bRect: Rect) -> Bool
+func isEmptyRect(aRect: Rect) -> Bool
+func edgeInsetsEqual(aInsets: EdgeInsets, _ bInsets: EdgeInsets) -> Bool
+func insetRect(aRect: Rect, _ dX: CGFloat, _ dY: CGFloat) -> Rect
+func integralRect(aRect: Rect) -> Rect
+func integralRectWithOptions(aRect: Rect, _ opts: AlignmentOptions) -> Rect
+func unionRect(aRect: Rect, _ bRect: Rect) -> Rect
+func intersectionRect(aRect: Rect, _ bRect: Rect) -> Rect
+func offsetRect(aRect: Rect, _ dX: CGFloat, _ dY: CGFloat) -> Rect
+func divideRect(inRect: Rect, _ slice: UnsafeMutablePointer<Rect>, _ rem: UnsafeMutablePointer<Rect>, _ amount: CGFloat, _ edge: RectEdge)
+func pointInRect(aPoint: Point, _ aRect: Rect) -> Bool
+func mouseInRect(aPoint: Point, _ aRect: Rect, _ flipped: Bool) -> Bool
+func containsRect(aRect: Rect, _ bRect: Rect) -> Bool
+func intersectsRect(aRect: Rect, _ bRect: Rect) -> Bool
+func stringFromPoint(aPoint: Point) -> String
+func stringFromSize(aSize: Size) -> String
+func stringFromRect(aRect: Rect) -> String
+func pointFromString(aString: String) -> Point
+func sizeFromString(aString: String) -> Size
+func rectFromString(aString: String) -> Rect
+extension Value {
+   init(point: Point)
+   init(size: Size)
+   init(rect: Rect)
+   init(edgeInsets insets: EdgeInsets)
+  var pointValue: Point { get }
+  var sizeValue: Size { get }
+  var rectValue: Rect { get }
+  var edgeInsetsValue: EdgeInsets { get }
 }
-extension NSCoder {
-  func encodePoint(point: NSPoint)
-  func decodePoint() -> NSPoint
-  func encodeSize(size: NSSize)
-  func decodeSize() -> NSSize
-  func encodeRect(rect: NSRect)
-  func decodeRect() -> NSRect
+extension Coder {
+  func encode(point: Point)
+  func decodePoint() -> Point
+  func encode(size: Size)
+  func decodeSize() -> Size
+  func encode(rect: Rect)
+  func decodeRect() -> Rect
 }
-extension NSCoder {
-  func encodePoint(point: NSPoint, forKey key: String)
-  func encodeSize(size: NSSize, forKey key: String)
-  func encodeRect(rect: NSRect, forKey key: String)
-  func decodePointForKey(key: String) -> NSPoint
-  func decodeSizeForKey(key: String) -> NSSize
-  func decodeRectForKey(key: String) -> NSRect
+extension Coder {
+  func encode(point: Point, forKey key: String)
+  func encode(size: Size, forKey key: String)
+  func encode(rect: Rect, forKey key: String)
+  func decodePointForKey(key: String) -> Point
+  func decodeSizeForKey(key: String) -> Size
+  func decodeRectForKey(key: String) -> Rect
 }
-func NSFileTypeForHFSTypeCode(hfsFileTypeCode: OSType) -> String!
-func NSHFSTypeCodeFromFileType(fileTypeString: String!) -> OSType
-func NSHFSTypeOfFile(fullFilePath: String!) -> String!
-let NSHTTPCookieName: String
-let NSHTTPCookieValue: String
-let NSHTTPCookieOriginURL: String
-let NSHTTPCookieVersion: String
-let NSHTTPCookieDomain: String
-let NSHTTPCookiePath: String
-let NSHTTPCookieSecure: String
-let NSHTTPCookieExpires: String
-let NSHTTPCookieComment: String
-let NSHTTPCookieCommentURL: String
-let NSHTTPCookieDiscard: String
-let NSHTTPCookieMaximumAge: String
-let NSHTTPCookiePort: String
-class NSHTTPCookie : NSObject {
+func fileTypeForHFSTypeCode(hfsFileTypeCode: OSType) -> String!
+func HFSTypeCodeFromFileType(fileTypeString: String!) -> OSType
+func HFSTypeOfFile(fullFilePath: String!) -> String!
+let HTTPCookieName: String
+let HTTPCookieValue: String
+let HTTPCookieOriginURL: String
+let HTTPCookieVersion: String
+let HTTPCookieDomain: String
+let HTTPCookiePath: String
+let HTTPCookieSecure: String
+let HTTPCookieExpires: String
+let HTTPCookieComment: String
+let HTTPCookieCommentURL: String
+let HTTPCookieDiscard: String
+let HTTPCookieMaximumAge: String
+let HTTPCookiePort: String
+class HTTPCookie : Object {
   init?(properties: [String : AnyObject])
-  class func requestHeaderFieldsWithCookies(cookies: [NSHTTPCookie]) -> [String : String]
-  class func cookiesWithResponseHeaderFields(headerFields: [String : String], forURL URL: NSURL) -> [NSHTTPCookie]
+  class func requestHeaderFieldsWith(cookies: [HTTPCookie]) -> [String : String]
+  class func cookiesWithResponseHeaderFields(headerFields: [String : String], forURL URL: URL) -> [HTTPCookie]
   var properties: [String : AnyObject]? { get }
   var version: Int { get }
   var name: String { get }
   var value: String { get }
-  @NSCopying var expiresDate: NSDate? { get }
-  var sessionOnly: Bool { get }
+  @NSCopying var expiresDate: Date? { get }
+  var isSessionOnly: Bool { get }
   var domain: String { get }
   var path: String { get }
-  var secure: Bool { get }
-  var HTTPOnly: Bool { get }
+  var isSecure: Bool { get }
+  var isHTTPOnly: Bool { get }
   var comment: String? { get }
-  @NSCopying var commentURL: NSURL? { get }
-  var portList: [NSNumber]? { get }
+  @NSCopying var commentURL: URL? { get }
+  var portList: [Number]? { get }
   init()
 }
-enum NSHTTPCookieAcceptPolicy : UInt {
+enum HTTPCookieAcceptPolicy : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case Always
   case Never
   case OnlyFromMainDocumentDomain
 }
-class NSHTTPCookieStorage : NSObject {
-  class func sharedHTTPCookieStorage() -> NSHTTPCookieStorage
-  class func sharedCookieStorageForGroupContainerIdentifier(identifier: String) -> NSHTTPCookieStorage
-  var cookies: [NSHTTPCookie]? { get }
-  func setCookie(cookie: NSHTTPCookie)
-  func deleteCookie(cookie: NSHTTPCookie)
-  func removeCookiesSinceDate(date: NSDate)
-  func cookiesForURL(URL: NSURL) -> [NSHTTPCookie]?
-  func setCookies(cookies: [NSHTTPCookie], forURL URL: NSURL?, mainDocumentURL: NSURL?)
-  var cookieAcceptPolicy: NSHTTPCookieAcceptPolicy
-  func sortedCookiesUsingDescriptors(sortOrder: [NSSortDescriptor]) -> [NSHTTPCookie]
+class HTTPCookieStorage : Object {
+  class func shared() -> HTTPCookieStorage
+  class func sharedCookieStorageForGroupContainerIdentifier(identifier: String) -> HTTPCookieStorage
+  var cookies: [HTTPCookie]? { get }
+  func setCookie(cookie: HTTPCookie)
+  func deleteCookie(cookie: HTTPCookie)
+  func removeCookiesSince(date: Date)
+  func cookiesFor(URL: URL) -> [HTTPCookie]?
+  func setCookies(cookies: [HTTPCookie], forURL URL: URL?, mainDocumentURL: URL?)
+  var cookieAcceptPolicy: HTTPCookieAcceptPolicy
+  func sortedCookiesUsing(sortOrder: [SortDescriptor]) -> [HTTPCookie]
   init()
 }
-extension NSHTTPCookieStorage {
-  func storeCookies(cookies: [NSHTTPCookie], forTask task: NSURLSessionTask)
-  func getCookiesForTask(task: NSURLSessionTask, completionHandler: ([NSHTTPCookie]?) -> Void)
+extension HTTPCookieStorage {
+  func storeCookies(cookies: [HTTPCookie], forTask task: URLSessionTask)
+  func getCookiesFor(task: URLSessionTask, completionHandler: ([HTTPCookie]?) -> Void)
 }
-let NSHTTPCookieManagerAcceptPolicyChangedNotification: String
-let NSHTTPCookieManagerCookiesChangedNotification: String
+let HTTPCookieManagerAcceptPolicyChangedNotification: String
+let HTTPCookieManagerCookiesChangedNotification: String
 var __FOUNDATION_NSHASHTABLE__: Int32 { get }
-let NSHashTableStrongMemory: NSPointerFunctionsOptions
-let NSHashTableCopyIn: NSPointerFunctionsOptions
-let NSHashTableObjectPointerPersonality: NSPointerFunctionsOptions
-let NSHashTableWeakMemory: NSPointerFunctionsOptions
-typealias NSHashTableOptions = Int
-class NSHashTable : NSObject, NSCopying, NSCoding, NSFastEnumeration {
-  init(options: NSPointerFunctionsOptions, capacity initialCapacity: Int)
-  init(pointerFunctions functions: NSPointerFunctions, capacity initialCapacity: Int)
-   init(options: NSPointerFunctionsOptions)
-  class func weakObjectsHashTable() -> NSHashTable
-  @NSCopying var pointerFunctions: NSPointerFunctions { get }
+let hashTableStrongMemory: PointerFunctionsOptions
+let hashTableCopyIn: PointerFunctionsOptions
+let hashTableObjectPointerPersonality: PointerFunctionsOptions
+let hashTableWeakMemory: PointerFunctionsOptions
+typealias HashTableOptions = Int
+class HashTable : Object, Copying, Coding, FastEnumeration {
+  init(options: PointerFunctionsOptions = [], capacity initialCapacity: Int)
+  init(pointerFunctions functions: PointerFunctions, capacity initialCapacity: Int)
+   init(options: PointerFunctionsOptions = [])
+  class func weakObjects() -> HashTable
+  @NSCopying var pointerFunctions: PointerFunctions { get }
   var count: Int { get }
   func member(object: AnyObject?) -> AnyObject?
-  func objectEnumerator() -> NSEnumerator
-  func addObject(object: AnyObject?)
-  func removeObject(object: AnyObject?)
+  func objectEnumerator() -> Enumerator
+  func add(object: AnyObject?)
+  func remove(object: AnyObject?)
   func removeAllObjects()
   var allObjects: [AnyObject] { get }
   var anyObject: AnyObject? { get }
-  func containsObject(anObject: AnyObject?) -> Bool
-  func intersectsHashTable(other: NSHashTable) -> Bool
-  func isEqualToHashTable(other: NSHashTable) -> Bool
-  func isSubsetOfHashTable(other: NSHashTable) -> Bool
-  func intersectHashTable(other: NSHashTable)
-  func unionHashTable(other: NSHashTable)
-  func minusHashTable(other: NSHashTable)
-  var setRepresentation: Set<NSObject> { get }
+  func contains(anObject: AnyObject?) -> Bool
+  func intersectsHashTable(other: HashTable) -> Bool
+  func isEqualTo(other: HashTable) -> Bool
+  func isSubsetOf(other: HashTable) -> Bool
+  func intersectHashTable(other: HashTable)
+  func unionHashTable(other: HashTable)
+  func minusHashTable(other: HashTable)
+  var setRepresentation: Set<Object> { get }
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func countByEnumeratingWithState(state: UnsafeMutablePointer<NSFastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func countByEnumeratingWith(state: UnsafeMutablePointer<FastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
 }
-struct NSHashEnumerator {
+struct HashEnumerator {
   var _pi: Int
   var _si: Int
   var _bs: UnsafeMutablePointer<Void>
   init()
   init(_pi: Int, _si: Int, _bs: UnsafeMutablePointer<Void>)
 }
-func NSFreeHashTable(table: NSHashTable)
-func NSResetHashTable(table: NSHashTable)
-func NSCompareHashTables(table1: NSHashTable, _ table2: NSHashTable) -> Bool
-func NSCopyHashTableWithZone(table: NSHashTable, _ zone: NSZone) -> NSHashTable
-func NSHashGet(table: NSHashTable, _ pointer: UnsafePointer<Void>) -> UnsafeMutablePointer<Void>
-func NSHashInsert(table: NSHashTable, _ pointer: UnsafePointer<Void>)
-func NSHashInsertKnownAbsent(table: NSHashTable, _ pointer: UnsafePointer<Void>)
-func NSHashInsertIfAbsent(table: NSHashTable, _ pointer: UnsafePointer<Void>) -> UnsafeMutablePointer<Void>
-func NSHashRemove(table: NSHashTable, _ pointer: UnsafePointer<Void>)
-func NSEnumerateHashTable(table: NSHashTable) -> NSHashEnumerator
-func NSNextHashEnumeratorItem(enumerator: UnsafeMutablePointer<NSHashEnumerator>) -> UnsafeMutablePointer<Void>
-func NSEndHashTableEnumeration(enumerator: UnsafeMutablePointer<NSHashEnumerator>)
-func NSCountHashTable(table: NSHashTable) -> Int
-func NSStringFromHashTable(table: NSHashTable) -> String
-func NSAllHashTableObjects(table: NSHashTable) -> [AnyObject]
-struct NSHashTableCallBacks {
-  var hash: (@convention(c) (NSHashTable, UnsafePointer<Void>) -> Int)?
-  var isEqual: (@convention(c) (NSHashTable, UnsafePointer<Void>, UnsafePointer<Void>) -> ObjCBool)?
-  var retain: (@convention(c) (NSHashTable, UnsafePointer<Void>) -> Void)?
-  var release: (@convention(c) (NSHashTable, UnsafeMutablePointer<Void>) -> Void)?
-  var describe: (@convention(c) (NSHashTable, UnsafePointer<Void>) -> String?)?
+func freeHashTable(table: HashTable)
+func resetHashTable(table: HashTable)
+func compareHashTables(table1: HashTable, _ table2: HashTable) -> Bool
+func copyHashTableWithZone(table: HashTable, _ zone: Zone) -> HashTable
+func hashGet(table: HashTable, _ pointer: UnsafePointer<Void>) -> UnsafeMutablePointer<Void>
+func hashInsert(table: HashTable, _ pointer: UnsafePointer<Void>)
+func hashInsertKnownAbsent(table: HashTable, _ pointer: UnsafePointer<Void>)
+func hashInsertIfAbsent(table: HashTable, _ pointer: UnsafePointer<Void>) -> UnsafeMutablePointer<Void>
+func hashRemove(table: HashTable, _ pointer: UnsafePointer<Void>)
+func enumerateHashTable(table: HashTable) -> HashEnumerator
+func nextHashEnumeratorItem(enumerator: UnsafeMutablePointer<HashEnumerator>) -> UnsafeMutablePointer<Void>
+func endHashTableEnumeration(enumerator: UnsafeMutablePointer<HashEnumerator>)
+func countHashTable(table: HashTable) -> Int
+func stringFromHashTable(table: HashTable) -> String
+func allHashTableObjects(table: HashTable) -> [AnyObject]
+struct HashTableCallBacks {
+  var hash: (@convention(c) (HashTable, UnsafePointer<Void>) -> Int)?
+  var isEqual: (@convention(c) (HashTable, UnsafePointer<Void>, UnsafePointer<Void>) -> ObjCBool)?
+  var retain: (@convention(c) (HashTable, UnsafePointer<Void>) -> Void)?
+  var release: (@convention(c) (HashTable, UnsafeMutablePointer<Void>) -> Void)?
+  var describe: (@convention(c) (HashTable, UnsafePointer<Void>) -> String?)?
   init()
-  init(hash: (@convention(c) (NSHashTable, UnsafePointer<Void>) -> Int)?, isEqual: (@convention(c) (NSHashTable, UnsafePointer<Void>, UnsafePointer<Void>) -> ObjCBool)?, retain: (@convention(c) (NSHashTable, UnsafePointer<Void>) -> Void)?, release: (@convention(c) (NSHashTable, UnsafeMutablePointer<Void>) -> Void)?, describe: (@convention(c) (NSHashTable, UnsafePointer<Void>) -> String?)?)
+  init(hash: (@convention(c) (HashTable, UnsafePointer<Void>) -> Int)?, isEqual: (@convention(c) (HashTable, UnsafePointer<Void>, UnsafePointer<Void>) -> ObjCBool)?, retain: (@convention(c) (HashTable, UnsafePointer<Void>) -> Void)?, release: (@convention(c) (HashTable, UnsafeMutablePointer<Void>) -> Void)?, describe: (@convention(c) (HashTable, UnsafePointer<Void>) -> String?)?)
 }
-func NSCreateHashTableWithZone(callBacks: NSHashTableCallBacks, _ capacity: Int, _ zone: NSZone) -> NSHashTable
-func NSCreateHashTable(callBacks: NSHashTableCallBacks, _ capacity: Int) -> NSHashTable
-let NSIntegerHashCallBacks: NSHashTableCallBacks
-let NSNonOwnedPointerHashCallBacks: NSHashTableCallBacks
-let NSNonRetainedObjectHashCallBacks: NSHashTableCallBacks
-let NSObjectHashCallBacks: NSHashTableCallBacks
-let NSOwnedObjectIdentityHashCallBacks: NSHashTableCallBacks
-let NSOwnedPointerHashCallBacks: NSHashTableCallBacks
-let NSPointerToStructHashCallBacks: NSHashTableCallBacks
-class NSHost : NSObject {
-  class func currentHost() -> Self
+func createHashTableWithZone(callBacks: HashTableCallBacks, _ capacity: Int, _ zone: Zone) -> HashTable
+func createHashTable(callBacks: HashTableCallBacks, _ capacity: Int) -> HashTable
+let integerHashCallBacks: HashTableCallBacks
+let nonOwnedPointerHashCallBacks: HashTableCallBacks
+let nonRetainedObjectHashCallBacks: HashTableCallBacks
+let objectHashCallBacks: HashTableCallBacks
+let ownedObjectIdentityHashCallBacks: HashTableCallBacks
+let ownedPointerHashCallBacks: HashTableCallBacks
+let pointerToStructHashCallBacks: HashTableCallBacks
+class Host : Object {
+  class func current() -> Self
   convenience init(name: String?)
   convenience init(address: String)
-  func isEqualToHost(aHost: NSHost) -> Bool
+  func isEqualTo(aHost: Host) -> Bool
   var name: String? { get }
   var names: [String] { get }
   var address: String? { get }
@@ -2450,105 +2446,102 @@ class NSHost : NSObject {
   var localizedName: String? { get }
   init()
 }
-class NSIndexPath : NSObject, NSCopying, NSSecureCoding {
+class IndexPath : Object, Copying, SecureCoding {
   init(indexes: UnsafePointer<Int>, length: Int)
   convenience init(index: Int)
-  func indexPathByAddingIndex(index: Int) -> NSIndexPath
-  func indexPathByRemovingLastIndex() -> NSIndexPath
+  func adding(index: Int) -> IndexPath
+  func removingLastIndex() -> IndexPath
   func indexAtPosition(position: Int) -> Int
   var length: Int { get }
   func getIndexes(indexes: UnsafeMutablePointer<Int>, range positionRange: NSRange)
-  func compare(otherObject: NSIndexPath) -> NSComparisonResult
+  func compare(otherObject: IndexPath) -> ComparisonResult
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-extension NSIndexPath {
+extension IndexPath {
   /// This method is unsafe because it could potentially cause buffer overruns. You should use -getIndexes:range: instead. 
   func getIndexes(indexes: UnsafeMutablePointer<Int>)
 }
-class NSIndexSet : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
-  init(indexesInRange range: NSRange)
-  init(indexSet: NSIndexSet)
+class IndexSet : Object, Copying, MutableCopying, SecureCoding {
+  init(indexesIn range: NSRange)
+  init(indexSet: IndexSet)
   convenience init(index value: Int)
-  func isEqualToIndexSet(indexSet: NSIndexSet) -> Bool
+  func isEqualTo(indexSet: IndexSet) -> Bool
   var count: Int { get }
   var firstIndex: Int { get }
   var lastIndex: Int { get }
   func indexGreaterThanIndex(value: Int) -> Int
   func indexLessThanIndex(value: Int) -> Int
-  func indexGreaterThanOrEqualToIndex(value: Int) -> Int
-  func indexLessThanOrEqualToIndex(value: Int) -> Int
-  func getIndexes(indexBuffer: UnsafeMutablePointer<Int>, maxCount bufferSize: Int, inIndexRange range: NSRangePointer) -> Int
-  func countOfIndexesInRange(range: NSRange) -> Int
-  func containsIndex(value: Int) -> Bool
-  func containsIndexesInRange(range: NSRange) -> Bool
-  func containsIndexes(indexSet: NSIndexSet) -> Bool
-  func intersectsIndexesInRange(range: NSRange) -> Bool
-  func enumerateIndexesUsingBlock(block: (Int, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func enumerateIndexesWithOptions(opts: NSEnumerationOptions, usingBlock block: (Int, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func enumerateIndexesInRange(range: NSRange, options opts: NSEnumerationOptions, usingBlock block: (Int, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func indexGreaterThanOrEqualTo(value: Int) -> Int
+  func indexLessThanOrEqualTo(value: Int) -> Int
+  func getIndexes(indexBuffer: UnsafeMutablePointer<Int>, maxCount bufferSize: Int, inIndexRange range: RangePointer) -> Int
+  func countOfIndexesIn(range: NSRange) -> Int
+  func contains(value: Int) -> Bool
+  func containsIn(range: NSRange) -> Bool
+  func contains(indexSet: IndexSet) -> Bool
+  func intersectsIndexesIn(range: NSRange) -> Bool
+  func enumerateUsing(block: (Int, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func enumerate(options opts: EnumerationOptions = [], usingBlock block: (Int, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func enumerateIn(range: NSRange, options opts: EnumerationOptions = [], usingBlock block: (Int, UnsafeMutablePointer<ObjCBool>) -> Void)
   func indexPassingTest(predicate: (Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Int
-  func indexWithOptions(opts: NSEnumerationOptions, passingTest predicate: (Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Int
-  func indexInRange(range: NSRange, options opts: NSEnumerationOptions, passingTest predicate: (Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Int
-  func indexesPassingTest(predicate: (Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> NSIndexSet
-  func indexesWithOptions(opts: NSEnumerationOptions, passingTest predicate: (Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> NSIndexSet
-  func indexesInRange(range: NSRange, options opts: NSEnumerationOptions, passingTest predicate: (Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> NSIndexSet
-  func enumerateRangesUsingBlock(block: (NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func enumerateRangesWithOptions(opts: NSEnumerationOptions, usingBlock block: (NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func enumerateRangesInRange(range: NSRange, options opts: NSEnumerationOptions, usingBlock block: (NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func index(options opts: EnumerationOptions = [], passingTest predicate: (Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Int
+  func indexIn(range: NSRange, options opts: EnumerationOptions = [], passingTest predicate: (Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Int
+  func indexesPassingTest(predicate: (Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> IndexSet
+  func indexes(options opts: EnumerationOptions = [], passingTest predicate: (Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> IndexSet
+  func indexesIn(range: NSRange, options opts: EnumerationOptions = [], passingTest predicate: (Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> IndexSet
+  func enumerateRangesUsing(block: (NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func enumerateRanges(options opts: EnumerationOptions = [], usingBlock block: (NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func enumerateRangesIn(range: NSRange, options opts: EnumerationOptions = [], usingBlock block: (NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-extension NSIndexSet : SequenceType {
-  /// Return a *generator* over the elements of this *sequence*.
-  ///
-  /// - Complexity: O(1).
+extension IndexSet : SequenceType {
   func generate() -> NSIndexSetGenerator
   typealias Generator = NSIndexSetGenerator
   typealias SubSequence = AnySequence<Element>
 }
-class NSMutableIndexSet : NSIndexSet {
-  func addIndexes(indexSet: NSIndexSet)
-  func removeIndexes(indexSet: NSIndexSet)
+class MutableIndexSet : IndexSet {
+  func add(indexSet: IndexSet)
+  func remove(indexSet: IndexSet)
   func removeAllIndexes()
-  func addIndex(value: Int)
-  func removeIndex(value: Int)
-  func addIndexesInRange(range: NSRange)
-  func removeIndexesInRange(range: NSRange)
-  func shiftIndexesStartingAtIndex(index: Int, by delta: Int)
-  init(indexesInRange range: NSRange)
-  init(indexSet: NSIndexSet)
+  func add(value: Int)
+  func remove(value: Int)
+  func addIn(range: NSRange)
+  func removeIn(range: NSRange)
+  func shiftIndexesStartingAt(index: Int, by delta: Int)
+  init(indexesIn range: NSRange)
+  init(indexSet: IndexSet)
   convenience init(index value: Int)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-typealias NSItemProviderCompletionHandler = (NSSecureCoding?, NSError!) -> Void
-typealias NSItemProviderLoadHandler = (NSItemProviderCompletionHandler!, AnyClass!, [NSObject : AnyObject]!) -> Void
-class NSItemProvider : NSObject, NSCopying {
-  init(item: NSSecureCoding?, typeIdentifier: String?)
-  convenience init?(contentsOfURL fileURL: NSURL!)
-  func registerItemForTypeIdentifier(typeIdentifier: String, loadHandler: NSItemProviderLoadHandler)
+typealias ItemProviderCompletionHandler = (SecureCoding?, Error!) -> Void
+typealias ItemProviderLoadHandler = (ItemProviderCompletionHandler!, AnyClass!, [Object : AnyObject]!) -> Void
+class ItemProvider : Object, Copying {
+  init(item: SecureCoding?, typeIdentifier: String?)
+  convenience init?(contentsOf fileURL: URL!)
+  func registerItemForTypeIdentifier(typeIdentifier: String, loadHandler: ItemProviderLoadHandler)
   var registeredTypeIdentifiers: [AnyObject] { get }
   func hasItemConformingToTypeIdentifier(typeIdentifier: String) -> Bool
-  func loadItemForTypeIdentifier(typeIdentifier: String, options: [NSObject : AnyObject]?, completionHandler: NSItemProviderCompletionHandler?)
+  func loadItemForTypeIdentifier(typeIdentifier: String, options: [Object : AnyObject]? = [:], completionHandler: ItemProviderCompletionHandler? = nil)
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-let NSItemProviderPreferredImageSizeKey: String
-extension NSItemProvider {
-  var previewImageHandler: NSItemProviderLoadHandler?
-  func loadPreviewImageWithOptions(options: [NSObject : AnyObject]!, completionHandler: NSItemProviderCompletionHandler!)
+let itemProviderPreferredImageSizeKey: String
+extension ItemProvider {
+  var previewImageHandler: ItemProviderLoadHandler?
+  func loadPreviewImage(options options: [Object : AnyObject]! = [:], completionHandler: ItemProviderCompletionHandler!)
 }
-let NSExtensionJavaScriptPreprocessingResultsKey: String
-let NSItemProviderErrorDomain: String
-enum NSItemProviderErrorCode : Int {
+let extensionJavaScriptPreprocessingResultsKey: String
+let itemProviderErrorDomain: String
+enum ItemProviderErrorCode : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case UnknownError
@@ -2556,39 +2549,39 @@ enum NSItemProviderErrorCode : Int {
   case UnexpectedValueClassError
   case UnavailableCoercionError
 }
-struct NSJSONReadingOptions : OptionSetType {
+struct JSONReadingOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var MutableContainers: NSJSONReadingOptions { get }
-  static var MutableLeaves: NSJSONReadingOptions { get }
-  static var AllowFragments: NSJSONReadingOptions { get }
+  static var MutableContainers: JSONReadingOptions { get }
+  static var MutableLeaves: JSONReadingOptions { get }
+  static var AllowFragments: JSONReadingOptions { get }
 }
-struct NSJSONWritingOptions : OptionSetType {
+struct JSONWritingOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var PrettyPrinted: NSJSONWritingOptions { get }
+  static var PrettyPrinted: JSONWritingOptions { get }
 }
-class NSJSONSerialization : NSObject {
+class JSONSerialization : Object {
   class func isValidJSONObject(obj: AnyObject) -> Bool
-  class func dataWithJSONObject(obj: AnyObject, options opt: NSJSONWritingOptions) throws -> NSData
-  class func JSONObjectWithData(data: NSData, options opt: NSJSONReadingOptions) throws -> AnyObject
-  class func writeJSONObject(obj: AnyObject, toStream stream: NSOutputStream, options opt: NSJSONWritingOptions, error: NSErrorPointer) -> Int
-  class func JSONObjectWithStream(stream: NSInputStream, options opt: NSJSONReadingOptions) throws -> AnyObject
+  class func dataWithJSONObject(obj: AnyObject, options opt: JSONWritingOptions = []) throws -> Data
+  class func jsonObjectWith(data: Data, options opt: JSONReadingOptions = []) throws -> AnyObject
+  class func writeJSONObject(obj: AnyObject, to stream: OutputStream, options opt: JSONWritingOptions = [], error: ErrorPointer) -> Int
+  class func jsonObjectWith(stream: InputStream, options opt: JSONReadingOptions = []) throws -> AnyObject
   init()
 }
-let NSUndefinedKeyException: String
-let NSAverageKeyValueOperator: String
-let NSCountKeyValueOperator: String
-let NSDistinctUnionOfArraysKeyValueOperator: String
-let NSDistinctUnionOfObjectsKeyValueOperator: String
-let NSDistinctUnionOfSetsKeyValueOperator: String
-let NSMaximumKeyValueOperator: String
-let NSMinimumKeyValueOperator: String
-let NSSumKeyValueOperator: String
-let NSUnionOfArraysKeyValueOperator: String
-let NSUnionOfObjectsKeyValueOperator: String
-let NSUnionOfSetsKeyValueOperator: String
-extension NSObject {
+let undefinedKeyException: String
+let averageKeyValueOperator: String
+let countKeyValueOperator: String
+let distinctUnionOfArraysKeyValueOperator: String
+let distinctUnionOfObjectsKeyValueOperator: String
+let distinctUnionOfSetsKeyValueOperator: String
+let maximumKeyValueOperator: String
+let minimumKeyValueOperator: String
+let sumKeyValueOperator: String
+let unionOfArraysKeyValueOperator: String
+let unionOfObjectsKeyValueOperator: String
+let unionOfSetsKeyValueOperator: String
+extension Object {
   class func accessInstanceVariablesDirectly() -> Bool
   class func valueForKey(key: String) -> AnyObject?
   func valueForKey(key: String) -> AnyObject?
@@ -2596,24 +2589,24 @@ extension NSObject {
   func setValue(value: AnyObject?, forKey key: String)
   class func validateValue(ioValue: AutoreleasingUnsafeMutablePointer<AnyObject?>, forKey inKey: String) throws
   func validateValue(ioValue: AutoreleasingUnsafeMutablePointer<AnyObject?>, forKey inKey: String) throws
-  class func mutableArrayValueForKey(key: String) -> NSMutableArray
-  func mutableArrayValueForKey(key: String) -> NSMutableArray
-  class func mutableOrderedSetValueForKey(key: String) -> NSMutableOrderedSet
-  func mutableOrderedSetValueForKey(key: String) -> NSMutableOrderedSet
-  class func mutableSetValueForKey(key: String) -> NSMutableSet
-  func mutableSetValueForKey(key: String) -> NSMutableSet
+  class func mutableArrayValueForKey(key: String) -> MutableArray
+  func mutableArrayValueForKey(key: String) -> MutableArray
+  class func mutableOrderedSetValueForKey(key: String) -> MutableOrderedSet
+  func mutableOrderedSetValueForKey(key: String) -> MutableOrderedSet
+  class func mutableSetValueForKey(key: String) -> MutableSet
+  func mutableSetValueForKey(key: String) -> MutableSet
   class func valueForKeyPath(keyPath: String) -> AnyObject?
   func valueForKeyPath(keyPath: String) -> AnyObject?
   class func setValue(value: AnyObject?, forKeyPath keyPath: String)
   func setValue(value: AnyObject?, forKeyPath keyPath: String)
   class func validateValue(ioValue: AutoreleasingUnsafeMutablePointer<AnyObject?>, forKeyPath inKeyPath: String) throws
   func validateValue(ioValue: AutoreleasingUnsafeMutablePointer<AnyObject?>, forKeyPath inKeyPath: String) throws
-  class func mutableArrayValueForKeyPath(keyPath: String) -> NSMutableArray
-  func mutableArrayValueForKeyPath(keyPath: String) -> NSMutableArray
-  class func mutableOrderedSetValueForKeyPath(keyPath: String) -> NSMutableOrderedSet
-  func mutableOrderedSetValueForKeyPath(keyPath: String) -> NSMutableOrderedSet
-  class func mutableSetValueForKeyPath(keyPath: String) -> NSMutableSet
-  func mutableSetValueForKeyPath(keyPath: String) -> NSMutableSet
+  class func mutableArrayValueForKeyPath(keyPath: String) -> MutableArray
+  func mutableArrayValueForKeyPath(keyPath: String) -> MutableArray
+  class func mutableOrderedSetValueForKeyPath(keyPath: String) -> MutableOrderedSet
+  func mutableOrderedSetValueForKeyPath(keyPath: String) -> MutableOrderedSet
+  class func mutableSetValueForKeyPath(keyPath: String) -> MutableSet
+  func mutableSetValueForKeyPath(keyPath: String) -> MutableSet
   class func valueForUndefinedKey(key: String) -> AnyObject?
   func valueForUndefinedKey(key: String) -> AnyObject?
   class func setValue(value: AnyObject?, forUndefinedKey key: String)
@@ -2622,8 +2615,8 @@ extension NSObject {
   func setNilValueForKey(key: String)
   class func dictionaryWithValuesForKeys(keys: [String]) -> [String : AnyObject]
   func dictionaryWithValuesForKeys(keys: [String]) -> [String : AnyObject]
-  class func setValuesForKeysWithDictionary(keyedValues: [String : AnyObject])
-  func setValuesForKeysWithDictionary(keyedValues: [String : AnyObject])
+  class func setValuesForKeysWith(keyedValues: [String : AnyObject])
+  func setValuesForKeysWith(keyedValues: [String : AnyObject])
 }
 extension NSArray {
   func valueForKey(key: String) -> AnyObject
@@ -2632,10 +2625,10 @@ extension NSArray {
 extension NSDictionary {
   func valueForKey(key: String) -> AnyObject?
 }
-extension NSMutableDictionary {
+extension MutableDictionary {
   func setValue(value: AnyObject?, forKey key: String)
 }
-extension NSOrderedSet {
+extension OrderedSet {
   func valueForKey(key: String) -> AnyObject
   func setValue(value: AnyObject?, forKey key: String)
 }
@@ -2643,17 +2636,17 @@ extension NSSet {
   func valueForKey(key: String) -> AnyObject
   func setValue(value: AnyObject?, forKey key: String)
 }
-extension NSObject {
+extension Object {
 }
-struct NSKeyValueObservingOptions : OptionSetType {
+struct KeyValueObservingOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var New: NSKeyValueObservingOptions { get }
-  static var Old: NSKeyValueObservingOptions { get }
-  static var Initial: NSKeyValueObservingOptions { get }
-  static var Prior: NSKeyValueObservingOptions { get }
+  static var New: KeyValueObservingOptions { get }
+  static var Old: KeyValueObservingOptions { get }
+  static var Initial: KeyValueObservingOptions { get }
+  static var Prior: KeyValueObservingOptions { get }
 }
-enum NSKeyValueChange : UInt {
+enum KeyValueChange : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case Setting
@@ -2661,7 +2654,7 @@ enum NSKeyValueChange : UInt {
   case Removal
   case Replacement
 }
-enum NSKeyValueSetMutationKind : UInt {
+enum KeyValueSetMutationKind : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case UnionSetMutation
@@ -2669,95 +2662,95 @@ enum NSKeyValueSetMutationKind : UInt {
   case IntersectSetMutation
   case SetSetMutation
 }
-let NSKeyValueChangeKindKey: String
-let NSKeyValueChangeNewKey: String
-let NSKeyValueChangeOldKey: String
-let NSKeyValueChangeIndexesKey: String
-let NSKeyValueChangeNotificationIsPriorKey: String
-extension NSObject {
-  class func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>)
-  func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>)
+let keyValueChangeKindKey: String
+let keyValueChangeNewKey: String
+let keyValueChangeOldKey: String
+let keyValueChangeIndexesKey: String
+let keyValueChangeNotificationIsPriorKey: String
+extension Object {
+  class func observeValueForKeyPath(keyPath: String?, of object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>)
+  func observeValueForKeyPath(keyPath: String?, of object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>)
 }
-extension NSObject {
-  class func addObserver(observer: NSObject, forKeyPath keyPath: String, options: NSKeyValueObservingOptions, context: UnsafeMutablePointer<Void>)
-  func addObserver(observer: NSObject, forKeyPath keyPath: String, options: NSKeyValueObservingOptions, context: UnsafeMutablePointer<Void>)
-  class func removeObserver(observer: NSObject, forKeyPath keyPath: String, context: UnsafeMutablePointer<Void>)
-  func removeObserver(observer: NSObject, forKeyPath keyPath: String, context: UnsafeMutablePointer<Void>)
-  class func removeObserver(observer: NSObject, forKeyPath keyPath: String)
-  func removeObserver(observer: NSObject, forKeyPath keyPath: String)
+extension Object {
+  class func addObserver(observer: Object, forKeyPath keyPath: String, options: KeyValueObservingOptions = [], context: UnsafeMutablePointer<Void>)
+  func addObserver(observer: Object, forKeyPath keyPath: String, options: KeyValueObservingOptions = [], context: UnsafeMutablePointer<Void>)
+  class func removeObserver(observer: Object, forKeyPath keyPath: String, context: UnsafeMutablePointer<Void>)
+  func removeObserver(observer: Object, forKeyPath keyPath: String, context: UnsafeMutablePointer<Void>)
+  class func removeObserver(observer: Object, forKeyPath keyPath: String)
+  func removeObserver(observer: Object, forKeyPath keyPath: String)
 }
 extension NSArray {
-  func addObserver(observer: NSObject, toObjectsAtIndexes indexes: NSIndexSet, forKeyPath keyPath: String, options: NSKeyValueObservingOptions, context: UnsafeMutablePointer<Void>)
-  func removeObserver(observer: NSObject, fromObjectsAtIndexes indexes: NSIndexSet, forKeyPath keyPath: String, context: UnsafeMutablePointer<Void>)
-  func removeObserver(observer: NSObject, fromObjectsAtIndexes indexes: NSIndexSet, forKeyPath keyPath: String)
-  func addObserver(observer: NSObject, forKeyPath keyPath: String, options: NSKeyValueObservingOptions, context: UnsafeMutablePointer<Void>)
-  func removeObserver(observer: NSObject, forKeyPath keyPath: String, context: UnsafeMutablePointer<Void>)
-  func removeObserver(observer: NSObject, forKeyPath keyPath: String)
+  func addObserver(observer: Object, toObjectsAt indexes: IndexSet, forKeyPath keyPath: String, options: KeyValueObservingOptions = [], context: UnsafeMutablePointer<Void>)
+  func removeObserver(observer: Object, fromObjectsAt indexes: IndexSet, forKeyPath keyPath: String, context: UnsafeMutablePointer<Void>)
+  func removeObserver(observer: Object, fromObjectsAt indexes: IndexSet, forKeyPath keyPath: String)
+  func addObserver(observer: Object, forKeyPath keyPath: String, options: KeyValueObservingOptions = [], context: UnsafeMutablePointer<Void>)
+  func removeObserver(observer: Object, forKeyPath keyPath: String, context: UnsafeMutablePointer<Void>)
+  func removeObserver(observer: Object, forKeyPath keyPath: String)
 }
-extension NSOrderedSet {
-  func addObserver(observer: NSObject, forKeyPath keyPath: String, options: NSKeyValueObservingOptions, context: UnsafeMutablePointer<Void>)
-  func removeObserver(observer: NSObject, forKeyPath keyPath: String, context: UnsafeMutablePointer<Void>)
-  func removeObserver(observer: NSObject, forKeyPath keyPath: String)
+extension OrderedSet {
+  func addObserver(observer: Object, forKeyPath keyPath: String, options: KeyValueObservingOptions = [], context: UnsafeMutablePointer<Void>)
+  func removeObserver(observer: Object, forKeyPath keyPath: String, context: UnsafeMutablePointer<Void>)
+  func removeObserver(observer: Object, forKeyPath keyPath: String)
 }
 extension NSSet {
-  func addObserver(observer: NSObject, forKeyPath keyPath: String, options: NSKeyValueObservingOptions, context: UnsafeMutablePointer<Void>)
-  func removeObserver(observer: NSObject, forKeyPath keyPath: String, context: UnsafeMutablePointer<Void>)
-  func removeObserver(observer: NSObject, forKeyPath keyPath: String)
+  func addObserver(observer: Object, forKeyPath keyPath: String, options: KeyValueObservingOptions = [], context: UnsafeMutablePointer<Void>)
+  func removeObserver(observer: Object, forKeyPath keyPath: String, context: UnsafeMutablePointer<Void>)
+  func removeObserver(observer: Object, forKeyPath keyPath: String)
 }
-extension NSObject {
+extension Object {
   class func willChangeValueForKey(key: String)
   func willChangeValueForKey(key: String)
   class func didChangeValueForKey(key: String)
   func didChangeValueForKey(key: String)
-  class func willChange(changeKind: NSKeyValueChange, valuesAtIndexes indexes: NSIndexSet, forKey key: String)
-  func willChange(changeKind: NSKeyValueChange, valuesAtIndexes indexes: NSIndexSet, forKey key: String)
-  class func didChange(changeKind: NSKeyValueChange, valuesAtIndexes indexes: NSIndexSet, forKey key: String)
-  func didChange(changeKind: NSKeyValueChange, valuesAtIndexes indexes: NSIndexSet, forKey key: String)
-  class func willChangeValueForKey(key: String, withSetMutation mutationKind: NSKeyValueSetMutationKind, usingObjects objects: Set<NSObject>)
-  func willChangeValueForKey(key: String, withSetMutation mutationKind: NSKeyValueSetMutationKind, usingObjects objects: Set<NSObject>)
-  class func didChangeValueForKey(key: String, withSetMutation mutationKind: NSKeyValueSetMutationKind, usingObjects objects: Set<NSObject>)
-  func didChangeValueForKey(key: String, withSetMutation mutationKind: NSKeyValueSetMutationKind, usingObjects objects: Set<NSObject>)
+  class func willChange(changeKind: KeyValueChange, valuesAt indexes: IndexSet, forKey key: String)
+  func willChange(changeKind: KeyValueChange, valuesAt indexes: IndexSet, forKey key: String)
+  class func didChange(changeKind: KeyValueChange, valuesAt indexes: IndexSet, forKey key: String)
+  func didChange(changeKind: KeyValueChange, valuesAt indexes: IndexSet, forKey key: String)
+  class func willChangeValueForKey(key: String, withSetMutation mutationKind: KeyValueSetMutationKind, usingObjects objects: Set<Object>)
+  func willChangeValueForKey(key: String, withSetMutation mutationKind: KeyValueSetMutationKind, usingObjects objects: Set<Object>)
+  class func didChangeValueForKey(key: String, withSetMutation mutationKind: KeyValueSetMutationKind, usingObjects objects: Set<Object>)
+  func didChangeValueForKey(key: String, withSetMutation mutationKind: KeyValueSetMutationKind, usingObjects objects: Set<Object>)
 }
-extension NSObject {
+extension Object {
   class func keyPathsForValuesAffectingValueForKey(key: String) -> Set<String>
   class func automaticallyNotifiesObserversForKey(key: String) -> Bool
   var observationInfo: UnsafeMutablePointer<Void>
   class func observationInfo() -> UnsafeMutablePointer<Void>
   class func setObservationInfo(observationInfo: UnsafeMutablePointer<Void>)
 }
-extension NSObject {
+extension Object {
 }
-let NSInvalidArchiveOperationException: String
-let NSInvalidUnarchiveOperationException: String
-let NSKeyedArchiveRootObjectKey: String
-class NSKeyedArchiver : NSCoder {
-  class func archivedDataWithRootObject(rootObject: AnyObject) -> NSData
+let invalidArchiveOperationException: String
+let invalidUnarchiveOperationException: String
+let keyedArchiveRootObjectKey: String
+class KeyedArchiver : Coder {
+  class func archivedDataWithRootObject(rootObject: AnyObject) -> Data
   class func archiveRootObject(rootObject: AnyObject, toFile path: String) -> Bool
-  init(forWritingWithMutableData data: NSMutableData)
-  unowned(unsafe) var delegate: @sil_unmanaged NSKeyedArchiverDelegate?
-  var outputFormat: NSPropertyListFormat
+  init(forWritingWith data: MutableData)
+  unowned(unsafe) var delegate: @sil_unmanaged KeyedArchiverDelegate?
+  var outputFormat: PropertyListFormat
   func finishEncoding()
   class func setClassName(codedName: String?, forClass cls: AnyClass)
   func setClassName(codedName: String?, forClass cls: AnyClass)
-  class func classNameForClass(cls: AnyClass) -> String?
-  func classNameForClass(cls: AnyClass) -> String?
-  func encodeObject(objv: AnyObject?, forKey key: String)
+  class func classNameFor(cls: AnyClass) -> String?
+  func classNameFor(cls: AnyClass) -> String?
+  func encode(objv: AnyObject?, forKey key: String)
   func encodeConditionalObject(objv: AnyObject?, forKey key: String)
-  func encodeBool(boolv: Bool, forKey key: String)
-  func encodeInt(intv: Int32, forKey key: String)
-  func encodeInt32(intv: Int32, forKey key: String)
-  func encodeInt64(intv: Int64, forKey key: String)
-  func encodeFloat(realv: Float, forKey key: String)
-  func encodeDouble(realv: Double, forKey key: String)
+  func encode(boolv: Bool, forKey key: String)
+  func encode(intv: Int32, forKey key: String)
+  func encode(intv: Int32, forKey key: String)
+  func encode(intv: Int64, forKey key: String)
+  func encode(realv: Float, forKey key: String)
+  func encode(realv: Double, forKey key: String)
   func encodeBytes(bytesp: UnsafePointer<UInt8>, length lenv: Int, forKey key: String)
   var requiresSecureCoding: Bool
   init()
 }
-class NSKeyedUnarchiver : NSCoder {
-  class func unarchiveObjectWithData(data: NSData) -> AnyObject?
+class KeyedUnarchiver : Coder {
+  class func unarchiveObjectWith(data: Data) -> AnyObject?
   class func unarchiveObjectWithFile(path: String) -> AnyObject?
-  init(forReadingWithData data: NSData)
-  unowned(unsafe) var delegate: @sil_unmanaged NSKeyedUnarchiverDelegate?
+  init(forReadingWith data: Data)
+  unowned(unsafe) var delegate: @sil_unmanaged KeyedUnarchiverDelegate?
   func finishDecoding()
   class func setClass(cls: AnyClass?, forClassName codedName: String)
   func setClass(cls: AnyClass?, forClassName codedName: String)
@@ -2775,35 +2768,35 @@ class NSKeyedUnarchiver : NSCoder {
   var requiresSecureCoding: Bool
   init()
 }
-extension NSKeyedUnarchiver {
+extension KeyedUnarchiver {
   @warn_unused_result
-  class func unarchiveTopLevelObjectWithData(data: NSData) throws -> AnyObject?
+  class func unarchiveTopLevelObjectWithData(data: Data) throws -> AnyObject?
 }
-protocol NSKeyedArchiverDelegate : NSObjectProtocol {
-  optional func archiver(archiver: NSKeyedArchiver, willEncodeObject object: AnyObject) -> AnyObject?
-  optional func archiver(archiver: NSKeyedArchiver, didEncodeObject object: AnyObject?)
-  optional func archiver(archiver: NSKeyedArchiver, willReplaceObject object: AnyObject?, withObject newObject: AnyObject?)
-  optional func archiverWillFinish(archiver: NSKeyedArchiver)
-  optional func archiverDidFinish(archiver: NSKeyedArchiver)
+protocol KeyedArchiverDelegate : ObjectProtocol {
+  optional func archiver(archiver: KeyedArchiver, willEncode object: AnyObject) -> AnyObject?
+  optional func archiver(archiver: KeyedArchiver, didEncode object: AnyObject?)
+  optional func archiver(archiver: KeyedArchiver, willReplace object: AnyObject?, withObject newObject: AnyObject?)
+  optional func archiverWillFinish(archiver: KeyedArchiver)
+  optional func archiverDidFinish(archiver: KeyedArchiver)
 }
-protocol NSKeyedUnarchiverDelegate : NSObjectProtocol {
-  optional func unarchiver(unarchiver: NSKeyedUnarchiver, cannotDecodeObjectOfClassName name: String, originalClasses classNames: [String]) -> AnyClass?
-  optional func unarchiver(unarchiver: NSKeyedUnarchiver, didDecodeObject object: AnyObject?) -> AnyObject?
-  optional func unarchiver(unarchiver: NSKeyedUnarchiver, willReplaceObject object: AnyObject, withObject newObject: AnyObject)
-  optional func unarchiverWillFinish(unarchiver: NSKeyedUnarchiver)
-  optional func unarchiverDidFinish(unarchiver: NSKeyedUnarchiver)
+protocol KeyedUnarchiverDelegate : ObjectProtocol {
+  optional func unarchiver(unarchiver: KeyedUnarchiver, cannotDecodeObjectOfClassName name: String, originalClasses classNames: [String]) -> AnyClass?
+  optional func unarchiver(unarchiver: KeyedUnarchiver, didDecode object: AnyObject?) -> AnyObject?
+  optional func unarchiver(unarchiver: KeyedUnarchiver, willReplace object: AnyObject, withObject newObject: AnyObject)
+  optional func unarchiverWillFinish(unarchiver: KeyedUnarchiver)
+  optional func unarchiverDidFinish(unarchiver: KeyedUnarchiver)
 }
-extension NSObject {
+extension Object {
   var classForKeyedArchiver: AnyClass? { get }
-  class func replacementObjectForKeyedArchiver(archiver: NSKeyedArchiver) -> AnyObject?
-  func replacementObjectForKeyedArchiver(archiver: NSKeyedArchiver) -> AnyObject?
+  class func replacementObjectFor(archiver: KeyedArchiver) -> AnyObject?
+  func replacementObjectFor(archiver: KeyedArchiver) -> AnyObject?
   class func classFallbacksForKeyedArchiver() -> [String]
   class func classForKeyedArchiver() -> AnyClass?
 }
-extension NSObject {
+extension Object {
   class func classForKeyedUnarchiver() -> AnyClass
 }
-enum NSLengthFormatterUnit : Int {
+enum LengthFormatterUnit : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case Millimeter
@@ -2815,118 +2808,118 @@ enum NSLengthFormatterUnit : Int {
   case Yard
   case Mile
 }
-class NSLengthFormatter : NSFormatter {
-  @NSCopying var numberFormatter: NSNumberFormatter!
-  var unitStyle: NSFormattingUnitStyle
-  var forPersonHeightUse: Bool
-  func stringFromValue(value: Double, unit: NSLengthFormatterUnit) -> String
+class LengthFormatter : Formatter {
+  @NSCopying var numberFormatter: NumberFormatter!
+  var unitStyle: FormattingUnitStyle
+  var isForPersonHeightUse: Bool
+  func stringFromValue(value: Double, unit: LengthFormatterUnit) -> String
   func stringFromMeters(numberInMeters: Double) -> String
-  func unitStringFromValue(value: Double, unit: NSLengthFormatterUnit) -> String
-  func unitStringFromMeters(numberInMeters: Double, usedUnit unitp: UnsafeMutablePointer<NSLengthFormatterUnit>) -> String
+  func unitStringFromValue(value: Double, unit: LengthFormatterUnit) -> String
+  func unitStringFromMeters(numberInMeters: Double, usedUnit unitp: UnsafeMutablePointer<LengthFormatterUnit>) -> String
   func getObjectValue(obj: AutoreleasingUnsafeMutablePointer<AnyObject?>, forString string: String, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-let NSLinguisticTagSchemeTokenType: String
-let NSLinguisticTagSchemeLexicalClass: String
-let NSLinguisticTagSchemeNameType: String
-let NSLinguisticTagSchemeNameTypeOrLexicalClass: String
-let NSLinguisticTagSchemeLemma: String
-let NSLinguisticTagSchemeLanguage: String
-let NSLinguisticTagSchemeScript: String
-let NSLinguisticTagWord: String
-let NSLinguisticTagPunctuation: String
-let NSLinguisticTagWhitespace: String
-let NSLinguisticTagOther: String
-let NSLinguisticTagNoun: String
-let NSLinguisticTagVerb: String
-let NSLinguisticTagAdjective: String
-let NSLinguisticTagAdverb: String
-let NSLinguisticTagPronoun: String
-let NSLinguisticTagDeterminer: String
-let NSLinguisticTagParticle: String
-let NSLinguisticTagPreposition: String
-let NSLinguisticTagNumber: String
-let NSLinguisticTagConjunction: String
-let NSLinguisticTagInterjection: String
-let NSLinguisticTagClassifier: String
-let NSLinguisticTagIdiom: String
-let NSLinguisticTagOtherWord: String
-let NSLinguisticTagSentenceTerminator: String
-let NSLinguisticTagOpenQuote: String
-let NSLinguisticTagCloseQuote: String
-let NSLinguisticTagOpenParenthesis: String
-let NSLinguisticTagCloseParenthesis: String
-let NSLinguisticTagWordJoiner: String
-let NSLinguisticTagDash: String
-let NSLinguisticTagOtherPunctuation: String
-let NSLinguisticTagParagraphBreak: String
-let NSLinguisticTagOtherWhitespace: String
-let NSLinguisticTagPersonalName: String
-let NSLinguisticTagPlaceName: String
-let NSLinguisticTagOrganizationName: String
-struct NSLinguisticTaggerOptions : OptionSetType {
+let linguisticTagSchemeTokenType: String
+let linguisticTagSchemeLexicalClass: String
+let linguisticTagSchemeNameType: String
+let linguisticTagSchemeNameTypeOrLexicalClass: String
+let linguisticTagSchemeLemma: String
+let linguisticTagSchemeLanguage: String
+let linguisticTagSchemeScript: String
+let linguisticTagWord: String
+let linguisticTagPunctuation: String
+let linguisticTagWhitespace: String
+let linguisticTagOther: String
+let linguisticTagNoun: String
+let linguisticTagVerb: String
+let linguisticTagAdjective: String
+let linguisticTagAdverb: String
+let linguisticTagPronoun: String
+let linguisticTagDeterminer: String
+let linguisticTagParticle: String
+let linguisticTagPreposition: String
+let linguisticTagNumber: String
+let linguisticTagConjunction: String
+let linguisticTagInterjection: String
+let linguisticTagClassifier: String
+let linguisticTagIdiom: String
+let linguisticTagOtherWord: String
+let linguisticTagSentenceTerminator: String
+let linguisticTagOpenQuote: String
+let linguisticTagCloseQuote: String
+let linguisticTagOpenParenthesis: String
+let linguisticTagCloseParenthesis: String
+let linguisticTagWordJoiner: String
+let linguisticTagDash: String
+let linguisticTagOtherPunctuation: String
+let linguisticTagParagraphBreak: String
+let linguisticTagOtherWhitespace: String
+let linguisticTagPersonalName: String
+let linguisticTagPlaceName: String
+let linguisticTagOrganizationName: String
+struct LinguisticTaggerOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var OmitWords: NSLinguisticTaggerOptions { get }
-  static var OmitPunctuation: NSLinguisticTaggerOptions { get }
-  static var OmitWhitespace: NSLinguisticTaggerOptions { get }
-  static var OmitOther: NSLinguisticTaggerOptions { get }
-  static var JoinNames: NSLinguisticTaggerOptions { get }
+  static var OmitWords: LinguisticTaggerOptions { get }
+  static var OmitPunctuation: LinguisticTaggerOptions { get }
+  static var OmitWhitespace: LinguisticTaggerOptions { get }
+  static var OmitOther: LinguisticTaggerOptions { get }
+  static var JoinNames: LinguisticTaggerOptions { get }
 }
-class NSLinguisticTagger : NSObject {
+class LinguisticTagger : Object {
   init(tagSchemes: [String], options opts: Int)
   var tagSchemes: [String] { get }
   var string: String?
   class func availableTagSchemesForLanguage(language: String) -> [String]
-  func setOrthography(orthography: NSOrthography?, range: NSRange)
-  func orthographyAtIndex(charIndex: Int, effectiveRange: NSRangePointer) -> NSOrthography?
-  func stringEditedInRange(newRange: NSRange, changeInLength delta: Int)
-  func enumerateTagsInRange(range: NSRange, scheme tagScheme: String, options opts: NSLinguisticTaggerOptions, usingBlock block: (String, NSRange, NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func sentenceRangeForRange(range: NSRange) -> NSRange
-  func tagAtIndex(charIndex: Int, scheme tagScheme: String, tokenRange: NSRangePointer, sentenceRange: NSRangePointer) -> String?
-  func tagsInRange(range: NSRange, scheme tagScheme: String, options opts: NSLinguisticTaggerOptions, tokenRanges: AutoreleasingUnsafeMutablePointer<NSArray?>) -> [String]
-  func possibleTagsAtIndex(charIndex: Int, scheme tagScheme: String, tokenRange: NSRangePointer, sentenceRange: NSRangePointer, scores: AutoreleasingUnsafeMutablePointer<NSArray?>) -> [String]?
+  func setOrthography(orthography: Orthography?, range: NSRange)
+  func orthographyAt(charIndex: Int, effectiveRange: RangePointer) -> Orthography?
+  func stringEditedIn(newRange: NSRange, changeInLength delta: Int)
+  func enumerateTagsIn(range: NSRange, scheme tagScheme: String, options opts: LinguisticTaggerOptions = [], usingBlock block: (String, NSRange, NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func sentenceRangeFor(range: NSRange) -> NSRange
+  func tagAt(charIndex: Int, scheme tagScheme: String, tokenRange: RangePointer, sentenceRange: RangePointer) -> String?
+  func tagsIn(range: NSRange, scheme tagScheme: String, options opts: LinguisticTaggerOptions = [], tokenRanges: AutoreleasingUnsafeMutablePointer<NSArray?>) -> [String]
+  func possibleTagsAt(charIndex: Int, scheme tagScheme: String, tokenRange: RangePointer, sentenceRange: RangePointer, scores: AutoreleasingUnsafeMutablePointer<NSArray?>) -> [String]?
   convenience init()
 }
 extension NSString {
-  func linguisticTagsInRange(range: NSRange, scheme tagScheme: String, options opts: NSLinguisticTaggerOptions, orthography: NSOrthography?, tokenRanges: AutoreleasingUnsafeMutablePointer<NSArray?>) -> [String]
-  func enumerateLinguisticTagsInRange(range: NSRange, scheme tagScheme: String, options opts: NSLinguisticTaggerOptions, orthography: NSOrthography?, usingBlock block: (String, NSRange, NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func linguisticTagsIn(range: NSRange, scheme tagScheme: String, options opts: LinguisticTaggerOptions = [], orthography: Orthography?, tokenRanges: AutoreleasingUnsafeMutablePointer<NSArray?>) -> [String]
+  func enumerateLinguisticTagsIn(range: NSRange, scheme tagScheme: String, options opts: LinguisticTaggerOptions = [], orthography: Orthography?, usingBlock block: (String, NSRange, NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
 }
-class NSLocale : NSObject, NSCopying, NSSecureCoding {
+class Locale : Object, Copying, SecureCoding {
   func objectForKey(key: AnyObject) -> AnyObject?
   func displayNameForKey(key: AnyObject, value: AnyObject) -> String?
   init(localeIdentifier string: String)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
+  func encodeWith(aCoder: Coder)
 }
-extension NSLocale {
+extension Locale {
   var localeIdentifier: String { get }
 }
-extension NSLocale {
-  class func autoupdatingCurrentLocale() -> NSLocale
-  class func currentLocale() -> NSLocale
-  class func systemLocale() -> NSLocale
+extension Locale {
+  class func autoupdatingCurrent() -> Locale
+  class func current() -> Locale
+  class func system() -> Locale
 }
-extension NSLocale {
+extension Locale {
   class func availableLocaleIdentifiers() -> [String]
-  class func ISOLanguageCodes() -> [String]
-  class func ISOCountryCodes() -> [String]
-  class func ISOCurrencyCodes() -> [String]
+  class func isoLanguageCodes() -> [String]
+  class func isoCountryCodes() -> [String]
+  class func isoCurrencyCodes() -> [String]
   class func commonISOCurrencyCodes() -> [String]
   class func preferredLanguages() -> [String]
   class func componentsFromLocaleIdentifier(string: String) -> [String : String]
   class func localeIdentifierFromComponents(dict: [String : String]) -> String
-  class func canonicalLocaleIdentifierFromString(string: String) -> String
-  class func canonicalLanguageIdentifierFromString(string: String) -> String
+  class func canonicalLocaleIdentifierFrom(string: String) -> String
+  class func canonicalLanguageIdentifierFrom(string: String) -> String
   class func localeIdentifierFromWindowsLocaleCode(lcid: UInt32) -> String?
   class func windowsLocaleCodeFromLocaleIdentifier(localeIdentifier: String) -> UInt32
-  class func characterDirectionForLanguage(isoLangCode: String) -> NSLocaleLanguageDirection
-  class func lineDirectionForLanguage(isoLangCode: String) -> NSLocaleLanguageDirection
+  class func characterDirectionForLanguage(isoLangCode: String) -> LocaleLanguageDirection
+  class func lineDirectionForLanguage(isoLangCode: String) -> LocaleLanguageDirection
 }
-enum NSLocaleLanguageDirection : UInt {
+enum LocaleLanguageDirection : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case Unknown
@@ -2935,74 +2928,74 @@ enum NSLocaleLanguageDirection : UInt {
   case TopToBottom
   case BottomToTop
 }
-let NSCurrentLocaleDidChangeNotification: String
-let NSLocaleIdentifier: String
-let NSLocaleLanguageCode: String
-let NSLocaleCountryCode: String
-let NSLocaleScriptCode: String
-let NSLocaleVariantCode: String
-let NSLocaleExemplarCharacterSet: String
-let NSLocaleCalendar: String
-let NSLocaleCollationIdentifier: String
-let NSLocaleUsesMetricSystem: String
-let NSLocaleMeasurementSystem: String
-let NSLocaleDecimalSeparator: String
-let NSLocaleGroupingSeparator: String
-let NSLocaleCurrencySymbol: String
-let NSLocaleCurrencyCode: String
-let NSLocaleCollatorIdentifier: String
-let NSLocaleQuotationBeginDelimiterKey: String
-let NSLocaleQuotationEndDelimiterKey: String
-let NSLocaleAlternateQuotationBeginDelimiterKey: String
-let NSLocaleAlternateQuotationEndDelimiterKey: String
-let NSGregorianCalendar: String
-let NSBuddhistCalendar: String
-let NSChineseCalendar: String
-let NSHebrewCalendar: String
-let NSIslamicCalendar: String
-let NSIslamicCivilCalendar: String
-let NSJapaneseCalendar: String
-let NSRepublicOfChinaCalendar: String
-let NSPersianCalendar: String
-let NSIndianCalendar: String
-let NSISO8601Calendar: String
-protocol NSLocking {
+let currentLocaleDidChangeNotification: String
+let localeIdentifier: String
+let localeLanguageCode: String
+let localeCountryCode: String
+let localeScriptCode: String
+let localeVariantCode: String
+let localeExemplarCharacterSet: String
+let localeCalendar: String
+let localeCollationIdentifier: String
+let localeUsesMetricSystem: String
+let localeMeasurementSystem: String
+let localeDecimalSeparator: String
+let localeGroupingSeparator: String
+let localeCurrencySymbol: String
+let localeCurrencyCode: String
+let localeCollatorIdentifier: String
+let localeQuotationBeginDelimiterKey: String
+let localeQuotationEndDelimiterKey: String
+let localeAlternateQuotationBeginDelimiterKey: String
+let localeAlternateQuotationEndDelimiterKey: String
+let gregorianCalendar: String
+let buddhistCalendar: String
+let chineseCalendar: String
+let hebrewCalendar: String
+let islamicCalendar: String
+let islamicCivilCalendar: String
+let japaneseCalendar: String
+let republicOfChinaCalendar: String
+let persianCalendar: String
+let indianCalendar: String
+let ISO8601Calendar: String
+protocol Locking {
   func lock()
   func unlock()
 }
-class NSLock : NSObject, NSLocking {
+class Lock : Object, Locking {
   func tryLock() -> Bool
-  func lockBeforeDate(limit: NSDate) -> Bool
+  func lockBefore(limit: Date) -> Bool
   var name: String?
   init()
   func lock()
   func unlock()
 }
-class NSConditionLock : NSObject, NSLocking {
+class ConditionLock : Object, Locking {
   init(condition: Int)
   var condition: Int { get }
   func lockWhenCondition(condition: Int)
   func tryLock() -> Bool
-  func tryLockWhenCondition(condition: Int) -> Bool
+  func tryWhenCondition(condition: Int) -> Bool
   func unlockWithCondition(condition: Int)
-  func lockBeforeDate(limit: NSDate) -> Bool
-  func lockWhenCondition(condition: Int, beforeDate limit: NSDate) -> Bool
+  func lockBefore(limit: Date) -> Bool
+  func lockWhenCondition(condition: Int, before limit: Date) -> Bool
   var name: String?
   convenience init()
   func lock()
   func unlock()
 }
-class NSRecursiveLock : NSObject, NSLocking {
+class RecursiveLock : Object, Locking {
   func tryLock() -> Bool
-  func lockBeforeDate(limit: NSDate) -> Bool
+  func lockBefore(limit: Date) -> Bool
   var name: String?
   init()
   func lock()
   func unlock()
 }
-class NSCondition : NSObject, NSLocking {
+class Condition : Object, Locking {
   func wait()
-  func waitUntilDate(limit: NSDate) -> Bool
+  func waitUntil(limit: Date) -> Bool
   func signal()
   func broadcast()
   var name: String?
@@ -3011,90 +3004,90 @@ class NSCondition : NSObject, NSLocking {
   func unlock()
 }
 var __FOUNDATION_NSMAPTABLE__: Int32 { get }
-let NSMapTableStrongMemory: NSPointerFunctionsOptions
-let NSMapTableCopyIn: NSPointerFunctionsOptions
-let NSMapTableObjectPointerPersonality: NSPointerFunctionsOptions
-let NSMapTableWeakMemory: NSPointerFunctionsOptions
-typealias NSMapTableOptions = Int
-class NSMapTable : NSObject, NSCopying, NSCoding, NSFastEnumeration {
-  init(keyOptions: NSPointerFunctionsOptions, valueOptions: NSPointerFunctionsOptions, capacity initialCapacity: Int)
-  init(keyPointerFunctions keyFunctions: NSPointerFunctions, valuePointerFunctions valueFunctions: NSPointerFunctions, capacity initialCapacity: Int)
-   init(keyOptions: NSPointerFunctionsOptions, valueOptions: NSPointerFunctionsOptions)
-  class func strongToStrongObjectsMapTable() -> NSMapTable
-  class func weakToStrongObjectsMapTable() -> NSMapTable
-  class func strongToWeakObjectsMapTable() -> NSMapTable
-  class func weakToWeakObjectsMapTable() -> NSMapTable
-  @NSCopying var keyPointerFunctions: NSPointerFunctions { get }
-  @NSCopying var valuePointerFunctions: NSPointerFunctions { get }
-  func objectForKey(aKey: AnyObject?) -> AnyObject?
-  func removeObjectForKey(aKey: AnyObject?)
+let mapTableStrongMemory: PointerFunctionsOptions
+let mapTableCopyIn: PointerFunctionsOptions
+let mapTableObjectPointerPersonality: PointerFunctionsOptions
+let mapTableWeakMemory: PointerFunctionsOptions
+typealias MapTableOptions = Int
+class MapTable : Object, Copying, Coding, FastEnumeration {
+  init(keyOptions: PointerFunctionsOptions = [], valueOptions: PointerFunctionsOptions = [], capacity initialCapacity: Int)
+  init(keyPointerFunctions keyFunctions: PointerFunctions, valuePointerFunctions valueFunctions: PointerFunctions, capacity initialCapacity: Int)
+   init(keyOptions: PointerFunctionsOptions = [], valueOptions: PointerFunctionsOptions = [])
+  class func strongToStrongObjects() -> MapTable
+  class func weakToStrongObjects() -> MapTable
+  class func strongToWeakObjects() -> MapTable
+  class func weakToWeakObjects() -> MapTable
+  @NSCopying var keyPointerFunctions: PointerFunctions { get }
+  @NSCopying var valuePointerFunctions: PointerFunctions { get }
+  func objectFor(aKey: AnyObject?) -> AnyObject?
+  func removeObjectFor(aKey: AnyObject?)
   func setObject(anObject: AnyObject?, forKey aKey: AnyObject?)
   var count: Int { get }
-  func keyEnumerator() -> NSEnumerator
-  func objectEnumerator() -> NSEnumerator?
+  func keyEnumerator() -> Enumerator
+  func objectEnumerator() -> Enumerator?
   func removeAllObjects()
-  func dictionaryRepresentation() -> [NSObject : AnyObject]
+  func dictionaryRepresentation() -> [Object : AnyObject]
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func countByEnumeratingWithState(state: UnsafeMutablePointer<NSFastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func countByEnumeratingWith(state: UnsafeMutablePointer<FastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
 }
-struct NSMapEnumerator {
+struct MapEnumerator {
   var _pi: Int
   var _si: Int
   var _bs: UnsafeMutablePointer<Void>
   init()
   init(_pi: Int, _si: Int, _bs: UnsafeMutablePointer<Void>)
 }
-func NSFreeMapTable(table: NSMapTable)
-func NSResetMapTable(table: NSMapTable)
-func NSCompareMapTables(table1: NSMapTable, _ table2: NSMapTable) -> Bool
-func NSCopyMapTableWithZone(table: NSMapTable, _ zone: NSZone) -> NSMapTable
-func NSMapMember(table: NSMapTable, _ key: UnsafePointer<Void>, _ originalKey: UnsafeMutablePointer<UnsafeMutablePointer<Void>>, _ value: UnsafeMutablePointer<UnsafeMutablePointer<Void>>) -> Bool
-func NSMapGet(table: NSMapTable, _ key: UnsafePointer<Void>) -> UnsafeMutablePointer<Void>
-func NSMapInsert(table: NSMapTable, _ key: UnsafePointer<Void>, _ value: UnsafePointer<Void>)
-func NSMapInsertKnownAbsent(table: NSMapTable, _ key: UnsafePointer<Void>, _ value: UnsafePointer<Void>)
-func NSMapInsertIfAbsent(table: NSMapTable, _ key: UnsafePointer<Void>, _ value: UnsafePointer<Void>) -> UnsafeMutablePointer<Void>
-func NSMapRemove(table: NSMapTable, _ key: UnsafePointer<Void>)
-func NSEnumerateMapTable(table: NSMapTable) -> NSMapEnumerator
-func NSNextMapEnumeratorPair(enumerator: UnsafeMutablePointer<NSMapEnumerator>, _ key: UnsafeMutablePointer<UnsafeMutablePointer<Void>>, _ value: UnsafeMutablePointer<UnsafeMutablePointer<Void>>) -> Bool
-func NSEndMapTableEnumeration(enumerator: UnsafeMutablePointer<NSMapEnumerator>)
-func NSCountMapTable(table: NSMapTable) -> Int
-func NSStringFromMapTable(table: NSMapTable) -> String
-func NSAllMapTableKeys(table: NSMapTable) -> [AnyObject]
-func NSAllMapTableValues(table: NSMapTable) -> [AnyObject]
-struct NSMapTableKeyCallBacks {
-  var hash: (@convention(c) (NSMapTable, UnsafePointer<Void>) -> Int)?
-  var isEqual: (@convention(c) (NSMapTable, UnsafePointer<Void>, UnsafePointer<Void>) -> ObjCBool)?
-  var retain: (@convention(c) (NSMapTable, UnsafePointer<Void>) -> Void)?
-  var release: (@convention(c) (NSMapTable, UnsafeMutablePointer<Void>) -> Void)?
-  var describe: (@convention(c) (NSMapTable, UnsafePointer<Void>) -> String?)?
+func freeMapTable(table: MapTable)
+func resetMapTable(table: MapTable)
+func compareMapTables(table1: MapTable, _ table2: MapTable) -> Bool
+func copyMapTableWithZone(table: MapTable, _ zone: Zone) -> MapTable
+func mapMember(table: MapTable, _ key: UnsafePointer<Void>, _ originalKey: UnsafeMutablePointer<UnsafeMutablePointer<Void>>, _ value: UnsafeMutablePointer<UnsafeMutablePointer<Void>>) -> Bool
+func mapGet(table: MapTable, _ key: UnsafePointer<Void>) -> UnsafeMutablePointer<Void>
+func mapInsert(table: MapTable, _ key: UnsafePointer<Void>, _ value: UnsafePointer<Void>)
+func mapInsertKnownAbsent(table: MapTable, _ key: UnsafePointer<Void>, _ value: UnsafePointer<Void>)
+func mapInsertIfAbsent(table: MapTable, _ key: UnsafePointer<Void>, _ value: UnsafePointer<Void>) -> UnsafeMutablePointer<Void>
+func mapRemove(table: MapTable, _ key: UnsafePointer<Void>)
+func enumerateMapTable(table: MapTable) -> MapEnumerator
+func nextMapEnumeratorPair(enumerator: UnsafeMutablePointer<MapEnumerator>, _ key: UnsafeMutablePointer<UnsafeMutablePointer<Void>>, _ value: UnsafeMutablePointer<UnsafeMutablePointer<Void>>) -> Bool
+func endMapTableEnumeration(enumerator: UnsafeMutablePointer<MapEnumerator>)
+func countMapTable(table: MapTable) -> Int
+func stringFromMapTable(table: MapTable) -> String
+func allMapTableKeys(table: MapTable) -> [AnyObject]
+func allMapTableValues(table: MapTable) -> [AnyObject]
+struct MapTableKeyCallBacks {
+  var hash: (@convention(c) (MapTable, UnsafePointer<Void>) -> Int)?
+  var isEqual: (@convention(c) (MapTable, UnsafePointer<Void>, UnsafePointer<Void>) -> ObjCBool)?
+  var retain: (@convention(c) (MapTable, UnsafePointer<Void>) -> Void)?
+  var release: (@convention(c) (MapTable, UnsafeMutablePointer<Void>) -> Void)?
+  var describe: (@convention(c) (MapTable, UnsafePointer<Void>) -> String?)?
   var notAKeyMarker: UnsafePointer<Void>
   init()
-  init(hash: (@convention(c) (NSMapTable, UnsafePointer<Void>) -> Int)?, isEqual: (@convention(c) (NSMapTable, UnsafePointer<Void>, UnsafePointer<Void>) -> ObjCBool)?, retain: (@convention(c) (NSMapTable, UnsafePointer<Void>) -> Void)?, release: (@convention(c) (NSMapTable, UnsafeMutablePointer<Void>) -> Void)?, describe: (@convention(c) (NSMapTable, UnsafePointer<Void>) -> String?)?, notAKeyMarker: UnsafePointer<Void>)
+  init(hash: (@convention(c) (MapTable, UnsafePointer<Void>) -> Int)?, isEqual: (@convention(c) (MapTable, UnsafePointer<Void>, UnsafePointer<Void>) -> ObjCBool)?, retain: (@convention(c) (MapTable, UnsafePointer<Void>) -> Void)?, release: (@convention(c) (MapTable, UnsafeMutablePointer<Void>) -> Void)?, describe: (@convention(c) (MapTable, UnsafePointer<Void>) -> String?)?, notAKeyMarker: UnsafePointer<Void>)
 }
-struct NSMapTableValueCallBacks {
-  var retain: (@convention(c) (NSMapTable, UnsafePointer<Void>) -> Void)?
-  var release: (@convention(c) (NSMapTable, UnsafeMutablePointer<Void>) -> Void)?
-  var describe: (@convention(c) (NSMapTable, UnsafePointer<Void>) -> String?)?
+struct MapTableValueCallBacks {
+  var retain: (@convention(c) (MapTable, UnsafePointer<Void>) -> Void)?
+  var release: (@convention(c) (MapTable, UnsafeMutablePointer<Void>) -> Void)?
+  var describe: (@convention(c) (MapTable, UnsafePointer<Void>) -> String?)?
   init()
-  init(retain: (@convention(c) (NSMapTable, UnsafePointer<Void>) -> Void)?, release: (@convention(c) (NSMapTable, UnsafeMutablePointer<Void>) -> Void)?, describe: (@convention(c) (NSMapTable, UnsafePointer<Void>) -> String?)?)
+  init(retain: (@convention(c) (MapTable, UnsafePointer<Void>) -> Void)?, release: (@convention(c) (MapTable, UnsafeMutablePointer<Void>) -> Void)?, describe: (@convention(c) (MapTable, UnsafePointer<Void>) -> String?)?)
 }
-func NSCreateMapTableWithZone(keyCallBacks: NSMapTableKeyCallBacks, _ valueCallBacks: NSMapTableValueCallBacks, _ capacity: Int, _ zone: NSZone) -> NSMapTable
-func NSCreateMapTable(keyCallBacks: NSMapTableKeyCallBacks, _ valueCallBacks: NSMapTableValueCallBacks, _ capacity: Int) -> NSMapTable
-let NSIntegerMapKeyCallBacks: NSMapTableKeyCallBacks
-let NSNonOwnedPointerMapKeyCallBacks: NSMapTableKeyCallBacks
-let NSNonOwnedPointerOrNullMapKeyCallBacks: NSMapTableKeyCallBacks
-let NSNonRetainedObjectMapKeyCallBacks: NSMapTableKeyCallBacks
-let NSObjectMapKeyCallBacks: NSMapTableKeyCallBacks
-let NSOwnedPointerMapKeyCallBacks: NSMapTableKeyCallBacks
-let NSIntegerMapValueCallBacks: NSMapTableValueCallBacks
-let NSNonOwnedPointerMapValueCallBacks: NSMapTableValueCallBacks
-let NSObjectMapValueCallBacks: NSMapTableValueCallBacks
-let NSNonRetainedObjectMapValueCallBacks: NSMapTableValueCallBacks
-let NSOwnedPointerMapValueCallBacks: NSMapTableValueCallBacks
-enum NSMassFormatterUnit : Int {
+func createMapTableWithZone(keyCallBacks: MapTableKeyCallBacks, _ valueCallBacks: MapTableValueCallBacks, _ capacity: Int, _ zone: Zone) -> MapTable
+func createMapTable(keyCallBacks: MapTableKeyCallBacks, _ valueCallBacks: MapTableValueCallBacks, _ capacity: Int) -> MapTable
+let integerMapKeyCallBacks: MapTableKeyCallBacks
+let nonOwnedPointerMapKeyCallBacks: MapTableKeyCallBacks
+let nonOwnedPointerOrNullMapKeyCallBacks: MapTableKeyCallBacks
+let nonRetainedObjectMapKeyCallBacks: MapTableKeyCallBacks
+let objectMapKeyCallBacks: MapTableKeyCallBacks
+let ownedPointerMapKeyCallBacks: MapTableKeyCallBacks
+let integerMapValueCallBacks: MapTableValueCallBacks
+let nonOwnedPointerMapValueCallBacks: MapTableValueCallBacks
+let objectMapValueCallBacks: MapTableValueCallBacks
+let nonRetainedObjectMapValueCallBacks: MapTableValueCallBacks
+let ownedPointerMapValueCallBacks: MapTableValueCallBacks
+enum MassFormatterUnit : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case Gram
@@ -3103,262 +3096,262 @@ enum NSMassFormatterUnit : Int {
   case Pound
   case Stone
 }
-class NSMassFormatter : NSFormatter {
-  @NSCopying var numberFormatter: NSNumberFormatter!
-  var unitStyle: NSFormattingUnitStyle
-  var forPersonMassUse: Bool
-  func stringFromValue(value: Double, unit: NSMassFormatterUnit) -> String
+class MassFormatter : Formatter {
+  @NSCopying var numberFormatter: NumberFormatter!
+  var unitStyle: FormattingUnitStyle
+  var isForPersonMassUse: Bool
+  func stringFromValue(value: Double, unit: MassFormatterUnit) -> String
   func stringFromKilograms(numberInKilograms: Double) -> String
-  func unitStringFromValue(value: Double, unit: NSMassFormatterUnit) -> String
-  func unitStringFromKilograms(numberInKilograms: Double, usedUnit unitp: UnsafeMutablePointer<NSMassFormatterUnit>) -> String
+  func unitStringFromValue(value: Double, unit: MassFormatterUnit) -> String
+  func unitStringFromKilograms(numberInKilograms: Double, usedUnit unitp: UnsafeMutablePointer<MassFormatterUnit>) -> String
   func getObjectValue(obj: AutoreleasingUnsafeMutablePointer<AnyObject?>, forString string: String, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class NSMetadataQuery : NSObject {
-  unowned(unsafe) var delegate: @sil_unmanaged NSMetadataQueryDelegate?
-  @NSCopying var predicate: NSPredicate?
-  var sortDescriptors: [NSSortDescriptor]
+class MetadataQuery : Object {
+  unowned(unsafe) var delegate: @sil_unmanaged MetadataQueryDelegate?
+  @NSCopying var predicate: Predicate?
+  var sortDescriptors: [SortDescriptor]
   var valueListAttributes: [String]
   var groupingAttributes: [String]?
-  var notificationBatchingInterval: NSTimeInterval
+  var notificationBatchingInterval: TimeInterval
   var searchScopes: [AnyObject]
   var searchItems: [AnyObject]?
-  var operationQueue: NSOperationQueue?
-  func startQuery() -> Bool
-  func stopQuery()
-  var started: Bool { get }
-  var gathering: Bool { get }
-  var stopped: Bool { get }
+  var operationQueue: OperationQueue?
+  func start() -> Bool
+  func stop()
+  var isStarted: Bool { get }
+  var isGathering: Bool { get }
+  var isStopped: Bool { get }
   func disableUpdates()
   func enableUpdates()
   var resultCount: Int { get }
-  func resultAtIndex(idx: Int) -> AnyObject
-  func enumerateResultsUsingBlock(block: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func enumerateResultsWithOptions(opts: NSEnumerationOptions, usingBlock block: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func resultAt(idx: Int) -> AnyObject
+  func enumerateResultsUsing(block: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func enumerateResults(options opts: EnumerationOptions = [], usingBlock block: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
   var results: [AnyObject] { get }
   func indexOfResult(result: AnyObject) -> Int
-  var valueLists: [String : [NSMetadataQueryAttributeValueTuple]] { get }
-  var groupedResults: [NSMetadataQueryResultGroup] { get }
-  func valueOfAttribute(attrName: String, forResultAtIndex idx: Int) -> AnyObject?
+  var valueLists: [String : [MetadataQueryAttributeValueTuple]] { get }
+  var groupedResults: [MetadataQueryResultGroup] { get }
+  func valueOfAttribute(attrName: String, forResultAt idx: Int) -> AnyObject?
   init()
 }
-protocol NSMetadataQueryDelegate : NSObjectProtocol {
-  optional func metadataQuery(query: NSMetadataQuery, replacementObjectForResultObject result: NSMetadataItem) -> AnyObject
-  optional func metadataQuery(query: NSMetadataQuery, replacementValueForAttribute attrName: String, value attrValue: AnyObject) -> AnyObject
+protocol MetadataQueryDelegate : ObjectProtocol {
+  optional func metadataQuery(query: MetadataQuery, replacementObjectForResultObject result: MetadataItem) -> AnyObject
+  optional func metadataQuery(query: MetadataQuery, replacementValueForAttribute attrName: String, value attrValue: AnyObject) -> AnyObject
 }
-let NSMetadataQueryDidStartGatheringNotification: String
-let NSMetadataQueryGatheringProgressNotification: String
-let NSMetadataQueryDidFinishGatheringNotification: String
-let NSMetadataQueryDidUpdateNotification: String
-let NSMetadataQueryUpdateAddedItemsKey: String
-let NSMetadataQueryUpdateChangedItemsKey: String
-let NSMetadataQueryUpdateRemovedItemsKey: String
-let NSMetadataQueryResultContentRelevanceAttribute: String
-let NSMetadataQueryUserHomeScope: String
-let NSMetadataQueryLocalComputerScope: String
-let NSMetadataQueryNetworkScope: String
-let NSMetadataQueryIndexedLocalComputerScope: String
-let NSMetadataQueryIndexedNetworkScope: String
-let NSMetadataQueryUbiquitousDocumentsScope: String
-let NSMetadataQueryUbiquitousDataScope: String
-let NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope: String
-class NSMetadataItem : NSObject {
-  init?(URL url: NSURL)
+let metadataQueryDidStartGatheringNotification: String
+let metadataQueryGatheringProgressNotification: String
+let metadataQueryDidFinishGatheringNotification: String
+let metadataQueryDidUpdateNotification: String
+let metadataQueryUpdateAddedItemsKey: String
+let metadataQueryUpdateChangedItemsKey: String
+let metadataQueryUpdateRemovedItemsKey: String
+let metadataQueryResultContentRelevanceAttribute: String
+let metadataQueryUserHomeScope: String
+let metadataQueryLocalComputerScope: String
+let metadataQueryNetworkScope: String
+let metadataQueryIndexedLocalComputerScope: String
+let metadataQueryIndexedNetworkScope: String
+let metadataQueryUbiquitousDocumentsScope: String
+let metadataQueryUbiquitousDataScope: String
+let metadataQueryAccessibleUbiquitousExternalDocumentsScope: String
+class MetadataItem : Object {
+  init?(url: URL)
   func valueForAttribute(key: String) -> AnyObject?
   func valuesForAttributes(keys: [String]) -> [String : AnyObject]?
   var attributes: [String] { get }
   convenience init()
 }
-class NSMetadataQueryAttributeValueTuple : NSObject {
+class MetadataQueryAttributeValueTuple : Object {
   var attribute: String { get }
   var value: AnyObject? { get }
   var count: Int { get }
   init()
 }
-class NSMetadataQueryResultGroup : NSObject {
+class MetadataQueryResultGroup : Object {
   var attribute: String { get }
   var value: AnyObject { get }
-  var subgroups: [NSMetadataQueryResultGroup]? { get }
+  var subgroups: [MetadataQueryResultGroup]? { get }
   var resultCount: Int { get }
-  func resultAtIndex(idx: Int) -> AnyObject
+  func resultAt(idx: Int) -> AnyObject
   var results: [AnyObject] { get }
   init()
 }
-let NSMetadataItemFSNameKey: String
-let NSMetadataItemDisplayNameKey: String
-let NSMetadataItemURLKey: String
-let NSMetadataItemPathKey: String
-let NSMetadataItemFSSizeKey: String
-let NSMetadataItemFSCreationDateKey: String
-let NSMetadataItemFSContentChangeDateKey: String
-let NSMetadataItemContentTypeKey: String
-let NSMetadataItemContentTypeTreeKey: String
-let NSMetadataItemIsUbiquitousKey: String
-let NSMetadataUbiquitousItemHasUnresolvedConflictsKey: String
-let NSMetadataUbiquitousItemDownloadingStatusKey: String
-let NSMetadataUbiquitousItemDownloadingStatusNotDownloaded: String
-let NSMetadataUbiquitousItemDownloadingStatusDownloaded: String
-let NSMetadataUbiquitousItemDownloadingStatusCurrent: String
-let NSMetadataUbiquitousItemIsDownloadingKey: String
-let NSMetadataUbiquitousItemIsUploadedKey: String
-let NSMetadataUbiquitousItemIsUploadingKey: String
-let NSMetadataUbiquitousItemPercentDownloadedKey: String
-let NSMetadataUbiquitousItemPercentUploadedKey: String
-let NSMetadataUbiquitousItemDownloadingErrorKey: String
-let NSMetadataUbiquitousItemUploadingErrorKey: String
-let NSMetadataUbiquitousItemDownloadRequestedKey: String
-let NSMetadataUbiquitousItemIsExternalDocumentKey: String
-let NSMetadataUbiquitousItemContainerDisplayNameKey: String
-let NSMetadataUbiquitousItemURLInLocalContainerKey: String
-let NSMetadataItemAttributeChangeDateKey: String
-let NSMetadataItemKeywordsKey: String
-let NSMetadataItemTitleKey: String
-let NSMetadataItemAuthorsKey: String
-let NSMetadataItemEditorsKey: String
-let NSMetadataItemParticipantsKey: String
-let NSMetadataItemProjectsKey: String
-let NSMetadataItemDownloadedDateKey: String
-let NSMetadataItemWhereFromsKey: String
-let NSMetadataItemCommentKey: String
-let NSMetadataItemCopyrightKey: String
-let NSMetadataItemLastUsedDateKey: String
-let NSMetadataItemContentCreationDateKey: String
-let NSMetadataItemContentModificationDateKey: String
-let NSMetadataItemDateAddedKey: String
-let NSMetadataItemDurationSecondsKey: String
-let NSMetadataItemContactKeywordsKey: String
-let NSMetadataItemVersionKey: String
-let NSMetadataItemPixelHeightKey: String
-let NSMetadataItemPixelWidthKey: String
-let NSMetadataItemPixelCountKey: String
-let NSMetadataItemColorSpaceKey: String
-let NSMetadataItemBitsPerSampleKey: String
-let NSMetadataItemFlashOnOffKey: String
-let NSMetadataItemFocalLengthKey: String
-let NSMetadataItemAcquisitionMakeKey: String
-let NSMetadataItemAcquisitionModelKey: String
-let NSMetadataItemISOSpeedKey: String
-let NSMetadataItemOrientationKey: String
-let NSMetadataItemLayerNamesKey: String
-let NSMetadataItemWhiteBalanceKey: String
-let NSMetadataItemApertureKey: String
-let NSMetadataItemProfileNameKey: String
-let NSMetadataItemResolutionWidthDPIKey: String
-let NSMetadataItemResolutionHeightDPIKey: String
-let NSMetadataItemExposureModeKey: String
-let NSMetadataItemExposureTimeSecondsKey: String
-let NSMetadataItemEXIFVersionKey: String
-let NSMetadataItemCameraOwnerKey: String
-let NSMetadataItemFocalLength35mmKey: String
-let NSMetadataItemLensModelKey: String
-let NSMetadataItemEXIFGPSVersionKey: String
-let NSMetadataItemAltitudeKey: String
-let NSMetadataItemLatitudeKey: String
-let NSMetadataItemLongitudeKey: String
-let NSMetadataItemSpeedKey: String
-let NSMetadataItemTimestampKey: String
-let NSMetadataItemGPSTrackKey: String
-let NSMetadataItemImageDirectionKey: String
-let NSMetadataItemNamedLocationKey: String
-let NSMetadataItemGPSStatusKey: String
-let NSMetadataItemGPSMeasureModeKey: String
-let NSMetadataItemGPSDOPKey: String
-let NSMetadataItemGPSMapDatumKey: String
-let NSMetadataItemGPSDestLatitudeKey: String
-let NSMetadataItemGPSDestLongitudeKey: String
-let NSMetadataItemGPSDestBearingKey: String
-let NSMetadataItemGPSDestDistanceKey: String
-let NSMetadataItemGPSProcessingMethodKey: String
-let NSMetadataItemGPSAreaInformationKey: String
-let NSMetadataItemGPSDateStampKey: String
-let NSMetadataItemGPSDifferentalKey: String
-let NSMetadataItemCodecsKey: String
-let NSMetadataItemMediaTypesKey: String
-let NSMetadataItemStreamableKey: String
-let NSMetadataItemTotalBitRateKey: String
-let NSMetadataItemVideoBitRateKey: String
-let NSMetadataItemAudioBitRateKey: String
-let NSMetadataItemDeliveryTypeKey: String
-let NSMetadataItemAlbumKey: String
-let NSMetadataItemHasAlphaChannelKey: String
-let NSMetadataItemRedEyeOnOffKey: String
-let NSMetadataItemMeteringModeKey: String
-let NSMetadataItemMaxApertureKey: String
-let NSMetadataItemFNumberKey: String
-let NSMetadataItemExposureProgramKey: String
-let NSMetadataItemExposureTimeStringKey: String
-let NSMetadataItemHeadlineKey: String
-let NSMetadataItemInstructionsKey: String
-let NSMetadataItemCityKey: String
-let NSMetadataItemStateOrProvinceKey: String
-let NSMetadataItemCountryKey: String
-let NSMetadataItemTextContentKey: String
-let NSMetadataItemAudioSampleRateKey: String
-let NSMetadataItemAudioChannelCountKey: String
-let NSMetadataItemTempoKey: String
-let NSMetadataItemKeySignatureKey: String
-let NSMetadataItemTimeSignatureKey: String
-let NSMetadataItemAudioEncodingApplicationKey: String
-let NSMetadataItemComposerKey: String
-let NSMetadataItemLyricistKey: String
-let NSMetadataItemAudioTrackNumberKey: String
-let NSMetadataItemRecordingDateKey: String
-let NSMetadataItemMusicalGenreKey: String
-let NSMetadataItemIsGeneralMIDISequenceKey: String
-let NSMetadataItemRecordingYearKey: String
-let NSMetadataItemOrganizationsKey: String
-let NSMetadataItemLanguagesKey: String
-let NSMetadataItemRightsKey: String
-let NSMetadataItemPublishersKey: String
-let NSMetadataItemContributorsKey: String
-let NSMetadataItemCoverageKey: String
-let NSMetadataItemSubjectKey: String
-let NSMetadataItemThemeKey: String
-let NSMetadataItemDescriptionKey: String
-let NSMetadataItemIdentifierKey: String
-let NSMetadataItemAudiencesKey: String
-let NSMetadataItemNumberOfPagesKey: String
-let NSMetadataItemPageWidthKey: String
-let NSMetadataItemPageHeightKey: String
-let NSMetadataItemSecurityMethodKey: String
-let NSMetadataItemCreatorKey: String
-let NSMetadataItemEncodingApplicationsKey: String
-let NSMetadataItemDueDateKey: String
-let NSMetadataItemStarRatingKey: String
-let NSMetadataItemPhoneNumbersKey: String
-let NSMetadataItemEmailAddressesKey: String
-let NSMetadataItemInstantMessageAddressesKey: String
-let NSMetadataItemKindKey: String
-let NSMetadataItemRecipientsKey: String
-let NSMetadataItemFinderCommentKey: String
-let NSMetadataItemFontsKey: String
-let NSMetadataItemAppleLoopsRootKeyKey: String
-let NSMetadataItemAppleLoopsKeyFilterTypeKey: String
-let NSMetadataItemAppleLoopsLoopModeKey: String
-let NSMetadataItemAppleLoopDescriptorsKey: String
-let NSMetadataItemMusicalInstrumentCategoryKey: String
-let NSMetadataItemMusicalInstrumentNameKey: String
-let NSMetadataItemCFBundleIdentifierKey: String
-let NSMetadataItemInformationKey: String
-let NSMetadataItemDirectorKey: String
-let NSMetadataItemProducerKey: String
-let NSMetadataItemGenreKey: String
-let NSMetadataItemPerformersKey: String
-let NSMetadataItemOriginalFormatKey: String
-let NSMetadataItemOriginalSourceKey: String
-let NSMetadataItemAuthorEmailAddressesKey: String
-let NSMetadataItemRecipientEmailAddressesKey: String
-let NSMetadataItemAuthorAddressesKey: String
-let NSMetadataItemRecipientAddressesKey: String
-let NSMetadataItemIsLikelyJunkKey: String
-let NSMetadataItemExecutableArchitecturesKey: String
-let NSMetadataItemExecutablePlatformKey: String
-let NSMetadataItemApplicationCategoriesKey: String
-let NSMetadataItemIsApplicationManagedKey: String
-let NSNetServicesErrorCode: String
-let NSNetServicesErrorDomain: String
-enum NSNetServicesError : Int {
+let metadataItemFSNameKey: String
+let metadataItemDisplayNameKey: String
+let metadataItemURLKey: String
+let metadataItemPathKey: String
+let metadataItemFSSizeKey: String
+let metadataItemFSCreationDateKey: String
+let metadataItemFSContentChangeDateKey: String
+let metadataItemContentTypeKey: String
+let metadataItemContentTypeTreeKey: String
+let metadataItemIsUbiquitousKey: String
+let metadataUbiquitousItemHasUnresolvedConflictsKey: String
+let metadataUbiquitousItemDownloadingStatusKey: String
+let metadataUbiquitousItemDownloadingStatusNotDownloaded: String
+let metadataUbiquitousItemDownloadingStatusDownloaded: String
+let metadataUbiquitousItemDownloadingStatusCurrent: String
+let metadataUbiquitousItemIsDownloadingKey: String
+let metadataUbiquitousItemIsUploadedKey: String
+let metadataUbiquitousItemIsUploadingKey: String
+let metadataUbiquitousItemPercentDownloadedKey: String
+let metadataUbiquitousItemPercentUploadedKey: String
+let metadataUbiquitousItemDownloadingErrorKey: String
+let metadataUbiquitousItemUploadingErrorKey: String
+let metadataUbiquitousItemDownloadRequestedKey: String
+let metadataUbiquitousItemIsExternalDocumentKey: String
+let metadataUbiquitousItemContainerDisplayNameKey: String
+let metadataUbiquitousItemURLInLocalContainerKey: String
+let metadataItemAttributeChangeDateKey: String
+let metadataItemKeywordsKey: String
+let metadataItemTitleKey: String
+let metadataItemAuthorsKey: String
+let metadataItemEditorsKey: String
+let metadataItemParticipantsKey: String
+let metadataItemProjectsKey: String
+let metadataItemDownloadedDateKey: String
+let metadataItemWhereFromsKey: String
+let metadataItemCommentKey: String
+let metadataItemCopyrightKey: String
+let metadataItemLastUsedDateKey: String
+let metadataItemContentCreationDateKey: String
+let metadataItemContentModificationDateKey: String
+let metadataItemDateAddedKey: String
+let metadataItemDurationSecondsKey: String
+let metadataItemContactKeywordsKey: String
+let metadataItemVersionKey: String
+let metadataItemPixelHeightKey: String
+let metadataItemPixelWidthKey: String
+let metadataItemPixelCountKey: String
+let metadataItemColorSpaceKey: String
+let metadataItemBitsPerSampleKey: String
+let metadataItemFlashOnOffKey: String
+let metadataItemFocalLengthKey: String
+let metadataItemAcquisitionMakeKey: String
+let metadataItemAcquisitionModelKey: String
+let metadataItemISOSpeedKey: String
+let metadataItemOrientationKey: String
+let metadataItemLayerNamesKey: String
+let metadataItemWhiteBalanceKey: String
+let metadataItemApertureKey: String
+let metadataItemProfileNameKey: String
+let metadataItemResolutionWidthDPIKey: String
+let metadataItemResolutionHeightDPIKey: String
+let metadataItemExposureModeKey: String
+let metadataItemExposureTimeSecondsKey: String
+let metadataItemEXIFVersionKey: String
+let metadataItemCameraOwnerKey: String
+let metadataItemFocalLength35mmKey: String
+let metadataItemLensModelKey: String
+let metadataItemEXIFGPSVersionKey: String
+let metadataItemAltitudeKey: String
+let metadataItemLatitudeKey: String
+let metadataItemLongitudeKey: String
+let metadataItemSpeedKey: String
+let metadataItemTimestampKey: String
+let metadataItemGPSTrackKey: String
+let metadataItemImageDirectionKey: String
+let metadataItemNamedLocationKey: String
+let metadataItemGPSStatusKey: String
+let metadataItemGPSMeasureModeKey: String
+let metadataItemGPSDOPKey: String
+let metadataItemGPSMapDatumKey: String
+let metadataItemGPSDestLatitudeKey: String
+let metadataItemGPSDestLongitudeKey: String
+let metadataItemGPSDestBearingKey: String
+let metadataItemGPSDestDistanceKey: String
+let metadataItemGPSProcessingMethodKey: String
+let metadataItemGPSAreaInformationKey: String
+let metadataItemGPSDateStampKey: String
+let metadataItemGPSDifferentalKey: String
+let metadataItemCodecsKey: String
+let metadataItemMediaTypesKey: String
+let metadataItemStreamableKey: String
+let metadataItemTotalBitRateKey: String
+let metadataItemVideoBitRateKey: String
+let metadataItemAudioBitRateKey: String
+let metadataItemDeliveryTypeKey: String
+let metadataItemAlbumKey: String
+let metadataItemHasAlphaChannelKey: String
+let metadataItemRedEyeOnOffKey: String
+let metadataItemMeteringModeKey: String
+let metadataItemMaxApertureKey: String
+let metadataItemFNumberKey: String
+let metadataItemExposureProgramKey: String
+let metadataItemExposureTimeStringKey: String
+let metadataItemHeadlineKey: String
+let metadataItemInstructionsKey: String
+let metadataItemCityKey: String
+let metadataItemStateOrProvinceKey: String
+let metadataItemCountryKey: String
+let metadataItemTextContentKey: String
+let metadataItemAudioSampleRateKey: String
+let metadataItemAudioChannelCountKey: String
+let metadataItemTempoKey: String
+let metadataItemKeySignatureKey: String
+let metadataItemTimeSignatureKey: String
+let metadataItemAudioEncodingApplicationKey: String
+let metadataItemComposerKey: String
+let metadataItemLyricistKey: String
+let metadataItemAudioTrackNumberKey: String
+let metadataItemRecordingDateKey: String
+let metadataItemMusicalGenreKey: String
+let metadataItemIsGeneralMIDISequenceKey: String
+let metadataItemRecordingYearKey: String
+let metadataItemOrganizationsKey: String
+let metadataItemLanguagesKey: String
+let metadataItemRightsKey: String
+let metadataItemPublishersKey: String
+let metadataItemContributorsKey: String
+let metadataItemCoverageKey: String
+let metadataItemSubjectKey: String
+let metadataItemThemeKey: String
+let metadataItemDescriptionKey: String
+let metadataItemIdentifierKey: String
+let metadataItemAudiencesKey: String
+let metadataItemNumberOfPagesKey: String
+let metadataItemPageWidthKey: String
+let metadataItemPageHeightKey: String
+let metadataItemSecurityMethodKey: String
+let metadataItemCreatorKey: String
+let metadataItemEncodingApplicationsKey: String
+let metadataItemDueDateKey: String
+let metadataItemStarRatingKey: String
+let metadataItemPhoneNumbersKey: String
+let metadataItemEmailAddressesKey: String
+let metadataItemInstantMessageAddressesKey: String
+let metadataItemKindKey: String
+let metadataItemRecipientsKey: String
+let metadataItemFinderCommentKey: String
+let metadataItemFontsKey: String
+let metadataItemAppleLoopsRootKeyKey: String
+let metadataItemAppleLoopsKeyFilterTypeKey: String
+let metadataItemAppleLoopsLoopModeKey: String
+let metadataItemAppleLoopDescriptorsKey: String
+let metadataItemMusicalInstrumentCategoryKey: String
+let metadataItemMusicalInstrumentNameKey: String
+let metadataItemCFBundleIdentifierKey: String
+let metadataItemInformationKey: String
+let metadataItemDirectorKey: String
+let metadataItemProducerKey: String
+let metadataItemGenreKey: String
+let metadataItemPerformersKey: String
+let metadataItemOriginalFormatKey: String
+let metadataItemOriginalSourceKey: String
+let metadataItemAuthorEmailAddressesKey: String
+let metadataItemRecipientEmailAddressesKey: String
+let metadataItemAuthorAddressesKey: String
+let metadataItemRecipientAddressesKey: String
+let metadataItemIsLikelyJunkKey: String
+let metadataItemExecutableArchitecturesKey: String
+let metadataItemExecutablePlatformKey: String
+let metadataItemApplicationCategoriesKey: String
+let metadataItemIsApplicationManagedKey: String
+let netServicesErrorCode: String
+let netServicesErrorDomain: String
+enum NetServicesError : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case UnknownError
@@ -3370,141 +3363,141 @@ enum NSNetServicesError : Int {
   case InvalidError
   case TimeoutError
 }
-struct NSNetServiceOptions : OptionSetType {
+struct NetServiceOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var NoAutoRename: NSNetServiceOptions { get }
-  static var ListenForConnections: NSNetServiceOptions { get }
+  static var NoAutoRename: NetServiceOptions { get }
+  static var ListenForConnections: NetServiceOptions { get }
 }
-class NSNetService : NSObject {
+class NetService : Object {
   init(domain: String, type: String, name: String, port: Int32)
   convenience init(domain: String, type: String, name: String)
-  func scheduleInRunLoop(aRunLoop: NSRunLoop, forMode mode: String)
-  func removeFromRunLoop(aRunLoop: NSRunLoop, forMode mode: String)
-  unowned(unsafe) var delegate: @sil_unmanaged NSNetServiceDelegate?
+  func scheduleIn(aRunLoop: RunLoop, forMode mode: String)
+  func removeFrom(aRunLoop: RunLoop, forMode mode: String)
+  unowned(unsafe) var delegate: @sil_unmanaged NetServiceDelegate?
   var includesPeerToPeer: Bool
   var name: String { get }
   var type: String { get }
   var domain: String { get }
   var hostName: String? { get }
-  var addresses: [NSData]? { get }
+  var addresses: [Data]? { get }
   var port: Int { get }
   func publish()
-  func publishWithOptions(options: NSNetServiceOptions)
+  func publish(options options: NetServiceOptions = [])
   func stop()
-  class func dictionaryFromTXTRecordData(txtData: NSData) -> [String : NSData]
-  class func dataFromTXTRecordDictionary(txtDictionary: [String : NSData]) -> NSData
-  func resolveWithTimeout(timeout: NSTimeInterval)
-  func getInputStream(inputStream: UnsafeMutablePointer<NSInputStream?>, outputStream: UnsafeMutablePointer<NSOutputStream?>) -> Bool
-  func setTXTRecordData(recordData: NSData?) -> Bool
-  func TXTRecordData() -> NSData?
+  class func dictionaryFromTXTRecord(txtData: Data) -> [String : Data]
+  class func dataFromTXTRecord(txtDictionary: [String : Data]) -> Data
+  func resolveWithTimeout(timeout: TimeInterval)
+  func getInputStream(inputStream: UnsafeMutablePointer<InputStream?>, outputStream: UnsafeMutablePointer<OutputStream?>) -> Bool
+  func setTXTRecord(recordData: Data?) -> Bool
+  func txtRecordData() -> Data?
   func startMonitoring()
   func stopMonitoring()
   convenience init()
 }
-class NSNetServiceBrowser : NSObject {
+class NetServiceBrowser : Object {
   init()
-  unowned(unsafe) var delegate: @sil_unmanaged NSNetServiceBrowserDelegate?
+  unowned(unsafe) var delegate: @sil_unmanaged NetServiceBrowserDelegate?
   var includesPeerToPeer: Bool
-  func scheduleInRunLoop(aRunLoop: NSRunLoop, forMode mode: String)
-  func removeFromRunLoop(aRunLoop: NSRunLoop, forMode mode: String)
+  func scheduleIn(aRunLoop: RunLoop, forMode mode: String)
+  func removeFrom(aRunLoop: RunLoop, forMode mode: String)
   func searchForBrowsableDomains()
   func searchForRegistrationDomains()
   func searchForServicesOfType(type: String, inDomain domainString: String)
   func stop()
 }
-protocol NSNetServiceDelegate : NSObjectProtocol {
-  optional func netServiceWillPublish(sender: NSNetService)
-  optional func netServiceDidPublish(sender: NSNetService)
-  optional func netService(sender: NSNetService, didNotPublish errorDict: [String : NSNumber])
-  optional func netServiceWillResolve(sender: NSNetService)
-  optional func netServiceDidResolveAddress(sender: NSNetService)
-  optional func netService(sender: NSNetService, didNotResolve errorDict: [String : NSNumber])
-  optional func netServiceDidStop(sender: NSNetService)
-  optional func netService(sender: NSNetService, didUpdateTXTRecordData data: NSData)
-  optional func netService(sender: NSNetService, didAcceptConnectionWithInputStream inputStream: NSInputStream, outputStream: NSOutputStream)
+protocol NetServiceDelegate : ObjectProtocol {
+  optional func netServiceWillPublish(sender: NetService)
+  optional func netServiceDidPublish(sender: NetService)
+  optional func netService(sender: NetService, didNotPublish errorDict: [String : Number])
+  optional func netServiceWillResolve(sender: NetService)
+  optional func netServiceDidResolveAddress(sender: NetService)
+  optional func netService(sender: NetService, didNotResolve errorDict: [String : Number])
+  optional func netServiceDidStop(sender: NetService)
+  optional func netService(sender: NetService, didUpdateTXTRecord data: Data)
+  optional func netService(sender: NetService, didAcceptConnectionWith inputStream: InputStream, outputStream: OutputStream)
 }
-protocol NSNetServiceBrowserDelegate : NSObjectProtocol {
-  optional func netServiceBrowserWillSearch(browser: NSNetServiceBrowser)
-  optional func netServiceBrowserDidStopSearch(browser: NSNetServiceBrowser)
-  optional func netServiceBrowser(browser: NSNetServiceBrowser, didNotSearch errorDict: [String : NSNumber])
-  optional func netServiceBrowser(browser: NSNetServiceBrowser, didFindDomain domainString: String, moreComing: Bool)
-  optional func netServiceBrowser(browser: NSNetServiceBrowser, didFindService service: NSNetService, moreComing: Bool)
-  optional func netServiceBrowser(browser: NSNetServiceBrowser, didRemoveDomain domainString: String, moreComing: Bool)
-  optional func netServiceBrowser(browser: NSNetServiceBrowser, didRemoveService service: NSNetService, moreComing: Bool)
+protocol NetServiceBrowserDelegate : ObjectProtocol {
+  optional func netServiceBrowserWillSearch(browser: NetServiceBrowser)
+  optional func netServiceBrowserDidStopSearch(browser: NetServiceBrowser)
+  optional func netServiceBrowser(browser: NetServiceBrowser, didNotSearch errorDict: [String : Number])
+  optional func netServiceBrowser(browser: NetServiceBrowser, didFindDomain domainString: String, moreComing: Bool)
+  optional func netServiceBrowser(browser: NetServiceBrowser, didFind service: NetService, moreComing: Bool)
+  optional func netServiceBrowser(browser: NetServiceBrowser, didRemoveDomain domainString: String, moreComing: Bool)
+  optional func netServiceBrowser(browser: NetServiceBrowser, didRemove service: NetService, moreComing: Bool)
 }
-class NSNotification : NSObject, NSCopying, NSCoding {
+class Notification : Object, Copying, Coding {
   var name: String { get }
   var object: AnyObject? { get }
-  var userInfo: [NSObject : AnyObject]? { get }
-  init(name: String, object: AnyObject?, userInfo: [NSObject : AnyObject]?)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
+  var userInfo: [Object : AnyObject]? { get }
+  init(name: String, object: AnyObject?, userInfo: [Object : AnyObject]? = [:])
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
 }
-extension NSNotification {
+extension Notification {
   convenience init(name aName: String, object anObject: AnyObject?)
   convenience init()
 }
-class NSNotificationCenter : NSObject {
-  class func defaultCenter() -> NSNotificationCenter
+class NotificationCenter : Object {
+  class func defaultCenter() -> NotificationCenter
   func addObserver(observer: AnyObject, selector aSelector: Selector, name aName: String?, object anObject: AnyObject?)
-  func postNotification(notification: NSNotification)
+  func post(notification: Notification)
   func postNotificationName(aName: String, object anObject: AnyObject?)
-  func postNotificationName(aName: String, object anObject: AnyObject?, userInfo aUserInfo: [NSObject : AnyObject]?)
+  func postNotificationName(aName: String, object anObject: AnyObject?, userInfo aUserInfo: [Object : AnyObject]? = [:])
   func removeObserver(observer: AnyObject)
   func removeObserver(observer: AnyObject, name aName: String?, object anObject: AnyObject?)
-  func addObserverForName(name: String?, object obj: AnyObject?, queue: NSOperationQueue?, usingBlock block: (NSNotification) -> Void) -> NSObjectProtocol
+  func addObserverForName(name: String?, object obj: AnyObject?, queue: OperationQueue?, usingBlock block: (Notification) -> Void) -> ObjectProtocol
   init()
 }
-enum NSPostingStyle : UInt {
+enum PostingStyle : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case PostWhenIdle
   case PostASAP
   case PostNow
 }
-struct NSNotificationCoalescing : OptionSetType {
+struct NotificationCoalescing : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var NoCoalescing: NSNotificationCoalescing { get }
-  static var CoalescingOnName: NSNotificationCoalescing { get }
-  static var CoalescingOnSender: NSNotificationCoalescing { get }
+  static var NoCoalescing: NotificationCoalescing { get }
+  static var CoalescingOnName: NotificationCoalescing { get }
+  static var CoalescingOnSender: NotificationCoalescing { get }
 }
-class NSNotificationQueue : NSObject {
-  class func defaultQueue() -> NSNotificationQueue
-  init(notificationCenter: NSNotificationCenter)
-  func enqueueNotification(notification: NSNotification, postingStyle: NSPostingStyle)
-  func enqueueNotification(notification: NSNotification, postingStyle: NSPostingStyle, coalesceMask: NSNotificationCoalescing, forModes modes: [String]?)
-  func dequeueNotificationsMatching(notification: NSNotification, coalesceMask: Int)
+class NotificationQueue : Object {
+  class func defaultQueue() -> NotificationQueue
+  init(notificationCenter: NotificationCenter)
+  func enqueueNotification(notification: Notification, postingStyle: PostingStyle)
+  func enqueueNotification(notification: Notification, postingStyle: PostingStyle, coalesceMask: NotificationCoalescing, forModes modes: [String]?)
+  func dequeueNotificationsMatching(notification: Notification, coalesceMask: Int)
   convenience init()
 }
-class NSNull : NSObject, NSCopying, NSSecureCoding {
+class Null : Object, Copying, SecureCoding {
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-enum NSNumberFormatterBehavior : UInt {
+enum NumberFormatterBehavior : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case BehaviorDefault
   case Behavior10_0
   case Behavior10_4
 }
-class NSNumberFormatter : NSFormatter {
-  var formattingContext: NSFormattingContext
+class NumberFormatter : Formatter {
+  var formattingContext: FormattingContext
   func getObjectValue(obj: AutoreleasingUnsafeMutablePointer<AnyObject?>, forString string: String, range rangep: UnsafeMutablePointer<NSRange>) throws
-  func stringFromNumber(number: NSNumber) -> String?
-  func numberFromString(string: String) -> NSNumber?
-  class func localizedStringFromNumber(num: NSNumber, numberStyle nstyle: NSNumberFormatterStyle) -> String
-  class func defaultFormatterBehavior() -> NSNumberFormatterBehavior
-  class func setDefaultFormatterBehavior(behavior: NSNumberFormatterBehavior)
-  var numberStyle: NSNumberFormatterStyle
-  @NSCopying var locale: NSLocale!
+  func stringFrom(number: Number) -> String?
+  func numberFrom(string: String) -> Number?
+  class func localizedStringFrom(num: Number, number nstyle: NumberFormatterStyle) -> String
+  class func defaultFormatterBehavior() -> NumberFormatterBehavior
+  class func setDefaultFormatterBehavior(behavior: NumberFormatterBehavior)
+  var numberStyle: NumberFormatterStyle
+  @NSCopying var locale: Locale!
   var generatesDecimalNumbers: Bool
-  var formatterBehavior: NSNumberFormatterBehavior
+  var formatterBehavior: NumberFormatterBehavior
   var negativeFormat: String!
   var textAttributesForNegativeValues: [String : AnyObject]?
   var positiveFormat: String!
@@ -3539,28 +3532,28 @@ class NSNumberFormatter : NSFormatter {
   var exponentSymbol: String!
   var groupingSize: Int
   var secondaryGroupingSize: Int
-  @NSCopying var multiplier: NSNumber?
+  @NSCopying var multiplier: Number?
   var formatWidth: Int
   var paddingCharacter: String!
-  var paddingPosition: NSNumberFormatterPadPosition
-  var roundingMode: NSNumberFormatterRoundingMode
-  @NSCopying var roundingIncrement: NSNumber!
+  var paddingPosition: NumberFormatterPadPosition
+  var roundingMode: NumberFormatterRoundingMode
+  @NSCopying var roundingIncrement: Number!
   var minimumIntegerDigits: Int
   var maximumIntegerDigits: Int
   var minimumFractionDigits: Int
   var maximumFractionDigits: Int
-  @NSCopying var minimum: NSNumber?
-  @NSCopying var maximum: NSNumber?
+  @NSCopying var minimum: Number?
+  @NSCopying var maximum: Number?
   var currencyGroupingSeparator: String!
-  var lenient: Bool
+  var isLenient: Bool
   var usesSignificantDigits: Bool
   var minimumSignificantDigits: Int
   var maximumSignificantDigits: Int
-  var partialStringValidationEnabled: Bool
+  var isPartialStringValidationEnabled: Bool
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-enum NSNumberFormatterStyle : UInt {
+enum NumberFormatterStyle : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case NoStyle
@@ -3574,7 +3567,7 @@ enum NSNumberFormatterStyle : UInt {
   case CurrencyPluralStyle
   case CurrencyAccountingStyle
 }
-enum NSNumberFormatterPadPosition : UInt {
+enum NumberFormatterPadPosition : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case BeforePrefix
@@ -3582,7 +3575,7 @@ enum NSNumberFormatterPadPosition : UInt {
   case BeforeSuffix
   case AfterSuffix
 }
-enum NSNumberFormatterRoundingMode : UInt {
+enum NumberFormatterRoundingMode : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case RoundCeiling
@@ -3593,17 +3586,17 @@ enum NSNumberFormatterRoundingMode : UInt {
   case RoundHalfDown
   case RoundHalfUp
 }
-extension NSNumberFormatter {
+extension NumberFormatter {
   var hasThousandSeparators: Bool
   var thousandSeparator: String!
   var localizesFormat: Bool
   var format: String
-  @NSCopying var attributedStringForZero: NSAttributedString
-  @NSCopying var attributedStringForNil: NSAttributedString
-  @NSCopying var attributedStringForNotANumber: NSAttributedString
-  @NSCopying var roundingBehavior: NSDecimalNumberHandler
+  @NSCopying var attributedStringForZero: AttributedString
+  @NSCopying var attributedStringForNil: AttributedString
+  @NSCopying var attributedStringForNotANumber: AttributedString
+  @NSCopying var roundingBehavior: DecimalNumberHandler
 }
-var NSFoundationVersionNumber: Double
+var foundationVersionNumber: Double
 var NSFoundationVersionNumber10_0: Double { get }
 var NSFoundationVersionNumber10_1: Double { get }
 var NSFoundationVersionNumber10_1_1: Double { get }
@@ -3677,35 +3670,35 @@ var NSFoundationVersionNumber10_10: Double { get }
 var NSFoundationVersionNumber10_10_1: Double { get }
 var NSFoundationVersionNumber10_10_2: Double { get }
 var NSFoundationVersionNumber10_10_3: Double { get }
-func NSStringFromSelector(aSelector: Selector) -> String
-func NSSelectorFromString(aSelectorName: String) -> Selector
-func NSStringFromClass(aClass: AnyClass) -> String
-func NSClassFromString(aClassName: String) -> AnyClass?
-func NSStringFromProtocol(proto: Protocol) -> String
-func NSProtocolFromString(namestr: String) -> Protocol?
-func NSGetSizeAndAlignment(typePtr: UnsafePointer<Int8>, _ sizep: UnsafeMutablePointer<Int>, _ alignp: UnsafeMutablePointer<Int>) -> UnsafePointer<Int8>
-func NSLogv(format: String, _ args: CVaListPointer)
-enum NSComparisonResult : Int {
+func stringFromSelector(aSelector: Selector) -> String
+func selectorFromString(aSelectorName: String) -> Selector
+func stringFromClass(aClass: AnyClass) -> String
+func classFromString(aClassName: String) -> AnyClass?
+func stringFromProtocol(proto: Protocol) -> String
+func protocolFromString(namestr: String) -> Protocol?
+func getSizeAndAlignment(typePtr: UnsafePointer<Int8>, _ sizep: UnsafeMutablePointer<Int>, _ alignp: UnsafeMutablePointer<Int>) -> UnsafePointer<Int8>
+func logv(format: String, _ args: CVaListPointer)
+enum ComparisonResult : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case OrderedAscending
   case OrderedSame
   case OrderedDescending
 }
-typealias NSComparator = (AnyObject, AnyObject) -> NSComparisonResult
-struct NSEnumerationOptions : OptionSetType {
+typealias Comparator = (AnyObject, AnyObject) -> ComparisonResult
+struct EnumerationOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var Concurrent: NSEnumerationOptions { get }
-  static var Reverse: NSEnumerationOptions { get }
+  static var Concurrent: EnumerationOptions { get }
+  static var Reverse: EnumerationOptions { get }
 }
-struct NSSortOptions : OptionSetType {
+struct SortOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var Concurrent: NSSortOptions { get }
-  static var Stable: NSSortOptions { get }
+  static var Concurrent: SortOptions { get }
+  static var Stable: SortOptions { get }
 }
-enum NSQualityOfService : Int {
+enum QualityOfService : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case UserInteractive
@@ -3714,76 +3707,76 @@ enum NSQualityOfService : Int {
   case Background
   case Default
 }
-let NSNotFound: Int
-protocol NSCopying {
-  func copyWithZone(zone: NSZone) -> AnyObject
+let notFound: Int
+protocol Copying {
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-protocol NSMutableCopying {
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+protocol MutableCopying {
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
 }
-protocol NSCoding {
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+protocol Coding {
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-protocol NSSecureCoding : NSCoding {
+protocol SecureCoding : Coding {
   static func supportsSecureCoding() -> Bool
 }
-extension NSObject {
+extension Object {
   class func version() -> Int
   class func setVersion(aVersion: Int)
   var classForCoder: AnyClass { get }
-  class func replacementObjectForCoder(aCoder: NSCoder) -> AnyObject?
-  func replacementObjectForCoder(aCoder: NSCoder) -> AnyObject?
-  class func awakeAfterUsingCoder(aDecoder: NSCoder) -> AnyObject?
-  func awakeAfterUsingCoder(aDecoder: NSCoder) -> AnyObject?
+  class func replacementObjectFor(aCoder: Coder) -> AnyObject?
+  func replacementObjectFor(aCoder: Coder) -> AnyObject?
+  class func awakeAfterUsing(aDecoder: Coder) -> AnyObject?
+  func awakeAfterUsing(aDecoder: Coder) -> AnyObject?
   class func classForCoder() -> AnyClass
 }
-extension NSObject {
+extension Object {
 }
-protocol NSDiscardableContent {
+protocol DiscardableContent {
   func beginContentAccess() -> Bool
   func endContentAccess()
   func discardContentIfPossible()
   func isContentDiscarded() -> Bool
 }
-extension NSObject {
+extension Object {
   var autoContentAccessingProxy: AnyObject { get }
   class func autoContentAccessingProxy() -> AnyObject
 }
 func CFBridgingRetain(X: AnyObject?) -> AnyObject?
-extension NSObject {
-  class func scriptingValueForSpecifier(objectSpecifier: NSScriptObjectSpecifier) -> AnyObject?
-  func scriptingValueForSpecifier(objectSpecifier: NSScriptObjectSpecifier) -> AnyObject?
+extension Object {
+  class func scriptingValueFor(objectSpecifier: ScriptObjectSpecifier) -> AnyObject?
+  func scriptingValueFor(objectSpecifier: ScriptObjectSpecifier) -> AnyObject?
   var scriptingProperties: [String : AnyObject]?
   class func copyScriptingValue(value: AnyObject, forKey key: String, withProperties properties: [String : AnyObject]) -> AnyObject?
   func copyScriptingValue(value: AnyObject, forKey key: String, withProperties properties: [String : AnyObject]) -> AnyObject?
-  class func newScriptingObjectOfClass(objectClass: AnyClass, forValueForKey key: String, withContentsValue contentsValue: AnyObject?, properties: [String : AnyObject]) -> AnyObject?
-  func newScriptingObjectOfClass(objectClass: AnyClass, forValueForKey key: String, withContentsValue contentsValue: AnyObject?, properties: [String : AnyObject]) -> AnyObject?
+  class func newScriptingObjectOf(objectClass: AnyClass, forValueForKey key: String, withContentsValue contentsValue: AnyObject?, properties: [String : AnyObject]) -> AnyObject?
+  func newScriptingObjectOf(objectClass: AnyClass, forValueForKey key: String, withContentsValue contentsValue: AnyObject?, properties: [String : AnyObject]) -> AnyObject?
   class func scriptingProperties() -> [String : AnyObject]?
   class func setScriptingProperties(scriptingProperties: [String : AnyObject]?)
 }
-class NSOperation : NSObject {
+class Operation : Object {
   func start()
   func main()
-  var cancelled: Bool { get }
+  var isCancelled: Bool { get }
   func cancel()
-  var executing: Bool { get }
-  var finished: Bool { get }
-  var concurrent: Bool { get }
-  var asynchronous: Bool { get }
-  var ready: Bool { get }
-  func addDependency(op: NSOperation)
-  func removeDependency(op: NSOperation)
-  var dependencies: [NSOperation] { get }
-  var queuePriority: NSOperationQueuePriority
+  var isExecuting: Bool { get }
+  var isFinished: Bool { get }
+  var isConcurrent: Bool { get }
+  var isAsynchronous: Bool { get }
+  var isReady: Bool { get }
+  func addDependency(op: Operation)
+  func removeDependency(op: Operation)
+  var dependencies: [Operation] { get }
+  var queuePriority: OperationQueuePriority
   var completionBlock: (() -> Void)?
   func waitUntilFinished()
   var threadPriority: Double
-  var qualityOfService: NSQualityOfService
+  var qualityOfService: QualityOfService
   var name: String?
   init()
 }
-enum NSOperationQueuePriority : Int {
+enum OperationQueuePriority : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case VeryLow
@@ -3792,197 +3785,194 @@ enum NSOperationQueuePriority : Int {
   case High
   case VeryHigh
 }
-class NSBlockOperation : NSOperation {
+class BlockOperation : Operation {
   convenience init(block: () -> Void)
   func addExecutionBlock(block: () -> Void)
   var executionBlocks: [() -> Void] { get }
   init()
 }
-let NSInvocationOperationVoidResultException: String
-let NSInvocationOperationCancelledException: String
-let NSOperationQueueDefaultMaxConcurrentOperationCount: Int
-class NSOperationQueue : NSObject {
-  func addOperation(op: NSOperation)
-  func addOperations(ops: [NSOperation], waitUntilFinished wait: Bool)
-  func addOperationWithBlock(block: () -> Void)
-  var operations: [NSOperation] { get }
+let invocationOperationVoidResultException: String
+let invocationOperationCancelledException: String
+let operationQueueDefaultMaxConcurrentOperationCount: Int
+class OperationQueue : Object {
+  func addOperation(op: Operation)
+  func addOperations(ops: [Operation], waitUntilFinished wait: Bool)
+  func addOperationWith(block: () -> Void)
+  var operations: [Operation] { get }
   var operationCount: Int { get }
   var maxConcurrentOperationCount: Int
-  var suspended: Bool
+  var isSuspended: Bool
   var name: String?
-  var qualityOfService: NSQualityOfService
+  var qualityOfService: QualityOfService
   unowned(unsafe) var underlyingQueue: @sil_unmanaged dispatch_queue_t?
   func cancelAllOperations()
   func waitUntilAllOperationsAreFinished()
-  class func currentQueue() -> NSOperationQueue?
-  class func mainQueue() -> NSOperationQueue
+  class func current() -> OperationQueue?
+  class func main() -> OperationQueue
   init()
 }
-class NSOrderedSet : NSObject, NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration {
+class OrderedSet : Object, Copying, MutableCopying, SecureCoding, FastEnumeration {
   var count: Int { get }
-  func objectAtIndex(idx: Int) -> AnyObject
-  func indexOfObject(object: AnyObject) -> Int
+  func objectAt(idx: Int) -> AnyObject
+  func indexOf(object: AnyObject) -> Int
   init()
   init(objects: UnsafePointer<AnyObject?>, count cnt: Int)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  func countByEnumeratingWithState(state: UnsafeMutablePointer<NSFastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
+  func encodeWith(aCoder: Coder)
+  func countByEnumeratingWith(state: UnsafeMutablePointer<FastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
 }
-extension NSOrderedSet : SequenceType {
-  /// Return a *generator* over the elements of this *sequence*.
-  ///
-  /// - Complexity: O(1).
+extension OrderedSet : SequenceType {
   func generate() -> NSFastGenerator
   typealias Generator = NSFastGenerator
   typealias SubSequence = AnySequence<AnyObject>
 }
-extension NSOrderedSet {
+extension OrderedSet {
   convenience init(objects elements: AnyObject...)
 }
-extension NSOrderedSet : ArrayLiteralConvertible {
+extension OrderedSet : ArrayLiteralConvertible {
   required convenience init(arrayLiteral elements: AnyObject...)
   typealias Element = AnyObject
 }
-extension NSOrderedSet {
+extension OrderedSet {
   func getObjects(objects: AutoreleasingUnsafeMutablePointer<AnyObject?>, range: NSRange)
-  func objectsAtIndexes(indexes: NSIndexSet) -> [AnyObject]
+  func objectsAt(indexes: IndexSet) -> [AnyObject]
   var firstObject: AnyObject? { get }
   var lastObject: AnyObject? { get }
-  func isEqualToOrderedSet(other: NSOrderedSet) -> Bool
-  func containsObject(object: AnyObject) -> Bool
-  func intersectsOrderedSet(other: NSOrderedSet) -> Bool
-  func intersectsSet(set: Set<NSObject>) -> Bool
-  func isSubsetOfOrderedSet(other: NSOrderedSet) -> Bool
-  func isSubsetOfSet(set: Set<NSObject>) -> Bool
+  func isEqualTo(other: OrderedSet) -> Bool
+  func contains(object: AnyObject) -> Bool
+  func intersectsOrderedSet(other: OrderedSet) -> Bool
+  func intersectsSet(set: Set<Object>) -> Bool
+  func isSubsetOf(other: OrderedSet) -> Bool
+  func isSubsetOf(set: Set<Object>) -> Bool
   subscript (idx: Int) -> AnyObject { get }
-  func objectEnumerator() -> NSEnumerator
-  func reverseObjectEnumerator() -> NSEnumerator
-  @NSCopying var reversedOrderedSet: NSOrderedSet { get }
+  func objectEnumerator() -> Enumerator
+  func reverseObjectEnumerator() -> Enumerator
+  @NSCopying var reversed: OrderedSet { get }
   var array: [AnyObject] { get }
-  var set: Set<NSObject> { get }
-  func enumerateObjectsUsingBlock(block: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func enumerateObjectsWithOptions(opts: NSEnumerationOptions, usingBlock block: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func enumerateObjectsAtIndexes(s: NSIndexSet, options opts: NSEnumerationOptions, usingBlock block: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
+  var set: Set<Object> { get }
+  func enumerateObjectsUsing(block: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func enumerateObjects(options opts: EnumerationOptions = [], usingBlock block: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func enumerateObjectsAt(s: IndexSet, options opts: EnumerationOptions = [], usingBlock block: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
   func indexOfObjectPassingTest(predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Int
-  func indexOfObjectWithOptions(opts: NSEnumerationOptions, passingTest predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Int
-  func indexOfObjectAtIndexes(s: NSIndexSet, options opts: NSEnumerationOptions, passingTest predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Int
-  func indexesOfObjectsPassingTest(predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> NSIndexSet
-  func indexesOfObjectsWithOptions(opts: NSEnumerationOptions, passingTest predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> NSIndexSet
-  func indexesOfObjectsAtIndexes(s: NSIndexSet, options opts: NSEnumerationOptions, passingTest predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> NSIndexSet
-  func indexOfObject(object: AnyObject, inSortedRange range: NSRange, options opts: NSBinarySearchingOptions, usingComparator cmp: NSComparator) -> Int
-  func sortedArrayUsingComparator(cmptr: NSComparator) -> [AnyObject]
-  func sortedArrayWithOptions(opts: NSSortOptions, usingComparator cmptr: NSComparator) -> [AnyObject]
+  func indexOfObject(options opts: EnumerationOptions = [], passingTest predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Int
+  func indexOfObjectAt(s: IndexSet, options opts: EnumerationOptions = [], passingTest predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Int
+  func indexesOfObjectsPassingTest(predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> IndexSet
+  func indexesOfObjects(options opts: EnumerationOptions = [], passingTest predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> IndexSet
+  func indexesOfObjectsAt(s: IndexSet, options opts: EnumerationOptions = [], passingTest predicate: (AnyObject, Int, UnsafeMutablePointer<ObjCBool>) -> Bool) -> IndexSet
+  func indexOf(object: AnyObject, inSortedRange range: NSRange, options opts: BinarySearchingOptions = [], usingComparator cmp: Comparator) -> Int
+  func sortedArrayUsingComparator(cmptr: Comparator) -> [AnyObject]
+  func sortedArray(options opts: SortOptions = [], usingComparator cmptr: Comparator) -> [AnyObject]
   var description: String { get }
   func descriptionWithLocale(locale: AnyObject?) -> String
   func descriptionWithLocale(locale: AnyObject?, indent level: Int) -> String
 }
-extension NSOrderedSet {
+extension OrderedSet {
   convenience init(object: AnyObject)
-  convenience init(orderedSet set: NSOrderedSet)
-  convenience init(orderedSet set: NSOrderedSet, copyItems flag: Bool)
-  convenience init(orderedSet set: NSOrderedSet, range: NSRange, copyItems flag: Bool)
+  convenience init(orderedSet set: OrderedSet)
+  convenience init(orderedSet set: OrderedSet, copyItems flag: Bool)
+  convenience init(orderedSet set: OrderedSet, range: NSRange, copyItems flag: Bool)
   convenience init(array: [AnyObject])
   convenience init(array set: [AnyObject], copyItems flag: Bool)
   convenience init(array set: [AnyObject], range: NSRange, copyItems flag: Bool)
-  convenience init(set: Set<NSObject>)
-  convenience init(set: Set<NSObject>, copyItems flag: Bool)
+  convenience init(set: Set<Object>)
+  convenience init(set: Set<Object>, copyItems flag: Bool)
 }
-class NSMutableOrderedSet : NSOrderedSet {
-  func insertObject(object: AnyObject, atIndex idx: Int)
-  func removeObjectAtIndex(idx: Int)
-  func replaceObjectAtIndex(idx: Int, withObject object: AnyObject)
-  init?(coder aDecoder: NSCoder)
+class MutableOrderedSet : OrderedSet {
+  func insert(object: AnyObject, at idx: Int)
+  func removeObjectAt(idx: Int)
+  func replaceObjectAt(idx: Int, withObject object: AnyObject)
+  init?(coder aDecoder: Coder)
   init()
   init(capacity numItems: Int)
   convenience init(objects: UnsafePointer<AnyObject?>, count cnt: Int)
   convenience init(object: AnyObject)
-  convenience init(orderedSet set: NSOrderedSet)
-  convenience init(orderedSet set: NSOrderedSet, copyItems flag: Bool)
-  convenience init(orderedSet set: NSOrderedSet, range: NSRange, copyItems flag: Bool)
+  convenience init(orderedSet set: OrderedSet)
+  convenience init(orderedSet set: OrderedSet, copyItems flag: Bool)
+  convenience init(orderedSet set: OrderedSet, range: NSRange, copyItems flag: Bool)
   convenience init(array: [AnyObject])
   convenience init(array set: [AnyObject], copyItems flag: Bool)
   convenience init(array set: [AnyObject], range: NSRange, copyItems flag: Bool)
-  convenience init(set: Set<NSObject>)
-  convenience init(set: Set<NSObject>, copyItems flag: Bool)
+  convenience init(set: Set<Object>)
+  convenience init(set: Set<Object>, copyItems flag: Bool)
 }
-extension NSMutableOrderedSet {
-  func addObject(object: AnyObject)
+extension MutableOrderedSet {
+  func add(object: AnyObject)
   func addObjects(objects: UnsafePointer<AnyObject?>, count: Int)
-  func addObjectsFromArray(array: [AnyObject])
-  func exchangeObjectAtIndex(idx1: Int, withObjectAtIndex idx2: Int)
-  func moveObjectsAtIndexes(indexes: NSIndexSet, toIndex idx: Int)
-  func insertObjects(objects: [AnyObject], atIndexes indexes: NSIndexSet)
-  func setObject(obj: AnyObject, atIndex idx: Int)
+  func addObjectsFrom(array: [AnyObject])
+  func exchangeObjectAt(idx1: Int, withObjectAt idx2: Int)
+  func moveObjectsAt(indexes: IndexSet, to idx: Int)
+  func insert(objects: [AnyObject], at indexes: IndexSet)
+  func setObject(obj: AnyObject, at idx: Int)
   subscript (idx: Int) -> AnyObject
-  func replaceObjectsInRange(range: NSRange, withObjects objects: UnsafePointer<AnyObject?>, count: Int)
-  func replaceObjectsAtIndexes(indexes: NSIndexSet, withObjects objects: [AnyObject])
-  func removeObjectsInRange(range: NSRange)
-  func removeObjectsAtIndexes(indexes: NSIndexSet)
+  func replaceObjectsIn(range: NSRange, withObjects objects: UnsafePointer<AnyObject?>, count: Int)
+  func replaceObjectsAt(indexes: IndexSet, withObjects objects: [AnyObject])
+  func removeObjectsIn(range: NSRange)
+  func removeObjectsAt(indexes: IndexSet)
   func removeAllObjects()
-  func removeObject(object: AnyObject)
-  func removeObjectsInArray(array: [AnyObject])
-  func intersectOrderedSet(other: NSOrderedSet)
-  func minusOrderedSet(other: NSOrderedSet)
-  func unionOrderedSet(other: NSOrderedSet)
-  func intersectSet(other: Set<NSObject>)
-  func minusSet(other: Set<NSObject>)
-  func unionSet(other: Set<NSObject>)
-  func sortUsingComparator(cmptr: NSComparator)
-  func sortWithOptions(opts: NSSortOptions, usingComparator cmptr: NSComparator)
-  func sortRange(range: NSRange, options opts: NSSortOptions, usingComparator cmptr: NSComparator)
+  func remove(object: AnyObject)
+  func removeObjectsIn(array: [AnyObject])
+  func intersectOrderedSet(other: OrderedSet)
+  func minusOrderedSet(other: OrderedSet)
+  func unionOrderedSet(other: OrderedSet)
+  func intersectSet(other: Set<Object>)
+  func minusSet(other: Set<Object>)
+  func unionSet(other: Set<Object>)
+  func sortUsingComparator(cmptr: Comparator)
+  func sort(options opts: SortOptions = [], usingComparator cmptr: Comparator)
+  func sortRange(range: NSRange, options opts: SortOptions = [], usingComparator cmptr: Comparator)
 }
-extension NSMutableOrderedSet {
+extension MutableOrderedSet {
 }
-class NSOrthography : NSObject, NSCopying, NSCoding {
+class Orthography : Object, Copying, Coding {
   var dominantScript: String { get }
   var languageMap: [String : [String]] { get }
   init(dominantScript script: String, languageMap map: [String : [String]])
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
 }
-extension NSOrthography {
+extension Orthography {
   func languagesForScript(script: String) -> [String]?
   func dominantLanguageForScript(script: String) -> String?
   var dominantLanguage: String { get }
   var allScripts: [String] { get }
   var allLanguages: [String] { get }
 }
-extension NSOrthography {
+extension Orthography {
 }
 extension NSString {
   class func pathWithComponents(components: [String]) -> String
   var pathComponents: [String] { get }
-  var absolutePath: Bool { get }
+  var isAbsolutePath: Bool { get }
   var lastPathComponent: String { get }
-  var stringByDeletingLastPathComponent: String { get }
-  func stringByAppendingPathComponent(str: String) -> String
+  var deletingLastPathComponent: String { get }
+  func appendingPathComponent(str: String) -> String
   var pathExtension: String { get }
-  var stringByDeletingPathExtension: String { get }
-  func stringByAppendingPathExtension(str: String) -> String?
-  var stringByAbbreviatingWithTildeInPath: String { get }
-  var stringByExpandingTildeInPath: String { get }
-  var stringByStandardizingPath: String { get }
-  var stringByResolvingSymlinksInPath: String { get }
+  var deletingPathExtension: String { get }
+  func appendingPathExtension(str: String) -> String?
+  var abbreviatingWithTildeInPath: String { get }
+  var expandingTildeInPath: String { get }
+  var standardizingPath: String { get }
+  var resolvingSymlinksInPath: String { get }
   func stringsByAppendingPaths(paths: [String]) -> [String]
-  func completePathIntoString(outputName: AutoreleasingUnsafeMutablePointer<NSString?>, caseSensitive flag: Bool, matchesIntoArray outputArray: AutoreleasingUnsafeMutablePointer<NSArray?>, filterTypes: [String]?) -> Int
+  func completePathInto(outputName: AutoreleasingUnsafeMutablePointer<NSString?>, caseSensitive flag: Bool, matchesInto outputArray: AutoreleasingUnsafeMutablePointer<NSArray?>, filterTypes: [String]?) -> Int
   var fileSystemRepresentation: UnsafePointer<Int8> { get }
   func getFileSystemRepresentation(cname: UnsafeMutablePointer<Int8>, maxLength max: Int) -> Bool
 }
 extension NSArray {
   func pathsMatchingExtensions(filterTypes: [String]) -> [String]
 }
-func NSUserName() -> String
-func NSFullUserName() -> String
-func NSHomeDirectory() -> String
-func NSHomeDirectoryForUser(userName: String?) -> String?
-func NSTemporaryDirectory() -> String
-func NSOpenStepRootDirectory() -> String
-enum NSSearchPathDirectory : UInt {
+func userName() -> String
+func fullUserName() -> String
+func homeDirectory() -> String
+func homeDirectoryForUser(userName: String?) -> String?
+func temporaryDirectory() -> String
+func openStepRootDirectory() -> String
+enum SearchPathDirectory : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case ApplicationDirectory
@@ -4013,31 +4003,31 @@ enum NSSearchPathDirectory : UInt {
   case AllLibrariesDirectory
   case TrashDirectory
 }
-struct NSSearchPathDomainMask : OptionSetType {
+struct SearchPathDomainMask : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var UserDomainMask: NSSearchPathDomainMask { get }
-  static var LocalDomainMask: NSSearchPathDomainMask { get }
-  static var NetworkDomainMask: NSSearchPathDomainMask { get }
-  static var SystemDomainMask: NSSearchPathDomainMask { get }
-  static var AllDomainsMask: NSSearchPathDomainMask { get }
+  static var UserDomainMask: SearchPathDomainMask { get }
+  static var LocalDomainMask: SearchPathDomainMask { get }
+  static var NetworkDomainMask: SearchPathDomainMask { get }
+  static var SystemDomainMask: SearchPathDomainMask { get }
+  static var AllDomainsMask: SearchPathDomainMask { get }
 }
-func NSSearchPathForDirectoriesInDomains(directory: NSSearchPathDirectory, _ domainMask: NSSearchPathDomainMask, _ expandTilde: Bool) -> [String]
-class NSPersonNameComponents : NSObject, NSCopying, NSSecureCoding {
+func searchPathForDirectoriesInDomains(directory: SearchPathDirectory, _ domainMask: SearchPathDomainMask, _ expandTilde: Bool) -> [String]
+class PersonNameComponents : Object, Copying, SecureCoding {
   var namePrefix: String?
   var givenName: String?
   var middleName: String?
   var familyName: String?
   var nameSuffix: String?
   var nickname: String?
-  @NSCopying var phoneticRepresentation: NSPersonNameComponents?
+  @NSCopying var phoneticRepresentation: PersonNameComponents?
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-enum NSPersonNameComponentsFormatterStyle : Int {
+enum PersonNameComponentsFormatterStyle : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case Default
@@ -4046,70 +4036,70 @@ enum NSPersonNameComponentsFormatterStyle : Int {
   case Long
   case Abbreviated
 }
-struct NSPersonNameComponentsFormatterOptions : OptionSetType {
+struct PersonNameComponentsFormatterOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var Phonetic: NSPersonNameComponentsFormatterOptions { get }
+  static var Phonetic: PersonNameComponentsFormatterOptions { get }
 }
-class NSPersonNameComponentsFormatter : NSFormatter {
-  var style: NSPersonNameComponentsFormatterStyle
-  var phonetic: Bool
-  class func localizedStringFromPersonNameComponents(components: NSPersonNameComponents, style nameFormatStyle: NSPersonNameComponentsFormatterStyle, options nameOptions: NSPersonNameComponentsFormatterOptions) -> String
-  func stringFromPersonNameComponents(components: NSPersonNameComponents) -> String
-  func annotatedStringFromPersonNameComponents(components: NSPersonNameComponents) -> NSAttributedString
+class PersonNameComponentsFormatter : Formatter {
+  var style: PersonNameComponentsFormatterStyle
+  var isPhonetic: Bool
+  class func localizedStringFrom(components: PersonNameComponents, style nameFormatStyle: PersonNameComponentsFormatterStyle, options nameOptions: PersonNameComponentsFormatterOptions = []) -> String
+  func stringFrom(components: PersonNameComponents) -> String
+  func annotatedStringFrom(components: PersonNameComponents) -> AttributedString
   func getObjectValue(obj: AutoreleasingUnsafeMutablePointer<AnyObject?>, forString string: String, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-let NSPersonNameComponentKey: String
-let NSPersonNameComponentGivenName: String
-let NSPersonNameComponentFamilyName: String
-let NSPersonNameComponentMiddleName: String
-let NSPersonNameComponentPrefix: String
-let NSPersonNameComponentSuffix: String
-let NSPersonNameComponentNickname: String
-let NSPersonNameComponentDelimiter: String
-class NSPointerArray : NSObject, NSFastEnumeration, NSCopying, NSCoding {
-  init(options: NSPointerFunctionsOptions)
-  init(pointerFunctions functions: NSPointerFunctions)
-  @NSCopying var pointerFunctions: NSPointerFunctions { get }
-  func pointerAtIndex(index: Int) -> UnsafeMutablePointer<Void>
+let personNameComponentKey: String
+let personNameComponentGivenName: String
+let personNameComponentFamilyName: String
+let personNameComponentMiddleName: String
+let personNameComponentPrefix: String
+let personNameComponentSuffix: String
+let personNameComponentNickname: String
+let personNameComponentDelimiter: String
+class PointerArray : Object, FastEnumeration, Copying, Coding {
+  init(options: PointerFunctionsOptions = [])
+  init(pointerFunctions functions: PointerFunctions)
+  @NSCopying var pointerFunctions: PointerFunctions { get }
+  func pointerAt(index: Int) -> UnsafeMutablePointer<Void>
   func addPointer(pointer: UnsafeMutablePointer<Void>)
-  func removePointerAtIndex(index: Int)
-  func insertPointer(item: UnsafeMutablePointer<Void>, atIndex index: Int)
-  func replacePointerAtIndex(index: Int, withPointer item: UnsafeMutablePointer<Void>)
+  func removePointerAt(index: Int)
+  func insertPointer(item: UnsafeMutablePointer<Void>, at index: Int)
+  func replacePointerAt(index: Int, withPointer item: UnsafeMutablePointer<Void>)
   func compact()
   var count: Int
   convenience init()
-  func countByEnumeratingWithState(state: UnsafeMutablePointer<NSFastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func countByEnumeratingWith(state: UnsafeMutablePointer<FastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-extension NSPointerArray {
-  class func strongObjectsPointerArray() -> NSPointerArray
-  class func weakObjectsPointerArray() -> NSPointerArray
+extension PointerArray {
+  class func strongObjects() -> PointerArray
+  class func weakObjects() -> PointerArray
   var allObjects: [AnyObject] { get }
 }
 var __FOUNDATION_NSPOINTERFUNCTIONS__: Int32 { get }
-struct NSPointerFunctionsOptions : OptionSetType {
+struct PointerFunctionsOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var StrongMemory: NSPointerFunctionsOptions { get }
-  static var OpaqueMemory: NSPointerFunctionsOptions { get }
-  static var MallocMemory: NSPointerFunctionsOptions { get }
-  static var MachVirtualMemory: NSPointerFunctionsOptions { get }
-  static var WeakMemory: NSPointerFunctionsOptions { get }
-  static var ObjectPersonality: NSPointerFunctionsOptions { get }
-  static var OpaquePersonality: NSPointerFunctionsOptions { get }
-  static var ObjectPointerPersonality: NSPointerFunctionsOptions { get }
-  static var CStringPersonality: NSPointerFunctionsOptions { get }
-  static var StructPersonality: NSPointerFunctionsOptions { get }
-  static var IntegerPersonality: NSPointerFunctionsOptions { get }
-  static var CopyIn: NSPointerFunctionsOptions { get }
+  static var StrongMemory: PointerFunctionsOptions { get }
+  static var OpaqueMemory: PointerFunctionsOptions { get }
+  static var MallocMemory: PointerFunctionsOptions { get }
+  static var MachVirtualMemory: PointerFunctionsOptions { get }
+  static var WeakMemory: PointerFunctionsOptions { get }
+  static var ObjectPersonality: PointerFunctionsOptions { get }
+  static var OpaquePersonality: PointerFunctionsOptions { get }
+  static var ObjectPointerPersonality: PointerFunctionsOptions { get }
+  static var CStringPersonality: PointerFunctionsOptions { get }
+  static var StructPersonality: PointerFunctionsOptions { get }
+  static var IntegerPersonality: PointerFunctionsOptions { get }
+  static var CopyIn: PointerFunctionsOptions { get }
 }
-class NSPointerFunctions : NSObject, NSCopying {
-  init(options: NSPointerFunctionsOptions)
+class PointerFunctions : Object, Copying {
+  init(options: PointerFunctionsOptions = [])
   var hashFunction: (@convention(c) (UnsafePointer<Void>, (@convention(c) (UnsafePointer<Void>) -> Int)?) -> Int)?
   var isEqualFunction: (@convention(c) (UnsafePointer<Void>, UnsafePointer<Void>, (@convention(c) (UnsafePointer<Void>) -> Int)?) -> ObjCBool)?
   var sizeFunction: (@convention(c) (UnsafePointer<Void>) -> Int)?
@@ -4119,99 +4109,99 @@ class NSPointerFunctions : NSObject, NSCopying {
   var usesStrongWriteBarrier: Bool
   var usesWeakReadAndWriteBarriers: Bool
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-typealias NSSocketNativeHandle = Int32
-let NSPortDidBecomeInvalidNotification: String
-class NSPort : NSObject, NSCopying, NSCoding {
+typealias SocketNativeHandle = Int32
+let portDidBecomeInvalidNotification: String
+class Port : Object, Copying, Coding {
   func invalidate()
-  var valid: Bool { get }
-  func setDelegate(anObject: NSPortDelegate?)
-  func delegate() -> NSPortDelegate?
-  func scheduleInRunLoop(runLoop: NSRunLoop, forMode mode: String)
-  func removeFromRunLoop(runLoop: NSRunLoop, forMode mode: String)
+  var isValid: Bool { get }
+  func setDelegate(anObject: PortDelegate?)
+  func delegate() -> PortDelegate?
+  func scheduleIn(runLoop: RunLoop, forMode mode: String)
+  func removeFrom(runLoop: RunLoop, forMode mode: String)
   var reservedSpaceLength: Int { get }
-  func sendBeforeDate(limitDate: NSDate, components: NSMutableArray?, from receivePort: NSPort?, reserved headerSpaceReserved: Int) -> Bool
-  func sendBeforeDate(limitDate: NSDate, msgid msgID: Int, components: NSMutableArray?, from receivePort: NSPort?, reserved headerSpaceReserved: Int) -> Bool
+  func sendBefore(limitDate: Date, components: MutableArray?, from receivePort: Port?, reserved headerSpaceReserved: Int) -> Bool
+  func sendBefore(limitDate: Date, msgid msgID: Int, components: MutableArray?, from receivePort: Port?, reserved headerSpaceReserved: Int) -> Bool
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-protocol NSPortDelegate : NSObjectProtocol {
-  optional func handlePortMessage(message: NSPortMessage)
+protocol PortDelegate : ObjectProtocol {
+  optional func handle(message: PortMessage)
 }
-class NSMachPort : NSPort {
-  class func portWithMachPort(machPort: UInt32) -> NSPort
+class MachPort : Port {
+  class func portWithMachPort(machPort: UInt32) -> Port
   init(machPort: UInt32)
-  func setDelegate(anObject: NSMachPortDelegate?)
-  func delegate() -> NSMachPortDelegate?
-  class func portWithMachPort(machPort: UInt32, options f: NSMachPortOptions) -> NSPort
-  init(machPort: UInt32, options f: NSMachPortOptions)
+  func setDelegate(anObject: MachPortDelegate?)
+  func delegate() -> MachPortDelegate?
+  class func portWithMachPort(machPort: UInt32, options f: MachPortOptions = []) -> Port
+  init(machPort: UInt32, options f: MachPortOptions = [])
   var machPort: UInt32 { get }
-  func scheduleInRunLoop(runLoop: NSRunLoop, forMode mode: String)
-  func removeFromRunLoop(runLoop: NSRunLoop, forMode mode: String)
+  func scheduleIn(runLoop: RunLoop, forMode mode: String)
+  func removeFrom(runLoop: RunLoop, forMode mode: String)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-struct NSMachPortOptions : OptionSetType {
+struct MachPortOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var DeallocateNone: NSMachPortOptions { get }
-  static var DeallocateSendRight: NSMachPortOptions { get }
-  static var DeallocateReceiveRight: NSMachPortOptions { get }
+  static var DeallocateNone: MachPortOptions { get }
+  static var DeallocateSendRight: MachPortOptions { get }
+  static var DeallocateReceiveRight: MachPortOptions { get }
 }
-protocol NSMachPortDelegate : NSPortDelegate {
+protocol MachPortDelegate : PortDelegate {
   optional func handleMachMessage(msg: UnsafeMutablePointer<Void>)
 }
-class NSMessagePort : NSPort {
+class MessagePort : Port {
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class NSSocketPort : NSPort {
+class SocketPort : Port {
   convenience init()
-  convenience init?(TCPPort port: UInt16)
-  init?(protocolFamily family: Int32, socketType type: Int32, protocol: Int32, address: NSData)
-  init?(protocolFamily family: Int32, socketType type: Int32, protocol: Int32, socket sock: NSSocketNativeHandle)
+  convenience init?(tcpPort port: UInt16)
+  init?(protocolFamily family: Int32, socketType type: Int32, protocol: Int32, address: Data)
+  init?(protocolFamily family: Int32, socketType type: Int32, protocol: Int32, socket sock: SocketNativeHandle)
   convenience init?(remoteWithTCPPort port: UInt16, host hostName: String?)
-  init(remoteWithProtocolFamily family: Int32, socketType type: Int32, protocol: Int32, address: NSData)
+  init(remoteWithProtocolFamily family: Int32, socketType type: Int32, protocol: Int32, address: Data)
   var protocolFamily: Int32 { get }
   var socketType: Int32 { get }
   var `protocol`: Int32 { get }
-  @NSCopying var address: NSData { get }
-  var socket: NSSocketNativeHandle { get }
-  init?(coder aDecoder: NSCoder)
+  @NSCopying var address: Data { get }
+  var socket: SocketNativeHandle { get }
+  init?(coder aDecoder: Coder)
 }
-extension NSObject {
+extension Object {
   class func classForPortCoder() -> AnyClass
 }
-class NSPortMessage : NSObject {
-  init(sendPort: NSPort?, receivePort replyPort: NSPort?, components: [AnyObject]?)
+class PortMessage : Object {
+  init(send sendPort: Port?, receive replyPort: Port?, components: [AnyObject]?)
   var components: [AnyObject]? { get }
-  var receivePort: NSPort? { get }
-  var sendPort: NSPort? { get }
-  func sendBeforeDate(date: NSDate) -> Bool
+  var receivePort: Port? { get }
+  var sendPort: Port? { get }
+  func sendBefore(date: Date) -> Bool
   var msgid: UInt32
   convenience init()
 }
-class NSPredicate : NSObject, NSSecureCoding, NSCopying {
+class Predicate : Object, SecureCoding, Copying {
    init(format predicateFormat: String, argumentArray arguments: [AnyObject]?)
    init(format predicateFormat: String, arguments argList: CVaListPointer)
    init?(fromMetadataQueryString queryString: String)
    init(value: Bool)
    init(block: (AnyObject, [String : AnyObject]?) -> Bool)
   var predicateFormat: String { get }
-  func predicateWithSubstitutionVariables(variables: [String : AnyObject]) -> Self
-  func evaluateWithObject(object: AnyObject?) -> Bool
-  func evaluateWithObject(object: AnyObject?, substitutionVariables bindings: [String : AnyObject]?) -> Bool
+  func withSubstitutionVariables(variables: [String : AnyObject]) -> Self
+  func evaluateWith(object: AnyObject?) -> Bool
+  func evaluateWith(object: AnyObject?, substitutionVariables bindings: [String : AnyObject]?) -> Bool
   func allowEvaluation()
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-extension NSPredicate {
+extension Predicate {
   convenience init(format predicateFormat: String, _ args: CVarArgType...)
 }
 struct _predicateFlags {
@@ -4221,39 +4211,39 @@ struct _predicateFlags {
   init(_evaluationBlocked: UInt32, _reservedPredicateFlags: UInt32)
 }
 extension NSArray {
-  func filteredArrayUsingPredicate(predicate: NSPredicate) -> [AnyObject]
+  func filteredArrayUsing(predicate: Predicate) -> [AnyObject]
 }
-extension NSMutableArray {
-  func filterUsingPredicate(predicate: NSPredicate)
+extension MutableArray {
+  func filterUsing(predicate: Predicate)
 }
 extension NSSet {
-  func filteredSetUsingPredicate(predicate: NSPredicate) -> Set<NSObject>
+  func filteredSetUsing(predicate: Predicate) -> Set<Object>
 }
-extension NSMutableSet {
-  func filterUsingPredicate(predicate: NSPredicate)
+extension MutableSet {
+  func filterUsing(predicate: Predicate)
 }
-extension NSOrderedSet {
-  func filteredOrderedSetUsingPredicate(p: NSPredicate) -> NSOrderedSet
+extension OrderedSet {
+  func filteredOrderedSetUsing(p: Predicate) -> OrderedSet
 }
-extension NSMutableOrderedSet {
-  func filterUsingPredicate(p: NSPredicate)
+extension MutableOrderedSet {
+  func filterUsing(p: Predicate)
 }
-var NSWindowsNTOperatingSystem: Int { get }
-var NSWindows95OperatingSystem: Int { get }
-var NSSolarisOperatingSystem: Int { get }
-var NSHPUXOperatingSystem: Int { get }
-var NSMACHOperatingSystem: Int { get }
-var NSSunOSOperatingSystem: Int { get }
-var NSOSF1OperatingSystem: Int { get }
-struct NSOperatingSystemVersion {
+var windowsNTOperatingSystem: Int { get }
+var windows95OperatingSystem: Int { get }
+var solarisOperatingSystem: Int { get }
+var HPUXOperatingSystem: Int { get }
+var MACHOperatingSystem: Int { get }
+var sunOSOperatingSystem: Int { get }
+var OSF1OperatingSystem: Int { get }
+struct OperatingSystemVersion {
   var majorVersion: Int
   var minorVersion: Int
   var patchVersion: Int
   init()
   init(majorVersion: Int, minorVersion: Int, patchVersion: Int)
 }
-class NSProcessInfo : NSObject {
-  class func processInfo() -> NSProcessInfo
+class ProcessInfo : Object {
+  class func processInfo() -> ProcessInfo
   var environment: [String : String] { get }
   var arguments: [String] { get }
   var hostName: String { get }
@@ -4263,12 +4253,12 @@ class NSProcessInfo : NSObject {
   func operatingSystem() -> Int
   func operatingSystemName() -> String
   var operatingSystemVersionString: String { get }
-  var operatingSystemVersion: NSOperatingSystemVersion { get }
+  var operatingSystemVersion: OperatingSystemVersion { get }
   var processorCount: Int { get }
   var activeProcessorCount: Int { get }
   var physicalMemory: UInt64 { get }
-  func isOperatingSystemAtLeastVersion(version: NSOperatingSystemVersion) -> Bool
-  var systemUptime: NSTimeInterval { get }
+  func isOperatingSystemAtLeastVersion(version: OperatingSystemVersion) -> Bool
+  var systemUptime: TimeInterval { get }
   func disableSuddenTermination()
   func enableSuddenTermination()
   func disableAutomaticTermination(reason: String)
@@ -4276,24 +4266,24 @@ class NSProcessInfo : NSObject {
   var automaticTerminationSupportEnabled: Bool
   init()
 }
-struct NSActivityOptions : OptionSetType {
+struct ActivityOptions : OptionSetType {
   init(rawValue: UInt64)
   let rawValue: UInt64
-  static var IdleDisplaySleepDisabled: NSActivityOptions { get }
-  static var IdleSystemSleepDisabled: NSActivityOptions { get }
-  static var SuddenTerminationDisabled: NSActivityOptions { get }
-  static var AutomaticTerminationDisabled: NSActivityOptions { get }
-  static var UserInitiated: NSActivityOptions { get }
-  static var UserInitiatedAllowingIdleSystemSleep: NSActivityOptions { get }
-  static var Background: NSActivityOptions { get }
-  static var LatencyCritical: NSActivityOptions { get }
+  static var IdleDisplaySleepDisabled: ActivityOptions { get }
+  static var IdleSystemSleepDisabled: ActivityOptions { get }
+  static var SuddenTerminationDisabled: ActivityOptions { get }
+  static var AutomaticTerminationDisabled: ActivityOptions { get }
+  static var UserInitiated: ActivityOptions { get }
+  static var UserInitiatedAllowingIdleSystemSleep: ActivityOptions { get }
+  static var Background: ActivityOptions { get }
+  static var LatencyCritical: ActivityOptions { get }
 }
-extension NSProcessInfo {
-  func beginActivityWithOptions(options: NSActivityOptions, reason: String) -> NSObjectProtocol
-  func endActivity(activity: NSObjectProtocol)
-  func performActivityWithOptions(options: NSActivityOptions, reason: String, usingBlock block: () -> Void)
+extension ProcessInfo {
+  func beginActivity(options options: ActivityOptions = [], reason: String) -> ObjectProtocol
+  func endActivity(activity: ObjectProtocol)
+  func performActivity(options options: ActivityOptions = [], reason: String, usingBlock block: () -> Void)
 }
-enum NSProcessInfoThermalState : Int {
+enum ProcessInfoThermalState : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case Nominal
@@ -4301,111 +4291,111 @@ enum NSProcessInfoThermalState : Int {
   case Serious
   case Critical
 }
-extension NSProcessInfo {
-  var thermalState: NSProcessInfoThermalState { get }
+extension ProcessInfo {
+  var thermalState: ProcessInfoThermalState { get }
 }
-extension NSProcessInfo {
+extension ProcessInfo {
 }
-let NSProcessInfoThermalStateDidChangeNotification: String
-class NSProgress : NSObject {
-  class func currentProgress() -> NSProgress?
+let processInfoThermalStateDidChangeNotification: String
+class Progress : Object {
+  class func current() -> Progress?
    init(totalUnitCount unitCount: Int64)
-  class func discreteProgressWithTotalUnitCount(unitCount: Int64) -> NSProgress
-   init(totalUnitCount unitCount: Int64, parent: NSProgress, pendingUnitCount portionOfParentTotalUnitCount: Int64)
-  init(parent parentProgressOrNil: NSProgress?, userInfo userInfoOrNil: [NSObject : AnyObject]?)
+  class func discreteProgressWithTotalUnitCount(unitCount: Int64) -> Progress
+   init(totalUnitCount unitCount: Int64, parent: Progress, pendingUnitCount portionOfParentTotalUnitCount: Int64)
+  init(parent parentProgressOrNil: Progress?, userInfo userInfoOrNil: [Object : AnyObject]? = [:])
   func becomeCurrentWithPendingUnitCount(unitCount: Int64)
   func resignCurrent()
-  func addChild(child: NSProgress, withPendingUnitCount inUnitCount: Int64)
+  func addChild(child: Progress, withPendingUnitCount inUnitCount: Int64)
   var totalUnitCount: Int64
   var completedUnitCount: Int64
   var localizedDescription: String!
   var localizedAdditionalDescription: String!
-  var cancellable: Bool
-  var pausable: Bool
-  var cancelled: Bool { get }
-  var paused: Bool { get }
+  var isCancellable: Bool
+  var isPausable: Bool
+  var isCancelled: Bool { get }
+  var isPaused: Bool { get }
   var cancellationHandler: (() -> Void)?
   var pausingHandler: (() -> Void)?
   var resumingHandler: (() -> Void)?
   func setUserInfoObject(objectOrNil: AnyObject?, forKey key: String)
-  var indeterminate: Bool { get }
+  var isIndeterminate: Bool { get }
   var fractionCompleted: Double { get }
   func cancel()
   func pause()
   func resume()
-  var userInfo: [NSObject : AnyObject] { get }
+  var userInfo: [Object : AnyObject] { get }
   var kind: String?
   func publish()
   func unpublish()
-  class func addSubscriberForFileURL(url: NSURL, withPublishingHandler publishingHandler: NSProgressPublishingHandler) -> AnyObject
+  class func addSubscriberForFileURL(url: URL, withPublishingHandler publishingHandler: ProgressPublishingHandler) -> AnyObject
   class func removeSubscriber(subscriber: AnyObject)
-  var old: Bool { get }
+  var isOld: Bool { get }
   convenience init()
 }
-typealias NSProgressUnpublishingHandler = () -> Void
-typealias NSProgressPublishingHandler = (NSProgress) -> NSProgressUnpublishingHandler?
-protocol NSProgressReporting : NSObjectProtocol {
-  var progress: NSProgress { get }
+typealias ProgressUnpublishingHandler = () -> Void
+typealias ProgressPublishingHandler = (Progress) -> ProgressUnpublishingHandler?
+protocol ProgressReporting : ObjectProtocol {
+  var progress: Progress { get }
 }
-let NSProgressEstimatedTimeRemainingKey: String
-let NSProgressThroughputKey: String
-let NSProgressKindFile: String
-let NSProgressFileOperationKindKey: String
-let NSProgressFileOperationKindDownloading: String
-let NSProgressFileOperationKindDecompressingAfterDownloading: String
-let NSProgressFileOperationKindReceiving: String
-let NSProgressFileOperationKindCopying: String
-let NSProgressFileURLKey: String
-let NSProgressFileTotalCountKey: String
-let NSProgressFileCompletedCountKey: String
-let NSProgressFileAnimationImageKey: String
-let NSProgressFileAnimationImageOriginalRectKey: String
-let NSProgressFileIconKey: String
-struct NSPropertyListMutabilityOptions : OptionSetType {
+let progressEstimatedTimeRemainingKey: String
+let progressThroughputKey: String
+let progressKindFile: String
+let progressFileOperationKindKey: String
+let progressFileOperationKindDownloading: String
+let progressFileOperationKindDecompressingAfterDownloading: String
+let progressFileOperationKindReceiving: String
+let progressFileOperationKindCopying: String
+let progressFileURLKey: String
+let progressFileTotalCountKey: String
+let progressFileCompletedCountKey: String
+let progressFileAnimationImageKey: String
+let progressFileAnimationImageOriginalRectKey: String
+let progressFileIconKey: String
+struct PropertyListMutabilityOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var Immutable: NSPropertyListMutabilityOptions { get }
-  static var MutableContainers: NSPropertyListMutabilityOptions { get }
-  static var MutableContainersAndLeaves: NSPropertyListMutabilityOptions { get }
+  static var Immutable: PropertyListMutabilityOptions { get }
+  static var MutableContainers: PropertyListMutabilityOptions { get }
+  static var MutableContainersAndLeaves: PropertyListMutabilityOptions { get }
 }
-enum NSPropertyListFormat : UInt {
+enum PropertyListFormat : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case OpenStepFormat
   case XMLFormat_v1_0
   case BinaryFormat_v1_0
 }
-typealias NSPropertyListReadOptions = NSPropertyListMutabilityOptions
-typealias NSPropertyListWriteOptions = Int
-class NSPropertyListSerialization : NSObject {
-  class func propertyList(plist: AnyObject, isValidForFormat format: NSPropertyListFormat) -> Bool
-  class func dataWithPropertyList(plist: AnyObject, format: NSPropertyListFormat, options opt: NSPropertyListWriteOptions) throws -> NSData
-  class func writePropertyList(plist: AnyObject, toStream stream: NSOutputStream, format: NSPropertyListFormat, options opt: NSPropertyListWriteOptions, error: NSErrorPointer) -> Int
-  class func propertyListWithData(data: NSData, options opt: NSPropertyListReadOptions, format: UnsafeMutablePointer<NSPropertyListFormat>) throws -> AnyObject
-  class func propertyListWithStream(stream: NSInputStream, options opt: NSPropertyListReadOptions, format: UnsafeMutablePointer<NSPropertyListFormat>) throws -> AnyObject
-  class func dataFromPropertyList(plist: AnyObject, format: NSPropertyListFormat, errorDescription errorString: UnsafeMutablePointer<NSString?>) -> NSData?
-  class func propertyListFromData(data: NSData, mutabilityOption opt: NSPropertyListMutabilityOptions, format: UnsafeMutablePointer<NSPropertyListFormat>, errorDescription errorString: UnsafeMutablePointer<NSString?>) -> AnyObject?
+typealias PropertyListReadOptions = PropertyListMutabilityOptions
+typealias PropertyListWriteOptions = Int
+class PropertyListSerialization : Object {
+  class func propertyList(plist: AnyObject, isValidFor format: PropertyListFormat) -> Bool
+  class func dataWithPropertyList(plist: AnyObject, format: PropertyListFormat, options opt: PropertyListWriteOptions) throws -> Data
+  class func writePropertyList(plist: AnyObject, to stream: OutputStream, format: PropertyListFormat, options opt: PropertyListWriteOptions, error: ErrorPointer) -> Int
+  class func propertyListWith(data: Data, options opt: PropertyListReadOptions = [], format: UnsafeMutablePointer<PropertyListFormat>) throws -> AnyObject
+  class func propertyListWith(stream: InputStream, options opt: PropertyListReadOptions = [], format: UnsafeMutablePointer<PropertyListFormat>) throws -> AnyObject
+  class func dataFromPropertyList(plist: AnyObject, format: PropertyListFormat, errorDescription errorString: UnsafeMutablePointer<NSString?>) -> Data?
+  class func propertyListFrom(data: Data, mutabilityOption opt: PropertyListMutabilityOptions = [], format: UnsafeMutablePointer<PropertyListFormat>, errorDescription errorString: UnsafeMutablePointer<NSString?>) -> AnyObject?
   init()
 }
-class NSProtocolChecker : NSProxy {
+class ProtocolChecker : Proxy {
   var `protocol`: Protocol { get }
-  var target: NSObject? { get }
+  var target: Object? { get }
 }
-extension NSProtocolChecker {
-  init(target anObject: NSObject, protocol aProtocol: Protocol)
+extension ProtocolChecker {
+  init(target anObject: Object, protocol aProtocol: Protocol)
 }
-class NSProxy : NSObjectProtocol {
+class Proxy : ObjectProtocol {
   class func alloc() -> Self
   class func `class`() -> AnyClass
-  class func forwardInvocation(invocation: NSInvocation)
-  func forwardInvocation(invocation: NSInvocation)
+  class func forwardInvocation(invocation: Invocation)
+  func forwardInvocation(invocation: Invocation)
   class func dealloc()
   func dealloc()
   class func finalize()
   func finalize()
   var description: String { get }
   var debugDescription: String { get }
-  class func respondsToSelector(aSelector: Selector) -> Bool
+  class func respondsTo(aSelector: Selector) -> Bool
   class func description() -> String
   class func debugDescription() -> String
   func isEqual(object: AnyObject?) -> Bool
@@ -4413,21 +4403,21 @@ class NSProxy : NSObjectProtocol {
   var hash: Int { get }
   var superclass: AnyClass? { get }
   func `self`() -> Self
-  func performSelector(aSelector: Selector) -> Unmanaged<AnyObject>!
-  class func performSelector(aSelector: Selector) -> Unmanaged<AnyObject>!
-  func performSelector(aSelector: Selector, withObject object: AnyObject!) -> Unmanaged<AnyObject>!
-  class func performSelector(aSelector: Selector, withObject object: AnyObject!) -> Unmanaged<AnyObject>!
-  func performSelector(aSelector: Selector, withObject object1: AnyObject!, withObject object2: AnyObject!) -> Unmanaged<AnyObject>!
-  class func performSelector(aSelector: Selector, withObject object1: AnyObject!, withObject object2: AnyObject!) -> Unmanaged<AnyObject>!
+  func perform(aSelector: Selector) -> Unmanaged<AnyObject>!
+  class func perform(aSelector: Selector) -> Unmanaged<AnyObject>!
+  func perform(aSelector: Selector, withObject object: AnyObject!) -> Unmanaged<AnyObject>!
+  class func perform(aSelector: Selector, withObject object: AnyObject!) -> Unmanaged<AnyObject>!
+  func perform(aSelector: Selector, withObject object1: AnyObject!, withObject object2: AnyObject!) -> Unmanaged<AnyObject>!
+  class func perform(aSelector: Selector, withObject object1: AnyObject!, withObject object2: AnyObject!) -> Unmanaged<AnyObject>!
   func isProxy() -> Bool
   class func isProxy() -> Bool
-  func isKindOfClass(aClass: AnyClass) -> Bool
-  class func isKindOfClass(aClass: AnyClass) -> Bool
-  func isMemberOfClass(aClass: AnyClass) -> Bool
-  class func isMemberOfClass(aClass: AnyClass) -> Bool
-  func conformsToProtocol(aProtocol: Protocol) -> Bool
-  class func conformsToProtocol(aProtocol: Protocol) -> Bool
-  func respondsToSelector(aSelector: Selector) -> Bool
+  func isKindOf(aClass: AnyClass) -> Bool
+  class func isKindOf(aClass: AnyClass) -> Bool
+  func isMemberOf(aClass: AnyClass) -> Bool
+  class func isMemberOf(aClass: AnyClass) -> Bool
+  func conformsTo(aProtocol: Protocol) -> Bool
+  class func conformsTo(aProtocol: Protocol) -> Bool
+  func respondsTo(aSelector: Selector) -> Bool
 }
 struct _NSRange {
   var location: Int
@@ -4435,140 +4425,140 @@ struct _NSRange {
   init()
   init(location: Int, length: Int)
 }
-extension _NSRange {
+extension NSRange {
   init(_ x: Range<Int>)
   @warn_unused_result
   func toRange() -> Range<Int>?
 }
-extension _NSRange : _Reflectable {
+extension NSRange : _Reflectable {
   /// Returns a mirror that reflects `self`.
   func _getMirror() -> _MirrorType
 }
-extension _NSRange : _ObjectiveCBridgeable {
+extension NSRange : _ObjectiveCBridgeable {
   static func _isBridgedToObjectiveC() -> Bool
   static func _getObjectiveCType() -> Any.Type
-  func _bridgeToObjectiveC() -> NSValue
-  static func _forceBridgeFromObjectiveC(x: NSValue, inout result: NSRange?)
-  static func _conditionallyBridgeFromObjectiveC(x: NSValue, inout result: NSRange?) -> Bool
-  typealias _ObjectiveCType = NSValue
+  func _bridgeToObjectiveC() -> Value
+  static func _forceBridgeFromObjectiveC(x: Value, inout result: NSRange?)
+  static func _conditionallyBridgeFromObjectiveC(x: Value, inout result: NSRange?) -> Bool
+  typealias _ObjectiveCType = Value
 }
 typealias NSRange = _NSRange
-typealias NSRangePointer = UnsafeMutablePointer<NSRange>
-func NSMakeRange(loc: Int, _ len: Int) -> NSRange
-func NSMaxRange(range: NSRange) -> Int
-func NSLocationInRange(loc: Int, _ range: NSRange) -> Bool
-func NSEqualRanges(range1: NSRange, _ range2: NSRange) -> Bool
-func NSUnionRange(range1: NSRange, _ range2: NSRange) -> NSRange
-func NSIntersectionRange(range1: NSRange, _ range2: NSRange) -> NSRange
-func NSStringFromRange(range: NSRange) -> String
-func NSRangeFromString(aString: String) -> NSRange
-extension NSValue {
+typealias RangePointer = UnsafeMutablePointer<NSRange>
+func makeRange(loc: Int, _ len: Int) -> NSRange
+func maxRange(range: NSRange) -> Int
+func locationInRange(loc: Int, _ range: NSRange) -> Bool
+func equalRanges(range1: NSRange, _ range2: NSRange) -> Bool
+func unionRange(range1: NSRange, _ range2: NSRange) -> NSRange
+func intersectionRange(range1: NSRange, _ range2: NSRange) -> NSRange
+func stringFromRange(range: NSRange) -> String
+func rangeFromString(aString: String) -> NSRange
+extension Value {
    init(range: NSRange)
   var rangeValue: NSRange { get }
 }
-struct NSRegularExpressionOptions : OptionSetType {
+struct RegularExpressionOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var CaseInsensitive: NSRegularExpressionOptions { get }
-  static var AllowCommentsAndWhitespace: NSRegularExpressionOptions { get }
-  static var IgnoreMetacharacters: NSRegularExpressionOptions { get }
-  static var DotMatchesLineSeparators: NSRegularExpressionOptions { get }
-  static var AnchorsMatchLines: NSRegularExpressionOptions { get }
-  static var UseUnixLineSeparators: NSRegularExpressionOptions { get }
-  static var UseUnicodeWordBoundaries: NSRegularExpressionOptions { get }
+  static var CaseInsensitive: RegularExpressionOptions { get }
+  static var AllowCommentsAndWhitespace: RegularExpressionOptions { get }
+  static var IgnoreMetacharacters: RegularExpressionOptions { get }
+  static var DotMatchesLineSeparators: RegularExpressionOptions { get }
+  static var AnchorsMatchLines: RegularExpressionOptions { get }
+  static var UseUnixLineSeparators: RegularExpressionOptions { get }
+  static var UseUnicodeWordBoundaries: RegularExpressionOptions { get }
 }
-class NSRegularExpression : NSObject, NSCopying, NSCoding {
-  init(pattern: String, options: NSRegularExpressionOptions) throws
+class RegularExpression : Object, Copying, Coding {
+  init(pattern: String, options: RegularExpressionOptions = []) throws
   var pattern: String { get }
-  var options: NSRegularExpressionOptions { get }
+  var options: RegularExpressionOptions { get }
   var numberOfCaptureGroups: Int { get }
-  class func escapedPatternForString(string: String) -> String
+  class func escapedPatternFor(string: String) -> String
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-struct NSMatchingOptions : OptionSetType {
+struct MatchingOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var ReportProgress: NSMatchingOptions { get }
-  static var ReportCompletion: NSMatchingOptions { get }
-  static var Anchored: NSMatchingOptions { get }
-  static var WithTransparentBounds: NSMatchingOptions { get }
-  static var WithoutAnchoringBounds: NSMatchingOptions { get }
+  static var ReportProgress: MatchingOptions { get }
+  static var ReportCompletion: MatchingOptions { get }
+  static var Anchored: MatchingOptions { get }
+  static var WithTransparentBounds: MatchingOptions { get }
+  static var WithoutAnchoringBounds: MatchingOptions { get }
 }
-struct NSMatchingFlags : OptionSetType {
+struct MatchingFlags : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var Progress: NSMatchingFlags { get }
-  static var Completed: NSMatchingFlags { get }
-  static var HitEnd: NSMatchingFlags { get }
-  static var RequiredEnd: NSMatchingFlags { get }
-  static var InternalError: NSMatchingFlags { get }
+  static var Progress: MatchingFlags { get }
+  static var Completed: MatchingFlags { get }
+  static var HitEnd: MatchingFlags { get }
+  static var RequiredEnd: MatchingFlags { get }
+  static var InternalError: MatchingFlags { get }
 }
-extension NSRegularExpression {
-  func enumerateMatchesInString(string: String, options: NSMatchingOptions, range: NSRange, usingBlock block: (NSTextCheckingResult?, NSMatchingFlags, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func matchesInString(string: String, options: NSMatchingOptions, range: NSRange) -> [NSTextCheckingResult]
-  func numberOfMatchesInString(string: String, options: NSMatchingOptions, range: NSRange) -> Int
-  func firstMatchInString(string: String, options: NSMatchingOptions, range: NSRange) -> NSTextCheckingResult?
-  func rangeOfFirstMatchInString(string: String, options: NSMatchingOptions, range: NSRange) -> NSRange
+extension RegularExpression {
+  func enumerateMatchesIn(string: String, options: MatchingOptions = [], range: NSRange, usingBlock block: (TextCheckingResult?, MatchingFlags, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func matchesIn(string: String, options: MatchingOptions = [], range: NSRange) -> [TextCheckingResult]
+  func numberOfMatchesIn(string: String, options: MatchingOptions = [], range: NSRange) -> Int
+  func firstMatchIn(string: String, options: MatchingOptions = [], range: NSRange) -> TextCheckingResult?
+  func rangeOfFirstMatchIn(string: String, options: MatchingOptions = [], range: NSRange) -> NSRange
 }
-extension NSRegularExpression {
-  func stringByReplacingMatchesInString(string: String, options: NSMatchingOptions, range: NSRange, withTemplate templ: String) -> String
-  func replaceMatchesInString(string: NSMutableString, options: NSMatchingOptions, range: NSRange, withTemplate templ: String) -> Int
-  func replacementStringForResult(result: NSTextCheckingResult, inString string: String, offset: Int, template templ: String) -> String
-  class func escapedTemplateForString(string: String) -> String
+extension RegularExpression {
+  func stringByReplacingMatchesIn(string: String, options: MatchingOptions = [], range: NSRange, withTemplate templ: String) -> String
+  func replaceMatchesIn(string: MutableString, options: MatchingOptions = [], range: NSRange, withTemplate templ: String) -> Int
+  func replacementStringFor(result: TextCheckingResult, in string: String, offset: Int, template templ: String) -> String
+  class func escapedTemplateFor(string: String) -> String
 }
-class NSDataDetector : NSRegularExpression {
-  init(types checkingTypes: NSTextCheckingTypes) throws
-  var checkingTypes: NSTextCheckingTypes { get }
-  convenience init(pattern: String, options: NSRegularExpressionOptions) throws
+class DataDetector : RegularExpression {
+  init(types checkingTypes: TextCheckingTypes) throws
+  var checkingTypes: TextCheckingTypes { get }
+  convenience init(pattern: String, options: RegularExpressionOptions = []) throws
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-let NSDefaultRunLoopMode: String
-let NSRunLoopCommonModes: String
-class NSRunLoop : NSObject {
-  class func currentRunLoop() -> NSRunLoop
-  class func mainRunLoop() -> NSRunLoop
+let defaultRunLoopMode: String
+let runLoopCommonModes: String
+class RunLoop : Object {
+  class func current() -> RunLoop
+  class func main() -> RunLoop
   var currentMode: String? { get }
   func getCFRunLoop() -> CFRunLoop
-  func addTimer(timer: NSTimer, forMode mode: String)
-  func addPort(aPort: NSPort, forMode mode: String)
-  func removePort(aPort: NSPort, forMode mode: String)
-  func limitDateForMode(mode: String) -> NSDate?
-  func acceptInputForMode(mode: String, beforeDate limitDate: NSDate)
+  func add(timer: Timer, forMode mode: String)
+  func add(aPort: Port, forMode mode: String)
+  func remove(aPort: Port, forMode mode: String)
+  func limitDateForMode(mode: String) -> Date?
+  func acceptInputForMode(mode: String, before limitDate: Date)
   init()
 }
-extension NSRunLoop {
+extension RunLoop {
   func run()
-  func runUntilDate(limitDate: NSDate)
-  func runMode(mode: String, beforeDate limitDate: NSDate) -> Bool
+  func runUntil(limitDate: Date)
+  func runMode(mode: String, before limitDate: Date) -> Bool
 }
-extension NSObject {
-  class func performSelector(aSelector: Selector, withObject anArgument: AnyObject?, afterDelay delay: NSTimeInterval, inModes modes: [String])
-  func performSelector(aSelector: Selector, withObject anArgument: AnyObject?, afterDelay delay: NSTimeInterval, inModes modes: [String])
-  class func performSelector(aSelector: Selector, withObject anArgument: AnyObject?, afterDelay delay: NSTimeInterval)
-  func performSelector(aSelector: Selector, withObject anArgument: AnyObject?, afterDelay delay: NSTimeInterval)
+extension Object {
+  class func perform(aSelector: Selector, withObject anArgument: AnyObject?, afterDelay delay: TimeInterval, inModes modes: [String])
+  func perform(aSelector: Selector, withObject anArgument: AnyObject?, afterDelay delay: TimeInterval, inModes modes: [String])
+  class func perform(aSelector: Selector, withObject anArgument: AnyObject?, afterDelay delay: TimeInterval)
+  func perform(aSelector: Selector, withObject anArgument: AnyObject?, afterDelay delay: TimeInterval)
   class func cancelPreviousPerformRequestsWithTarget(aTarget: AnyObject, selector aSelector: Selector, object anArgument: AnyObject?)
   class func cancelPreviousPerformRequestsWithTarget(aTarget: AnyObject)
 }
-extension NSRunLoop {
-  func performSelector(aSelector: Selector, target: AnyObject, argument arg: AnyObject?, order: Int, modes: [String])
-  func cancelPerformSelector(aSelector: Selector, target: AnyObject, argument arg: AnyObject?)
+extension RunLoop {
+  func perform(aSelector: Selector, target: AnyObject, argument arg: AnyObject?, order: Int, modes: [String])
+  func cancelPerform(aSelector: Selector, target: AnyObject, argument arg: AnyObject?)
   func cancelPerformSelectorsWithTarget(target: AnyObject)
 }
-class NSScanner : NSObject, NSCopying {
+class Scanner : Object, Copying {
   var string: String { get }
   var scanLocation: Int
-  @NSCopying var charactersToBeSkipped: NSCharacterSet?
+  @NSCopying var charactersToBeSkipped: CharacterSet?
   var caseSensitive: Bool
   var locale: AnyObject?
   init(string: String)
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-extension NSScanner {
+extension Scanner {
   func scanInt(result: UnsafeMutablePointer<Int32>) -> Bool
   func scanInteger(result: UnsafeMutablePointer<Int>) -> Bool
   func scanLongLong(result: UnsafeMutablePointer<Int64>) -> Bool
@@ -4579,26 +4569,26 @@ extension NSScanner {
   func scanHexLongLong(result: UnsafeMutablePointer<UInt64>) -> Bool
   func scanHexFloat(result: UnsafeMutablePointer<Float>) -> Bool
   func scanHexDouble(result: UnsafeMutablePointer<Double>) -> Bool
-  func scanString(string: String, intoString result: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
-  func scanCharactersFromSet(set: NSCharacterSet, intoString result: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
-  func scanUpToString(string: String, intoString result: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
-  func scanUpToCharactersFromSet(set: NSCharacterSet, intoString result: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
-  var atEnd: Bool { get }
-  class func localizedScannerWithString(string: String) -> AnyObject
+  func scanString(string: String, into result: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
+  func scanCharactersFrom(set: CharacterSet, into result: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
+  func scanUpTo(string: String, into result: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
+  func scanUpToCharactersFrom(set: CharacterSet, into result: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
+  var isAtEnd: Bool { get }
+  class func localizedScannerWith(string: String) -> AnyObject
 }
-class NSScriptClassDescription : NSClassDescription {
+class ScriptClassDescription : ClassDescription {
    init?(forClass aClass: AnyClass)
-  init?(suiteName: String, className: String, dictionary classDeclaration: [NSObject : AnyObject]?)
+  init?(suiteName: String, className: String, dictionary classDeclaration: [Object : AnyObject]?)
   var suiteName: String? { get }
   var className: String? { get }
   var implementationClassName: String? { get }
-  var superclassDescription: NSScriptClassDescription? { get }
+  var superclass: ScriptClassDescription? { get }
   var appleEventCode: FourCharCode { get }
   func matchesAppleEventCode(appleEventCode: FourCharCode) -> Bool
-  func supportsCommand(commandDescription: NSScriptCommandDescription) -> Bool
-  func selectorForCommand(commandDescription: NSScriptCommandDescription) -> Selector
+  func supportsCommand(commandDescription: ScriptCommandDescription) -> Bool
+  func selectorForCommand(commandDescription: ScriptCommandDescription) -> Selector
   func typeForKey(key: String) -> String?
-  func classDescriptionForKey(key: String) -> NSScriptClassDescription?
+  func forKey(key: String) -> ScriptClassDescription?
   func appleEventCodeForKey(key: String) -> FourCharCode
   func keyWithAppleEventCode(appleEventCode: FourCharCode) -> String?
   var defaultSubcontainerAttributeKey: String? { get }
@@ -4609,57 +4599,57 @@ class NSScriptClassDescription : NSClassDescription {
   func hasWritablePropertyForKey(key: String) -> Bool
   convenience init()
 }
-extension NSScriptClassDescription {
+extension ScriptClassDescription {
 }
-extension NSObject {
+extension Object {
   var classCode: FourCharCode { get }
   var className: String { get }
   class func classCode() -> FourCharCode
   class func className() -> String
 }
-class NSScriptCoercionHandler : NSObject {
-  class func sharedCoercionHandler() -> NSScriptCoercionHandler
-  func coerceValue(value: AnyObject, toClass: AnyClass) -> AnyObject?
-  func registerCoercer(coercer: AnyObject, selector: Selector, toConvertFromClass fromClass: AnyClass, toClass: AnyClass)
+class ScriptCoercionHandler : Object {
+  class func shared() -> ScriptCoercionHandler
+  func coerceValue(value: AnyObject, to toClass: AnyClass) -> AnyObject?
+  func registerCoercer(coercer: AnyObject, selector: Selector, toConvertFrom fromClass: AnyClass, to toClass: AnyClass)
   init()
 }
-var NSNoScriptError: Int { get }
-var NSReceiverEvaluationScriptError: Int { get }
-var NSKeySpecifierEvaluationScriptError: Int { get }
-var NSArgumentEvaluationScriptError: Int { get }
-var NSReceiversCantHandleCommandScriptError: Int { get }
-var NSRequiredArgumentsMissingScriptError: Int { get }
-var NSArgumentsWrongScriptError: Int { get }
-var NSUnknownKeyScriptError: Int { get }
-var NSInternalScriptError: Int { get }
-var NSOperationNotSupportedForKeyScriptError: Int { get }
-var NSCannotCreateScriptCommandError: Int { get }
-class NSScriptCommand : NSObject, NSCoding {
-  init(commandDescription commandDef: NSScriptCommandDescription)
-  convenience init?(coder inCoder: NSCoder)
-  var commandDescription: NSScriptCommandDescription { get }
+var noScriptError: Int { get }
+var receiverEvaluationScriptError: Int { get }
+var keySpecifierEvaluationScriptError: Int { get }
+var argumentEvaluationScriptError: Int { get }
+var receiversCantHandleCommandScriptError: Int { get }
+var requiredArgumentsMissingScriptError: Int { get }
+var argumentsWrongScriptError: Int { get }
+var unknownKeyScriptError: Int { get }
+var internalScriptError: Int { get }
+var operationNotSupportedForKeyScriptError: Int { get }
+var cannotCreateScriptCommandError: Int { get }
+class ScriptCommand : Object, Coding {
+  init(commandDescription commandDef: ScriptCommandDescription)
+  convenience init?(coder inCoder: Coder)
+  var commandDescription: ScriptCommandDescription { get }
   var directParameter: AnyObject?
-  var receiversSpecifier: NSScriptObjectSpecifier?
+  var receiversSpecifier: ScriptObjectSpecifier?
   var evaluatedReceivers: AnyObject? { get }
   var arguments: [String : AnyObject]?
   var evaluatedArguments: [String : AnyObject]? { get }
-  var wellFormed: Bool { get }
+  var isWellFormed: Bool { get }
   func performDefaultImplementation() -> AnyObject?
-  func executeCommand() -> AnyObject?
+  func execute() -> AnyObject?
   var scriptErrorNumber: Int
-  var scriptErrorOffendingObjectDescriptor: NSAppleEventDescriptor?
-  var scriptErrorExpectedTypeDescriptor: NSAppleEventDescriptor?
+  var scriptErrorOffendingObjectDescriptor: AppleEventDescriptor?
+  var scriptErrorExpectedTypeDescriptor: AppleEventDescriptor?
   var scriptErrorString: String?
-  class func currentCommand() -> NSScriptCommand?
-  @NSCopying var appleEvent: NSAppleEventDescriptor? { get }
+  class func current() -> ScriptCommand?
+  @NSCopying var appleEvent: AppleEventDescriptor? { get }
   func suspendExecution()
   func resumeExecutionWithResult(result: AnyObject?)
   convenience init()
-  func encodeWithCoder(aCoder: NSCoder)
+  func encodeWith(aCoder: Coder)
 }
-class NSScriptCommandDescription : NSObject, NSCoding {
-  init?(suiteName: String, commandName: String, dictionary commandDeclaration: [NSObject : AnyObject]?)
-  init?(coder inCoder: NSCoder)
+class ScriptCommandDescription : Object, Coding {
+  init?(suiteName: String, commandName: String, dictionary commandDeclaration: [Object : AnyObject]?)
+  init?(coder inCoder: Coder)
   var suiteName: String { get }
   var commandName: String { get }
   var appleEventClassCode: FourCharCode { get }
@@ -4671,44 +4661,44 @@ class NSScriptCommandDescription : NSObject, NSCoding {
   func typeForArgumentWithName(argumentName: String) -> String?
   func appleEventCodeForArgumentWithName(argumentName: String) -> FourCharCode
   func isOptionalArgumentWithName(argumentName: String) -> Bool
-  func createCommandInstance() -> NSScriptCommand
-  func createCommandInstanceWithZone(zone: NSZone) -> NSScriptCommand
-  func encodeWithCoder(aCoder: NSCoder)
+  func createCommandInstance() -> ScriptCommand
+  func createCommandInstance(zone zone: Zone = nil) -> ScriptCommand
+  func encodeWith(aCoder: Coder)
 }
-class NSScriptExecutionContext : NSObject {
-  class func sharedScriptExecutionContext() -> NSScriptExecutionContext
+class ScriptExecutionContext : Object {
+  class func shared() -> ScriptExecutionContext
   var topLevelObject: AnyObject?
   var objectBeingTested: AnyObject?
   var rangeContainerObject: AnyObject?
   init()
 }
-let NSOperationNotSupportedForKeyException: String
-extension NSObject {
-  class func valueAtIndex(index: Int, inPropertyWithKey key: String) -> AnyObject?
-  func valueAtIndex(index: Int, inPropertyWithKey key: String) -> AnyObject?
+let operationNotSupportedForKeyException: String
+extension Object {
+  class func valueAt(index: Int, inPropertyWithKey key: String) -> AnyObject?
+  func valueAt(index: Int, inPropertyWithKey key: String) -> AnyObject?
   class func valueWithName(name: String, inPropertyWithKey key: String) -> AnyObject?
   func valueWithName(name: String, inPropertyWithKey key: String) -> AnyObject?
   class func valueWithUniqueID(uniqueID: AnyObject, inPropertyWithKey key: String) -> AnyObject?
   func valueWithUniqueID(uniqueID: AnyObject, inPropertyWithKey key: String) -> AnyObject?
-  class func insertValue(value: AnyObject, atIndex index: Int, inPropertyWithKey key: String)
-  func insertValue(value: AnyObject, atIndex index: Int, inPropertyWithKey key: String)
-  class func removeValueAtIndex(index: Int, fromPropertyWithKey key: String)
-  func removeValueAtIndex(index: Int, fromPropertyWithKey key: String)
-  class func replaceValueAtIndex(index: Int, inPropertyWithKey key: String, withValue value: AnyObject)
-  func replaceValueAtIndex(index: Int, inPropertyWithKey key: String, withValue value: AnyObject)
+  class func insertValue(value: AnyObject, at index: Int, inPropertyWithKey key: String)
+  func insertValue(value: AnyObject, at index: Int, inPropertyWithKey key: String)
+  class func removeValueAt(index: Int, fromPropertyWithKey key: String)
+  func removeValueAt(index: Int, fromPropertyWithKey key: String)
+  class func replaceValueAt(index: Int, inPropertyWithKey key: String, withValue value: AnyObject)
+  func replaceValueAt(index: Int, inPropertyWithKey key: String, withValue value: AnyObject)
   class func insertValue(value: AnyObject, inPropertyWithKey key: String)
   func insertValue(value: AnyObject, inPropertyWithKey key: String)
   class func coerceValue(value: AnyObject?, forKey key: String) -> AnyObject?
   func coerceValue(value: AnyObject?, forKey key: String) -> AnyObject?
 }
-var NSNoSpecifierError: Int { get }
-var NSNoTopLevelContainersSpecifierError: Int { get }
-var NSContainerSpecifierError: Int { get }
-var NSUnknownKeySpecifierError: Int { get }
-var NSInvalidIndexSpecifierError: Int { get }
-var NSInternalSpecifierError: Int { get }
-var NSOperationNotSupportedForKeySpecifierError: Int { get }
-enum NSInsertionPosition : UInt {
+var noSpecifierError: Int { get }
+var noTopLevelContainersSpecifierError: Int { get }
+var containerSpecifierError: Int { get }
+var unknownKeySpecifierError: Int { get }
+var invalidIndexSpecifierError: Int { get }
+var internalSpecifierError: Int { get }
+var operationNotSupportedForKeySpecifierError: Int { get }
+enum InsertionPosition : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case PositionAfter
@@ -4717,13 +4707,13 @@ enum NSInsertionPosition : UInt {
   case PositionEnd
   case PositionReplace
 }
-enum NSRelativePosition : UInt {
+enum RelativePosition : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case After
   case Before
 }
-enum NSWhoseSubelementIdentifier : UInt {
+enum WhoseSubelementIdentifier : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case IndexSubelement
@@ -4732,60 +4722,60 @@ enum NSWhoseSubelementIdentifier : UInt {
   case RandomSubelement
   case NoSubelement
 }
-class NSScriptObjectSpecifier : NSObject, NSCoding {
-   init?(descriptor: NSAppleEventDescriptor)
-  convenience init(containerSpecifier container: NSScriptObjectSpecifier, key property: String)
-  init(containerClassDescription classDesc: NSScriptClassDescription, containerSpecifier container: NSScriptObjectSpecifier?, key property: String)
-  init?(coder inCoder: NSCoder)
-  unowned(unsafe) var childSpecifier: @sil_unmanaged NSScriptObjectSpecifier?
-  var containerSpecifier: NSScriptObjectSpecifier?
+class ScriptObjectSpecifier : Object, Coding {
+   init?(descriptor: AppleEventDescriptor)
+  convenience init(containerSpecifier container: ScriptObjectSpecifier, key property: String)
+  init(containerClassDescription classDesc: ScriptClassDescription, containerSpecifier container: ScriptObjectSpecifier?, key property: String)
+  init?(coder inCoder: Coder)
+  unowned(unsafe) var child: @sil_unmanaged ScriptObjectSpecifier?
+  var container: ScriptObjectSpecifier?
   var containerIsObjectBeingTested: Bool
   var containerIsRangeContainerObject: Bool
   var key: String
-  var containerClassDescription: NSScriptClassDescription?
-  var keyClassDescription: NSScriptClassDescription? { get }
+  var containerClassDescription: ScriptClassDescription?
+  var keyClassDescription: ScriptClassDescription? { get }
   func indicesOfObjectsByEvaluatingWithContainer(container: AnyObject, count: UnsafeMutablePointer<Int>) -> UnsafeMutablePointer<Int>
   func objectsByEvaluatingWithContainers(containers: AnyObject) -> AnyObject?
   var objectsByEvaluatingSpecifier: AnyObject? { get }
   var evaluationErrorNumber: Int
-  var evaluationErrorSpecifier: NSScriptObjectSpecifier? { get }
-  @NSCopying var descriptor: NSAppleEventDescriptor? { get }
+  var evaluationError: ScriptObjectSpecifier? { get }
+  @NSCopying var descriptor: AppleEventDescriptor? { get }
   convenience init()
-  func encodeWithCoder(aCoder: NSCoder)
+  func encodeWith(aCoder: Coder)
 }
-extension NSObject {
-  var objectSpecifier: NSScriptObjectSpecifier? { get }
-  class func indicesOfObjectsByEvaluatingObjectSpecifier(specifier: NSScriptObjectSpecifier) -> [NSNumber]?
-  func indicesOfObjectsByEvaluatingObjectSpecifier(specifier: NSScriptObjectSpecifier) -> [NSNumber]?
-  class func objectSpecifier() -> NSScriptObjectSpecifier?
+extension Object {
+  var objectSpecifier: ScriptObjectSpecifier? { get }
+  class func indicesOfObjectsByEvaluatingObjectSpecifier(specifier: ScriptObjectSpecifier) -> [Number]?
+  func indicesOfObjectsByEvaluatingObjectSpecifier(specifier: ScriptObjectSpecifier) -> [Number]?
+  class func objectSpecifier() -> ScriptObjectSpecifier?
 }
-class NSIndexSpecifier : NSScriptObjectSpecifier {
-  init(containerClassDescription classDesc: NSScriptClassDescription, containerSpecifier container: NSScriptObjectSpecifier?, key property: String, index: Int)
+class IndexSpecifier : ScriptObjectSpecifier {
+  init(containerClassDescription classDesc: ScriptClassDescription, containerSpecifier container: ScriptObjectSpecifier?, key property: String, index: Int)
   var index: Int
-  convenience init(containerSpecifier container: NSScriptObjectSpecifier, key property: String)
-  convenience init(containerClassDescription classDesc: NSScriptClassDescription, containerSpecifier container: NSScriptObjectSpecifier?, key property: String)
-  init?(coder inCoder: NSCoder)
+  convenience init(containerSpecifier container: ScriptObjectSpecifier, key property: String)
+  convenience init(containerClassDescription classDesc: ScriptClassDescription, containerSpecifier container: ScriptObjectSpecifier?, key property: String)
+  init?(coder inCoder: Coder)
   convenience init()
 }
-class NSMiddleSpecifier : NSScriptObjectSpecifier {
-  convenience init(containerSpecifier container: NSScriptObjectSpecifier, key property: String)
-  init(containerClassDescription classDesc: NSScriptClassDescription, containerSpecifier container: NSScriptObjectSpecifier?, key property: String)
-  init?(coder inCoder: NSCoder)
+class MiddleSpecifier : ScriptObjectSpecifier {
+  convenience init(containerSpecifier container: ScriptObjectSpecifier, key property: String)
+  init(containerClassDescription classDesc: ScriptClassDescription, containerSpecifier container: ScriptObjectSpecifier?, key property: String)
+  init?(coder inCoder: Coder)
   convenience init()
 }
-class NSNameSpecifier : NSScriptObjectSpecifier {
-  init?(coder inCoder: NSCoder)
-  init(containerClassDescription classDesc: NSScriptClassDescription, containerSpecifier container: NSScriptObjectSpecifier?, key property: String, name: String)
+class NameSpecifier : ScriptObjectSpecifier {
+  init?(coder inCoder: Coder)
+  init(containerClassDescription classDesc: ScriptClassDescription, containerSpecifier container: ScriptObjectSpecifier?, key property: String, name: String)
   var name: String
-  convenience init(containerSpecifier container: NSScriptObjectSpecifier, key property: String)
-  convenience init(containerClassDescription classDesc: NSScriptClassDescription, containerSpecifier container: NSScriptObjectSpecifier?, key property: String)
+  convenience init(containerSpecifier container: ScriptObjectSpecifier, key property: String)
+  convenience init(containerClassDescription classDesc: ScriptClassDescription, containerSpecifier container: ScriptObjectSpecifier?, key property: String)
   convenience init()
 }
-class NSPositionalSpecifier : NSObject {
-  init(position: NSInsertionPosition, objectSpecifier specifier: NSScriptObjectSpecifier)
-  var position: NSInsertionPosition { get }
-  var objectSpecifier: NSScriptObjectSpecifier { get }
-  func setInsertionClassDescription(classDescription: NSScriptClassDescription)
+class PositionalSpecifier : Object {
+  init(position: InsertionPosition, objectSpecifier specifier: ScriptObjectSpecifier)
+  var position: InsertionPosition { get }
+  var objectSpecifier: ScriptObjectSpecifier { get }
+  func setInsertionClassDescription(classDescription: ScriptClassDescription)
   func evaluate()
   var insertionContainer: AnyObject? { get }
   var insertionKey: String? { get }
@@ -4793,144 +4783,144 @@ class NSPositionalSpecifier : NSObject {
   var insertionReplaces: Bool { get }
   convenience init()
 }
-class NSPropertySpecifier : NSScriptObjectSpecifier {
-  convenience init(containerSpecifier container: NSScriptObjectSpecifier, key property: String)
-  init(containerClassDescription classDesc: NSScriptClassDescription, containerSpecifier container: NSScriptObjectSpecifier?, key property: String)
-  init?(coder inCoder: NSCoder)
+class PropertySpecifier : ScriptObjectSpecifier {
+  convenience init(containerSpecifier container: ScriptObjectSpecifier, key property: String)
+  init(containerClassDescription classDesc: ScriptClassDescription, containerSpecifier container: ScriptObjectSpecifier?, key property: String)
+  init?(coder inCoder: Coder)
   convenience init()
 }
-class NSRandomSpecifier : NSScriptObjectSpecifier {
-  convenience init(containerSpecifier container: NSScriptObjectSpecifier, key property: String)
-  init(containerClassDescription classDesc: NSScriptClassDescription, containerSpecifier container: NSScriptObjectSpecifier?, key property: String)
-  init?(coder inCoder: NSCoder)
+class RandomSpecifier : ScriptObjectSpecifier {
+  convenience init(containerSpecifier container: ScriptObjectSpecifier, key property: String)
+  init(containerClassDescription classDesc: ScriptClassDescription, containerSpecifier container: ScriptObjectSpecifier?, key property: String)
+  init?(coder inCoder: Coder)
   convenience init()
 }
-class NSRangeSpecifier : NSScriptObjectSpecifier {
-  init?(coder inCoder: NSCoder)
-  init(containerClassDescription classDesc: NSScriptClassDescription, containerSpecifier container: NSScriptObjectSpecifier?, key property: String, startSpecifier startSpec: NSScriptObjectSpecifier?, endSpecifier endSpec: NSScriptObjectSpecifier?)
-  var startSpecifier: NSScriptObjectSpecifier?
-  var endSpecifier: NSScriptObjectSpecifier?
-  convenience init(containerSpecifier container: NSScriptObjectSpecifier, key property: String)
-  convenience init(containerClassDescription classDesc: NSScriptClassDescription, containerSpecifier container: NSScriptObjectSpecifier?, key property: String)
+class RangeSpecifier : ScriptObjectSpecifier {
+  init?(coder inCoder: Coder)
+  init(containerClassDescription classDesc: ScriptClassDescription, containerSpecifier container: ScriptObjectSpecifier?, key property: String, start startSpec: ScriptObjectSpecifier?, end endSpec: ScriptObjectSpecifier?)
+  var startSpecifier: ScriptObjectSpecifier?
+  var endSpecifier: ScriptObjectSpecifier?
+  convenience init(containerSpecifier container: ScriptObjectSpecifier, key property: String)
+  convenience init(containerClassDescription classDesc: ScriptClassDescription, containerSpecifier container: ScriptObjectSpecifier?, key property: String)
   convenience init()
 }
-class NSRelativeSpecifier : NSScriptObjectSpecifier {
-  init?(coder inCoder: NSCoder)
-  init(containerClassDescription classDesc: NSScriptClassDescription, containerSpecifier container: NSScriptObjectSpecifier?, key property: String, relativePosition relPos: NSRelativePosition, baseSpecifier: NSScriptObjectSpecifier?)
-  var relativePosition: NSRelativePosition
-  var baseSpecifier: NSScriptObjectSpecifier?
-  convenience init(containerSpecifier container: NSScriptObjectSpecifier, key property: String)
-  convenience init(containerClassDescription classDesc: NSScriptClassDescription, containerSpecifier container: NSScriptObjectSpecifier?, key property: String)
+class RelativeSpecifier : ScriptObjectSpecifier {
+  init?(coder inCoder: Coder)
+  init(containerClassDescription classDesc: ScriptClassDescription, containerSpecifier container: ScriptObjectSpecifier?, key property: String, relativePosition relPos: RelativePosition, baseSpecifier: ScriptObjectSpecifier?)
+  var relativePosition: RelativePosition
+  var baseSpecifier: ScriptObjectSpecifier?
+  convenience init(containerSpecifier container: ScriptObjectSpecifier, key property: String)
+  convenience init(containerClassDescription classDesc: ScriptClassDescription, containerSpecifier container: ScriptObjectSpecifier?, key property: String)
   convenience init()
 }
-class NSUniqueIDSpecifier : NSScriptObjectSpecifier {
-  init?(coder inCoder: NSCoder)
-  init(containerClassDescription classDesc: NSScriptClassDescription, containerSpecifier container: NSScriptObjectSpecifier?, key property: String, uniqueID: AnyObject)
+class UniqueIDSpecifier : ScriptObjectSpecifier {
+  init?(coder inCoder: Coder)
+  init(containerClassDescription classDesc: ScriptClassDescription, containerSpecifier container: ScriptObjectSpecifier?, key property: String, uniqueID: AnyObject)
   @NSCopying var uniqueID: AnyObject
-  convenience init(containerSpecifier container: NSScriptObjectSpecifier, key property: String)
-  convenience init(containerClassDescription classDesc: NSScriptClassDescription, containerSpecifier container: NSScriptObjectSpecifier?, key property: String)
+  convenience init(containerSpecifier container: ScriptObjectSpecifier, key property: String)
+  convenience init(containerClassDescription classDesc: ScriptClassDescription, containerSpecifier container: ScriptObjectSpecifier?, key property: String)
   convenience init()
 }
-class NSWhoseSpecifier : NSScriptObjectSpecifier {
-  init?(coder inCoder: NSCoder)
-  init(containerClassDescription classDesc: NSScriptClassDescription, containerSpecifier container: NSScriptObjectSpecifier?, key property: String, test: NSScriptWhoseTest)
-  var test: NSScriptWhoseTest
-  var startSubelementIdentifier: NSWhoseSubelementIdentifier
+class WhoseSpecifier : ScriptObjectSpecifier {
+  init?(coder inCoder: Coder)
+  init(containerClassDescription classDesc: ScriptClassDescription, containerSpecifier container: ScriptObjectSpecifier?, key property: String, test: ScriptWhoseTest)
+  var test: ScriptWhoseTest
+  var startSubelementIdentifier: WhoseSubelementIdentifier
   var startSubelementIndex: Int
-  var endSubelementIdentifier: NSWhoseSubelementIdentifier
+  var endSubelementIdentifier: WhoseSubelementIdentifier
   var endSubelementIndex: Int
-  convenience init(containerSpecifier container: NSScriptObjectSpecifier, key property: String)
-  convenience init(containerClassDescription classDesc: NSScriptClassDescription, containerSpecifier container: NSScriptObjectSpecifier?, key property: String)
+  convenience init(containerSpecifier container: ScriptObjectSpecifier, key property: String)
+  convenience init(containerClassDescription classDesc: ScriptClassDescription, containerSpecifier container: ScriptObjectSpecifier?, key property: String)
   convenience init()
 }
-enum NSSaveOptions : UInt {
+enum SaveOptions : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case Yes
   case No
   case Ask
 }
-class NSCloneCommand : NSScriptCommand {
-  func setReceiversSpecifier(receiversRef: NSScriptObjectSpecifier?)
-  var keySpecifier: NSScriptObjectSpecifier { get }
-  init(commandDescription commandDef: NSScriptCommandDescription)
-  init?(coder inCoder: NSCoder)
+class CloneCommand : ScriptCommand {
+  func setReceiversSpecifier(receiversRef: ScriptObjectSpecifier?)
+  var keySpecifier: ScriptObjectSpecifier { get }
+  init(commandDescription commandDef: ScriptCommandDescription)
+  init?(coder inCoder: Coder)
   convenience init()
 }
-class NSCloseCommand : NSScriptCommand {
-  var saveOptions: NSSaveOptions { get }
-  init(commandDescription commandDef: NSScriptCommandDescription)
-  init?(coder inCoder: NSCoder)
+class CloseCommand : ScriptCommand {
+  var saveOptions: SaveOptions { get }
+  init(commandDescription commandDef: ScriptCommandDescription)
+  init?(coder inCoder: Coder)
   convenience init()
 }
-class NSCountCommand : NSScriptCommand {
-  init(commandDescription commandDef: NSScriptCommandDescription)
-  init?(coder inCoder: NSCoder)
+class CountCommand : ScriptCommand {
+  init(commandDescription commandDef: ScriptCommandDescription)
+  init?(coder inCoder: Coder)
   convenience init()
 }
-class NSCreateCommand : NSScriptCommand {
-  var createClassDescription: NSScriptClassDescription { get }
+class CreateCommand : ScriptCommand {
+  var createClassDescription: ScriptClassDescription { get }
   var resolvedKeyDictionary: [String : AnyObject] { get }
-  init(commandDescription commandDef: NSScriptCommandDescription)
-  init?(coder inCoder: NSCoder)
+  init(commandDescription commandDef: ScriptCommandDescription)
+  init?(coder inCoder: Coder)
   convenience init()
 }
-class NSDeleteCommand : NSScriptCommand {
-  func setReceiversSpecifier(receiversRef: NSScriptObjectSpecifier?)
-  var keySpecifier: NSScriptObjectSpecifier { get }
-  init(commandDescription commandDef: NSScriptCommandDescription)
-  init?(coder inCoder: NSCoder)
+class DeleteCommand : ScriptCommand {
+  func setReceiversSpecifier(receiversRef: ScriptObjectSpecifier?)
+  var keySpecifier: ScriptObjectSpecifier { get }
+  init(commandDescription commandDef: ScriptCommandDescription)
+  init?(coder inCoder: Coder)
   convenience init()
 }
-class NSExistsCommand : NSScriptCommand {
-  init(commandDescription commandDef: NSScriptCommandDescription)
-  init?(coder inCoder: NSCoder)
+class ExistsCommand : ScriptCommand {
+  init(commandDescription commandDef: ScriptCommandDescription)
+  init?(coder inCoder: Coder)
   convenience init()
 }
-class NSGetCommand : NSScriptCommand {
-  init(commandDescription commandDef: NSScriptCommandDescription)
-  init?(coder inCoder: NSCoder)
+class GetCommand : ScriptCommand {
+  init(commandDescription commandDef: ScriptCommandDescription)
+  init?(coder inCoder: Coder)
   convenience init()
 }
-class NSMoveCommand : NSScriptCommand {
-  func setReceiversSpecifier(receiversRef: NSScriptObjectSpecifier?)
-  var keySpecifier: NSScriptObjectSpecifier { get }
-  init(commandDescription commandDef: NSScriptCommandDescription)
-  init?(coder inCoder: NSCoder)
+class MoveCommand : ScriptCommand {
+  func setReceiversSpecifier(receiversRef: ScriptObjectSpecifier?)
+  var keySpecifier: ScriptObjectSpecifier { get }
+  init(commandDescription commandDef: ScriptCommandDescription)
+  init?(coder inCoder: Coder)
   convenience init()
 }
-class NSQuitCommand : NSScriptCommand {
-  var saveOptions: NSSaveOptions { get }
-  init(commandDescription commandDef: NSScriptCommandDescription)
-  init?(coder inCoder: NSCoder)
+class QuitCommand : ScriptCommand {
+  var saveOptions: SaveOptions { get }
+  init(commandDescription commandDef: ScriptCommandDescription)
+  init?(coder inCoder: Coder)
   convenience init()
 }
-class NSSetCommand : NSScriptCommand {
-  func setReceiversSpecifier(receiversRef: NSScriptObjectSpecifier?)
-  var keySpecifier: NSScriptObjectSpecifier { get }
-  init(commandDescription commandDef: NSScriptCommandDescription)
-  init?(coder inCoder: NSCoder)
+class SetCommand : ScriptCommand {
+  func setReceiversSpecifier(receiversRef: ScriptObjectSpecifier?)
+  var keySpecifier: ScriptObjectSpecifier { get }
+  init(commandDescription commandDef: ScriptCommandDescription)
+  init?(coder inCoder: Coder)
   convenience init()
 }
-class NSScriptSuiteRegistry : NSObject {
-  class func sharedScriptSuiteRegistry() -> NSScriptSuiteRegistry
-  class func setSharedScriptSuiteRegistry(registry: NSScriptSuiteRegistry)
-  func loadSuitesFromBundle(bundle: NSBundle)
-  func loadSuiteWithDictionary(suiteDeclaration: [NSObject : AnyObject], fromBundle bundle: NSBundle)
-  func registerClassDescription(classDescription: NSScriptClassDescription)
-  func registerCommandDescription(commandDescription: NSScriptCommandDescription)
+class ScriptSuiteRegistry : Object {
+  class func shared() -> ScriptSuiteRegistry
+  class func setSharedScriptSuiteRegistry(registry: ScriptSuiteRegistry)
+  func loadSuitesFrom(bundle: Bundle)
+  func loadSuiteWith(suiteDeclaration: [Object : AnyObject], from bundle: Bundle)
+  func register(classDescription: ScriptClassDescription)
+  func register(commandDescription: ScriptCommandDescription)
   var suiteNames: [String] { get }
   func appleEventCodeForSuite(suiteName: String) -> FourCharCode
-  func bundleForSuite(suiteName: String) -> NSBundle?
-  func classDescriptionsInSuite(suiteName: String) -> [String : NSScriptClassDescription]?
-  func commandDescriptionsInSuite(suiteName: String) -> [String : NSScriptCommandDescription]?
+  func bundleForSuite(suiteName: String) -> Bundle?
+  func classDescriptionsInSuite(suiteName: String) -> [String : ScriptClassDescription]?
+  func commandDescriptionsInSuite(suiteName: String) -> [String : ScriptCommandDescription]?
   func suiteForAppleEventCode(appleEventCode: FourCharCode) -> String?
-  func classDescriptionWithAppleEventCode(appleEventCode: FourCharCode) -> NSScriptClassDescription?
-  func commandDescriptionWithAppleEventClass(appleEventClassCode: FourCharCode, andAppleEventCode appleEventIDCode: FourCharCode) -> NSScriptCommandDescription?
-  func aeteResource(languageName: String) -> NSData?
+  func classDescriptionWithAppleEventCode(appleEventCode: FourCharCode) -> ScriptClassDescription?
+  func commandDescriptionWithAppleEventClass(appleEventClassCode: FourCharCode, andAppleEventCode appleEventIDCode: FourCharCode) -> ScriptCommandDescription?
+  func aeteResource(languageName: String) -> Data?
   init()
 }
-enum NSTestComparisonOperation : UInt {
+enum TestComparisonOperation : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case EqualToComparison
@@ -4942,24 +4932,24 @@ enum NSTestComparisonOperation : UInt {
   case EndsWithComparison
   case ContainsComparison
 }
-class NSScriptWhoseTest : NSObject, NSCoding {
+class ScriptWhoseTest : Object, Coding {
   func isTrue() -> Bool
   init()
-  init?(coder inCoder: NSCoder)
-  func encodeWithCoder(aCoder: NSCoder)
+  init?(coder inCoder: Coder)
+  func encodeWith(aCoder: Coder)
 }
-class NSLogicalTest : NSScriptWhoseTest {
-  init(andTestWithTests subTests: [NSSpecifierTest])
-  init(orTestWithTests subTests: [NSSpecifierTest])
-  init(notTestWithTest subTest: NSScriptWhoseTest)
+class LogicalTest : ScriptWhoseTest {
+  init(andTestWith subTests: [SpecifierTest])
+  init(orTestWith subTests: [SpecifierTest])
+  init(notTestWith subTest: ScriptWhoseTest)
   convenience init()
-  init?(coder inCoder: NSCoder)
+  init?(coder inCoder: Coder)
 }
-class NSSpecifierTest : NSScriptWhoseTest {
-  init?(coder inCoder: NSCoder)
-  init(objectSpecifier obj1: NSScriptObjectSpecifier?, comparisonOperator compOp: NSTestComparisonOperation, testObject obj2: AnyObject?)
+class SpecifierTest : ScriptWhoseTest {
+  init?(coder inCoder: Coder)
+  init(objectSpecifier obj1: ScriptObjectSpecifier?, comparisonOperator compOp: TestComparisonOperation, test obj2: AnyObject?)
 }
-extension NSObject {
+extension Object {
   class func isEqualTo(object: AnyObject?) -> Bool
   func isEqualTo(object: AnyObject?) -> Bool
   class func isLessThanOrEqualTo(object: AnyObject?) -> Bool
@@ -4979,7 +4969,7 @@ extension NSObject {
   class func isCaseInsensitiveLike(object: String) -> Bool
   func isCaseInsensitiveLike(object: String) -> Bool
 }
-extension NSObject {
+extension Object {
   class func scriptingIsEqualTo(object: AnyObject) -> Bool
   func scriptingIsEqualTo(object: AnyObject) -> Bool
   class func scriptingIsLessThanOrEqualTo(object: AnyObject) -> Bool
@@ -4997,18 +4987,18 @@ extension NSObject {
   class func scriptingContains(object: AnyObject) -> Bool
   func scriptingContains(object: AnyObject) -> Bool
 }
-class NSSet : NSObject, NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration {
+class NSSet : Object, Copying, MutableCopying, SecureCoding, FastEnumeration {
   var count: Int { get }
   func member(object: AnyObject) -> AnyObject?
-  func objectEnumerator() -> NSEnumerator
+  func objectEnumerator() -> Enumerator
   init()
   init(objects: UnsafePointer<AnyObject?>, count cnt: Int)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  func countByEnumeratingWithState(state: UnsafeMutablePointer<NSFastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
+  func encodeWith(aCoder: Coder)
+  func countByEnumeratingWith(state: UnsafeMutablePointer<FastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
 }
 extension NSSet : SequenceType {
   /// Return a *generator* over the elements of this *sequence*.
@@ -5041,96 +5031,96 @@ extension NSSet : _Reflectable {
 extension NSSet {
   var allObjects: [AnyObject] { get }
   func anyObject() -> AnyObject?
-  func containsObject(anObject: AnyObject) -> Bool
+  func contains(anObject: AnyObject) -> Bool
   var description: String { get }
   func descriptionWithLocale(locale: AnyObject?) -> String
-  func intersectsSet(otherSet: Set<NSObject>) -> Bool
-  func isEqualToSet(otherSet: Set<NSObject>) -> Bool
-  func isSubsetOfSet(otherSet: Set<NSObject>) -> Bool
-  func setByAddingObject(anObject: AnyObject) -> Set<NSObject>
-  func setByAddingObjectsFromSet(other: Set<NSObject>) -> Set<NSObject>
-  func setByAddingObjectsFromArray(other: [AnyObject]) -> Set<NSObject>
-  func enumerateObjectsUsingBlock(block: (AnyObject, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func enumerateObjectsWithOptions(opts: NSEnumerationOptions, usingBlock block: (AnyObject, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func objectsPassingTest(predicate: (AnyObject, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Set<NSObject>
-  func objectsWithOptions(opts: NSEnumerationOptions, passingTest predicate: (AnyObject, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Set<NSObject>
+  func intersectsSet(otherSet: Set<Object>) -> Bool
+  func isEqualTo(otherSet: Set<Object>) -> Bool
+  func isSubsetOf(otherSet: Set<Object>) -> Bool
+  func adding(anObject: AnyObject) -> Set<Object>
+  func addingObjectsFrom(other: Set<Object>) -> Set<Object>
+  func addingObjectsFrom(other: [AnyObject]) -> Set<Object>
+  func enumerateObjectsUsing(block: (AnyObject, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func enumerateObjects(options opts: EnumerationOptions = [], usingBlock block: (AnyObject, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func objectsPassingTest(predicate: (AnyObject, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Set<Object>
+  func objects(options opts: EnumerationOptions = [], passingTest predicate: (AnyObject, UnsafeMutablePointer<ObjCBool>) -> Bool) -> Set<Object>
 }
 extension NSSet {
   convenience init(object: AnyObject)
-  convenience init(set: Set<NSObject>)
-  convenience init(set: Set<NSObject>, copyItems flag: Bool)
+  convenience init(set: Set<Object>)
+  convenience init(set: Set<Object>, copyItems flag: Bool)
   convenience init(array: [AnyObject])
 }
-class NSMutableSet : NSSet {
-  func addObject(object: AnyObject)
-  func removeObject(object: AnyObject)
-  init?(coder aDecoder: NSCoder)
+class MutableSet : NSSet {
+  func add(object: AnyObject)
+  func remove(object: AnyObject)
+  init?(coder aDecoder: Coder)
   init()
   init(capacity numItems: Int)
   convenience init(objects: UnsafePointer<AnyObject?>, count cnt: Int)
   convenience init(object: AnyObject)
-  convenience init(set: Set<NSObject>)
-  convenience init(set: Set<NSObject>, copyItems flag: Bool)
+  convenience init(set: Set<Object>)
+  convenience init(set: Set<Object>, copyItems flag: Bool)
   convenience init(array: [AnyObject])
 }
-extension NSMutableSet {
-  func addObjectsFromArray(array: [AnyObject])
-  func intersectSet(otherSet: Set<NSObject>)
-  func minusSet(otherSet: Set<NSObject>)
+extension MutableSet {
+  func addObjectsFrom(array: [AnyObject])
+  func intersectSet(otherSet: Set<Object>)
+  func minusSet(otherSet: Set<Object>)
   func removeAllObjects()
-  func unionSet(otherSet: Set<NSObject>)
-  func setSet(otherSet: Set<NSObject>)
+  func unionSet(otherSet: Set<Object>)
+  func setSet(otherSet: Set<Object>)
 }
-extension NSMutableSet {
+extension MutableSet {
 }
-class NSCountedSet : NSMutableSet {
+class CountedSet : MutableSet {
   init(capacity numItems: Int)
   convenience init(array: [AnyObject])
-  convenience init(set: Set<NSObject>)
-  func countForObject(object: AnyObject) -> Int
-  func objectEnumerator() -> NSEnumerator
-  func addObject(object: AnyObject)
-  func removeObject(object: AnyObject)
-  init?(coder aDecoder: NSCoder)
+  convenience init(set: Set<Object>)
+  func countFor(object: AnyObject) -> Int
+  func objectEnumerator() -> Enumerator
+  func add(object: AnyObject)
+  func remove(object: AnyObject)
+  init?(coder aDecoder: Coder)
   convenience init()
   convenience init(objects: UnsafePointer<AnyObject?>, count cnt: Int)
   convenience init(object: AnyObject)
-  convenience init(set: Set<NSObject>, copyItems flag: Bool)
+  convenience init(set: Set<Object>, copyItems flag: Bool)
 }
-class NSSortDescriptor : NSObject, NSSecureCoding, NSCopying {
+class SortDescriptor : Object, SecureCoding, Copying {
   init(key: String?, ascending: Bool)
   init(key: String?, ascending: Bool, selector: Selector)
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   var key: String? { get }
   var ascending: Bool { get }
   var selector: Selector { get }
   func allowEvaluation()
-  init(key: String?, ascending: Bool, comparator cmptr: NSComparator)
-  var comparator: NSComparator { get }
-  func compareObject(object1: AnyObject, toObject object2: AnyObject) -> NSComparisonResult
+  init(key: String?, ascending: Bool, comparator cmptr: Comparator)
+  var comparator: Comparator { get }
+  func compare(object1: AnyObject, to object2: AnyObject) -> ComparisonResult
   var reversedSortDescriptor: AnyObject { get }
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 extension NSSet {
-  func sortedArrayUsingDescriptors(sortDescriptors: [NSSortDescriptor]) -> [AnyObject]
+  func sortedArrayUsing(sortDescriptors: [SortDescriptor]) -> [AnyObject]
 }
 extension NSArray {
-  func sortedArrayUsingDescriptors(sortDescriptors: [NSSortDescriptor]) -> [AnyObject]
+  func sortedArrayUsing(sortDescriptors: [SortDescriptor]) -> [AnyObject]
 }
-extension NSMutableArray {
-  func sortUsingDescriptors(sortDescriptors: [NSSortDescriptor])
+extension MutableArray {
+  func sortUsing(sortDescriptors: [SortDescriptor])
 }
-extension NSOrderedSet {
-  func sortedArrayUsingDescriptors(sortDescriptors: [NSSortDescriptor]) -> [AnyObject]
+extension OrderedSet {
+  func sortedArrayUsing(sortDescriptors: [SortDescriptor]) -> [AnyObject]
 }
-extension NSMutableOrderedSet {
-  func sortUsingDescriptors(sortDescriptors: [NSSortDescriptor])
+extension MutableOrderedSet {
+  func sortUsing(sortDescriptors: [SortDescriptor])
 }
-class NSSpellServer : NSObject {
-  unowned(unsafe) var delegate: @sil_unmanaged NSSpellServerDelegate?
+class SpellServer : Object {
+  unowned(unsafe) var delegate: @sil_unmanaged SpellServerDelegate?
   func registerLanguage(language: String?, byVendor vendor: String?) -> Bool
   func isWordInUserDictionaries(word: String, caseSensitive flag: Bool) -> Bool
   func run()
@@ -5144,20 +5134,20 @@ struct __ssFlags {
   init()
   init(delegateLearnsWords: UInt32, delegateForgetsWords: UInt32, busy: UInt32, _reserved: UInt32)
 }
-protocol NSSpellServerDelegate : NSObjectProtocol {
-  optional func spellServer(sender: NSSpellServer, findMisspelledWordInString stringToCheck: String, language: String, wordCount: UnsafeMutablePointer<Int>, countOnly: Bool) -> NSRange
-  optional func spellServer(sender: NSSpellServer, suggestGuessesForWord word: String, inLanguage language: String) -> [String]?
-  optional func spellServer(sender: NSSpellServer, didLearnWord word: String, inLanguage language: String)
-  optional func spellServer(sender: NSSpellServer, didForgetWord word: String, inLanguage language: String)
-  optional func spellServer(sender: NSSpellServer, suggestCompletionsForPartialWordRange range: NSRange, inString string: String, language: String) -> [String]?
-  optional func spellServer(sender: NSSpellServer, checkGrammarInString stringToCheck: String, language: String?, details: AutoreleasingUnsafeMutablePointer<NSArray?>) -> NSRange
-  optional func spellServer(sender: NSSpellServer, checkString stringToCheck: String, offset: Int, types checkingTypes: NSTextCheckingTypes, options: [String : AnyObject]?, orthography: NSOrthography?, wordCount: UnsafeMutablePointer<Int>) -> [NSTextCheckingResult]?
-  optional func spellServer(sender: NSSpellServer, recordResponse response: Int, toCorrection correction: String, forWord word: String, language: String)
+protocol SpellServerDelegate : ObjectProtocol {
+  optional func spellServer(sender: SpellServer, findMisspelledWordIn stringToCheck: String, language: String, wordCount: UnsafeMutablePointer<Int>, countOnly: Bool) -> NSRange
+  optional func spellServer(sender: SpellServer, suggestGuessesForWord word: String, inLanguage language: String) -> [String]?
+  optional func spellServer(sender: SpellServer, didLearnWord word: String, inLanguage language: String)
+  optional func spellServer(sender: SpellServer, didForgetWord word: String, inLanguage language: String)
+  optional func spellServer(sender: SpellServer, suggestCompletionsForPartialWordRange range: NSRange, in string: String, language: String) -> [String]?
+  optional func spellServer(sender: SpellServer, checkGrammarIn stringToCheck: String, language: String?, details: AutoreleasingUnsafeMutablePointer<NSArray?>) -> NSRange
+  optional func spellServer(sender: SpellServer, check stringToCheck: String, offset: Int, types checkingTypes: TextCheckingTypes, options: [String : AnyObject]? = [:], orthography: Orthography?, wordCount: UnsafeMutablePointer<Int>) -> [TextCheckingResult]?
+  optional func spellServer(sender: SpellServer, recordResponse response: Int, toCorrection correction: String, forWord word: String, language: String)
 }
-let NSGrammarRange: String
-let NSGrammarUserDescription: String
-let NSGrammarCorrections: String
-enum NSStreamStatus : UInt {
+let grammarRange: String
+let grammarUserDescription: String
+let grammarCorrections: String
+enum StreamStatus : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case NotOpen
@@ -5169,136 +5159,136 @@ enum NSStreamStatus : UInt {
   case Closed
   case Error
 }
-struct NSStreamEvent : OptionSetType {
+struct StreamEvent : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var None: NSStreamEvent { get }
-  static var OpenCompleted: NSStreamEvent { get }
-  static var HasBytesAvailable: NSStreamEvent { get }
-  static var HasSpaceAvailable: NSStreamEvent { get }
-  static var ErrorOccurred: NSStreamEvent { get }
-  static var EndEncountered: NSStreamEvent { get }
+  static var None: StreamEvent { get }
+  static var OpenCompleted: StreamEvent { get }
+  static var HasBytesAvailable: StreamEvent { get }
+  static var HasSpaceAvailable: StreamEvent { get }
+  static var ErrorOccurred: StreamEvent { get }
+  static var EndEncountered: StreamEvent { get }
 }
-class NSStream : NSObject {
+class Stream : Object {
   func open()
   func close()
-  unowned(unsafe) var delegate: @sil_unmanaged NSStreamDelegate?
+  unowned(unsafe) var delegate: @sil_unmanaged StreamDelegate?
   func propertyForKey(key: String) -> AnyObject?
   func setProperty(property: AnyObject?, forKey key: String) -> Bool
-  func scheduleInRunLoop(aRunLoop: NSRunLoop, forMode mode: String)
-  func removeFromRunLoop(aRunLoop: NSRunLoop, forMode mode: String)
-  var streamStatus: NSStreamStatus { get }
-  @NSCopying var streamError: NSError? { get }
+  func scheduleIn(aRunLoop: RunLoop, forMode mode: String)
+  func removeFrom(aRunLoop: RunLoop, forMode mode: String)
+  var streamStatus: StreamStatus { get }
+  @NSCopying var streamError: Error? { get }
   init()
 }
-class NSInputStream : NSStream {
+class InputStream : Stream {
   func read(buffer: UnsafeMutablePointer<UInt8>, maxLength len: Int) -> Int
   func getBuffer(buffer: UnsafeMutablePointer<UnsafeMutablePointer<UInt8>>, length len: UnsafeMutablePointer<Int>) -> Bool
   var hasBytesAvailable: Bool { get }
-  init(data: NSData)
-  init?(URL url: NSURL)
+  init(data: Data)
+  init?(url: URL)
   convenience init()
 }
-class NSOutputStream : NSStream {
+class OutputStream : Stream {
   func write(buffer: UnsafePointer<UInt8>, maxLength len: Int) -> Int
   var hasSpaceAvailable: Bool { get }
   init(toMemory: ())
   init(toBuffer buffer: UnsafeMutablePointer<UInt8>, capacity: Int)
-  init?(URL url: NSURL, append shouldAppend: Bool)
+  init?(url: URL, append shouldAppend: Bool)
   convenience init()
 }
-extension NSStream {
-  class func getStreamsToHostWithName(hostname: String, port: Int, inputStream: AutoreleasingUnsafeMutablePointer<NSInputStream?>, outputStream: AutoreleasingUnsafeMutablePointer<NSOutputStream?>)
-  class func getStreamsToHost(host: NSHost, port: Int, inputStream: AutoreleasingUnsafeMutablePointer<NSInputStream?>, outputStream: AutoreleasingUnsafeMutablePointer<NSOutputStream?>)
+extension Stream {
+  class func getStreamsToHostWithName(hostname: String, port: Int, inputStream: AutoreleasingUnsafeMutablePointer<InputStream?>, outputStream: AutoreleasingUnsafeMutablePointer<OutputStream?>)
+  class func getStreamsTo(host: Host, port: Int, inputStream: AutoreleasingUnsafeMutablePointer<InputStream?>, outputStream: AutoreleasingUnsafeMutablePointer<OutputStream?>)
 }
-extension NSStream {
-  class func getBoundStreamsWithBufferSize(bufferSize: Int, inputStream: AutoreleasingUnsafeMutablePointer<NSInputStream?>, outputStream: AutoreleasingUnsafeMutablePointer<NSOutputStream?>)
+extension Stream {
+  class func getBoundStreamsWithBufferSize(bufferSize: Int, inputStream: AutoreleasingUnsafeMutablePointer<InputStream?>, outputStream: AutoreleasingUnsafeMutablePointer<OutputStream?>)
 }
-extension NSInputStream {
+extension InputStream {
   convenience init?(fileAtPath path: String)
 }
-extension NSOutputStream {
+extension OutputStream {
   convenience init?(toFileAtPath path: String, append shouldAppend: Bool)
-  class func outputStreamToMemory() -> Self
+  class func toMemory() -> Self
 }
-protocol NSStreamDelegate : NSObjectProtocol {
-  optional func stream(aStream: NSStream, handleEvent eventCode: NSStreamEvent)
+protocol StreamDelegate : ObjectProtocol {
+  optional func stream(aStream: Stream, handle eventCode: StreamEvent)
 }
-let NSStreamSocketSecurityLevelKey: String
-let NSStreamSocketSecurityLevelNone: String
-let NSStreamSocketSecurityLevelSSLv2: String
-let NSStreamSocketSecurityLevelSSLv3: String
-let NSStreamSocketSecurityLevelTLSv1: String
-let NSStreamSocketSecurityLevelNegotiatedSSL: String
-let NSStreamSOCKSProxyConfigurationKey: String
-let NSStreamSOCKSProxyHostKey: String
-let NSStreamSOCKSProxyPortKey: String
-let NSStreamSOCKSProxyVersionKey: String
-let NSStreamSOCKSProxyUserKey: String
-let NSStreamSOCKSProxyPasswordKey: String
-let NSStreamSOCKSProxyVersion4: String
-let NSStreamSOCKSProxyVersion5: String
-let NSStreamDataWrittenToMemoryStreamKey: String
-let NSStreamFileCurrentOffsetKey: String
-let NSStreamSocketSSLErrorDomain: String
-let NSStreamSOCKSErrorDomain: String
-let NSStreamNetworkServiceType: String
-let NSStreamNetworkServiceTypeVoIP: String
-let NSStreamNetworkServiceTypeVideo: String
-let NSStreamNetworkServiceTypeBackground: String
-let NSStreamNetworkServiceTypeVoice: String
+let streamSocketSecurityLevelKey: String
+let streamSocketSecurityLevelNone: String
+let streamSocketSecurityLevelSSLv2: String
+let streamSocketSecurityLevelSSLv3: String
+let streamSocketSecurityLevelTLSv1: String
+let streamSocketSecurityLevelNegotiatedSSL: String
+let streamSOCKSProxyConfigurationKey: String
+let streamSOCKSProxyHostKey: String
+let streamSOCKSProxyPortKey: String
+let streamSOCKSProxyVersionKey: String
+let streamSOCKSProxyUserKey: String
+let streamSOCKSProxyPasswordKey: String
+let streamSOCKSProxyVersion4: String
+let streamSOCKSProxyVersion5: String
+let streamDataWrittenToMemoryStreamKey: String
+let streamFileCurrentOffsetKey: String
+let streamSocketSSLErrorDomain: String
+let streamSOCKSErrorDomain: String
+let streamNetworkServiceType: String
+let streamNetworkServiceTypeVoIP: String
+let streamNetworkServiceTypeVideo: String
+let streamNetworkServiceTypeBackground: String
+let streamNetworkServiceTypeVoice: String
 typealias unichar = UInt16
-struct NSStringCompareOptions : OptionSetType {
+struct StringCompareOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var CaseInsensitiveSearch: NSStringCompareOptions { get }
-  static var LiteralSearch: NSStringCompareOptions { get }
-  static var BackwardsSearch: NSStringCompareOptions { get }
-  static var AnchoredSearch: NSStringCompareOptions { get }
-  static var NumericSearch: NSStringCompareOptions { get }
-  static var DiacriticInsensitiveSearch: NSStringCompareOptions { get }
-  static var WidthInsensitiveSearch: NSStringCompareOptions { get }
-  static var ForcedOrderingSearch: NSStringCompareOptions { get }
-  static var RegularExpressionSearch: NSStringCompareOptions { get }
+  static var CaseInsensitiveSearch: StringCompareOptions { get }
+  static var LiteralSearch: StringCompareOptions { get }
+  static var BackwardsSearch: StringCompareOptions { get }
+  static var AnchoredSearch: StringCompareOptions { get }
+  static var NumericSearch: StringCompareOptions { get }
+  static var DiacriticInsensitiveSearch: StringCompareOptions { get }
+  static var WidthInsensitiveSearch: StringCompareOptions { get }
+  static var ForcedOrderingSearch: StringCompareOptions { get }
+  static var RegularExpressionSearch: StringCompareOptions { get }
 }
-var NSASCIIStringEncoding: UInt { get }
-var NSNEXTSTEPStringEncoding: UInt { get }
-var NSJapaneseEUCStringEncoding: UInt { get }
-var NSUTF8StringEncoding: UInt { get }
-var NSISOLatin1StringEncoding: UInt { get }
-var NSSymbolStringEncoding: UInt { get }
-var NSNonLossyASCIIStringEncoding: UInt { get }
-var NSShiftJISStringEncoding: UInt { get }
-var NSISOLatin2StringEncoding: UInt { get }
-var NSUnicodeStringEncoding: UInt { get }
-var NSWindowsCP1251StringEncoding: UInt { get }
-var NSWindowsCP1252StringEncoding: UInt { get }
-var NSWindowsCP1253StringEncoding: UInt { get }
-var NSWindowsCP1254StringEncoding: UInt { get }
-var NSWindowsCP1250StringEncoding: UInt { get }
-var NSISO2022JPStringEncoding: UInt { get }
-var NSMacOSRomanStringEncoding: UInt { get }
-var NSUTF16StringEncoding: UInt { get }
-var NSUTF16BigEndianStringEncoding: UInt { get }
-var NSUTF16LittleEndianStringEncoding: UInt { get }
-var NSUTF32StringEncoding: UInt { get }
-var NSUTF32BigEndianStringEncoding: UInt { get }
-var NSUTF32LittleEndianStringEncoding: UInt { get }
-struct NSStringEncodingConversionOptions : OptionSetType {
+var ASCIIStringEncoding: UInt { get }
+var NEXTSTEPStringEncoding: UInt { get }
+var japaneseEUCStringEncoding: UInt { get }
+var UTF8StringEncoding: UInt { get }
+var ISOLatin1StringEncoding: UInt { get }
+var symbolStringEncoding: UInt { get }
+var nonLossyASCIIStringEncoding: UInt { get }
+var shiftJISStringEncoding: UInt { get }
+var ISOLatin2StringEncoding: UInt { get }
+var unicodeStringEncoding: UInt { get }
+var windowsCP1251StringEncoding: UInt { get }
+var windowsCP1252StringEncoding: UInt { get }
+var windowsCP1253StringEncoding: UInt { get }
+var windowsCP1254StringEncoding: UInt { get }
+var windowsCP1250StringEncoding: UInt { get }
+var ISO2022JPStringEncoding: UInt { get }
+var macOSRomanStringEncoding: UInt { get }
+var UTF16StringEncoding: UInt { get }
+var UTF16BigEndianStringEncoding: UInt { get }
+var UTF16LittleEndianStringEncoding: UInt { get }
+var UTF32StringEncoding: UInt { get }
+var UTF32BigEndianStringEncoding: UInt { get }
+var UTF32LittleEndianStringEncoding: UInt { get }
+struct StringEncodingConversionOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var AllowLossy: NSStringEncodingConversionOptions { get }
-  static var ExternalRepresentation: NSStringEncodingConversionOptions { get }
+  static var AllowLossy: StringEncodingConversionOptions { get }
+  static var ExternalRepresentation: StringEncodingConversionOptions { get }
 }
-class NSString : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
+class NSString : Object, Copying, MutableCopying, SecureCoding {
   var length: Int { get }
-  func characterAtIndex(index: Int) -> unichar
+  func characterAt(index: Int) -> unichar
   init()
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
+  func encodeWith(aCoder: Coder)
 }
 extension NSString : StringLiteralConvertible {
   /// Create an instance initialized to `value`.
@@ -5312,7 +5302,7 @@ extension NSString : StringLiteralConvertible {
 }
 extension NSString {
   convenience init(format: NSString, _ args: CVarArgType...)
-  convenience init(format: NSString, locale: NSLocale?, _ args: CVarArgType...)
+  convenience init(format: NSString, locale: Locale?, _ args: CVarArgType...)
   @warn_unused_result
   class func localizedStringWithFormat(format: NSString, _ args: CVarArgType...) -> Self
   @warn_unused_result
@@ -5332,66 +5322,66 @@ extension NSString : _Reflectable {
   func _getMirror() -> _MirrorType
 }
 extension NSString {
-  func substringFromIndex(from: Int) -> String
-  func substringToIndex(to: Int) -> String
-  func substringWithRange(range: NSRange) -> String
+  func substringFrom(from: Int) -> String
+  func substringTo(to: Int) -> String
+  func substringWith(range: NSRange) -> String
   func getCharacters(buffer: UnsafeMutablePointer<unichar>, range: NSRange)
-  func compare(string: String) -> NSComparisonResult
-  func compare(string: String, options mask: NSStringCompareOptions) -> NSComparisonResult
-  func compare(string: String, options mask: NSStringCompareOptions, range compareRange: NSRange) -> NSComparisonResult
-  func compare(string: String, options mask: NSStringCompareOptions, range compareRange: NSRange, locale: AnyObject?) -> NSComparisonResult
-  func caseInsensitiveCompare(string: String) -> NSComparisonResult
-  func localizedCompare(string: String) -> NSComparisonResult
-  func localizedCaseInsensitiveCompare(string: String) -> NSComparisonResult
-  func localizedStandardCompare(string: String) -> NSComparisonResult
-  func isEqualToString(aString: String) -> Bool
+  func compare(string: String) -> ComparisonResult
+  func compare(string: String, options mask: StringCompareOptions = []) -> ComparisonResult
+  func compare(string: String, options mask: StringCompareOptions = [], range compareRange: NSRange) -> ComparisonResult
+  func compare(string: String, options mask: StringCompareOptions = [], range compareRange: NSRange, locale: AnyObject?) -> ComparisonResult
+  func caseInsensitiveCompare(string: String) -> ComparisonResult
+  func localizedCompare(string: String) -> ComparisonResult
+  func localizedCaseInsensitiveCompare(string: String) -> ComparisonResult
+  func localizedStandardCompare(string: String) -> ComparisonResult
+  func isEqualTo(aString: String) -> Bool
   func hasPrefix(str: String) -> Bool
   func hasSuffix(str: String) -> Bool
-  func commonPrefixWithString(str: String, options mask: NSStringCompareOptions) -> String
-  func containsString(str: String) -> Bool
-  func localizedCaseInsensitiveContainsString(str: String) -> Bool
-  func localizedStandardContainsString(str: String) -> Bool
-  func localizedStandardRangeOfString(str: String) -> NSRange
-  func rangeOfString(searchString: String) -> NSRange
-  func rangeOfString(searchString: String, options mask: NSStringCompareOptions) -> NSRange
-  func rangeOfString(searchString: String, options mask: NSStringCompareOptions, range searchRange: NSRange) -> NSRange
-  func rangeOfString(searchString: String, options mask: NSStringCompareOptions, range searchRange: NSRange, locale: NSLocale?) -> NSRange
-  func rangeOfCharacterFromSet(searchSet: NSCharacterSet) -> NSRange
-  func rangeOfCharacterFromSet(searchSet: NSCharacterSet, options mask: NSStringCompareOptions) -> NSRange
-  func rangeOfCharacterFromSet(searchSet: NSCharacterSet, options mask: NSStringCompareOptions, range searchRange: NSRange) -> NSRange
-  func rangeOfComposedCharacterSequenceAtIndex(index: Int) -> NSRange
-  func rangeOfComposedCharacterSequencesForRange(range: NSRange) -> NSRange
-  func stringByAppendingString(aString: String) -> String
+  func commonPrefixWith(str: String, options mask: StringCompareOptions = []) -> String
+  func contains(str: String) -> Bool
+  func localizedCaseInsensitiveContains(str: String) -> Bool
+  func localizedStandardContains(str: String) -> Bool
+  func localizedStandardRangeOf(str: String) -> NSRange
+  func rangeOf(searchString: String) -> NSRange
+  func rangeOf(searchString: String, options mask: StringCompareOptions = []) -> NSRange
+  func rangeOf(searchString: String, options mask: StringCompareOptions = [], range searchRange: NSRange) -> NSRange
+  func rangeOf(searchString: String, options mask: StringCompareOptions = [], range searchRange: NSRange, locale: Locale?) -> NSRange
+  func rangeOfCharacterFrom(searchSet: CharacterSet) -> NSRange
+  func rangeOfCharacterFrom(searchSet: CharacterSet, options mask: StringCompareOptions = []) -> NSRange
+  func rangeOfCharacterFrom(searchSet: CharacterSet, options mask: StringCompareOptions = [], range searchRange: NSRange) -> NSRange
+  func rangeOfComposedCharacterSequenceAt(index: Int) -> NSRange
+  func rangeOfComposedCharacterSequencesFor(range: NSRange) -> NSRange
+  func appending(aString: String) -> String
   var doubleValue: Double { get }
   var floatValue: Float { get }
   var intValue: Int32 { get }
   var integerValue: Int { get }
   var longLongValue: Int64 { get }
   var boolValue: Bool { get }
-  var uppercaseString: String { get }
-  var lowercaseString: String { get }
-  var capitalizedString: String { get }
-  var localizedUppercaseString: String { get }
-  var localizedLowercaseString: String { get }
-  var localizedCapitalizedString: String { get }
-  func uppercaseStringWithLocale(locale: NSLocale?) -> String
-  func lowercaseStringWithLocale(locale: NSLocale?) -> String
-  func capitalizedStringWithLocale(locale: NSLocale?) -> String
+  var uppercase: String { get }
+  var lowercase: String { get }
+  var capitalized: String { get }
+  var localizedUppercase: String { get }
+  var localizedLowercase: String { get }
+  var localizedCapitalized: String { get }
+  func uppercaseStringWith(locale: Locale?) -> String
+  func lowercaseStringWith(locale: Locale?) -> String
+  func capitalizedStringWith(locale: Locale?) -> String
   func getLineStart(startPtr: UnsafeMutablePointer<Int>, end lineEndPtr: UnsafeMutablePointer<Int>, contentsEnd contentsEndPtr: UnsafeMutablePointer<Int>, forRange range: NSRange)
-  func lineRangeForRange(range: NSRange) -> NSRange
+  func lineRangeFor(range: NSRange) -> NSRange
   func getParagraphStart(startPtr: UnsafeMutablePointer<Int>, end parEndPtr: UnsafeMutablePointer<Int>, contentsEnd contentsEndPtr: UnsafeMutablePointer<Int>, forRange range: NSRange)
-  func paragraphRangeForRange(range: NSRange) -> NSRange
-  func enumerateSubstringsInRange(range: NSRange, options opts: NSStringEnumerationOptions, usingBlock block: (String?, NSRange, NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func enumerateLinesUsingBlock(block: (String, UnsafeMutablePointer<ObjCBool>) -> Void)
-  var UTF8String: UnsafePointer<Int8> { get }
+  func paragraphRangeFor(range: NSRange) -> NSRange
+  func enumerateSubstringsIn(range: NSRange, options opts: StringEnumerationOptions = [], usingBlock block: (String?, NSRange, NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func enumerateLinesUsing(block: (String, UnsafeMutablePointer<ObjCBool>) -> Void)
+  var utf8String: UnsafePointer<Int8> { get }
   var fastestEncoding: UInt { get }
   var smallestEncoding: UInt { get }
-  func dataUsingEncoding(encoding: UInt, allowLossyConversion lossy: Bool) -> NSData?
-  func dataUsingEncoding(encoding: UInt) -> NSData?
+  func dataUsingEncoding(encoding: UInt, allowLossyConversion lossy: Bool) -> Data?
+  func dataUsingEncoding(encoding: UInt) -> Data?
   func canBeConvertedToEncoding(encoding: UInt) -> Bool
   func cStringUsingEncoding(encoding: UInt) -> UnsafePointer<Int8>
   func getCString(buffer: UnsafeMutablePointer<Int8>, maxLength maxBufferCount: Int, encoding: UInt) -> Bool
-  func getBytes(buffer: UnsafeMutablePointer<Void>, maxLength maxBufferCount: Int, usedLength usedBufferCount: UnsafeMutablePointer<Int>, encoding: UInt, options: NSStringEncodingConversionOptions, range: NSRange, remainingRange leftover: NSRangePointer) -> Bool
+  func getBytes(buffer: UnsafeMutablePointer<Void>, maxLength maxBufferCount: Int, usedLength usedBufferCount: UnsafeMutablePointer<Int>, encoding: UInt, options: StringEncodingConversionOptions = [], range: NSRange, remaining leftover: RangePointer) -> Bool
   func maximumLengthOfBytesUsingEncoding(enc: UInt) -> Int
   func lengthOfBytesUsingEncoding(enc: UInt) -> Int
   class func availableStringEncodings() -> UnsafePointer<UInt>
@@ -5401,156 +5391,156 @@ extension NSString {
   var precomposedStringWithCanonicalMapping: String { get }
   var decomposedStringWithCompatibilityMapping: String { get }
   var precomposedStringWithCompatibilityMapping: String { get }
-  func componentsSeparatedByString(separator: String) -> [String]
-  func componentsSeparatedByCharactersInSet(separator: NSCharacterSet) -> [String]
-  func stringByTrimmingCharactersInSet(set: NSCharacterSet) -> String
-  func stringByPaddingToLength(newLength: Int, withString padString: String, startingAtIndex padIndex: Int) -> String
-  func stringByFoldingWithOptions(options: NSStringCompareOptions, locale: NSLocale?) -> String
-  func stringByReplacingOccurrencesOfString(target: String, withString replacement: String, options: NSStringCompareOptions, range searchRange: NSRange) -> String
-  func stringByReplacingOccurrencesOfString(target: String, withString replacement: String) -> String
-  func stringByReplacingCharactersInRange(range: NSRange, withString replacement: String) -> String
-  func stringByApplyingTransform(transform: String, reverse: Bool) -> String?
-  func writeToURL(url: NSURL, atomically useAuxiliaryFile: Bool, encoding enc: UInt) throws
+  func componentsSeparatedBy(separator: String) -> [String]
+  func componentsSeparatedByCharactersIn(separator: CharacterSet) -> [String]
+  func byTrimmingCharactersIn(set: CharacterSet) -> String
+  func byPaddingToLength(newLength: Int, withString padString: String, startingAt padIndex: Int) -> String
+  func folding(options options: StringCompareOptions = [], locale: Locale?) -> String
+  func replacingOccurrencesOf(target: String, withString replacement: String, options: StringCompareOptions = [], range searchRange: NSRange) -> String
+  func replacingOccurrencesOf(target: String, withString replacement: String) -> String
+  func replacingCharactersIn(range: NSRange, withString replacement: String) -> String
+  func applyingTransform(transform: String, reverse: Bool) -> String?
+  func writeTo(url: URL, atomically useAuxiliaryFile: Bool, encoding enc: UInt) throws
   func writeToFile(path: String, atomically useAuxiliaryFile: Bool, encoding enc: UInt) throws
   var description: String { get }
   var hash: Int { get }
   convenience init(charactersNoCopy characters: UnsafeMutablePointer<unichar>, length: Int, freeWhenDone freeBuffer: Bool)
   convenience init(characters: UnsafePointer<unichar>, length: Int)
-  convenience init?(UTF8String nullTerminatedCString: UnsafePointer<Int8>)
+  convenience init?(utf8String nullTerminatedCString: UnsafePointer<Int8>)
   convenience init(string aString: String)
   convenience init(format: String, arguments argList: CVaListPointer)
   convenience init(format: String, locale: AnyObject?, arguments argList: CVaListPointer)
-  convenience init?(data: NSData, encoding: UInt)
+  convenience init?(data: Data, encoding: UInt)
   convenience init?(bytes: UnsafePointer<Void>, length len: Int, encoding: UInt)
   convenience init?(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length len: Int, encoding: UInt, freeWhenDone freeBuffer: Bool)
-  convenience init?(CString nullTerminatedCString: UnsafePointer<Int8>, encoding: UInt)
-  convenience init(contentsOfURL url: NSURL, encoding enc: UInt) throws
+  convenience init?(cString nullTerminatedCString: UnsafePointer<Int8>, encoding: UInt)
+  convenience init(contentsOf url: URL, encoding enc: UInt) throws
   convenience init(contentsOfFile path: String, encoding enc: UInt) throws
-  convenience init(contentsOfURL url: NSURL, usedEncoding enc: UnsafeMutablePointer<UInt>) throws
+  convenience init(contentsOf url: URL, usedEncoding enc: UnsafeMutablePointer<UInt>) throws
   convenience init(contentsOfFile path: String, usedEncoding enc: UnsafeMutablePointer<UInt>) throws
 }
-struct NSStringEnumerationOptions : OptionSetType {
+struct StringEnumerationOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var ByLines: NSStringEnumerationOptions { get }
-  static var ByParagraphs: NSStringEnumerationOptions { get }
-  static var ByComposedCharacterSequences: NSStringEnumerationOptions { get }
-  static var ByWords: NSStringEnumerationOptions { get }
-  static var BySentences: NSStringEnumerationOptions { get }
-  static var Reverse: NSStringEnumerationOptions { get }
-  static var SubstringNotRequired: NSStringEnumerationOptions { get }
-  static var Localized: NSStringEnumerationOptions { get }
+  static var ByLines: StringEnumerationOptions { get }
+  static var ByParagraphs: StringEnumerationOptions { get }
+  static var ByComposedCharacterSequences: StringEnumerationOptions { get }
+  static var ByWords: StringEnumerationOptions { get }
+  static var BySentences: StringEnumerationOptions { get }
+  static var Reverse: StringEnumerationOptions { get }
+  static var SubstringNotRequired: StringEnumerationOptions { get }
+  static var Localized: StringEnumerationOptions { get }
 }
-let NSStringTransformLatinToKatakana: String
-let NSStringTransformLatinToHiragana: String
-let NSStringTransformLatinToHangul: String
-let NSStringTransformLatinToArabic: String
-let NSStringTransformLatinToHebrew: String
-let NSStringTransformLatinToThai: String
-let NSStringTransformLatinToCyrillic: String
-let NSStringTransformLatinToGreek: String
-let NSStringTransformToLatin: String
-let NSStringTransformMandarinToLatin: String
-let NSStringTransformHiraganaToKatakana: String
-let NSStringTransformFullwidthToHalfwidth: String
-let NSStringTransformToXMLHex: String
-let NSStringTransformToUnicodeName: String
-let NSStringTransformStripCombiningMarks: String
-let NSStringTransformStripDiacritics: String
+let stringTransformLatinToKatakana: String
+let stringTransformLatinToHiragana: String
+let stringTransformLatinToHangul: String
+let stringTransformLatinToArabic: String
+let stringTransformLatinToHebrew: String
+let stringTransformLatinToThai: String
+let stringTransformLatinToCyrillic: String
+let stringTransformLatinToGreek: String
+let stringTransformToLatin: String
+let stringTransformMandarinToLatin: String
+let stringTransformHiraganaToKatakana: String
+let stringTransformFullwidthToHalfwidth: String
+let stringTransformToXMLHex: String
+let stringTransformToUnicodeName: String
+let stringTransformStripCombiningMarks: String
+let stringTransformStripDiacritics: String
 extension NSString {
-  class func stringEncodingForData(data: NSData, encodingOptions opts: [String : AnyObject]?, convertedString string: AutoreleasingUnsafeMutablePointer<NSString?>, usedLossyConversion: UnsafeMutablePointer<ObjCBool>) -> UInt
+  class func stringEncodingFor(data: Data, encodingOptions opts: [String : AnyObject]? = [:], convertedString string: AutoreleasingUnsafeMutablePointer<NSString?>, usedLossyConversion: UnsafeMutablePointer<ObjCBool>) -> UInt
 }
-let NSStringEncodingDetectionSuggestedEncodingsKey: String
-let NSStringEncodingDetectionDisallowedEncodingsKey: String
-let NSStringEncodingDetectionUseOnlySuggestedEncodingsKey: String
-let NSStringEncodingDetectionAllowLossyKey: String
-let NSStringEncodingDetectionFromWindowsKey: String
-let NSStringEncodingDetectionLossySubstitutionKey: String
-let NSStringEncodingDetectionLikelyLanguageKey: String
-class NSMutableString : NSString {
-  func replaceCharactersInRange(range: NSRange, withString aString: String)
+let stringEncodingDetectionSuggestedEncodingsKey: String
+let stringEncodingDetectionDisallowedEncodingsKey: String
+let stringEncodingDetectionUseOnlySuggestedEncodingsKey: String
+let stringEncodingDetectionAllowLossyKey: String
+let stringEncodingDetectionFromWindowsKey: String
+let stringEncodingDetectionLossySubstitutionKey: String
+let stringEncodingDetectionLikelyLanguageKey: String
+class MutableString : NSString {
+  func replaceCharactersIn(range: NSRange, withString aString: String)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init(charactersNoCopy characters: UnsafeMutablePointer<unichar>, length: Int, freeWhenDone freeBuffer: Bool)
   convenience init(characters: UnsafePointer<unichar>, length: Int)
-  convenience init?(UTF8String nullTerminatedCString: UnsafePointer<Int8>)
+  convenience init?(utf8String nullTerminatedCString: UnsafePointer<Int8>)
   convenience init(string aString: String)
   convenience init(format: String, arguments argList: CVaListPointer)
   convenience init(format: String, locale: AnyObject?, arguments argList: CVaListPointer)
-  convenience init?(data: NSData, encoding: UInt)
+  convenience init?(data: Data, encoding: UInt)
   convenience init?(bytes: UnsafePointer<Void>, length len: Int, encoding: UInt)
   convenience init?(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length len: Int, encoding: UInt, freeWhenDone freeBuffer: Bool)
-  convenience init?(CString nullTerminatedCString: UnsafePointer<Int8>, encoding: UInt)
-  convenience init(contentsOfURL url: NSURL, encoding enc: UInt) throws
+  convenience init?(cString nullTerminatedCString: UnsafePointer<Int8>, encoding: UInt)
+  convenience init(contentsOf url: URL, encoding enc: UInt) throws
   convenience init(contentsOfFile path: String, encoding enc: UInt) throws
-  convenience init(contentsOfURL url: NSURL, usedEncoding enc: UnsafeMutablePointer<UInt>) throws
+  convenience init(contentsOf url: URL, usedEncoding enc: UnsafeMutablePointer<UInt>) throws
   convenience init(contentsOfFile path: String, usedEncoding enc: UnsafeMutablePointer<UInt>) throws
 }
-extension NSMutableString {
+extension MutableString {
   func appendFormat(format: NSString, _ args: CVarArgType...)
 }
-extension NSMutableString {
-  func insertString(aString: String, atIndex loc: Int)
-  func deleteCharactersInRange(range: NSRange)
-  func appendString(aString: String)
+extension MutableString {
+  func insert(aString: String, at loc: Int)
+  func deleteCharactersIn(range: NSRange)
+  func append(aString: String)
   func setString(aString: String)
-  func replaceOccurrencesOfString(target: String, withString replacement: String, options: NSStringCompareOptions, range searchRange: NSRange) -> Int
-  func applyTransform(transform: String, reverse: Bool, range: NSRange, updatedRange resultingRange: NSRangePointer) -> Bool
+  func replaceOccurrencesOf(target: String, withString replacement: String, options: StringCompareOptions = [], range searchRange: NSRange) -> Int
+  func applyTransform(transform: String, reverse: Bool, range: NSRange, updatedRange resultingRange: RangePointer) -> Bool
   init(capacity: Int)
 }
-let NSCharacterConversionException: String
-let NSParseErrorException: String
+let characterConversionException: String
+let parseErrorException: String
 extension NSString {
   func propertyList() -> AnyObject
-  func propertyListFromStringsFileFormat() -> [NSObject : AnyObject]?
+  func propertyListFromStringsFileFormat() -> [Object : AnyObject]?
 }
 extension NSString {
   func getCharacters(buffer: UnsafeMutablePointer<unichar>)
 }
-var NSProprietaryStringEncoding: UInt { get }
-class NSSimpleCString : NSString {
+var proprietaryStringEncoding: UInt { get }
+class SimpleCString : NSString {
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init(charactersNoCopy characters: UnsafeMutablePointer<unichar>, length: Int, freeWhenDone freeBuffer: Bool)
   convenience init(characters: UnsafePointer<unichar>, length: Int)
-  convenience init?(UTF8String nullTerminatedCString: UnsafePointer<Int8>)
+  convenience init?(utf8String nullTerminatedCString: UnsafePointer<Int8>)
   convenience init(string aString: String)
   convenience init(format: String, arguments argList: CVaListPointer)
   convenience init(format: String, locale: AnyObject?, arguments argList: CVaListPointer)
-  convenience init?(data: NSData, encoding: UInt)
+  convenience init?(data: Data, encoding: UInt)
   convenience init?(bytes: UnsafePointer<Void>, length len: Int, encoding: UInt)
   convenience init?(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length len: Int, encoding: UInt, freeWhenDone freeBuffer: Bool)
-  convenience init?(CString nullTerminatedCString: UnsafePointer<Int8>, encoding: UInt)
-  convenience init(contentsOfURL url: NSURL, encoding enc: UInt) throws
+  convenience init?(cString nullTerminatedCString: UnsafePointer<Int8>, encoding: UInt)
+  convenience init(contentsOf url: URL, encoding enc: UInt) throws
   convenience init(contentsOfFile path: String, encoding enc: UInt) throws
-  convenience init(contentsOfURL url: NSURL, usedEncoding enc: UnsafeMutablePointer<UInt>) throws
+  convenience init(contentsOf url: URL, usedEncoding enc: UnsafeMutablePointer<UInt>) throws
   convenience init(contentsOfFile path: String, usedEncoding enc: UnsafeMutablePointer<UInt>) throws
 }
-class NSConstantString : NSSimpleCString {
+class ConstantString : SimpleCString {
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init(charactersNoCopy characters: UnsafeMutablePointer<unichar>, length: Int, freeWhenDone freeBuffer: Bool)
   convenience init(characters: UnsafePointer<unichar>, length: Int)
-  convenience init?(UTF8String nullTerminatedCString: UnsafePointer<Int8>)
+  convenience init?(utf8String nullTerminatedCString: UnsafePointer<Int8>)
   convenience init(string aString: String)
   convenience init(format: String, arguments argList: CVaListPointer)
   convenience init(format: String, locale: AnyObject?, arguments argList: CVaListPointer)
-  convenience init?(data: NSData, encoding: UInt)
+  convenience init?(data: Data, encoding: UInt)
   convenience init?(bytes: UnsafePointer<Void>, length len: Int, encoding: UInt)
   convenience init?(bytesNoCopy bytes: UnsafeMutablePointer<Void>, length len: Int, encoding: UInt, freeWhenDone freeBuffer: Bool)
-  convenience init?(CString nullTerminatedCString: UnsafePointer<Int8>, encoding: UInt)
-  convenience init(contentsOfURL url: NSURL, encoding enc: UInt) throws
+  convenience init?(cString nullTerminatedCString: UnsafePointer<Int8>, encoding: UInt)
+  convenience init(contentsOf url: URL, encoding enc: UInt) throws
   convenience init(contentsOfFile path: String, encoding enc: UInt) throws
-  convenience init(contentsOfURL url: NSURL, usedEncoding enc: UnsafeMutablePointer<UInt>) throws
+  convenience init(contentsOf url: URL, usedEncoding enc: UnsafeMutablePointer<UInt>) throws
   convenience init(contentsOfFile path: String, usedEncoding enc: UnsafeMutablePointer<UInt>) throws
 }
-enum NSTaskTerminationReason : Int {
+enum TaskTerminationReason : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case Exit
   case UncaughtSignal
 }
-class NSTask : NSObject {
+class Task : Object {
   init()
   var launchPath: String?
   var arguments: [String]?
@@ -5565,168 +5555,168 @@ class NSTask : NSObject {
   func suspend() -> Bool
   func resume() -> Bool
   var processIdentifier: Int32 { get }
-  var running: Bool { get }
+  var isRunning: Bool { get }
   var terminationStatus: Int32 { get }
-  var terminationReason: NSTaskTerminationReason { get }
-  var terminationHandler: ((NSTask) -> Void)?
-  var qualityOfService: NSQualityOfService
+  var terminationReason: TaskTerminationReason { get }
+  var terminationHandler: ((Task) -> Void)?
+  var qualityOfService: QualityOfService
 }
-extension NSTask {
-  class func launchedTaskWithLaunchPath(path: String, arguments: [String]) -> NSTask
+extension Task {
+  class func launchedTaskWithLaunchPath(path: String, arguments: [String]) -> Task
   func waitUntilExit()
 }
-let NSTaskDidTerminateNotification: String
-struct NSTextCheckingType : OptionSetType {
+let taskDidTerminateNotification: String
+struct TextCheckingType : OptionSetType {
   init(rawValue: UInt64)
   let rawValue: UInt64
-  static var Orthography: NSTextCheckingType { get }
-  static var Spelling: NSTextCheckingType { get }
-  static var Grammar: NSTextCheckingType { get }
-  static var Date: NSTextCheckingType { get }
-  static var Address: NSTextCheckingType { get }
-  static var Link: NSTextCheckingType { get }
-  static var Quote: NSTextCheckingType { get }
-  static var Dash: NSTextCheckingType { get }
-  static var Replacement: NSTextCheckingType { get }
-  static var Correction: NSTextCheckingType { get }
-  static var RegularExpression: NSTextCheckingType { get }
-  static var PhoneNumber: NSTextCheckingType { get }
-  static var TransitInformation: NSTextCheckingType { get }
+  static var Orthography: TextCheckingType { get }
+  static var Spelling: TextCheckingType { get }
+  static var Grammar: TextCheckingType { get }
+  static var Date: TextCheckingType { get }
+  static var Address: TextCheckingType { get }
+  static var Link: TextCheckingType { get }
+  static var Quote: TextCheckingType { get }
+  static var Dash: TextCheckingType { get }
+  static var Replacement: TextCheckingType { get }
+  static var Correction: TextCheckingType { get }
+  static var RegularExpression: TextCheckingType { get }
+  static var PhoneNumber: TextCheckingType { get }
+  static var TransitInformation: TextCheckingType { get }
 }
-typealias NSTextCheckingTypes = UInt64
-var NSTextCheckingAllSystemTypes: NSTextCheckingTypes { get }
-var NSTextCheckingAllCustomTypes: NSTextCheckingTypes { get }
-var NSTextCheckingAllTypes: NSTextCheckingTypes { get }
-class NSTextCheckingResult : NSObject, NSCopying, NSCoding {
-  var resultType: NSTextCheckingType { get }
+typealias TextCheckingTypes = UInt64
+var textCheckingAllSystemTypes: TextCheckingTypes { get }
+var textCheckingAllCustomTypes: TextCheckingTypes { get }
+var textCheckingAllTypes: TextCheckingTypes { get }
+class TextCheckingResult : Object, Copying, Coding {
+  var resultType: TextCheckingType { get }
   var range: NSRange { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-extension NSTextCheckingResult {
-  @NSCopying var orthography: NSOrthography? { get }
+extension TextCheckingResult {
+  @NSCopying var orthography: Orthography? { get }
   var grammarDetails: [String]? { get }
-  @NSCopying var date: NSDate? { get }
-  @NSCopying var timeZone: NSTimeZone? { get }
-  var duration: NSTimeInterval { get }
+  @NSCopying var date: Date? { get }
+  @NSCopying var timeZone: TimeZone? { get }
+  var duration: TimeInterval { get }
   var components: [String : String]? { get }
-  @NSCopying var URL: NSURL? { get }
+  @NSCopying var url: URL? { get }
   var replacementString: String? { get }
   var alternativeStrings: [String]? { get }
-  @NSCopying var regularExpression: NSRegularExpression? { get }
+  @NSCopying var regularExpression: RegularExpression? { get }
   var phoneNumber: String? { get }
   var addressComponents: [String : String]? { get }
   var numberOfRanges: Int { get }
-  func rangeAtIndex(idx: Int) -> NSRange
-  func resultByAdjustingRangesWithOffset(offset: Int) -> NSTextCheckingResult
+  func rangeAt(idx: Int) -> NSRange
+  func adjustingRangesWithOffset(offset: Int) -> TextCheckingResult
 }
-let NSTextCheckingNameKey: String
-let NSTextCheckingJobTitleKey: String
-let NSTextCheckingOrganizationKey: String
-let NSTextCheckingStreetKey: String
-let NSTextCheckingCityKey: String
-let NSTextCheckingStateKey: String
-let NSTextCheckingZIPKey: String
-let NSTextCheckingCountryKey: String
-let NSTextCheckingPhoneKey: String
-let NSTextCheckingAirlineKey: String
-let NSTextCheckingFlightKey: String
-extension NSTextCheckingResult {
-  class func orthographyCheckingResultWithRange(range: NSRange, orthography: NSOrthography) -> NSTextCheckingResult
-  class func spellCheckingResultWithRange(range: NSRange) -> NSTextCheckingResult
-  class func grammarCheckingResultWithRange(range: NSRange, details: [String]) -> NSTextCheckingResult
-  class func dateCheckingResultWithRange(range: NSRange, date: NSDate) -> NSTextCheckingResult
-  class func dateCheckingResultWithRange(range: NSRange, date: NSDate, timeZone: NSTimeZone, duration: NSTimeInterval) -> NSTextCheckingResult
-  class func addressCheckingResultWithRange(range: NSRange, components: [String : String]) -> NSTextCheckingResult
-  class func linkCheckingResultWithRange(range: NSRange, URL url: NSURL) -> NSTextCheckingResult
-  class func quoteCheckingResultWithRange(range: NSRange, replacementString: String) -> NSTextCheckingResult
-  class func dashCheckingResultWithRange(range: NSRange, replacementString: String) -> NSTextCheckingResult
-  class func replacementCheckingResultWithRange(range: NSRange, replacementString: String) -> NSTextCheckingResult
-  class func correctionCheckingResultWithRange(range: NSRange, replacementString: String) -> NSTextCheckingResult
-  class func correctionCheckingResultWithRange(range: NSRange, replacementString: String, alternativeStrings: [String]) -> NSTextCheckingResult
-  class func regularExpressionCheckingResultWithRanges(ranges: NSRangePointer, count: Int, regularExpression: NSRegularExpression) -> NSTextCheckingResult
-  class func phoneNumberCheckingResultWithRange(range: NSRange, phoneNumber: String) -> NSTextCheckingResult
-  class func transitInformationCheckingResultWithRange(range: NSRange, components: [String : String]) -> NSTextCheckingResult
+let textCheckingNameKey: String
+let textCheckingJobTitleKey: String
+let textCheckingOrganizationKey: String
+let textCheckingStreetKey: String
+let textCheckingCityKey: String
+let textCheckingStateKey: String
+let textCheckingZIPKey: String
+let textCheckingCountryKey: String
+let textCheckingPhoneKey: String
+let textCheckingAirlineKey: String
+let textCheckingFlightKey: String
+extension TextCheckingResult {
+  class func orthographyCheckingResultWith(range: NSRange, orthography: Orthography) -> TextCheckingResult
+  class func spellWith(range: NSRange) -> TextCheckingResult
+  class func grammarCheckingResultWith(range: NSRange, details: [String]) -> TextCheckingResult
+  class func dateCheckingResultWith(range: NSRange, date: Date) -> TextCheckingResult
+  class func dateCheckingResultWith(range: NSRange, date: Date, timeZone: TimeZone, duration: TimeInterval) -> TextCheckingResult
+  class func addressCheckingResultWith(range: NSRange, components: [String : String]) -> TextCheckingResult
+  class func linkCheckingResultWith(range: NSRange, url: URL) -> TextCheckingResult
+  class func quoteCheckingResultWith(range: NSRange, replacementString: String) -> TextCheckingResult
+  class func dashCheckingResultWith(range: NSRange, replacementString: String) -> TextCheckingResult
+  class func replacementCheckingResultWith(range: NSRange, replacementString: String) -> TextCheckingResult
+  class func correctionCheckingResultWith(range: NSRange, replacementString: String) -> TextCheckingResult
+  class func correctionCheckingResultWith(range: NSRange, replacementString: String, alternativeStrings: [String]) -> TextCheckingResult
+  class func regularExpressionCheckingResultWithRanges(ranges: RangePointer, count: Int, regularExpression: RegularExpression) -> TextCheckingResult
+  class func phoneNumberWith(range: NSRange, phoneNumber: String) -> TextCheckingResult
+  class func transitInformationCheckingResultWith(range: NSRange, components: [String : String]) -> TextCheckingResult
 }
-class NSThread : NSObject {
-  class func currentThread() -> NSThread
+class Thread : Object {
+  class func current() -> Thread
   class func detachNewThreadSelector(selector: Selector, toTarget target: AnyObject, withObject argument: AnyObject?)
   class func isMultiThreaded() -> Bool
-  var threadDictionary: NSMutableDictionary { get }
-  class func sleepUntilDate(date: NSDate)
-  class func sleepForTimeInterval(ti: NSTimeInterval)
+  var threadDictionary: MutableDictionary { get }
+  class func sleepUntil(date: Date)
+  class func sleepForTimeInterval(ti: TimeInterval)
   class func exit()
   class func threadPriority() -> Double
   class func setThreadPriority(p: Double) -> Bool
   var threadPriority: Double
-  var qualityOfService: NSQualityOfService
-  class func callStackReturnAddresses() -> [NSNumber]
+  var qualityOfService: QualityOfService
+  class func callStackReturnAddresses() -> [Number]
   class func callStackSymbols() -> [String]
   var name: String?
   var stackSize: Int
   var isMainThread: Bool { get }
   class func isMainThread() -> Bool
-  class func mainThread() -> NSThread
+  class func main() -> Thread
   init()
   convenience init(target: AnyObject, selector: Selector, object argument: AnyObject?)
-  var executing: Bool { get }
-  var finished: Bool { get }
-  var cancelled: Bool { get }
+  var isExecuting: Bool { get }
+  var isFinished: Bool { get }
+  var isCancelled: Bool { get }
   func cancel()
   func start()
   func main()
 }
-let NSWillBecomeMultiThreadedNotification: String
-let NSDidBecomeSingleThreadedNotification: String
-let NSThreadWillExitNotification: String
-extension NSObject {
+let willBecomeMultiThreadedNotification: String
+let didBecomeSingleThreadedNotification: String
+let threadWillExitNotification: String
+extension Object {
   class func performSelectorOnMainThread(aSelector: Selector, withObject arg: AnyObject?, waitUntilDone wait: Bool, modes array: [String]?)
   func performSelectorOnMainThread(aSelector: Selector, withObject arg: AnyObject?, waitUntilDone wait: Bool, modes array: [String]?)
   class func performSelectorOnMainThread(aSelector: Selector, withObject arg: AnyObject?, waitUntilDone wait: Bool)
   func performSelectorOnMainThread(aSelector: Selector, withObject arg: AnyObject?, waitUntilDone wait: Bool)
-  class func performSelector(aSelector: Selector, onThread thr: NSThread, withObject arg: AnyObject?, waitUntilDone wait: Bool, modes array: [String]?)
-  func performSelector(aSelector: Selector, onThread thr: NSThread, withObject arg: AnyObject?, waitUntilDone wait: Bool, modes array: [String]?)
-  class func performSelector(aSelector: Selector, onThread thr: NSThread, withObject arg: AnyObject?, waitUntilDone wait: Bool)
-  func performSelector(aSelector: Selector, onThread thr: NSThread, withObject arg: AnyObject?, waitUntilDone wait: Bool)
+  class func perform(aSelector: Selector, on thr: Thread, withObject arg: AnyObject?, waitUntilDone wait: Bool, modes array: [String]?)
+  func perform(aSelector: Selector, on thr: Thread, withObject arg: AnyObject?, waitUntilDone wait: Bool, modes array: [String]?)
+  class func perform(aSelector: Selector, on thr: Thread, withObject arg: AnyObject?, waitUntilDone wait: Bool)
+  func perform(aSelector: Selector, on thr: Thread, withObject arg: AnyObject?, waitUntilDone wait: Bool)
   class func performSelectorInBackground(aSelector: Selector, withObject arg: AnyObject?)
   func performSelectorInBackground(aSelector: Selector, withObject arg: AnyObject?)
 }
-class NSTimeZone : NSObject, NSCopying, NSSecureCoding {
+class TimeZone : Object, Copying, SecureCoding {
   var name: String { get }
-  @NSCopying var data: NSData { get }
-  func secondsFromGMTForDate(aDate: NSDate) -> Int
-  func abbreviationForDate(aDate: NSDate) -> String?
-  func isDaylightSavingTimeForDate(aDate: NSDate) -> Bool
-  func daylightSavingTimeOffsetForDate(aDate: NSDate) -> NSTimeInterval
-  func nextDaylightSavingTimeTransitionAfterDate(aDate: NSDate) -> NSDate?
+  @NSCopying var data: Data { get }
+  func secondsFromGMTFor(aDate: Date) -> Int
+  func abbreviationFor(aDate: Date) -> String?
+  func isDaylightSavingTimeFor(aDate: Date) -> Bool
+  func daylightSavingTimeOffsetFor(aDate: Date) -> TimeInterval
+  func nextDaylightSavingTimeTransitionAfter(aDate: Date) -> Date?
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-extension NSTimeZone {
-  class func systemTimeZone() -> NSTimeZone
+extension TimeZone {
+  class func system() -> TimeZone
   class func resetSystemTimeZone()
-  class func defaultTimeZone() -> NSTimeZone
-  class func setDefaultTimeZone(aTimeZone: NSTimeZone)
-  class func localTimeZone() -> NSTimeZone
+  class func defaultTimeZone() -> TimeZone
+  class func setDefaultTimeZone(aTimeZone: TimeZone)
+  class func local() -> TimeZone
   class func knownTimeZoneNames() -> [String]
   class func abbreviationDictionary() -> [String : String]
   class func setAbbreviationDictionary(dict: [String : String])
   class func timeZoneDataVersion() -> String
   var secondsFromGMT: Int { get }
   var abbreviation: String? { get }
-  var daylightSavingTime: Bool { get }
-  var daylightSavingTimeOffset: NSTimeInterval { get }
-  @NSCopying var nextDaylightSavingTimeTransition: NSDate? { get }
+  var isDaylightSavingTime: Bool { get }
+  var daylightSavingTimeOffset: TimeInterval { get }
+  @NSCopying var nextDaylightSavingTimeTransition: Date? { get }
   var description: String { get }
-  func isEqualToTimeZone(aTimeZone: NSTimeZone) -> Bool
-  func localizedName(style: NSTimeZoneNameStyle, locale: NSLocale?) -> String?
+  func isEqualTo(aTimeZone: TimeZone) -> Bool
+  func localizedName(style: TimeZoneNameStyle, locale: Locale?) -> String?
 }
-enum NSTimeZoneNameStyle : Int {
+enum TimeZoneNameStyle : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case Standard
@@ -5736,54 +5726,54 @@ enum NSTimeZoneNameStyle : Int {
   case Generic
   case ShortGeneric
 }
-extension NSTimeZone {
+extension TimeZone {
   init?(name tzName: String)
-  init?(name tzName: String, data aData: NSData?)
+  init?(name tzName: String, data aData: Data?)
   convenience init(forSecondsFromGMT seconds: Int)
   convenience init?(abbreviation: String)
 }
-let NSSystemTimeZoneDidChangeNotification: String
-class NSTimer : NSObject {
-   init(timeInterval ti: NSTimeInterval, invocation: NSInvocation, repeats yesOrNo: Bool)
-  class func scheduledTimerWithTimeInterval(ti: NSTimeInterval, invocation: NSInvocation, repeats yesOrNo: Bool) -> NSTimer
-   init(timeInterval ti: NSTimeInterval, target aTarget: AnyObject, selector aSelector: Selector, userInfo: AnyObject?, repeats yesOrNo: Bool)
-  class func scheduledTimerWithTimeInterval(ti: NSTimeInterval, target aTarget: AnyObject, selector aSelector: Selector, userInfo: AnyObject?, repeats yesOrNo: Bool) -> NSTimer
-  init(fireDate date: NSDate, interval ti: NSTimeInterval, target t: AnyObject, selector s: Selector, userInfo ui: AnyObject?, repeats rep: Bool)
+let systemTimeZoneDidChangeNotification: String
+class Timer : Object {
+   init(timeInterval ti: TimeInterval, invocation: Invocation, repeats yesOrNo: Bool)
+  class func scheduledTimerWithTimeInterval(ti: TimeInterval, invocation: Invocation, repeats yesOrNo: Bool) -> Timer
+   init(timeInterval ti: TimeInterval, target aTarget: AnyObject, selector aSelector: Selector, userInfo: AnyObject?, repeats yesOrNo: Bool)
+  class func scheduledTimerWithTimeInterval(ti: TimeInterval, target aTarget: AnyObject, selector aSelector: Selector, userInfo: AnyObject?, repeats yesOrNo: Bool) -> Timer
+  init(fire date: Date, interval ti: TimeInterval, target t: AnyObject, selector s: Selector, userInfo ui: AnyObject?, repeats rep: Bool)
   func fire()
-  @NSCopying var fireDate: NSDate
-  var timeInterval: NSTimeInterval { get }
-  var tolerance: NSTimeInterval
+  @NSCopying var fireDate: Date
+  var timeInterval: TimeInterval { get }
+  var tolerance: TimeInterval
   func invalidate()
-  var valid: Bool { get }
+  var isValid: Bool { get }
   var userInfo: AnyObject? { get }
   convenience init()
 }
-class NSURL : NSObject, NSSecureCoding, NSCopying, NSURLHandleClient {
+class URL : Object, SecureCoding, Copying, URLHandleClient {
   convenience init?(scheme: String, host: String?, path: String)
-  init(fileURLWithPath path: String, isDirectory isDir: Bool, relativeToURL baseURL: NSURL?)
-  init(fileURLWithPath path: String, relativeToURL baseURL: NSURL?)
+  init(fileURLWithPath path: String, isDirectory isDir: Bool, relativeTo baseURL: URL?)
+  init(fileURLWithPath path: String, relativeTo baseURL: URL?)
   init(fileURLWithPath path: String, isDirectory isDir: Bool)
   init(fileURLWithPath path: String)
-  class func fileURLWithPath(path: String, isDirectory isDir: Bool, relativeToURL baseURL: NSURL?) -> NSURL
-  class func fileURLWithPath(path: String, relativeToURL baseURL: NSURL?) -> NSURL
-  class func fileURLWithPath(path: String, isDirectory isDir: Bool) -> NSURL
-  class func fileURLWithPath(path: String) -> NSURL
-  init(fileURLWithFileSystemRepresentation path: UnsafePointer<Int8>, isDirectory isDir: Bool, relativeToURL baseURL: NSURL?)
-  class func fileURLWithFileSystemRepresentation(path: UnsafePointer<Int8>, isDirectory isDir: Bool, relativeToURL baseURL: NSURL?) -> NSURL
+  class func fileURLWithPath(path: String, isDirectory isDir: Bool, relativeTo baseURL: URL?) -> URL
+  class func fileURLWithPath(path: String, relativeTo baseURL: URL?) -> URL
+  class func fileURLWithPath(path: String, isDirectory isDir: Bool) -> URL
+  class func fileURLWithPath(path: String) -> URL
+  init(fileURLWithFileSystemRepresentation path: UnsafePointer<Int8>, isDirectory isDir: Bool, relativeTo baseURL: URL?)
+  class func fileURLWithFileSystemRepresentation(path: UnsafePointer<Int8>, isDirectory isDir: Bool, relativeTo baseURL: URL?) -> URL
   convenience init?(string URLString: String)
-  init?(string URLString: String, relativeToURL baseURL: NSURL?)
-  init(dataRepresentation data: NSData, relativeToURL baseURL: NSURL?)
-  init(absoluteURLWithDataRepresentation data: NSData, relativeToURL baseURL: NSURL?)
-  class func absoluteURLWithDataRepresentation(data: NSData, relativeToURL baseURL: NSURL?) -> NSURL
-  @NSCopying var dataRepresentation: NSData { get }
+  init?(string URLString: String, relativeTo baseURL: URL?)
+  init(dataRepresentation data: Data, relativeTo baseURL: URL?)
+  init(absoluteURLWithDataRepresentation data: Data, relativeTo baseURL: URL?)
+  class func absoluteURLWithDataRepresentation(data: Data, relativeTo baseURL: URL?) -> URL
+  @NSCopying var dataRepresentation: Data { get }
   var absoluteString: String { get }
   var relativeString: String? { get }
-  @NSCopying var baseURL: NSURL? { get }
-  @NSCopying var absoluteURL: NSURL { get }
+  @NSCopying var base: URL? { get }
+  @NSCopying var absolute: URL { get }
   var scheme: String { get }
   var resourceSpecifier: String { get }
   var host: String? { get }
-  @NSCopying var port: NSNumber? { get }
+  @NSCopying var port: Number? { get }
   var user: String? { get }
   var password: String? { get }
   var path: String? { get }
@@ -5794,12 +5784,12 @@ class NSURL : NSObject, NSSecureCoding, NSCopying, NSURLHandleClient {
   var hasDirectoryPath: Bool { get }
   func getFileSystemRepresentation(buffer: UnsafeMutablePointer<Int8>, maxLength maxBufferLength: Int) -> Bool
   var fileSystemRepresentation: UnsafePointer<Int8> { get }
-  var fileURL: Bool { get }
-  @NSCopying var standardizedURL: NSURL? { get }
-  func checkResourceIsReachableAndReturnError(error: NSErrorPointer) -> Bool
+  var isFileURL: Bool { get }
+  @NSCopying var standardized: URL? { get }
+  func checkResourceIsReachableAndReturnError(error: ErrorPointer) -> Bool
   func isFileReferenceURL() -> Bool
-  func fileReferenceURL() -> NSURL?
-  @NSCopying var filePathURL: NSURL? { get }
+  func fileReference() -> URL?
+  @NSCopying var filePath: URL? { get }
   func getResourceValue(value: AutoreleasingUnsafeMutablePointer<AnyObject?>, forKey key: String) throws
   func resourceValuesForKeys(keys: [String]) throws -> [String : AnyObject]
   func setResourceValue(value: AnyObject?, forKey key: String) throws
@@ -5807,176 +5797,175 @@ class NSURL : NSObject, NSSecureCoding, NSCopying, NSURLHandleClient {
   func removeCachedResourceValueForKey(key: String)
   func removeAllCachedResourceValues()
   func setTemporaryResourceValue(value: AnyObject?, forKey key: String)
-  func bookmarkDataWithOptions(options: NSURLBookmarkCreationOptions, includingResourceValuesForKeys keys: [String]?, relativeToURL relativeURL: NSURL?) throws -> NSData
-  convenience init(byResolvingBookmarkData bookmarkData: NSData, options: NSURLBookmarkResolutionOptions, relativeToURL relativeURL: NSURL?, bookmarkDataIsStale isStale: UnsafeMutablePointer<ObjCBool>) throws
-  class func resourceValuesForKeys(keys: [String], fromBookmarkData bookmarkData: NSData) -> [String : AnyObject]?
-  class func writeBookmarkData(bookmarkData: NSData, toURL bookmarkFileURL: NSURL, options: NSURLBookmarkFileCreationOptions) throws
-  class func bookmarkDataWithContentsOfURL(bookmarkFileURL: NSURL) throws -> NSData
-  convenience init(byResolvingAliasFileAtURL url: NSURL, options: NSURLBookmarkResolutionOptions) throws
+  func bookmarkData(options options: URLBookmarkCreationOptions = [], includingResourceValuesForKeys keys: [String]?, relativeTo relativeURL: URL?) throws -> Data
+  convenience init(byResolvingBookmarkData bookmarkData: Data, options: URLBookmarkResolutionOptions = [], relativeTo relativeURL: URL?, bookmarkDataIsStale isStale: UnsafeMutablePointer<ObjCBool>) throws
+  class func resourceValuesForKeys(keys: [String], fromBookmarkData bookmarkData: Data) -> [String : AnyObject]?
+  class func writeBookmarkData(bookmarkData: Data, to bookmarkFileURL: URL, options: URLBookmarkFileCreationOptions) throws
+  class func bookmarkDataWithContentsOf(bookmarkFileURL: URL) throws -> Data
+  convenience init(byResolvingAliasFileAt url: URL, options: URLBookmarkResolutionOptions = []) throws
   func startAccessingSecurityScopedResource() -> Bool
   func stopAccessingSecurityScopedResource()
   convenience init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-extension NSURL : _FileReferenceLiteralConvertible {
+extension URL : _FileReferenceLiteralConvertible {
   convenience init(failableFileReferenceLiteral path: String)
   required convenience init(fileReferenceLiteral path: String)
 }
-extension NSURL : _Reflectable {
-  /// Returns a mirror that reflects `self`.
+extension URL : _Reflectable {
   func _getMirror() -> _MirrorType
 }
-let NSURLFileScheme: String
-let NSURLKeysOfUnsetValuesKey: String
-let NSURLNameKey: String
-let NSURLLocalizedNameKey: String
-let NSURLIsRegularFileKey: String
-let NSURLIsDirectoryKey: String
-let NSURLIsSymbolicLinkKey: String
-let NSURLIsVolumeKey: String
-let NSURLIsPackageKey: String
-let NSURLIsApplicationKey: String
-let NSURLApplicationIsScriptableKey: String
-let NSURLIsSystemImmutableKey: String
-let NSURLIsUserImmutableKey: String
-let NSURLIsHiddenKey: String
-let NSURLHasHiddenExtensionKey: String
-let NSURLCreationDateKey: String
-let NSURLContentAccessDateKey: String
-let NSURLContentModificationDateKey: String
-let NSURLAttributeModificationDateKey: String
-let NSURLLinkCountKey: String
-let NSURLParentDirectoryURLKey: String
-let NSURLVolumeURLKey: String
-let NSURLTypeIdentifierKey: String
-let NSURLLocalizedTypeDescriptionKey: String
-let NSURLLabelNumberKey: String
-let NSURLLabelColorKey: String
-let NSURLLocalizedLabelKey: String
-let NSURLEffectiveIconKey: String
-let NSURLCustomIconKey: String
-let NSURLFileResourceIdentifierKey: String
-let NSURLVolumeIdentifierKey: String
-let NSURLPreferredIOBlockSizeKey: String
-let NSURLIsReadableKey: String
-let NSURLIsWritableKey: String
-let NSURLIsExecutableKey: String
-let NSURLFileSecurityKey: String
-let NSURLIsExcludedFromBackupKey: String
-let NSURLTagNamesKey: String
-let NSURLPathKey: String
-let NSURLIsMountTriggerKey: String
-let NSURLGenerationIdentifierKey: String
-let NSURLDocumentIdentifierKey: String
-let NSURLAddedToDirectoryDateKey: String
-let NSURLQuarantinePropertiesKey: String
-let NSURLFileResourceTypeKey: String
-let NSURLFileResourceTypeNamedPipe: String
-let NSURLFileResourceTypeCharacterSpecial: String
-let NSURLFileResourceTypeDirectory: String
-let NSURLFileResourceTypeBlockSpecial: String
-let NSURLFileResourceTypeRegular: String
-let NSURLFileResourceTypeSymbolicLink: String
-let NSURLFileResourceTypeSocket: String
-let NSURLFileResourceTypeUnknown: String
-let NSURLThumbnailDictionaryKey: String
-let NSURLThumbnailKey: String
-let NSThumbnail1024x1024SizeKey: String
-let NSURLFileSizeKey: String
-let NSURLFileAllocatedSizeKey: String
-let NSURLTotalFileSizeKey: String
-let NSURLTotalFileAllocatedSizeKey: String
-let NSURLIsAliasFileKey: String
-let NSURLVolumeLocalizedFormatDescriptionKey: String
-let NSURLVolumeTotalCapacityKey: String
-let NSURLVolumeAvailableCapacityKey: String
-let NSURLVolumeResourceCountKey: String
-let NSURLVolumeSupportsPersistentIDsKey: String
-let NSURLVolumeSupportsSymbolicLinksKey: String
-let NSURLVolumeSupportsHardLinksKey: String
-let NSURLVolumeSupportsJournalingKey: String
-let NSURLVolumeIsJournalingKey: String
-let NSURLVolumeSupportsSparseFilesKey: String
-let NSURLVolumeSupportsZeroRunsKey: String
-let NSURLVolumeSupportsCaseSensitiveNamesKey: String
-let NSURLVolumeSupportsCasePreservedNamesKey: String
-let NSURLVolumeSupportsRootDirectoryDatesKey: String
-let NSURLVolumeSupportsVolumeSizesKey: String
-let NSURLVolumeSupportsRenamingKey: String
-let NSURLVolumeSupportsAdvisoryFileLockingKey: String
-let NSURLVolumeSupportsExtendedSecurityKey: String
-let NSURLVolumeIsBrowsableKey: String
-let NSURLVolumeMaximumFileSizeKey: String
-let NSURLVolumeIsEjectableKey: String
-let NSURLVolumeIsRemovableKey: String
-let NSURLVolumeIsInternalKey: String
-let NSURLVolumeIsAutomountedKey: String
-let NSURLVolumeIsLocalKey: String
-let NSURLVolumeIsReadOnlyKey: String
-let NSURLVolumeCreationDateKey: String
-let NSURLVolumeURLForRemountingKey: String
-let NSURLVolumeUUIDStringKey: String
-let NSURLVolumeNameKey: String
-let NSURLVolumeLocalizedNameKey: String
-let NSURLIsUbiquitousItemKey: String
-let NSURLUbiquitousItemHasUnresolvedConflictsKey: String
-let NSURLUbiquitousItemIsDownloadingKey: String
-let NSURLUbiquitousItemIsUploadedKey: String
-let NSURLUbiquitousItemIsUploadingKey: String
-let NSURLUbiquitousItemDownloadingStatusKey: String
-let NSURLUbiquitousItemDownloadingErrorKey: String
-let NSURLUbiquitousItemUploadingErrorKey: String
-let NSURLUbiquitousItemDownloadRequestedKey: String
-let NSURLUbiquitousItemContainerDisplayNameKey: String
-let NSURLUbiquitousItemDownloadingStatusNotDownloaded: String
-let NSURLUbiquitousItemDownloadingStatusDownloaded: String
-let NSURLUbiquitousItemDownloadingStatusCurrent: String
-struct NSURLBookmarkCreationOptions : OptionSetType {
+let URLFileScheme: String
+let URLKeysOfUnsetValuesKey: String
+let URLNameKey: String
+let URLLocalizedNameKey: String
+let URLIsRegularFileKey: String
+let URLIsDirectoryKey: String
+let URLIsSymbolicLinkKey: String
+let URLIsVolumeKey: String
+let URLIsPackageKey: String
+let URLIsApplicationKey: String
+let URLApplicationIsScriptableKey: String
+let URLIsSystemImmutableKey: String
+let URLIsUserImmutableKey: String
+let URLIsHiddenKey: String
+let URLHasHiddenExtensionKey: String
+let URLCreationDateKey: String
+let URLContentAccessDateKey: String
+let URLContentModificationDateKey: String
+let URLAttributeModificationDateKey: String
+let URLLinkCountKey: String
+let URLParentDirectoryURLKey: String
+let URLVolumeURLKey: String
+let URLTypeIdentifierKey: String
+let URLLocalizedTypeDescriptionKey: String
+let URLLabelNumberKey: String
+let URLLabelColorKey: String
+let URLLocalizedLabelKey: String
+let URLEffectiveIconKey: String
+let URLCustomIconKey: String
+let URLFileResourceIdentifierKey: String
+let URLVolumeIdentifierKey: String
+let URLPreferredIOBlockSizeKey: String
+let URLIsReadableKey: String
+let URLIsWritableKey: String
+let URLIsExecutableKey: String
+let URLFileSecurityKey: String
+let URLIsExcludedFromBackupKey: String
+let URLTagNamesKey: String
+let URLPathKey: String
+let URLIsMountTriggerKey: String
+let URLGenerationIdentifierKey: String
+let URLDocumentIdentifierKey: String
+let URLAddedToDirectoryDateKey: String
+let URLQuarantinePropertiesKey: String
+let URLFileResourceTypeKey: String
+let URLFileResourceTypeNamedPipe: String
+let URLFileResourceTypeCharacterSpecial: String
+let URLFileResourceTypeDirectory: String
+let URLFileResourceTypeBlockSpecial: String
+let URLFileResourceTypeRegular: String
+let URLFileResourceTypeSymbolicLink: String
+let URLFileResourceTypeSocket: String
+let URLFileResourceTypeUnknown: String
+let URLThumbnailDictionaryKey: String
+let URLThumbnailKey: String
+let thumbnail1024x1024SizeKey: String
+let URLFileSizeKey: String
+let URLFileAllocatedSizeKey: String
+let URLTotalFileSizeKey: String
+let URLTotalFileAllocatedSizeKey: String
+let URLIsAliasFileKey: String
+let URLVolumeLocalizedFormatDescriptionKey: String
+let URLVolumeTotalCapacityKey: String
+let URLVolumeAvailableCapacityKey: String
+let URLVolumeResourceCountKey: String
+let URLVolumeSupportsPersistentIDsKey: String
+let URLVolumeSupportsSymbolicLinksKey: String
+let URLVolumeSupportsHardLinksKey: String
+let URLVolumeSupportsJournalingKey: String
+let URLVolumeIsJournalingKey: String
+let URLVolumeSupportsSparseFilesKey: String
+let URLVolumeSupportsZeroRunsKey: String
+let URLVolumeSupportsCaseSensitiveNamesKey: String
+let URLVolumeSupportsCasePreservedNamesKey: String
+let URLVolumeSupportsRootDirectoryDatesKey: String
+let URLVolumeSupportsVolumeSizesKey: String
+let URLVolumeSupportsRenamingKey: String
+let URLVolumeSupportsAdvisoryFileLockingKey: String
+let URLVolumeSupportsExtendedSecurityKey: String
+let URLVolumeIsBrowsableKey: String
+let URLVolumeMaximumFileSizeKey: String
+let URLVolumeIsEjectableKey: String
+let URLVolumeIsRemovableKey: String
+let URLVolumeIsInternalKey: String
+let URLVolumeIsAutomountedKey: String
+let URLVolumeIsLocalKey: String
+let URLVolumeIsReadOnlyKey: String
+let URLVolumeCreationDateKey: String
+let URLVolumeURLForRemountingKey: String
+let URLVolumeUUIDStringKey: String
+let URLVolumeNameKey: String
+let URLVolumeLocalizedNameKey: String
+let URLIsUbiquitousItemKey: String
+let URLUbiquitousItemHasUnresolvedConflictsKey: String
+let URLUbiquitousItemIsDownloadingKey: String
+let URLUbiquitousItemIsUploadedKey: String
+let URLUbiquitousItemIsUploadingKey: String
+let URLUbiquitousItemDownloadingStatusKey: String
+let URLUbiquitousItemDownloadingErrorKey: String
+let URLUbiquitousItemUploadingErrorKey: String
+let URLUbiquitousItemDownloadRequestedKey: String
+let URLUbiquitousItemContainerDisplayNameKey: String
+let URLUbiquitousItemDownloadingStatusNotDownloaded: String
+let URLUbiquitousItemDownloadingStatusDownloaded: String
+let URLUbiquitousItemDownloadingStatusCurrent: String
+struct URLBookmarkCreationOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var MinimalBookmark: NSURLBookmarkCreationOptions { get }
-  static var SuitableForBookmarkFile: NSURLBookmarkCreationOptions { get }
-  static var WithSecurityScope: NSURLBookmarkCreationOptions { get }
-  static var SecurityScopeAllowOnlyReadAccess: NSURLBookmarkCreationOptions { get }
+  static var MinimalBookmark: URLBookmarkCreationOptions { get }
+  static var SuitableForBookmarkFile: URLBookmarkCreationOptions { get }
+  static var WithSecurityScope: URLBookmarkCreationOptions { get }
+  static var SecurityScopeAllowOnlyReadAccess: URLBookmarkCreationOptions { get }
 }
-struct NSURLBookmarkResolutionOptions : OptionSetType {
+struct URLBookmarkResolutionOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var WithoutUI: NSURLBookmarkResolutionOptions { get }
-  static var WithoutMounting: NSURLBookmarkResolutionOptions { get }
-  static var WithSecurityScope: NSURLBookmarkResolutionOptions { get }
+  static var WithoutUI: URLBookmarkResolutionOptions { get }
+  static var WithoutMounting: URLBookmarkResolutionOptions { get }
+  static var WithSecurityScope: URLBookmarkResolutionOptions { get }
 }
-typealias NSURLBookmarkFileCreationOptions = Int
-extension NSURL {
+typealias URLBookmarkFileCreationOptions = Int
+extension URL {
   func getPromisedItemResourceValue(value: AutoreleasingUnsafeMutablePointer<AnyObject?>, forKey key: String) throws
   func promisedItemResourceValuesForKeys(keys: [String]) throws -> [String : AnyObject]
-  func checkPromisedItemIsReachableAndReturnError(error: NSErrorPointer) -> Bool
+  func checkPromisedItemIsReachableAndReturnError(error: ErrorPointer) -> Bool
 }
-class NSURLQueryItem : NSObject, NSSecureCoding, NSCopying {
+class URLQueryItem : Object, SecureCoding, Copying {
   init(name: String, value: String?)
   var name: String { get }
   var value: String? { get }
   convenience init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class NSURLComponents : NSObject, NSCopying {
+class URLComponents : Object, Copying {
   init()
-  init?(URL url: NSURL, resolvingAgainstBaseURL resolve: Bool)
+  init?(url: URL, resolvingAgainstBaseURL resolve: Bool)
   init?(string URLString: String)
-  @NSCopying var URL: NSURL? { get }
-  func URLRelativeToURL(baseURL: NSURL?) -> NSURL?
+  @NSCopying var url: URL? { get }
+  func urlRelativeTo(baseURL: URL?) -> URL?
   var string: String? { get }
   var scheme: String?
   var user: String?
   var password: String?
   var host: String?
-  @NSCopying var port: NSNumber?
+  @NSCopying var port: Number?
   var path: String?
   var query: String?
   var fragment: String?
@@ -5994,149 +5983,149 @@ class NSURLComponents : NSObject, NSCopying {
   var rangeOfPath: NSRange { get }
   var rangeOfQuery: NSRange { get }
   var rangeOfFragment: NSRange { get }
-  var queryItems: [NSURLQueryItem]?
-  func copyWithZone(zone: NSZone) -> AnyObject
+  var queryItems: [URLQueryItem]?
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-extension NSCharacterSet {
-  class func URLUserAllowedCharacterSet() -> NSCharacterSet
-  class func URLPasswordAllowedCharacterSet() -> NSCharacterSet
-  class func URLHostAllowedCharacterSet() -> NSCharacterSet
-  class func URLPathAllowedCharacterSet() -> NSCharacterSet
-  class func URLQueryAllowedCharacterSet() -> NSCharacterSet
-  class func URLFragmentAllowedCharacterSet() -> NSCharacterSet
+extension CharacterSet {
+  class func urlUserAllowed() -> CharacterSet
+  class func urlPasswordAllowed() -> CharacterSet
+  class func urlHostAllowed() -> CharacterSet
+  class func urlPathAllowed() -> CharacterSet
+  class func urlQueryAllowed() -> CharacterSet
+  class func urlFragmentAllowed() -> CharacterSet
 }
 extension NSString {
-  func stringByAddingPercentEncodingWithAllowedCharacters(allowedCharacters: NSCharacterSet) -> String?
-  var stringByRemovingPercentEncoding: String? { get }
-  func stringByAddingPercentEscapesUsingEncoding(enc: UInt) -> String?
-  func stringByReplacingPercentEscapesUsingEncoding(enc: UInt) -> String?
+  func addingPercentEncodingWithAllowedCharacters(allowedCharacters: CharacterSet) -> String?
+  var removingPercentEncoding: String? { get }
+  func addingPercentEscapesUsingEncoding(enc: UInt) -> String?
+  func replacingPercentEscapesUsingEncoding(enc: UInt) -> String?
 }
-extension NSURL {
-  class func fileURLWithPathComponents(components: [String]) -> NSURL?
+extension URL {
+  class func fileURLWithPathComponents(components: [String]) -> URL?
   var pathComponents: [String]? { get }
   var lastPathComponent: String? { get }
   var pathExtension: String? { get }
-  func URLByAppendingPathComponent(pathComponent: String) -> NSURL
-  func URLByAppendingPathComponent(pathComponent: String, isDirectory: Bool) -> NSURL
-  @NSCopying var URLByDeletingLastPathComponent: NSURL? { get }
-  func URLByAppendingPathExtension(pathExtension: String) -> NSURL
-  @NSCopying var URLByDeletingPathExtension: NSURL? { get }
-  @NSCopying var URLByStandardizingPath: NSURL? { get }
-  @NSCopying var URLByResolvingSymlinksInPath: NSURL? { get }
+  func appendingPathComponent(pathComponent: String) -> URL
+  func appendingPathComponent(pathComponent: String, isDirectory: Bool) -> URL
+  @NSCopying var deletingLastPathComponent: URL? { get }
+  func appendingPathExtension(pathExtension: String) -> URL
+  @NSCopying var deletingPathExtension: URL? { get }
+  @NSCopying var standardizingPath: URL? { get }
+  @NSCopying var resolvingSymlinksInPath: URL? { get }
 }
-class NSFileSecurity : NSObject, NSCopying, NSCoding {
-  init?(coder aDecoder: NSCoder)
+class FileSecurity : Object, Copying, Coding {
+  init?(coder aDecoder: Coder)
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
 }
-extension NSObject {
+extension Object {
 }
-extension NSURL {
+extension URL {
 }
-protocol NSURLAuthenticationChallengeSender : NSObjectProtocol {
-  func useCredential(credential: NSURLCredential, forAuthenticationChallenge challenge: NSURLAuthenticationChallenge)
-  func continueWithoutCredentialForAuthenticationChallenge(challenge: NSURLAuthenticationChallenge)
-  func cancelAuthenticationChallenge(challenge: NSURLAuthenticationChallenge)
-  optional func performDefaultHandlingForAuthenticationChallenge(challenge: NSURLAuthenticationChallenge)
-  optional func rejectProtectionSpaceAndContinueWithChallenge(challenge: NSURLAuthenticationChallenge)
+protocol URLAuthenticationChallengeSender : ObjectProtocol {
+  func use(credential: URLCredential, forAuthenticationChallenge challenge: URLAuthenticationChallenge)
+  func continueWithoutCredentialFor(challenge: URLAuthenticationChallenge)
+  func cancel(challenge: URLAuthenticationChallenge)
+  optional func performDefaultHandlingFor(challenge: URLAuthenticationChallenge)
+  optional func rejectProtectionSpaceAndContinueWith(challenge: URLAuthenticationChallenge)
 }
-class NSURLAuthenticationChallenge : NSObject, NSSecureCoding {
-  init(protectionSpace space: NSURLProtectionSpace, proposedCredential credential: NSURLCredential?, previousFailureCount: Int, failureResponse response: NSURLResponse?, error: NSError?, sender: NSURLAuthenticationChallengeSender)
-  init(authenticationChallenge challenge: NSURLAuthenticationChallenge, sender: NSURLAuthenticationChallengeSender)
-  @NSCopying var protectionSpace: NSURLProtectionSpace { get }
-  @NSCopying var proposedCredential: NSURLCredential? { get }
+class URLAuthenticationChallenge : Object, SecureCoding {
+  init(protectionSpace space: URLProtectionSpace, proposedCredential credential: URLCredential?, previousFailureCount: Int, failureResponse response: URLResponse?, error: Error?, sender: URLAuthenticationChallengeSender)
+  init(authenticationChallenge challenge: URLAuthenticationChallenge, sender: URLAuthenticationChallengeSender)
+  @NSCopying var protectionSpace: URLProtectionSpace { get }
+  @NSCopying var proposedCredential: URLCredential? { get }
   var previousFailureCount: Int { get }
-  @NSCopying var failureResponse: NSURLResponse? { get }
-  @NSCopying var error: NSError? { get }
-  var sender: NSURLAuthenticationChallengeSender? { get }
+  @NSCopying var failureResponse: URLResponse? { get }
+  @NSCopying var error: Error? { get }
+  var sender: URLAuthenticationChallengeSender? { get }
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-enum NSURLCacheStoragePolicy : UInt {
+enum URLCacheStoragePolicy : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case Allowed
   case AllowedInMemoryOnly
   case NotAllowed
 }
-class NSCachedURLResponse : NSObject, NSSecureCoding, NSCopying {
-  init(response: NSURLResponse, data: NSData)
-  init(response: NSURLResponse, data: NSData, userInfo: [NSObject : AnyObject]?, storagePolicy: NSURLCacheStoragePolicy)
-  @NSCopying var response: NSURLResponse { get }
-  @NSCopying var data: NSData { get }
-  var userInfo: [NSObject : AnyObject]? { get }
-  var storagePolicy: NSURLCacheStoragePolicy { get }
+class CachedURLResponse : Object, SecureCoding, Copying {
+  init(response: URLResponse, data: Data)
+  init(response: URLResponse, data: Data, userInfo: [Object : AnyObject]? = [:], storagePolicy: URLCacheStoragePolicy)
+  @NSCopying var response: URLResponse { get }
+  @NSCopying var data: Data { get }
+  var userInfo: [Object : AnyObject]? { get }
+  var storagePolicy: URLCacheStoragePolicy { get }
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class NSURLCache : NSObject {
-  class func sharedURLCache() -> NSURLCache
-  class func setSharedURLCache(cache: NSURLCache)
+class URLCache : Object {
+  class func shared() -> URLCache
+  class func setSharedURLCache(cache: URLCache)
   init(memoryCapacity: Int, diskCapacity: Int, diskPath path: String?)
-  func cachedResponseForRequest(request: NSURLRequest) -> NSCachedURLResponse?
-  func storeCachedResponse(cachedResponse: NSCachedURLResponse, forRequest request: NSURLRequest)
-  func removeCachedResponseForRequest(request: NSURLRequest)
+  func cachedResponseFor(request: URLRequest) -> CachedURLResponse?
+  func storeCachedResponse(cachedResponse: CachedURLResponse, forRequest request: URLRequest)
+  func removeCachedResponseFor(request: URLRequest)
   func removeAllCachedResponses()
-  func removeCachedResponsesSinceDate(date: NSDate)
+  func removeCachedResponsesSince(date: Date)
   var memoryCapacity: Int
   var diskCapacity: Int
   var currentMemoryUsage: Int { get }
   var currentDiskUsage: Int { get }
   init()
 }
-extension NSURLCache {
-  func storeCachedResponse(cachedResponse: NSCachedURLResponse, forDataTask dataTask: NSURLSessionDataTask)
-  func getCachedResponseForDataTask(dataTask: NSURLSessionDataTask, completionHandler: (NSCachedURLResponse?) -> Void)
-  func removeCachedResponseForDataTask(dataTask: NSURLSessionDataTask)
+extension URLCache {
+  func storeCachedResponse(cachedResponse: CachedURLResponse, forDataTask dataTask: URLSessionDataTask)
+  func getCachedResponseFor(dataTask: URLSessionDataTask, completionHandler: (CachedURLResponse?) -> Void)
+  func removeCachedResponseFor(dataTask: URLSessionDataTask)
 }
-class NSURLConnection : NSObject {
-  init?(request: NSURLRequest, delegate: AnyObject?, startImmediately: Bool)
-  init?(request: NSURLRequest, delegate: AnyObject?)
-  @NSCopying var originalRequest: NSURLRequest { get }
-  @NSCopying var currentRequest: NSURLRequest { get }
+class URLConnection : Object {
+  init?(request: URLRequest, delegate: AnyObject?, startImmediately: Bool)
+  init?(request: URLRequest, delegate: AnyObject?)
+  @NSCopying var originalRequest: URLRequest { get }
+  @NSCopying var currentRequest: URLRequest { get }
   func start()
   func cancel()
-  func scheduleInRunLoop(aRunLoop: NSRunLoop, forMode mode: String)
-  func unscheduleFromRunLoop(aRunLoop: NSRunLoop, forMode mode: String)
-  func setDelegateQueue(queue: NSOperationQueue?)
-  class func canHandleRequest(request: NSURLRequest) -> Bool
+  func scheduleIn(aRunLoop: RunLoop, forMode mode: String)
+  func unscheduleFrom(aRunLoop: RunLoop, forMode mode: String)
+  func setDelegateQueue(queue: OperationQueue?)
+  class func canHandle(request: URLRequest) -> Bool
   init()
 }
-protocol NSURLConnectionDelegate : NSObjectProtocol {
-  optional func connection(connection: NSURLConnection, didFailWithError error: NSError)
-  optional func connectionShouldUseCredentialStorage(connection: NSURLConnection) -> Bool
-  optional func connection(connection: NSURLConnection, willSendRequestForAuthenticationChallenge challenge: NSURLAuthenticationChallenge)
-  optional func connection(connection: NSURLConnection, canAuthenticateAgainstProtectionSpace protectionSpace: NSURLProtectionSpace) -> Bool
-  optional func connection(connection: NSURLConnection, didReceiveAuthenticationChallenge challenge: NSURLAuthenticationChallenge)
-  optional func connection(connection: NSURLConnection, didCancelAuthenticationChallenge challenge: NSURLAuthenticationChallenge)
+protocol URLConnectionDelegate : ObjectProtocol {
+  optional func connection(connection: URLConnection, didFailWithError error: Error)
+  optional func connectionShouldUseCredentialStorage(connection: URLConnection) -> Bool
+  optional func connection(connection: URLConnection, willSendRequestFor challenge: URLAuthenticationChallenge)
+  optional func connection(connection: URLConnection, canAuthenticateAgainstProtectionSpace protectionSpace: URLProtectionSpace) -> Bool
+  optional func connection(connection: URLConnection, didReceive challenge: URLAuthenticationChallenge)
+  optional func connection(connection: URLConnection, didCancel challenge: URLAuthenticationChallenge)
 }
-protocol NSURLConnectionDataDelegate : NSURLConnectionDelegate {
-  optional func connection(connection: NSURLConnection, willSendRequest request: NSURLRequest, redirectResponse response: NSURLResponse?) -> NSURLRequest?
-  optional func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse)
-  optional func connection(connection: NSURLConnection, didReceiveData data: NSData)
-  optional func connection(connection: NSURLConnection, needNewBodyStream request: NSURLRequest) -> NSInputStream?
-  optional func connection(connection: NSURLConnection, didSendBodyData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int)
-  optional func connection(connection: NSURLConnection, willCacheResponse cachedResponse: NSCachedURLResponse) -> NSCachedURLResponse?
-  optional func connectionDidFinishLoading(connection: NSURLConnection)
+protocol URLConnectionDataDelegate : URLConnectionDelegate {
+  optional func connection(connection: URLConnection, willSend request: URLRequest, redirectResponse response: URLResponse?) -> URLRequest?
+  optional func connection(connection: URLConnection, didReceive response: URLResponse)
+  optional func connection(connection: URLConnection, didReceive data: Data)
+  optional func connection(connection: URLConnection, needNewBodyStream request: URLRequest) -> InputStream?
+  optional func connection(connection: URLConnection, didSendBodyData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int)
+  optional func connection(connection: URLConnection, willCacheResponse cachedResponse: CachedURLResponse) -> CachedURLResponse?
+  optional func connectionDidFinishLoading(connection: URLConnection)
 }
-protocol NSURLConnectionDownloadDelegate : NSURLConnectionDelegate {
-  optional func connection(connection: NSURLConnection, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, expectedTotalBytes: Int64)
-  optional func connectionDidResumeDownloading(connection: NSURLConnection, totalBytesWritten: Int64, expectedTotalBytes: Int64)
-  func connectionDidFinishDownloading(connection: NSURLConnection, destinationURL: NSURL)
+protocol URLConnectionDownloadDelegate : URLConnectionDelegate {
+  optional func connection(connection: URLConnection, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, expectedTotalBytes: Int64)
+  optional func connectionDidResumeDownloading(connection: URLConnection, totalBytesWritten: Int64, expectedTotalBytes: Int64)
+  func connectionDidFinishDownloading(connection: URLConnection, destinationURL: URL)
 }
-extension NSURLConnection {
-  class func sendSynchronousRequest(request: NSURLRequest, returningResponse response: AutoreleasingUnsafeMutablePointer<NSURLResponse?>) throws -> NSData
+extension URLConnection {
+  class func sendSynchronousRequest(request: URLRequest, returning response: AutoreleasingUnsafeMutablePointer<URLResponse?>) throws -> Data
 }
-extension NSURLConnection {
-  class func sendAsynchronousRequest(request: NSURLRequest, queue: NSOperationQueue, completionHandler handler: (NSURLResponse?, NSData?, NSError?) -> Void)
+extension URLConnection {
+  class func sendAsynchronousRequest(request: URLRequest, queue: OperationQueue, completionHandler handler: (URLResponse?, Data?, Error?) -> Void)
 }
-enum NSURLCredentialPersistence : UInt {
+enum URLCredentialPersistence : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case None
@@ -6144,133 +6133,133 @@ enum NSURLCredentialPersistence : UInt {
   case Permanent
   case Synchronizable
 }
-class NSURLCredential : NSObject, NSSecureCoding, NSCopying {
-  var persistence: NSURLCredentialPersistence { get }
+class URLCredential : Object, SecureCoding, Copying {
+  var persistence: URLCredentialPersistence { get }
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-extension NSURLCredential {
-  init(user: String, password: String, persistence: NSURLCredentialPersistence)
+extension URLCredential {
+  init(user: String, password: String, persistence: URLCredentialPersistence)
   var user: String? { get }
   var password: String? { get }
   var hasPassword: Bool { get }
 }
-extension NSURLCredential {
-  init(identity: SecIdentity, certificates certArray: [AnyObject]?, persistence: NSURLCredentialPersistence)
+extension URLCredential {
+  init(identity: SecIdentity, certificates certArray: [AnyObject]?, persistence: URLCredentialPersistence)
   var identity: SecIdentity? { get }
   var certificates: [AnyObject] { get }
 }
-extension NSURLCredential {
+extension URLCredential {
   init(trust: SecTrust)
    init(forTrust trust: SecTrust)
 }
-class NSURLCredentialStorage : NSObject {
-  class func sharedCredentialStorage() -> NSURLCredentialStorage
-  func credentialsForProtectionSpace(space: NSURLProtectionSpace) -> [String : NSURLCredential]?
-  var allCredentials: [NSURLProtectionSpace : [String : NSURLCredential]] { get }
-  func setCredential(credential: NSURLCredential, forProtectionSpace space: NSURLProtectionSpace)
-  func removeCredential(credential: NSURLCredential, forProtectionSpace space: NSURLProtectionSpace)
-  func removeCredential(credential: NSURLCredential, forProtectionSpace space: NSURLProtectionSpace, options: [String : AnyObject]?)
-  func defaultCredentialForProtectionSpace(space: NSURLProtectionSpace) -> NSURLCredential?
-  func setDefaultCredential(credential: NSURLCredential, forProtectionSpace space: NSURLProtectionSpace)
+class URLCredentialStorage : Object {
+  class func shared() -> URLCredentialStorage
+  func credentialsFor(space: URLProtectionSpace) -> [String : URLCredential]?
+  var allCredentials: [URLProtectionSpace : [String : URLCredential]] { get }
+  func setCredential(credential: URLCredential, forProtectionSpace space: URLProtectionSpace)
+  func remove(credential: URLCredential, forProtectionSpace space: URLProtectionSpace)
+  func remove(credential: URLCredential, forProtectionSpace space: URLProtectionSpace, options: [String : AnyObject]? = [:])
+  func defaultCredentialFor(space: URLProtectionSpace) -> URLCredential?
+  func setDefaultCredential(credential: URLCredential, forProtectionSpace space: URLProtectionSpace)
   init()
 }
-extension NSURLCredentialStorage {
-  func getCredentialsForProtectionSpace(protectionSpace: NSURLProtectionSpace, task: NSURLSessionTask, completionHandler: ([String : NSURLCredential]?) -> Void)
-  func setCredential(credential: NSURLCredential, forProtectionSpace protectionSpace: NSURLProtectionSpace, task: NSURLSessionTask)
-  func removeCredential(credential: NSURLCredential, forProtectionSpace protectionSpace: NSURLProtectionSpace, options: [String : AnyObject]?, task: NSURLSessionTask)
-  func getDefaultCredentialForProtectionSpace(space: NSURLProtectionSpace, task: NSURLSessionTask, completionHandler: (NSURLCredential?) -> Void)
-  func setDefaultCredential(credential: NSURLCredential, forProtectionSpace protectionSpace: NSURLProtectionSpace, task: NSURLSessionTask)
+extension URLCredentialStorage {
+  func getCredentialsFor(protectionSpace: URLProtectionSpace, task: URLSessionTask, completionHandler: ([String : URLCredential]?) -> Void)
+  func setCredential(credential: URLCredential, forProtectionSpace protectionSpace: URLProtectionSpace, task: URLSessionTask)
+  func remove(credential: URLCredential, forProtectionSpace protectionSpace: URLProtectionSpace, options: [String : AnyObject]? = [:], task: URLSessionTask)
+  func getDefaultCredentialFor(space: URLProtectionSpace, task: URLSessionTask, completionHandler: (URLCredential?) -> Void)
+  func setDefaultCredential(credential: URLCredential, forProtectionSpace protectionSpace: URLProtectionSpace, task: URLSessionTask)
 }
-let NSURLCredentialStorageChangedNotification: String
-let NSURLCredentialStorageRemoveSynchronizableCredentials: String
-class NSURLDownload : NSObject {
+let URLCredentialStorageChangedNotification: String
+let URLCredentialStorageRemoveSynchronizableCredentials: String
+class URLDownload : Object {
   class func canResumeDownloadDecodedWithEncodingMIMEType(MIMEType: String) -> Bool
-  init(request: NSURLRequest, delegate: NSURLDownloadDelegate?)
-  init(resumeData: NSData, delegate: NSURLDownloadDelegate?, path: String)
+  init(request: URLRequest, delegate: URLDownloadDelegate?)
+  init(resumeData: Data, delegate: URLDownloadDelegate?, path: String)
   func cancel()
   func setDestination(path: String, allowOverwrite: Bool)
-  @NSCopying var request: NSURLRequest { get }
-  @NSCopying var resumeData: NSData? { get }
+  @NSCopying var request: URLRequest { get }
+  @NSCopying var resumeData: Data? { get }
   var deletesFileUponFailure: Bool
   init()
 }
-protocol NSURLDownloadDelegate : NSObjectProtocol {
-  optional func downloadDidBegin(download: NSURLDownload)
-  optional func download(download: NSURLDownload, willSendRequest request: NSURLRequest, redirectResponse: NSURLResponse?) -> NSURLRequest?
-  optional func download(connection: NSURLDownload, canAuthenticateAgainstProtectionSpace protectionSpace: NSURLProtectionSpace) -> Bool
-  optional func download(download: NSURLDownload, didReceiveAuthenticationChallenge challenge: NSURLAuthenticationChallenge)
-  optional func download(download: NSURLDownload, didCancelAuthenticationChallenge challenge: NSURLAuthenticationChallenge)
-  optional func downloadShouldUseCredentialStorage(download: NSURLDownload) -> Bool
-  optional func download(download: NSURLDownload, didReceiveResponse response: NSURLResponse)
-  optional func download(download: NSURLDownload, willResumeWithResponse response: NSURLResponse, fromByte startingByte: Int64)
-  optional func download(download: NSURLDownload, didReceiveDataOfLength length: Int)
-  optional func download(download: NSURLDownload, shouldDecodeSourceDataOfMIMEType encodingType: String) -> Bool
-  optional func download(download: NSURLDownload, decideDestinationWithSuggestedFilename filename: String)
-  optional func download(download: NSURLDownload, didCreateDestination path: String)
-  optional func downloadDidFinish(download: NSURLDownload)
-  optional func download(download: NSURLDownload, didFailWithError error: NSError)
+protocol URLDownloadDelegate : ObjectProtocol {
+  optional func downloadDidBegin(download: URLDownload)
+  optional func download(download: URLDownload, willSend request: URLRequest, redirectResponse: URLResponse?) -> URLRequest?
+  optional func download(connection: URLDownload, canAuthenticateAgainstProtectionSpace protectionSpace: URLProtectionSpace) -> Bool
+  optional func download(download: URLDownload, didReceive challenge: URLAuthenticationChallenge)
+  optional func download(download: URLDownload, didCancel challenge: URLAuthenticationChallenge)
+  optional func downloadShouldUseCredentialStorage(download: URLDownload) -> Bool
+  optional func download(download: URLDownload, didReceive response: URLResponse)
+  optional func download(download: URLDownload, willResumeWith response: URLResponse, fromByte startingByte: Int64)
+  optional func download(download: URLDownload, didReceiveDataOfLength length: Int)
+  optional func download(download: URLDownload, shouldDecodeSourceDataOfMIMEType encodingType: String) -> Bool
+  optional func download(download: URLDownload, decideDestinationWithSuggestedFilename filename: String)
+  optional func download(download: URLDownload, didCreateDestination path: String)
+  optional func downloadDidFinish(download: URLDownload)
+  optional func download(download: URLDownload, didFailWithError error: Error)
 }
-let NSURLErrorDomain: String
-let NSURLErrorFailingURLErrorKey: String
-let NSURLErrorFailingURLStringErrorKey: String
-let NSURLErrorFailingURLPeerTrustErrorKey: String
-let NSURLErrorBackgroundTaskCancelledReasonKey: String
-var NSURLErrorCancelledReasonUserForceQuitApplication: Int { get }
-var NSURLErrorCancelledReasonBackgroundUpdatesDisabled: Int { get }
-var NSURLErrorCancelledReasonInsufficientSystemResources: Int { get }
-var NSURLErrorUnknown: Int { get }
-var NSURLErrorCancelled: Int { get }
-var NSURLErrorBadURL: Int { get }
-var NSURLErrorTimedOut: Int { get }
-var NSURLErrorUnsupportedURL: Int { get }
-var NSURLErrorCannotFindHost: Int { get }
-var NSURLErrorCannotConnectToHost: Int { get }
-var NSURLErrorNetworkConnectionLost: Int { get }
-var NSURLErrorDNSLookupFailed: Int { get }
-var NSURLErrorHTTPTooManyRedirects: Int { get }
-var NSURLErrorResourceUnavailable: Int { get }
-var NSURLErrorNotConnectedToInternet: Int { get }
-var NSURLErrorRedirectToNonExistentLocation: Int { get }
-var NSURLErrorBadServerResponse: Int { get }
-var NSURLErrorUserCancelledAuthentication: Int { get }
-var NSURLErrorUserAuthenticationRequired: Int { get }
-var NSURLErrorZeroByteResource: Int { get }
-var NSURLErrorCannotDecodeRawData: Int { get }
-var NSURLErrorCannotDecodeContentData: Int { get }
-var NSURLErrorCannotParseResponse: Int { get }
-var NSURLErrorAppTransportSecurityRequiresSecureConnection: Int { get }
-var NSURLErrorFileDoesNotExist: Int { get }
-var NSURLErrorFileIsDirectory: Int { get }
-var NSURLErrorNoPermissionsToReadFile: Int { get }
-var NSURLErrorDataLengthExceedsMaximum: Int { get }
-var NSURLErrorSecureConnectionFailed: Int { get }
-var NSURLErrorServerCertificateHasBadDate: Int { get }
-var NSURLErrorServerCertificateUntrusted: Int { get }
-var NSURLErrorServerCertificateHasUnknownRoot: Int { get }
-var NSURLErrorServerCertificateNotYetValid: Int { get }
-var NSURLErrorClientCertificateRejected: Int { get }
-var NSURLErrorClientCertificateRequired: Int { get }
-var NSURLErrorCannotLoadFromNetwork: Int { get }
-var NSURLErrorCannotCreateFile: Int { get }
-var NSURLErrorCannotOpenFile: Int { get }
-var NSURLErrorCannotCloseFile: Int { get }
-var NSURLErrorCannotWriteToFile: Int { get }
-var NSURLErrorCannotRemoveFile: Int { get }
-var NSURLErrorCannotMoveFile: Int { get }
-var NSURLErrorDownloadDecodingFailedMidStream: Int { get }
-var NSURLErrorDownloadDecodingFailedToComplete: Int { get }
-var NSURLErrorInternationalRoamingOff: Int { get }
-var NSURLErrorCallIsActive: Int { get }
-var NSURLErrorDataNotAllowed: Int { get }
-var NSURLErrorRequestBodyStreamExhausted: Int { get }
-var NSURLErrorBackgroundSessionRequiresSharedContainer: Int { get }
-var NSURLErrorBackgroundSessionInUseByAnotherProcess: Int { get }
-var NSURLErrorBackgroundSessionWasDisconnected: Int { get }
-enum NSURLHandleStatus : UInt {
+let URLErrorDomain: String
+let URLErrorFailingURLErrorKey: String
+let URLErrorFailingURLStringErrorKey: String
+let URLErrorFailingURLPeerTrustErrorKey: String
+let URLErrorBackgroundTaskCancelledReasonKey: String
+var URLErrorCancelledReasonUserForceQuitApplication: Int { get }
+var URLErrorCancelledReasonBackgroundUpdatesDisabled: Int { get }
+var URLErrorCancelledReasonInsufficientSystemResources: Int { get }
+var URLErrorUnknown: Int { get }
+var URLErrorCancelled: Int { get }
+var URLErrorBadURL: Int { get }
+var URLErrorTimedOut: Int { get }
+var URLErrorUnsupportedURL: Int { get }
+var URLErrorCannotFindHost: Int { get }
+var URLErrorCannotConnectToHost: Int { get }
+var URLErrorNetworkConnectionLost: Int { get }
+var URLErrorDNSLookupFailed: Int { get }
+var URLErrorHTTPTooManyRedirects: Int { get }
+var URLErrorResourceUnavailable: Int { get }
+var URLErrorNotConnectedToInternet: Int { get }
+var URLErrorRedirectToNonExistentLocation: Int { get }
+var URLErrorBadServerResponse: Int { get }
+var URLErrorUserCancelledAuthentication: Int { get }
+var URLErrorUserAuthenticationRequired: Int { get }
+var URLErrorZeroByteResource: Int { get }
+var URLErrorCannotDecodeRawData: Int { get }
+var URLErrorCannotDecodeContentData: Int { get }
+var URLErrorCannotParseResponse: Int { get }
+var URLErrorAppTransportSecurityRequiresSecureConnection: Int { get }
+var URLErrorFileDoesNotExist: Int { get }
+var URLErrorFileIsDirectory: Int { get }
+var URLErrorNoPermissionsToReadFile: Int { get }
+var URLErrorDataLengthExceedsMaximum: Int { get }
+var URLErrorSecureConnectionFailed: Int { get }
+var URLErrorServerCertificateHasBadDate: Int { get }
+var URLErrorServerCertificateUntrusted: Int { get }
+var URLErrorServerCertificateHasUnknownRoot: Int { get }
+var URLErrorServerCertificateNotYetValid: Int { get }
+var URLErrorClientCertificateRejected: Int { get }
+var URLErrorClientCertificateRequired: Int { get }
+var URLErrorCannotLoadFromNetwork: Int { get }
+var URLErrorCannotCreateFile: Int { get }
+var URLErrorCannotOpenFile: Int { get }
+var URLErrorCannotCloseFile: Int { get }
+var URLErrorCannotWriteToFile: Int { get }
+var URLErrorCannotRemoveFile: Int { get }
+var URLErrorCannotMoveFile: Int { get }
+var URLErrorDownloadDecodingFailedMidStream: Int { get }
+var URLErrorDownloadDecodingFailedToComplete: Int { get }
+var URLErrorInternationalRoamingOff: Int { get }
+var URLErrorCallIsActive: Int { get }
+var URLErrorDataNotAllowed: Int { get }
+var URLErrorRequestBodyStreamExhausted: Int { get }
+var URLErrorBackgroundSessionRequiresSharedContainer: Int { get }
+var URLErrorBackgroundSessionInUseByAnotherProcess: Int { get }
+var URLErrorBackgroundSessionWasDisconnected: Int { get }
+enum URLHandleStatus : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case NotLoaded
@@ -6278,27 +6267,27 @@ enum NSURLHandleStatus : UInt {
   case LoadInProgress
   case LoadFailed
 }
-protocol NSURLHandleClient {
+protocol URLHandleClient {
 }
-class NSURLHandle : NSObject {
+class URLHandle : Object {
   init()
 }
-let NSURLProtectionSpaceHTTP: String
-let NSURLProtectionSpaceHTTPS: String
-let NSURLProtectionSpaceFTP: String
-let NSURLProtectionSpaceHTTPProxy: String
-let NSURLProtectionSpaceHTTPSProxy: String
-let NSURLProtectionSpaceFTPProxy: String
-let NSURLProtectionSpaceSOCKSProxy: String
-let NSURLAuthenticationMethodDefault: String
-let NSURLAuthenticationMethodHTTPBasic: String
-let NSURLAuthenticationMethodHTTPDigest: String
-let NSURLAuthenticationMethodHTMLForm: String
-let NSURLAuthenticationMethodNTLM: String
-let NSURLAuthenticationMethodNegotiate: String
-let NSURLAuthenticationMethodClientCertificate: String
-let NSURLAuthenticationMethodServerTrust: String
-class NSURLProtectionSpace : NSObject, NSSecureCoding, NSCopying {
+let URLProtectionSpaceHTTP: String
+let URLProtectionSpaceHTTPS: String
+let URLProtectionSpaceFTP: String
+let URLProtectionSpaceHTTPProxy: String
+let URLProtectionSpaceHTTPSProxy: String
+let URLProtectionSpaceFTPProxy: String
+let URLProtectionSpaceSOCKSProxy: String
+let URLAuthenticationMethodDefault: String
+let URLAuthenticationMethodHTTPBasic: String
+let URLAuthenticationMethodHTTPDigest: String
+let URLAuthenticationMethodHTMLForm: String
+let URLAuthenticationMethodNTLM: String
+let URLAuthenticationMethodNegotiate: String
+let URLAuthenticationMethodClientCertificate: String
+let URLAuthenticationMethodServerTrust: String
+class URLProtectionSpace : Object, SecureCoding, Copying {
   init(host: String, port: Int, protocol: String?, realm: String?, authenticationMethod: String?)
   init(proxyHost host: String, port: Int, type: String?, realm: String?, authenticationMethod: String?)
   var realm: String? { get }
@@ -6311,60 +6300,60 @@ class NSURLProtectionSpace : NSObject, NSSecureCoding, NSCopying {
   func isProxy() -> Bool
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-extension NSURLProtectionSpace {
-  var distinguishedNames: [NSData]? { get }
+extension URLProtectionSpace {
+  var distinguishedNames: [Data]? { get }
 }
-extension NSURLProtectionSpace {
+extension URLProtectionSpace {
   var serverTrust: SecTrust? { get }
 }
-protocol NSURLProtocolClient : NSObjectProtocol {
-  func URLProtocol(protocol: NSURLProtocol, wasRedirectedToRequest request: NSURLRequest, redirectResponse: NSURLResponse)
-  func URLProtocol(protocol: NSURLProtocol, cachedResponseIsValid cachedResponse: NSCachedURLResponse)
-  func URLProtocol(protocol: NSURLProtocol, didReceiveResponse response: NSURLResponse, cacheStoragePolicy policy: NSURLCacheStoragePolicy)
-  func URLProtocol(protocol: NSURLProtocol, didLoadData data: NSData)
-  func URLProtocolDidFinishLoading(protocol: NSURLProtocol)
-  func URLProtocol(protocol: NSURLProtocol, didFailWithError error: NSError)
-  func URLProtocol(protocol: NSURLProtocol, didReceiveAuthenticationChallenge challenge: NSURLAuthenticationChallenge)
-  func URLProtocol(protocol: NSURLProtocol, didCancelAuthenticationChallenge challenge: NSURLAuthenticationChallenge)
+protocol URLProtocolClient : ObjectProtocol {
+  func urlProtocol(protocol: URLProtocol, wasRedirectedTo request: URLRequest, redirectResponse: URLResponse)
+  func urlProtocol(protocol: URLProtocol, cachedResponseIsValid cachedResponse: CachedURLResponse)
+  func urlProtocol(protocol: URLProtocol, didReceive response: URLResponse, cacheStoragePolicy policy: URLCacheStoragePolicy)
+  func urlProtocol(protocol: URLProtocol, didLoad data: Data)
+  func urlProtocolDidFinishLoading(protocol: URLProtocol)
+  func urlProtocol(protocol: URLProtocol, didFailWithError error: Error)
+  func urlProtocol(protocol: URLProtocol, didReceive challenge: URLAuthenticationChallenge)
+  func urlProtocol(protocol: URLProtocol, didCancel challenge: URLAuthenticationChallenge)
 }
-class NSURLProtocol : NSObject {
-  init(request: NSURLRequest, cachedResponse: NSCachedURLResponse?, client: NSURLProtocolClient?)
-  var client: NSURLProtocolClient? { get }
-  @NSCopying var request: NSURLRequest { get }
-  @NSCopying var cachedResponse: NSCachedURLResponse? { get }
-  class func canInitWithRequest(request: NSURLRequest) -> Bool
-  class func canonicalRequestForRequest(request: NSURLRequest) -> NSURLRequest
-  class func requestIsCacheEquivalent(a: NSURLRequest, toRequest b: NSURLRequest) -> Bool
+class URLProtocol : Object {
+  init(request: URLRequest, cachedResponse: CachedURLResponse?, client: URLProtocolClient?)
+  var client: URLProtocolClient? { get }
+  @NSCopying var request: URLRequest { get }
+  @NSCopying var cachedResponse: CachedURLResponse? { get }
+  class func canInitWith(request: URLRequest) -> Bool
+  class func canonicalRequestFor(request: URLRequest) -> URLRequest
+  class func requestIsCacheEquivalent(a: URLRequest, to b: URLRequest) -> Bool
   func startLoading()
   func stopLoading()
-  class func propertyForKey(key: String, inRequest request: NSURLRequest) -> AnyObject?
-  class func setProperty(value: AnyObject, forKey key: String, inRequest request: NSMutableURLRequest)
-  class func removePropertyForKey(key: String, inRequest request: NSMutableURLRequest)
+  class func propertyForKey(key: String, in request: URLRequest) -> AnyObject?
+  class func setProperty(value: AnyObject, forKey key: String, in request: MutableURLRequest)
+  class func removePropertyForKey(key: String, in request: MutableURLRequest)
   class func registerClass(protocolClass: AnyClass) -> Bool
   class func unregisterClass(protocolClass: AnyClass)
   convenience init()
 }
-extension NSURLProtocol {
-  class func canInitWithTask(task: NSURLSessionTask) -> Bool
-  convenience init(task: NSURLSessionTask, cachedResponse: NSCachedURLResponse?, client: NSURLProtocolClient?)
-  @NSCopying var task: NSURLSessionTask? { get }
+extension URLProtocol {
+  class func canInitWith(task: URLSessionTask) -> Bool
+  convenience init(task: URLSessionTask, cachedResponse: CachedURLResponse?, client: URLProtocolClient?)
+  @NSCopying var task: URLSessionTask? { get }
 }
-enum NSURLRequestCachePolicy : UInt {
+enum URLRequestCachePolicy : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case UseProtocolCachePolicy
   case ReloadIgnoringLocalCacheData
   case ReloadIgnoringLocalAndRemoteCacheData
-  static var ReloadIgnoringCacheData: NSURLRequestCachePolicy { get }
+  static var ReloadIgnoringCacheData: URLRequestCachePolicy { get }
   case ReturnCacheDataElseLoad
   case ReturnCacheDataDontLoad
   case ReloadRevalidatingCacheData
 }
-enum NSURLRequestNetworkServiceType : UInt {
+enum URLRequestNetworkServiceType : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case NetworkServiceTypeDefault
@@ -6373,100 +6362,100 @@ enum NSURLRequestNetworkServiceType : UInt {
   case NetworkServiceTypeBackground
   case NetworkServiceTypeVoice
 }
-class NSURLRequest : NSObject, NSSecureCoding, NSCopying, NSMutableCopying {
+class URLRequest : Object, SecureCoding, Copying, MutableCopying {
   class func supportsSecureCoding() -> Bool
-  convenience init(URL: NSURL)
-  init(URL: NSURL, cachePolicy: NSURLRequestCachePolicy, timeoutInterval: NSTimeInterval)
-  @NSCopying var URL: NSURL? { get }
-  var cachePolicy: NSURLRequestCachePolicy { get }
-  var timeoutInterval: NSTimeInterval { get }
-  @NSCopying var mainDocumentURL: NSURL? { get }
-  var networkServiceType: NSURLRequestNetworkServiceType { get }
+  convenience init(url URL: URL)
+  init(url URL: URL, cachePolicy: URLRequestCachePolicy, timeoutInterval: TimeInterval)
+  @NSCopying var url: URL? { get }
+  var cachePolicy: URLRequestCachePolicy { get }
+  var timeoutInterval: TimeInterval { get }
+  @NSCopying var mainDocumentURL: URL? { get }
+  var networkServiceType: URLRequestNetworkServiceType { get }
   var allowsCellularAccess: Bool { get }
   convenience init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
 }
-class NSMutableURLRequest : NSURLRequest {
-  @NSCopying var URL: NSURL?
-  var cachePolicy: NSURLRequestCachePolicy
-  var timeoutInterval: NSTimeInterval
-  @NSCopying var mainDocumentURL: NSURL?
-  var networkServiceType: NSURLRequestNetworkServiceType
+class MutableURLRequest : URLRequest {
+  @NSCopying var url: URL?
+  var cachePolicy: URLRequestCachePolicy
+  var timeoutInterval: TimeInterval
+  @NSCopying var mainDocumentURL: URL?
+  var networkServiceType: URLRequestNetworkServiceType
   var allowsCellularAccess: Bool
-  convenience init(URL: NSURL)
-  init(URL: NSURL, cachePolicy: NSURLRequestCachePolicy, timeoutInterval: NSTimeInterval)
+  convenience init(url URL: URL)
+  init(url URL: URL, cachePolicy: URLRequestCachePolicy, timeoutInterval: TimeInterval)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-extension NSURLRequest {
-  var HTTPMethod: String? { get }
+extension URLRequest {
+  var httpMethod: String? { get }
   var allHTTPHeaderFields: [String : String]? { get }
   func valueForHTTPHeaderField(field: String) -> String?
-  @NSCopying var HTTPBody: NSData? { get }
-  var HTTPBodyStream: NSInputStream? { get }
-  var HTTPShouldHandleCookies: Bool { get }
-  var HTTPShouldUsePipelining: Bool { get }
+  @NSCopying var httpBody: Data? { get }
+  var httpBodyStream: InputStream? { get }
+  var httpShouldHandleCookies: Bool { get }
+  var httpShouldUsePipelining: Bool { get }
 }
-extension NSMutableURLRequest {
-  var HTTPMethod: String
+extension MutableURLRequest {
+  var httpMethod: String
   var allHTTPHeaderFields: [String : String]?
   func setValue(value: String?, forHTTPHeaderField field: String)
   func addValue(value: String, forHTTPHeaderField field: String)
-  @NSCopying var HTTPBody: NSData?
-  var HTTPBodyStream: NSInputStream?
-  var HTTPShouldHandleCookies: Bool
-  var HTTPShouldUsePipelining: Bool
+  @NSCopying var httpBody: Data?
+  var httpBodyStream: InputStream?
+  var httpShouldHandleCookies: Bool
+  var httpShouldUsePipelining: Bool
 }
-class NSURLResponse : NSObject, NSSecureCoding, NSCopying {
-  init(URL: NSURL, MIMEType: String?, expectedContentLength length: Int, textEncodingName name: String?)
-  @NSCopying var URL: NSURL? { get }
-  var MIMEType: String? { get }
+class URLResponse : Object, SecureCoding, Copying {
+  init(url URL: URL, mimeType MIMEType: String?, expectedContentLength length: Int, textEncodingName name: String?)
+  @NSCopying var url: URL? { get }
+  var mimeType: String? { get }
   var expectedContentLength: Int64 { get }
   var textEncodingName: String? { get }
   var suggestedFilename: String? { get }
   convenience init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class NSHTTPURLResponse : NSURLResponse {
-  init?(URL url: NSURL, statusCode: Int, HTTPVersion: String?, headerFields: [String : String]?)
+class HTTPURLResponse : URLResponse {
+  init?(url: URL, statusCode: Int, httpVersion HTTPVersion: String?, headerFields: [String : String]?)
   var statusCode: Int { get }
-  var allHeaderFields: [NSObject : AnyObject] { get }
+  var allHeaderFields: [Object : AnyObject] { get }
   class func localizedStringForStatusCode(statusCode: Int) -> String
-  init(URL: NSURL, MIMEType: String?, expectedContentLength length: Int, textEncodingName name: String?)
+  init(url URL: URL, mimeType MIMEType: String?, expectedContentLength length: Int, textEncodingName name: String?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class NSUUID : NSObject, NSCopying, NSSecureCoding {
+class UUID : Object, Copying, SecureCoding {
   init()
-  convenience init?(UUIDString string: String)
-  convenience init(UUIDBytes bytes: UnsafePointer<UInt8>)
-  func getUUIDBytes(uuid: UnsafeMutablePointer<UInt8>)
-  var UUIDString: String { get }
-  func copyWithZone(zone: NSZone) -> AnyObject
+  convenience init?(uuidString string: String)
+  convenience init(uuidBytes bytes: UnsafePointer<UInt8>)
+  func getBytes(uuid: UnsafeMutablePointer<UInt8>)
+  var uuidString: String { get }
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class NSUbiquitousKeyValueStore : NSObject {
-  class func defaultStore() -> NSUbiquitousKeyValueStore
+class UbiquitousKeyValueStore : Object {
+  class func defaultStore() -> UbiquitousKeyValueStore
   func objectForKey(aKey: String) -> AnyObject?
   func setObject(anObject: AnyObject?, forKey aKey: String)
   func removeObjectForKey(aKey: String)
   func stringForKey(aKey: String) -> String?
   func arrayForKey(aKey: String) -> [AnyObject]?
   func dictionaryForKey(aKey: String) -> [String : AnyObject]?
-  func dataForKey(aKey: String) -> NSData?
+  func dataForKey(aKey: String) -> Data?
   func longLongForKey(aKey: String) -> Int64
   func doubleForKey(aKey: String) -> Double
   func boolForKey(aKey: String) -> Bool
   func setString(aString: String?, forKey aKey: String)
-  func setData(aData: NSData?, forKey aKey: String)
+  func setData(aData: Data?, forKey aKey: String)
   func setArray(anArray: [AnyObject]?, forKey aKey: String)
   func setDictionary(aDictionary: [String : AnyObject]?, forKey aKey: String)
   func setLongLong(value: Int64, forKey aKey: String)
@@ -6476,21 +6465,21 @@ class NSUbiquitousKeyValueStore : NSObject {
   func synchronize() -> Bool
   init()
 }
-let NSUbiquitousKeyValueStoreDidChangeExternallyNotification: String
-let NSUbiquitousKeyValueStoreChangeReasonKey: String
-let NSUbiquitousKeyValueStoreChangedKeysKey: String
-var NSUbiquitousKeyValueStoreServerChange: Int { get }
-var NSUbiquitousKeyValueStoreInitialSyncChange: Int { get }
-var NSUbiquitousKeyValueStoreQuotaViolationChange: Int { get }
-var NSUbiquitousKeyValueStoreAccountChange: Int { get }
-let NSUndoCloseGroupingRunLoopOrdering: Int
-class NSUndoManager : NSObject {
+let ubiquitousKeyValueStoreDidChangeExternallyNotification: String
+let ubiquitousKeyValueStoreChangeReasonKey: String
+let ubiquitousKeyValueStoreChangedKeysKey: String
+var ubiquitousKeyValueStoreServerChange: Int { get }
+var ubiquitousKeyValueStoreInitialSyncChange: Int { get }
+var ubiquitousKeyValueStoreQuotaViolationChange: Int { get }
+var ubiquitousKeyValueStoreAccountChange: Int { get }
+let undoCloseGroupingRunLoopOrdering: Int
+class UndoManager : Object {
   func beginUndoGrouping()
   func endUndoGrouping()
   var groupingLevel: Int { get }
   func disableUndoRegistration()
   func enableUndoRegistration()
-  var undoRegistrationEnabled: Bool { get }
+  var isUndoRegistrationEnabled: Bool { get }
   var groupsByEvent: Bool
   var levelsOfUndo: Int
   var runLoopModes: [String]
@@ -6499,8 +6488,8 @@ class NSUndoManager : NSObject {
   func undoNestedGroup()
   var canUndo: Bool { get }
   var canRedo: Bool { get }
-  var undoing: Bool { get }
-  var redoing: Bool { get }
+  var isUndoing: Bool { get }
+  var isRedoing: Bool { get }
   func removeAllActions()
   func removeAllActionsWithTarget(target: AnyObject)
   func registerUndoWithTarget(target: AnyObject, selector: Selector, object anObject: AnyObject?)
@@ -6518,51 +6507,51 @@ class NSUndoManager : NSObject {
   func redoMenuTitleForUndoActionName(actionName: String) -> String
   init()
 }
-extension NSUndoManager {
+extension UndoManager {
   func registerUndoWithTarget<TargetType : AnyObject>(target: TargetType, handler: (TargetType) -> Void)
 }
-let NSUndoManagerGroupIsDiscardableKey: String
-let NSUndoManagerCheckpointNotification: String
-let NSUndoManagerWillUndoChangeNotification: String
-let NSUndoManagerWillRedoChangeNotification: String
-let NSUndoManagerDidUndoChangeNotification: String
-let NSUndoManagerDidRedoChangeNotification: String
-let NSUndoManagerDidOpenUndoGroupNotification: String
-let NSUndoManagerWillCloseUndoGroupNotification: String
-let NSUndoManagerDidCloseUndoGroupNotification: String
-class NSUserActivity : NSObject {
+let undoManagerGroupIsDiscardableKey: String
+let undoManagerCheckpointNotification: String
+let undoManagerWillUndoChangeNotification: String
+let undoManagerWillRedoChangeNotification: String
+let undoManagerDidUndoChangeNotification: String
+let undoManagerDidRedoChangeNotification: String
+let undoManagerDidOpenUndoGroupNotification: String
+let undoManagerWillCloseUndoGroupNotification: String
+let undoManagerDidCloseUndoGroupNotification: String
+class UserActivity : Object {
   init(activityType: String)
   init()
   var activityType: String { get }
   var title: String?
-  var userInfo: [NSObject : AnyObject]?
-  func addUserInfoEntriesFromDictionary(otherDictionary: [NSObject : AnyObject])
+  var userInfo: [Object : AnyObject]?
+  func addUserInfoEntriesFrom(otherDictionary: [Object : AnyObject])
   var requiredUserInfoKeys: Set<String>
   var needsSave: Bool
-  @NSCopying var webpageURL: NSURL?
-  @NSCopying var expirationDate: NSDate
+  @NSCopying var webpageURL: URL?
+  @NSCopying var expirationDate: Date
   var keywords: Set<String>
   var supportsContinuationStreams: Bool
-  weak var delegate: @sil_weak NSUserActivityDelegate?
+  weak var delegate: @sil_weak UserActivityDelegate?
   func becomeCurrent()
   func resignCurrent()
   func invalidate()
-  func getContinuationStreamsWithCompletionHandler(completionHandler: (NSInputStream?, NSOutputStream?, NSError?) -> Void)
-  var eligibleForHandoff: Bool
-  var eligibleForSearch: Bool
-  var eligibleForPublicIndexing: Bool
+  func getContinuationStreamsWithCompletionHandler(completionHandler: (InputStream?, OutputStream?, Error?) -> Void)
+  var isEligibleForHandoff: Bool
+  var isEligibleForSearch: Bool
+  var isEligibleForPublicIndexing: Bool
 }
-let NSUserActivityTypeBrowsingWeb: String
-protocol NSUserActivityDelegate : NSObjectProtocol {
-  optional func userActivityWillSave(userActivity: NSUserActivity)
-  optional func userActivityWasContinued(userActivity: NSUserActivity)
-  optional func userActivity(userActivity: NSUserActivity?, didReceiveInputStream inputStream: NSInputStream, outputStream: NSOutputStream)
+let userActivityTypeBrowsingWeb: String
+protocol UserActivityDelegate : ObjectProtocol {
+  optional func userActivityWillSave(userActivity: UserActivity)
+  optional func userActivityWasContinued(userActivity: UserActivity)
+  optional func userActivity(userActivity: UserActivity?, didReceive inputStream: InputStream, outputStream: OutputStream)
 }
-let NSGlobalDomain: String
-let NSArgumentDomain: String
-let NSRegistrationDomain: String
-class NSUserDefaults : NSObject {
-  class func standardUserDefaults() -> NSUserDefaults
+let globalDomain: String
+let argumentDomain: String
+let registrationDomain: String
+class UserDefaults : Object {
+  class func standard() -> UserDefaults
   class func resetStandardUserDefaults()
   convenience init()
   init?(suiteName suitename: String?)
@@ -6572,19 +6561,19 @@ class NSUserDefaults : NSObject {
   func stringForKey(defaultName: String) -> String?
   func arrayForKey(defaultName: String) -> [AnyObject]?
   func dictionaryForKey(defaultName: String) -> [String : AnyObject]?
-  func dataForKey(defaultName: String) -> NSData?
+  func dataForKey(defaultName: String) -> Data?
   func stringArrayForKey(defaultName: String) -> [String]?
   func integerForKey(defaultName: String) -> Int
   func floatForKey(defaultName: String) -> Float
   func doubleForKey(defaultName: String) -> Double
   func boolForKey(defaultName: String) -> Bool
-  func URLForKey(defaultName: String) -> NSURL?
+  func urlForKey(defaultName: String) -> URL?
   func setInteger(value: Int, forKey defaultName: String)
   func setFloat(value: Float, forKey defaultName: String)
   func setDouble(value: Double, forKey defaultName: String)
   func setBool(value: Bool, forKey defaultName: String)
-  func setURL(url: NSURL?, forKey defaultName: String)
-  func registerDefaults(registrationDictionary: [String : AnyObject])
+  func setURL(url: URL?, forKey defaultName: String)
+  func register(registrationDictionary: [String : AnyObject])
   func addSuiteNamed(suiteName: String)
   func removeSuiteNamed(suiteName: String)
   func dictionaryRepresentation() -> [String : AnyObject]
@@ -6599,8 +6588,8 @@ class NSUserDefaults : NSObject {
   func objectIsForcedForKey(key: String) -> Bool
   func objectIsForcedForKey(key: String, inDomain domain: String) -> Bool
 }
-let NSUserDefaultsDidChangeNotification: String
-enum NSUserNotificationActivationType : Int {
+let userDefaultsDidChangeNotification: String
+enum UserNotificationActivationType : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case None
@@ -6609,107 +6598,107 @@ enum NSUserNotificationActivationType : Int {
   case Replied
   case AdditionalActionClicked
 }
-class NSUserNotification : NSObject, NSCopying {
+class UserNotification : Object, Copying {
   init()
   var title: String?
   var subtitle: String?
   var informativeText: String?
   var actionButtonTitle: String
   var userInfo: [String : AnyObject]?
-  @NSCopying var deliveryDate: NSDate?
-  @NSCopying var deliveryTimeZone: NSTimeZone?
-  @NSCopying var deliveryRepeatInterval: NSDateComponents?
-  @NSCopying var actualDeliveryDate: NSDate? { get }
-  var presented: Bool { get }
-  var remote: Bool { get }
+  @NSCopying var deliveryDate: Date?
+  @NSCopying var deliveryTimeZone: TimeZone?
+  @NSCopying var deliveryRepeatInterval: DateComponents?
+  @NSCopying var actualDeliveryDate: Date? { get }
+  var isPresented: Bool { get }
+  var isRemote: Bool { get }
   var soundName: String?
   var hasActionButton: Bool
-  var activationType: NSUserNotificationActivationType { get }
+  var activationType: UserNotificationActivationType { get }
   var otherButtonTitle: String
   var identifier: String?
   var hasReplyButton: Bool
   var responsePlaceholder: String?
-  @NSCopying var response: NSAttributedString? { get }
-  var additionalActions: [NSUserNotificationAction]?
-  @NSCopying var additionalActivationAction: NSUserNotificationAction? { get }
-  func copyWithZone(zone: NSZone) -> AnyObject
+  @NSCopying var response: AttributedString? { get }
+  var additionalActions: [UserNotificationAction]?
+  @NSCopying var additionalActivationAction: UserNotificationAction? { get }
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class NSUserNotificationAction : NSObject, NSCopying {
+class UserNotificationAction : Object, Copying {
   convenience init(identifier: String?, title: String?)
   var identifier: String? { get }
   var title: String? { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-let NSUserNotificationDefaultSoundName: String
-class NSUserNotificationCenter : NSObject {
-  class func defaultUserNotificationCenter() -> NSUserNotificationCenter
-  unowned(unsafe) var delegate: @sil_unmanaged NSUserNotificationCenterDelegate?
-  var scheduledNotifications: [NSUserNotification]
-  func scheduleNotification(notification: NSUserNotification)
-  func removeScheduledNotification(notification: NSUserNotification)
-  var deliveredNotifications: [NSUserNotification] { get }
-  func deliverNotification(notification: NSUserNotification)
-  func removeDeliveredNotification(notification: NSUserNotification)
+let userNotificationDefaultSoundName: String
+class UserNotificationCenter : Object {
+  class func defaultUserNotificationCenter() -> UserNotificationCenter
+  unowned(unsafe) var delegate: @sil_unmanaged UserNotificationCenterDelegate?
+  var scheduledNotifications: [UserNotification]
+  func scheduleNotification(notification: UserNotification)
+  func removeScheduledNotification(notification: UserNotification)
+  var deliveredNotifications: [UserNotification] { get }
+  func deliver(notification: UserNotification)
+  func removeDeliveredNotification(notification: UserNotification)
   func removeAllDeliveredNotifications()
   init()
 }
-protocol NSUserNotificationCenterDelegate : NSObjectProtocol {
-  optional func userNotificationCenter(center: NSUserNotificationCenter, didDeliverNotification notification: NSUserNotification)
-  optional func userNotificationCenter(center: NSUserNotificationCenter, didActivateNotification notification: NSUserNotification)
-  optional func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool
+protocol UserNotificationCenterDelegate : ObjectProtocol {
+  optional func userNotificationCenter(center: UserNotificationCenter, didDeliver notification: UserNotification)
+  optional func userNotificationCenter(center: UserNotificationCenter, didActivateNotification notification: UserNotification)
+  optional func userNotificationCenter(center: UserNotificationCenter, shouldPresent notification: UserNotification) -> Bool
 }
-class NSUserScriptTask : NSObject {
-  init(URL url: NSURL) throws
-  @NSCopying var scriptURL: NSURL { get }
-  func executeWithCompletionHandler(handler: NSUserScriptTaskCompletionHandler?)
+class UserScriptTask : Object {
+  init(url: URL) throws
+  @NSCopying var scriptURL: URL { get }
+  func execute(completionHandler handler: UserScriptTaskCompletionHandler? = nil)
   convenience init()
 }
-typealias NSUserScriptTaskCompletionHandler = (NSError?) -> Void
-class NSUserUnixTask : NSUserScriptTask {
-  var standardInput: NSFileHandle?
-  var standardOutput: NSFileHandle?
-  var standardError: NSFileHandle?
-  func executeWithArguments(arguments: [String]?, completionHandler handler: NSUserUnixTaskCompletionHandler?)
-  init(URL url: NSURL) throws
+typealias UserScriptTaskCompletionHandler = (Error?) -> Void
+class UserUnixTask : UserScriptTask {
+  var standardInput: FileHandle?
+  var standardOutput: FileHandle?
+  var standardError: FileHandle?
+  func executeWithArguments(arguments: [String]?, completionHandler handler: UserUnixTaskCompletionHandler? = nil)
+  init(url: URL) throws
   convenience init()
 }
-typealias NSUserUnixTaskCompletionHandler = (NSError?) -> Void
-class NSUserAppleScriptTask : NSUserScriptTask {
-  func executeWithAppleEvent(event: NSAppleEventDescriptor?, completionHandler handler: NSUserAppleScriptTaskCompletionHandler?)
-  init(URL url: NSURL) throws
+typealias UserUnixTaskCompletionHandler = (Error?) -> Void
+class UserAppleScriptTask : UserScriptTask {
+  func executeWithAppleEvent(event: AppleEventDescriptor?, completionHandler handler: UserAppleScriptTaskCompletionHandler? = nil)
+  init(url: URL) throws
   convenience init()
 }
-typealias NSUserAppleScriptTaskCompletionHandler = (NSAppleEventDescriptor?, NSError?) -> Void
-class NSUserAutomatorTask : NSUserScriptTask {
+typealias UserAppleScriptTaskCompletionHandler = (AppleEventDescriptor?, Error?) -> Void
+class UserAutomatorTask : UserScriptTask {
   var variables: [String : AnyObject]?
-  func executeWithInput(input: NSSecureCoding?, completionHandler handler: NSUserAutomatorTaskCompletionHandler?)
-  init(URL url: NSURL) throws
+  func executeWithInput(input: SecureCoding?, completionHandler handler: UserAutomatorTaskCompletionHandler? = nil)
+  init(url: URL) throws
   convenience init()
 }
-typealias NSUserAutomatorTaskCompletionHandler = (AnyObject?, NSError?) -> Void
-class NSValue : NSObject, NSCopying, NSSecureCoding {
+typealias UserAutomatorTaskCompletionHandler = (AnyObject?, Error?) -> Void
+class Value : Object, Copying, SecureCoding {
   func getValue(value: UnsafeMutablePointer<Void>)
   var objCType: UnsafePointer<Int8> { get }
   init(bytes value: UnsafePointer<Void>, objCType type: UnsafePointer<Int8>)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
+  func encodeWith(aCoder: Coder)
 }
-extension NSValue {
+extension Value {
    init(_ value: UnsafePointer<Void>, withObjCType type: UnsafePointer<Int8>)
 }
-extension NSValue {
+extension Value {
    init(nonretainedObject anObject: AnyObject?)
   var nonretainedObjectValue: AnyObject? { get }
    init(pointer: UnsafePointer<Void>)
   var pointerValue: UnsafeMutablePointer<Void> { get }
-  func isEqualToValue(value: NSValue) -> Bool
+  func isEqualTo(value: Value) -> Bool
 }
-class NSNumber : NSValue {
-  init?(coder aDecoder: NSCoder)
+class Number : Value {
+  init?(coder aDecoder: Coder)
   init(char value: Int8)
   init(unsignedChar value: UInt8)
   init(short value: Int16)
@@ -6741,32 +6730,29 @@ class NSNumber : NSValue {
   var integerValue: Int { get }
   var unsignedIntegerValue: UInt { get }
   var stringValue: String { get }
-  func compare(otherNumber: NSNumber) -> NSComparisonResult
-  func isEqualToNumber(number: NSNumber) -> Bool
+  func compare(otherNumber: Number) -> ComparisonResult
+  func isEqualTo(number: Number) -> Bool
   func descriptionWithLocale(locale: AnyObject?) -> String
   convenience init(bytes value: UnsafePointer<Void>, objCType type: UnsafePointer<Int8>)
   convenience init()
 }
-extension NSNumber : FloatLiteralConvertible, IntegerLiteralConvertible, BooleanLiteralConvertible {
-  /// Create an instance initialized to `value`.
+extension Number : FloatLiteralConvertible, IntegerLiteralConvertible, BooleanLiteralConvertible {
   required convenience init(integerLiteral value: Int)
-  /// Create an instance initialized to `value`.
   required convenience init(floatLiteral value: Double)
-  /// Create an instance initialized to `value`.
   required convenience init(booleanLiteral value: Bool)
   typealias FloatLiteralType = Double
   typealias IntegerLiteralType = Int
   typealias BooleanLiteralType = Bool
 }
-extension NSNumber {
+extension Number {
 }
-let NSNegateBooleanTransformerName: String
-let NSIsNilTransformerName: String
-let NSIsNotNilTransformerName: String
-let NSUnarchiveFromDataTransformerName: String
-let NSKeyedUnarchiveFromDataTransformerName: String
-class NSValueTransformer : NSObject {
-  class func setValueTransformer(transformer: NSValueTransformer?, forName name: String)
+let negateBooleanTransformerName: String
+let isNilTransformerName: String
+let isNotNilTransformerName: String
+let unarchiveFromDataTransformerName: String
+let keyedUnarchiveFromDataTransformerName: String
+class ValueTransformer : Object {
+  class func setValueTransformer(transformer: ValueTransformer?, forName name: String)
    init?(forName name: String)
   class func valueTransformerNames() -> [String]
   class func transformedValueClass() -> AnyClass
@@ -6775,61 +6761,61 @@ class NSValueTransformer : NSObject {
   func reverseTransformedValue(value: AnyObject?) -> AnyObject?
   init()
 }
-class NSXMLDTD : NSXMLNode {
+class XMLDTD : XMLNode {
   init()
-  convenience init(contentsOfURL url: NSURL, options mask: Int) throws
-  init(data: NSData, options mask: Int) throws
+  convenience init(contentsOf url: URL, options mask: Int) throws
+  init(data: Data, options mask: Int) throws
   var publicID: String?
   var systemID: String?
-  func insertChild(child: NSXMLNode, atIndex index: Int)
-  func insertChildren(children: [NSXMLNode], atIndex index: Int)
-  func removeChildAtIndex(index: Int)
-  func setChildren(children: [NSXMLNode]?)
-  func addChild(child: NSXMLNode)
-  func replaceChildAtIndex(index: Int, withNode node: NSXMLNode)
-  func entityDeclarationForName(name: String) -> NSXMLDTDNode?
-  func notationDeclarationForName(name: String) -> NSXMLDTDNode?
-  func elementDeclarationForName(name: String) -> NSXMLDTDNode?
-  func attributeDeclarationForName(name: String, elementName: String) -> NSXMLDTDNode?
-  class func predefinedEntityDeclarationForName(name: String) -> NSXMLDTDNode?
-  convenience init(kind: NSXMLNodeKind)
+  func insertChild(child: XMLNode, at index: Int)
+  func insertChildren(children: [XMLNode], at index: Int)
+  func removeChildAt(index: Int)
+  func setChildren(children: [XMLNode]?)
+  func addChild(child: XMLNode)
+  func replaceChildAt(index: Int, withNode node: XMLNode)
+  func entityDeclarationForName(name: String) -> XMLDTDNode?
+  func notationDeclarationForName(name: String) -> XMLDTDNode?
+  func elementDeclarationForName(name: String) -> XMLDTDNode?
+  func attributeDeclarationForName(name: String, elementName: String) -> XMLDTDNode?
+  class func predefinedEntityDeclarationForName(name: String) -> XMLDTDNode?
+  convenience init(kind: XMLNodeKind)
 }
-enum NSXMLDTDNodeKind : UInt {
+enum XMLDTDNodeKind : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
-  case NSXMLEntityGeneralKind
-  case NSXMLEntityParsedKind
-  case NSXMLEntityUnparsedKind
-  case NSXMLEntityParameterKind
-  case NSXMLEntityPredefined
-  case NSXMLAttributeCDATAKind
-  case NSXMLAttributeIDKind
-  case NSXMLAttributeIDRefKind
-  case NSXMLAttributeIDRefsKind
-  case NSXMLAttributeEntityKind
-  case NSXMLAttributeEntitiesKind
-  case NSXMLAttributeNMTokenKind
-  case NSXMLAttributeNMTokensKind
-  case NSXMLAttributeEnumerationKind
-  case NSXMLAttributeNotationKind
-  case NSXMLElementDeclarationUndefinedKind
-  case NSXMLElementDeclarationEmptyKind
-  case NSXMLElementDeclarationAnyKind
-  case NSXMLElementDeclarationMixedKind
-  case NSXMLElementDeclarationElementKind
+  case XMLEntityGeneralKind
+  case XMLEntityParsedKind
+  case XMLEntityUnparsedKind
+  case XMLEntityParameterKind
+  case XMLEntityPredefined
+  case XMLAttributeCDATAKind
+  case XMLAttributeIDKind
+  case XMLAttributeIDRefKind
+  case XMLAttributeIDRefsKind
+  case XMLAttributeEntityKind
+  case XMLAttributeEntitiesKind
+  case XMLAttributeNMTokenKind
+  case XMLAttributeNMTokensKind
+  case XMLAttributeEnumerationKind
+  case XMLAttributeNotationKind
+  case XMLElementDeclarationUndefinedKind
+  case XMLElementDeclarationEmptyKind
+  case XMLElementDeclarationAnyKind
+  case XMLElementDeclarationMixedKind
+  case XMLElementDeclarationElementKind
 }
-class NSXMLDTDNode : NSXMLNode {
-  init?(XMLString string: String)
-  init(kind: NSXMLNodeKind, options: Int)
+class XMLDTDNode : XMLNode {
+  init?(xmlString string: String)
+  init(kind: XMLNodeKind, options: Int)
   init()
-  var DTDKind: NSXMLDTDNodeKind
-  var external: Bool { get }
+  var dtdKind: XMLDTDNodeKind
+  var isExternal: Bool { get }
   var publicID: String?
   var systemID: String?
   var notationName: String?
-  convenience init(kind: NSXMLNodeKind)
+  convenience init(kind: XMLNodeKind)
 }
-enum NSXMLDocumentContentKind : UInt {
+enum XMLDocumentContentKind : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case XMLKind
@@ -6837,70 +6823,70 @@ enum NSXMLDocumentContentKind : UInt {
   case HTMLKind
   case TextKind
 }
-class NSXMLDocument : NSXMLNode {
+class XMLDocument : XMLNode {
   init()
-  convenience init(XMLString string: String, options mask: Int) throws
-  convenience init(contentsOfURL url: NSURL, options mask: Int) throws
-  init(data: NSData, options mask: Int) throws
-  init(rootElement element: NSXMLElement?)
-  class func replacementClassForClass(cls: AnyClass) -> AnyClass
+  convenience init(xmlString string: String, options mask: Int) throws
+  convenience init(contentsOf url: URL, options mask: Int) throws
+  init(data: Data, options mask: Int) throws
+  init(rootElement element: XMLElement?)
+  class func replacementClassFor(cls: AnyClass) -> AnyClass
   var characterEncoding: String?
   var version: String?
-  var standalone: Bool
-  var documentContentKind: NSXMLDocumentContentKind
-  var MIMEType: String?
-  @NSCopying var DTD: NSXMLDTD?
-  func setRootElement(root: NSXMLElement)
-  func rootElement() -> NSXMLElement?
-  func insertChild(child: NSXMLNode, atIndex index: Int)
-  func insertChildren(children: [NSXMLNode], atIndex index: Int)
-  func removeChildAtIndex(index: Int)
-  func setChildren(children: [NSXMLNode]?)
-  func addChild(child: NSXMLNode)
-  func replaceChildAtIndex(index: Int, withNode node: NSXMLNode)
-  @NSCopying var XMLData: NSData { get }
-  func XMLDataWithOptions(options: Int) -> NSData
-  func objectByApplyingXSLT(xslt: NSData, arguments: [String : String]?) throws -> AnyObject
+  var isStandalone: Bool
+  var documentContentKind: XMLDocumentContentKind
+  var mimeType: String?
+  @NSCopying var dtd: XMLDTD?
+  func setRootElement(root: XMLElement)
+  func rootElement() -> XMLElement?
+  func insertChild(child: XMLNode, at index: Int)
+  func insertChildren(children: [XMLNode], at index: Int)
+  func removeChildAt(index: Int)
+  func setChildren(children: [XMLNode]?)
+  func addChild(child: XMLNode)
+  func replaceChildAt(index: Int, withNode node: XMLNode)
+  @NSCopying var xmlData: Data { get }
+  func xmlDataWithOptions(options: Int) -> Data
+  func objectByApplyingXSLT(xslt: Data, arguments: [String : String]?) throws -> AnyObject
   func objectByApplyingXSLTString(xslt: String, arguments: [String : String]?) throws -> AnyObject
-  func objectByApplyingXSLTAtURL(xsltURL: NSURL, arguments argument: [String : String]?) throws -> AnyObject
+  func objectByApplyingXSLTAt(xsltURL: URL, arguments argument: [String : String]?) throws -> AnyObject
   func validate() throws
-  convenience init(kind: NSXMLNodeKind)
-  convenience init(kind: NSXMLNodeKind, options: Int)
+  convenience init(kind: XMLNodeKind)
+  convenience init(kind: XMLNodeKind, options: Int)
 }
-class NSXMLElement : NSXMLNode {
+class XMLElement : XMLNode {
   convenience init(name: String)
-  init(name: String, URI: String?)
+  init(name: String, uri URI: String?)
   convenience init(name: String, stringValue string: String?)
-  init(XMLString string: String) throws
-  convenience init(kind: NSXMLNodeKind, options: Int)
-  func elementsForName(name: String) -> [NSXMLElement]
-  func elementsForLocalName(localName: String, URI: String?) -> [NSXMLElement]
-  func addAttribute(attribute: NSXMLNode)
+  init(xmlString string: String) throws
+  convenience init(kind: XMLNodeKind, options: Int)
+  func elementsForName(name: String) -> [XMLElement]
+  func elementsForLocalName(localName: String, uri URI: String?) -> [XMLElement]
+  func addAttribute(attribute: XMLNode)
   func removeAttributeForName(name: String)
-  var attributes: [NSXMLNode]?
-  func setAttributesWithDictionary(attributes: [String : String])
-  func attributeForName(name: String) -> NSXMLNode?
-  func attributeForLocalName(localName: String, URI: String?) -> NSXMLNode?
-  func addNamespace(aNamespace: NSXMLNode)
+  var attributes: [XMLNode]?
+  func setAttributesWith(attributes: [String : String])
+  func attributeForName(name: String) -> XMLNode?
+  func attributeForLocalName(localName: String, uri URI: String?) -> XMLNode?
+  func addNamespace(aNamespace: XMLNode)
   func removeNamespaceForPrefix(name: String)
-  var namespaces: [NSXMLNode]?
-  func namespaceForPrefix(name: String) -> NSXMLNode?
-  func resolveNamespaceForName(name: String) -> NSXMLNode?
+  var namespaces: [XMLNode]?
+  func namespaceForPrefix(name: String) -> XMLNode?
+  func resolveNamespaceForName(name: String) -> XMLNode?
   func resolvePrefixForNamespaceURI(namespaceURI: String) -> String?
-  func insertChild(child: NSXMLNode, atIndex index: Int)
-  func insertChildren(children: [NSXMLNode], atIndex index: Int)
-  func removeChildAtIndex(index: Int)
-  func setChildren(children: [NSXMLNode]?)
-  func addChild(child: NSXMLNode)
-  func replaceChildAtIndex(index: Int, withNode node: NSXMLNode)
+  func insertChild(child: XMLNode, at index: Int)
+  func insertChildren(children: [XMLNode], at index: Int)
+  func removeChildAt(index: Int)
+  func setChildren(children: [XMLNode]?)
+  func addChild(child: XMLNode)
+  func replaceChildAt(index: Int, withNode node: XMLNode)
   func normalizeAdjacentTextNodesPreservingCDATA(preserve: Bool)
   convenience init()
-  convenience init(kind: NSXMLNodeKind)
+  convenience init(kind: XMLNodeKind)
 }
-extension NSXMLElement {
-  func setAttributesAsDictionary(attributes: [NSObject : AnyObject])
+extension XMLElement {
+  func setAttributesAs(attributes: [Object : AnyObject])
 }
-enum NSXMLNodeKind : UInt {
+enum XMLNodeKind : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case InvalidKind
@@ -6917,85 +6903,85 @@ enum NSXMLNodeKind : UInt {
   case ElementDeclarationKind
   case NotationDeclarationKind
 }
-class NSXMLNode : NSObject, NSCopying {
+class XMLNode : Object, Copying {
   init()
-  convenience init(kind: NSXMLNodeKind)
-  init(kind: NSXMLNodeKind, options: Int)
+  convenience init(kind: XMLNodeKind)
+  init(kind: XMLNodeKind, options: Int)
   class func document() -> AnyObject
-  class func documentWithRootElement(element: NSXMLElement) -> AnyObject
+  class func documentWithRootElement(element: XMLElement) -> AnyObject
   class func elementWithName(name: String) -> AnyObject
-  class func elementWithName(name: String, URI: String) -> AnyObject
+  class func elementWithName(name: String, uri URI: String) -> AnyObject
   class func elementWithName(name: String, stringValue string: String) -> AnyObject
-  class func elementWithName(name: String, children: [NSXMLNode]?, attributes: [NSXMLNode]?) -> AnyObject
+  class func elementWithName(name: String, children: [XMLNode]?, attributes: [XMLNode]?) -> AnyObject
   class func attributeWithName(name: String, stringValue: String) -> AnyObject
-  class func attributeWithName(name: String, URI: String, stringValue: String) -> AnyObject
+  class func attributeWithName(name: String, uri URI: String, stringValue: String) -> AnyObject
   class func namespaceWithName(name: String, stringValue: String) -> AnyObject
   class func processingInstructionWithName(name: String, stringValue: String) -> AnyObject
   class func commentWithStringValue(stringValue: String) -> AnyObject
   class func textWithStringValue(stringValue: String) -> AnyObject
-  class func DTDNodeWithXMLString(string: String) -> AnyObject?
-  var kind: NSXMLNodeKind { get }
+  class func dtdNodeWithXMLString(string: String) -> AnyObject?
+  var kind: XMLNodeKind { get }
   var name: String?
   var objectValue: AnyObject?
   var stringValue: String?
   func setStringValue(string: String, resolvingEntities resolve: Bool)
   var index: Int { get }
   var level: Int { get }
-  var rootDocument: NSXMLDocument? { get }
-  @NSCopying var parent: NSXMLNode? { get }
+  var rootDocument: XMLDocument? { get }
+  @NSCopying var parent: XMLNode? { get }
   var childCount: Int { get }
-  var children: [NSXMLNode]? { get }
-  func childAtIndex(index: Int) -> NSXMLNode?
-  @NSCopying var previousSibling: NSXMLNode? { get }
-  @NSCopying var nextSibling: NSXMLNode? { get }
-  @NSCopying var previousNode: NSXMLNode? { get }
-  @NSCopying var nextNode: NSXMLNode? { get }
+  var children: [XMLNode]? { get }
+  func childAt(index: Int) -> XMLNode?
+  @NSCopying var previousSibling: XMLNode? { get }
+  @NSCopying var nextSibling: XMLNode? { get }
+  @NSCopying var previous: XMLNode? { get }
+  @NSCopying var next: XMLNode? { get }
   func detach()
-  var XPath: String? { get }
+  var xPath: String? { get }
   var localName: String? { get }
   var prefix: String? { get }
-  var URI: String?
+  var uri: String?
   class func localNameForName(name: String) -> String
   class func prefixForName(name: String) -> String?
-  class func predefinedNamespaceForPrefix(name: String) -> NSXMLNode?
+  class func predefinedNamespaceForPrefix(name: String) -> XMLNode?
   var description: String { get }
-  var XMLString: String { get }
-  func XMLStringWithOptions(options: Int) -> String
+  var xmlString: String { get }
+  func xmlStringWithOptions(options: Int) -> String
   func canonicalXMLStringPreservingComments(comments: Bool) -> String
-  func nodesForXPath(xpath: String) throws -> [NSXMLNode]
+  func nodesForXPath(xpath: String) throws -> [XMLNode]
   func objectsForXQuery(xquery: String, constants: [String : AnyObject]?) throws -> [AnyObject]
   func objectsForXQuery(xquery: String) throws -> [AnyObject]
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-var NSXMLNodeOptionsNone: Int { get }
-var NSXMLNodeIsCDATA: Int { get }
-var NSXMLNodeExpandEmptyElement: Int { get }
-var NSXMLNodeCompactEmptyElement: Int { get }
-var NSXMLNodeUseSingleQuotes: Int { get }
-var NSXMLNodeUseDoubleQuotes: Int { get }
-var NSXMLNodeNeverEscapeContents: Int { get }
-var NSXMLDocumentTidyHTML: Int { get }
-var NSXMLDocumentTidyXML: Int { get }
-var NSXMLDocumentValidate: Int { get }
-var NSXMLNodeLoadExternalEntitiesAlways: Int { get }
-var NSXMLNodeLoadExternalEntitiesSameOriginOnly: Int { get }
-var NSXMLNodeLoadExternalEntitiesNever: Int { get }
-var NSXMLDocumentXInclude: Int { get }
-var NSXMLNodePrettyPrint: Int { get }
-var NSXMLDocumentIncludeContentTypeDeclaration: Int { get }
-var NSXMLNodePreserveNamespaceOrder: Int { get }
-var NSXMLNodePreserveAttributeOrder: Int { get }
-var NSXMLNodePreserveEntities: Int { get }
-var NSXMLNodePreservePrefixes: Int { get }
-var NSXMLNodePreserveCDATA: Int { get }
-var NSXMLNodePreserveWhitespace: Int { get }
-var NSXMLNodePreserveDTD: Int { get }
-var NSXMLNodePreserveCharacterReferences: Int { get }
-var NSXMLNodePromoteSignificantWhitespace: Int { get }
-var NSXMLNodePreserveEmptyElements: Int { get }
-var NSXMLNodePreserveQuotes: Int { get }
-var NSXMLNodePreserveAll: Int { get }
-enum NSXMLParserExternalEntityResolvingPolicy : UInt {
+var XMLNodeOptionsNone: Int { get }
+var XMLNodeIsCDATA: Int { get }
+var XMLNodeExpandEmptyElement: Int { get }
+var XMLNodeCompactEmptyElement: Int { get }
+var XMLNodeUseSingleQuotes: Int { get }
+var XMLNodeUseDoubleQuotes: Int { get }
+var XMLNodeNeverEscapeContents: Int { get }
+var XMLDocumentTidyHTML: Int { get }
+var XMLDocumentTidyXML: Int { get }
+var XMLDocumentValidate: Int { get }
+var XMLNodeLoadExternalEntitiesAlways: Int { get }
+var XMLNodeLoadExternalEntitiesSameOriginOnly: Int { get }
+var XMLNodeLoadExternalEntitiesNever: Int { get }
+var XMLDocumentXInclude: Int { get }
+var XMLNodePrettyPrint: Int { get }
+var XMLDocumentIncludeContentTypeDeclaration: Int { get }
+var XMLNodePreserveNamespaceOrder: Int { get }
+var XMLNodePreserveAttributeOrder: Int { get }
+var XMLNodePreserveEntities: Int { get }
+var XMLNodePreservePrefixes: Int { get }
+var XMLNodePreserveCDATA: Int { get }
+var XMLNodePreserveWhitespace: Int { get }
+var XMLNodePreserveDTD: Int { get }
+var XMLNodePreserveCharacterReferences: Int { get }
+var XMLNodePromoteSignificantWhitespace: Int { get }
+var XMLNodePreserveEmptyElements: Int { get }
+var XMLNodePreserveQuotes: Int { get }
+var XMLNodePreserveAll: Int { get }
+enum XMLParserExternalEntityResolvingPolicy : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case ResolveExternalEntitiesNever
@@ -7003,51 +6989,51 @@ enum NSXMLParserExternalEntityResolvingPolicy : UInt {
   case ResolveExternalEntitiesSameOriginOnly
   case ResolveExternalEntitiesAlways
 }
-class NSXMLParser : NSObject {
-  convenience init?(contentsOfURL url: NSURL)
-  init(data: NSData)
-  convenience init(stream: NSInputStream)
-  unowned(unsafe) var delegate: @sil_unmanaged NSXMLParserDelegate?
+class XMLParser : Object {
+  convenience init?(contentsOf url: URL)
+  init(data: Data)
+  convenience init(stream: InputStream)
+  unowned(unsafe) var delegate: @sil_unmanaged XMLParserDelegate?
   var shouldProcessNamespaces: Bool
   var shouldReportNamespacePrefixes: Bool
-  var externalEntityResolvingPolicy: NSXMLParserExternalEntityResolvingPolicy
-  var allowedExternalEntityURLs: Set<NSURL>?
+  var externalEntityResolvingPolicy: XMLParserExternalEntityResolvingPolicy
+  var allowedExternalEntityURLs: Set<URL>?
   func parse() -> Bool
   func abortParsing()
-  @NSCopying var parserError: NSError? { get }
+  @NSCopying var parserError: Error? { get }
   var shouldResolveExternalEntities: Bool
   convenience init()
 }
-extension NSXMLParser {
+extension XMLParser {
   var publicID: String? { get }
   var systemID: String? { get }
   var lineNumber: Int { get }
   var columnNumber: Int { get }
 }
-protocol NSXMLParserDelegate : NSObjectProtocol {
-  optional func parserDidStartDocument(parser: NSXMLParser)
-  optional func parserDidEndDocument(parser: NSXMLParser)
-  optional func parser(parser: NSXMLParser, foundNotationDeclarationWithName name: String, publicID: String?, systemID: String?)
-  optional func parser(parser: NSXMLParser, foundUnparsedEntityDeclarationWithName name: String, publicID: String?, systemID: String?, notationName: String?)
-  optional func parser(parser: NSXMLParser, foundAttributeDeclarationWithName attributeName: String, forElement elementName: String, type: String?, defaultValue: String?)
-  optional func parser(parser: NSXMLParser, foundElementDeclarationWithName elementName: String, model: String)
-  optional func parser(parser: NSXMLParser, foundInternalEntityDeclarationWithName name: String, value: String?)
-  optional func parser(parser: NSXMLParser, foundExternalEntityDeclarationWithName name: String, publicID: String?, systemID: String?)
-  optional func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String])
-  optional func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)
-  optional func parser(parser: NSXMLParser, didStartMappingPrefix prefix: String, toURI namespaceURI: String)
-  optional func parser(parser: NSXMLParser, didEndMappingPrefix prefix: String)
-  optional func parser(parser: NSXMLParser, foundCharacters string: String)
-  optional func parser(parser: NSXMLParser, foundIgnorableWhitespace whitespaceString: String)
-  optional func parser(parser: NSXMLParser, foundProcessingInstructionWithTarget target: String, data: String?)
-  optional func parser(parser: NSXMLParser, foundComment comment: String)
-  optional func parser(parser: NSXMLParser, foundCDATA CDATABlock: NSData)
-  optional func parser(parser: NSXMLParser, resolveExternalEntityName name: String, systemID: String?) -> NSData?
-  optional func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError)
-  optional func parser(parser: NSXMLParser, validationErrorOccurred validationError: NSError)
+protocol XMLParserDelegate : ObjectProtocol {
+  optional func parserDidStartDocument(parser: XMLParser)
+  optional func parserDidEndDocument(parser: XMLParser)
+  optional func parser(parser: XMLParser, foundNotationDeclarationWithName name: String, publicID: String?, systemID: String?)
+  optional func parser(parser: XMLParser, foundUnparsedEntityDeclarationWithName name: String, publicID: String?, systemID: String?, notationName: String?)
+  optional func parser(parser: XMLParser, foundAttributeDeclarationWithName attributeName: String, forElement elementName: String, type: String?, defaultValue: String?)
+  optional func parser(parser: XMLParser, foundElementDeclarationWithName elementName: String, model: String)
+  optional func parser(parser: XMLParser, foundInternalEntityDeclarationWithName name: String, value: String?)
+  optional func parser(parser: XMLParser, foundExternalEntityDeclarationWithName name: String, publicID: String?, systemID: String?)
+  optional func parser(parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:])
+  optional func parser(parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)
+  optional func parser(parser: XMLParser, didStartMappingPrefix prefix: String, toURI namespaceURI: String)
+  optional func parser(parser: XMLParser, didEndMappingPrefix prefix: String)
+  optional func parser(parser: XMLParser, foundCharacters string: String)
+  optional func parser(parser: XMLParser, foundIgnorableWhitespace whitespaceString: String)
+  optional func parser(parser: XMLParser, foundProcessingInstructionWithTarget target: String, data: String?)
+  optional func parser(parser: XMLParser, foundComment comment: String)
+  optional func parser(parser: XMLParser, foundCDATA CDATABlock: Data)
+  optional func parser(parser: XMLParser, resolveExternalEntityName name: String, systemID: String?) -> Data?
+  optional func parser(parser: XMLParser, parseErrorOccurred parseError: Error)
+  optional func parser(parser: XMLParser, validationErrorOccurred validationError: Error)
 }
-let NSXMLParserErrorDomain: String
-enum NSXMLParserError : Int {
+let XMLParserErrorDomain: String
+enum XMLParserError : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case InternalError
@@ -7144,26 +7130,26 @@ enum NSXMLParserError : Int {
   case NoDTDError
   case DelegateAbortedParseError
 }
-protocol NSXPCProxyCreating {
+protocol XPCProxyCreating {
   func remoteObjectProxy() -> AnyObject
-  func remoteObjectProxyWithErrorHandler(handler: (NSError) -> Void) -> AnyObject
+  func remoteObjectProxyWithErrorHandler(handler: (Error) -> Void) -> AnyObject
 }
-struct NSXPCConnectionOptions : OptionSetType {
+struct XPCConnectionOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
-  static var Privileged: NSXPCConnectionOptions { get }
+  static var Privileged: XPCConnectionOptions { get }
 }
-class NSXPCConnection : NSObject, NSXPCProxyCreating {
+class XPCConnection : Object, XPCProxyCreating {
   init(serviceName: String)
   var serviceName: String? { get }
-  init(machServiceName name: String, options: NSXPCConnectionOptions)
-  init(listenerEndpoint endpoint: NSXPCListenerEndpoint)
-  var endpoint: NSXPCListenerEndpoint { get }
-  var exportedInterface: NSXPCInterface?
+  init(machServiceName name: String, options: XPCConnectionOptions = [])
+  init(listenerEndpoint endpoint: XPCListenerEndpoint)
+  var endpoint: XPCListenerEndpoint { get }
+  var exportedInterface: XPCInterface?
   var exportedObject: AnyObject?
-  var remoteObjectInterface: NSXPCInterface?
+  var remoteObjectInterface: XPCInterface?
   var remoteObjectProxy: AnyObject { get }
-  func remoteObjectProxyWithErrorHandler(handler: (NSError) -> Void) -> AnyObject
+  func remoteObjectProxyWithErrorHandler(handler: (Error) -> Void) -> AnyObject
   var interruptionHandler: (() -> Void)?
   var invalidationHandler: (() -> Void)?
   func resume()
@@ -7175,41 +7161,41 @@ class NSXPCConnection : NSObject, NSXPCProxyCreating {
   var effectiveGroupIdentifier: gid_t { get }
   init()
 }
-class NSXPCListener : NSObject {
-  class func serviceListener() -> NSXPCListener
-  class func anonymousListener() -> NSXPCListener
+class XPCListener : Object {
+  class func service() -> XPCListener
+  class func anonymous() -> XPCListener
   init(machServiceName name: String)
-  unowned(unsafe) var delegate: @sil_unmanaged NSXPCListenerDelegate?
-  var endpoint: NSXPCListenerEndpoint { get }
+  unowned(unsafe) var delegate: @sil_unmanaged XPCListenerDelegate?
+  var endpoint: XPCListenerEndpoint { get }
   func resume()
   func suspend()
   func invalidate()
   convenience init()
 }
-protocol NSXPCListenerDelegate : NSObjectProtocol {
-  optional func listener(listener: NSXPCListener, shouldAcceptNewConnection newConnection: NSXPCConnection) -> Bool
+protocol XPCListenerDelegate : ObjectProtocol {
+  optional func listener(listener: XPCListener, shouldAcceptNewConnection newConnection: XPCConnection) -> Bool
 }
-class NSXPCInterface : NSObject {
+class XPCInterface : Object {
    init(withProtocol protocol: Protocol)
   unowned(unsafe) var `protocol`: @sil_unmanaged Protocol
-  func setClasses(classes: Set<NSObject>, forSelector sel: Selector, argumentIndex arg: Int, ofReply: Bool)
-  func classesForSelector(sel: Selector, argumentIndex arg: Int, ofReply: Bool) -> Set<NSObject>
-  func setInterface(ifc: NSXPCInterface, forSelector sel: Selector, argumentIndex arg: Int, ofReply: Bool)
-  func interfaceForSelector(sel: Selector, argumentIndex arg: Int, ofReply: Bool) -> NSXPCInterface?
+  func setClasses(classes: Set<Object>, forSelector sel: Selector, argumentIndex arg: Int, ofReply: Bool)
+  func classesFor(sel: Selector, argumentIndex arg: Int, ofReply: Bool) -> Set<Object>
+  func setInterface(ifc: XPCInterface, forSelector sel: Selector, argumentIndex arg: Int, ofReply: Bool)
+  func forSelector(sel: Selector, argumentIndex arg: Int, ofReply: Bool) -> XPCInterface?
   init()
 }
-class NSXPCListenerEndpoint : NSObject, NSSecureCoding {
+class XPCListenerEndpoint : Object, SecureCoding {
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-var NSScannedOption: Int { get }
-var NSCollectorDisabledOption: Int { get }
-func NSPageSize() -> Int
-func NSLogPageSize() -> Int
-func NSRoundUpToMultipleOfPageSize(bytes: Int) -> Int
-func NSRoundDownToMultipleOfPageSize(bytes: Int) -> Int
-func NSAllocateMemoryPages(bytes: Int) -> UnsafeMutablePointer<Void>
-func NSDeallocateMemoryPages(ptr: UnsafeMutablePointer<Void>, _ bytes: Int)
-func NSCopyMemoryPages(source: UnsafePointer<Void>, _ dest: UnsafeMutablePointer<Void>, _ bytes: Int)
+var scannedOption: Int { get }
+var collectorDisabledOption: Int { get }
+func pageSize() -> Int
+func logPageSize() -> Int
+func roundUpToMultipleOfPageSize(bytes: Int) -> Int
+func roundDownToMultipleOfPageSize(bytes: Int) -> Int
+func allocateMemoryPages(bytes: Int) -> UnsafeMutablePointer<Void>
+func deallocateMemoryPages(ptr: UnsafeMutablePointer<Void>, _ bytes: Int)
+func copyMemoryPages(source: UnsafePointer<Void>, _ dest: UnsafeMutablePointer<Void>, _ bytes: Int)

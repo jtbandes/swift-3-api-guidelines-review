@@ -15,7 +15,7 @@ extension AVMediaSelectionGroup {
 /// representation outside the client application. Examples of media items that a
 /// developer might want to represent include song files, streaming audio URLs,
 /// or radio stations.
-class MPContentItem : NSObject {
+class MPContentItem : Object {
   /// A unique identifier for this content item. (Required)
   var identifier: String { get }
   /// A title for this item. Usually this would be the track name, if representing
@@ -30,12 +30,12 @@ class MPContentItem : NSObject {
   /// Represents whether the content item is a container of other content items.
   /// An example of a container content item might be an album, which contains
   /// multiple songs.
-  var container: Bool
+  var isContainer: Bool
   /// Represents whether this content item is playable or not. A content item can
   /// be both a container, and playable. For example, a container item like a
   /// playlist might be set as playable if the app would like to provide the
   /// option of playing the playlist's tracks in order when selected.
-  var playable: Bool
+  var isPlayable: Bool
   /// Represents the current playback progress of the item.
   /// 0.0 = not watched/listened/viewed, 1.0 = fully watched/listened/viewed
   /// Default is -1.0 (no progress indicator shown)
@@ -46,7 +46,7 @@ class MPContentItem : NSObject {
   convenience init()
 }
 typealias MPMediaEntityPersistentID = UInt64
-class MPMediaEntity : NSObject, NSSecureCoding {
+class MPMediaEntity : Object, SecureCoding {
   class func canFilterByProperty(property: String) -> Bool
   func enumerateValuesForProperties(properties: Set<String>, usingBlock block: (String, AnyObject, UnsafeMutablePointer<ObjCBool>) -> Void)
   subscript (key: AnyObject) -> AnyObject? { get }
@@ -54,8 +54,8 @@ class MPMediaEntity : NSObject, NSSecureCoding {
   var persistentID: MPMediaEntityPersistentID { get }
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let MPMediaEntityPropertyPersistentID: String
 struct MPMediaType : OptionSetType {
@@ -89,30 +89,30 @@ class MPMediaItem : MPMediaEntity {
   var genrePersistentID: MPMediaEntityPersistentID { get }
   var composer: String? { get }
   var composerPersistentID: MPMediaEntityPersistentID { get }
-  var playbackDuration: NSTimeInterval { get }
+  var playbackDuration: TimeInterval { get }
   var albumTrackNumber: Int { get }
   var albumTrackCount: Int { get }
   var discNumber: Int { get }
   var discCount: Int { get }
   var artwork: MPMediaItemArtwork? { get }
   var lyrics: String? { get }
-  var compilation: Bool { get }
-  var releaseDate: NSDate? { get }
+  var isCompilation: Bool { get }
+  var releaseDate: Date? { get }
   var beatsPerMinute: Int { get }
   var comments: String? { get }
-  var assetURL: NSURL? { get }
-  var cloudItem: Bool { get }
-  var protectedAsset: Bool { get }
+  var assetURL: URL? { get }
+  var isCloudItem: Bool { get }
+  var hasProtectedAsset: Bool { get }
   var podcastTitle: String? { get }
   var podcastPersistentID: MPMediaEntityPersistentID { get }
   var playCount: Int { get }
   var skipCount: Int { get }
   var rating: Int { get }
-  var lastPlayedDate: NSDate? { get }
+  var lastPlayedDate: Date? { get }
   var userGrouping: String? { get }
-  var bookmarkTime: NSTimeInterval { get }
+  var bookmarkTime: TimeInterval { get }
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 let MPMediaItemPropertyPersistentID: String
 let MPMediaItemPropertyMediaType: String
@@ -149,9 +149,9 @@ let MPMediaItemPropertyRating: String
 let MPMediaItemPropertyLastPlayedDate: String
 let MPMediaItemPropertyUserGrouping: String
 let MPMediaItemPropertyBookmarkTime: String
-class MPMediaItemArtwork : NSObject {
+class MPMediaItemArtwork : Object {
   init(image: UIImage)
-  func imageWithSize(size: CGSize) -> UIImage?
+  func imageWith(size: CGSize) -> UIImage?
   var bounds: CGRect { get }
   var imageCropRect: CGRect { get }
   convenience init()
@@ -163,17 +163,17 @@ class MPMediaItemCollection : MPMediaEntity {
   var count: Int { get }
   var mediaTypes: MPMediaType { get }
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class MPMediaLibrary : NSObject, NSSecureCoding {
+class MPMediaLibrary : Object, SecureCoding {
   class func defaultMediaLibrary() -> MPMediaLibrary
-  var lastModifiedDate: NSDate { get }
+  var lastModifiedDate: Date { get }
   func beginGeneratingLibraryChangeNotifications()
   func endGeneratingLibraryChangeNotifications()
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let MPMediaLibraryDidChangeNotification: String
 class MPMediaPickerController : UIViewController {
@@ -184,11 +184,11 @@ class MPMediaPickerController : UIViewController {
   var showsCloudItems: Bool
   var showsItemsWithProtectedAssets: Bool
   var prompt: String?
-  convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder aDecoder: NSCoder)
+  convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
-protocol MPMediaPickerControllerDelegate : NSObjectProtocol {
+protocol MPMediaPickerControllerDelegate : ObjectProtocol {
   optional func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection)
   optional func mediaPickerDidCancel(mediaPicker: MPMediaPickerController)
 }
@@ -198,7 +198,7 @@ protocol MPMediaPlayback {
   func play()
   func pause()
   func stop()
-  var currentPlaybackTime: NSTimeInterval { get set }
+  var currentPlaybackTime: TimeInterval { get set }
   var currentPlaybackRate: Float { get set }
   func beginSeekingForward()
   func beginSeekingBackward()
@@ -220,7 +220,7 @@ class MPMediaPlaylist : MPMediaItemCollection {
   var seedItems: [MPMediaItem]? { get }
   init(items: [MPMediaItem])
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 let MPMediaPlaylistPropertyPersistentID: String
 let MPMediaPlaylistPropertyName: String
@@ -238,7 +238,7 @@ enum MPMediaGrouping : Int {
   case Playlist
   case PodcastTitle
 }
-class MPMediaQuery : NSObject, NSSecureCoding, NSCopying {
+class MPMediaQuery : Object, SecureCoding, Copying {
   init(filterPredicates: Set<MPMediaPredicate>?)
   var filterPredicates: Set<MPMediaPredicate>?
   func addFilterPredicate(predicate: MPMediaPredicate)
@@ -248,26 +248,26 @@ class MPMediaQuery : NSObject, NSSecureCoding, NSCopying {
   var groupingType: MPMediaGrouping
   var itemSections: [MPMediaQuerySection]? { get }
   var collectionSections: [MPMediaQuerySection]? { get }
-  class func albumsQuery() -> MPMediaQuery
-  class func artistsQuery() -> MPMediaQuery
-  class func songsQuery() -> MPMediaQuery
-  class func playlistsQuery() -> MPMediaQuery
-  class func podcastsQuery() -> MPMediaQuery
-  class func audiobooksQuery() -> MPMediaQuery
-  class func compilationsQuery() -> MPMediaQuery
-  class func composersQuery() -> MPMediaQuery
-  class func genresQuery() -> MPMediaQuery
+  class func albums() -> MPMediaQuery
+  class func artists() -> MPMediaQuery
+  class func songs() -> MPMediaQuery
+  class func playlists() -> MPMediaQuery
+  class func podcasts() -> MPMediaQuery
+  class func audiobooks() -> MPMediaQuery
+  class func compilations() -> MPMediaQuery
+  class func composers() -> MPMediaQuery
+  class func genres() -> MPMediaQuery
   convenience init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class MPMediaPredicate : NSObject, NSSecureCoding {
+class MPMediaPredicate : Object, SecureCoding {
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 enum MPMediaPredicateComparison : Int {
   init?(rawValue: Int)
@@ -282,20 +282,20 @@ class MPMediaPropertyPredicate : MPMediaPredicate {
   @NSCopying var value: AnyObject? { get }
   var comparisonType: MPMediaPredicateComparison { get }
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 extension MPMediaItem {
   class func persistentIDPropertyForGroupingType(groupingType: MPMediaGrouping) -> String
   class func titlePropertyForGroupingType(groupingType: MPMediaGrouping) -> String
 }
-class MPMediaQuerySection : NSObject, NSSecureCoding, NSCopying {
+class MPMediaQuerySection : Object, SecureCoding, Copying {
   var title: String { get }
   var range: NSRange { get }
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 enum MPMovieScalingMode : Int {
   init?(rawValue: Int)
@@ -358,9 +358,9 @@ enum MPMovieSourceType : Int {
   case File
   case Streaming
 }
-class MPMoviePlayerController : NSObject, MPMediaPlayback {
-  init!(contentURL url: NSURL!)
-  @NSCopying var contentURL: NSURL!
+class MPMoviePlayerController : Object, MPMediaPlayback {
+  init!(contentURL url: URL!)
+  @NSCopying var contentURL: URL!
   var view: UIView! { get }
   var backgroundView: UIView! { get }
   var playbackState: MPMoviePlaybackState { get }
@@ -368,7 +368,7 @@ class MPMoviePlayerController : NSObject, MPMediaPlayback {
   var controlStyle: MPMovieControlStyle
   var repeatMode: MPMovieRepeatMode
   var shouldAutoplay: Bool
-  var fullscreen: Bool
+  var isFullscreen: Bool
   func setFullscreen(fullscreen: Bool, animated: Bool)
   var scalingMode: MPMovieScalingMode
   var readyForDisplay: Bool { get }
@@ -378,7 +378,7 @@ class MPMoviePlayerController : NSObject, MPMediaPlayback {
   func play()
   func pause()
   func stop()
-  var currentPlaybackTime: NSTimeInterval
+  var currentPlaybackTime: TimeInterval
   var currentPlaybackRate: Float
   func beginSeekingForward()
   func beginSeekingBackward()
@@ -387,13 +387,13 @@ class MPMoviePlayerController : NSObject, MPMediaPlayback {
 extension MPMoviePlayerController {
   var movieMediaTypes: MPMovieMediaTypeMask { get }
   var movieSourceType: MPMovieSourceType
-  var duration: NSTimeInterval { get }
-  var playableDuration: NSTimeInterval { get }
+  var duration: TimeInterval { get }
+  var playableDuration: TimeInterval { get }
   var naturalSize: CGSize { get }
-  var initialPlaybackTime: NSTimeInterval
-  var endPlaybackTime: NSTimeInterval
+  var initialPlaybackTime: TimeInterval
+  var endPlaybackTime: TimeInterval
   var allowsAirPlay: Bool
-  var airPlayVideoActive: Bool { get }
+  var isAirPlayVideoActive: Bool { get }
 }
 let MPMoviePlayerScalingModeDidChangeNotification: String
 let MPMoviePlayerPlaybackDidFinishNotification: String
@@ -430,12 +430,12 @@ let MPMoviePlayerThumbnailErrorKey: String
 extension MPMoviePlayerController {
   var timedMetadata: [AnyObject]! { get }
 }
-class MPTimedMetadata : NSObject {
+class MPTimedMetadata : Object {
   var key: String! { get }
   var keyspace: String! { get }
   var value: AnyObject! { get }
-  var timestamp: NSTimeInterval { get }
-  var allMetadata: [NSObject : AnyObject]! { get }
+  var timestamp: TimeInterval { get }
+  var allMetadata: [Object : AnyObject]! { get }
   init()
 }
 let MPMoviePlayerTimedMetadataUpdatedNotification: String
@@ -449,56 +449,56 @@ extension MPMoviePlayerController {
   var accessLog: MPMovieAccessLog! { get }
   var errorLog: MPMovieErrorLog! { get }
 }
-class MPMovieAccessLog : NSObject, NSCopying {
-  var extendedLogData: NSData! { get }
+class MPMovieAccessLog : Object, Copying {
+  var extendedLogData: Data! { get }
   var extendedLogDataStringEncoding: UInt { get }
   var events: [AnyObject]! { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class MPMovieErrorLog : NSObject, NSCopying {
-  var extendedLogData: NSData! { get }
+class MPMovieErrorLog : Object, Copying {
+  var extendedLogData: Data! { get }
   var extendedLogDataStringEncoding: UInt { get }
   var events: [AnyObject]! { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class MPMovieAccessLogEvent : NSObject, NSCopying {
+class MPMovieAccessLogEvent : Object, Copying {
   var numberOfSegmentsDownloaded: Int { get }
-  var playbackStartDate: NSDate! { get }
-  var URI: String! { get }
+  var playbackStartDate: Date! { get }
+  var uri: String! { get }
   var serverAddress: String! { get }
   var numberOfServerAddressChanges: Int { get }
   var playbackSessionID: String! { get }
-  var playbackStartOffset: NSTimeInterval { get }
-  var segmentsDownloadedDuration: NSTimeInterval { get }
-  var durationWatched: NSTimeInterval { get }
+  var playbackStartOffset: TimeInterval { get }
+  var segmentsDownloadedDuration: TimeInterval { get }
+  var durationWatched: TimeInterval { get }
   var numberOfStalls: Int { get }
   var numberOfBytesTransferred: Int64 { get }
   var observedBitrate: Double { get }
   var indicatedBitrate: Double { get }
   var numberOfDroppedVideoFrames: Int { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class MPMovieErrorLogEvent : NSObject, NSCopying {
-  var date: NSDate! { get }
-  var URI: String! { get }
+class MPMovieErrorLogEvent : Object, Copying {
+  var date: Date! { get }
+  var uri: String! { get }
   var serverAddress: String! { get }
   var playbackSessionID: String! { get }
   var errorStatusCode: Int { get }
   var errorDomain: String! { get }
   var errorComment: String! { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 extension MPMoviePlayerController {
 }
 class MPMoviePlayerViewController : UIViewController {
-  init!(contentURL: NSURL!)
+  init!(contentURL: URL!)
   var moviePlayer: MPMoviePlayerController! { get }
-  convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder aDecoder: NSCoder)
+  convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
 extension UIViewController {
@@ -531,7 +531,7 @@ enum MPMusicShuffleMode : Int {
   case Songs
   case Albums
 }
-class MPMusicPlayerController : NSObject, MPMediaPlayback {
+class MPMusicPlayerController : Object, MPMediaPlayback {
   /// Playing media items with the applicationMusicPlayer will restore the user's Music state after the application quits.
   class func applicationMusicPlayer() -> MPMusicPlayerController
   /// Playing media items with the systemMusicPlayer will replace the user's current Music state.
@@ -543,7 +543,7 @@ class MPMusicPlayerController : NSObject, MPMediaPlayback {
   func play()
   func pause()
   func stop()
-  var currentPlaybackTime: NSTimeInterval
+  var currentPlaybackTime: TimeInterval
   var currentPlaybackRate: Float
   func beginSeekingForward()
   func beginSeekingBackward()
@@ -555,8 +555,8 @@ extension MPMusicPlayerController {
   var shuffleMode: MPMusicShuffleMode
   @NSCopying var nowPlayingItem: MPMediaItem?
   var indexOfNowPlayingItem: Int { get }
-  func setQueueWithQuery(query: MPMediaQuery)
-  func setQueueWithItemCollection(itemCollection: MPMediaItemCollection)
+  func setQueueWith(query: MPMediaQuery)
+  func setQueueWith(itemCollection: MPMediaItemCollection)
   func skipToNextItem()
   func skipToBeginning()
   func skipToPreviousItem()
@@ -566,7 +566,7 @@ extension MPMusicPlayerController {
 let MPMusicPlayerControllerPlaybackStateDidChangeNotification: String
 let MPMusicPlayerControllerNowPlayingItemDidChangeNotification: String
 let MPMusicPlayerControllerVolumeDidChangeNotification: String
-class MPNowPlayingInfoCenter : NSObject {
+class MPNowPlayingInfoCenter : Object {
   class func defaultCenter() -> MPNowPlayingInfoCenter
   var nowPlayingInfo: [String : AnyObject]?
   init()
@@ -597,7 +597,7 @@ enum MPNowPlayingInfoLanguageOptionType : UInt {
   case Legible
 }
 /// Represents a single language option option.
-class MPNowPlayingInfoLanguageOption : NSObject {
+class MPNowPlayingInfoLanguageOption : Object {
   init(type languageOptionType: MPNowPlayingInfoLanguageOptionType, languageTag: String, characteristics languageOptionCharacteristics: [String]?, displayName: String, identifier: String)
   /// Represents a special case that is used to
   /// represent the best legible language option based on system preferences.
@@ -623,7 +623,7 @@ class MPNowPlayingInfoLanguageOption : NSObject {
   var identifier: String? { get }
   init()
 }
-class MPNowPlayingInfoLanguageOptionGroup : NSObject {
+class MPNowPlayingInfoLanguageOptionGroup : Object {
   init(languageOptions: [MPNowPlayingInfoLanguageOption], defaultLanguageOption: MPNowPlayingInfoLanguageOption?, allowEmptySelection: Bool)
   /// The available language options within this group.
   var languageOptions: [MPNowPlayingInfoLanguageOption] { get }
@@ -638,26 +638,26 @@ class MPNowPlayingInfoLanguageOptionGroup : NSObject {
 /// Data sources are responsible for providing metadata about your media to these
 /// systems in a meaningful way, so that features like user interfaces and play
 /// queues can be setup automatically.
-protocol MPPlayableContentDataSource : NSObjectProtocol {
+protocol MPPlayableContentDataSource : ObjectProtocol {
   /// Tells the data source to begin loading content items that are children of the
   /// item specified by indexPath. This is provided so that applications can begin
   /// asynchronous batched loading of content before MediaPlayer begins asking for
   /// content items to display.
   /// Client applications should always call the completion handler after loading
   /// has finished, if this method is implemented.
-  optional func beginLoadingChildItemsAtIndexPath(indexPath: NSIndexPath, completionHandler: (NSError?) -> Void)
+  optional func beginLoadingChildItemsAt(indexPath: IndexPath, completionHandler: (Error?) -> Void)
   /// Tells MediaPlayer whether the content provided by the data source supports
   /// playback progress as a property of its metadata.
   /// If this method is not implemented, MediaPlayer will assume that progress is
   /// not supported for any content items.
-  optional func childItemsDisplayPlaybackProgressAtIndexPath(indexPath: NSIndexPath) -> Bool
+  optional func childItemsDisplayPlaybackProgressAt(indexPath: IndexPath) -> Bool
   /// Returns the number of child nodes at the specified index path. In a virtual
   /// filesystem, this would be the number of files in a specific folder. An empty
   /// index path represents the root node.
-  func numberOfChildItemsAtIndexPath(indexPath: NSIndexPath) -> Int
+  func numberOfChildItemsAt(indexPath: IndexPath) -> Int
   /// Returns the content item at the specified index path. If the content item is
   /// mutated after returning, its updated contents will be sent to MediaPlayer.
-  func contentItemAtIndexPath(indexPath: NSIndexPath) -> MPContentItem?
+  func contentItemAt(indexPath: IndexPath) -> MPContentItem?
 }
 /// The MPPlayableContentDelegate is a protocol that allows for external media
 /// players to send playback commands to an application. For instance,
@@ -665,11 +665,11 @@ protocol MPPlayableContentDataSource : NSObjectProtocol {
 /// MPPlayableContentDataSource) and selects a content item to play. If the media
 /// player decides that it wants to play the item, it will ask the application's
 /// content delegate to initiate playback.
-protocol MPPlayableContentDelegate : NSObjectProtocol {
+protocol MPPlayableContentDelegate : ObjectProtocol {
   /// This method is called when a media player interface wants to play a requested
   /// content item. The application should call the completion handler with an
   /// appropriate error if there was an error beginning playback for the item.
-  optional func playableContentManager(contentManager: MPPlayableContentManager, initiatePlaybackOfContentItemAtIndexPath indexPath: NSIndexPath, completionHandler: (NSError?) -> Void)
+  optional func playableContentManager(contentManager: MPPlayableContentManager, initiatePlaybackOfContentItemAt indexPath: IndexPath, completionHandler: (Error?) -> Void)
   /// This method is called when a media player interface wants the now playing
   /// app to setup a playback queue for later playback. The application should
   /// load content into its play queue and prepare it for playback, but not start
@@ -677,7 +677,7 @@ protocol MPPlayableContentDelegate : NSObjectProtocol {
   /// requests to play something else.
   /// The app should call the provided completion handler once it is ready to play
   /// something.
-  optional func playableContentManager(contentManager: MPPlayableContentManager, initializePlaybackQueueWithCompletionHandler completionHandler: (NSError?) -> Void)
+  optional func playableContentManager(contentManager: MPPlayableContentManager, initializePlaybackQueueWithCompletionHandler completionHandler: (Error?) -> Void)
   /// This method is called when the content server notifies the manager that the current context has changed.
   optional func playableContentManager(contentManager: MPPlayableContentManager, didUpdateContext context: MPPlayableContentManagerContext)
 }
@@ -686,12 +686,12 @@ protocol MPPlayableContentDelegate : NSObjectProtocol {
 /// provides the content manager with a data source, which allows the media player
 /// to browse the media content offered by the application, as well as a delegate,
 /// which allows the media player to relay non-media remote playback commands to the application.
-class MPPlayableContentManager : NSObject {
+class MPPlayableContentManager : Object {
   weak var dataSource: @sil_weak MPPlayableContentDataSource?
   weak var delegate: @sil_weak MPPlayableContentDelegate?
   var context: MPPlayableContentManagerContext { get }
   /// Returns the application's instance of the content manager.
-  class func sharedContentManager() -> Self
+  class func shared() -> Self
   /// Tells the content manager that the data source has changed and that we need to
   /// reload data from the data source.
   func reloadData()
@@ -704,7 +704,7 @@ class MPPlayableContentManager : NSObject {
 /// MPPlayableContentManagerContext represents the current state of
 /// the playable content endpoint. A context is retrievable from an instance
 /// of MPPlayableContentManager.
-class MPPlayableContentManagerContext : NSObject {
+class MPPlayableContentManagerContext : Object {
   /// The number of items the content server will display when content limiting is enforced.
   /// Returns NSIntegerMax if the content server will never limit the number of items.
   var enforcedContentItemsCount: Int { get }
@@ -733,10 +733,10 @@ enum MPRemoteCommandHandlerStatus : Int {
   /// The command could not be executed for another reason.
   case CommandFailed
 }
-class MPRemoteCommand : NSObject {
+class MPRemoteCommand : Object {
   /// Whether a button (for example) should be enabled and tappable for this
   /// particular command.
-  var enabled: Bool
+  var isEnabled: Bool
   func addTarget(target: AnyObject, action: Selector)
   func removeTarget(target: AnyObject, action: Selector)
   func removeTarget(target: AnyObject?)
@@ -753,7 +753,7 @@ class MPFeedbackCommand : MPRemoteCommand {
   /// Whether the feedback command is in an "active" state. An example of when a
   /// feedback command would be active is if the user already "liked" a particular
   /// content item.
-  var active: Bool
+  var isActive: Bool
   /// A localized string briefly describing the context of the command.
   var localizedTitle: String
   /// An optional shorter version of the localized title for this feedback
@@ -772,13 +772,13 @@ class MPRatingCommand : MPRemoteCommand {
 class MPChangePlaybackRateCommand : MPRemoteCommand {
   /// An array of NSNumbers (floats) that contain supported playback rates that
   /// the command can send.
-  var supportedPlaybackRates: [NSNumber]
+  var supportedPlaybackRates: [Number]
   init()
 }
 class MPChangePlaybackPositionCommand : MPRemoteCommand {
   init()
 }
-class MPRemoteCommandCenter : NSObject {
+class MPRemoteCommandCenter : Object {
   var pauseCommand: MPRemoteCommand { get }
   var playCommand: MPRemoteCommand { get }
   var stopCommand: MPRemoteCommand { get }
@@ -797,19 +797,19 @@ class MPRemoteCommandCenter : NSObject {
   var dislikeCommand: MPFeedbackCommand { get }
   var bookmarkCommand: MPFeedbackCommand { get }
   var changePlaybackPositionCommand: MPChangePlaybackPositionCommand { get }
-  class func sharedCommandCenter() -> MPRemoteCommandCenter
+  class func shared() -> MPRemoteCommandCenter
   init()
 }
-class MPRemoteCommandEvent : NSObject {
+class MPRemoteCommandEvent : Object {
   /// The command that sent the event.
   var command: MPRemoteCommand { get }
   /// The time when the event occurred.
-  var timestamp: NSTimeInterval { get }
+  var timestamp: TimeInterval { get }
   init()
 }
 class MPSkipIntervalCommandEvent : MPRemoteCommandEvent {
   /// The chosen interval for this skip command event.
-  var interval: NSTimeInterval { get }
+  var interval: TimeInterval { get }
   init()
 }
 enum MPSeekCommandEventType : UInt {
@@ -847,7 +847,7 @@ class MPFeedbackCommandEvent : MPRemoteCommandEvent {
   /// dislike command. The app might want to remove the "like" flag from the
   /// current track, but not blacklist and skip to the next track as it would for
   /// a dislike command.
-  var negative: Bool { get }
+  var isNegative: Bool { get }
   init()
 }
 class MPChangeLanguageOptionCommandEvent : MPRemoteCommandEvent {
@@ -860,31 +860,31 @@ class MPChangeLanguageOptionCommandEvent : MPRemoteCommandEvent {
 }
 class MPChangePlaybackPositionCommandEvent : MPRemoteCommandEvent {
   /// The desired playback position to use when setting the current time of the player.
-  var positionTime: NSTimeInterval { get }
+  var positionTime: TimeInterval { get }
   init()
 }
 func MPVolumeSettingsAlertShow()
 func MPVolumeSettingsAlertHide()
 func MPVolumeSettingsAlertIsVisible() -> Bool
-class MPVolumeView : UIView, NSCoding {
+class MPVolumeView : UIView, Coding {
   var showsVolumeSlider: Bool
   var showsRouteButton: Bool
-  var wirelessRoutesAvailable: Bool { get }
-  var wirelessRouteActive: Bool { get }
+  var areWirelessRoutesAvailable: Bool { get }
+  var isWirelessRouteActive: Bool { get }
   func setMinimumVolumeSliderImage(image: UIImage?, forState state: UIControlState)
   func setMaximumVolumeSliderImage(image: UIImage?, forState state: UIControlState)
   func setVolumeThumbImage(image: UIImage?, forState state: UIControlState)
-  func minimumVolumeSliderImageForState(state: UIControlState) -> UIImage?
-  func maximumVolumeSliderImageForState(state: UIControlState) -> UIImage?
-  func volumeThumbImageForState(state: UIControlState) -> UIImage?
+  func minimumVolumeSliderImageFor(state: UIControlState) -> UIImage?
+  func maximumVolumeSliderImageFor(state: UIControlState) -> UIImage?
+  func volumeThumbImageFor(state: UIControlState) -> UIImage?
   var volumeWarningSliderImage: UIImage?
   func volumeSliderRectForBounds(bounds: CGRect) -> CGRect
   func volumeThumbRectForBounds(bounds: CGRect, volumeSliderRect rect: CGRect, value: Float) -> CGRect
   func setRouteButtonImage(image: UIImage?, forState state: UIControlState)
-  func routeButtonImageForState(state: UIControlState) -> UIImage?
+  func routeButtonImageFor(state: UIControlState) -> UIImage?
   func routeButtonRectForBounds(bounds: CGRect) -> CGRect
   init(frame: CGRect)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
 let MPVolumeViewWirelessRoutesAvailableDidChangeNotification: String

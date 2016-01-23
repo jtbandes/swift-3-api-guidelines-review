@@ -1,5 +1,5 @@
 
-class GLKBaseEffect : NSObject, GLKNamedEffect {
+class GLKBaseEffect : Object, GLKNamedEffect {
   func prepareToDraw()
   var colorMaterialEnabled: GLboolean
   var lightModelTwoSided: GLboolean
@@ -20,7 +20,7 @@ class GLKBaseEffect : NSObject, GLKNamedEffect {
   init()
 }
 typealias GLKEffectPropertyPrvPtr = COpaquePointer
-class GLKEffectProperty : NSObject {
+class GLKEffectProperty : Object {
   init()
 }
 enum GLKFogMode : GLint {
@@ -111,7 +111,7 @@ struct _GLKMatrix2 {
   init(m: (Float, Float, Float, Float))
   init()
 }
-extension _GLKMatrix2 {
+extension GLKMatrix2 {
   typealias _Tuple = (Float, Float, Float, Float)
   var _tuple: _Tuple { get }
   var m00: Float { get }
@@ -126,7 +126,7 @@ struct _GLKMatrix3 {
   init(m: (Float, Float, Float, Float, Float, Float, Float, Float, Float))
   init()
 }
-extension _GLKMatrix3 {
+extension GLKMatrix3 {
   typealias _Tuple = (Float, Float, Float, Float, Float, Float, Float, Float, Float)
   var _tuple: _Tuple { get }
   var m00: Float { get }
@@ -146,7 +146,7 @@ struct _GLKMatrix4 {
   init(m: (Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float))
   init()
 }
-extension _GLKMatrix4 {
+extension GLKMatrix4 {
   typealias _Tuple = (Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float)
   var _tuple: _Tuple { get }
   var m00: Float { get }
@@ -173,7 +173,7 @@ struct _GLKVector2 {
   init(v: (Float, Float))
   init()
 }
-extension _GLKVector2 {
+extension GLKVector2 {
   typealias _Tuple = (Float, Float)
   var _tuple: _Tuple { get }
   var x: Float { get }
@@ -188,7 +188,7 @@ struct _GLKVector3 {
   init(v: (Float, Float, Float))
   init()
 }
-extension _GLKVector3 {
+extension GLKVector3 {
   typealias _Tuple = (Float, Float, Float)
   var _tuple: _Tuple { get }
   var x: Float { get }
@@ -208,7 +208,7 @@ struct _GLKVector4 {
   init(v: (Float, Float, Float, Float))
   init()
 }
-extension _GLKVector4 {
+extension GLKVector4 {
   typealias _Tuple = (Float, Float, Float, Float)
   var _tuple: _Tuple { get }
   var x: Float { get }
@@ -231,7 +231,7 @@ struct _GLKQuaternion {
   init(q: (Float, Float, Float, Float))
   init()
 }
-extension _GLKQuaternion {
+extension GLKQuaternion {
   typealias _Tuple = (Float, Float, Float, Float)
   var _tuple: _Tuple { get }
   var v: GLKVector3 { get }
@@ -374,16 +374,16 @@ func GLKMatrixStackRotateY(stack: GLKMatrixStack, _ radians: Float)
 func GLKMatrixStackRotateZ(stack: GLKMatrixStack, _ radians: Float)
 let kGLKModelErrorDomain: String
 let kGLKModelErrorKey: String
-class GLKMeshBufferAllocator : NSObject, MDLMeshBufferAllocator {
+class GLKMeshBufferAllocator : Object, MDLMeshBufferAllocator {
   init()
   func newZone(capacity: Int) -> MDLMeshBufferZone
-  func newZoneForBuffersWithSize(sizes: [NSNumber], andType types: [NSNumber]) -> MDLMeshBufferZone
+  func newZoneForBuffersWithSize(sizes: [Number], andType types: [Number]) -> MDLMeshBufferZone
   func newBuffer(length: Int, type: MDLMeshBufferType) -> MDLMeshBuffer
-  func newBufferWithData(data: NSData, type: MDLMeshBufferType) -> MDLMeshBuffer
-  func newBufferFromZone(zone: MDLMeshBufferZone?, length: Int, type: MDLMeshBufferType) -> MDLMeshBuffer?
-  func newBufferFromZone(zone: MDLMeshBufferZone?, data: NSData, type: MDLMeshBufferType) -> MDLMeshBuffer?
+  func newBufferWith(data: Data, type: MDLMeshBufferType) -> MDLMeshBuffer
+  func newBufferFrom(zone: MDLMeshBufferZone?, length: Int, type: MDLMeshBufferType) -> MDLMeshBuffer?
+  func newBufferFrom(zone: MDLMeshBufferZone?, data: Data, type: MDLMeshBufferType) -> MDLMeshBuffer?
 }
-class GLKMeshBuffer : NSObject, MDLMeshBuffer {
+class GLKMeshBuffer : Object, MDLMeshBuffer {
   var length: Int { get }
   var allocator: GLKMeshBufferAllocator { get }
   var glBufferName: GLuint { get }
@@ -391,11 +391,11 @@ class GLKMeshBuffer : NSObject, MDLMeshBuffer {
   var type: MDLMeshBufferType { get }
   func zone() -> MDLMeshBufferZone?
   init()
-  func fillData(data: NSData, offset: Int)
+  func fill(data: Data, offset: Int)
   func map() -> MDLMeshBufferMap
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class GLKSubmesh : NSObject {
+class GLKSubmesh : Object {
   var type: GLenum { get }
   var mode: GLenum { get }
   var elementCount: GLsizei { get }
@@ -403,9 +403,9 @@ class GLKSubmesh : NSObject {
   weak var mesh: @sil_weak GLKMesh? { get }
   var name: String { get }
 }
-class GLKMesh : NSObject {
+class GLKMesh : Object {
   init(mesh: MDLMesh) throws
-  class func newMeshesFromAsset(asset: MDLAsset, sourceMeshes: AutoreleasingUnsafeMutablePointer<NSArray?>) throws -> [GLKMesh]
+  class func newMeshesFrom(asset: MDLAsset, sourceMeshes: AutoreleasingUnsafeMutablePointer<NSArray?>) throws -> [GLKMesh]
   var vertexCount: Int { get }
   var vertexBuffers: [GLKMeshBuffer] { get }
   var vertexDescriptor: MDLVertexDescriptor { get }
@@ -453,7 +453,7 @@ class GLKReflectionMapEffect : GLKBaseEffect, GLKNamedEffect {
   var matrix: GLKMatrix3
   init()
 }
-class GLKSkyboxEffect : NSObject, GLKNamedEffect {
+class GLKSkyboxEffect : Object, GLKNamedEffect {
   func prepareToDraw()
   func draw()
   var center: GLKVector3
@@ -510,7 +510,7 @@ enum GLKTextureInfoOrigin : GLint {
   case TopLeft
   case BottomLeft
 }
-class GLKTextureInfo : NSObject, NSCopying {
+class GLKTextureInfo : Object, Copying {
   var name: GLuint { get }
   var target: GLenum { get }
   var width: GLuint { get }
@@ -519,25 +519,25 @@ class GLKTextureInfo : NSObject, NSCopying {
   var textureOrigin: GLKTextureInfoOrigin { get }
   var containsMipmaps: Bool { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-typealias GLKTextureLoaderCallback = (GLKTextureInfo?, NSError?) -> Void
-class GLKTextureLoader : NSObject {
-  class func textureWithContentsOfFile(path: String, options: [String : NSNumber]?) throws -> GLKTextureInfo
-  class func textureWithContentsOfURL(url: NSURL, options: [String : NSNumber]?) throws -> GLKTextureInfo
-  class func textureWithContentsOfData(data: NSData, options: [String : NSNumber]?) throws -> GLKTextureInfo
-  class func textureWithCGImage(cgImage: CGImage, options: [String : NSNumber]?) throws -> GLKTextureInfo
-  class func cubeMapWithContentsOfFiles(paths: [AnyObject], options: [String : NSNumber]?) throws -> GLKTextureInfo
-  class func cubeMapWithContentsOfFile(path: String, options: [String : NSNumber]?) throws -> GLKTextureInfo
-  class func cubeMapWithContentsOfURL(url: NSURL, options: [String : NSNumber]?) throws -> GLKTextureInfo
+typealias GLKTextureLoaderCallback = (GLKTextureInfo?, Error?) -> Void
+class GLKTextureLoader : Object {
+  class func textureWithContentsOfFile(path: String, options: [String : Number]? = [:]) throws -> GLKTextureInfo
+  class func textureWithContentsOf(url: URL, options: [String : Number]? = [:]) throws -> GLKTextureInfo
+  class func textureWithContentsOf(data: Data, options: [String : Number]? = [:]) throws -> GLKTextureInfo
+  class func textureWith(cgImage: CGImage, options: [String : Number]? = [:]) throws -> GLKTextureInfo
+  class func cubeMapWithContentsOfFiles(paths: [AnyObject], options: [String : Number]? = [:]) throws -> GLKTextureInfo
+  class func cubeMapWithContentsOfFile(path: String, options: [String : Number]? = [:]) throws -> GLKTextureInfo
+  class func cubeMapWithContentsOf(url: URL, options: [String : Number]? = [:]) throws -> GLKTextureInfo
   init(sharegroup: EAGLSharegroup)
-  func textureWithContentsOfFile(path: String, options: [String : NSNumber]?, queue: dispatch_queue_t?, completionHandler block: GLKTextureLoaderCallback)
-  func textureWithContentsOfURL(url: NSURL, options: [String : NSNumber]?, queue: dispatch_queue_t?, completionHandler block: GLKTextureLoaderCallback)
-  func textureWithContentsOfData(data: NSData, options: [String : NSNumber]?, queue: dispatch_queue_t?, completionHandler block: GLKTextureLoaderCallback)
-  func textureWithCGImage(cgImage: CGImage, options: [String : NSNumber]?, queue: dispatch_queue_t?, completionHandler block: GLKTextureLoaderCallback)
-  func cubeMapWithContentsOfFiles(paths: [AnyObject], options: [String : NSNumber]?, queue: dispatch_queue_t?, completionHandler block: GLKTextureLoaderCallback)
-  func cubeMapWithContentsOfFile(path: String, options: [String : NSNumber]?, queue: dispatch_queue_t?, completionHandler block: GLKTextureLoaderCallback)
-  func cubeMapWithContentsOfURL(url: NSURL, options: [String : NSNumber]?, queue: dispatch_queue_t?, completionHandler block: GLKTextureLoaderCallback)
+  func textureWithContentsOfFile(path: String, options: [String : Number]? = [:], queue: dispatch_queue_t?, completionHandler block: GLKTextureLoaderCallback)
+  func textureWithContentsOf(url: URL, options: [String : Number]? = [:], queue: dispatch_queue_t?, completionHandler block: GLKTextureLoaderCallback)
+  func textureWithContentsOf(data: Data, options: [String : Number]? = [:], queue: dispatch_queue_t?, completionHandler block: GLKTextureLoaderCallback)
+  func textureWith(cgImage: CGImage, options: [String : Number]? = [:], queue: dispatch_queue_t?, completionHandler block: GLKTextureLoaderCallback)
+  func cubeMapWithContentsOfFiles(paths: [AnyObject], options: [String : Number]? = [:], queue: dispatch_queue_t?, completionHandler block: GLKTextureLoaderCallback)
+  func cubeMapWithContentsOfFile(path: String, options: [String : Number]? = [:], queue: dispatch_queue_t?, completionHandler block: GLKTextureLoaderCallback)
+  func cubeMapWithContentsOf(url: URL, options: [String : Number]? = [:], queue: dispatch_queue_t?, completionHandler block: GLKTextureLoaderCallback)
   init()
 }
 func GLKVector2Make(x: Float, _ y: Float) -> GLKVector2
@@ -645,7 +645,7 @@ enum GLKViewDrawableMultisample : GLint {
   case MultisampleNone
   case Multisample4X
 }
-class GLKView : UIView, NSCoding {
+class GLKView : UIView, Coding {
   init(frame: CGRect, context: EAGLContext)
   @IBOutlet unowned(unsafe) var delegate: @sil_unmanaged GLKViewDelegate?
   var context: EAGLContext
@@ -661,30 +661,30 @@ class GLKView : UIView, NSCoding {
   var enableSetNeedsDisplay: Bool
   func display()
   init(frame: CGRect)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
-protocol GLKViewDelegate : NSObjectProtocol {
-  func glkView(view: GLKView, drawInRect rect: CGRect)
+protocol GLKViewDelegate : ObjectProtocol {
+  func glkView(view: GLKView, drawIn rect: CGRect)
 }
-class GLKViewController : UIViewController, NSCoding, GLKViewDelegate {
+class GLKViewController : UIViewController, Coding, GLKViewDelegate {
   @IBOutlet unowned(unsafe) var delegate: @sil_unmanaged GLKViewControllerDelegate?
   var preferredFramesPerSecond: Int
   var framesPerSecond: Int { get }
-  var paused: Bool
+  var isPaused: Bool
   var framesDisplayed: Int { get }
-  var timeSinceFirstResume: NSTimeInterval { get }
-  var timeSinceLastResume: NSTimeInterval { get }
-  var timeSinceLastUpdate: NSTimeInterval { get }
-  var timeSinceLastDraw: NSTimeInterval { get }
+  var timeSinceFirstResume: TimeInterval { get }
+  var timeSinceLastResume: TimeInterval { get }
+  var timeSinceLastUpdate: TimeInterval { get }
+  var timeSinceLastDraw: TimeInterval { get }
   var pauseOnWillResignActive: Bool
   var resumeOnDidBecomeActive: Bool
-  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder aDecoder: NSCoder)
+  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder aDecoder: Coder)
   convenience init()
-  func glkView(view: GLKView, drawInRect rect: CGRect)
+  func glkView(view: GLKView, drawIn rect: CGRect)
 }
-protocol GLKViewControllerDelegate : NSObjectProtocol {
+protocol GLKViewControllerDelegate : ObjectProtocol {
   func glkViewControllerUpdate(controller: GLKViewController)
   optional func glkViewController(controller: GLKViewController, willPause pause: Bool)
 }

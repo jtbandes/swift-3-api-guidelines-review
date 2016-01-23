@@ -3,8 +3,8 @@ let GCControllerDidConnectNotification: String
 let GCControllerDidDisconnectNotification: String
 class GCEventViewController : UIViewController {
   var controllerUserInteractionEnabled: Bool
-  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder aDecoder: NSCoder)
+  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
 enum GCControllerPlayerIndex : Int {
@@ -16,18 +16,18 @@ enum GCControllerPlayerIndex : Int {
   case Index3
   case Index4
 }
-class GCController : NSObject {
+class GCController : Object {
   var controllerPausedHandler: ((GCController) -> Void)?
   var handlerQueue: dispatch_queue_t
   var vendorName: String? { get }
-  var attachedToDevice: Bool { get }
+  var isAttachedToDevice: Bool { get }
   var playerIndex: GCControllerPlayerIndex
   var gamepad: GCGamepad? { get }
   var microGamepad: GCMicroGamepad? { get }
   var extendedGamepad: GCExtendedGamepad? { get }
   var motion: GCMotion? { get }
   class func controllers() -> [GCController]
-  class func startWirelessControllerDiscoveryWithCompletionHandler(completionHandler: (() -> Void)?)
+  class func startWirelessControllerDiscovery(completionHandler completionHandler: (() -> Void)? = nil)
   class func stopWirelessControllerDiscovery()
   init()
 }
@@ -41,7 +41,7 @@ class GCControllerButtonInput : GCControllerElement {
   var valueChangedHandler: GCControllerButtonValueChangedHandler?
   var pressedChangedHandler: GCControllerButtonValueChangedHandler?
   var value: Float { get }
-  var pressed: Bool { get }
+  var isPressed: Bool { get }
   init()
 }
 typealias GCControllerButtonValueChangedHandler = (GCControllerButtonInput, Float, Bool) -> Void
@@ -56,12 +56,12 @@ class GCControllerDirectionPad : GCControllerElement {
   init()
 }
 typealias GCControllerDirectionPadValueChangedHandler = (GCControllerDirectionPad, Float, Float) -> Void
-class GCControllerElement : NSObject {
+class GCControllerElement : Object {
   weak var collection: @sil_weak GCControllerElement? { get }
-  var analog: Bool { get }
+  var isAnalog: Bool { get }
   init()
 }
-class GCExtendedGamepad : NSObject {
+class GCExtendedGamepad : Object {
   weak var controller: @sil_weak GCController? { get }
   var valueChangedHandler: GCExtendedGamepadValueChangedHandler?
   func saveSnapshot() -> GCExtendedGamepadSnapshot
@@ -80,9 +80,9 @@ class GCExtendedGamepad : NSObject {
 }
 typealias GCExtendedGamepadValueChangedHandler = (GCExtendedGamepad, GCControllerElement) -> Void
 class GCExtendedGamepadSnapshot : GCExtendedGamepad {
-  @NSCopying var snapshotData: NSData
-  init(snapshotData data: NSData)
-  init(controller: GCController, snapshotData data: NSData)
+  @NSCopying var snapshotData: Data
+  init(snapshotData data: Data)
+  init(controller: GCController, snapshotData data: Data)
   init()
 }
 struct GCExtendedGamepadSnapShotDataV100 {
@@ -105,9 +105,9 @@ struct GCExtendedGamepadSnapShotDataV100 {
   init()
   init(version: UInt16, size: UInt16, dpadX: Float, dpadY: Float, buttonA: Float, buttonB: Float, buttonX: Float, buttonY: Float, leftShoulder: Float, rightShoulder: Float, leftThumbstickX: Float, leftThumbstickY: Float, rightThumbstickX: Float, rightThumbstickY: Float, leftTrigger: Float, rightTrigger: Float)
 }
-func GCExtendedGamepadSnapShotDataV100FromNSData(snapshotData: UnsafeMutablePointer<GCExtendedGamepadSnapShotDataV100>, _ data: NSData?) -> Bool
-func NSDataFromGCExtendedGamepadSnapShotDataV100(snapshotData: UnsafeMutablePointer<GCExtendedGamepadSnapShotDataV100>) -> NSData?
-class GCGamepad : NSObject {
+func GCExtendedGamepadSnapShotDataV100FromNSData(snapshotData: UnsafeMutablePointer<GCExtendedGamepadSnapShotDataV100>, _ data: Data?) -> Bool
+func NSDataFromGCExtendedGamepadSnapShotDataV100(snapshotData: UnsafeMutablePointer<GCExtendedGamepadSnapShotDataV100>) -> Data?
+class GCGamepad : Object {
   weak var controller: @sil_weak GCController? { get }
   var valueChangedHandler: GCGamepadValueChangedHandler?
   func saveSnapshot() -> GCGamepadSnapshot
@@ -122,9 +122,9 @@ class GCGamepad : NSObject {
 }
 typealias GCGamepadValueChangedHandler = (GCGamepad, GCControllerElement) -> Void
 class GCGamepadSnapshot : GCGamepad {
-  @NSCopying var snapshotData: NSData
-  init(snapshotData data: NSData)
-  init(controller: GCController, snapshotData data: NSData)
+  @NSCopying var snapshotData: Data
+  init(snapshotData data: Data)
+  init(controller: GCController, snapshotData data: Data)
   init()
 }
 struct GCGamepadSnapShotDataV100 {
@@ -141,9 +141,9 @@ struct GCGamepadSnapShotDataV100 {
   init()
   init(version: UInt16, size: UInt16, dpadX: Float, dpadY: Float, buttonA: Float, buttonB: Float, buttonX: Float, buttonY: Float, leftShoulder: Float, rightShoulder: Float)
 }
-func GCGamepadSnapShotDataV100FromNSData(snapshotData: UnsafeMutablePointer<GCGamepadSnapShotDataV100>, _ data: NSData?) -> Bool
-func NSDataFromGCGamepadSnapShotDataV100(snapshotData: UnsafeMutablePointer<GCGamepadSnapShotDataV100>) -> NSData?
-class GCMicroGamepad : NSObject {
+func GCGamepadSnapShotDataV100FromNSData(snapshotData: UnsafeMutablePointer<GCGamepadSnapShotDataV100>, _ data: Data?) -> Bool
+func NSDataFromGCGamepadSnapShotDataV100(snapshotData: UnsafeMutablePointer<GCGamepadSnapShotDataV100>) -> Data?
+class GCMicroGamepad : Object {
   weak var controller: @sil_weak GCController? { get }
   var valueChangedHandler: GCMicroGamepadValueChangedHandler?
   func saveSnapshot() -> GCMicroGamepadSnapshot
@@ -156,9 +156,9 @@ class GCMicroGamepad : NSObject {
 }
 typealias GCMicroGamepadValueChangedHandler = (GCMicroGamepad, GCControllerElement) -> Void
 class GCMicroGamepadSnapshot : GCMicroGamepad {
-  @NSCopying var snapshotData: NSData
-  init(snapshotData data: NSData)
-  init(controller: GCController, snapshotData data: NSData)
+  @NSCopying var snapshotData: Data
+  init(snapshotData data: Data)
+  init(controller: GCController, snapshotData data: Data)
   init()
 }
 struct GCMicroGamepadSnapShotDataV100 {
@@ -171,8 +171,8 @@ struct GCMicroGamepadSnapShotDataV100 {
   init()
   init(version: UInt16, size: UInt16, dpadX: Float, dpadY: Float, buttonA: Float, buttonX: Float)
 }
-func GCMicroGamepadSnapShotDataV100FromNSData(snapshotData: UnsafeMutablePointer<GCMicroGamepadSnapShotDataV100>, _ data: NSData?) -> Bool
-func NSDataFromGCMicroGamepadSnapShotDataV100(snapshotData: UnsafeMutablePointer<GCMicroGamepadSnapShotDataV100>) -> NSData?
+func GCMicroGamepadSnapShotDataV100FromNSData(snapshotData: UnsafeMutablePointer<GCMicroGamepadSnapShotDataV100>, _ data: Data?) -> Bool
+func NSDataFromGCMicroGamepadSnapShotDataV100(snapshotData: UnsafeMutablePointer<GCMicroGamepadSnapShotDataV100>) -> Data?
 struct GCAcceleration {
   var x: Double
   var y: Double
@@ -202,7 +202,7 @@ struct GCQuaternion {
   init()
   init(x: Double, y: Double, z: Double, w: Double)
 }
-class GCMotion : NSObject {
+class GCMotion : Object {
   weak var controller: @sil_weak GCController? { get }
   var valueChangedHandler: GCMotionValueChangedHandler?
   var gravity: GCAcceleration { get }

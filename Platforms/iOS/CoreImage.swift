@@ -1,9 +1,9 @@
 
 var UNIFIED_CORE_IMAGE: Int32 { get }
-class CIColor : NSObject, NSSecureCoding, NSCopying {
+class CIColor : Object, SecureCoding, Copying {
   convenience init(red r: CGFloat, green g: CGFloat, blue b: CGFloat)
   convenience init(string representation: String)
-  init(CGColor c: CGColor)
+  init(cgColor c: CGColor)
   convenience init(red r: CGFloat, green g: CGFloat, blue b: CGFloat, alpha a: CGFloat)
   var numberOfComponents: Int { get }
   var components: UnsafePointer<CGFloat> { get }
@@ -15,25 +15,25 @@ class CIColor : NSObject, NSSecureCoding, NSCopying {
   var stringRepresentation: String { get }
   convenience init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class CIContext : NSObject {
-   init(CGContext cgctx: CGContext, options: [String : AnyObject]?)
-   init(options: [String : AnyObject]?)
-   init(EAGLContext eaglContext: EAGLContext)
-   init(EAGLContext eaglContext: EAGLContext, options: [String : AnyObject]?)
-   init(MTLDevice device: MTLDevice)
-   init(MTLDevice device: MTLDevice, options: [String : AnyObject]?)
+class CIContext : Object {
+   init(cgContext cgctx: CGContext, options: [String : AnyObject]? = [:])
+   init(options: [String : AnyObject]? = [:])
+   init(eaglContext: EAGLContext)
+   init(eaglContext: EAGLContext, options: [String : AnyObject]? = [:])
+   init(mtlDevice device: MTLDevice)
+   init(mtlDevice device: MTLDevice, options: [String : AnyObject]? = [:])
   var workingColorSpace: CGColorSpace { get }
-  func drawImage(image: CIImage, inRect: CGRect, fromRect: CGRect)
-  func createCGImage(image: CIImage, fromRect: CGRect) -> CGImage
-  func createCGImage(image: CIImage, fromRect: CGRect, format: CIFormat, colorSpace: CGColorSpace?) -> CGImage
+  func draw(image: CIImage, in inRect: CGRect, from fromRect: CGRect)
+  func createCGImage(image: CIImage, from fromRect: CGRect) -> CGImage
+  func createCGImage(image: CIImage, from fromRect: CGRect, format: CIFormat, colorSpace: CGColorSpace?) -> CGImage
   func render(image: CIImage, toBitmap data: UnsafeMutablePointer<Void>, rowBytes: Int, bounds: CGRect, format: CIFormat, colorSpace: CGColorSpace?)
-  func render(image: CIImage, toCVPixelBuffer buffer: CVPixelBuffer)
-  func render(image: CIImage, toCVPixelBuffer buffer: CVPixelBuffer, bounds: CGRect, colorSpace: CGColorSpace?)
-  func render(image: CIImage, toMTLTexture texture: MTLTexture, commandBuffer: MTLCommandBuffer?, bounds: CGRect, colorSpace: CGColorSpace)
+  func render(image: CIImage, to buffer: CVPixelBuffer)
+  func render(image: CIImage, to buffer: CVPixelBuffer, bounds: CGRect, colorSpace: CGColorSpace?)
+  func render(image: CIImage, to texture: MTLTexture, commandBuffer: MTLCommandBuffer?, bounds: CGRect, colorSpace: CGColorSpace)
   func inputImageMaximumSize() -> CGSize
   func outputImageMaximumSize() -> CGSize
   init()
@@ -46,10 +46,10 @@ let kCIContextUseSoftwareRenderer: String
 let kCIContextPriorityRequestLow: String
 extension CIContext {
 }
-class CIDetector : NSObject {
-   init(ofType type: String, context: CIContext?, options: [String : AnyObject]?)
-  func featuresInImage(image: CIImage) -> [CIFeature]
-  func featuresInImage(image: CIImage, options: [String : AnyObject]?) -> [CIFeature]
+class CIDetector : Object {
+   init(ofType type: String, context: CIContext?, options: [String : AnyObject]? = [:])
+  func featuresIn(image: CIImage) -> [CIFeature]
+  func featuresIn(image: CIImage, options: [String : AnyObject]? = [:]) -> [CIFeature]
   init()
 }
 let CIDetectorTypeFace: String
@@ -68,7 +68,7 @@ let CIDetectorSmile: String
 let CIDetectorFocalLength: String
 let CIDetectorAspectRatio: String
 let CIDetectorReturnSubFeatures: String
-class CIFeature : NSObject {
+class CIFeature : Object {
   var type: String { get }
   var bounds: CGRect { get }
   init()
@@ -208,7 +208,7 @@ let kCIInputShadingImageKey: String
 let kCIInputTargetImageKey: String
 let kCIInputExtentKey: String
 let kCIInputVersionKey: String
-class CIFilter : NSObject, NSSecureCoding, NSCopying {
+class CIFilter : Object, SecureCoding, Copying {
   var outputImage: CIImage? { get }
   var name: String { get }
   var inputKeys: [String] { get }
@@ -217,9 +217,9 @@ class CIFilter : NSObject, NSSecureCoding, NSCopying {
   var attributes: [String : AnyObject] { get }
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 extension CIFilter {
   convenience init?(name: String!, elements: (String, AnyObject)...)
@@ -229,64 +229,64 @@ extension CIFilter {
    init?(name: String, withInputParameters params: [String : AnyObject]?)
   class func filterNamesInCategory(category: String?) -> [String]
   class func filterNamesInCategories(categories: [String]?) -> [String]
-  class func registerFilterName(name: String, constructor anObject: CIFilterConstructor, classAttributes attributes: [String : AnyObject])
+  class func registerName(name: String, constructor anObject: CIFilterConstructor, classAttributes attributes: [String : AnyObject] = [:])
   class func localizedNameForFilterName(filterName: String) -> String?
   class func localizedNameForCategory(category: String) -> String
   class func localizedDescriptionForFilterName(filterName: String) -> String?
-  class func localizedReferenceDocumentationForFilterName(filterName: String) -> NSURL?
+  class func localizedReferenceDocumentationForFilterName(filterName: String) -> URL?
 }
 extension CIFilter {
-  class func serializedXMPFromFilters(filters: [CIFilter], inputImageExtent extent: CGRect) -> NSData
-  class func filterArrayFromSerializedXMP(xmpData: NSData, inputImageExtent extent: CGRect, error outError: NSErrorPointer) -> [CIFilter]
+  class func serializedXMPFrom(filters: [CIFilter], inputImageExtent extent: CGRect) -> Data
+  class func filterArrayFromSerializedXMP(xmpData: Data, inputImageExtent extent: CGRect, error outError: ErrorPointer) -> [CIFilter]
 }
 protocol CIFilterConstructor {
   func filterWithName(name: String) -> CIFilter?
 }
-class CIFilterShape : NSObject, NSCopying {
+class CIFilterShape : Object, Copying {
   init(rect r: CGRect)
   func transformBy(m: CGAffineTransform, interior flag: Bool) -> CIFilterShape
   func insetByX(dx: Int32, y dy: Int32) -> CIFilterShape
   func unionWith(s2: CIFilterShape) -> CIFilterShape
-  func unionWithRect(r: CGRect) -> CIFilterShape
+  func unionWith(r: CGRect) -> CIFilterShape
   func intersectWith(s2: CIFilterShape) -> CIFilterShape
-  func intersectWithRect(r: CGRect) -> CIFilterShape
+  func intersectWith(r: CGRect) -> CIFilterShape
   var extent: CGRect { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class CIImage : NSObject, NSSecureCoding, NSCopying {
-  class func emptyImage() -> CIImage
-  init(CGImage image: CGImage)
-  init(CGImage image: CGImage, options: [String : AnyObject]?)
-  init?(data: NSData)
-  init?(data: NSData, options: [String : AnyObject]?)
-  init(bitmapData data: NSData, bytesPerRow: Int, size: CGSize, format: CIFormat, colorSpace: CGColorSpace?)
+class CIImage : Object, SecureCoding, Copying {
+  class func empty() -> CIImage
+  init(cgImage image: CGImage)
+  init(cgImage image: CGImage, options: [String : AnyObject]? = [:])
+  init?(data: Data)
+  init?(data: Data, options: [String : AnyObject]? = [:])
+  init(bitmapData data: Data, bytesPerRow: Int, size: CGSize, format: CIFormat, colorSpace: CGColorSpace?)
   init(texture name: UInt32, size: CGSize, flipped: Bool, colorSpace: CGColorSpace?)
-  init(MTLTexture texture: MTLTexture, options: [String : AnyObject]?)
-  init?(contentsOfURL url: NSURL)
-  init?(contentsOfURL url: NSURL, options: [String : AnyObject]?)
-  init(CVImageBuffer imageBuffer: CVImageBuffer)
-  init(CVImageBuffer imageBuffer: CVImageBuffer, options: [String : AnyObject]?)
-  init(CVPixelBuffer pixelBuffer: CVPixelBuffer)
-  init(CVPixelBuffer pixelBuffer: CVPixelBuffer, options: [String : AnyObject]?)
+  init(mtlTexture texture: MTLTexture, options: [String : AnyObject]? = [:])
+  init?(contentsOf url: URL)
+  init?(contentsOf url: URL, options: [String : AnyObject]? = [:])
+  init(cvImageBuffer imageBuffer: CVImageBuffer)
+  init(cvImageBuffer imageBuffer: CVImageBuffer, options: [String : AnyObject]? = [:])
+  init(cvPixelBuffer pixelBuffer: CVPixelBuffer)
+  init(cvPixelBuffer pixelBuffer: CVPixelBuffer, options: [String : AnyObject]? = [:])
   init(color: CIColor)
-  func imageByApplyingTransform(matrix: CGAffineTransform) -> CIImage
-  func imageByApplyingOrientation(orientation: Int32) -> CIImage
+  func applying(matrix: CGAffineTransform) -> CIImage
+  func applyingOrientation(orientation: Int32) -> CIImage
   func imageTransformForOrientation(orientation: Int32) -> CGAffineTransform
-  func imageByCompositingOverImage(dest: CIImage) -> CIImage
-  func imageByCroppingToRect(rect: CGRect) -> CIImage
-  func imageByClampingToExtent() -> CIImage
-  func imageByApplyingFilter(filterName: String, withInputParameters params: [String : AnyObject]?) -> CIImage
+  func byCompositingOverImage(dest: CIImage) -> CIImage
+  func byCroppingTo(rect: CGRect) -> CIImage
+  func byClampingToExtent() -> CIImage
+  func applyingFilter(filterName: String, withInputParameters params: [String : AnyObject]?) -> CIImage
   var extent: CGRect { get }
   var properties: [String : AnyObject] { get }
-  var url: NSURL? { get }
+  var url: URL? { get }
   var colorSpace: CGColorSpace? { get }
-  func regionOfInterestForImage(image: CIImage, inRect rect: CGRect) -> CGRect
+  func regionOfInterestFor(image: CIImage, in rect: CGRect) -> CGRect
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 typealias CIFormat = Int32
 var kCIFormatARGB8: CIFormat
@@ -310,14 +310,14 @@ var kCIFormatRGf: CIFormat
 let kCIImageColorSpace: String
 let kCIImageProperties: String
 extension CIImage {
-  func autoAdjustmentFiltersWithOptions(options: [String : AnyObject]?) -> [CIFilter]
+  func autoAdjustmentFilters(options options: [String : AnyObject]? = [:]) -> [CIFilter]
 }
 let kCIImageAutoAdjustEnhance: String
 let kCIImageAutoAdjustRedEye: String
 let kCIImageAutoAdjustFeatures: String
 let kCIImageAutoAdjustCrop: String
 let kCIImageAutoAdjustLevel: String
-class CIImageAccumulator : NSObject {
+class CIImageAccumulator : Object {
   init(extent: CGRect, format: CIFormat)
   init(extent: CGRect, format: CIFormat, colorSpace: CGColorSpace)
   var extent: CGRect { get }
@@ -329,17 +329,17 @@ class CIImageAccumulator : NSObject {
   init()
 }
 extension CIImage {
-  init(imageProvider p: AnyObject, size width: Int, _ height: Int, format f: CIFormat, colorSpace cs: CGColorSpace?, options: [String : AnyObject]?)
+  init(imageProvider p: AnyObject, size width: Int, _ height: Int, format f: CIFormat, colorSpace cs: CGColorSpace?, options: [String : AnyObject]? = [:])
 }
-extension NSObject {
+extension Object {
   class func provideImageData(data: UnsafeMutablePointer<Void>, bytesPerRow rowbytes: Int, origin x: Int, _ y: Int, size width: Int, _ height: Int, userInfo info: AnyObject?)
   func provideImageData(data: UnsafeMutablePointer<Void>, bytesPerRow rowbytes: Int, origin x: Int, _ y: Int, size width: Int, _ height: Int, userInfo info: AnyObject?)
 }
 let kCIImageProviderTileSize: String
 let kCIImageProviderUserInfo: String
 typealias CIKernelROICallback = (Int32, CGRect) -> CGRect
-class CIKernel : NSObject {
-  class func kernelsWithString(string: String) -> [CIKernel]?
+class CIKernel : Object {
+  class func kernelsWith(string: String) -> [CIKernel]?
   convenience init?(string: String)
   var name: String { get }
   func setROISelector(method: Selector)
@@ -356,13 +356,13 @@ class CIWarpKernel : CIKernel {
   func applyWithExtent(extent: CGRect, roiCallback callback: CIKernelROICallback, inputImage image: CIImage, arguments args: [AnyObject]?) -> CIImage?
   init()
 }
-class CISampler : NSObject, NSCopying {
+class CISampler : Object, Copying {
   convenience init(image im: CIImage)
-  init(image im: CIImage, options dict: [NSObject : AnyObject]?)
+  init(image im: CIImage, options dict: [Object : AnyObject]? = [:])
   var definition: CIFilterShape { get }
   var extent: CGRect { get }
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 let kCISamplerAffineMatrix: String
 let kCISamplerWrapMode: String
@@ -372,29 +372,29 @@ let kCISamplerWrapClamp: String
 let kCISamplerFilterNearest: String
 let kCISamplerFilterLinear: String
 let kCISamplerColorSpace: String
-class CIVector : NSObject, NSCopying, NSSecureCoding {
+class CIVector : Object, Copying, SecureCoding {
   init(values: UnsafePointer<CGFloat>, count: Int)
   convenience init(x: CGFloat)
   convenience init(x: CGFloat, y: CGFloat)
   convenience init(x: CGFloat, y: CGFloat, z: CGFloat)
   convenience init(x: CGFloat, y: CGFloat, z: CGFloat, w: CGFloat)
-  convenience init(CGPoint p: CGPoint)
-  convenience init(CGRect r: CGRect)
-  convenience init(CGAffineTransform r: CGAffineTransform)
+  convenience init(cgPoint p: CGPoint)
+  convenience init(cgRect r: CGRect)
+  convenience init(cgAffineTransform r: CGAffineTransform)
   convenience init(string representation: String)
-  func valueAtIndex(index: Int) -> CGFloat
+  func valueAt(index: Int) -> CGFloat
   var count: Int { get }
-  var X: CGFloat { get }
-  var Y: CGFloat { get }
-  var Z: CGFloat { get }
-  var W: CGFloat { get }
-  var CGPointValue: CGPoint { get }
-  var CGRectValue: CGRect { get }
-  var CGAffineTransformValue: CGAffineTransform { get }
+  var x: CGFloat { get }
+  var y: CGFloat { get }
+  var z: CGFloat { get }
+  var w: CGFloat { get }
+  var cgPointValue: CGPoint { get }
+  var cgRectValue: CGRect { get }
+  var cgAffineTransformValue: CGAffineTransform { get }
   var stringRepresentation: String { get }
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }

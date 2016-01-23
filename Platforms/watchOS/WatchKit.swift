@@ -9,14 +9,14 @@ enum WKAlertActionStyle : Int {
   case Destructive
 }
 typealias WKAlertActionHandler = () -> Void
-class WKAlertAction : NSObject {
+class WKAlertAction : Object {
   convenience init(title: String, style: WKAlertActionStyle, handler: WKAlertActionHandler)
 }
-class WKAudioFileAsset : NSObject {
-  convenience init(URL: NSURL)
-  convenience init(URL: NSURL, title: String?, albumTitle: String?, artist: String?)
-  var URL: NSURL { get }
-  var duration: NSTimeInterval { get }
+class WKAudioFileAsset : Object {
+  convenience init(url URL: URL)
+  convenience init(url URL: URL, title: String?, albumTitle: String?, artist: String?)
+  var url: URL { get }
+  var duration: TimeInterval { get }
   var title: String? { get }
   var albumTitle: String? { get }
   var artist: String? { get }
@@ -28,16 +28,16 @@ enum WKAudioFilePlayerStatus : Int {
   case ReadyToPlay
   case Failed
 }
-class WKAudioFilePlayer : NSObject {
+class WKAudioFilePlayer : Object {
   convenience init(playerItem item: WKAudioFilePlayerItem)
   func play()
   func pause()
-  func replaceCurrentItemWithPlayerItem(item: WKAudioFilePlayerItem?)
+  func replaceCurrentItemWith(item: WKAudioFilePlayerItem?)
   var currentItem: WKAudioFilePlayerItem? { get }
   var status: WKAudioFilePlayerStatus { get }
-  var error: NSError? { get }
+  var error: Error? { get }
   var rate: Float
-  var currentTime: NSTimeInterval { get }
+  var currentTime: TimeInterval { get }
 }
 class WKAudioFileQueuePlayer : WKAudioFilePlayer {
   convenience init(items: [WKAudioFilePlayerItem])
@@ -58,12 +58,12 @@ enum WKAudioFilePlayerItemStatus : Int {
   case ReadyToPlay
   case Failed
 }
-class WKAudioFilePlayerItem : NSObject {
+class WKAudioFilePlayerItem : Object {
    init(asset: WKAudioFileAsset)
   var asset: WKAudioFileAsset { get }
   var status: WKAudioFilePlayerItemStatus { get }
-  var error: NSError? { get }
-  var currentTime: NSTimeInterval { get }
+  var error: Error? { get }
+  var currentTime: TimeInterval { get }
 }
 let WatchKitErrorDomain: String
 enum WatchKitErrorCode : Int {
@@ -80,43 +80,43 @@ extension WatchKitErrorCode : _BridgedNSError {
   static var _NSErrorDomain: String { get }
   typealias RawValue = Int
 }
-class WKExtension : NSObject {
-  class func sharedExtension() -> WKExtension
-  func openSystemURL(url: NSURL)
+class WKExtension : Object {
+  class func shared() -> WKExtension
+  func openSystemURL(url: URL)
   weak var delegate: @sil_weak WKExtensionDelegate?
   var rootInterfaceController: WKInterfaceController? { get }
   init()
 }
-protocol WKExtensionDelegate : NSObjectProtocol {
+protocol WKExtensionDelegate : ObjectProtocol {
   optional func applicationDidFinishLaunching()
   optional func applicationDidBecomeActive()
   optional func applicationWillResignActive()
-  optional func handleActionWithIdentifier(identifier: String?, forRemoteNotification remoteNotification: [NSObject : AnyObject])
+  optional func handleActionWithIdentifier(identifier: String?, forRemoteNotification remoteNotification: [Object : AnyObject])
   optional func handleActionWithIdentifier(identifier: String?, forLocalNotification localNotification: UILocalNotification)
-  optional func handleActionWithIdentifier(identifier: String?, forRemoteNotification remoteNotification: [NSObject : AnyObject], withResponseInfo responseInfo: [NSObject : AnyObject])
-  optional func handleActionWithIdentifier(identifier: String?, forLocalNotification localNotification: UILocalNotification, withResponseInfo responseInfo: [NSObject : AnyObject])
-  optional func handleUserActivity(userInfo: [NSObject : AnyObject]?)
-  optional func didReceiveRemoteNotification(userInfo: [NSObject : AnyObject])
-  optional func didReceiveLocalNotification(notification: UILocalNotification)
+  optional func handleActionWithIdentifier(identifier: String?, forRemoteNotification remoteNotification: [Object : AnyObject], withResponseInfo responseInfo: [Object : AnyObject])
+  optional func handleActionWithIdentifier(identifier: String?, forLocalNotification localNotification: UILocalNotification, withResponseInfo responseInfo: [Object : AnyObject])
+  optional func handleUserActivity(userInfo: [Object : AnyObject]?)
+  optional func didReceiveRemoteNotification(userInfo: [Object : AnyObject])
+  optional func didReceive(notification: UILocalNotification)
 }
-class WKImage : NSObject, NSCopying, NSSecureCoding {
+class WKImage : Object, Copying, SecureCoding {
   convenience init(image: UIImage)
-  convenience init(imageData: NSData)
+  convenience init(imageData: Data)
   convenience init(imageName: String)
   var image: UIImage? { get }
-  var imageData: NSData? { get }
+  var imageData: Data? { get }
   var imageName: String? { get }
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 class WKInterfaceButton : WKInterfaceObject {
   func setTitle(title: String?)
-  func setAttributedTitle(attributedTitle: NSAttributedString?)
+  func setAttributedTitle(attributedTitle: AttributedString?)
   func setBackgroundColor(color: UIColor?)
   func setBackgroundImage(image: UIImage?)
-  func setBackgroundImageData(imageData: NSData?)
+  func setBackgroundImageData(imageData: Data?)
   func setBackgroundImageNamed(imageName: String?)
   func setEnabled(enabled: Bool)
 }
@@ -174,7 +174,7 @@ enum WKAudioRecorderPreset : Int {
   case WideBandSpeech
   case HighQualityAudio
 }
-class WKInterfaceController : NSObject {
+class WKInterfaceController : Object {
   init()
   func awakeWithContext(context: AnyObject?)
   var contentFrame: CGRect { get }
@@ -185,39 +185,39 @@ class WKInterfaceController : NSObject {
   func pickerDidFocus(picker: WKInterfacePicker)
   func pickerDidResignFocus(picker: WKInterfacePicker)
   func pickerDidSettle(picker: WKInterfacePicker)
-  func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int)
-  func handleActionWithIdentifier(identifier: String?, forRemoteNotification remoteNotification: [NSObject : AnyObject])
+  func table(table: WKInterfaceTable, didSelectRowAt rowIndex: Int)
+  func handleActionWithIdentifier(identifier: String?, forRemoteNotification remoteNotification: [Object : AnyObject])
   func handleActionWithIdentifier(identifier: String?, forLocalNotification localNotification: UILocalNotification)
-  func handleUserActivity(userInfo: [NSObject : AnyObject]?)
+  func handleUserActivity(userInfo: [Object : AnyObject]?)
   func setTitle(title: String?)
-  func pushControllerWithName(name: String, context: AnyObject?)
-  func popController()
+  func pushWithName(name: String, context: AnyObject?)
+  func pop()
   func popToRootController()
   class func reloadRootControllersWithNames(names: [String], contexts: [AnyObject]?)
   func becomeCurrentPage()
-  func presentControllerWithName(name: String, context: AnyObject?)
-  func presentControllerWithNames(names: [String], contexts: [AnyObject]?)
-  func dismissController()
+  func presentWithName(name: String, context: AnyObject?)
+  func presentWithNames(names: [String], contexts: [AnyObject]?)
+  func dismiss()
   func presentTextInputControllerWithSuggestions(suggestions: [String]?, allowedInputMode inputMode: WKTextInputMode, completion: ([AnyObject]?) -> Void)
   func presentTextInputControllerWithSuggestionsForLanguage(suggestionsHandler: ((String) -> [AnyObject]?)?, allowedInputMode inputMode: WKTextInputMode, completion: ([AnyObject]?) -> Void)
   func dismissTextInputController()
-  func presentMediaPlayerControllerWithURL(URL: NSURL, options: [NSObject : AnyObject]?, completion: (Bool, NSTimeInterval, NSError?) -> Void)
+  func presentMediaPlayerControllerWith(URL: URL, options: [Object : AnyObject]? = [:], completion: (Bool, TimeInterval, Error?) -> Void)
   func dismissMediaPlayerController()
-  func presentAudioRecorderControllerWithOutputURL(URL: NSURL, preset: WKAudioRecorderPreset, options: [NSObject : AnyObject]?, completion: (Bool, NSError?) -> Void)
+  func presentAudioRecorderControllerWithOutputURL(URL: URL, preset: WKAudioRecorderPreset, options: [Object : AnyObject]? = [:], completion: (Bool, Error?) -> Void)
   func dismissAudioRecorderController()
   func contextForSegueWithIdentifier(segueIdentifier: String) -> AnyObject?
   func contextsForSegueWithIdentifier(segueIdentifier: String) -> [AnyObject]?
-  func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject?
-  func contextsForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> [AnyObject]?
-  func animateWithDuration(duration: NSTimeInterval, animations: () -> Void)
-  func presentAlertControllerWithTitle(title: String?, message: String?, preferredStyle: WKAlertControllerStyle, actions: [WKAlertAction])
+  func contextForSegueWithIdentifier(segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> AnyObject?
+  func contextsForSegueWithIdentifier(segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> [AnyObject]?
+  func animateWithDuration(duration: TimeInterval, animations: () -> Void)
+  func presentAlertWithTitle(title: String?, message: String?, preferredStyle: WKAlertControllerStyle, actions: [WKAlertAction])
   func presentAddPassesControllerWithPasses(passes: [AnyObject], completion: () -> Void)
   func dismissAddPassesController()
-  func addMenuItemWithImage(image: UIImage, title: String, action: Selector)
+  func addMenuItemWith(image: UIImage, title: String, action: Selector)
   func addMenuItemWithImageNamed(imageName: String, title: String, action: Selector)
-  func addMenuItemWithItemIcon(itemIcon: WKMenuItemIcon, title: String, action: Selector)
+  func addMenuItemWith(itemIcon: WKMenuItemIcon, title: String, action: Selector)
   func clearAllMenuItems()
-  func updateUserActivity(type: String, userInfo: [NSObject : AnyObject]?, webpageURL: NSURL?)
+  func updateUserActivity(type: String, userInfo: [Object : AnyObject]? = [:], webpageURL: URL?)
   func invalidateUserActivity()
   func beginGlanceUpdates()
   func endGlanceUpdates()
@@ -237,15 +237,15 @@ let WKAudioRecorderControllerOptionsAutorecordKey: String
 let WKAudioRecorderControllerOptionsMaximumDurationKey: String
 class WKUserNotificationInterfaceController : WKInterfaceController {
   init()
-  func didReceiveRemoteNotification(remoteNotification: [NSObject : AnyObject], withCompletion completionHandler: (WKUserNotificationInterfaceType) -> Void)
-  func didReceiveLocalNotification(localNotification: UILocalNotification, withCompletion completionHandler: (WKUserNotificationInterfaceType) -> Void)
-  func suggestionsForResponseToActionWithIdentifier(identifier: String, forRemoteNotification remoteNotification: [NSObject : AnyObject], inputLanguage: String) -> [String]
+  func didReceiveRemoteNotification(remoteNotification: [Object : AnyObject], withCompletion completionHandler: (WKUserNotificationInterfaceType) -> Void)
+  func didReceive(localNotification: UILocalNotification, withCompletion completionHandler: (WKUserNotificationInterfaceType) -> Void)
+  func suggestionsForResponseToActionWithIdentifier(identifier: String, forRemoteNotification remoteNotification: [Object : AnyObject], inputLanguage: String) -> [String]
   func suggestionsForResponseToActionWithIdentifier(identifier: String, forLocalNotification localNotification: UILocalNotification, inputLanguage: String) -> [String]
 }
 class WKInterfaceDate : WKInterfaceObject {
   func setTextColor(color: UIColor?)
-  func setTimeZone(timeZone: NSTimeZone?)
-  func setCalendar(calendar: NSCalendar?)
+  func setTimeZone(timeZone: TimeZone?)
+  func setCalendar(calendar: Calendar?)
 }
 enum WKHapticType : Int {
   init?(rawValue: Int)
@@ -275,19 +275,19 @@ enum WKInterfaceSemanticContentAttribute : Int {
   case ForceLeftToRight
   case ForceRightToLeft
 }
-class WKInterfaceDevice : NSObject {
-  class func currentDevice() -> WKInterfaceDevice
+class WKInterfaceDevice : Object {
+  class func current() -> WKInterfaceDevice
   var screenBounds: CGRect { get }
   var screenScale: CGFloat { get }
   var preferredContentSizeCategory: String { get }
   var layoutDirection: WKInterfaceLayoutDirection { get }
-  class func interfaceLayoutDirectionForSemanticContentAttribute(semanticContentAttribute: WKInterfaceSemanticContentAttribute) -> WKInterfaceLayoutDirection
+  class func interfaceLayoutDirectionFor(semanticContentAttribute: WKInterfaceSemanticContentAttribute) -> WKInterfaceLayoutDirection
   var systemVersion: String { get }
   var name: String { get }
   var model: String { get }
   var localizedModel: String { get }
   var systemName: String { get }
-  func playHaptic(type: WKHapticType)
+  func play(type: WKHapticType)
   init()
 }
 class WKInterfaceGroup : WKInterfaceObject, WKImageAnimatable {
@@ -295,30 +295,30 @@ class WKInterfaceGroup : WKInterfaceObject, WKImageAnimatable {
   func setContentInset(contentInset: UIEdgeInsets)
   func setBackgroundColor(color: UIColor?)
   func setBackgroundImage(image: UIImage?)
-  func setBackgroundImageData(imageData: NSData?)
+  func setBackgroundImageData(imageData: Data?)
   func setBackgroundImageNamed(imageName: String?)
   func startAnimating()
-  func startAnimatingWithImagesInRange(imageRange: NSRange, duration: NSTimeInterval, repeatCount: Int)
+  func startAnimatingWithImagesIn(imageRange: NSRange, duration: TimeInterval, repeatCount: Int)
   func stopAnimating()
 }
-protocol WKImageAnimatable : NSObjectProtocol {
+protocol WKImageAnimatable : ObjectProtocol {
   func startAnimating()
-  func startAnimatingWithImagesInRange(imageRange: NSRange, duration: NSTimeInterval, repeatCount: Int)
+  func startAnimatingWithImagesIn(imageRange: NSRange, duration: TimeInterval, repeatCount: Int)
   func stopAnimating()
 }
 class WKInterfaceImage : WKInterfaceObject, WKImageAnimatable {
   func setImage(image: UIImage?)
-  func setImageData(imageData: NSData?)
+  func setImageData(imageData: Data?)
   func setImageNamed(imageName: String?)
   func setTintColor(tintColor: UIColor?)
   func startAnimating()
-  func startAnimatingWithImagesInRange(imageRange: NSRange, duration: NSTimeInterval, repeatCount: Int)
+  func startAnimatingWithImagesIn(imageRange: NSRange, duration: TimeInterval, repeatCount: Int)
   func stopAnimating()
 }
 class WKInterfaceLabel : WKInterfaceObject {
   func setText(text: String?)
   func setTextColor(color: UIColor?)
-  func setAttributedText(attributedText: NSAttributedString?)
+  func setAttributedText(attributedText: AttributedString?)
 }
 enum WKInterfaceMapPinColor : Int {
   init?(rawValue: Int)
@@ -336,7 +336,7 @@ class WKInterfaceMap : WKInterfaceObject {
   func removeAllAnnotations()
 }
 class WKInterfaceMovie : WKInterfaceObject {
-  func setMovieURL(URL: NSURL)
+  func setMovieURL(URL: URL)
   func setVideoGravity(videoGravity: WKVideoGravity)
   func setLoops(loops: Bool)
   func setPosterImage(posterImage: WKImage?)
@@ -355,7 +355,7 @@ enum WKInterfaceObjectVerticalAlignment : Int {
   case Center
   case Bottom
 }
-class WKInterfaceObject : NSObject {
+class WKInterfaceObject : Object {
   func setHidden(hidden: Bool)
   func setAlpha(alpha: CGFloat)
   func setSemanticContentAttribute(semanticContentAttribute: WKInterfaceSemanticContentAttribute)
@@ -378,7 +378,7 @@ extension WKInterfaceObject {
   func setAccessibilityTraits(accessibilityTraits: UIAccessibilityTraits)
   func setAccessibilityImageRegions(accessibilityImageRegions: [WKAccessibilityImageRegion])
 }
-class WKAccessibilityImageRegion : NSObject {
+class WKAccessibilityImageRegion : Object {
   var frame: CGRect
   var label: String
   init()
@@ -391,15 +391,15 @@ class WKInterfacePicker : WKInterfaceObject {
   func setCoordinatedAnimations(coordinatedAnimations: [WKInterfaceObject]?)
   func setEnabled(enabled: Bool)
 }
-class WKPickerItem : NSObject, NSSecureCoding {
+class WKPickerItem : Object, SecureCoding {
   var title: String?
   var caption: String?
   @NSCopying var accessoryImage: WKImage?
   @NSCopying var contentImage: WKImage?
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 class WKInterfaceSeparator : WKInterfaceObject {
   func setColor(color: UIColor?)
@@ -412,7 +412,7 @@ class WKInterfaceSlider : WKInterfaceObject {
 }
 class WKInterfaceSwitch : WKInterfaceObject {
   func setTitle(title: String?)
-  func setAttributedTitle(attributedTitle: NSAttributedString?)
+  func setAttributedTitle(attributedTitle: AttributedString?)
   func setEnabled(enabled: Bool)
   func setOn(on: Bool)
   func setColor(color: UIColor?)
@@ -421,14 +421,14 @@ class WKInterfaceTable : WKInterfaceObject {
   func setRowTypes(rowTypes: [String])
   func setNumberOfRows(numberOfRows: Int, withRowType rowType: String)
   var numberOfRows: Int { get }
-  func rowControllerAtIndex(index: Int) -> AnyObject?
-  func insertRowsAtIndexes(rows: NSIndexSet, withRowType rowType: String)
-  func removeRowsAtIndexes(rows: NSIndexSet)
-  func scrollToRowAtIndex(index: Int)
+  func rowControllerAt(index: Int) -> AnyObject?
+  func insertRowsAt(rows: IndexSet, withRowType rowType: String)
+  func removeRowsAt(rows: IndexSet)
+  func scrollToRowAt(index: Int)
 }
 class WKInterfaceTimer : WKInterfaceObject {
   func setTextColor(color: UIColor?)
-  func setDate(date: NSDate)
+  func setDate(date: Date)
   func start()
   func stop()
 }

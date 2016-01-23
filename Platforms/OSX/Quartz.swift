@@ -1,8 +1,8 @@
 
 protocol IKCameraDeviceViewDelegate {
   optional func cameraDeviceViewSelectionDidChange(cameraDeviceView: IKCameraDeviceView!)
-  optional func cameraDeviceView(cameraDeviceView: IKCameraDeviceView!, didDownloadFile file: ICCameraFile!, location url: NSURL!, fileData data: NSData!, error: NSError!)
-  optional func cameraDeviceView(cameraDeviceView: IKCameraDeviceView!, didEncounterError error: NSError!)
+  optional func cameraDeviceView(cameraDeviceView: IKCameraDeviceView!, didDownloadFile file: ICCameraFile!, location url: URL!, fileData data: Data!, error: Error!)
+  optional func cameraDeviceView(cameraDeviceView: IKCameraDeviceView!, didEncounterError error: Error!)
 }
 enum IKCameraDeviceViewDisplayMode : Int {
   init?(rawValue: Int)
@@ -27,27 +27,27 @@ class IKCameraDeviceView : NSView {
   var iconSize: Int
   var transferMode: IKCameraDeviceViewTransferMode
   var displaysDownloadsDirectoryControl: Bool
-  var downloadsDirectory: NSURL!
+  var downloadsDirectory: URL!
   var displaysPostProcessApplicationControl: Bool
-  var postProcessApplication: NSURL!
+  var postProcessApplication: URL!
   var canRotateSelectedItemsLeft: Bool { get }
   var canRotateSelectedItemsRight: Bool { get }
   var canDeleteSelectedItems: Bool { get }
   var canDownloadSelectedItems: Bool { get }
-  func selectedIndexes() -> NSIndexSet!
-  func selectIndexes(indexes: NSIndexSet!, byExtendingSelection extend: Bool)
+  func selectedIndexes() -> IndexSet!
+  func select(indexes: IndexSet!, byExtendingSelection extend: Bool)
   @IBAction func rotateLeft(sender: AnyObject!)
   @IBAction func rotateRight(sender: AnyObject!)
   @IBAction func deleteSelectedItems(sender: AnyObject!)
   @IBAction func downloadSelectedItems(sender: AnyObject!)
   @IBAction func downloadAllItems(sender: AnyObject!)
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 protocol IKDeviceBrowserViewDelegate {
   func deviceBrowserView(deviceBrowserView: IKDeviceBrowserView!, selectionDidChange device: ICDevice!)
-  optional func deviceBrowserView(deviceBrowserView: IKDeviceBrowserView!, didEncounterError error: NSError!)
+  optional func deviceBrowserView(deviceBrowserView: IKDeviceBrowserView!, didEncounterError error: Error!)
 }
 enum IKDeviceBrowserViewDisplayMode : Int {
   init?(rawValue: Int)
@@ -64,25 +64,25 @@ class IKDeviceBrowserView : NSView {
   var displaysNetworkScanners: Bool
   var mode: IKDeviceBrowserViewDisplayMode
   var selectedDevice: ICDevice! { get }
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 class IKFilterBrowserPanel : NSPanel {
   class func filterBrowserPanelWithStyleMask(styleMask: UInt32) -> AnyObject!
   func filterName() -> String!
-  init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
-  convenience init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
+  init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
+  convenience init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
   convenience init(contentViewController: NSViewController)
   convenience init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init?(windowRef: UnsafeMutablePointer<Void>)
 }
 extension IKFilterBrowserPanel {
-  func beginWithOptions(inOptions: [NSObject : AnyObject]!, modelessDelegate: AnyObject!, didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func beginSheetWithOptions(inOptions: [NSObject : AnyObject]!, modalForWindow docWindow: NSWindow!, modalDelegate: AnyObject!, didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func runModalWithOptions(inOptions: [NSObject : AnyObject]!) -> Int32
-  func filterBrowserViewWithOptions(inOptions: [NSObject : AnyObject]!) -> IKFilterBrowserView!
+  func begin(options inOptions: [Object : AnyObject]! = [:], modelessDelegate: AnyObject!, didEnd didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func beginSheet(options inOptions: [Object : AnyObject]! = [:], modalFor docWindow: NSWindow!, modalDelegate: AnyObject!, didEnd didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func runModal(options inOptions: [Object : AnyObject]! = [:]) -> Int32
+  func filterBrowserView(options inOptions: [Object : AnyObject]! = [:]) -> IKFilterBrowserView!
   func finish(sender: AnyObject!)
 }
 let IKFilterBrowserFilterSelectedNotification: String
@@ -96,8 +96,8 @@ let IKFilterBrowserDefaultInputImage: String
 class IKFilterBrowserView : NSView {
   func setPreviewState(inState: Bool)
   func filterName() -> String!
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 let IKUISizeFlavor: String
@@ -107,18 +107,18 @@ let IKUISizeRegular: String
 let IKUImaxSize: String
 let IKUIFlavorAllowFallback: String
 extension CIFilter {
-  func viewForUIConfiguration(inUIConfiguration: [NSObject : AnyObject]!, excludedKeys inKeys: [AnyObject]!) -> IKFilterUIView!
+  func viewForUIConfiguration(inUIConfiguration: [Object : AnyObject]!, excludedKeys inKeys: [AnyObject]!) -> IKFilterUIView!
 }
 protocol IKFilterCustomUIProvider {
-  func provideViewForUIConfiguration(inUIConfiguration: [NSObject : AnyObject]!, excludedKeys inKeys: [AnyObject]!) -> IKFilterUIView!
+  func provideViewForUIConfiguration(inUIConfiguration: [Object : AnyObject]!, excludedKeys inKeys: [AnyObject]!) -> IKFilterUIView!
 }
 class IKFilterUIView : NSView {
-  class func viewWithFrame(frameRect: NSRect, filter inFilter: CIFilter!) -> AnyObject!
-  init!(frame frameRect: NSRect, filter inFilter: CIFilter!)
+  class func viewWithFrame(frameRect: Rect, filter inFilter: CIFilter!) -> AnyObject!
+  init!(frame frameRect: Rect, filter inFilter: CIFilter!)
   func filter() -> CIFilter!
   func objectController() -> NSObjectController!
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 struct IKImageBrowserCellState : RawRepresentable, Equatable {
@@ -133,16 +133,16 @@ let IKImageBrowserCellBackgroundLayer: String
 let IKImageBrowserCellForegroundLayer: String
 let IKImageBrowserCellSelectionLayer: String
 let IKImageBrowserCellPlaceHolderLayer: String
-class IKImageBrowserCell : NSObject {
+class IKImageBrowserCell : Object {
   func imageBrowserView() -> IKImageBrowserView!
   func representedItem() -> AnyObject!
   func indexOfRepresentedItem() -> Int
-  func frame() -> NSRect
-  func imageContainerFrame() -> NSRect
-  func imageFrame() -> NSRect
-  func selectionFrame() -> NSRect
-  func titleFrame() -> NSRect
-  func subtitleFrame() -> NSRect
+  func frame() -> Rect
+  func imageContainerFrame() -> Rect
+  func imageFrame() -> Rect
+  func selectionFrame() -> Rect
+  func titleFrame() -> Rect
+  func subtitleFrame() -> Rect
   func imageAlignment() -> NSImageAlignment
   func isSelected() -> Bool
   func cellState() -> IKImageBrowserCellState
@@ -164,23 +164,23 @@ struct IKImageBrowserDropOperation : RawRepresentable, Equatable {
 }
 var IKImageBrowserDropOn: IKImageBrowserDropOperation { get }
 var IKImageBrowserDropBefore: IKImageBrowserDropOperation { get }
-extension NSObject {
+extension Object {
   class func numberOfItemsInImageBrowser(aBrowser: IKImageBrowserView!) -> Int
   func numberOfItemsInImageBrowser(aBrowser: IKImageBrowserView!) -> Int
-  class func imageBrowser(aBrowser: IKImageBrowserView!, itemAtIndex index: Int) -> AnyObject!
-  func imageBrowser(aBrowser: IKImageBrowserView!, itemAtIndex index: Int) -> AnyObject!
-  class func imageBrowser(aBrowser: IKImageBrowserView!, removeItemsAtIndexes indexes: NSIndexSet!)
-  func imageBrowser(aBrowser: IKImageBrowserView!, removeItemsAtIndexes indexes: NSIndexSet!)
-  class func imageBrowser(aBrowser: IKImageBrowserView!, moveItemsAtIndexes indexes: NSIndexSet!, toIndex destinationIndex: Int) -> Bool
-  func imageBrowser(aBrowser: IKImageBrowserView!, moveItemsAtIndexes indexes: NSIndexSet!, toIndex destinationIndex: Int) -> Bool
-  class func imageBrowser(aBrowser: IKImageBrowserView!, writeItemsAtIndexes itemIndexes: NSIndexSet!, toPasteboard pasteboard: NSPasteboard!) -> Int
-  func imageBrowser(aBrowser: IKImageBrowserView!, writeItemsAtIndexes itemIndexes: NSIndexSet!, toPasteboard pasteboard: NSPasteboard!) -> Int
+  class func imageBrowser(aBrowser: IKImageBrowserView!, itemAt index: Int) -> AnyObject!
+  func imageBrowser(aBrowser: IKImageBrowserView!, itemAt index: Int) -> AnyObject!
+  class func imageBrowser(aBrowser: IKImageBrowserView!, removeItemsAt indexes: IndexSet!)
+  func imageBrowser(aBrowser: IKImageBrowserView!, removeItemsAt indexes: IndexSet!)
+  class func imageBrowser(aBrowser: IKImageBrowserView!, moveItemsAt indexes: IndexSet!, to destinationIndex: Int) -> Bool
+  func imageBrowser(aBrowser: IKImageBrowserView!, moveItemsAt indexes: IndexSet!, to destinationIndex: Int) -> Bool
+  class func imageBrowser(aBrowser: IKImageBrowserView!, writeItemsAt itemIndexes: IndexSet!, to pasteboard: NSPasteboard!) -> Int
+  func imageBrowser(aBrowser: IKImageBrowserView!, writeItemsAt itemIndexes: IndexSet!, to pasteboard: NSPasteboard!) -> Int
   class func numberOfGroupsInImageBrowser(aBrowser: IKImageBrowserView!) -> Int
   func numberOfGroupsInImageBrowser(aBrowser: IKImageBrowserView!) -> Int
-  class func imageBrowser(aBrowser: IKImageBrowserView!, groupAtIndex index: Int) -> [NSObject : AnyObject]!
-  func imageBrowser(aBrowser: IKImageBrowserView!, groupAtIndex index: Int) -> [NSObject : AnyObject]!
+  class func imageBrowser(aBrowser: IKImageBrowserView!, groupAt index: Int) -> [Object : AnyObject]!
+  func imageBrowser(aBrowser: IKImageBrowserView!, groupAt index: Int) -> [Object : AnyObject]!
 }
-extension NSObject {
+extension Object {
   class func imageUID() -> String!
   func imageUID() -> String!
   class func imageRepresentationType() -> String!
@@ -197,16 +197,16 @@ extension NSObject {
   func isSelectable() -> Bool
 }
 class IKImageBrowserView : NSView, NSDraggingSource {
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init()
-  func draggingSession(session: NSDraggingSession, sourceOperationMaskForDraggingContext context: NSDraggingContext) -> NSDragOperation
-  func draggingSession(session: NSDraggingSession, willBeginAtPoint screenPoint: NSPoint)
-  func draggingSession(session: NSDraggingSession, movedToPoint screenPoint: NSPoint)
-  func draggingSession(session: NSDraggingSession, endedAtPoint screenPoint: NSPoint, operation: NSDragOperation)
-  func ignoreModifierKeysForDraggingSession(session: NSDraggingSession) -> Bool
+  func draggingSession(session: NSDraggingSession, sourceOperationMaskFor context: NSDraggingContext) -> NSDragOperation
+  func draggingSession(session: NSDraggingSession, willBeginAt screenPoint: Point)
+  func draggingSession(session: NSDraggingSession, movedTo screenPoint: Point)
+  func draggingSession(session: NSDraggingSession, endedAt screenPoint: Point, operation: NSDragOperation)
+  func ignoreModifierKeysFor(session: NSDraggingSession) -> Bool
 }
 extension IKImageBrowserView {
-  init!(frame: NSRect)
+  init!(frame: Rect)
   func setDataSource(source: AnyObject!)
   func dataSource() -> AnyObject!
   func reloadData()
@@ -223,7 +223,7 @@ extension IKImageBrowserView {
   func setForegroundLayer(aLayer: CALayer!)
   func foregroundLayer() -> CALayer!
   func newCellForRepresentedItem(anItem: AnyObject!) -> IKImageBrowserCell!
-  func cellForItemAtIndex(index: Int) -> IKImageBrowserCell!
+  func cellForItemAt(index: Int) -> IKImageBrowserCell!
 }
 extension IKImageBrowserView {
   func setZoomValue(aValue: Float)
@@ -231,25 +231,25 @@ extension IKImageBrowserView {
   func setContentResizingMask(mask: Int)
   func contentResizingMask() -> Int
   func scrollIndexToVisible(index: Int)
-  func setCellSize(size: NSSize)
-  func cellSize() -> NSSize
-  func intercellSpacing() -> NSSize
-  func setIntercellSpacing(aSize: NSSize)
-  func indexOfItemAtPoint(point: NSPoint) -> Int
-  func itemFrameAtIndex(index: Int) -> NSRect
-  func visibleItemIndexes() -> NSIndexSet!
-  func rowIndexesInRect(rect: NSRect) -> NSIndexSet!
-  func columnIndexesInRect(rect: NSRect) -> NSIndexSet!
-  func rectOfColumn(columnIndex: Int) -> NSRect
-  func rectOfRow(rowIndex: Int) -> NSRect
+  func setCellSize(size: Size)
+  func cellSize() -> Size
+  func intercellSpacing() -> Size
+  func setIntercellSpacing(aSize: Size)
+  func indexOfItemAt(point: Point) -> Int
+  func itemFrameAt(index: Int) -> Rect
+  func visibleItemIndexes() -> IndexSet!
+  func rowIndexesIn(rect: Rect) -> IndexSet!
+  func columnIndexesIn(rect: Rect) -> IndexSet!
+  func rectOfColumn(columnIndex: Int) -> Rect
+  func rectOfRow(rowIndex: Int) -> Rect
   func numberOfRows() -> Int
   func numberOfColumns() -> Int
   func setCanControlQuickLookPanel(flag: Bool)
   func canControlQuickLookPanel() -> Bool
 }
 extension IKImageBrowserView {
-  func selectionIndexes() -> NSIndexSet!
-  func setSelectionIndexes(indexes: NSIndexSet!, byExtendingSelection extendSelection: Bool)
+  func selectionIndexes() -> IndexSet!
+  func setSelectionIndexes(indexes: IndexSet!, byExtendingSelection extendSelection: Bool)
   func setAllowsMultipleSelection(flag: Bool)
   func allowsMultipleSelection() -> Bool
   func setAllowsEmptySelection(flag: Bool)
@@ -258,9 +258,9 @@ extension IKImageBrowserView {
   func allowsReordering() -> Bool
   func setAnimates(flag: Bool)
   func animates() -> Bool
-  func expandGroupAtIndex(index: Int)
-  func collapseGroupAtIndex(index: Int)
-  func isGroupExpandedAtIndex(index: Int) -> Bool
+  func expandGroupAt(index: Int)
+  func collapseGroupAt(index: Int)
+  func isGroupExpandedAt(index: Int) -> Bool
 }
 extension IKImageBrowserView {
   func setDraggingDestinationDelegate(delegate: AnyObject!)
@@ -269,17 +269,17 @@ extension IKImageBrowserView {
   func dropOperation() -> IKImageBrowserDropOperation
   func setAllowsDroppingOnItems(flag: Bool)
   func allowsDroppingOnItems() -> Bool
-  func setDropIndex(index: Int, dropOperation operation: IKImageBrowserDropOperation)
+  func setDrop(index: Int, dropOperation operation: IKImageBrowserDropOperation)
 }
-extension NSObject {
+extension Object {
   class func imageBrowserSelectionDidChange(aBrowser: IKImageBrowserView!)
   func imageBrowserSelectionDidChange(aBrowser: IKImageBrowserView!)
-  class func imageBrowser(aBrowser: IKImageBrowserView!, cellWasDoubleClickedAtIndex index: Int)
-  func imageBrowser(aBrowser: IKImageBrowserView!, cellWasDoubleClickedAtIndex index: Int)
-  class func imageBrowser(aBrowser: IKImageBrowserView!, cellWasRightClickedAtIndex index: Int, withEvent event: NSEvent!)
-  func imageBrowser(aBrowser: IKImageBrowserView!, cellWasRightClickedAtIndex index: Int, withEvent event: NSEvent!)
-  class func imageBrowser(aBrowser: IKImageBrowserView!, backgroundWasRightClickedWithEvent event: NSEvent!)
-  func imageBrowser(aBrowser: IKImageBrowserView!, backgroundWasRightClickedWithEvent event: NSEvent!)
+  class func imageBrowser(aBrowser: IKImageBrowserView!, cellWasDoubleClickedAt index: Int)
+  func imageBrowser(aBrowser: IKImageBrowserView!, cellWasDoubleClickedAt index: Int)
+  class func imageBrowser(aBrowser: IKImageBrowserView!, cellWasRightClickedAt index: Int, withEvent event: NSEvent!)
+  func imageBrowser(aBrowser: IKImageBrowserView!, cellWasRightClickedAt index: Int, withEvent event: NSEvent!)
+  class func imageBrowser(aBrowser: IKImageBrowserView!, backgroundWasRightClickedWith event: NSEvent!)
+  func imageBrowser(aBrowser: IKImageBrowserView!, backgroundWasRightClickedWith event: NSEvent!)
 }
 let IKImageBrowserPathRepresentationType: String
 let IKImageBrowserNSURLRepresentationType: String
@@ -310,9 +310,9 @@ let IKImageBrowserGroupHeaderLayer: String
 let IKImageBrowserGroupFooterLayer: String
 protocol IKImageEditPanelDataSource {
   func image() -> Unmanaged<CGImage>!
-  func setImage(image: CGImage!, imageProperties metaData: [NSObject : AnyObject]!)
-  optional func thumbnailWithMaximumSize(size: NSSize) -> Unmanaged<CGImage>!
-  optional func imageProperties() -> [NSObject : AnyObject]!
+  func setImage(image: CGImage!, imageProperties metaData: [Object : AnyObject]!)
+  optional func thumbnailWithMaximumSize(size: Size) -> Unmanaged<CGImage>!
+  optional func imageProperties() -> [Object : AnyObject]!
   optional func hasAdjustMode() -> Bool
   optional func hasEffectsMode() -> Bool
   optional func hasDetailsMode() -> Bool
@@ -320,13 +320,13 @@ protocol IKImageEditPanelDataSource {
 class IKImageEditPanel : NSPanel {
   unowned(unsafe) var dataSource: @sil_unmanaged IKImageEditPanelDataSource!
   var filterArray: [AnyObject]! { get }
-  class func sharedImageEditPanel() -> IKImageEditPanel!
+  class func shared() -> IKImageEditPanel!
   func reloadData()
-  init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
-  convenience init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
+  init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
+  convenience init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
   convenience init(contentViewController: NSViewController)
   convenience init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init?(windowRef: UnsafeMutablePointer<Void>)
 }
 let IKToolModeNone: String
@@ -354,16 +354,16 @@ class IKImageView : NSView {
   var doubleClickOpensImageEditPanel: Bool
   unowned(unsafe) var imageCorrection: @sil_unmanaged CIFilter!
   unowned(unsafe) var backgroundColor: @sil_unmanaged NSColor!
-  func setImage(image: CGImage!, imageProperties metaData: [NSObject : AnyObject]!)
-  func setImageWithURL(url: NSURL!)
+  func setImage(image: CGImage!, imageProperties metaData: [Object : AnyObject]!)
+  func setImageWith(url: URL!)
   func image() -> Unmanaged<CGImage>!
-  func imageSize() -> NSSize
-  func imageProperties() -> [NSObject : AnyObject]!
-  func setRotationAngle(rotationAngle: CGFloat, centerPoint: NSPoint)
+  func imageSize() -> Size
+  func imageProperties() -> [Object : AnyObject]!
+  func setRotationAngle(rotationAngle: CGFloat, center centerPoint: Point)
   @IBAction func rotateImageLeft(sender: AnyObject!)
   @IBAction func rotateImageRight(sender: AnyObject!)
-  func setImageZoomFactor(zoomFactor: CGFloat, centerPoint: NSPoint)
-  func zoomImageToRect(rect: NSRect)
+  func setImageZoomFactor(zoomFactor: CGFloat, center centerPoint: Point)
+  func zoomImageTo(rect: Rect)
   @IBAction func zoomImageToFit(sender: AnyObject!)
   @IBAction func zoomImageToActualSize(sender: AnyObject!)
   @IBAction func zoomIn(sender: AnyObject!)
@@ -373,32 +373,32 @@ class IKImageView : NSView {
   @IBAction func crop(sender: AnyObject!)
   func setOverlay(layer: CALayer!, forType layerType: String!)
   func overlayForType(layerType: String!) -> CALayer!
-  func scrollToPoint(point: NSPoint)
-  func scrollToRect(rect: NSRect)
-  func convertViewPointToImagePoint(viewPoint: NSPoint) -> NSPoint
-  func convertViewRectToImageRect(viewRect: NSRect) -> NSRect
-  func convertImagePointToViewPoint(imagePoint: NSPoint) -> NSPoint
-  func convertImageRectToViewRect(imageRect: NSRect) -> NSRect
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  func scrollTo(point: Point)
+  func scrollTo(rect: Rect)
+  func convertPointToImagePoint(viewPoint: Point) -> Point
+  func convertRectToImageRect(viewRect: Rect) -> Rect
+  func convertImagePointToViewPoint(imagePoint: Point) -> Point
+  func convertImageRectToViewRect(imageRect: Rect) -> Rect
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 class IKPictureTaker : NSPanel {
   class func pictureTaker() -> IKPictureTaker!
   func runModal() -> Int
-  func beginPictureTakerWithDelegate(delegate: AnyObject!, didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func beginPictureTakerSheetForWindow(aWindow: NSWindow!, withDelegate delegate: AnyObject!, didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func popUpRecentsMenuForView(aView: NSView!, withDelegate delegate: AnyObject!, didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func beginWithDelegate(delegate: AnyObject!, didEnd didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func beginSheetFor(aWindow: NSWindow!, withDelegate delegate: AnyObject!, didEnd didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func popUpRecentsMenuFor(aView: NSView!, withDelegate delegate: AnyObject!, didEnd didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
   func setInputImage(image: NSImage!)
   func inputImage() -> NSImage!
   func outputImage() -> NSImage!
   func setMirroring(b: Bool)
   func mirroring() -> Bool
-  init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
-  convenience init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
+  init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
+  convenience init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
   convenience init(contentViewController: NSViewController)
   convenience init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init?(windowRef: UnsafeMutablePointer<Void>)
 }
 let IKPictureTakerAllowsVideoCaptureKey: String
@@ -413,25 +413,25 @@ let IKPictureTakerOutputImageMaxSizeKey: String
 let IKPictureTakerShowAddressBookPictureKey: String
 let IKPictureTakerShowEmptyPictureKey: String
 let IKPictureTakerRemainOpenAfterValidateKey: String
-extension NSObject {
+extension Object {
   class func saveOptions(saveOptions: IKSaveOptions!, shouldShowUTType utType: String!) -> Bool
   func saveOptions(saveOptions: IKSaveOptions!, shouldShowUTType utType: String!) -> Bool
 }
-class IKSaveOptions : NSObject {
+class IKSaveOptions : Object {
   unowned(unsafe) var delegate: @sil_unmanaged AnyObject!
-  var imageProperties: [NSObject : AnyObject]! { get }
+  var imageProperties: [Object : AnyObject]! { get }
   var imageUTType: String! { get }
-  var userSelection: [NSObject : AnyObject]! { get }
-  init!(imageProperties: [NSObject : AnyObject]!, imageUTType: String!)
-  func addSaveOptionsAccessoryViewToSavePanel(savePanel: NSSavePanel!)
-  func addSaveOptionsToView(view: NSView!)
+  var userSelection: [Object : AnyObject]! { get }
+  init!(imageProperties: [Object : AnyObject]!, imageUTType: String!)
+  func addAccessoryViewTo(savePanel: NSSavePanel!)
+  func addTo(view: NSView!)
   init()
 }
 protocol IKScannerDeviceViewDelegate {
-  optional func scannerDeviceView(scannerDeviceView: IKScannerDeviceView!, didScanToURL url: NSURL!, fileData data: NSData!, error: NSError!)
-  optional func scannerDeviceView(scannerDeviceView: IKScannerDeviceView!, didScanToURL url: NSURL!, error: NSError!)
-  optional func scannerDeviceView(scannerDeviceView: IKScannerDeviceView!, didScanToBandData data: ICScannerBandData!, scanInfo: [NSObject : AnyObject]!, error: NSError!)
-  optional func scannerDeviceView(scannerDeviceView: IKScannerDeviceView!, didEncounterError error: NSError!)
+  optional func scannerDeviceView(scannerDeviceView: IKScannerDeviceView!, didScanTo url: URL!, fileData data: Data!, error: Error!)
+  optional func scannerDeviceView(scannerDeviceView: IKScannerDeviceView!, didScanTo url: URL!, error: Error!)
+  optional func scannerDeviceView(scannerDeviceView: IKScannerDeviceView!, didScanTo data: ICScannerBandData!, scanInfo: [Object : AnyObject]!, error: Error!)
+  optional func scannerDeviceView(scannerDeviceView: IKScannerDeviceView!, didEncounterError error: Error!)
 }
 enum IKScannerDeviceViewTransferMode : Int {
   init?(rawValue: Int)
@@ -455,33 +455,33 @@ class IKScannerDeviceView : NSView {
   var scanControlLabel: String!
   var overviewControlLabel: String!
   var displaysDownloadsDirectoryControl: Bool
-  var downloadsDirectory: NSURL!
+  var downloadsDirectory: URL!
   var documentName: String!
   var displaysPostProcessApplicationControl: Bool
-  var postProcessApplication: NSURL!
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  var postProcessApplication: URL!
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 protocol IKSlideshowDataSource {
   func numberOfSlideshowItems() -> Int
-  func slideshowItemAtIndex(index: Int) -> AnyObject!
-  optional func nameOfSlideshowItemAtIndex(index: Int) -> String!
-  optional func canExportSlideshowItemAtIndex(index: Int, toApplication applicationBundleIdentifier: String!) -> Bool
+  func slideshowItemAt(index: Int) -> AnyObject!
+  optional func nameOfSlideshowItemAt(index: Int) -> String!
+  optional func canExportSlideshowItemAt(index: Int, toApplication applicationBundleIdentifier: String!) -> Bool
   optional func slideshowWillStart()
   optional func slideshowDidStop()
   optional func slideshowDidChangeCurrentIndex(newIndex: Int)
 }
-class IKSlideshow : NSObject {
-  var autoPlayDelay: NSTimeInterval
-  class func sharedSlideshow() -> IKSlideshow!
-  func runSlideshowWithDataSource(dataSource: IKSlideshowDataSource!, inMode slideshowMode: String!, options slideshowOptions: [NSObject : AnyObject]!)
-  func stopSlideshow(sender: AnyObject!)
+class IKSlideshow : Object {
+  var autoPlayDelay: TimeInterval
+  class func shared() -> IKSlideshow!
+  func runWith(dataSource: IKSlideshowDataSource!, inMode slideshowMode: String!, options slideshowOptions: [Object : AnyObject]! = [:])
+  func stop(sender: AnyObject!)
   func reloadData()
-  func reloadSlideshowItemAtIndex(index: Int)
+  func reloadItemAt(index: Int)
   func indexOfCurrentSlideshowItem() -> Int
   class func canExportToApplication(applicationBundleIdentifier: String!) -> Bool
-  class func exportSlideshowItem(item: AnyObject!, toApplication applicationBundleIdentifier: String!)
+  class func exportItem(item: AnyObject!, toApplication applicationBundleIdentifier: String!)
   init()
 }
 let IKSlideshowModeImages: String
@@ -502,12 +502,12 @@ let IK_PhotosBundleIdentifier: String
 let IKPictureTakerShowAddressBookPicture: String
 let IKPictureTakerShowEmptyPicture: String
 let IKPictureTakerCropAreaSizeKey: String
-class PDFAction : NSObject, NSCopying {
+class PDFAction : Object, Copying {
   func type() -> String!
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class PDFActionGoTo : PDFAction, NSCopying {
+class PDFActionGoTo : PDFAction, Copying {
   init!(destination: PDFDestination!)
   func destination() -> PDFDestination!
   func setDestination(destination: PDFDestination!)
@@ -526,43 +526,43 @@ var kPDFActionNamedFind: Int { get }
 var kPDFActionNamedPrint: Int { get }
 var kPDFActionNamedZoomIn: Int { get }
 var kPDFActionNamedZoomOut: Int { get }
-class PDFActionNamed : PDFAction, NSCopying {
+class PDFActionNamed : PDFAction, Copying {
   init!(name: PDFActionNamedName)
   func name() -> PDFActionNamedName
   func setName(name: PDFActionNamedName)
   init()
 }
-class PDFActionRemoteGoTo : PDFAction, NSCopying {
-  init!(pageIndex: Int, atPoint point: NSPoint, fileURL url: NSURL!)
+class PDFActionRemoteGoTo : PDFAction, Copying {
+  init!(pageIndex: Int, at point: Point, fileURL url: URL!)
   func pageIndex() -> Int
   func setPageIndex(pageIndex: Int)
-  func point() -> NSPoint
-  func setPoint(point: NSPoint)
-  func URL() -> NSURL!
-  func setURL(url: NSURL!)
+  func point() -> Point
+  func setPoint(point: Point)
+  func url() -> URL!
+  func setURL(url: URL!)
   init()
 }
-class PDFActionResetForm : PDFAction, NSCopying {
+class PDFActionResetForm : PDFAction, Copying {
   init!()
   func fields() -> [AnyObject]!
   func setFields(fields: [AnyObject]!)
   func fieldsIncludedAreCleared() -> Bool
   func setFieldsIncludedAreCleared(include: Bool)
 }
-class PDFActionURL : PDFAction, NSCopying {
-  init!(URL url: NSURL!)
-  func URL() -> NSURL!
-  func setURL(url: NSURL!)
+class PDFActionURL : PDFAction, Copying {
+  init!(url: URL!)
+  func url() -> URL!
+  func setURL(url: URL!)
   init()
 }
-class PDFAnnotation : NSObject, NSCopying, NSCoding {
-  init!(bounds: NSRect)
+class PDFAnnotation : Object, Copying, Coding {
+  init!(bounds: Rect)
   func page() -> PDFPage!
   func type() -> String!
-  func bounds() -> NSRect
-  func setBounds(bounds: NSRect)
-  func modificationDate() -> NSDate!
-  func setModificationDate(date: NSDate!)
+  func bounds() -> Rect
+  func setBounds(bounds: Rect)
+  func modificationDate() -> Date!
+  func setModificationDate(date: Date!)
   func userName() -> String!
   func setUserName(name: String!)
   func popup() -> PDFAnnotationPopup!
@@ -576,7 +576,7 @@ class PDFAnnotation : NSObject, NSCopying, NSCoding {
   func color() -> NSColor!
   func setColor(color: NSColor!)
   func mouseUpAction() -> PDFAction!
-  func setMouseUpAction(action: PDFAction!)
+  func setMouseUp(action: PDFAction!)
   func contents() -> String!
   func setContents(contents: String!)
   func toolTip() -> String!
@@ -584,16 +584,16 @@ class PDFAnnotation : NSObject, NSCopying, NSCoding {
   func removeAllAppearanceStreams()
   func drawWithBox(box: PDFDisplayBox)
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 typealias PDFWidgetControlType = Int
 var kPDFWidgetUnknownControl: Int { get }
 var kPDFWidgetPushButtonControl: Int { get }
 var kPDFWidgetRadioButtonControl: Int { get }
 var kPDFWidgetCheckBoxControl: Int { get }
-class PDFAnnotationButtonWidget : PDFAnnotation, NSCopying {
+class PDFAnnotationButtonWidget : PDFAnnotation, Copying {
   func controlType() -> PDFWidgetControlType
   func setControlType(type: PDFWidgetControlType)
   func state() -> Int
@@ -614,11 +614,11 @@ class PDFAnnotationButtonWidget : PDFAnnotation, NSCopying {
   func setFieldName(name: String!)
   func onStateValue() -> String!
   func setOnStateValue(name: String!)
-  init!(bounds: NSRect)
+  init!(bounds: Rect)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class PDFAnnotationChoiceWidget : PDFAnnotation, NSCopying {
+class PDFAnnotationChoiceWidget : PDFAnnotation, Copying {
   func stringValue() -> String!
   func setStringValue(value: String!)
   func backgroundColor() -> NSColor!
@@ -633,35 +633,35 @@ class PDFAnnotationChoiceWidget : PDFAnnotation, NSCopying {
   func setIsListChoice(isList: Bool)
   func choices() -> [AnyObject]!
   func setChoices(options: [AnyObject]!)
-  init!(bounds: NSRect)
+  init!(bounds: Rect)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class PDFAnnotationCircle : PDFAnnotation, NSCopying {
+class PDFAnnotationCircle : PDFAnnotation, Copying {
   func interiorColor() -> NSColor!
   func setInteriorColor(color: NSColor!)
-  init!(bounds: NSRect)
+  init!(bounds: Rect)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class PDFAnnotationFreeText : PDFAnnotation, NSCopying, NSCoding {
+class PDFAnnotationFreeText : PDFAnnotation, Copying, Coding {
   func font() -> NSFont!
   func setFont(font: NSFont!)
   func fontColor() -> NSColor!
   func setFontColor(color: NSColor!)
   func alignment() -> NSTextAlignment
   func setAlignment(alignment: NSTextAlignment)
-  init!(bounds: NSRect)
+  init!(bounds: Rect)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class PDFAnnotationInk : PDFAnnotation, NSCopying, NSCoding {
+class PDFAnnotationInk : PDFAnnotation, Copying, Coding {
   func paths() -> [AnyObject]!
-  func addBezierPath(path: NSBezierPath!)
-  func removeBezierPath(path: NSBezierPath!)
-  init!(bounds: NSRect)
+  func add(path: NSBezierPath!)
+  func remove(path: NSBezierPath!)
+  init!(bounds: Rect)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 typealias PDFLineStyle = Int
 var kPDFLineStyleNone: Int { get }
@@ -670,64 +670,64 @@ var kPDFLineStyleCircle: Int { get }
 var kPDFLineStyleDiamond: Int { get }
 var kPDFLineStyleOpenArrow: Int { get }
 var kPDFLineStyleClosedArrow: Int { get }
-class PDFAnnotationLine : PDFAnnotation, NSCopying, NSCoding {
-  func startPoint() -> NSPoint
-  func setStartPoint(point: NSPoint)
-  func endPoint() -> NSPoint
-  func setEndPoint(point: NSPoint)
-  func startLineStyle() -> PDFLineStyle
-  func setStartLineStyle(style: PDFLineStyle)
-  func endLineStyle() -> PDFLineStyle
-  func setEndLineStyle(style: PDFLineStyle)
+class PDFAnnotationLine : PDFAnnotation, Copying, Coding {
+  func startPoint() -> Point
+  func setStart(point: Point)
+  func endPoint() -> Point
+  func setEnd(point: Point)
+  func startStyle() -> PDFLineStyle
+  func setStartStyle(style: PDFLineStyle)
+  func endStyle() -> PDFLineStyle
+  func setEndStyle(style: PDFLineStyle)
   func interiorColor() -> NSColor!
   func setInteriorColor(color: NSColor!)
-  init!(bounds: NSRect)
+  init!(bounds: Rect)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class PDFAnnotationLink : PDFAnnotation, NSCopying {
+class PDFAnnotationLink : PDFAnnotation, Copying {
   func destination() -> PDFDestination!
   func setDestination(destination: PDFDestination!)
-  func URL() -> NSURL!
-  func setURL(url: NSURL!)
+  func url() -> URL!
+  func setURL(url: URL!)
   func setHighlighted(flag: Bool)
-  init!(bounds: NSRect)
+  init!(bounds: Rect)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 typealias PDFMarkupType = Int
 var kPDFMarkupTypeHighlight: Int { get }
 var kPDFMarkupTypeStrikeOut: Int { get }
 var kPDFMarkupTypeUnderline: Int { get }
-class PDFAnnotationMarkup : PDFAnnotation, NSCopying, NSCoding {
+class PDFAnnotationMarkup : PDFAnnotation, Copying, Coding {
   func quadrilateralPoints() -> [AnyObject]!
   func setQuadrilateralPoints(points: [AnyObject]!)
   func markupType() -> PDFMarkupType
   func setMarkupType(type: PDFMarkupType)
-  init!(bounds: NSRect)
+  init!(bounds: Rect)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class PDFAnnotationPopup : PDFAnnotation, NSCopying, NSCoding {
+class PDFAnnotationPopup : PDFAnnotation, Copying, Coding {
   func isOpen() -> Bool
   func setIsOpen(isOpen: Bool)
-  init!(bounds: NSRect)
+  init!(bounds: Rect)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class PDFAnnotationSquare : PDFAnnotation, NSCopying, NSCoding {
+class PDFAnnotationSquare : PDFAnnotation, Copying, Coding {
   func interiorColor() -> NSColor!
   func setInteriorColor(color: NSColor!)
-  init!(bounds: NSRect)
+  init!(bounds: Rect)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class PDFAnnotationStamp : PDFAnnotation, NSCopying {
+class PDFAnnotationStamp : PDFAnnotation, Copying {
   func name() -> String!
   func setName(name: String!)
-  init!(bounds: NSRect)
+  init!(bounds: Rect)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 typealias PDFTextAnnotationIconType = Int
 var kPDFTextAnnotationIconComment: Int { get }
@@ -737,18 +737,18 @@ var kPDFTextAnnotationIconHelp: Int { get }
 var kPDFTextAnnotationIconNewParagraph: Int { get }
 var kPDFTextAnnotationIconParagraph: Int { get }
 var kPDFTextAnnotationIconInsert: Int { get }
-class PDFAnnotationText : PDFAnnotation, NSCopying, NSCoding {
+class PDFAnnotationText : PDFAnnotation, Copying, Coding {
   func iconType() -> PDFTextAnnotationIconType
   func setIconType(type: PDFTextAnnotationIconType)
-  init!(bounds: NSRect)
+  init!(bounds: Rect)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class PDFAnnotationTextWidget : PDFAnnotation, NSCopying {
+class PDFAnnotationTextWidget : PDFAnnotation, Copying {
   func stringValue() -> String!
   func setStringValue(value: String!)
-  func attributedStringValue() -> NSAttributedString!
-  func setAttributedStringValue(value: NSAttributedString!)
+  func attributedStringValue() -> AttributedString!
+  func setAttributedStringValue(value: AttributedString!)
   func backgroundColor() -> NSColor!
   func setBackgroundColor(color: NSColor!)
   func rotation() -> Int32
@@ -765,9 +765,9 @@ class PDFAnnotationTextWidget : PDFAnnotation, NSCopying {
   func setFieldName(name: String!)
   func isMultiline() -> Bool
   func setIsMultiline(multiline: Bool)
-  init!(bounds: NSRect)
+  init!(bounds: Rect)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 typealias PDFBorderStyle = Int
 var kPDFBorderStyleSolid: Int { get }
@@ -775,29 +775,29 @@ var kPDFBorderStyleDashed: Int { get }
 var kPDFBorderStyleBeveled: Int { get }
 var kPDFBorderStyleInset: Int { get }
 var kPDFBorderStyleUnderline: Int { get }
-class PDFBorder : NSObject, NSCopying, NSCoding {
+class PDFBorder : Object, Copying, Coding {
   func style() -> PDFBorderStyle
   func setStyle(style: PDFBorderStyle)
   func lineWidth() -> CGFloat
   func setLineWidth(width: CGFloat)
   func dashPattern() -> [AnyObject]!
   func setDashPattern(pattern: [AnyObject]!)
-  func drawInRect(rect: NSRect)
+  func drawIn(rect: Rect)
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 var kPDFDestinationUnspecifiedValue: Float { get }
-class PDFDestination : NSObject, NSCopying {
-  init!(page: PDFPage!, atPoint point: NSPoint)
+class PDFDestination : Object, Copying {
+  init!(page: PDFPage!, at point: Point)
   func page() -> PDFPage!
-  func point() -> NSPoint
+  func point() -> Point
   func zoom() -> CGFloat
   func setZoom(zoom: CGFloat)
-  func compare(destination: PDFDestination!) -> NSComparisonResult
+  func compare(destination: PDFDestination!) -> ComparisonResult
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 typealias PDFPrintScalingMode = Int
 var kPDFPrintPageScaleNone: Int { get }
@@ -825,13 +825,13 @@ let PDFDocumentProducerAttribute: String
 let PDFDocumentCreationDateAttribute: String
 let PDFDocumentModificationDateAttribute: String
 let PDFDocumentKeywordsAttribute: String
-class PDFDocument : NSObject, NSCopying {
-  init!(URL url: NSURL!)
-  init!(data: NSData!)
-  func documentURL() -> NSURL!
+class PDFDocument : Object, Copying {
+  init!(url: URL!)
+  init!(data: Data!)
+  func documentURL() -> URL!
   func documentRef() -> Unmanaged<CGPDFDocument>!
-  func documentAttributes() -> [NSObject : AnyObject]!
-  func setDocumentAttributes(attributes: [NSObject : AnyObject]!)
+  func documentAttributes() -> [Object : AnyObject]!
+  func setDocumentAttributes(attributes: [Object : AnyObject]!)
   func majorVersion() -> Int32
   func minorVersion() -> Int32
   func isEncrypted() -> Bool
@@ -843,50 +843,50 @@ class PDFDocument : NSObject, NSCopying {
   func string() -> String!
   func setDelegate(anObject: AnyObject!)
   func delegate() -> AnyObject!
-  func dataRepresentation() -> NSData!
-  func dataRepresentationWithOptions(options: [NSObject : AnyObject]!) -> NSData!
+  func dataRepresentation() -> Data!
+  func dataRepresentation(options options: [Object : AnyObject]! = [:]) -> Data!
   func writeToFile(path: String!) -> Bool
-  func writeToFile(path: String!, withOptions options: [NSObject : AnyObject]!) -> Bool
-  func writeToURL(url: NSURL!) -> Bool
-  func writeToURL(url: NSURL!, withOptions options: [NSObject : AnyObject]!) -> Bool
+  func writeToFile(path: String!, withOptions options: [Object : AnyObject]! = [:]) -> Bool
+  func writeTo(url: URL!) -> Bool
+  func writeTo(url: URL!, withOptions options: [Object : AnyObject]! = [:]) -> Bool
   func outlineRoot() -> PDFOutline!
   func setOutlineRoot(outline: PDFOutline!)
-  func outlineItemForSelection(selection: PDFSelection!) -> PDFOutline!
+  func outlineItemFor(selection: PDFSelection!) -> PDFOutline!
   func pageCount() -> Int
-  func pageAtIndex(index: Int) -> PDFPage!
-  func indexForPage(page: PDFPage!) -> Int
-  func insertPage(page: PDFPage!, atIndex index: Int)
-  func removePageAtIndex(index: Int)
-  func exchangePageAtIndex(indexA: Int, withPageAtIndex indexB: Int)
+  func pageAt(index: Int) -> PDFPage!
+  func indexFor(page: PDFPage!) -> Int
+  func insert(page: PDFPage!, at index: Int)
+  func removePageAt(index: Int)
+  func exchangePageAt(indexA: Int, withPageAt indexB: Int)
   func pageClass() -> AnyClass!
   func findString(string: String!, withOptions options: Int) -> [AnyObject]!
   func beginFindString(string: String!, withOptions options: Int)
   func beginFindStrings(strings: [AnyObject]!, withOptions options: Int)
-  func findString(string: String!, fromSelection selection: PDFSelection!, withOptions options: Int) -> PDFSelection!
+  func findString(string: String!, from selection: PDFSelection!, withOptions options: Int) -> PDFSelection!
   func isFinding() -> Bool
   func cancelFindString()
-  func printOperationForPrintInfo(printInfo: NSPrintInfo!, scalingMode scaleMode: PDFPrintScalingMode, autoRotate doRotate: Bool) -> NSPrintOperation!
+  func printOperationFor(printInfo: NSPrintInfo!, scalingMode scaleMode: PDFPrintScalingMode, autoRotate doRotate: Bool) -> NSPrintOperation!
   func selectionForEntireDocument() -> PDFSelection!
-  func selectionFromPage(startPage: PDFPage!, atPoint startPt: NSPoint, toPage endPage: PDFPage!, atPoint endPt: NSPoint) -> PDFSelection!
-  func selectionFromPage(startPage: PDFPage!, atCharacterIndex startChar: Int, toPage endPage: PDFPage!, atCharacterIndex endChar: Int) -> PDFSelection!
+  func selectionFrom(startPage: PDFPage!, at startPt: Point, to endPage: PDFPage!, at endPt: Point) -> PDFSelection!
+  func selectionFrom(startPage: PDFPage!, atCharacterIndex startChar: Int, to endPage: PDFPage!, atCharacterIndex endChar: Int) -> PDFSelection!
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-extension NSObject {
-  class func documentDidUnlock(notification: NSNotification!)
-  func documentDidUnlock(notification: NSNotification!)
-  class func documentDidBeginDocumentFind(notification: NSNotification!)
-  func documentDidBeginDocumentFind(notification: NSNotification!)
-  class func documentDidEndDocumentFind(notification: NSNotification!)
-  func documentDidEndDocumentFind(notification: NSNotification!)
-  class func documentDidBeginPageFind(notification: NSNotification!)
-  func documentDidBeginPageFind(notification: NSNotification!)
-  class func documentDidEndPageFind(notification: NSNotification!)
-  func documentDidEndPageFind(notification: NSNotification!)
-  class func documentDidFindMatch(notification: NSNotification!)
-  func documentDidFindMatch(notification: NSNotification!)
+extension Object {
+  class func documentDidUnlock(notification: Notification!)
+  func documentDidUnlock(notification: Notification!)
+  class func documentDidBeginDocumentFind(notification: Notification!)
+  func documentDidBeginDocumentFind(notification: Notification!)
+  class func documentDidEndDocumentFind(notification: Notification!)
+  func documentDidEndDocumentFind(notification: Notification!)
+  class func documentDidBeginPageFind(notification: Notification!)
+  func documentDidBeginPageFind(notification: Notification!)
+  class func documentDidEndPageFind(notification: Notification!)
+  func documentDidEndPageFind(notification: Notification!)
+  class func documentDidFindMatch(notification: Notification!)
+  func documentDidFindMatch(notification: Notification!)
 }
-extension NSObject {
+extension Object {
   class func didMatchString(instance: PDFSelection!)
   func didMatchString(instance: PDFSelection!)
   class func classForPage() -> AnyClass!
@@ -894,14 +894,14 @@ extension NSObject {
   class func classForAnnotationClass(annotationClass: AnyClass!) -> AnyClass!
   func classForAnnotationClass(annotationClass: AnyClass!) -> AnyClass!
 }
-class PDFOutline : NSObject {
+class PDFOutline : Object {
   init!()
   func document() -> PDFDocument!
   func parent() -> PDFOutline!
   func numberOfChildren() -> Int
   func index() -> Int
-  func childAtIndex(index: Int) -> PDFOutline!
-  func insertChild(child: PDFOutline!, atIndex index: Int)
+  func childAt(index: Int) -> PDFOutline!
+  func insertChild(child: PDFOutline!, at index: Int)
   func removeFromParent()
   func label() -> String!
   func setLabel(label: String!)
@@ -918,13 +918,13 @@ var kPDFDisplayBoxCropBox: Int { get }
 var kPDFDisplayBoxBleedBox: Int { get }
 var kPDFDisplayBoxTrimBox: Int { get }
 var kPDFDisplayBoxArtBox: Int { get }
-class PDFPage : NSObject, NSCopying {
+class PDFPage : Object, Copying {
   init!(image: NSImage!)
   func document() -> PDFDocument!
   func pageRef() -> Unmanaged<CGPDFPage>!
   func label() -> String!
-  func boundsForBox(box: PDFDisplayBox) -> NSRect
-  func setBounds(bounds: NSRect, forBox box: PDFDisplayBox)
+  func boundsForBox(box: PDFDisplayBox) -> Rect
+  func setBounds(bounds: Rect, forBox box: PDFDisplayBox)
   func rotation() -> Int
   func setRotation(angle: Int)
   func annotations() -> [AnyObject]!
@@ -932,51 +932,51 @@ class PDFPage : NSObject, NSCopying {
   func setDisplaysAnnotations(display: Bool)
   func addAnnotation(annotation: PDFAnnotation!)
   func removeAnnotation(annotation: PDFAnnotation!)
-  func annotationAtPoint(point: NSPoint) -> PDFAnnotation!
+  func annotationAt(point: Point) -> PDFAnnotation!
   func drawWithBox(box: PDFDisplayBox)
   func transformContextForBox(box: PDFDisplayBox)
   func numberOfCharacters() -> Int
   func string() -> String!
-  func attributedString() -> NSAttributedString!
-  func characterBoundsAtIndex(index: Int) -> NSRect
-  func characterIndexAtPoint(point: NSPoint) -> Int
-  func selectionForRect(rect: NSRect) -> PDFSelection!
-  func selectionForWordAtPoint(point: NSPoint) -> PDFSelection!
-  func selectionForLineAtPoint(point: NSPoint) -> PDFSelection!
-  func selectionFromPoint(startPoint: NSPoint, toPoint endPoint: NSPoint) -> PDFSelection!
-  func selectionForRange(range: NSRange) -> PDFSelection!
-  func dataRepresentation() -> NSData!
+  func attributedString() -> AttributedString!
+  func characterBoundsAt(index: Int) -> Rect
+  func characterIndexAt(point: Point) -> Int
+  func selectionFor(rect: Rect) -> PDFSelection!
+  func selectionForWordAt(point: Point) -> PDFSelection!
+  func selectionForLineAt(point: Point) -> PDFSelection!
+  func selectionFrom(startPoint: Point, to endPoint: Point) -> PDFSelection!
+  func selectionFor(range: NSRange) -> PDFSelection!
+  func dataRepresentation() -> Data!
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class PDFSelection : NSObject, NSCopying {
+class PDFSelection : Object, Copying {
   init!(document: PDFDocument!)
   func pages() -> [AnyObject]!
   func color() -> NSColor!
   func setColor(color: NSColor!)
   func string() -> String!
-  func attributedString() -> NSAttributedString!
-  func boundsForPage(page: PDFPage!) -> NSRect
-  func numberOfTextRangesOnPage(page: PDFPage!) -> Int
-  func rangeAtIndex(index: Int, onPage page: PDFPage!) -> NSRange
+  func attributedString() -> AttributedString!
+  func boundsFor(page: PDFPage!) -> Rect
+  func numberOfTextRangesOn(page: PDFPage!) -> Int
+  func rangeAt(index: Int, on page: PDFPage!) -> NSRange
   func selectionsByLine() -> [AnyObject]!
-  func addSelection(selection: PDFSelection!)
+  func add(selection: PDFSelection!)
   func addSelections(selections: [AnyObject]!)
-  func extendSelectionAtEnd(succeed: Int)
-  func extendSelectionAtStart(precede: Int)
-  func drawForPage(page: PDFPage!, active: Bool)
-  func drawForPage(page: PDFPage!, withBox box: PDFDisplayBox, active: Bool)
+  func extendAtEnd(succeed: Int)
+  func extendAtStart(precede: Int)
+  func drawFor(page: PDFPage!, active: Bool)
+  func drawFor(page: PDFPage!, withBox box: PDFDisplayBox, active: Bool)
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class PDFThumbnailView : NSView, NSCoding {
+class PDFThumbnailView : NSView, Coding {
   func setPDFView(view: PDFView!)
-  func PDFView() -> PDFView!
-  func setThumbnailSize(size: NSSize)
-  func thumbnailSize() -> NSSize
+  func pdfView() -> PDFView!
+  func setThumbnailSize(size: Size)
+  func thumbnailSize() -> Size
   func setMaximumNumberOfColumns(maxColumns: Int)
   func maximumNumberOfColumns() -> Int
-  func setLabelFont(font: NSFont!)
+  func setLabel(font: NSFont!)
   func labelFont() -> NSFont!
   func setBackgroundColor(color: NSColor!)
   func backgroundColor() -> NSColor!
@@ -985,8 +985,8 @@ class PDFThumbnailView : NSView, NSCoding {
   func setAllowsMultipleSelection(flag: Bool)
   func allowsMultipleSelection() -> Bool
   func selectedPages() -> [AnyObject]!
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 let PDFThumbnailViewDocumentEditedNotification: String
@@ -1038,11 +1038,11 @@ class PDFView : NSView, NSAnimationDelegate, NSMenuDelegate {
   func canGoForward() -> Bool
   @IBAction func goForward(sender: AnyObject!)
   func currentPage() -> PDFPage!
-  func goToPage(page: PDFPage!)
+  func goTo(page: PDFPage!)
   func currentDestination() -> PDFDestination!
-  func goToDestination(destination: PDFDestination!)
-  func goToSelection(selection: PDFSelection!)
-  func goToRect(rect: NSRect, onPage page: PDFPage!)
+  func goTo(destination: PDFDestination!)
+  func goTo(selection: PDFSelection!)
+  func goTo(rect: Rect, on page: PDFPage!)
   func setDisplayMode(mode: PDFDisplayMode)
   func displayMode() -> PDFDisplayMode
   func setDisplaysPageBreaks(breaks: Bool)
@@ -1071,9 +1071,9 @@ class PDFView : NSView, NSAnimationDelegate, NSMenuDelegate {
   func setAutoScales(newAuto: Bool)
   func autoScales() -> Bool
   func areaOfInterestForMouse(event: NSEvent!) -> PDFAreaOfInterest
-  func areaOfInterestForPoint(cursorLocation: NSPoint) -> PDFAreaOfInterest
+  func areaOfInterestFor(cursorLocation: Point) -> PDFAreaOfInterest
   func setCursorForAreaOfInterest(area: PDFAreaOfInterest)
-  func performAction(action: PDFAction!)
+  func perform(action: PDFAction!)
   func currentSelection() -> PDFSelection!
   func setCurrentSelection(selection: PDFSelection!)
   func setCurrentSelection(selection: PDFSelection!, animate: Bool)
@@ -1083,27 +1083,27 @@ class PDFView : NSView, NSAnimationDelegate, NSMenuDelegate {
   func setHighlightedSelections(selections: [AnyObject]!)
   func highlightedSelections() -> [AnyObject]!
   func takePasswordFrom(sender: AnyObject!)
-  func drawPage(page: PDFPage!)
+  func draw(page: PDFPage!)
   func drawPagePost(page: PDFPage!)
   func copy(sender: AnyObject!)
-  func printWithInfo(printInfo: NSPrintInfo!, autoRotate doRotate: Bool)
-  func printWithInfo(printInfo: NSPrintInfo!, autoRotate doRotate: Bool, pageScaling scale: PDFPrintScalingMode)
-  func pageForPoint(point: NSPoint, nearest: Bool) -> PDFPage!
-  func convertPoint(point: NSPoint, toPage page: PDFPage!) -> NSPoint
-  func convertRect(rect: NSRect, toPage page: PDFPage!) -> NSRect
-  func convertPoint(point: NSPoint, fromPage page: PDFPage!) -> NSPoint
-  func convertRect(rect: NSRect, fromPage page: PDFPage!) -> NSRect
+  func printWith(printInfo: NSPrintInfo!, autoRotate doRotate: Bool)
+  func printWith(printInfo: NSPrintInfo!, autoRotate doRotate: Bool, pageScaling scale: PDFPrintScalingMode)
+  func pageFor(point: Point, nearest: Bool) -> PDFPage!
+  func convert(point: Point, to page: PDFPage!) -> Point
+  func convert(rect: Rect, to page: PDFPage!) -> Rect
+  func convert(point: Point, from page: PDFPage!) -> Point
+  func convert(rect: Rect, from page: PDFPage!) -> Rect
   func documentView() -> NSView!
   func layoutDocumentView()
-  func annotationsChangedOnPage(page: PDFPage!)
-  func rowSizeForPage(page: PDFPage!) -> NSSize
+  func annotationsChangedOn(page: PDFPage!)
+  func rowSizeFor(page: PDFPage!) -> Size
   func setAllowsDragging(allow: Bool)
   func allowsDragging() -> Bool
   func visiblePages() -> [AnyObject]!
   func setEnableDataDetectors(enable: Bool)
   func enableDataDetectors() -> Bool
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
   func animationShouldStart(animation: NSAnimation) -> Bool
   func animationDidStop(animation: NSAnimation)
@@ -1111,29 +1111,29 @@ class PDFView : NSView, NSAnimationDelegate, NSMenuDelegate {
   func animation(animation: NSAnimation, valueForProgress progress: NSAnimationProgress) -> Float
   func animation(animation: NSAnimation, didReachProgressMark progress: NSAnimationProgress)
   func menuNeedsUpdate(menu: NSMenu)
-  func numberOfItemsInMenu(menu: NSMenu) -> Int
-  func menu(menu: NSMenu, updateItem item: NSMenuItem, atIndex index: Int, shouldCancel: Bool) -> Bool
+  func numberOfItemsIn(menu: NSMenu) -> Int
+  func menu(menu: NSMenu, updateItem item: NSMenuItem, at index: Int, shouldCancel: Bool) -> Bool
   func menuHasKeyEquivalent(menu: NSMenu, forEvent event: NSEvent, target: AutoreleasingUnsafeMutablePointer<AnyObject?>, action: UnsafeMutablePointer<Selector>) -> Bool
   func menuWillOpen(menu: NSMenu)
   func menuDidClose(menu: NSMenu)
-  func menu(menu: NSMenu, willHighlightItem item: NSMenuItem?)
-  func confinementRectForMenu(menu: NSMenu, onScreen screen: NSScreen?) -> NSRect
+  func menu(menu: NSMenu, willHighlight item: NSMenuItem?)
+  func confinementRectFor(menu: NSMenu, on screen: NSScreen?) -> Rect
 }
-extension NSObject {
-  class func PDFViewWillChangeScaleFactor(sender: PDFView!, toScale scale: CGFloat) -> CGFloat
-  func PDFViewWillChangeScaleFactor(sender: PDFView!, toScale scale: CGFloat) -> CGFloat
-  class func PDFViewWillClickOnLink(sender: PDFView!, withURL url: NSURL!)
-  func PDFViewWillClickOnLink(sender: PDFView!, withURL url: NSURL!)
-  class func PDFViewPrintJobTitle(sender: PDFView!) -> String!
-  func PDFViewPrintJobTitle(sender: PDFView!) -> String!
-  class func PDFViewPerformFind(sender: PDFView!)
-  func PDFViewPerformFind(sender: PDFView!)
-  class func PDFViewPerformGoToPage(sender: PDFView!)
-  func PDFViewPerformGoToPage(sender: PDFView!)
-  class func PDFViewPerformPrint(sender: PDFView!)
-  func PDFViewPerformPrint(sender: PDFView!)
-  class func PDFViewOpenPDF(sender: PDFView!, forRemoteGoToAction action: PDFActionRemoteGoTo!)
-  func PDFViewOpenPDF(sender: PDFView!, forRemoteGoToAction action: PDFActionRemoteGoTo!)
+extension Object {
+  class func pdfViewWillChangeScaleFactor(sender: PDFView!, toScale scale: CGFloat) -> CGFloat
+  func pdfViewWillChangeScaleFactor(sender: PDFView!, toScale scale: CGFloat) -> CGFloat
+  class func pdfViewWillClickOnLink(sender: PDFView!, withURL url: URL!)
+  func pdfViewWillClickOnLink(sender: PDFView!, withURL url: URL!)
+  class func pdfViewPrintJobTitle(sender: PDFView!) -> String!
+  func pdfViewPrintJobTitle(sender: PDFView!) -> String!
+  class func pdfViewPerformFind(sender: PDFView!)
+  func pdfViewPerformFind(sender: PDFView!)
+  class func pdfViewPerformGoToPage(sender: PDFView!)
+  func pdfViewPerformGoToPage(sender: PDFView!)
+  class func pdfViewPerformPrint(sender: PDFView!)
+  func pdfViewPerformPrint(sender: PDFView!)
+  class func pdfViewOpenPDF(sender: PDFView!, forRemoteGoToAction action: PDFActionRemoteGoTo!)
+  func pdfViewOpenPDF(sender: PDFView!, forRemoteGoToAction action: PDFActionRemoteGoTo!)
 }
 let QCCompositionAttributeNameKey: String
 let QCCompositionAttributeDescriptionKey: String
@@ -1170,15 +1170,15 @@ let QCCompositionProtocolImageFilter: String
 let QCCompositionProtocolScreenSaver: String
 let QCCompositionProtocolRSSVisualizer: String
 let QCCompositionProtocolMusicVisualizer: String
-class QCComposition : NSObject, NSCopying {
+class QCComposition : Object, Copying {
    init!(file path: String!)
-   init!(data: NSData!)
+   init!(data: Data!)
   func protocols() -> [AnyObject]!
-  func attributes() -> [NSObject : AnyObject]!
+  func attributes() -> [Object : AnyObject]!
   func inputKeys() -> [AnyObject]!
   func outputKeys() -> [AnyObject]!
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 class QCCompositionLayer : CAOpenGLLayer, QCCompositionRenderer {
   init!(file path: String!)
@@ -1186,8 +1186,8 @@ class QCCompositionLayer : CAOpenGLLayer, QCCompositionRenderer {
   func composition() -> QCComposition!
   init()
   init(layer: AnyObject)
-  init?(coder aDecoder: NSCoder)
-  func attributes() -> [NSObject : AnyObject]!
+  init?(coder aDecoder: Coder)
+  func attributes() -> [Object : AnyObject]!
   func inputKeys() -> [AnyObject]!
   func outputKeys() -> [AnyObject]!
   func setValue(value: AnyObject!, forInputKey key: String!) -> Bool
@@ -1196,7 +1196,7 @@ class QCCompositionLayer : CAOpenGLLayer, QCCompositionRenderer {
   func valueForOutputKey(key: String!, ofType type: String!) -> AnyObject!
   func propertyListFromInputValues() -> AnyObject!
   func setInputValuesWithPropertyList(plist: AnyObject!)
-  func userInfo() -> NSMutableDictionary!
+  func userInfo() -> MutableDictionary!
 }
 class QCCompositionParameterView : NSView {
   func setCompositionRenderer(renderer: QCCompositionRenderer!)
@@ -1208,30 +1208,30 @@ class QCCompositionParameterView : NSView {
   func drawsBackground() -> Bool
   func setDelegate(delegate: AnyObject!)
   func delegate() -> AnyObject!
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
-extension NSObject {
-  class func compositionParameterView(parameterView: QCCompositionParameterView!, shouldDisplayParameterWithKey portKey: String!, attributes portAttributes: [NSObject : AnyObject]!) -> Bool
-  func compositionParameterView(parameterView: QCCompositionParameterView!, shouldDisplayParameterWithKey portKey: String!, attributes portAttributes: [NSObject : AnyObject]!) -> Bool
+extension Object {
+  class func compositionParameterView(parameterView: QCCompositionParameterView!, shouldDisplayParameterWithKey portKey: String!, attributes portAttributes: [Object : AnyObject]! = [:]) -> Bool
+  func compositionParameterView(parameterView: QCCompositionParameterView!, shouldDisplayParameterWithKey portKey: String!, attributes portAttributes: [Object : AnyObject]! = [:]) -> Bool
   class func compositionParameterView(parameterView: QCCompositionParameterView!, didChangeParameterWithKey portKey: String!)
   func compositionParameterView(parameterView: QCCompositionParameterView!, didChangeParameterWithKey portKey: String!)
 }
 let QCCompositionPickerPanelDidSelectCompositionNotification: String
 class QCCompositionPickerPanel : NSPanel {
-  class func sharedCompositionPickerPanel() -> QCCompositionPickerPanel!
+  class func shared() -> QCCompositionPickerPanel!
   func compositionPickerView() -> QCCompositionPickerView!
-  init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
-  convenience init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
+  init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
+  convenience init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
   convenience init(contentViewController: NSViewController)
   convenience init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init?(windowRef: UnsafeMutablePointer<Void>)
 }
 let QCCompositionPickerViewDidSelectCompositionNotification: String
 class QCCompositionPickerView : NSView {
-  func setCompositionsFromRepositoryWithProtocol(protocol: String!, andAttributes attributes: [NSObject : AnyObject]!)
+  func setCompositionsFromRepositoryWithProtocol(protocol: String!, andAttributes attributes: [Object : AnyObject]! = [:])
   func compositions() -> [AnyObject]!
   func setDelegate(delegate: AnyObject!)
   func delegate() -> AnyObject!
@@ -1239,8 +1239,8 @@ class QCCompositionPickerView : NSView {
   func showsCompositionNames() -> Bool
   func setAllowsEmptySelection(flag: Bool)
   func allowsEmptySelection() -> Bool
-  func setCompositionAspectRatio(ratio: NSSize)
-  func compositionAspectRatio() -> NSSize
+  func setCompositionAspectRatio(ratio: Size)
+  func compositionAspectRatio() -> Size
   func setDefaultValue(value: AnyObject!, forInputKey key: String!)
   func resetDefaultInputValues()
   func setSelectedComposition(composition: QCComposition!)
@@ -1258,13 +1258,13 @@ class QCCompositionPickerView : NSView {
   func setNumberOfColumns(columns: Int)
   func numberOfRows() -> Int
   func setNumberOfRows(rows: Int)
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
-extension NSObject {
-  class func compositionPickerView(pickerView: QCCompositionPickerView!, didSelectComposition composition: QCComposition!)
-  func compositionPickerView(pickerView: QCCompositionPickerView!, didSelectComposition composition: QCComposition!)
+extension Object {
+  class func compositionPickerView(pickerView: QCCompositionPickerView!, didSelect composition: QCComposition!)
+  func compositionPickerView(pickerView: QCCompositionPickerView!, didSelect composition: QCComposition!)
   class func compositionPickerViewDidStartAnimating(pickerView: QCCompositionPickerView!)
   func compositionPickerViewDidStartAnimating(pickerView: QCCompositionPickerView!)
   class func compositionPickerViewWillStopAnimating(pickerView: QCCompositionPickerView!)
@@ -1274,16 +1274,16 @@ let QCCompositionRepositoryDidUpdateNotification: String
 extension QCComposition {
   func identifier() -> String!
 }
-class QCCompositionRepository : NSObject {
-  class func sharedCompositionRepository() -> QCCompositionRepository!
+class QCCompositionRepository : Object {
+  class func shared() -> QCCompositionRepository!
   func compositionWithIdentifier(identifier: String!) -> QCComposition!
-  func compositionsWithProtocols(protocols: [AnyObject]!, andAttributes attributes: [NSObject : AnyObject]!) -> [AnyObject]!
+  func compositionsWithProtocols(protocols: [AnyObject]!, andAttributes attributes: [Object : AnyObject]! = [:]) -> [AnyObject]!
   func allCompositions() -> [AnyObject]!
   init()
 }
 class QCPatchController : NSController {
   init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
 }
 let QCPlugInAttributeNameKey: String
 let QCPlugInAttributeDescriptionKey: String
@@ -1329,19 +1329,19 @@ var kQCPlugInTimeModeTimeBase: QCPlugInTimeMode { get }
 typealias QCPlugInBufferReleaseCallback = @convention(c) (UnsafePointer<Void>, UnsafeMutablePointer<Void>) -> Void
 typealias QCPlugInTextureReleaseCallback = @convention(c) (CGLContextObj, GLuint, UnsafeMutablePointer<Void>) -> Void
 protocol QCPlugInContext {
-  func compositionURL() -> NSURL!
-  func userInfo() -> NSMutableDictionary!
+  func compositionURL() -> URL!
+  func userInfo() -> MutableDictionary!
   func colorSpace() -> Unmanaged<CGColorSpace>!
-  func bounds() -> NSRect
-  func CGLContextObj() -> CGLContextObj
+  func bounds() -> Rect
+  func cglContextObj() -> CGLContextObj
   func outputImageProviderFromBufferWithPixelFormat(format: String!, pixelsWide width: Int, pixelsHigh height: Int, baseAddress: UnsafePointer<Void>, bytesPerRow rowBytes: Int, releaseCallback callback: QCPlugInBufferReleaseCallback!, releaseContext context: UnsafeMutablePointer<Void>, colorSpace: CGColorSpace!, shouldColorMatch colorMatch: Bool) -> AnyObject!
   func outputImageProviderFromTextureWithPixelFormat(format: String!, pixelsWide width: Int, pixelsHigh height: Int, name: GLuint, flipped: Bool, releaseCallback callback: QCPlugInTextureReleaseCallback!, releaseContext context: UnsafeMutablePointer<Void>, colorSpace: CGColorSpace!, shouldColorMatch colorMatch: Bool) -> AnyObject!
 }
 protocol QCPlugInInputImageSource {
-  func imageBounds() -> NSRect
+  func imageBounds() -> Rect
   func imageColorSpace() -> Unmanaged<CGColorSpace>!
   func shouldColorMatch() -> Bool
-  func lockBufferRepresentationWithPixelFormat(format: String!, colorSpace: CGColorSpace!, forBounds bounds: NSRect) -> Bool
+  func lockBufferRepresentationWithPixelFormat(format: String!, colorSpace: CGColorSpace!, forBounds bounds: Rect) -> Bool
   func bufferPixelsWide() -> Int
   func bufferPixelsHigh() -> Int
   func bufferPixelFormat() -> String!
@@ -1349,7 +1349,7 @@ protocol QCPlugInInputImageSource {
   func bufferBaseAddress() -> UnsafePointer<Void>
   func bufferBytesPerRow() -> Int
   func unlockBufferRepresentation()
-  func lockTextureRepresentationWithColorSpace(colorSpace: CGColorSpace!, forBounds bounds: NSRect) -> Bool
+  func lockTextureRepresentationWith(colorSpace: CGColorSpace!, forBounds bounds: Rect) -> Bool
   func texturePixelsWide() -> Int
   func texturePixelsHigh() -> Int
   func textureTarget() -> GLenum
@@ -1362,28 +1362,28 @@ protocol QCPlugInInputImageSource {
   func unlockTextureRepresentation()
 }
 protocol QCPlugInOutputImageProvider {
-  func imageBounds() -> NSRect
+  func imageBounds() -> Rect
   func imageColorSpace() -> Unmanaged<CGColorSpace>!
   optional func shouldColorMatch() -> Bool
   optional func supportedBufferPixelFormats() -> [AnyObject]!
-  optional func renderToBuffer(baseAddress: UnsafeMutablePointer<Void>, withBytesPerRow rowBytes: Int, pixelFormat format: String!, forBounds bounds: NSRect) -> Bool
+  optional func renderToBuffer(baseAddress: UnsafeMutablePointer<Void>, withBytesPerRow rowBytes: Int, pixelFormat format: String!, forBounds bounds: Rect) -> Bool
   optional func supportedRenderedTexturePixelFormats() -> [AnyObject]!
-  optional func copyRenderedTextureForCGLContext(cgl_ctx: CGLContextObj, pixelFormat format: String!, bounds: NSRect, isFlipped flipped: UnsafeMutablePointer<ObjCBool>) -> GLuint
+  optional func copyRenderedTextureForCGLContext(cgl_ctx: CGLContextObj, pixelFormat format: String!, bounds: Rect, isFlipped flipped: UnsafeMutablePointer<ObjCBool>) -> GLuint
   optional func releaseRenderedTexture(name: GLuint, forCGLContext cgl_ctx: CGLContextObj)
   optional func canRenderWithCGLContext(cgl_ctx: CGLContextObj) -> Bool
-  optional func renderWithCGLContext(cgl_ctx: CGLContextObj, forBounds bounds: NSRect) -> Bool
+  optional func renderWithCGLContext(cgl_ctx: CGLContextObj, forBounds bounds: Rect) -> Bool
 }
-class QCPlugIn : NSObject {
-  class func attributes() -> [NSObject : AnyObject]!
-  class func attributesForPropertyPortWithKey(key: String!) -> [NSObject : AnyObject]!
+class QCPlugIn : Object {
+  class func attributes() -> [Object : AnyObject]!
+  class func attributesForPropertyPortWithKey(key: String!) -> [Object : AnyObject]!
   class func sortedPropertyPortKeys() -> [AnyObject]!
   class func executionMode() -> QCPlugInExecutionMode
   class func timeMode() -> QCPlugInTimeMode
   class func plugInKeys() -> [AnyObject]!
   func startExecution(context: QCPlugInContext!) -> Bool
   func enableExecution(context: QCPlugInContext!)
-  func executionTimeForContext(context: QCPlugInContext!, atTime time: NSTimeInterval, withArguments arguments: [NSObject : AnyObject]!) -> NSTimeInterval
-  func execute(context: QCPlugInContext!, atTime time: NSTimeInterval, withArguments arguments: [NSObject : AnyObject]!) -> Bool
+  func executionTimeFor(context: QCPlugInContext!, atTime time: TimeInterval, withArguments arguments: [Object : AnyObject]!) -> TimeInterval
+  func execute(context: QCPlugInContext!, atTime time: TimeInterval, withArguments arguments: [Object : AnyObject]!) -> Bool
   func disableExecution(context: QCPlugInContext!)
   func stopExecution(context: QCPlugInContext!)
   func serializedValueForKey(key: String!) -> AnyObject!
@@ -1394,20 +1394,20 @@ extension QCPlugIn {
   func didValueForInputKeyChange(key: String!) -> Bool
   func valueForInputKey(key: String!) -> AnyObject!
   func setValue(value: AnyObject!, forOutputKey key: String!) -> Bool
-  func addInputPortWithType(type: String!, forKey key: String!, withAttributes attributes: [NSObject : AnyObject]!)
+  func addInputPortWithType(type: String!, forKey key: String!, withAttributes attributes: [Object : AnyObject]! = [:])
   func removeInputPortForKey(key: String!)
-  func addOutputPortWithType(type: String!, forKey key: String!, withAttributes attributes: [NSObject : AnyObject]!)
+  func addOutputPortWithType(type: String!, forKey key: String!, withAttributes attributes: [Object : AnyObject]! = [:])
   func removeOutputPortForKey(key: String!)
 }
 extension QCPlugIn {
-  class func loadPlugInAtPath(path: String!) -> Bool
-  class func registerPlugInClass(aClass: AnyClass!)
+  class func loadAtPath(path: String!) -> Bool
+  class func registerClass(aClass: AnyClass!)
 }
 class QCPlugInViewController : NSViewController {
   init!(plugIn: QCPlugIn!, viewNibName name: String!)
   func plugIn() -> QCPlugIn!
-  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder: NSCoder)
+  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder: Coder)
   convenience init()
 }
 extension QCPlugIn {
@@ -1416,7 +1416,7 @@ extension QCPlugIn {
 let QCRendererEventKey: String
 let QCRendererMouseLocationKey: String
 protocol QCCompositionRenderer {
-  func attributes() -> [NSObject : AnyObject]!
+  func attributes() -> [Object : AnyObject]!
   func inputKeys() -> [AnyObject]!
   func outputKeys() -> [AnyObject]!
   func setValue(value: AnyObject!, forInputKey key: String!) -> Bool
@@ -1425,20 +1425,20 @@ protocol QCCompositionRenderer {
   func valueForOutputKey(key: String!, ofType type: String!) -> AnyObject!
   func propertyListFromInputValues() -> AnyObject!
   func setInputValuesWithPropertyList(plist: AnyObject!)
-  func userInfo() -> NSMutableDictionary!
+  func userInfo() -> MutableDictionary!
 }
-class QCRenderer : NSObject, QCCompositionRenderer {
+class QCRenderer : Object, QCCompositionRenderer {
   init!(composition: QCComposition!, colorSpace: CGColorSpace!)
-  init!(CGLContext context: CGLContextObj, pixelFormat format: CGLPixelFormatObj, colorSpace: CGColorSpace!, composition: QCComposition!)
-  init!(offScreenWithSize size: NSSize, colorSpace: CGColorSpace!, composition: QCComposition!)
+  init!(cglContext context: CGLContextObj, pixelFormat format: CGLPixelFormatObj, colorSpace: CGColorSpace!, composition: QCComposition!)
+  init!(offScreenWith size: Size, colorSpace: CGColorSpace!, composition: QCComposition!)
   init!(openGLContext context: NSOpenGLContext!, pixelFormat format: NSOpenGLPixelFormat!, file path: String!)
-  func renderAtTime(time: NSTimeInterval, arguments: [NSObject : AnyObject]!) -> Bool
-  func renderingTimeForTime(time: NSTimeInterval, arguments: [NSObject : AnyObject]!) -> NSTimeInterval
+  func renderAtTime(time: TimeInterval, arguments: [Object : AnyObject]!) -> Bool
+  func renderingTimeForTime(time: TimeInterval, arguments: [Object : AnyObject]!) -> TimeInterval
   func composition() -> QCComposition!
   func snapshotImage() -> NSImage!
   func createSnapshotImageOfType(type: String!) -> AnyObject!
   init()
-  func attributes() -> [NSObject : AnyObject]!
+  func attributes() -> [Object : AnyObject]!
   func inputKeys() -> [AnyObject]!
   func outputKeys() -> [AnyObject]!
   func setValue(value: AnyObject!, forInputKey key: String!) -> Bool
@@ -1447,13 +1447,13 @@ class QCRenderer : NSObject, QCCompositionRenderer {
   func valueForOutputKey(key: String!, ofType type: String!) -> AnyObject!
   func propertyListFromInputValues() -> AnyObject!
   func setInputValuesWithPropertyList(plist: AnyObject!)
-  func userInfo() -> NSMutableDictionary!
+  func userInfo() -> MutableDictionary!
 }
 let QCViewDidStartRenderingNotification: String
 let QCViewDidStopRenderingNotification: String
 class QCView : NSView, QCCompositionRenderer {
   func loadCompositionFromFile(path: String!) -> Bool
-  func loadComposition(composition: QCComposition!) -> Bool
+  func load(composition: QCComposition!) -> Bool
   func loadedComposition() -> QCComposition!
   func unloadComposition()
   func setAutostartsRendering(flag: Bool)
@@ -1466,7 +1466,7 @@ class QCView : NSView, QCCompositionRenderer {
   func maxRenderingFrameRate() -> Float
   func erase()
   func startRendering() -> Bool
-  func renderAtTime(time: NSTimeInterval, arguments: [NSObject : AnyObject]!) -> Bool
+  func renderAtTime(time: TimeInterval, arguments: [Object : AnyObject]!) -> Bool
   func pauseRendering()
   func isPausedRendering() -> Bool
   func resumeRendering()
@@ -1476,10 +1476,10 @@ class QCView : NSView, QCCompositionRenderer {
   func createSnapshotImageOfType(type: String!) -> AnyObject!
   func openGLContext() -> NSOpenGLContext!
   func openGLPixelFormat() -> NSOpenGLPixelFormat!
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
-  func attributes() -> [NSObject : AnyObject]!
+  func attributes() -> [Object : AnyObject]!
   func inputKeys() -> [AnyObject]!
   func outputKeys() -> [AnyObject]!
   func setValue(value: AnyObject!, forInputKey key: String!) -> Bool
@@ -1488,51 +1488,51 @@ class QCView : NSView, QCCompositionRenderer {
   func valueForOutputKey(key: String!, ofType type: String!) -> AnyObject!
   func propertyListFromInputValues() -> AnyObject!
   func setInputValuesWithPropertyList(plist: AnyObject!)
-  func userInfo() -> NSMutableDictionary!
+  func userInfo() -> MutableDictionary!
 }
 extension QCView {
   @IBAction func start(sender: AnyObject!)
   @IBAction func stop(sender: AnyObject!)
   @IBAction func play(sender: AnyObject!)
 }
-class QuartzFilter : NSObject {
-   init!(URL aURL: NSURL!)
-   init!(properties: [NSObject : AnyObject]!)
+class QuartzFilter : Object {
+   init!(url aURL: URL!)
+   init!(properties: [Object : AnyObject]!)
    init!(outputIntents: [AnyObject]!)
-  func properties() -> [NSObject : AnyObject]!
-  func url() -> NSURL!
+  func properties() -> [Object : AnyObject]!
+  func url() -> URL!
   func localizedName() -> String!
-  func applyToContext(aContext: CGContext!) -> Bool
-  func removeFromContext(aContext: CGContext!)
+  func applyTo(aContext: CGContext!) -> Bool
+  func removeFrom(aContext: CGContext!)
   init()
 }
 var globalUpdateOK: DarwinBoolean
 class QuartzFilterView : NSView {
   func sizeToFit()
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
-class QuartzFilterManager : NSObject {
+class QuartzFilterManager : Object {
   class func filtersInDomains(domains: [AnyObject]!) -> [AnyObject]!
   func filterPanel() -> NSPanel!
   func filterView() -> QuartzFilterView!
   func selectedFilter() -> QuartzFilter!
-  func selectFilter(filter: QuartzFilter!) -> Bool
+  func select(filter: QuartzFilter!) -> Bool
   func setDelegate(aDelegate: AnyObject!)
   func delegate() -> AnyObject!
-  func importFilter(filterProperties: [NSObject : AnyObject]!) -> QuartzFilter!
+  func importFilter(filterProperties: [Object : AnyObject]!) -> QuartzFilter!
   init()
 }
-extension NSObject {
-  class func quartzFilterManager(sender: QuartzFilterManager!, didAddFilter filter: QuartzFilter!)
-  func quartzFilterManager(sender: QuartzFilterManager!, didAddFilter filter: QuartzFilter!)
-  class func quartzFilterManager(sender: QuartzFilterManager!, didRemoveFilter filter: QuartzFilter!)
-  func quartzFilterManager(sender: QuartzFilterManager!, didRemoveFilter filter: QuartzFilter!)
+extension Object {
+  class func quartzFilterManager(sender: QuartzFilterManager!, didAdd filter: QuartzFilter!)
+  func quartzFilterManager(sender: QuartzFilterManager!, didAdd filter: QuartzFilter!)
+  class func quartzFilterManager(sender: QuartzFilterManager!, didRemove filter: QuartzFilter!)
+  func quartzFilterManager(sender: QuartzFilterManager!, didRemove filter: QuartzFilter!)
   class func quartzFilterManager(sender: QuartzFilterManager!, didModifyFilter filter: QuartzFilter!)
   func quartzFilterManager(sender: QuartzFilterManager!, didModifyFilter filter: QuartzFilter!)
-  class func quartzFilterManager(sender: QuartzFilterManager!, didSelectFilter filter: QuartzFilter!)
-  func quartzFilterManager(sender: QuartzFilterManager!, didSelectFilter filter: QuartzFilter!)
+  class func quartzFilterManager(sender: QuartzFilterManager!, didSelect filter: QuartzFilter!)
+  func quartzFilterManager(sender: QuartzFilterManager!, didSelect filter: QuartzFilter!)
 }
 let kQuartzFilterApplicationDomain: String
 let kQuartzFilterPDFWorkflowDomain: String
@@ -1541,18 +1541,18 @@ let kQuartzFilterManagerDidAddFilterNotification: String
 let kQuartzFilterManagerDidRemoveFilterNotification: String
 let kQuartzFilterManagerDidModifyFilterNotification: String
 let kQuartzFilterManagerDidSelectFilterNotification: String
-protocol QLPreviewItem : NSObjectProtocol {
-  var previewItemURL: NSURL! { get }
+protocol QLPreviewItem : ObjectProtocol {
+  var previewItemURL: URL! { get }
   optional var previewItemTitle: String! { get }
   optional var previewItemDisplayState: AnyObject! { get }
 }
-extension NSURL : QLPreviewItem {
-  var previewItemURL: NSURL! { get }
+extension URL : QLPreviewItem {
+  var previewItemURL: URL! { get }
   var previewItemTitle: String! { get }
   var previewItemDisplayState: AnyObject! { get }
 }
 class QLPreviewPanel : NSPanel {
-  class func sharedPreviewPanel() -> QLPreviewPanel!
+  class func shared() -> QLPreviewPanel!
   class func sharedPreviewPanelExists() -> Bool
   var currentController: AnyObject! { get }
   func updateController()
@@ -1563,17 +1563,17 @@ class QLPreviewPanel : NSPanel {
   var currentPreviewItem: QLPreviewItem! { get }
   var displayState: AnyObject!
   unowned(unsafe) var delegate: @sil_unmanaged AnyObject!
-  func enterFullScreenMode(screen: NSScreen!, withOptions options: [NSObject : AnyObject]!) -> Bool
-  func exitFullScreenModeWithOptions(options: [NSObject : AnyObject]!)
-  var inFullScreenMode: Bool { get }
-  init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
-  convenience init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
+  func enterFullScreenMode(screen: NSScreen!, withOptions options: [Object : AnyObject]! = [:]) -> Bool
+  func exitFullScreenMode(options options: [Object : AnyObject]! = [:])
+  var isInFullScreenMode: Bool { get }
+  init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
+  convenience init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
   convenience init(contentViewController: NSViewController)
   convenience init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init?(windowRef: UnsafeMutablePointer<Void>)
 }
-extension NSObject {
+extension Object {
   class func acceptsPreviewPanelControl(panel: QLPreviewPanel!) -> Bool
   func acceptsPreviewPanelControl(panel: QLPreviewPanel!) -> Bool
   class func beginPreviewPanelControl(panel: QLPreviewPanel!)
@@ -1582,13 +1582,13 @@ extension NSObject {
   func endPreviewPanelControl(panel: QLPreviewPanel!)
 }
 protocol QLPreviewPanelDataSource {
-  func numberOfPreviewItemsInPreviewPanel(panel: QLPreviewPanel!) -> Int
-  func previewPanel(panel: QLPreviewPanel!, previewItemAtIndex index: Int) -> QLPreviewItem!
+  func numberOfPreviewItemsIn(panel: QLPreviewPanel!) -> Int
+  func previewPanel(panel: QLPreviewPanel!, previewItemAt index: Int) -> QLPreviewItem!
 }
 protocol QLPreviewPanelDelegate : NSWindowDelegate {
-  optional func previewPanel(panel: QLPreviewPanel!, handleEvent event: NSEvent!) -> Bool
-  optional func previewPanel(panel: QLPreviewPanel!, sourceFrameOnScreenForPreviewItem item: QLPreviewItem!) -> NSRect
-  optional func previewPanel(panel: QLPreviewPanel!, transitionImageForPreviewItem item: QLPreviewItem!, contentRect: UnsafeMutablePointer<NSRect>) -> AnyObject!
+  optional func previewPanel(panel: QLPreviewPanel!, handle event: NSEvent!) -> Bool
+  optional func previewPanel(panel: QLPreviewPanel!, sourceFrameOnScreenFor item: QLPreviewItem!) -> Rect
+  optional func previewPanel(panel: QLPreviewPanel!, transitionImageFor item: QLPreviewItem!, contentRect: UnsafeMutablePointer<Rect>) -> AnyObject!
 }
 enum QLPreviewViewStyle : UInt {
   init?(rawValue: UInt)
@@ -1597,14 +1597,14 @@ enum QLPreviewViewStyle : UInt {
   case Compact
 }
 class QLPreviewView : NSView {
-  init!(frame: NSRect, style: QLPreviewViewStyle)
-  init!(frame: NSRect)
+  init!(frame: Rect, style: QLPreviewViewStyle)
+  init!(frame: Rect)
   var previewItem: QLPreviewItem!
   func refreshPreviewItem()
   var displayState: AnyObject!
   func close()
   var shouldCloseWithWindow: Bool
   var autostarts: Bool
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init()
 }

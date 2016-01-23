@@ -19,11 +19,11 @@ class EKCalendarChooser : UIViewController {
   var showsDoneButton: Bool
   var showsCancelButton: Bool
   var selectedCalendars: Set<EKCalendar>
-  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder aDecoder: NSCoder)
+  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
-protocol EKCalendarChooserDelegate : NSObjectProtocol {
+protocol EKCalendarChooserDelegate : ObjectProtocol {
   optional func calendarChooserSelectionDidChange(calendarChooser: EKCalendarChooser)
   optional func calendarChooserDidFinish(calendarChooser: EKCalendarChooser)
   optional func calendarChooserDidCancel(calendarChooser: EKCalendarChooser)
@@ -43,12 +43,12 @@ class EKEventEditViewController : UINavigationController {
   func cancelEditing()
   init(navigationBarClass: AnyClass?, toolbarClass: AnyClass?)
   init(rootViewController: UIViewController)
-  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder aDecoder: NSCoder)
+  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
-protocol EKEventEditViewDelegate : NSObjectProtocol {
-  func eventEditViewController(controller: EKEventEditViewController, didCompleteWithAction action: EKEventEditViewAction)
+protocol EKEventEditViewDelegate : ObjectProtocol {
+  func eventEditViewController(controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction)
   optional func eventEditViewControllerDefaultCalendarForNewEvents(controller: EKEventEditViewController) -> EKCalendar
 }
 enum EKEventViewAction : Int {
@@ -63,10 +63,10 @@ class EKEventViewController : UIViewController {
   var event: EKEvent
   var allowsEditing: Bool
   var allowsCalendarPreview: Bool
-  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder aDecoder: NSCoder)
+  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
-protocol EKEventViewDelegate : NSObjectProtocol {
-  func eventViewController(controller: EKEventViewController, didCompleteWithAction action: EKEventViewAction)
+protocol EKEventViewDelegate : ObjectProtocol {
+  func eventViewController(controller: EKEventViewController, didCompleteWith action: EKEventViewAction)
 }

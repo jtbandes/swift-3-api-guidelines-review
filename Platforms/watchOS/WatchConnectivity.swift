@@ -19,52 +19,52 @@ enum WCErrorCode : Int {
   case DeliveryFailed
   case InsufficientSpace
 }
-class WCSession : NSObject {
+class WCSession : Object {
   class func isSupported() -> Bool
   class func defaultSession() -> WCSession
   weak var delegate: @sil_weak WCSessionDelegate?
   func activateSession()
-  var reachable: Bool { get }
+  var isReachable: Bool { get }
   var iOSDeviceNeedsUnlockAfterRebootForReachability: Bool { get }
-  func sendMessage(message: [String : AnyObject], replyHandler: (([String : AnyObject]) -> Void)?, errorHandler: ((NSError) -> Void)?)
-  func sendMessageData(data: NSData, replyHandler: ((NSData) -> Void)?, errorHandler: ((NSError) -> Void)?)
+  func sendMessage(message: [String : AnyObject], replyHandler: (([String : AnyObject]) -> Void)?, errorHandler: ((Error) -> Void)? = nil)
+  func sendMessageData(data: Data, replyHandler: ((Data) -> Void)?, errorHandler: ((Error) -> Void)? = nil)
   var applicationContext: [String : AnyObject] { get }
   func updateApplicationContext(applicationContext: [String : AnyObject]) throws
   var receivedApplicationContext: [String : AnyObject] { get }
-  func transferUserInfo(userInfo: [String : AnyObject]) -> WCSessionUserInfoTransfer
+  func transferUserInfo(userInfo: [String : AnyObject] = [:]) -> WCSessionUserInfoTransfer
   var outstandingUserInfoTransfers: [WCSessionUserInfoTransfer] { get }
-  func transferFile(file: NSURL, metadata: [String : AnyObject]?) -> WCSessionFileTransfer
+  func transferFile(file: URL, metadata: [String : AnyObject]?) -> WCSessionFileTransfer
   var outstandingFileTransfers: [WCSessionFileTransfer] { get }
 }
-protocol WCSessionDelegate : NSObjectProtocol {
+protocol WCSessionDelegate : ObjectProtocol {
   optional func sessionReachabilityDidChange(session: WCSession)
   optional func session(session: WCSession, didReceiveMessage message: [String : AnyObject])
   optional func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void)
-  optional func session(session: WCSession, didReceiveMessageData messageData: NSData)
-  optional func session(session: WCSession, didReceiveMessageData messageData: NSData, replyHandler: (NSData) -> Void)
+  optional func session(session: WCSession, didReceiveMessageData messageData: Data)
+  optional func session(session: WCSession, didReceiveMessageData messageData: Data, replyHandler: (Data) -> Void)
   optional func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject])
-  optional func session(session: WCSession, didFinishUserInfoTransfer userInfoTransfer: WCSessionUserInfoTransfer, error: NSError?)
-  optional func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject])
-  optional func session(session: WCSession, didFinishFileTransfer fileTransfer: WCSessionFileTransfer, error: NSError?)
-  optional func session(session: WCSession, didReceiveFile file: WCSessionFile)
+  optional func session(session: WCSession, didFinishUserInfoTransfer userInfoTransfer: WCSessionUserInfoTransfer, error: Error?)
+  optional func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject] = [:])
+  optional func session(session: WCSession, didFinishFileTransfer fileTransfer: WCSessionFileTransfer, error: Error?)
+  optional func session(session: WCSession, didReceive file: WCSessionFile)
 }
-class WCSessionFile : NSObject {
-  var fileURL: NSURL { get }
+class WCSessionFile : Object {
+  var fileURL: URL { get }
   var metadata: [String : AnyObject]? { get }
   init()
 }
-class WCSessionFileTransfer : NSObject {
+class WCSessionFileTransfer : Object {
   var file: WCSessionFile { get }
-  var transferring: Bool { get }
+  var isTransferring: Bool { get }
   func cancel()
   init()
 }
-class WCSessionUserInfoTransfer : NSObject, NSSecureCoding {
+class WCSessionUserInfoTransfer : Object, SecureCoding {
   var userInfo: [String : AnyObject] { get }
-  var transferring: Bool { get }
+  var isTransferring: Bool { get }
   func cancel()
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }

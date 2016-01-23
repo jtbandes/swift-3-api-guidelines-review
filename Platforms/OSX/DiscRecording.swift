@@ -1,13 +1,13 @@
 
 func DRGetVersion() -> NumVersion
-class DRBurn : NSObject {
+class DRBurn : Object {
    init!(forDevice device: DRDevice!)
   init!(device: DRDevice!)
   func writeLayout(layout: AnyObject!)
-  func status() -> [NSObject : AnyObject]!
+  func status() -> [Object : AnyObject]!
   func abort()
-  func properties() -> [NSObject : AnyObject]!
-  func setProperties(properties: [NSObject : AnyObject]!)
+  func properties() -> [Object : AnyObject]!
+  func setProperties(properties: [Object : AnyObject]!)
   func device() -> DRDevice!
   init()
 }
@@ -77,12 +77,12 @@ var DRCDTextGenreCodeSoundEffects: Int { get }
 var DRCDTextGenreCodeSoundtrack: Int { get }
 var DRCDTextGenreCodeSpokenWord: Int { get }
 var DRCDTextGenreCodeWorldMusic: Int { get }
-class DRCDTextBlock : NSObject {
-  class func arrayOfCDTextBlocksFromPacks(packs: NSData!) -> [AnyObject]!
+class DRCDTextBlock : Object {
+  class func arrayOfCDTextBlocksFromPacks(packs: Data!) -> [AnyObject]!
   class func cdTextBlockWithLanguage(lang: String!, encoding enc: UInt) -> DRCDTextBlock!
   init!(language lang: String!, encoding enc: UInt)
-  func properties() -> [NSObject : AnyObject]!
-  func setProperties(properties: [NSObject : AnyObject]!)
+  func properties() -> [Object : AnyObject]!
+  func setProperties(properties: [Object : AnyObject]!)
   func trackDictionaries() -> [AnyObject]!
   func setTrackDictionaries(tracks: [AnyObject]!)
   func objectForKey(key: String!, ofTrack trackIndex: Int) -> AnyObject!
@@ -723,13 +723,13 @@ struct DRTrackProductionInfo {
   init()
   init(buffer: UnsafeMutablePointer<Void>, reqCount: UInt32, actCount: UInt32, flags: UInt32, blockSize: UInt32, requestedAddress: UInt64)
 }
-class DRDevice : NSObject {
+class DRDevice : Object {
   class func devices() -> [AnyObject]!
    init!(forBSDName bsdName: String!)
    init!(forIORegistryEntryPath path: String!)
   func isValid() -> Bool
-  func info() -> [NSObject : AnyObject]!
-  func status() -> [NSObject : AnyObject]!
+  func info() -> [Object : AnyObject]!
+  func status() -> [Object : AnyObject]!
   func openTray() -> Bool
   func closeTray() -> Bool
   func ejectMedia() -> Bool
@@ -737,7 +737,7 @@ class DRDevice : NSObject {
   func releaseExclusiveAccess()
   func acquireMediaReservation()
   func releaseMediaReservation()
-  func isEqualToDevice(otherDevice: DRDevice!) -> Bool
+  func isEqualTo(otherDevice: DRDevice!) -> Bool
   init()
 }
 extension DRDevice {
@@ -886,13 +886,13 @@ let DRDeviceMediaTypeHDDVDRAM: String
 let DRDeviceMediaTypeHDDVDRW: String
 let DRDeviceMediaTypeHDDVDRWDualLayer: String
 let DRDeviceMediaTypeUnknown: String
-class DRErase : NSObject {
+class DRErase : Object {
    init!(forDevice device: DRDevice!)
   init!(device: DRDevice!)
   func start()
-  func status() -> [NSObject : AnyObject]!
-  func properties() -> [NSObject : AnyObject]!
-  func setProperties(properties: [NSObject : AnyObject]!)
+  func status() -> [Object : AnyObject]!
+  func properties() -> [Object : AnyObject]!
+  func setProperties(properties: [Object : AnyObject]!)
   func device() -> DRDevice!
   init()
 }
@@ -909,22 +909,22 @@ var DRFilesystemInclusionMaskISO9660: Int { get }
 var DRFilesystemInclusionMaskJoliet: Int { get }
 var DRFilesystemInclusionMaskUDF: Int { get }
 var DRFilesystemInclusionMaskHFSPlus: Int { get }
-class DRFSObject : NSObject {
+class DRFSObject : Object {
   func isVirtual() -> Bool
   func sourcePath() -> String!
   func parent() -> DRFolder!
   func baseName() -> String!
   func setBaseName(baseName: String!)
   func specificNameForFilesystem(filesystem: String!) -> String!
-  func specificNames() -> [NSObject : AnyObject]!
+  func specificNames() -> [Object : AnyObject]!
   func setSpecificName(name: String!, forFilesystem filesystem: String!)
-  func setSpecificNames(specificNames: [NSObject : AnyObject]!)
+  func setSpecificNames(specificNames: [Object : AnyObject]!)
   func mangledNameForFilesystem(filesystem: String!) -> String!
-  func mangledNames() -> [NSObject : AnyObject]!
+  func mangledNames() -> [Object : AnyObject]!
   func propertyForKey(key: String!, inFilesystem filesystem: String!, mergeWithOtherFilesystems merge: Bool) -> AnyObject!
-  func propertiesForFilesystem(filesystem: String!, mergeWithOtherFilesystems merge: Bool) -> [NSObject : AnyObject]!
+  func propertiesForFilesystem(filesystem: String!, mergeWithOtherFilesystems merge: Bool) -> [Object : AnyObject]!
   func setProperty(property: AnyObject!, forKey key: String!, inFilesystem filesystem: String!)
-  func setProperties(properties: [NSObject : AnyObject]!, inFilesystem filesystem: String!)
+  func setProperties(properties: [Object : AnyObject]!, inFilesystem filesystem: String!)
   func explicitFilesystemMask() -> DRFilesystemInclusionMask
   func setExplicitFilesystemMask(mask: DRFilesystemInclusionMask)
   func effectiveFilesystemMask() -> DRFilesystemInclusionMask
@@ -980,9 +980,9 @@ class DRFile : DRFSObject {
   init()
 }
 extension DRFile {
-  class func virtualFileWithName(name: String!, data: NSData!) -> DRFile!
+  class func virtualFileWithName(name: String!, data: Data!) -> DRFile!
   class func virtualFileWithName(name: String!, dataProducer producer: AnyObject!) -> DRFile!
-  init!(name: String!, data: NSData!)
+  init!(name: String!, data: Data!)
   init!(name: String!, dataProducer producer: AnyObject!)
 }
 extension DRFile {
@@ -998,9 +998,9 @@ typealias DRFileFork = UInt32
 var DRFileForkData: Int { get }
 var DRFileForkResource: Int { get }
 protocol DRFileDataProduction {
-  func calculateSizeOfFile(file: DRFile!, fork: DRFileFork, estimating estimate: Bool) -> UInt64
+  func calculateSizeOf(file: DRFile!, fork: DRFileFork, estimating estimate: Bool) -> UInt64
   func prepareFileForBurn(file: DRFile!) -> Bool
-  func produceFile(file: DRFile!, fork: DRFileFork, intoBuffer buffer: UnsafeMutablePointer<Int8>, length bufferLength: UInt32, atAddress address: UInt64, blockSize: UInt32) -> UInt32
+  func produce(file: DRFile!, fork: DRFileFork, intoBuffer buffer: UnsafeMutablePointer<Int8>, length bufferLength: UInt32, atAddress address: UInt64, blockSize: UInt32) -> UInt32
   func prepareFileForVerification(file: DRFile!) -> Bool
   func cleanupFileAfterBurn(file: DRFile!)
 }
@@ -1017,10 +1017,10 @@ extension DRFolder {
   func count() -> Int
   func children() -> [AnyObject]!
 }
-class DRMSF : NSNumber {
+class DRMSF : Number {
   class func msf() -> DRMSF!
   class func msfWithFrames(frames: UInt32) -> DRMSF!
-  class func msfWithString(string: String!) -> DRMSF!
+  class func msfWith(string: String!) -> DRMSF!
   init!(frames: UInt32)
   init!(string: String!)
   func minutes() -> UInt32
@@ -1031,8 +1031,8 @@ class DRMSF : NSNumber {
   func msfBySubtracting(msf: DRMSF!) -> DRMSF!
   func description() -> String!
   func descriptionWithFormat(format: String!) -> String!
-  func isEqualToMSF(otherDRMSF: DRMSF!) -> Bool
-  init?(coder aDecoder: NSCoder)
+  func isEqualTo(otherDRMSF: DRMSF!) -> Bool
+  init?(coder aDecoder: Coder)
   init(char value: Int8)
   init(unsignedChar value: UInt8)
   init(short value: Int16)
@@ -1051,15 +1051,15 @@ class DRMSF : NSNumber {
   convenience init(bytes value: UnsafePointer<Void>, objCType type: UnsafePointer<Int8>)
   convenience init()
 }
-class DRMSFFormatter : NSFormatter {
+class DRMSFFormatter : Formatter {
   init!(format: String!)
   func format() -> String!
   func setFormat(format: String!)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class DRNotificationCenter : NSObject {
-  class func currentRunLoopCenter() -> DRNotificationCenter!
+class DRNotificationCenter : Object {
+  class func currentRunLoop() -> DRNotificationCenter!
   func addObserver(observer: AnyObject!, selector aSelector: Selector, name notificationName: String!, object anObject: AnyObject!)
   func removeObserver(observer: AnyObject!, name aName: String!, object anObject: AnyObject!)
   init()
@@ -1094,11 +1094,11 @@ let DRErrorStatusErrorInfoStringKey: String
 let DRErrorStatusSenseKey: String
 let DRErrorStatusSenseCodeStringKey: String
 let DRErrorStatusAdditionalSenseStringKey: String
-class DRTrack : NSObject {
+class DRTrack : Object {
   init!(producer: AnyObject!)
-  func properties() -> [NSObject : AnyObject]!
-  func setProperties(properties: [NSObject : AnyObject]!)
-  func testProductionSpeedForInterval(interval: NSTimeInterval) -> Float
+  func properties() -> [Object : AnyObject]!
+  func setProperties(properties: [Object : AnyObject]!)
+  func testProductionSpeedForInterval(interval: TimeInterval) -> Float
   func testProductionSpeedForLength(length: UInt32) -> Float
   func estimateLength() -> UInt64
   init()
@@ -1109,14 +1109,14 @@ extension DRTrack {
   func setPreGap(preGap: DRMSF!)
 }
 protocol DRTrackDataProduction {
-  func estimateLengthOfTrack(track: DRTrack!) -> UInt64
-  func prepareTrack(track: DRTrack!, forBurn burn: DRBurn!, toMedia mediaInfo: [NSObject : AnyObject]!) -> Bool
+  func estimateLengthOf(track: DRTrack!) -> UInt64
+  func prepare(track: DRTrack!, forBurn burn: DRBurn!, toMedia mediaInfo: [Object : AnyObject]!) -> Bool
   func cleanupTrackAfterBurn(track: DRTrack!)
-  func producePreGapForTrack(track: DRTrack!, intoBuffer buffer: UnsafeMutablePointer<Int8>, length bufferLength: UInt32, atAddress address: UInt64, blockSize: UInt32, ioFlags flags: UnsafeMutablePointer<UInt32>) -> UInt32
-  func produceDataForTrack(track: DRTrack!, intoBuffer buffer: UnsafeMutablePointer<Int8>, length bufferLength: UInt32, atAddress address: UInt64, blockSize: UInt32, ioFlags flags: UnsafeMutablePointer<UInt32>) -> UInt32
+  func producePreGapFor(track: DRTrack!, intoBuffer buffer: UnsafeMutablePointer<Int8>, length bufferLength: UInt32, atAddress address: UInt64, blockSize: UInt32, ioFlags flags: UnsafeMutablePointer<UInt32>) -> UInt32
+  func produceDataFor(track: DRTrack!, intoBuffer buffer: UnsafeMutablePointer<Int8>, length bufferLength: UInt32, atAddress address: UInt64, blockSize: UInt32, ioFlags flags: UnsafeMutablePointer<UInt32>) -> UInt32
   func prepareTrackForVerification(track: DRTrack!) -> Bool
-  func verifyPreGapForTrack(track: DRTrack!, inBuffer buffer: UnsafePointer<Int8>, length bufferLength: UInt32, atAddress address: UInt64, blockSize: UInt32, ioFlags flags: UnsafeMutablePointer<UInt32>) -> Bool
-  func verifyDataForTrack(track: DRTrack!, inBuffer buffer: UnsafePointer<Int8>, length bufferLength: UInt32, atAddress address: UInt64, blockSize: UInt32, ioFlags flags: UnsafeMutablePointer<UInt32>) -> Bool
+  func verifyPreGapFor(track: DRTrack!, inBuffer buffer: UnsafePointer<Int8>, length bufferLength: UInt32, atAddress address: UInt64, blockSize: UInt32, ioFlags flags: UnsafeMutablePointer<UInt32>) -> Bool
+  func verifyDataFor(track: DRTrack!, inBuffer buffer: UnsafePointer<Int8>, length bufferLength: UInt32, atAddress address: UInt64, blockSize: UInt32, ioFlags flags: UnsafeMutablePointer<UInt32>) -> Bool
   func cleanupTrackAfterVerification(track: DRTrack!) -> Bool
 }
 let DRTrackLengthKey: String

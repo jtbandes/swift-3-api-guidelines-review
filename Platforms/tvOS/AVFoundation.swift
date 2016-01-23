@@ -3,16 +3,16 @@ let AVCoreAnimationBeginTimeAtZero: CFTimeInterval
 let AVLayerVideoGravityResizeAspect: String
 let AVLayerVideoGravityResizeAspectFill: String
 let AVLayerVideoGravityResize: String
-class AVAsset : NSObject, NSCopying, AVAsynchronousKeyValueLoading {
-  convenience init(URL: NSURL)
+class AVAsset : Object, Copying, AVAsynchronousKeyValueLoading {
+  convenience init(url URL: URL)
   var duration: CMTime { get }
   var preferredRate: Float { get }
   var preferredVolume: Float { get }
   var preferredTransform: CGAffineTransform { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func statusOfValueForKey(key: String, error outError: NSErrorPointer) -> AVKeyValueStatus
-  func loadValuesAsynchronouslyForKeys(keys: [String], completionHandler handler: (() -> Void)?)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func statusOfValueForKey(key: String, error outError: ErrorPointer) -> AVKeyValueStatus
+  func loadValuesAsynchronouslyForKeys(keys: [String], completionHandler handler: (() -> Void)? = nil)
 }
 extension AVAsset {
   var providesPreciseDurationAndTiming: Bool { get }
@@ -47,8 +47,8 @@ extension AVAsset {
   func metadataForFormat(format: String) -> [AVMetadataItem]
 }
 extension AVAsset {
-  var availableChapterLocales: [NSLocale] { get }
-  func chapterMetadataGroupsWithTitleLocale(locale: NSLocale, containingItemsWithCommonKeys commonKeys: [String]?) -> [AVTimedMetadataGroup]
+  var availableChapterLocales: [Locale] { get }
+  func chapterMetadataGroupsWithTitleLocale(locale: Locale, containingItemsWithCommonKeys commonKeys: [String]?) -> [AVTimedMetadataGroup]
   func chapterMetadataGroupsBestMatchingPreferredLanguages(preferredLanguages: [String]) -> [AVTimedMetadataGroup]
 }
 extension AVAsset {
@@ -64,12 +64,12 @@ extension AVAsset {
   var containsFragments: Bool { get }
 }
 extension AVAsset {
-  var playable: Bool { get }
-  var exportable: Bool { get }
-  var readable: Bool { get }
-  var composable: Bool { get }
-  var compatibleWithSavedPhotosAlbum: Bool { get }
-  var compatibleWithAirPlayVideo: Bool { get }
+  var isPlayable: Bool { get }
+  var isExportable: Bool { get }
+  var isReadable: Bool { get }
+  var isComposable: Bool { get }
+  var isCompatibleWithSavedPhotosAlbum: Bool { get }
+  var isCompatibleWithAirPlayVideo: Bool { get }
 }
 let AVURLAssetPreferPreciseDurationAndTimingKey: String
 let AVURLAssetReferenceRestrictionsKey: String
@@ -78,15 +78,15 @@ class AVURLAsset : AVAsset {
   class func audiovisualTypes() -> [String]
   class func audiovisualMIMETypes() -> [String]
   class func isPlayableExtendedMIMEType(extendedMIMEType: String) -> Bool
-  init(URL: NSURL, options: [String : AnyObject]?)
-  @NSCopying var URL: NSURL { get }
-  convenience init(URL: NSURL)
+  init(url URL: URL, options: [String : AnyObject]? = [:])
+  @NSCopying var url: URL { get }
+  convenience init(url URL: URL)
 }
 extension AVURLAsset {
   var resourceLoader: AVAssetResourceLoader { get }
 }
 extension AVURLAsset {
-  func compatibleTrackForCompositionTrack(compositionTrack: AVCompositionTrack) -> AVAssetTrack?
+  func compatibleTrackFor(compositionTrack: AVCompositionTrack) -> AVAssetTrack?
 }
 let AVAssetDurationDidChangeNotification: String
 let AVAssetChapterMetadataGroupsDidChangeNotification: String
@@ -100,20 +100,20 @@ extension AVFragmentedAsset {
 }
 let AVAssetDownloadTaskMinimumRequiredMediaBitrateKey: String
 let AVAssetDownloadTaskMediaSelectionKey: String
-class AVAssetDownloadTask : NSURLSessionTask {
-  var URLAsset: AVURLAsset { get }
-  var destinationURL: NSURL { get }
+class AVAssetDownloadTask : URLSessionTask {
+  var urlAsset: AVURLAsset { get }
+  var destinationURL: URL { get }
   var options: [String : AnyObject]? { get }
-  var loadedTimeRanges: [NSValue] { get }
+  var loadedTimeRanges: [Value] { get }
   init()
 }
-protocol AVAssetDownloadDelegate : NSURLSessionTaskDelegate {
-  optional func URLSession(session: NSURLSession, assetDownloadTask: AVAssetDownloadTask, didLoadTimeRange timeRange: CMTimeRange, totalTimeRangesLoaded loadedTimeRanges: [NSValue], timeRangeExpectedToLoad: CMTimeRange)
-  optional func URLSession(session: NSURLSession, assetDownloadTask: AVAssetDownloadTask, didResolveMediaSelection resolvedMediaSelection: AVMediaSelection)
+protocol AVAssetDownloadDelegate : URLSessionTaskDelegate {
+  optional func urlSession(session: URLSession, assetDownloadTask: AVAssetDownloadTask, didLoad timeRange: CMTimeRange, totalTimeRangesLoaded loadedTimeRanges: [Value], timeRangeExpectedToLoad: CMTimeRange)
+  optional func urlSession(session: URLSession, assetDownloadTask: AVAssetDownloadTask, didResolve resolvedMediaSelection: AVMediaSelection)
 }
-class AVAssetDownloadURLSession : NSURLSession {
-   init(configuration: NSURLSessionConfiguration, assetDownloadDelegate delegate: AVAssetDownloadDelegate?, delegateQueue: NSOperationQueue?)
-  func assetDownloadTaskWithURLAsset(URLAsset: AVURLAsset, destinationURL: NSURL, options: [String : AnyObject]?) -> AVAssetDownloadTask?
+class AVAssetDownloadURLSession : URLSession {
+   init(configuration: URLSessionConfiguration, assetDownloadDelegate delegate: AVAssetDownloadDelegate?, delegateQueue: OperationQueue?)
+  func assetDownloadTaskWith(URLAsset: AVURLAsset, destinationURL: URL, options: [String : AnyObject]? = [:]) -> AVAssetDownloadTask?
   init()
 }
 let AVAssetExportPresetLowQuality: String
@@ -136,22 +136,22 @@ enum AVAssetExportSessionStatus : Int {
   case Failed
   case Cancelled
 }
-class AVAssetExportSession : NSObject {
+class AVAssetExportSession : Object {
   init?(asset: AVAsset, presetName: String)
   var presetName: String { get }
   var asset: AVAsset { get }
   var outputFileType: String?
-  @NSCopying var outputURL: NSURL?
+  @NSCopying var outputURL: URL?
   var shouldOptimizeForNetworkUse: Bool
   var status: AVAssetExportSessionStatus { get }
-  var error: NSError? { get }
+  var error: Error? { get }
   func exportAsynchronouslyWithCompletionHandler(handler: () -> Void)
   var progress: Float { get }
   func cancelExport()
 }
 extension AVAssetExportSession {
   class func allExportPresets() -> [String]
-  class func exportPresetsCompatibleWithAsset(asset: AVAsset) -> [String]
+  class func exportPresetsCompatibleWith(asset: AVAsset) -> [String]
   class func determineCompatibilityOfExportPreset(presetName: String, withAsset asset: AVAsset, outputFileType: String?, completionHandler handler: (Bool) -> Void)
 }
 extension AVAssetExportSession {
@@ -176,7 +176,7 @@ extension AVAssetExportSession {
 }
 extension AVAssetExportSession {
   var canPerformMultiplePassesOverSourceMediaData: Bool
-  @NSCopying var directoryForTemporaryFiles: NSURL?
+  @NSCopying var directoryForTemporaryFiles: URL?
 }
 let AVAssetImageGeneratorApertureModeCleanAperture: String
 let AVAssetImageGeneratorApertureModeProductionAperture: String
@@ -188,7 +188,7 @@ enum AVAssetImageGeneratorResult : Int {
   case Failed
   case Cancelled
 }
-class AVAssetImageGenerator : NSObject {
+class AVAssetImageGenerator : Object {
   var asset: AVAsset { get }
   var appliesPreferredTrackTransform: Bool
   var maximumSize: CGSize
@@ -198,11 +198,11 @@ class AVAssetImageGenerator : NSObject {
   var requestedTimeToleranceBefore: CMTime
   var requestedTimeToleranceAfter: CMTime
   init(asset: AVAsset)
-  func copyCGImageAtTime(requestedTime: CMTime, actualTime: UnsafeMutablePointer<CMTime>) throws -> CGImage
-  func generateCGImagesAsynchronouslyForTimes(requestedTimes: [NSValue], completionHandler handler: AVAssetImageGeneratorCompletionHandler)
+  func copyCGImageAt(requestedTime: CMTime, actualTime: UnsafeMutablePointer<CMTime>) throws -> CGImage
+  func generateCGImagesAsynchronouslyForTimes(requestedTimes: [Value], completionHandler handler: AVAssetImageGeneratorCompletionHandler)
   func cancelAllCGImageGeneration()
 }
-typealias AVAssetImageGeneratorCompletionHandler = (CMTime, CGImage?, CMTime, AVAssetImageGeneratorResult, NSError?) -> Void
+typealias AVAssetImageGeneratorCompletionHandler = (CMTime, CGImage?, CMTime, AVAssetImageGeneratorResult, Error?) -> Void
 enum AVAssetReaderStatus : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -212,11 +212,11 @@ enum AVAssetReaderStatus : Int {
   case Failed
   case Cancelled
 }
-class AVAssetReader : NSObject {
+class AVAssetReader : Object {
   init(asset: AVAsset) throws
   var asset: AVAsset { get }
   var status: AVAssetReaderStatus { get }
-  var error: NSError? { get }
+  var error: Error? { get }
   var timeRange: CMTimeRange
   var outputs: [AVAssetReaderOutput] { get }
   func canAddOutput(output: AVAssetReaderOutput) -> Bool
@@ -224,7 +224,7 @@ class AVAssetReader : NSObject {
   func startReading() -> Bool
   func cancelReading()
 }
-class AVAssetReaderOutput : NSObject {
+class AVAssetReaderOutput : Object {
   var mediaType: String { get }
   var alwaysCopiesSampleData: Bool
   func copyNextSampleBuffer() -> CMSampleBuffer?
@@ -232,7 +232,7 @@ class AVAssetReaderOutput : NSObject {
 }
 extension AVAssetReaderOutput {
   var supportsRandomAccess: Bool
-  func resetForReadingTimeRanges(timeRanges: [NSValue])
+  func resetForReadingTimeRanges(timeRanges: [Value])
   func markConfigurationAsFinal()
 }
 class AVAssetReaderTrackOutput : AVAssetReaderOutput {
@@ -255,7 +255,7 @@ class AVAssetReaderVideoCompositionOutput : AVAssetReaderOutput {
   @NSCopying var videoComposition: AVVideoComposition?
   var customVideoCompositor: AVVideoCompositing? { get }
 }
-class AVAssetReaderOutputMetadataAdaptor : NSObject {
+class AVAssetReaderOutputMetadataAdaptor : Object {
   init(assetReaderTrackOutput trackOutput: AVAssetReaderTrackOutput)
   var assetReaderTrackOutput: AVAssetReaderTrackOutput { get }
   func nextTimedMetadataGroup() -> AVTimedMetadataGroup?
@@ -264,67 +264,67 @@ class AVAssetReaderSampleReferenceOutput : AVAssetReaderOutput {
   init(track: AVAssetTrack)
   var track: AVAssetTrack { get }
 }
-class AVAssetResourceLoader : NSObject {
+class AVAssetResourceLoader : Object {
   func setDelegate(delegate: AVAssetResourceLoaderDelegate?, queue delegateQueue: dispatch_queue_t?)
   weak var delegate: @sil_weak AVAssetResourceLoaderDelegate? { get }
   var delegateQueue: dispatch_queue_t? { get }
 }
-protocol AVAssetResourceLoaderDelegate : NSObjectProtocol {
+protocol AVAssetResourceLoaderDelegate : ObjectProtocol {
   optional func resourceLoader(resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool
   optional func resourceLoader(resourceLoader: AVAssetResourceLoader, shouldWaitForRenewalOfRequestedResource renewalRequest: AVAssetResourceRenewalRequest) -> Bool
-  optional func resourceLoader(resourceLoader: AVAssetResourceLoader, didCancelLoadingRequest loadingRequest: AVAssetResourceLoadingRequest)
-  optional func resourceLoader(resourceLoader: AVAssetResourceLoader, shouldWaitForResponseToAuthenticationChallenge authenticationChallenge: NSURLAuthenticationChallenge) -> Bool
-  optional func resourceLoader(resourceLoader: AVAssetResourceLoader, didCancelAuthenticationChallenge authenticationChallenge: NSURLAuthenticationChallenge)
+  optional func resourceLoader(resourceLoader: AVAssetResourceLoader, didCancel loadingRequest: AVAssetResourceLoadingRequest)
+  optional func resourceLoader(resourceLoader: AVAssetResourceLoader, shouldWaitForResponseTo authenticationChallenge: URLAuthenticationChallenge) -> Bool
+  optional func resourceLoader(resourceLoader: AVAssetResourceLoader, didCancel authenticationChallenge: URLAuthenticationChallenge)
 }
-class AVAssetResourceLoadingRequest : NSObject {
-  var request: NSURLRequest { get }
-  var finished: Bool { get }
-  var cancelled: Bool { get }
+class AVAssetResourceLoadingRequest : Object {
+  var request: URLRequest { get }
+  var isFinished: Bool { get }
+  var isCancelled: Bool { get }
   var contentInformationRequest: AVAssetResourceLoadingContentInformationRequest? { get }
   var dataRequest: AVAssetResourceLoadingDataRequest? { get }
-  @NSCopying var response: NSURLResponse?
-  @NSCopying var redirect: NSURLRequest?
+  @NSCopying var response: URLResponse?
+  @NSCopying var redirect: URLRequest?
   func finishLoading()
-  func finishLoadingWithError(error: NSError?)
+  func finishLoadingWithError(error: Error?)
 }
 class AVAssetResourceRenewalRequest : AVAssetResourceLoadingRequest {
 }
-class AVAssetResourceLoadingContentInformationRequest : NSObject {
+class AVAssetResourceLoadingContentInformationRequest : Object {
   var contentType: String?
   var contentLength: Int64
-  var byteRangeAccessSupported: Bool
-  @NSCopying var renewalDate: NSDate?
+  var isByteRangeAccessSupported: Bool
+  @NSCopying var renewalDate: Date?
 }
-class AVAssetResourceLoadingDataRequest : NSObject {
+class AVAssetResourceLoadingDataRequest : Object {
   var requestedOffset: Int64 { get }
   var requestedLength: Int { get }
   var requestsAllDataToEndOfResource: Bool { get }
   var currentOffset: Int64 { get }
-  func respondWithData(data: NSData)
+  func respondWith(data: Data)
 }
 extension AVAssetResourceLoader {
   var preloadsEligibleContentKeys: Bool
 }
 extension AVAssetResourceLoadingRequest {
-  func streamingContentKeyRequestDataForApp(appIdentifier: NSData, contentIdentifier: NSData, options: [String : AnyObject]?) throws -> NSData
-  func persistentContentKeyFromKeyVendorResponse(keyVendorResponse: NSData, options: [String : AnyObject]?, error outError: NSErrorPointer) -> NSData
+  func streamingContentKeyRequestDataForApp(appIdentifier: Data, contentIdentifier: Data, options: [String : AnyObject]? = [:]) throws -> Data
+  func persistentContentKeyFromKeyVendorResponse(keyVendorResponse: Data, options: [String : AnyObject]? = [:], error outError: ErrorPointer) -> Data
 }
 let AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey: String
 extension AVAssetResourceLoadingRequest {
 }
-class AVAssetTrack : NSObject, NSCopying, AVAsynchronousKeyValueLoading {
+class AVAssetTrack : Object, Copying, AVAsynchronousKeyValueLoading {
   weak var asset: @sil_weak AVAsset? { get }
   var trackID: CMPersistentTrackID { get }
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func statusOfValueForKey(key: String, error outError: NSErrorPointer) -> AVKeyValueStatus
-  func loadValuesAsynchronouslyForKeys(keys: [String], completionHandler handler: (() -> Void)?)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func statusOfValueForKey(key: String, error outError: ErrorPointer) -> AVKeyValueStatus
+  func loadValuesAsynchronouslyForKeys(keys: [String], completionHandler handler: (() -> Void)? = nil)
 }
 extension AVAssetTrack {
   var mediaType: String { get }
   var formatDescriptions: [AnyObject] { get }
-  var playable: Bool { get }
-  var enabled: Bool { get }
-  var selfContained: Bool { get }
+  var isPlayable: Bool { get }
+  var isEnabled: Bool { get }
+  var isSelfContained: Bool { get }
   var totalSampleDataLength: Int64 { get }
   func hasMediaCharacteristic(mediaCharacteristic: String) -> Bool
 }
@@ -351,8 +351,8 @@ extension AVAssetTrack {
 }
 extension AVAssetTrack {
   var segments: [AVAssetTrackSegment] { get }
-  func segmentForTrackTime(trackTime: CMTime) -> AVAssetTrackSegment?
-  func samplePresentationTimeForTrackTime(trackTime: CMTime) -> CMTime
+  func segmentForTrack(trackTime: CMTime) -> AVAssetTrackSegment?
+  func samplePresentationTimeForTrack(trackTime: CMTime) -> CMTime
 }
 extension AVAssetTrack {
   var commonMetadata: [AVMetadataItem] { get }
@@ -373,14 +373,14 @@ let AVTrackAssociationTypeMetadataReferent: String
 let AVAssetTrackTimeRangeDidChangeNotification: String
 let AVAssetTrackSegmentsDidChangeNotification: String
 let AVAssetTrackTrackAssociationsDidChangeNotification: String
-class AVAssetTrackGroup : NSObject, NSCopying {
-  var trackIDs: [NSNumber] { get }
+class AVAssetTrackGroup : Object, Copying {
+  var trackIDs: [Number] { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class AVAssetTrackSegment : NSObject {
+class AVAssetTrackSegment : Object {
   var timeMapping: CMTimeMapping { get }
-  var empty: Bool { get }
+  var isEmpty: Bool { get }
 }
 enum AVAssetWriterStatus : Int {
   init?(rawValue: Int)
@@ -391,16 +391,16 @@ enum AVAssetWriterStatus : Int {
   case Failed
   case Cancelled
 }
-class AVAssetWriter : NSObject {
-  init(URL outputURL: NSURL, fileType outputFileType: String) throws
-  @NSCopying var outputURL: NSURL { get }
+class AVAssetWriter : Object {
+  init(url outputURL: URL, fileType outputFileType: String) throws
+  @NSCopying var outputURL: URL { get }
   var outputFileType: String { get }
   var availableMediaTypes: [String] { get }
   var status: AVAssetWriterStatus { get }
-  var error: NSError? { get }
+  var error: Error? { get }
   var metadata: [AVMetadataItem]
   var shouldOptimizeForNetworkUse: Bool
-  @NSCopying var directoryForTemporaryFiles: NSURL?
+  @NSCopying var directoryForTemporaryFiles: URL?
   var inputs: [AVAssetWriterInput] { get }
   func canApplyOutputSettings(outputSettings: [String : AnyObject]?, forMediaType mediaType: String) -> Bool
   func canAddInput(input: AVAssetWriterInput) -> Bool
@@ -426,17 +426,17 @@ class AVAssetWriterInputGroup : AVMediaSelectionGroup {
   var inputs: [AVAssetWriterInput] { get }
   var defaultInput: AVAssetWriterInput? { get }
 }
-class AVAssetWriterInput : NSObject {
+class AVAssetWriterInput : Object {
   convenience init(mediaType: String, outputSettings: [String : AnyObject]?)
   init(mediaType: String, outputSettings: [String : AnyObject]?, sourceFormatHint: CMFormatDescription?)
   var mediaType: String { get }
   var outputSettings: [String : AnyObject]? { get }
   var sourceFormatHint: CMFormatDescription? { get }
   var metadata: [AVMetadataItem]
-  var readyForMoreMediaData: Bool { get }
+  var isReadyForMoreMediaData: Bool { get }
   var expectsMediaDataInRealTime: Bool
-  func requestMediaDataWhenReadyOnQueue(queue: dispatch_queue_t, usingBlock block: () -> Void)
-  func appendSampleBuffer(sampleBuffer: CMSampleBuffer) -> Bool
+  func requestMediaDataWhenReadyOn(queue: dispatch_queue_t, usingBlock block: () -> Void)
+  func append(sampleBuffer: CMSampleBuffer) -> Bool
   func markAsFinished()
 }
 extension AVAssetWriterInput {
@@ -455,33 +455,33 @@ extension AVAssetWriterInput {
   var mediaTimeScale: CMTimeScale
   var preferredMediaChunkDuration: CMTime
   var preferredMediaChunkAlignment: Int
-  @NSCopying var sampleReferenceBaseURL: NSURL?
+  @NSCopying var sampleReferenceBaseURL: URL?
 }
 extension AVAssetWriterInput {
-  func canAddTrackAssociationWithTrackOfInput(input: AVAssetWriterInput, type trackAssociationType: String) -> Bool
-  func addTrackAssociationWithTrackOfInput(input: AVAssetWriterInput, type trackAssociationType: String)
+  func canAddTrackAssociationWithTrackOf(input: AVAssetWriterInput, type trackAssociationType: String) -> Bool
+  func addTrackAssociationWithTrackOf(input: AVAssetWriterInput, type trackAssociationType: String)
 }
 extension AVAssetWriterInput {
   var performsMultiPassEncodingIfSupported: Bool
   var canPerformMultiplePasses: Bool { get }
   var currentPassDescription: AVAssetWriterInputPassDescription? { get }
-  func respondToEachPassDescriptionOnQueue(queue: dispatch_queue_t, usingBlock block: dispatch_block_t)
+  func respondToEachPassDescriptionOn(queue: dispatch_queue_t, usingBlock block: dispatch_block_t)
   func markCurrentPassAsFinished()
 }
-class AVAssetWriterInputPassDescription : NSObject {
-  var sourceTimeRanges: [NSValue] { get }
+class AVAssetWriterInputPassDescription : Object {
+  var sourceTimeRanges: [Value] { get }
 }
-class AVAssetWriterInputPixelBufferAdaptor : NSObject {
-  init(assetWriterInput input: AVAssetWriterInput, sourcePixelBufferAttributes: [String : AnyObject]?)
+class AVAssetWriterInputPixelBufferAdaptor : Object {
+  init(assetWriterInput input: AVAssetWriterInput, sourcePixelBufferAttributes: [String : AnyObject]? = [:])
   var assetWriterInput: AVAssetWriterInput { get }
   var sourcePixelBufferAttributes: [String : AnyObject]? { get }
   var pixelBufferPool: CVPixelBufferPool? { get }
-  func appendPixelBuffer(pixelBuffer: CVPixelBuffer, withPresentationTime presentationTime: CMTime) -> Bool
+  func append(pixelBuffer: CVPixelBuffer, withPresentationTime presentationTime: CMTime) -> Bool
 }
-class AVAssetWriterInputMetadataAdaptor : NSObject {
+class AVAssetWriterInputMetadataAdaptor : Object {
   init(assetWriterInput input: AVAssetWriterInput)
   var assetWriterInput: AVAssetWriterInput { get }
-  func appendTimedMetadataGroup(timedMetadataGroup: AVTimedMetadataGroup) -> Bool
+  func append(timedMetadataGroup: AVTimedMetadataGroup) -> Bool
 }
 enum AVKeyValueStatus : Int {
   init?(rawValue: Int)
@@ -493,19 +493,19 @@ enum AVKeyValueStatus : Int {
   case Cancelled
 }
 protocol AVAsynchronousKeyValueLoading {
-  func statusOfValueForKey(key: String, error outError: NSErrorPointer) -> AVKeyValueStatus
-  func loadValuesAsynchronouslyForKeys(keys: [String], completionHandler handler: (() -> Void)?)
+  func statusOfValueForKey(key: String, error outError: ErrorPointer) -> AVKeyValueStatus
+  func loadValuesAsynchronouslyForKeys(keys: [String], completionHandler handler: (() -> Void)? = nil)
 }
-class AVAudioBuffer : NSObject, NSCopying, NSMutableCopying {
+class AVAudioBuffer : Object, Copying, MutableCopying {
   var format: AVAudioFormat { get }
   var audioBufferList: UnsafePointer<AudioBufferList> { get }
   var mutableAudioBufferList: UnsafeMutablePointer<AudioBufferList> { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
 }
 class AVAudioPCMBuffer : AVAudioBuffer {
-  init(PCMFormat format: AVAudioFormat, frameCapacity: AVAudioFrameCount)
+  init(pcmFormat format: AVAudioFormat, frameCapacity: AVAudioFrameCount)
   var frameCapacity: AVAudioFrameCount { get }
   var frameLength: AVAudioFrameCount
   var stride: Int { get }
@@ -524,7 +524,7 @@ class AVAudioCompressedBuffer : AVAudioBuffer {
   var packetDescriptions: UnsafeMutablePointer<AudioStreamPacketDescription> { get }
   init()
 }
-class AVAudioChannelLayout : NSObject, NSSecureCoding {
+class AVAudioChannelLayout : Object, SecureCoding {
   convenience init(layoutTag: AudioChannelLayoutTag)
   init(layout: UnsafePointer<AudioChannelLayout>)
   func isEqual(object: AnyObject) -> Bool
@@ -533,10 +533,10 @@ class AVAudioChannelLayout : NSObject, NSSecureCoding {
   var channelCount: AVAudioChannelCount { get }
   convenience init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class AVAudioConnectionPoint : NSObject {
+class AVAudioConnectionPoint : Object {
   init(node: AVAudioNode, bus: AVAudioNodeBus)
   weak var node: @sil_weak AVAudioNode? { get }
   var bus: AVAudioNodeBus { get }
@@ -571,40 +571,40 @@ enum AVAudioConverterOutputStatus : Int {
   case Error
 }
 typealias AVAudioConverterInputBlock = (AVAudioPacketCount, UnsafeMutablePointer<AVAudioConverterInputStatus>) -> AVAudioBuffer?
-class AVAudioConverter : NSObject {
-  init(fromFormat: AVAudioFormat, toFormat: AVAudioFormat)
+class AVAudioConverter : Object {
+  init(from fromFormat: AVAudioFormat, to toFormat: AVAudioFormat)
   func reset()
   var inputFormat: AVAudioFormat { get }
   var outputFormat: AVAudioFormat { get }
-  var channelMap: [NSNumber]
-  var magicCookie: NSData?
+  var channelMap: [Number]
+  var magicCookie: Data?
   var downmix: Bool
   var dither: Bool
   var sampleRateConverterQuality: Int
   var sampleRateConverterAlgorithm: String
   var primeMethod: AVAudioConverterPrimeMethod
   var primeInfo: AVAudioConverterPrimeInfo
-  func convertToBuffer(outputBuffer: AVAudioPCMBuffer, fromBuffer inputBuffer: AVAudioPCMBuffer) throws
-  func convertToBuffer(outputBuffer: AVAudioBuffer, error outError: NSErrorPointer, withInputFromBlock inputBlock: AVAudioConverterInputBlock) -> AVAudioConverterOutputStatus
+  func convertTo(outputBuffer: AVAudioPCMBuffer, from inputBuffer: AVAudioPCMBuffer) throws
+  func convertTo(outputBuffer: AVAudioBuffer, error outError: ErrorPointer, withInputFrom inputBlock: AVAudioConverterInputBlock) -> AVAudioConverterOutputStatus
   init()
 }
 extension AVAudioConverter {
   var bitRate: Int
   var bitRateStrategy: String?
   var maximumOutputPacketSize: Int { get }
-  var availableEncodeBitRates: [NSNumber]? { get }
-  var applicableEncodeBitRates: [NSNumber]? { get }
-  var availableEncodeSampleRates: [NSNumber]? { get }
-  var applicableEncodeSampleRates: [NSNumber]? { get }
-  var availableEncodeChannelLayoutTags: [NSNumber]? { get }
+  var availableEncodeBitRates: [Number]? { get }
+  var applicableEncodeBitRates: [Number]? { get }
+  var availableEncodeSampleRates: [Number]? { get }
+  var applicableEncodeSampleRates: [Number]? { get }
+  var availableEncodeChannelLayoutTags: [Number]? { get }
 }
-class AVAudioEngine : NSObject {
+class AVAudioEngine : Object {
   init()
-  func attachNode(node: AVAudioNode)
-  func detachNode(node: AVAudioNode)
+  func attach(node: AVAudioNode)
+  func detach(node: AVAudioNode)
   func connect(node1: AVAudioNode, to node2: AVAudioNode, fromBus bus1: AVAudioNodeBus, toBus bus2: AVAudioNodeBus, format: AVAudioFormat?)
   func connect(node1: AVAudioNode, to node2: AVAudioNode, format: AVAudioFormat?)
-  func connect(sourceNode: AVAudioNode, toConnectionPoints destNodes: [AVAudioConnectionPoint], fromBus sourceBus: AVAudioNodeBus, format: AVAudioFormat?)
+  func connect(sourceNode: AVAudioNode, to destNodes: [AVAudioConnectionPoint], fromBus sourceBus: AVAudioNodeBus, format: AVAudioFormat?)
   func disconnectNodeInput(node: AVAudioNode, bus: AVAudioNodeBus)
   func disconnectNodeInput(node: AVAudioNode)
   func disconnectNodeOutput(node: AVAudioNode, bus: AVAudioNodeBus)
@@ -614,12 +614,12 @@ class AVAudioEngine : NSObject {
   func pause()
   func reset()
   func stop()
-  func inputConnectionPointForNode(node: AVAudioNode, inputBus bus: AVAudioNodeBus) -> AVAudioConnectionPoint?
-  func outputConnectionPointsForNode(node: AVAudioNode, outputBus bus: AVAudioNodeBus) -> [AVAudioConnectionPoint]
+  func inputConnectionPointFor(node: AVAudioNode, inputBus bus: AVAudioNodeBus) -> AVAudioConnectionPoint?
+  func outputConnectionPointsFor(node: AVAudioNode, outputBus bus: AVAudioNodeBus) -> [AVAudioConnectionPoint]
   var musicSequence: MusicSequence
   var outputNode: AVAudioOutputNode { get }
   var mainMixerNode: AVAudioMixerNode { get }
-  var running: Bool { get }
+  var isRunning: Bool { get }
 }
 let AVAudioEngineConfigurationChangeNotification: String
 enum AVAudioEnvironmentDistanceAttenuationModel : Int {
@@ -629,14 +629,14 @@ enum AVAudioEnvironmentDistanceAttenuationModel : Int {
   case Inverse
   case Linear
 }
-class AVAudioEnvironmentDistanceAttenuationParameters : NSObject {
+class AVAudioEnvironmentDistanceAttenuationParameters : Object {
   var distanceAttenuationModel: AVAudioEnvironmentDistanceAttenuationModel
   var referenceDistance: Float
   var maximumDistance: Float
   var rolloffFactor: Float
   init()
 }
-class AVAudioEnvironmentReverbParameters : NSObject {
+class AVAudioEnvironmentReverbParameters : Object {
   var enable: Bool
   var level: Float
   var filterParameters: AVAudioUnitEQFilterParameters { get }
@@ -651,7 +651,7 @@ class AVAudioEnvironmentNode : AVAudioNode, AVAudioMixing {
   var listenerAngularOrientation: AVAudio3DAngularOrientation
   var distanceAttenuationParameters: AVAudioEnvironmentDistanceAttenuationParameters { get }
   var reverbParameters: AVAudioEnvironmentReverbParameters { get }
-  var applicableRenderingAlgorithms: [NSNumber] { get }
+  var applicableRenderingAlgorithms: [Number] { get }
   init()
   func destinationForMixer(mixer: AVAudioNode, bus: AVAudioNodeBus) -> AVAudioMixingDestination?
   var volume: Float
@@ -663,15 +663,15 @@ class AVAudioEnvironmentNode : AVAudioNode, AVAudioMixing {
   var occlusion: Float
   var position: AVAudio3DPoint
 }
-class AVAudioFile : NSObject {
-  init(forReading fileURL: NSURL) throws
-  init(forReading fileURL: NSURL, commonFormat format: AVAudioCommonFormat, interleaved: Bool) throws
-  init(forWriting fileURL: NSURL, settings: [String : AnyObject]) throws
-  init(forWriting fileURL: NSURL, settings: [String : AnyObject], commonFormat format: AVAudioCommonFormat, interleaved: Bool) throws
-  func readIntoBuffer(buffer: AVAudioPCMBuffer) throws
-  func readIntoBuffer(buffer: AVAudioPCMBuffer, frameCount frames: AVAudioFrameCount) throws
-  func writeFromBuffer(buffer: AVAudioPCMBuffer) throws
-  var url: NSURL { get }
+class AVAudioFile : Object {
+  init(forReading fileURL: URL) throws
+  init(forReading fileURL: URL, commonFormat format: AVAudioCommonFormat, interleaved: Bool) throws
+  init(forWriting fileURL: URL, settings: [String : AnyObject]) throws
+  init(forWriting fileURL: URL, settings: [String : AnyObject], commonFormat format: AVAudioCommonFormat, interleaved: Bool) throws
+  func readInto(buffer: AVAudioPCMBuffer) throws
+  func readInto(buffer: AVAudioPCMBuffer, frameCount frames: AVAudioFrameCount) throws
+  func writeFrom(buffer: AVAudioPCMBuffer) throws
+  var url: URL { get }
   var fileFormat: AVAudioFormat { get }
   var processingFormat: AVAudioFormat { get }
   var length: AVAudioFramePosition { get }
@@ -687,7 +687,7 @@ enum AVAudioCommonFormat : UInt {
   case PCMFormatInt16
   case PCMFormatInt32
 }
-class AVAudioFormat : NSObject, NSSecureCoding {
+class AVAudioFormat : Object, SecureCoding {
   init(streamDescription asbd: UnsafePointer<AudioStreamBasicDescription>)
   init(streamDescription asbd: UnsafePointer<AudioStreamBasicDescription>, channelLayout layout: AVAudioChannelLayout?)
   init(standardFormatWithSampleRate sampleRate: Double, channels: AVAudioChannelCount)
@@ -695,24 +695,24 @@ class AVAudioFormat : NSObject, NSSecureCoding {
   init(commonFormat format: AVAudioCommonFormat, sampleRate: Double, channels: AVAudioChannelCount, interleaved: Bool)
   init(commonFormat format: AVAudioCommonFormat, sampleRate: Double, interleaved: Bool, channelLayout layout: AVAudioChannelLayout)
   init(settings: [String : AnyObject])
-  init(CMAudioFormatDescription formatDescription: CMAudioFormatDescription)
+  init(cmAudioFormatDescription formatDescription: CMAudioFormatDescription)
   func isEqual(object: AnyObject) -> Bool
-  var standard: Bool { get }
+  var isStandard: Bool { get }
   var commonFormat: AVAudioCommonFormat { get }
   var channelCount: AVAudioChannelCount { get }
   var sampleRate: Double { get }
-  var interleaved: Bool { get }
+  var isInterleaved: Bool { get }
   var streamDescription: UnsafePointer<AudioStreamBasicDescription> { get }
   var channelLayout: AVAudioChannelLayout? { get }
   var settings: [String : AnyObject] { get }
   var formatDescription: CMAudioFormatDescription { get }
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 class AVAudioIONode : AVAudioNode {
-  var presentationLatency: NSTimeInterval { get }
+  var presentationLatency: TimeInterval { get }
   var audioUnit: AudioUnit { get }
   init()
 }
@@ -731,24 +731,24 @@ class AVAudioInputNode : AVAudioIONode, AVAudioMixing {
 class AVAudioOutputNode : AVAudioIONode {
   init()
 }
-class AVAudioMix : NSObject, NSCopying, NSMutableCopying {
+class AVAudioMix : Object, Copying, MutableCopying {
   var inputParameters: [AVAudioMixInputParameters] { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
 }
 class AVMutableAudioMix : AVAudioMix {
   var inputParameters: [AVAudioMixInputParameters]
   init()
 }
-class AVAudioMixInputParameters : NSObject, NSCopying, NSMutableCopying {
+class AVAudioMixInputParameters : Object, Copying, MutableCopying {
   var trackID: CMPersistentTrackID { get }
   var audioTimePitchAlgorithm: String? { get }
   var audioTapProcessor: MTAudioProcessingTap? { get }
-  func getVolumeRampForTime(time: CMTime, startVolume: UnsafeMutablePointer<Float>, endVolume: UnsafeMutablePointer<Float>, timeRange: UnsafeMutablePointer<CMTimeRange>) -> Bool
+  func getVolumeRampFor(time: CMTime, startVolume: UnsafeMutablePointer<Float>, endVolume: UnsafeMutablePointer<Float>, timeRange: UnsafeMutablePointer<CMTimeRange>) -> Bool
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
 }
 class AVMutableAudioMixInputParameters : AVAudioMixInputParameters {
   convenience init(track: AVAssetTrack?)
@@ -756,7 +756,7 @@ class AVMutableAudioMixInputParameters : AVAudioMixInputParameters {
   var audioTimePitchAlgorithm: String?
   var audioTapProcessor: MTAudioProcessingTap?
   func setVolumeRampFromStartVolume(startVolume: Float, toEndVolume endVolume: Float, timeRange: CMTimeRange)
-  func setVolume(volume: Float, atTime time: CMTime)
+  func setVolume(volume: Float, at time: CMTime)
   init()
 }
 class AVAudioMixerNode : AVAudioNode, AVAudioMixing {
@@ -777,7 +777,7 @@ protocol AVAudioMixing : AVAudioStereoMixing, AVAudio3DMixing {
   func destinationForMixer(mixer: AVAudioNode, bus: AVAudioNodeBus) -> AVAudioMixingDestination?
   var volume: Float { get set }
 }
-protocol AVAudioStereoMixing : NSObjectProtocol {
+protocol AVAudioStereoMixing : ObjectProtocol {
   var pan: Float { get set }
 }
 enum AVAudio3DMixingRenderingAlgorithm : Int {
@@ -789,7 +789,7 @@ enum AVAudio3DMixingRenderingAlgorithm : Int {
   case SoundField
   case StereoPassThrough
 }
-protocol AVAudio3DMixing : NSObjectProtocol {
+protocol AVAudio3DMixing : ObjectProtocol {
   var renderingAlgorithm: AVAudio3DMixingRenderingAlgorithm { get set }
   var rate: Float { get set }
   var reverbBlend: Float { get set }
@@ -797,7 +797,7 @@ protocol AVAudio3DMixing : NSObjectProtocol {
   var occlusion: Float { get set }
   var position: AVAudio3DPoint { get set }
 }
-class AVAudioMixingDestination : NSObject, AVAudioMixing {
+class AVAudioMixingDestination : Object, AVAudioMixing {
   var connectionPoint: AVAudioConnectionPoint { get }
   init()
   func destinationForMixer(mixer: AVAudioNode, bus: AVAudioNodeBus) -> AVAudioMixingDestination?
@@ -811,7 +811,7 @@ class AVAudioMixingDestination : NSObject, AVAudioMixing {
   var position: AVAudio3DPoint
 }
 typealias AVAudioNodeTapBlock = (AVAudioPCMBuffer, AVAudioTime) -> Void
-class AVAudioNode : NSObject {
+class AVAudioNode : Object {
   func reset()
   func inputFormatForBus(bus: AVAudioNodeBus) -> AVAudioFormat
   func outputFormatForBus(bus: AVAudioNodeBus) -> AVAudioFormat
@@ -825,40 +825,40 @@ class AVAudioNode : NSObject {
   var lastRenderTime: AVAudioTime? { get }
   init()
 }
-class AVAudioPlayer : NSObject {
-  init(contentsOfURL url: NSURL) throws
-  init(data: NSData) throws
-  init(contentsOfURL url: NSURL, fileTypeHint utiString: String?) throws
-  init(data: NSData, fileTypeHint utiString: String?) throws
+class AVAudioPlayer : Object {
+  init(contentsOf url: URL) throws
+  init(data: Data) throws
+  init(contentsOf url: URL, fileTypeHint utiString: String?) throws
+  init(data: Data, fileTypeHint utiString: String?) throws
   func prepareToPlay() -> Bool
   func play() -> Bool
-  func playAtTime(time: NSTimeInterval) -> Bool
+  func playAtTime(time: TimeInterval) -> Bool
   func pause()
   func stop()
-  var playing: Bool { get }
+  var isPlaying: Bool { get }
   var numberOfChannels: Int { get }
-  var duration: NSTimeInterval { get }
+  var duration: TimeInterval { get }
   unowned(unsafe) var delegate: @sil_unmanaged AVAudioPlayerDelegate?
-  var url: NSURL? { get }
-  var data: NSData? { get }
+  var url: URL? { get }
+  var data: Data? { get }
   var pan: Float
   var volume: Float
   var enableRate: Bool
   var rate: Float
-  var currentTime: NSTimeInterval
-  var deviceCurrentTime: NSTimeInterval { get }
+  var currentTime: TimeInterval
+  var deviceCurrentTime: TimeInterval { get }
   var numberOfLoops: Int
   var settings: [String : AnyObject] { get }
-  var meteringEnabled: Bool
+  var isMeteringEnabled: Bool
   func updateMeters()
   func peakPowerForChannel(channelNumber: Int) -> Float
   func averagePowerForChannel(channelNumber: Int) -> Float
-  var channelAssignments: [NSNumber]?
+  var channelAssignments: [Number]?
   init()
 }
-protocol AVAudioPlayerDelegate : NSObjectProtocol {
+protocol AVAudioPlayerDelegate : ObjectProtocol {
   optional func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool)
-  optional func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer, error: NSError?)
+  optional func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer, error: Error?)
   optional func audioPlayerBeginInterruption(player: AVAudioPlayer)
   optional func audioPlayerEndInterruption(player: AVAudioPlayer, withOptions flags: Int)
 }
@@ -870,18 +870,18 @@ struct AVAudioPlayerNodeBufferOptions : OptionSetType {
   static var InterruptsAtLoop: AVAudioPlayerNodeBufferOptions { get }
 }
 class AVAudioPlayerNode : AVAudioNode, AVAudioMixing {
-  func scheduleBuffer(buffer: AVAudioPCMBuffer, completionHandler: AVAudioNodeCompletionHandler?)
-  func scheduleBuffer(buffer: AVAudioPCMBuffer, atTime when: AVAudioTime?, options: AVAudioPlayerNodeBufferOptions, completionHandler: AVAudioNodeCompletionHandler?)
-  func scheduleFile(file: AVAudioFile, atTime when: AVAudioTime?, completionHandler: AVAudioNodeCompletionHandler?)
-  func scheduleSegment(file: AVAudioFile, startingFrame startFrame: AVAudioFramePosition, frameCount numberFrames: AVAudioFrameCount, atTime when: AVAudioTime?, completionHandler: AVAudioNodeCompletionHandler?)
+  func scheduleBuffer(buffer: AVAudioPCMBuffer, completionHandler: AVAudioNodeCompletionHandler? = nil)
+  func scheduleBuffer(buffer: AVAudioPCMBuffer, at when: AVAudioTime?, options: AVAudioPlayerNodeBufferOptions = [], completionHandler: AVAudioNodeCompletionHandler? = nil)
+  func scheduleFile(file: AVAudioFile, at when: AVAudioTime?, completionHandler: AVAudioNodeCompletionHandler? = nil)
+  func scheduleSegment(file: AVAudioFile, startingFrame startFrame: AVAudioFramePosition, frameCount numberFrames: AVAudioFrameCount, at when: AVAudioTime?, completionHandler: AVAudioNodeCompletionHandler? = nil)
   func stop()
   func prepareWithFrameCount(frameCount: AVAudioFrameCount)
   func play()
-  func playAtTime(when: AVAudioTime?)
+  func playAt(when: AVAudioTime?)
   func pause()
   func nodeTimeForPlayerTime(playerTime: AVAudioTime) -> AVAudioTime?
   func playerTimeForNodeTime(nodeTime: AVAudioTime) -> AVAudioTime?
-  var playing: Bool { get }
+  var isPlaying: Bool { get }
   init()
   func destinationForMixer(mixer: AVAudioNode, bus: AVAudioNodeBus) -> AVAudioMixingDestination?
   var volume: Float
@@ -912,39 +912,39 @@ struct _AVBeatRange {
 }
 typealias AVBeatRange = _AVBeatRange
 func AVMakeBeatRange(startBeat: AVMusicTimeStamp, _ lengthInBeats: AVMusicTimeStamp) -> AVBeatRange
-class AVAudioSequencer : NSObject {
+class AVAudioSequencer : Object {
   init(audioEngine engine: AVAudioEngine)
-  func loadFromURL(fileURL: NSURL, options: AVMusicSequenceLoadOptions) throws
-  func loadFromData(data: NSData, options: AVMusicSequenceLoadOptions) throws
-  func writeToURL(fileURL: NSURL, SMPTEResolution resolution: Int, replaceExisting replace: Bool) throws
-  func dataWithSMPTEResolution(SMPTEResolution: Int, error outError: NSErrorPointer) -> NSData
-  func secondsForBeats(beats: AVMusicTimeStamp) -> NSTimeInterval
-  func beatsForSeconds(seconds: NSTimeInterval) -> AVMusicTimeStamp
+  func loadFrom(fileURL: URL, options: AVMusicSequenceLoadOptions = []) throws
+  func loadFrom(data: Data, options: AVMusicSequenceLoadOptions = []) throws
+  func writeTo(fileURL: URL, smpteResolution resolution: Int, replaceExisting replace: Bool) throws
+  func dataWithSMPTEResolution(SMPTEResolution: Int, error outError: ErrorPointer) -> Data
+  func secondsForBeats(beats: AVMusicTimeStamp) -> TimeInterval
+  func beatsForSeconds(seconds: TimeInterval) -> AVMusicTimeStamp
   var tracks: [AVMusicTrack] { get }
   var tempoTrack: AVMusicTrack { get }
   var userInfo: [String : AnyObject] { get }
 }
 extension AVAudioSequencer {
-  var currentPositionInSeconds: NSTimeInterval
-  var currentPositionInBeats: NSTimeInterval
-  var playing: Bool { get }
+  var currentPositionInSeconds: TimeInterval
+  var currentPositionInBeats: TimeInterval
+  var isPlaying: Bool { get }
   var rate: Float
-  func hostTimeForBeats(inBeats: AVMusicTimeStamp, error outError: NSErrorPointer) -> UInt64
-  func beatsForHostTime(inHostTime: UInt64, error outError: NSErrorPointer) -> AVMusicTimeStamp
+  func hostTimeForBeats(inBeats: AVMusicTimeStamp, error outError: ErrorPointer) -> UInt64
+  func beatsForHostTime(inHostTime: UInt64, error outError: ErrorPointer) -> AVMusicTimeStamp
   func prepareToPlay()
   func start() throws
   func stop()
 }
-class AVMusicTrack : NSObject {
+class AVMusicTrack : Object {
   var destinationAudioUnit: AVAudioUnit?
   var loopRange: AVBeatRange
-  var loopingEnabled: Bool
+  var isLoopingEnabled: Bool
   var numberOfLoops: Int
   var offsetTime: AVMusicTimeStamp
-  var muted: Bool
-  var soloed: Bool
+  var isMuted: Bool
+  var isSoloed: Bool
   var lengthInBeats: AVMusicTimeStamp
-  var lengthInSeconds: NSTimeInterval
+  var lengthInSeconds: TimeInterval
   var timeResolution: Int { get }
   init()
 }
@@ -1016,20 +1016,20 @@ enum AVAudioSessionErrorCode : Int {
   case CodeResourceNotAvailable
   case CodeUnspecified
 }
-class AVAudioSession : NSObject {
+class AVAudioSession : Object {
   class func sharedInstance() -> AVAudioSession
   func setActive(active: Bool) throws
-  func setActive(active: Bool, withOptions options: AVAudioSessionSetActiveOptions) throws
+  func setActive(active: Bool, withOptions options: AVAudioSessionSetActiveOptions = []) throws
   var availableCategories: [String] { get }
   func setCategory(category: String) throws
-  func setCategory(category: String, withOptions options: AVAudioSessionCategoryOptions) throws
+  func setCategory(category: String, withOptions options: AVAudioSessionCategoryOptions = []) throws
   var category: String { get }
   var categoryOptions: AVAudioSessionCategoryOptions { get }
   var availableModes: [String] { get }
   func setMode(mode: String) throws
   var mode: String { get }
   func overrideOutputAudioPort(portOverride: AVAudioSessionPortOverride) throws
-  var otherAudioPlaying: Bool { get }
+  var isOtherAudioPlaying: Bool { get }
   var secondaryAudioShouldBeSilencedHint: Bool { get }
   var currentRoute: AVAudioSessionRouteDescription { get }
   func setPreferredInput(inPort: AVAudioSessionPortDescription?) throws
@@ -1041,8 +1041,8 @@ typealias PermissionBlock = (Bool) -> Void
 extension AVAudioSession {
   func setPreferredSampleRate(sampleRate: Double) throws
   var preferredSampleRate: Double { get }
-  func setPreferredIOBufferDuration(duration: NSTimeInterval) throws
-  var preferredIOBufferDuration: NSTimeInterval { get }
+  func setPreferredIOBufferDuration(duration: TimeInterval) throws
+  var preferredIOBufferDuration: TimeInterval { get }
   func setPreferredInputNumberOfChannels(count: Int) throws
   var preferredInputNumberOfChannels: Int { get }
   func setPreferredOutputNumberOfChannels(count: Int) throws
@@ -1051,8 +1051,8 @@ extension AVAudioSession {
   var maximumOutputNumberOfChannels: Int { get }
   func setInputGain(gain: Float) throws
   var inputGain: Float { get }
-  var inputGainSettable: Bool { get }
-  var inputAvailable: Bool { get }
+  var isInputGainSettable: Bool { get }
+  var isInputAvailable: Bool { get }
   var inputDataSources: [AVAudioSessionDataSourceDescription]? { get }
   var inputDataSource: AVAudioSessionDataSourceDescription? { get }
   func setInputDataSource(dataSource: AVAudioSessionDataSourceDescription?) throws
@@ -1063,9 +1063,9 @@ extension AVAudioSession {
   var inputNumberOfChannels: Int { get }
   var outputNumberOfChannels: Int { get }
   var outputVolume: Float { get }
-  var inputLatency: NSTimeInterval { get }
-  var outputLatency: NSTimeInterval { get }
-  var IOBufferDuration: NSTimeInterval { get }
+  var inputLatency: TimeInterval { get }
+  var outputLatency: TimeInterval { get }
+  var ioBufferDuration: TimeInterval { get }
 }
 extension AVAudioSession {
 }
@@ -1118,17 +1118,17 @@ let AVAudioSessionOrientationRight: String
 let AVAudioSessionPolarPatternOmnidirectional: String
 let AVAudioSessionPolarPatternCardioid: String
 let AVAudioSessionPolarPatternSubcardioid: String
-class AVAudioSessionChannelDescription : NSObject {
+class AVAudioSessionChannelDescription : Object {
   var channelName: String { get }
   var owningPortUID: String { get }
   var channelNumber: Int { get }
   var channelLabel: AudioChannelLabel { get }
   init()
 }
-class AVAudioSessionPortDescription : NSObject {
+class AVAudioSessionPortDescription : Object {
   var portType: String { get }
   var portName: String { get }
-  var UID: String { get }
+  var uid: String { get }
   var channels: [AVAudioSessionChannelDescription]? { get }
   var dataSources: [AVAudioSessionDataSourceDescription]? { get }
   var selectedDataSource: AVAudioSessionDataSourceDescription? { get }
@@ -1136,13 +1136,13 @@ class AVAudioSessionPortDescription : NSObject {
   func setPreferredDataSource(dataSource: AVAudioSessionDataSourceDescription?) throws
   init()
 }
-class AVAudioSessionRouteDescription : NSObject {
+class AVAudioSessionRouteDescription : Object {
   var inputs: [AVAudioSessionPortDescription] { get }
   var outputs: [AVAudioSessionPortDescription] { get }
   init()
 }
-class AVAudioSessionDataSourceDescription : NSObject {
-  var dataSourceID: NSNumber { get }
+class AVAudioSessionDataSourceDescription : Object {
+  var dataSourceID: Number { get }
   var dataSourceName: String { get }
   var location: String? { get }
   var orientation: String? { get }
@@ -1185,17 +1185,17 @@ enum AVAudioQuality : Int {
   case High
   case Max
 }
-class AVAudioTime : NSObject {
+class AVAudioTime : Object {
   init(audioTimeStamp ts: UnsafePointer<AudioTimeStamp>, sampleRate: Double)
   init(hostTime: UInt64)
   init(sampleTime: AVAudioFramePosition, atRate sampleRate: Double)
   init(hostTime: UInt64, sampleTime: AVAudioFramePosition, atRate sampleRate: Double)
-  class func hostTimeForSeconds(seconds: NSTimeInterval) -> UInt64
-  class func secondsForHostTime(hostTime: UInt64) -> NSTimeInterval
+  class func hostTimeForSeconds(seconds: TimeInterval) -> UInt64
+  class func secondsForHostTime(hostTime: UInt64) -> TimeInterval
   func extrapolateTimeFromAnchor(anchorTime: AVAudioTime) -> AVAudioTime
-  var hostTimeValid: Bool { get }
+  var isHostTimeValid: Bool { get }
   var hostTime: UInt64 { get }
-  var sampleTimeValid: Bool { get }
+  var isSampleTimeValid: Bool { get }
   var sampleTime: AVAudioFramePosition { get }
   var sampleRate: Double { get }
   var audioTimeStamp: AudioTimeStamp { get }
@@ -1233,11 +1233,11 @@ struct AVAudio3DAngularOrientation {
 }
 func AVAudioMake3DAngularOrientation(yaw: Float, _ pitch: Float, _ roll: Float) -> AVAudio3DAngularOrientation
 class AVAudioUnit : AVAudioNode {
-  class func instantiateWithComponentDescription(audioComponentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions, completionHandler: (AVAudioUnit?, NSError?) -> Void)
-  func loadAudioUnitPresetAtURL(url: NSURL) throws
+  class func instantiateWith(audioComponentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions = [], completionHandler: (AVAudioUnit?, Error?) -> Void)
+  func loadPresetAt(url: URL) throws
   var audioComponentDescription: AudioComponentDescription { get }
   var audioUnit: AudioUnit { get }
-  var AUAudioUnit: AUAudioUnit { get }
+  var auAudioUnit: AUAudioUnit { get }
   var name: String { get }
   var manufacturerName: String { get }
   var version: Int { get }
@@ -1254,14 +1254,14 @@ let AVAudioUnitTypeGenerator: String
 let AVAudioUnitTypeOfflineEffect: String
 let AVAudioUnitTypeMIDIProcessor: String
 let AVAudioUnitManufacturerNameApple: String
-class AVAudioUnitComponent : NSObject {
+class AVAudioUnitComponent : Object {
   var name: String { get }
   var typeName: String { get }
   var localizedTypeName: String { get }
   var manufacturerName: String { get }
   var version: Int { get }
   var versionString: String { get }
-  var sandboxSafe: Bool { get }
+  var isSandboxSafe: Bool { get }
   var hasMIDIInput: Bool { get }
   var hasMIDIOutput: Bool { get }
   var audioComponent: AudioComponent { get }
@@ -1270,17 +1270,17 @@ class AVAudioUnitComponent : NSObject {
   init()
 }
 let AVAudioUnitComponentTagsDidChangeNotification: String
-class AVAudioUnitComponentManager : NSObject {
+class AVAudioUnitComponentManager : Object {
   var tagNames: [String] { get }
   var standardLocalizedTagNames: [String] { get }
-  class func sharedAudioUnitComponentManager() -> Self
-  func componentsMatchingPredicate(predicate: NSPredicate) -> [AVAudioUnitComponent]
+  class func shared() -> Self
+  func componentsMatching(predicate: Predicate) -> [AVAudioUnitComponent]
   func componentsPassingTest(testHandler: (AVAudioUnitComponent, UnsafeMutablePointer<ObjCBool>) -> Bool) -> [AVAudioUnitComponent]
-  func componentsMatchingDescription(desc: AudioComponentDescription) -> [AVAudioUnitComponent]
+  func componentsMatching(desc: AudioComponentDescription) -> [AVAudioUnitComponent]
   init()
 }
 class AVAudioUnitDelay : AVAudioUnitEffect {
-  var delayTime: NSTimeInterval
+  var delayTime: TimeInterval
   var feedback: Float
   var lowPassCutoff: Float
   var wetDryMix: Float
@@ -1335,7 +1335,7 @@ enum AVAudioUnitEQFilterType : Int {
   case ResonantLowShelf
   case ResonantHighShelf
 }
-class AVAudioUnitEQFilterParameters : NSObject {
+class AVAudioUnitEQFilterParameters : Object {
   var filterType: AVAudioUnitEQFilterType
   var frequency: Float
   var bandwidth: Float
@@ -1381,7 +1381,7 @@ class AVAudioUnitMIDIInstrument : AVAudioUnit, AVAudioMixing {
   func sendProgramChange(program: UInt8, bankMSB: UInt8, bankLSB: UInt8, onChannel channel: UInt8)
   func sendMIDIEvent(midiStatus: UInt8, data1: UInt8, data2: UInt8)
   func sendMIDIEvent(midiStatus: UInt8, data1: UInt8)
-  func sendMIDISysExEvent(midiData: NSData)
+  func sendMIDISysExEvent(midiData: Data)
   init()
   func destinationForMixer(mixer: AVAudioNode, bus: AVAudioNodeBus) -> AVAudioMixingDestination?
   var volume: Float
@@ -1417,9 +1417,9 @@ class AVAudioUnitReverb : AVAudioUnitEffect {
   init()
 }
 class AVAudioUnitSampler : AVAudioUnitMIDIInstrument {
-  func loadSoundBankInstrumentAtURL(bankURL: NSURL, program: UInt8, bankMSB: UInt8, bankLSB: UInt8) throws
-  func loadInstrumentAtURL(instrumentURL: NSURL) throws
-  func loadAudioFilesAtURLs(audioFiles: [NSURL]) throws
+  func loadSoundBankInstrumentAt(bankURL: URL, program: UInt8, bankMSB: UInt8, bankLSB: UInt8) throws
+  func loadInstrumentAt(instrumentURL: URL) throws
+  func loadAudioFilesAtURLs(audioFiles: [URL]) throws
   var stereoPan: Float
   var masterGain: Float
   var globalTuning: Float
@@ -1448,16 +1448,16 @@ extension AVCaptureDevice {
 }
 extension AVCaptureDevice {
   var hasFlash: Bool { get }
-  var flashAvailable: Bool { get }
-  var flashActive: Bool { get }
+  var isFlashAvailable: Bool { get }
+  var isFlashActive: Bool { get }
   func isFlashModeSupported(flashMode: AVCaptureFlashMode) -> Bool
   var flashMode: AVCaptureFlashMode
 }
 let AVCaptureMaxAvailableTorchLevel: Float
 extension AVCaptureDevice {
   var hasTorch: Bool { get }
-  var torchAvailable: Bool { get }
-  var torchActive: Bool { get }
+  var isTorchAvailable: Bool { get }
+  var isTorchActive: Bool { get }
   var torchLevel: Float { get }
   func isTorchModeSupported(torchMode: AVCaptureTorchMode) -> Bool
   var torchMode: AVCaptureTorchMode
@@ -1466,13 +1466,13 @@ extension AVCaptureDevice {
 extension AVCaptureDevice {
   func isFocusModeSupported(focusMode: AVCaptureFocusMode) -> Bool
   var focusMode: AVCaptureFocusMode
-  var focusPointOfInterestSupported: Bool { get }
+  var isFocusPointOfInterestSupported: Bool { get }
   var focusPointOfInterest: CGPoint
-  var adjustingFocus: Bool { get }
-  var autoFocusRangeRestrictionSupported: Bool { get }
+  var isAdjustingFocus: Bool { get }
+  var isAutoFocusRangeRestrictionSupported: Bool { get }
   var autoFocusRangeRestriction: AVCaptureAutoFocusRangeRestriction
-  var smoothAutoFocusSupported: Bool { get }
-  var smoothAutoFocusEnabled: Bool
+  var isSmoothAutoFocusSupported: Bool { get }
+  var isSmoothAutoFocusEnabled: Bool
   var lensPosition: Float { get }
   func setFocusModeLockedWithLensPosition(lensPosition: Float, completionHandler handler: ((CMTime) -> Void)!)
 }
@@ -1480,13 +1480,13 @@ let AVCaptureLensPositionCurrent: Float
 extension AVCaptureDevice {
   func isExposureModeSupported(exposureMode: AVCaptureExposureMode) -> Bool
   var exposureMode: AVCaptureExposureMode
-  var exposurePointOfInterestSupported: Bool { get }
+  var isExposurePointOfInterestSupported: Bool { get }
   var exposurePointOfInterest: CGPoint
-  var adjustingExposure: Bool { get }
+  var isAdjustingExposure: Bool { get }
   var lensAperture: Float { get }
   var exposureDuration: CMTime { get }
-  var ISO: Float { get }
-  func setExposureModeCustomWithDuration(duration: CMTime, ISO: Float, completionHandler handler: ((CMTime) -> Void)!)
+  var iso: Float { get }
+  func setExposureModeCustomWithDuration(duration: CMTime, iso ISO: Float, completionHandler handler: ((CMTime) -> Void)!)
   var exposureTargetOffset: Float { get }
   var exposureTargetBias: Float { get }
   var minExposureTargetBias: Float { get }
@@ -1499,29 +1499,29 @@ let AVCaptureExposureTargetBiasCurrent: Float
 extension AVCaptureDevice {
   func isWhiteBalanceModeSupported(whiteBalanceMode: AVCaptureWhiteBalanceMode) -> Bool
   var whiteBalanceMode: AVCaptureWhiteBalanceMode
-  var adjustingWhiteBalance: Bool { get }
+  var isAdjustingWhiteBalance: Bool { get }
   var deviceWhiteBalanceGains: AVCaptureWhiteBalanceGains { get }
   var grayWorldDeviceWhiteBalanceGains: AVCaptureWhiteBalanceGains { get }
   var maxWhiteBalanceGain: Float { get }
   func setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains(whiteBalanceGains: AVCaptureWhiteBalanceGains, completionHandler handler: ((CMTime) -> Void)!)
   func chromaticityValuesForDeviceWhiteBalanceGains(whiteBalanceGains: AVCaptureWhiteBalanceGains) -> AVCaptureWhiteBalanceChromaticityValues
-  func deviceWhiteBalanceGainsForChromaticityValues(chromaticityValues: AVCaptureWhiteBalanceChromaticityValues) -> AVCaptureWhiteBalanceGains
+  func deviceWhiteBalanceGainsFor(chromaticityValues: AVCaptureWhiteBalanceChromaticityValues) -> AVCaptureWhiteBalanceGains
   func temperatureAndTintValuesForDeviceWhiteBalanceGains(whiteBalanceGains: AVCaptureWhiteBalanceGains) -> AVCaptureWhiteBalanceTemperatureAndTintValues
-  func deviceWhiteBalanceGainsForTemperatureAndTintValues(tempAndTintValues: AVCaptureWhiteBalanceTemperatureAndTintValues) -> AVCaptureWhiteBalanceGains
+  func deviceWhiteBalanceGainsFor(tempAndTintValues: AVCaptureWhiteBalanceTemperatureAndTintValues) -> AVCaptureWhiteBalanceGains
 }
 let AVCaptureWhiteBalanceGainsCurrent: AVCaptureWhiteBalanceGains
 extension AVCaptureDevice {
-  var subjectAreaChangeMonitoringEnabled: Bool
+  var isSubjectAreaChangeMonitoringEnabled: Bool
 }
 extension AVCaptureDevice {
-  var lowLightBoostSupported: Bool { get }
-  var lowLightBoostEnabled: Bool { get }
+  var isLowLightBoostSupported: Bool { get }
+  var isLowLightBoostEnabled: Bool { get }
   var automaticallyEnablesLowLightBoostWhenAvailable: Bool
 }
 extension AVCaptureDevice {
   var videoZoomFactor: CGFloat
   func rampToVideoZoomFactor(factor: CGFloat, withRate rate: Float)
-  var rampingVideoZoom: Bool { get }
+  var isRampingVideoZoom: Bool { get }
   func cancelVideoZoomRamp()
 }
 extension AVCaptureDevice {
@@ -1530,22 +1530,22 @@ extension AVCaptureDevice {
 }
 extension AVCaptureDevice {
   var automaticallyAdjustsVideoHDREnabled: Bool
-  var videoHDREnabled: Bool
+  var isVideoHDREnabled: Bool
 }
 extension AVCaptureStillImageOutput {
   var maxBracketedCaptureStillImageCount: Int { get }
-  var lensStabilizationDuringBracketedCaptureSupported: Bool { get }
-  var lensStabilizationDuringBracketedCaptureEnabled: Bool
-  func prepareToCaptureStillImageBracketFromConnection(connection: AVCaptureConnection!, withSettingsArray settings: [AnyObject]!, completionHandler handler: ((Bool, NSError!) -> Void)!)
-  func captureStillImageBracketAsynchronouslyFromConnection(connection: AVCaptureConnection!, withSettingsArray settings: [AnyObject]!, completionHandler handler: ((CMSampleBuffer!, AVCaptureBracketedStillImageSettings!, NSError!) -> Void)!)
+  var isLensStabilizationDuringBracketedCaptureSupported: Bool { get }
+  var isLensStabilizationDuringBracketedCaptureEnabled: Bool
+  func prepareToCaptureStillImageBracketFrom(connection: AVCaptureConnection!, withSettingsArray settings: [AnyObject]!, completionHandler handler: ((Bool, Error!) -> Void)!)
+  func captureStillImageBracketAsynchronouslyFrom(connection: AVCaptureConnection!, withSettingsArray settings: [AnyObject]!, completionHandler handler: ((CMSampleBuffer!, AVCaptureBracketedStillImageSettings!, Error!) -> Void)!)
 }
-class AVComposition : AVAsset, NSMutableCopying {
+class AVComposition : AVAsset, MutableCopying {
   var tracks: [AVCompositionTrack] { get }
   var naturalSize: CGSize { get }
-  var URLAssetInitializationOptions: [String : AnyObject] { get }
-  convenience init(URL: NSURL)
+  var urlAssetInitializationOptions: [String : AnyObject] { get }
+  convenience init(url URL: URL)
   init()
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
 }
 extension AVComposition {
   func trackWithTrackID(trackID: CMPersistentTrackID) -> AVCompositionTrack?
@@ -1555,20 +1555,20 @@ extension AVComposition {
 class AVMutableComposition : AVComposition {
   var tracks: [AVMutableCompositionTrack] { get }
   var naturalSize: CGSize
-  convenience init(URLAssetInitializationOptions: [String : AnyObject]?)
-  convenience init(URL: NSURL)
+  convenience init(urlAssetInitializationOptions URLAssetInitializationOptions: [String : AnyObject]? = [:])
+  convenience init(url URL: URL)
   init()
 }
 extension AVMutableComposition {
-  func insertTimeRange(timeRange: CMTimeRange, ofAsset asset: AVAsset, atTime startTime: CMTime) throws
-  func insertEmptyTimeRange(timeRange: CMTimeRange)
-  func removeTimeRange(timeRange: CMTimeRange)
+  func insert(timeRange: CMTimeRange, of asset: AVAsset, at startTime: CMTime) throws
+  func insertEmpty(timeRange: CMTimeRange)
+  func remove(timeRange: CMTimeRange)
   func scaleTimeRange(timeRange: CMTimeRange, toDuration duration: CMTime)
 }
 extension AVMutableComposition {
   func addMutableTrackWithMediaType(mediaType: String, preferredTrackID: CMPersistentTrackID) -> AVMutableCompositionTrack
   func removeTrack(track: AVCompositionTrack)
-  func mutableTrackCompatibleWithTrack(track: AVAssetTrack) -> AVMutableCompositionTrack?
+  func mutableTrackCompatibleWith(track: AVAssetTrack) -> AVMutableCompositionTrack?
 }
 extension AVMutableComposition {
   func trackWithTrackID(trackID: CMPersistentTrackID) -> AVMutableCompositionTrack?
@@ -1585,18 +1585,18 @@ class AVMutableCompositionTrack : AVCompositionTrack {
   var preferredTransform: CGAffineTransform
   var preferredVolume: Float
   var segments: [AVCompositionTrackSegment]!
-  func insertTimeRange(timeRange: CMTimeRange, ofTrack track: AVAssetTrack, atTime startTime: CMTime) throws
-  func insertTimeRanges(timeRanges: [NSValue], ofTracks tracks: [AVAssetTrack], atTime startTime: CMTime) throws
+  func insertTimeRange(timeRange: CMTimeRange, of track: AVAssetTrack, at startTime: CMTime) throws
+  func insertTimeRanges(timeRanges: [Value], of tracks: [AVAssetTrack], at startTime: CMTime) throws
   func insertEmptyTimeRange(timeRange: CMTimeRange)
   func removeTimeRange(timeRange: CMTimeRange)
   func scaleTimeRange(timeRange: CMTimeRange, toDuration duration: CMTime)
-  func validateTrackSegments(trackSegments: [AVCompositionTrackSegment]) throws
+  func validateSegments(trackSegments: [AVCompositionTrackSegment]) throws
 }
 class AVCompositionTrackSegment : AVAssetTrackSegment {
-  init(URL: NSURL, trackID: CMPersistentTrackID, sourceTimeRange: CMTimeRange, targetTimeRange: CMTimeRange)
+  init(url URL: URL, trackID: CMPersistentTrackID, sourceTimeRange: CMTimeRange, targetTimeRange: CMTimeRange)
   init(timeRange: CMTimeRange)
-  var empty: Bool { get }
-  var sourceURL: NSURL? { get }
+  var isEmpty: Bool { get }
+  var sourceURL: URL? { get }
   var sourceTrackID: CMPersistentTrackID { get }
 }
 let AVFoundationErrorDomain: String
@@ -1676,16 +1676,16 @@ extension AVError : _BridgedNSError {
   typealias RawValue = Int
 }
 typealias AVMIDIPlayerCompletionHandler = () -> Void
-class AVMIDIPlayer : NSObject {
-  init(contentsOfURL inURL: NSURL, soundBankURL bankURL: NSURL?) throws
-  init(data: NSData, soundBankURL bankURL: NSURL?) throws
+class AVMIDIPlayer : Object {
+  init(contentsOf inURL: URL, soundBankURL bankURL: URL?) throws
+  init(data: Data, soundBankURL bankURL: URL?) throws
   func prepareToPlay()
-  func play(completionHandler: AVMIDIPlayerCompletionHandler?)
+  func play(completionHandler: AVMIDIPlayerCompletionHandler? = nil)
   func stop()
-  var duration: NSTimeInterval { get }
-  var playing: Bool { get }
+  var duration: TimeInterval { get }
+  var isPlaying: Bool { get }
   var rate: Float
-  var currentPosition: NSTimeInterval
+  var currentPosition: TimeInterval
   init()
 }
 let AVMediaTypeVideo: String
@@ -1728,49 +1728,49 @@ let AVFileTypeAC3: String
 let AVFileTypeEnhancedAC3: String
 let AVStreamingKeyDeliveryContentKeyType: String
 let AVStreamingKeyDeliveryPersistentContentKeyType: String
-class AVMediaSelection : NSObject, NSCopying, NSMutableCopying {
+class AVMediaSelection : Object, Copying, MutableCopying {
   weak var asset: @sil_weak AVAsset? { get }
-  func selectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup: AVMediaSelectionGroup) -> AVMediaSelectionOption?
-  func mediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup(mediaSelectionGroup: AVMediaSelectionGroup) -> Bool
+  func selectedMediaOptionIn(mediaSelectionGroup: AVMediaSelectionGroup) -> AVMediaSelectionOption?
+  func mediaSelectionCriteriaCanBeAppliedAutomaticallyTo(mediaSelectionGroup: AVMediaSelectionGroup) -> Bool
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
 }
 class AVMutableMediaSelection : AVMediaSelection {
-  func selectMediaOption(mediaSelectionOption: AVMediaSelectionOption?, inMediaSelectionGroup mediaSelectionGroup: AVMediaSelectionGroup)
+  func selectMediaOption(mediaSelectionOption: AVMediaSelectionOption?, in mediaSelectionGroup: AVMediaSelectionGroup)
   init()
 }
-class AVMediaSelectionGroup : NSObject, NSCopying {
+class AVMediaSelectionGroup : Object, Copying {
   var options: [AVMediaSelectionOption] { get }
   var defaultOption: AVMediaSelectionOption? { get }
   var allowsEmptySelection: Bool { get }
   func mediaSelectionOptionWithPropertyList(plist: AnyObject) -> AVMediaSelectionOption?
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 extension AVMediaSelectionGroup {
-  class func playableMediaSelectionOptionsFromArray(mediaSelectionOptions: [AVMediaSelectionOption]) -> [AVMediaSelectionOption]
-  class func mediaSelectionOptionsFromArray(mediaSelectionOptions: [AVMediaSelectionOption], filteredAndSortedAccordingToPreferredLanguages preferredLanguages: [String]) -> [AVMediaSelectionOption]
-  class func mediaSelectionOptionsFromArray(mediaSelectionOptions: [AVMediaSelectionOption], withLocale locale: NSLocale) -> [AVMediaSelectionOption]
-  class func mediaSelectionOptionsFromArray(mediaSelectionOptions: [AVMediaSelectionOption], withMediaCharacteristics mediaCharacteristics: [String]) -> [AVMediaSelectionOption]
-  class func mediaSelectionOptionsFromArray(mediaSelectionOptions: [AVMediaSelectionOption], withoutMediaCharacteristics mediaCharacteristics: [String]) -> [AVMediaSelectionOption]
+  class func playableMediaSelectionOptionsFrom(mediaSelectionOptions: [AVMediaSelectionOption]) -> [AVMediaSelectionOption]
+  class func mediaSelectionOptionsFrom(mediaSelectionOptions: [AVMediaSelectionOption], filteredAndSortedAccordingToPreferredLanguages preferredLanguages: [String]) -> [AVMediaSelectionOption]
+  class func mediaSelectionOptionsFrom(mediaSelectionOptions: [AVMediaSelectionOption], withLocale locale: Locale) -> [AVMediaSelectionOption]
+  class func mediaSelectionOptionsFrom(mediaSelectionOptions: [AVMediaSelectionOption], withMediaCharacteristics mediaCharacteristics: [String]) -> [AVMediaSelectionOption]
+  class func mediaSelectionOptionsFrom(mediaSelectionOptions: [AVMediaSelectionOption], withoutMediaCharacteristics mediaCharacteristics: [String]) -> [AVMediaSelectionOption]
 }
-class AVMediaSelectionOption : NSObject, NSCopying {
+class AVMediaSelectionOption : Object, Copying {
   var mediaType: String { get }
-  var mediaSubTypes: [NSNumber] { get }
+  var mediaSubTypes: [Number] { get }
   func hasMediaCharacteristic(mediaCharacteristic: String) -> Bool
-  var playable: Bool { get }
+  var isPlayable: Bool { get }
   var extendedLanguageTag: String? { get }
-  var locale: NSLocale? { get }
+  var locale: Locale? { get }
   var commonMetadata: [AVMetadataItem] { get }
   var availableMetadataFormats: [String] { get }
   func metadataForFormat(format: String) -> [AVMetadataItem]
-  func associatedMediaSelectionOptionInMediaSelectionGroup(mediaSelectionGroup: AVMediaSelectionGroup) -> AVMediaSelectionOption?
+  func associatedMediaSelectionOptionIn(mediaSelectionGroup: AVMediaSelectionGroup) -> AVMediaSelectionOption?
   func propertyList() -> AnyObject
-  func displayNameWithLocale(locale: NSLocale) -> String
+  func displayNameWith(locale: Locale) -> String
   var displayName: String { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 let AVMetadataKeySpaceCommon: String
 let AVMetadataCommonKeyTitle: String
@@ -2315,86 +2315,86 @@ let AVMetadataIdentifierID3MetadataOfficialPublisherWebpage: String
 let AVMetadataIdentifierID3MetadataUserURL: String
 let AVMetadataIdentifierIcyMetadataStreamTitle: String
 let AVMetadataIdentifierIcyMetadataStreamURL: String
-class AVMetadataItem : NSObject, AVAsynchronousKeyValueLoading, NSCopying, NSMutableCopying {
+class AVMetadataItem : Object, AVAsynchronousKeyValueLoading, Copying, MutableCopying {
   var identifier: String? { get }
   var extendedLanguageTag: String? { get }
-  @NSCopying var locale: NSLocale? { get }
+  @NSCopying var locale: Locale? { get }
   var time: CMTime { get }
   var duration: CMTime { get }
   var dataType: String? { get }
-  @NSCopying var value: protocol<NSCopying, NSObjectProtocol>? { get }
+  @NSCopying var value: protocol<Copying, ObjectProtocol>? { get }
   var extraAttributes: [String : AnyObject]? { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
 }
 extension AVMetadataItem {
-  @NSCopying var startDate: NSDate? { get }
+  @NSCopying var startDate: Date? { get }
 }
 extension AVMetadataItem {
   var stringValue: String? { get }
-  var numberValue: NSNumber? { get }
-  var dateValue: NSDate? { get }
-  var dataValue: NSData? { get }
+  var numberValue: Number? { get }
+  var dateValue: Date? { get }
+  var dataValue: Data? { get }
 }
 extension AVMetadataItem {
-  func statusOfValueForKey(key: String, error outError: NSErrorPointer) -> AVKeyValueStatus
-  func loadValuesAsynchronouslyForKeys(keys: [String], completionHandler handler: (() -> Void)?)
+  func statusOfValueForKey(key: String, error outError: ErrorPointer) -> AVKeyValueStatus
+  func loadValuesAsynchronouslyForKeys(keys: [String], completionHandler handler: (() -> Void)? = nil)
 }
 extension AVMetadataItem {
-  class func metadataItemsFromArray(metadataItems: [AVMetadataItem], filteredAndSortedAccordingToPreferredLanguages preferredLanguages: [String]) -> [AVMetadataItem]
-  class func metadataItemsFromArray(metadataItems: [AVMetadataItem], filteredByIdentifier identifier: String) -> [AVMetadataItem]
-  class func metadataItemsFromArray(metadataItems: [AVMetadataItem], filteredByMetadataItemFilter metadataItemFilter: AVMetadataItemFilter) -> [AVMetadataItem]
+  class func metadataItemsFrom(metadataItems: [AVMetadataItem], filteredAndSortedAccordingToPreferredLanguages preferredLanguages: [String]) -> [AVMetadataItem]
+  class func metadataItemsFrom(metadataItems: [AVMetadataItem], filteredByIdentifier identifier: String) -> [AVMetadataItem]
+  class func metadataItemsFrom(metadataItems: [AVMetadataItem], filteredBy metadataItemFilter: AVMetadataItemFilter) -> [AVMetadataItem]
 }
 extension AVMetadataItem {
   class func identifierForKey(key: AnyObject, keySpace: String) -> String?
   class func keySpaceForIdentifier(identifier: String) -> String?
   class func keyForIdentifier(identifier: String) -> AnyObject?
-  @NSCopying var key: protocol<NSCopying, NSObjectProtocol>? { get }
+  @NSCopying var key: protocol<Copying, ObjectProtocol>? { get }
   var commonKey: String? { get }
   var keySpace: String? { get }
 }
 class AVMutableMetadataItem : AVMetadataItem {
   var identifier: String?
   var extendedLanguageTag: String?
-  @NSCopying var locale: NSLocale?
+  @NSCopying var locale: Locale?
   var time: CMTime
   var duration: CMTime
   var dataType: String?
-  @NSCopying var value: protocol<NSCopying, NSObjectProtocol>?
+  @NSCopying var value: protocol<Copying, ObjectProtocol>?
   var extraAttributes: [String : AnyObject]?
   init()
 }
 extension AVMutableMetadataItem {
-  @NSCopying var startDate: NSDate?
+  @NSCopying var startDate: Date?
 }
 extension AVMutableMetadataItem {
   var keySpace: String?
-  @NSCopying var key: protocol<NSCopying, NSObjectProtocol>?
+  @NSCopying var key: protocol<Copying, ObjectProtocol>?
 }
 extension AVMetadataItem {
-   init(propertiesOfMetadataItem metadataItem: AVMetadataItem, valueLoadingHandler handler: (AVMetadataItemValueRequest) -> Void)
+   init(propertiesOf metadataItem: AVMetadataItem, valueLoadingHandler handler: (AVMetadataItemValueRequest) -> Void)
 }
-class AVMetadataItemValueRequest : NSObject {
+class AVMetadataItemValueRequest : Object {
   weak var metadataItem: @sil_weak AVMetadataItem? { get }
-  func respondWithValue(value: protocol<NSCopying, NSObjectProtocol>)
-  func respondWithError(error: NSError)
+  func respondWithValue(value: protocol<Copying, ObjectProtocol>)
+  func respondWithError(error: Error)
   init()
 }
-class AVMetadataItemFilter : NSObject {
-  class func metadataItemFilterForSharing() -> AVMetadataItemFilter
+class AVMetadataItemFilter : Object {
+  class func forSharing() -> AVMetadataItemFilter
   init()
 }
 extension AVMetadataItem {
-  class func metadataItemsFromArray(metadataItems: [AVMetadataItem], withLocale locale: NSLocale) -> [AVMetadataItem]
-  class func metadataItemsFromArray(metadataItems: [AVMetadataItem], withKey key: AnyObject?, keySpace: String?) -> [AVMetadataItem]
+  class func metadataItemsFrom(metadataItems: [AVMetadataItem], withLocale locale: Locale) -> [AVMetadataItem]
+  class func metadataItemsFrom(metadataItems: [AVMetadataItem], withKey key: AnyObject?, keySpace: String?) -> [AVMetadataItem]
 }
 let AVOutputSettingsPreset640x480: String
 let AVOutputSettingsPreset960x540: String
 let AVOutputSettingsPreset1280x720: String
 let AVOutputSettingsPreset1920x1080: String
 let AVOutputSettingsPreset3840x2160: String
-class AVOutputSettingsAssistant : NSObject {
+class AVOutputSettingsAssistant : Object {
   class func availableOutputSettingsPresets() -> [String]
   convenience init?(preset presetIdentifier: String)
   var audioSettings: [String : AnyObject]? { get }
@@ -2414,11 +2414,11 @@ enum AVPlayerStatus : Int {
   case ReadyToPlay
   case Failed
 }
-class AVPlayer : NSObject {
-  init(URL: NSURL)
+class AVPlayer : Object {
+  init(url URL: URL)
   init(playerItem item: AVPlayerItem)
   var status: AVPlayerStatus { get }
-  var error: NSError? { get }
+  var error: Error? { get }
   init()
 }
 extension AVPlayer {
@@ -2428,7 +2428,7 @@ extension AVPlayer {
 }
 extension AVPlayer {
   var currentItem: AVPlayerItem? { get }
-  func replaceCurrentItemWithPlayerItem(item: AVPlayerItem?)
+  func replaceCurrentItemWith(item: AVPlayerItem?)
   var actionAtItemEnd: AVPlayerActionAtItemEnd
 }
 enum AVPlayerActionAtItemEnd : Int {
@@ -2440,28 +2440,28 @@ enum AVPlayerActionAtItemEnd : Int {
 }
 extension AVPlayer {
   func currentTime() -> CMTime
-  func seekToDate(date: NSDate)
-  func seekToDate(date: NSDate, completionHandler: (Bool) -> Void)
-  func seekToTime(time: CMTime)
-  func seekToTime(time: CMTime, toleranceBefore: CMTime, toleranceAfter: CMTime)
-  func seekToTime(time: CMTime, completionHandler: (Bool) -> Void)
-  func seekToTime(time: CMTime, toleranceBefore: CMTime, toleranceAfter: CMTime, completionHandler: (Bool) -> Void)
+  func seekTo(date: Date)
+  func seekTo(date: Date, completionHandler: (Bool) -> Void)
+  func seekTo(time: CMTime)
+  func seekTo(time: CMTime, toleranceBefore: CMTime, toleranceAfter: CMTime)
+  func seekTo(time: CMTime, completionHandler: (Bool) -> Void)
+  func seekTo(time: CMTime, toleranceBefore: CMTime, toleranceAfter: CMTime, completionHandler: (Bool) -> Void)
 }
 extension AVPlayer {
   func setRate(rate: Float, time itemTime: CMTime, atHostTime hostClockTime: CMTime)
-  func prerollAtRate(rate: Float, completionHandler: ((Bool) -> Void)?)
+  func prerollAtRate(rate: Float, completionHandler: ((Bool) -> Void)? = nil)
   func cancelPendingPrerolls()
   var masterClock: CMClock?
 }
 extension AVPlayer {
   func addPeriodicTimeObserverForInterval(interval: CMTime, queue: dispatch_queue_t?, usingBlock block: (CMTime) -> Void) -> AnyObject
-  func addBoundaryTimeObserverForTimes(times: [NSValue], queue: dispatch_queue_t?, usingBlock block: () -> Void) -> AnyObject
+  func addBoundaryTimeObserverForTimes(times: [Value], queue: dispatch_queue_t?, usingBlock block: () -> Void) -> AnyObject
   func removeTimeObserver(observer: AnyObject)
 }
 extension AVPlayer {
   var volume: Float
-  var muted: Bool
-  var closedCaptionDisplayEnabled: Bool
+  var isMuted: Bool
+  var isClosedCaptionDisplayEnabled: Bool
 }
 extension AVPlayer {
   var appliesMediaSelectionCriteriaAutomatically: Bool
@@ -2472,7 +2472,7 @@ extension AVPlayer {
 }
 extension AVPlayer {
   var allowsExternalPlayback: Bool
-  var externalPlaybackActive: Bool { get }
+  var isExternalPlaybackActive: Bool { get }
   var usesExternalPlaybackWhileExternalScreenIsActive: Bool
   var externalPlaybackVideoGravity: String
 }
@@ -2485,11 +2485,11 @@ class AVQueuePlayer : AVPlayer {
   init(items: [AVPlayerItem])
   func items() -> [AVPlayerItem]
   func advanceToNextItem()
-  func canInsertItem(item: AVPlayerItem, afterItem: AVPlayerItem?) -> Bool
-  func insertItem(item: AVPlayerItem, afterItem: AVPlayerItem?)
+  func canInsertItem(item: AVPlayerItem, after afterItem: AVPlayerItem?) -> Bool
+  func insertItem(item: AVPlayerItem, after afterItem: AVPlayerItem?)
   func removeItem(item: AVPlayerItem)
   func removeAllItems()
-  init(URL: NSURL)
+  init(url URL: URL)
   init(playerItem item: AVPlayerItem)
   init()
 }
@@ -2507,13 +2507,13 @@ enum AVPlayerItemStatus : Int {
   case ReadyToPlay
   case Failed
 }
-class AVPlayerItem : NSObject, NSCopying {
-  convenience init(URL: NSURL)
+class AVPlayerItem : Object, Copying {
+  convenience init(url URL: URL)
   convenience init(asset: AVAsset)
   init(asset: AVAsset, automaticallyLoadedAssetKeys: [String]?)
   var status: AVPlayerItemStatus { get }
-  var error: NSError? { get }
-  func copyWithZone(zone: NSZone) -> AnyObject
+  var error: Error? { get }
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 extension AVPlayerItem {
   var asset: AVAsset { get }
@@ -2536,15 +2536,15 @@ extension AVPlayerItem {
   func currentTime() -> CMTime
   var forwardPlaybackEndTime: CMTime
   var reversePlaybackEndTime: CMTime
-  var seekableTimeRanges: [NSValue] { get }
-  func seekToTime(time: CMTime)
-  func seekToTime(time: CMTime, completionHandler: (Bool) -> Void)
-  func seekToTime(time: CMTime, toleranceBefore: CMTime, toleranceAfter: CMTime)
-  func seekToTime(time: CMTime, toleranceBefore: CMTime, toleranceAfter: CMTime, completionHandler: (Bool) -> Void)
+  var seekableTimeRanges: [Value] { get }
+  func seekTo(time: CMTime)
+  func seekTo(time: CMTime, completionHandler: (Bool) -> Void)
+  func seekTo(time: CMTime, toleranceBefore: CMTime, toleranceAfter: CMTime)
+  func seekTo(time: CMTime, toleranceBefore: CMTime, toleranceAfter: CMTime, completionHandler: (Bool) -> Void)
   func cancelPendingSeeks()
-  func currentDate() -> NSDate?
-  func seekToDate(date: NSDate) -> Bool
-  func seekToDate(date: NSDate, completionHandler: (Bool) -> Void) -> Bool
+  func currentDate() -> Date?
+  func seekTo(date: Date) -> Bool
+  func seekTo(date: Date, completionHandler: (Bool) -> Void) -> Bool
   func stepByCount(stepCount: Int)
   var timebase: CMTimebase? { get }
 }
@@ -2559,19 +2559,19 @@ extension AVPlayerItem {
   @NSCopying var audioMix: AVAudioMix?
 }
 extension AVPlayerItem {
-  var loadedTimeRanges: [NSValue] { get }
-  var playbackLikelyToKeepUp: Bool { get }
-  var playbackBufferFull: Bool { get }
-  var playbackBufferEmpty: Bool { get }
+  var loadedTimeRanges: [Value] { get }
+  var isPlaybackLikelyToKeepUp: Bool { get }
+  var isPlaybackBufferFull: Bool { get }
+  var isPlaybackBufferEmpty: Bool { get }
   var canUseNetworkResourcesForLiveStreamingWhilePaused: Bool
 }
 extension AVPlayerItem {
   var preferredPeakBitRate: Double
 }
 extension AVPlayerItem {
-  func selectMediaOption(mediaSelectionOption: AVMediaSelectionOption?, inMediaSelectionGroup mediaSelectionGroup: AVMediaSelectionGroup)
-  func selectMediaOptionAutomaticallyInMediaSelectionGroup(mediaSelectionGroup: AVMediaSelectionGroup)
-  func selectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup: AVMediaSelectionGroup) -> AVMediaSelectionOption?
+  func selectMediaOption(mediaSelectionOption: AVMediaSelectionOption?, in mediaSelectionGroup: AVMediaSelectionGroup)
+  func selectMediaOptionAutomaticallyIn(mediaSelectionGroup: AVMediaSelectionGroup)
+  func selectedMediaOptionIn(mediaSelectionGroup: AVMediaSelectionGroup) -> AVMediaSelectionOption?
   var currentMediaSelection: AVMediaSelection { get }
 }
 extension AVPlayerItem {
@@ -2583,37 +2583,37 @@ extension AVPlayerItem {
   func removeOutput(output: AVPlayerItemOutput)
   var outputs: [AVPlayerItemOutput] { get }
 }
-class AVPlayerItemAccessLog : NSObject, NSCopying {
-  func extendedLogData() -> NSData?
+class AVPlayerItemAccessLog : Object, Copying {
+  func extendedLogData() -> Data?
   var extendedLogDataStringEncoding: UInt { get }
   var events: [AVPlayerItemAccessLogEvent] { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class AVPlayerItemErrorLog : NSObject, NSCopying {
-  func extendedLogData() -> NSData?
+class AVPlayerItemErrorLog : Object, Copying {
+  func extendedLogData() -> Data?
   var extendedLogDataStringEncoding: UInt { get }
   var events: [AVPlayerItemErrorLogEvent] { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class AVPlayerItemAccessLogEvent : NSObject, NSCopying {
+class AVPlayerItemAccessLogEvent : Object, Copying {
   var numberOfMediaRequests: Int { get }
-  var playbackStartDate: NSDate? { get }
-  var URI: String? { get }
+  var playbackStartDate: Date? { get }
+  var uri: String? { get }
   var serverAddress: String? { get }
   var numberOfServerAddressChanges: Int { get }
   var playbackSessionID: String? { get }
-  var playbackStartOffset: NSTimeInterval { get }
-  var segmentsDownloadedDuration: NSTimeInterval { get }
-  var durationWatched: NSTimeInterval { get }
+  var playbackStartOffset: TimeInterval { get }
+  var segmentsDownloadedDuration: TimeInterval { get }
+  var durationWatched: TimeInterval { get }
   var numberOfStalls: Int { get }
   var numberOfBytesTransferred: Int64 { get }
-  var transferDuration: NSTimeInterval { get }
+  var transferDuration: TimeInterval { get }
   var observedBitrate: Double { get }
   var indicatedBitrate: Double { get }
   var numberOfDroppedVideoFrames: Int { get }
-  var startupTime: NSTimeInterval { get }
+  var startupTime: TimeInterval { get }
   var downloadOverdue: Int { get }
   var observedMaxBitrate: Double { get }
   var observedMinBitrate: Double { get }
@@ -2622,36 +2622,36 @@ class AVPlayerItemAccessLogEvent : NSObject, NSCopying {
   var mediaRequestsWWAN: Int { get }
   var switchBitrate: Double { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class AVPlayerItemErrorLogEvent : NSObject, NSCopying {
-  var date: NSDate? { get }
-  var URI: String? { get }
+class AVPlayerItemErrorLogEvent : Object, Copying {
+  var date: Date? { get }
+  var uri: String? { get }
   var serverAddress: String? { get }
   var playbackSessionID: String? { get }
   var errorStatusCode: Int { get }
   var errorDomain: String { get }
   var errorComment: String? { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class AVPlayerItemOutput : NSObject {
+class AVPlayerItemOutput : Object {
   func itemTimeForHostTime(hostTimeInSeconds: CFTimeInterval) -> CMTime
   func itemTimeForMachAbsoluteTime(machAbsoluteTime: Int64) -> CMTime
   var suppressesPlayerRendering: Bool
   init()
 }
 class AVPlayerItemVideoOutput : AVPlayerItemOutput {
-  init(pixelBufferAttributes: [String : AnyObject]?)
+  init(pixelBufferAttributes: [String : AnyObject]? = [:])
   func hasNewPixelBufferForItemTime(itemTime: CMTime) -> Bool
   func copyPixelBufferForItemTime(itemTime: CMTime, itemTimeForDisplay outItemTimeForDisplay: UnsafeMutablePointer<CMTime>) -> CVPixelBuffer?
   func setDelegate(delegate: AVPlayerItemOutputPullDelegate?, queue delegateQueue: dispatch_queue_t?)
-  func requestNotificationOfMediaDataChangeWithAdvanceInterval(interval: NSTimeInterval)
+  func requestNotificationOfMediaDataChangeWithAdvanceInterval(interval: TimeInterval)
   unowned(unsafe) var delegate: @sil_unmanaged AVPlayerItemOutputPullDelegate? { get }
   var delegateQueue: dispatch_queue_t? { get }
   convenience init()
 }
-protocol AVPlayerItemOutputPullDelegate : NSObjectProtocol {
+protocol AVPlayerItemOutputPullDelegate : ObjectProtocol {
   optional func outputMediaDataWillChange(sender: AVPlayerItemOutput)
   optional func outputSequenceWasFlushed(output: AVPlayerItemOutput)
 }
@@ -2659,11 +2659,11 @@ class AVPlayerItemLegibleOutput : AVPlayerItemOutput {
   func setDelegate(delegate: AVPlayerItemLegibleOutputPushDelegate?, queue delegateQueue: dispatch_queue_t?)
   weak var delegate: @sil_weak AVPlayerItemLegibleOutputPushDelegate? { get }
   var delegateQueue: dispatch_queue_t? { get }
-  var advanceIntervalForDelegateInvocation: NSTimeInterval
+  var advanceIntervalForDelegateInvocation: TimeInterval
   init()
 }
 extension AVPlayerItemLegibleOutput {
-  init(mediaSubtypesForNativeRepresentation subtypes: [NSNumber])
+  init(mediaSubtypesForNativeRepresentation subtypes: [Number])
 }
 extension AVPlayerItemLegibleOutput {
   var textStylingResolution: String
@@ -2671,9 +2671,9 @@ extension AVPlayerItemLegibleOutput {
 let AVPlayerItemLegibleOutputTextStylingResolutionDefault: String
 let AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly: String
 protocol AVPlayerItemLegibleOutputPushDelegate : AVPlayerItemOutputPushDelegate {
-  optional func legibleOutput(output: AVPlayerItemLegibleOutput, didOutputAttributedStrings strings: [NSAttributedString], nativeSampleBuffers nativeSamples: [AnyObject], forItemTime itemTime: CMTime)
+  optional func legibleOutput(output: AVPlayerItemLegibleOutput, didOutputAttributedStrings strings: [AttributedString], nativeSampleBuffers nativeSamples: [AnyObject], forItemTime itemTime: CMTime)
 }
-protocol AVPlayerItemOutputPushDelegate : NSObjectProtocol {
+protocol AVPlayerItemOutputPushDelegate : ObjectProtocol {
   optional func outputSequenceWasFlushed(output: AVPlayerItemOutput)
 }
 class AVPlayerItemMetadataOutput : AVPlayerItemOutput {
@@ -2681,15 +2681,15 @@ class AVPlayerItemMetadataOutput : AVPlayerItemOutput {
   func setDelegate(delegate: AVPlayerItemMetadataOutputPushDelegate?, queue delegateQueue: dispatch_queue_t?)
   weak var delegate: @sil_weak AVPlayerItemMetadataOutputPushDelegate? { get }
   var delegateQueue: dispatch_queue_t? { get }
-  var advanceIntervalForDelegateInvocation: NSTimeInterval
+  var advanceIntervalForDelegateInvocation: TimeInterval
   convenience init()
 }
 protocol AVPlayerItemMetadataOutputPushDelegate : AVPlayerItemOutputPushDelegate {
-  optional func metadataOutput(output: AVPlayerItemMetadataOutput, didOutputTimedMetadataGroups groups: [AVTimedMetadataGroup], fromPlayerItemTrack track: AVPlayerItemTrack)
+  optional func metadataOutput(output: AVPlayerItemMetadataOutput, didOutputTimedMetadataGroups groups: [AVTimedMetadataGroup], from track: AVPlayerItemTrack)
 }
-class AVPlayerItemTrack : NSObject {
+class AVPlayerItemTrack : Object {
   var assetTrack: AVAssetTrack { get }
-  var enabled: Bool
+  var isEnabled: Bool
   var currentVideoFrameRate: Float { get }
   init()
 }
@@ -2697,14 +2697,14 @@ class AVPlayerLayer : CALayer {
    init(player: AVPlayer?)
   var player: AVPlayer?
   var videoGravity: String
-  var readyForDisplay: Bool { get }
+  var isReadyForDisplay: Bool { get }
   var videoRect: CGRect { get }
   var pixelBufferAttributes: [String : AnyObject]?
   init()
   init(layer: AnyObject)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class AVPlayerMediaSelectionCriteria : NSObject {
+class AVPlayerMediaSelectionCriteria : Object {
   var preferredLanguages: [String]? { get }
   var preferredMediaCharacteristics: [String]? { get }
   init(preferredLanguages: [String]?, preferredMediaCharacteristics: [String]?)
@@ -2714,8 +2714,8 @@ extension AVSampleBufferDisplayLayer {
   func enqueueSampleBuffer(sampleBuffer: CMSampleBuffer)
   func flush()
   func flushAndRemoveImage()
-  var readyForMoreMediaData: Bool { get }
-  func requestMediaDataWhenReadyOnQueue(queue: dispatch_queue_t, usingBlock block: () -> Void)
+  var isReadyForMoreMediaData: Bool { get }
+  func requestMediaDataWhenReadyOn(queue: dispatch_queue_t, usingBlock block: () -> Void)
   func stopRequestingMediaData()
 }
 enum AVSpeechBoundary : Int {
@@ -2734,7 +2734,7 @@ let AVSpeechUtteranceMinimumSpeechRate: Float
 let AVSpeechUtteranceMaximumSpeechRate: Float
 let AVSpeechUtteranceDefaultSpeechRate: Float
 let AVSpeechSynthesisVoiceIdentifierAlex: String
-class AVSpeechSynthesisVoice : NSObject, NSSecureCoding {
+class AVSpeechSynthesisVoice : Object, SecureCoding {
   class func speechVoices() -> [AVSpeechSynthesisVoice]
   class func currentLanguageCode() -> String
    init?(language languageCode: String?)
@@ -2745,40 +2745,40 @@ class AVSpeechSynthesisVoice : NSObject, NSSecureCoding {
   var quality: AVSpeechSynthesisVoiceQuality { get }
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class AVSpeechUtterance : NSObject, NSCopying, NSSecureCoding {
+class AVSpeechUtterance : Object, Copying, SecureCoding {
   init(string: String)
   var voice: AVSpeechSynthesisVoice?
   var speechString: String { get }
   var rate: Float
   var pitchMultiplier: Float
   var volume: Float
-  var preUtteranceDelay: NSTimeInterval
-  var postUtteranceDelay: NSTimeInterval
+  var preUtteranceDelay: TimeInterval
+  var postUtteranceDelay: TimeInterval
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class AVSpeechSynthesizer : NSObject {
+class AVSpeechSynthesizer : Object {
   unowned(unsafe) var delegate: @sil_unmanaged AVSpeechSynthesizerDelegate?
-  var speaking: Bool { get }
-  var paused: Bool { get }
-  func speakUtterance(utterance: AVSpeechUtterance)
-  func stopSpeakingAtBoundary(boundary: AVSpeechBoundary) -> Bool
-  func pauseSpeakingAtBoundary(boundary: AVSpeechBoundary) -> Bool
+  var isSpeaking: Bool { get }
+  var isPaused: Bool { get }
+  func speak(utterance: AVSpeechUtterance)
+  func stopSpeakingAt(boundary: AVSpeechBoundary) -> Bool
+  func pauseSpeakingAt(boundary: AVSpeechBoundary) -> Bool
   func continueSpeaking() -> Bool
   init()
 }
-protocol AVSpeechSynthesizerDelegate : NSObjectProtocol {
-  optional func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didStartSpeechUtterance utterance: AVSpeechUtterance)
+protocol AVSpeechSynthesizerDelegate : ObjectProtocol {
+  optional func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance)
   optional func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didFinishSpeechUtterance utterance: AVSpeechUtterance)
-  optional func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didPauseSpeechUtterance utterance: AVSpeechUtterance)
-  optional func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didContinueSpeechUtterance utterance: AVSpeechUtterance)
-  optional func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didCancelSpeechUtterance utterance: AVSpeechUtterance)
+  optional func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didPause utterance: AVSpeechUtterance)
+  optional func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didContinue utterance: AVSpeechUtterance)
+  optional func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance)
   optional func speechSynthesizer(synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance)
 }
 class AVSynchronizedLayer : CALayer {
@@ -2786,45 +2786,45 @@ class AVSynchronizedLayer : CALayer {
   var playerItem: AVPlayerItem?
   init()
   init(layer: AnyObject)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class AVTextStyleRule : NSObject, NSCopying {
-  class func propertyListForTextStyleRules(textStyleRules: [AVTextStyleRule]) -> AnyObject
+class AVTextStyleRule : Object, Copying {
+  class func propertyListFor(textStyleRules: [AVTextStyleRule]) -> AnyObject
   class func textStyleRulesFromPropertyList(plist: AnyObject) -> [AVTextStyleRule]?
-  convenience init?(textMarkupAttributes: [String : AnyObject])
-  init?(textMarkupAttributes: [String : AnyObject], textSelector: String?)
+  convenience init?(textMarkupAttributes: [String : AnyObject] = [:])
+  init?(textMarkupAttributes: [String : AnyObject] = [:], textSelector: String?)
   var textMarkupAttributes: [String : AnyObject] { get }
   var textSelector: String? { get }
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-extension NSValue {
-   init(CMTime time: CMTime)
-  var CMTimeValue: CMTime { get }
-   init(CMTimeRange timeRange: CMTimeRange)
-  var CMTimeRangeValue: CMTimeRange { get }
-   init(CMTimeMapping timeMapping: CMTimeMapping)
-  var CMTimeMappingValue: CMTimeMapping { get }
+extension Value {
+   init(cmTime time: CMTime)
+  var cmTimeValue: CMTime { get }
+   init(cmTimeRange timeRange: CMTimeRange)
+  var cmTimeRangeValue: CMTimeRange { get }
+   init(cmTimeMapping timeMapping: CMTimeMapping)
+  var cmTimeMappingValue: CMTimeMapping { get }
 }
-extension NSCoder {
-  func encodeCMTime(time: CMTime, forKey key: String)
+extension Coder {
+  func encode(time: CMTime, forKey key: String)
   func decodeCMTimeForKey(key: String) -> CMTime
-  func encodeCMTimeRange(timeRange: CMTimeRange, forKey key: String)
+  func encode(timeRange: CMTimeRange, forKey key: String)
   func decodeCMTimeRangeForKey(key: String) -> CMTimeRange
-  func encodeCMTimeMapping(timeMapping: CMTimeMapping, forKey key: String)
+  func encode(timeMapping: CMTimeMapping, forKey key: String)
   func decodeCMTimeMappingForKey(key: String) -> CMTimeMapping
 }
-class AVMetadataGroup : NSObject {
+class AVMetadataGroup : Object {
   var items: [AVMetadataItem] { get }
   init()
 }
-class AVTimedMetadataGroup : AVMetadataGroup, NSCopying, NSMutableCopying {
+class AVTimedMetadataGroup : AVMetadataGroup, Copying, MutableCopying {
   init(items: [AVMetadataItem], timeRange: CMTimeRange)
   init?(sampleBuffer: CMSampleBuffer)
   var timeRange: CMTimeRange { get }
   var items: [AVMetadataItem] { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
 }
 extension AVTimedMetadataGroup {
   func copyFormatDescription() -> CMMetadataFormatDescription?
@@ -2836,20 +2836,20 @@ class AVMutableTimedMetadataGroup : AVTimedMetadataGroup {
   init?(sampleBuffer: CMSampleBuffer)
   init()
 }
-class AVDateRangeMetadataGroup : AVMetadataGroup, NSCopying, NSMutableCopying {
-  init(items: [AVMetadataItem], startDate: NSDate, endDate: NSDate?)
-  @NSCopying var startDate: NSDate { get }
-  @NSCopying var endDate: NSDate? { get }
+class AVDateRangeMetadataGroup : AVMetadataGroup, Copying, MutableCopying {
+  init(items: [AVMetadataItem], start startDate: Date, end endDate: Date?)
+  @NSCopying var startDate: Date { get }
+  @NSCopying var endDate: Date? { get }
   var items: [AVMetadataItem] { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
 }
 class AVMutableDateRangeMetadataGroup : AVDateRangeMetadataGroup {
-  @NSCopying var startDate: NSDate
-  @NSCopying var endDate: NSDate?
+  @NSCopying var startDate: Date
+  @NSCopying var endDate: Date?
   var items: [AVMetadataItem]
-  init(items: [AVMetadataItem], startDate: NSDate, endDate: NSDate?)
+  init(items: [AVMetadataItem], start startDate: Date, end endDate: Date?)
   init()
 }
 func AVMakeRectWithAspectRatioInsideRect(aspectRatio: CGSize, _ boundingRect: CGRect) -> CGRect
@@ -2867,7 +2867,7 @@ struct AVEdgeWidths {
   init()
   init(left: CGFloat, top: CGFloat, right: CGFloat, bottom: CGFloat)
 }
-class AVVideoCompositionRenderContext : NSObject {
+class AVVideoCompositionRenderContext : Object {
   var size: CGSize { get }
   var renderTransform: CGAffineTransform { get }
   var renderScale: Float { get }
@@ -2878,41 +2878,41 @@ class AVVideoCompositionRenderContext : NSObject {
   func newPixelBuffer() -> CVPixelBuffer?
   init()
 }
-protocol AVVideoCompositing : NSObjectProtocol {
+protocol AVVideoCompositing : ObjectProtocol {
   var sourcePixelBufferAttributes: [String : AnyObject]? { get }
   var requiredPixelBufferAttributesForRenderContext: [String : AnyObject] { get }
   func renderContextChanged(newRenderContext: AVVideoCompositionRenderContext)
-  func startVideoCompositionRequest(asyncVideoCompositionRequest: AVAsynchronousVideoCompositionRequest)
+  func start(asyncVideoCompositionRequest: AVAsynchronousVideoCompositionRequest)
   optional func cancelAllPendingVideoCompositionRequests()
 }
-class AVAsynchronousVideoCompositionRequest : NSObject, NSCopying {
+class AVAsynchronousVideoCompositionRequest : Object, Copying {
   var renderContext: AVVideoCompositionRenderContext { get }
   var compositionTime: CMTime { get }
-  var sourceTrackIDs: [NSNumber] { get }
+  var sourceTrackIDs: [Number] { get }
   var videoCompositionInstruction: AVVideoCompositionInstructionProtocol { get }
   func sourceFrameByTrackID(trackID: CMPersistentTrackID) -> CVPixelBuffer?
   func finishWithComposedVideoFrame(composedVideoFrame: CVPixelBuffer)
-  func finishWithError(error: NSError)
+  func finishWithError(error: Error)
   func finishCancelledRequest()
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class AVAsynchronousCIImageFilteringRequest : NSObject, NSCopying {
+class AVAsynchronousCIImageFilteringRequest : Object, Copying {
   var renderSize: CGSize { get }
   var compositionTime: CMTime { get }
-  func finishWithError(error: NSError)
+  func finishWithError(error: Error)
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-protocol AVVideoCompositionInstructionProtocol : NSObjectProtocol {
+protocol AVVideoCompositionInstructionProtocol : ObjectProtocol {
   var timeRange: CMTimeRange { get }
   var enablePostProcessing: Bool { get }
   var containsTweening: Bool { get }
-  var requiredSourceTrackIDs: [NSValue]? { get }
+  var requiredSourceTrackIDs: [Value]? { get }
   var passthroughTrackID: CMPersistentTrackID { get }
 }
-class AVVideoComposition : NSObject, NSCopying, NSMutableCopying {
-   init(propertiesOfAsset asset: AVAsset)
+class AVVideoComposition : Object, Copying, MutableCopying {
+   init(propertiesOf asset: AVAsset)
   var customVideoCompositorClass: AnyObject.Type? { get }
   var frameDuration: CMTime { get }
   var renderSize: CGSize { get }
@@ -2920,14 +2920,14 @@ class AVVideoComposition : NSObject, NSCopying, NSMutableCopying {
   var instructions: [AVVideoCompositionInstructionProtocol] { get }
   var animationTool: AVVideoCompositionCoreAnimationTool? { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
 }
 extension AVVideoComposition {
    init(asset: AVAsset, applyingCIFiltersWithHandler applier: (AVAsynchronousCIImageFilteringRequest) -> Void)
 }
 class AVMutableVideoComposition : AVVideoComposition {
-   init(propertiesOfAsset asset: AVAsset)
+   init(propertiesOf asset: AVAsset)
   var customVideoCompositorClass: AnyObject.Type?
   var frameDuration: CMTime
   var renderSize: CGSize
@@ -2939,19 +2939,19 @@ class AVMutableVideoComposition : AVVideoComposition {
 extension AVMutableVideoComposition {
    init(asset: AVAsset, applyingCIFiltersWithHandler applier: (AVAsynchronousCIImageFilteringRequest) -> Void)
 }
-class AVVideoCompositionInstruction : NSObject, NSSecureCoding, NSCopying, NSMutableCopying, AVVideoCompositionInstructionProtocol {
+class AVVideoCompositionInstruction : Object, SecureCoding, Copying, MutableCopying, AVVideoCompositionInstructionProtocol {
   var timeRange: CMTimeRange { get }
   var backgroundColor: CGColor? { get }
   var layerInstructions: [AVVideoCompositionLayerInstruction] { get }
   var enablePostProcessing: Bool { get }
-  var requiredSourceTrackIDs: [NSValue] { get }
+  var requiredSourceTrackIDs: [Value] { get }
   var passthroughTrackID: CMPersistentTrackID { get }
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
   var containsTweening: Bool { get }
 }
 class AVMutableVideoCompositionInstruction : AVVideoCompositionInstruction {
@@ -2960,49 +2960,49 @@ class AVMutableVideoCompositionInstruction : AVVideoCompositionInstruction {
   var layerInstructions: [AVVideoCompositionLayerInstruction]
   var enablePostProcessing: Bool
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class AVVideoCompositionLayerInstruction : NSObject, NSSecureCoding, NSCopying, NSMutableCopying {
+class AVVideoCompositionLayerInstruction : Object, SecureCoding, Copying, MutableCopying {
   var trackID: CMPersistentTrackID { get }
-  func getTransformRampForTime(time: CMTime, startTransform: UnsafeMutablePointer<CGAffineTransform>, endTransform: UnsafeMutablePointer<CGAffineTransform>, timeRange: UnsafeMutablePointer<CMTimeRange>) -> Bool
-  func getOpacityRampForTime(time: CMTime, startOpacity: UnsafeMutablePointer<Float>, endOpacity: UnsafeMutablePointer<Float>, timeRange: UnsafeMutablePointer<CMTimeRange>) -> Bool
-  func getCropRectangleRampForTime(time: CMTime, startCropRectangle: UnsafeMutablePointer<CGRect>, endCropRectangle: UnsafeMutablePointer<CGRect>, timeRange: UnsafeMutablePointer<CMTimeRange>) -> Bool
+  func getTransformRampFor(time: CMTime, start startTransform: UnsafeMutablePointer<CGAffineTransform>, end endTransform: UnsafeMutablePointer<CGAffineTransform>, timeRange: UnsafeMutablePointer<CMTimeRange>) -> Bool
+  func getOpacityRampFor(time: CMTime, startOpacity: UnsafeMutablePointer<Float>, endOpacity: UnsafeMutablePointer<Float>, timeRange: UnsafeMutablePointer<CMTimeRange>) -> Bool
+  func getCropRectangleRampFor(time: CMTime, startCropRectangle: UnsafeMutablePointer<CGRect>, endCropRectangle: UnsafeMutablePointer<CGRect>, timeRange: UnsafeMutablePointer<CMTimeRange>) -> Bool
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
 }
 class AVMutableVideoCompositionLayerInstruction : AVVideoCompositionLayerInstruction {
   convenience init(assetTrack track: AVAssetTrack)
   var trackID: CMPersistentTrackID
-  func setTransformRampFromStartTransform(startTransform: CGAffineTransform, toEndTransform endTransform: CGAffineTransform, timeRange: CMTimeRange)
-  func setTransform(transform: CGAffineTransform, atTime time: CMTime)
+  func setTransformRampFromStart(startTransform: CGAffineTransform, toEnd endTransform: CGAffineTransform, timeRange: CMTimeRange)
+  func setTransform(transform: CGAffineTransform, at time: CMTime)
   func setOpacityRampFromStartOpacity(startOpacity: Float, toEndOpacity endOpacity: Float, timeRange: CMTimeRange)
-  func setOpacity(opacity: Float, atTime time: CMTime)
+  func setOpacity(opacity: Float, at time: CMTime)
   func setCropRectangleRampFromStartCropRectangle(startCropRectangle: CGRect, toEndCropRectangle endCropRectangle: CGRect, timeRange: CMTimeRange)
-  func setCropRectangle(cropRectangle: CGRect, atTime time: CMTime)
+  func setCropRectangle(cropRectangle: CGRect, at time: CMTime)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class AVVideoCompositionCoreAnimationTool : NSObject {
+class AVVideoCompositionCoreAnimationTool : Object {
   convenience init(additionalLayer layer: CALayer, asTrackID trackID: CMPersistentTrackID)
-  convenience init(postProcessingAsVideoLayer videoLayer: CALayer, inLayer animationLayer: CALayer)
-  convenience init(postProcessingAsVideoLayers videoLayers: [CALayer], inLayer animationLayer: CALayer)
+  convenience init(postProcessingAsVideoLayer videoLayer: CALayer, in animationLayer: CALayer)
+  convenience init(postProcessingAsVideoLayers videoLayers: [CALayer], in animationLayer: CALayer)
   init()
 }
 extension AVAsset {
   func unusedTrackID() -> CMPersistentTrackID
 }
 extension AVVideoComposition {
-  func isValidForAsset(asset: AVAsset?, timeRange: CMTimeRange, validationDelegate: AVVideoCompositionValidationHandling?) -> Bool
+  func isValidFor(asset: AVAsset?, timeRange: CMTimeRange, validationDelegate: AVVideoCompositionValidationHandling?) -> Bool
 }
-protocol AVVideoCompositionValidationHandling : NSObjectProtocol {
+protocol AVVideoCompositionValidationHandling : ObjectProtocol {
   optional func videoComposition(videoComposition: AVVideoComposition, shouldContinueValidatingAfterFindingInvalidValueForKey key: String) -> Bool
-  optional func videoComposition(videoComposition: AVVideoComposition, shouldContinueValidatingAfterFindingEmptyTimeRange timeRange: CMTimeRange) -> Bool
-  optional func videoComposition(videoComposition: AVVideoComposition, shouldContinueValidatingAfterFindingInvalidTimeRangeInInstruction videoCompositionInstruction: AVVideoCompositionInstructionProtocol) -> Bool
-  optional func videoComposition(videoComposition: AVVideoComposition, shouldContinueValidatingAfterFindingInvalidTrackIDInInstruction videoCompositionInstruction: AVVideoCompositionInstructionProtocol, layerInstruction: AVVideoCompositionLayerInstruction, asset: AVAsset) -> Bool
+  optional func videoComposition(videoComposition: AVVideoComposition, shouldContinueValidatingAfterFindingEmpty timeRange: CMTimeRange) -> Bool
+  optional func videoComposition(videoComposition: AVVideoComposition, shouldContinueValidatingAfterFindingInvalidTimeRangeIn videoCompositionInstruction: AVVideoCompositionInstructionProtocol) -> Bool
+  optional func videoComposition(videoComposition: AVVideoComposition, shouldContinueValidatingAfterFindingInvalidTrackIDIn videoCompositionInstruction: AVVideoCompositionInstructionProtocol, layerInstruction: AVVideoCompositionLayerInstruction, asset: AVAsset) -> Bool
 }
 let AVVideoCodecKey: String
 let AVVideoCodecH264: String

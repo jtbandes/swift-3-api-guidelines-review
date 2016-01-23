@@ -22,29 +22,29 @@ class ADBannerView : UIView {
   init!(adType type: ADAdType)
   var adType: ADAdType { get }
   weak var delegate: @sil_weak ADBannerViewDelegate!
-  var bannerLoaded: Bool { get }
-  var bannerViewActionInProgress: Bool { get }
-  func cancelBannerViewAction()
+  var isBannerLoaded: Bool { get }
+  var isBannerViewActionInProgress: Bool { get }
+  func cancelAction()
   var advertisingSection: String!
   init(frame: CGRect)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
-protocol ADBannerViewDelegate : NSObjectProtocol {
+protocol ADBannerViewDelegate : ObjectProtocol {
   optional func bannerViewWillLoadAd(banner: ADBannerView!)
   optional func bannerViewDidLoadAd(banner: ADBannerView!)
-  optional func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!)
+  optional func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: Error!)
   optional func bannerViewActionShouldBegin(banner: ADBannerView!, willLeaveApplication willLeave: Bool) -> Bool
   optional func bannerViewActionDidFinish(banner: ADBannerView!)
 }
 extension ADBannerView {
 }
-class ADClient : NSObject {
-  class func sharedClient() -> ADClient!
+class ADClient : Object {
+  class func shared() -> ADClient!
   func determineAppInstallationAttributionWithCompletionHandler(completionHandler: ((Bool) -> Void)!)
-  func lookupAdConversionDetails(completionHandler: ((NSDate!, NSDate!) -> Void)!)
-  func requestAttributionDetailsWithBlock(completionHandler: (([NSObject : AnyObject]!, NSError!) -> Void)!)
-  func addClientToSegments(segmentIdentifiers: [AnyObject]!, replaceExisting: Bool)
+  func lookupAdConversionDetails(completionHandler: ((Date!, Date!) -> Void)!)
+  func requestAttributionDetailsWith(completionHandler: (([Object : AnyObject]!, Error!) -> Void)!)
+  func addToSegments(segmentIdentifiers: [AnyObject]!, replaceExisting: Bool)
   init()
 }
 let ADClientErrorDomain: String
@@ -54,17 +54,17 @@ enum ADClientError : Int {
   case Unknown
   case LimitAdTracking
 }
-class ADInterstitialAd : NSObject {
+class ADInterstitialAd : Object {
   weak var delegate: @sil_weak ADInterstitialAdDelegate!
-  var loaded: Bool { get }
-  var actionInProgress: Bool { get }
+  var isLoaded: Bool { get }
+  var isActionInProgress: Bool { get }
   func cancelAction()
-  func presentInView(containerView: UIView!) -> Bool
+  func presentIn(containerView: UIView!) -> Bool
   init()
 }
-protocol ADInterstitialAdDelegate : NSObjectProtocol {
+protocol ADInterstitialAdDelegate : ObjectProtocol {
   func interstitialAdDidUnload(interstitialAd: ADInterstitialAd!)
-  func interstitialAd(interstitialAd: ADInterstitialAd!, didFailWithError error: NSError!)
+  func interstitialAd(interstitialAd: ADInterstitialAd!, didFailWithError error: Error!)
   optional func interstitialAdWillLoad(interstitialAd: ADInterstitialAd!)
   optional func interstitialAdDidLoad(interstitialAd: ADInterstitialAd!)
   optional func interstitialAdActionShouldBegin(interstitialAd: ADInterstitialAd!, willLeaveApplication willLeave: Bool) -> Bool
@@ -72,12 +72,12 @@ protocol ADInterstitialAdDelegate : NSObjectProtocol {
 }
 extension AVPlayerViewController {
   class func preparePrerollAds()
-  func playPrerollAdWithCompletionHandler(completionHandler: ((NSError!) -> Void)!)
+  func playPrerollAdWithCompletionHandler(completionHandler: ((Error!) -> Void)!)
   func cancelPreroll()
 }
 extension MPMoviePlayerController {
   class func preparePrerollAds()
-  func playPrerollAdWithCompletionHandler(completionHandler: ((NSError!) -> Void)!)
+  func playPrerollAdWithCompletionHandler(completionHandler: ((Error!) -> Void)!)
   func cancelPreroll()
 }
 enum ADInterstitialPresentationPolicy : Int {
@@ -92,8 +92,8 @@ extension UIViewController {
   var interstitialPresentationPolicy: ADInterstitialPresentationPolicy
   var canDisplayBannerAds: Bool
   var originalContentView: UIView! { get }
-  var presentingFullScreenAd: Bool { get }
-  var displayingBannerAd: Bool { get }
+  var isPresentingFullScreenAd: Bool { get }
+  var isDisplayingBannerAd: Bool { get }
   func requestInterstitialAdPresentation() -> Bool
   var shouldPresentInterstitialAd: Bool { get }
 }

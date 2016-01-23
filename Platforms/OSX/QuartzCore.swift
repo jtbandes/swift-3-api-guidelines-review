@@ -1,14 +1,14 @@
 
-class CAAnimation : NSObject, NSCoding, NSCopying, CAMediaTiming, CAAction {
+class CAAnimation : Object, Coding, Copying, CAMediaTiming, CAAction {
   class func defaultValueForKey(key: String) -> AnyObject?
   func shouldArchiveValueForKey(key: String) -> Bool
   var timingFunction: CAMediaTimingFunction?
   var delegate: AnyObject?
-  var removedOnCompletion: Bool
+  var isRemovedOnCompletion: Bool
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
   var beginTime: CFTimeInterval
   var duration: CFTimeInterval
   var speed: Float
@@ -17,9 +17,9 @@ class CAAnimation : NSObject, NSCoding, NSCopying, CAMediaTiming, CAAction {
   var repeatDuration: CFTimeInterval
   var autoreverses: Bool
   var fillMode: String
-  func runActionForKey(event: String, object anObject: AnyObject, arguments dict: [NSObject : AnyObject]?)
+  func runActionForKey(event: String, object anObject: AnyObject, arguments dict: [Object : AnyObject]?)
 }
-extension NSObject {
+extension Object {
   class func animationDidStart(anim: CAAnimation)
   func animationDidStart(anim: CAAnimation)
   class func animationDidStop(anim: CAAnimation, finished flag: Bool)
@@ -28,11 +28,11 @@ extension NSObject {
 class CAPropertyAnimation : CAAnimation {
   convenience init(keyPath path: String?)
   var keyPath: String?
-  var additive: Bool
-  var cumulative: Bool
+  var isAdditive: Bool
+  var isCumulative: Bool
   var valueFunction: CAValueFunction?
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class CABasicAnimation : CAPropertyAnimation {
   var fromValue: AnyObject?
@@ -40,21 +40,21 @@ class CABasicAnimation : CAPropertyAnimation {
   var byValue: AnyObject?
   convenience init(keyPath path: String?)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class CAKeyframeAnimation : CAPropertyAnimation {
   var values: [AnyObject]?
   var path: CGPath?
-  var keyTimes: [NSNumber]?
+  var keyTimes: [Number]?
   var timingFunctions: [CAMediaTimingFunction]?
   var calculationMode: String
-  var tensionValues: [NSNumber]?
-  var continuityValues: [NSNumber]?
-  var biasValues: [NSNumber]?
+  var tensionValues: [Number]?
+  var continuityValues: [Number]?
+  var biasValues: [Number]?
   var rotationMode: String?
   convenience init(keyPath path: String?)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 let kCAAnimationLinear: String
 let kCAAnimationDiscrete: String
@@ -71,7 +71,7 @@ class CASpringAnimation : CABasicAnimation {
   var settlingDuration: CFTimeInterval { get }
   convenience init(keyPath path: String?)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class CATransition : CAAnimation {
   var type: String
@@ -80,7 +80,7 @@ class CATransition : CAAnimation {
   var endProgress: Float
   var filter: AnyObject?
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 let kCATransitionFade: String
 let kCATransitionMoveIn: String
@@ -93,7 +93,7 @@ let kCATransitionFromBottom: String
 class CAAnimationGroup : CAAnimation {
   var animations: [CAAnimation]?
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 var CA_WARN_DEPRECATED: Int32 { get }
 func CACurrentMediaTime() -> CFTimeInterval
@@ -113,10 +113,10 @@ extension CALayer {
   var constraints: [CAConstraint]?
   func addConstraint(c: CAConstraint)
 }
-class CAConstraintLayoutManager : NSObject {
+class CAConstraintLayoutManager : Object {
   init()
 }
-class CAConstraint : NSObject, NSCoding {
+class CAConstraint : Object, Coding {
   convenience init(attribute attr: CAConstraintAttribute, relativeTo srcId: String, attribute srcAttr: CAConstraintAttribute, offset c: CGFloat)
   convenience init(attribute attr: CAConstraintAttribute, relativeTo srcId: String, attribute srcAttr: CAConstraintAttribute)
   init(attribute attr: CAConstraintAttribute, relativeTo srcId: String, attribute srcAttr: CAConstraintAttribute, scale m: CGFloat, offset c: CGFloat)
@@ -126,21 +126,21 @@ class CAConstraint : NSObject, NSCoding {
   var scale: CGFloat { get }
   var offset: CGFloat { get }
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class CAEmitterBehavior : NSObject, NSCoding {
+class CAEmitterBehavior : Object, Coding {
   class func behaviorTypes() -> [String]
   init(type: String)
   var type: String { get }
   var name: String?
-  var enabled: Bool
+  var isEnabled: Bool
   func inputKeys() -> [AnyObject]
-  class func attributesForKey(key: String) -> [NSObject : AnyObject]
-  func attributesForKeyPath(keyPath: String) -> [NSObject : AnyObject]
+  class func attributesForKey(key: String) -> [Object : AnyObject]
+  func attributesForKeyPath(keyPath: String) -> [Object : AnyObject]
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let kCAEmitterBehaviorWave: String
 let kCAEmitterBehaviorDrag: String
@@ -149,11 +149,11 @@ let kCAEmitterBehaviorValueOverLife: String
 let kCAEmitterBehaviorColorOverLife: String
 let kCAEmitterBehaviorLight: String
 let kCAEmitterBehaviorAttractor: String
-class CAEmitterCell : NSObject, NSCoding, CAMediaTiming {
+class CAEmitterCell : Object, Coding, CAMediaTiming {
   class func defaultValueForKey(key: String) -> AnyObject?
   func shouldArchiveValueForKey(key: String) -> Bool
   var name: String?
-  var enabled: Bool
+  var isEnabled: Bool
   var birthRate: Float
   var lifetime: Float
   var lifetimeRange: Float
@@ -186,10 +186,10 @@ class CAEmitterCell : NSObject, NSCoding, CAMediaTiming {
   var magnificationFilter: String
   var minificationFilterBias: Float
   var emitterCells: [CAEmitterCell]?
-  var style: [NSObject : AnyObject]?
+  var style: [Object : AnyObject]?
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
   var beginTime: CFTimeInterval
   var duration: CFTimeInterval
   var speed: Float
@@ -217,7 +217,7 @@ class CAEmitterLayer : CALayer {
   var seed: UInt32
   init()
   init(layer: AnyObject)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 let kCAEmitterLayerPoint: String
 let kCAEmitterLayerLine: String
@@ -236,13 +236,13 @@ let kCAEmitterLayerBackToFront: String
 let kCAEmitterLayerAdditive: String
 class CAGradientLayer : CALayer {
   var colors: [AnyObject]?
-  var locations: [NSNumber]?
+  var locations: [Number]?
   var startPoint: CGPoint
   var endPoint: CGPoint
   var type: String
   init()
   init(layer: AnyObject)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 let kCAGradientLayerAxial: String
 struct CAAutoresizingMask : OptionSetType {
@@ -264,7 +264,7 @@ struct CAEdgeAntialiasingMask : OptionSetType {
   static var LayerBottomEdge: CAEdgeAntialiasingMask { get }
   static var LayerTopEdge: CAEdgeAntialiasingMask { get }
 }
-class CALayer : NSObject, NSCoding, CAMediaTiming {
+class CALayer : Object, Coding, CAMediaTiming {
   init()
   init(layer: AnyObject)
   func presentationLayer() -> AnyObject?
@@ -281,29 +281,29 @@ class CALayer : NSObject, NSCoding, CAMediaTiming {
   func affineTransform() -> CGAffineTransform
   func setAffineTransform(m: CGAffineTransform)
   var frame: CGRect
-  var hidden: Bool
-  var doubleSided: Bool
-  var geometryFlipped: Bool
+  var isHidden: Bool
+  var isDoubleSided: Bool
+  var isGeometryFlipped: Bool
   func contentsAreFlipped() -> Bool
   var superlayer: CALayer? { get }
   func removeFromSuperlayer()
   var sublayers: [CALayer]?
   func addSublayer(layer: CALayer)
-  func insertSublayer(layer: CALayer, atIndex idx: UInt32)
+  func insertSublayer(layer: CALayer, at idx: UInt32)
   func insertSublayer(layer: CALayer, below sibling: CALayer?)
   func insertSublayer(layer: CALayer, above sibling: CALayer?)
   func replaceSublayer(layer: CALayer, with layer2: CALayer)
   var sublayerTransform: CATransform3D
   var mask: CALayer?
   var masksToBounds: Bool
-  func convertPoint(p: CGPoint, fromLayer l: CALayer?) -> CGPoint
-  func convertPoint(p: CGPoint, toLayer l: CALayer?) -> CGPoint
-  func convertRect(r: CGRect, fromLayer l: CALayer?) -> CGRect
-  func convertRect(r: CGRect, toLayer l: CALayer?) -> CGRect
-  func convertTime(t: CFTimeInterval, fromLayer l: CALayer?) -> CFTimeInterval
-  func convertTime(t: CFTimeInterval, toLayer l: CALayer?) -> CFTimeInterval
+  func convert(p: CGPoint, from l: CALayer?) -> CGPoint
+  func convert(p: CGPoint, to l: CALayer?) -> CGPoint
+  func convert(r: CGRect, from l: CALayer?) -> CGRect
+  func convert(r: CGRect, to l: CALayer?) -> CGRect
+  func convertTime(t: CFTimeInterval, from l: CALayer?) -> CFTimeInterval
+  func convertTime(t: CFTimeInterval, to l: CALayer?) -> CFTimeInterval
   func hitTest(p: CGPoint) -> CALayer?
-  func containsPoint(p: CGPoint) -> Bool
+  func contains(p: CGPoint) -> Bool
   var contents: AnyObject?
   var contentsRect: CGRect
   var contentsGravity: String
@@ -312,16 +312,16 @@ class CALayer : NSObject, NSCoding, CAMediaTiming {
   var minificationFilter: String
   var magnificationFilter: String
   var minificationFilterBias: Float
-  var opaque: Bool
+  var isOpaque: Bool
   func display()
   func setNeedsDisplay()
-  func setNeedsDisplayInRect(r: CGRect)
+  func setNeedsDisplayIn(r: CGRect)
   func needsDisplay() -> Bool
   func displayIfNeeded()
   var needsDisplayOnBoundsChange: Bool
   var drawsAsynchronously: Bool
-  func drawInContext(ctx: CGContext)
-  func renderInContext(ctx: CGContext)
+  func drawIn(ctx: CGContext)
+  func renderIn(ctx: CGContext)
   var edgeAntialiasingMask: CAEdgeAntialiasingMask
   var backgroundColor: CGColor?
   var cornerRadius: CGFloat
@@ -350,16 +350,16 @@ class CALayer : NSObject, NSCoding, CAMediaTiming {
   class func defaultActionForKey(event: String) -> CAAction?
   func actionForKey(event: String) -> CAAction?
   var actions: [String : CAAction]?
-  func addAnimation(anim: CAAnimation, forKey key: String?)
+  func add(anim: CAAnimation, forKey key: String?)
   func removeAllAnimations()
   func removeAnimationForKey(key: String)
   func animationKeys() -> [String]?
   func animationForKey(key: String) -> CAAnimation?
   var name: String?
   weak var delegate: @sil_weak AnyObject?
-  var style: [NSObject : AnyObject]?
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  var style: [Object : AnyObject]?
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
   var beginTime: CFTimeInterval
   var duration: CFTimeInterval
   var speed: Float
@@ -374,27 +374,27 @@ struct _CALayerIvars {
   var magic: UInt32
   var layer: UnsafeMutablePointer<Void>
 }
-extension NSObject {
-  class func preferredSizeOfLayer(layer: CALayer) -> CGSize
-  func preferredSizeOfLayer(layer: CALayer) -> CGSize
-  class func invalidateLayoutOfLayer(layer: CALayer)
-  func invalidateLayoutOfLayer(layer: CALayer)
-  class func layoutSublayersOfLayer(layer: CALayer)
-  func layoutSublayersOfLayer(layer: CALayer)
+extension Object {
+  class func preferredSizeOf(layer: CALayer) -> CGSize
+  func preferredSizeOf(layer: CALayer) -> CGSize
+  class func invalidateLayoutOf(layer: CALayer)
+  func invalidateLayoutOf(layer: CALayer)
+  class func layoutSublayersOf(layer: CALayer)
+  func layoutSublayersOf(layer: CALayer)
 }
 protocol CAAction {
-  func runActionForKey(event: String, object anObject: AnyObject, arguments dict: [NSObject : AnyObject]?)
+  func runActionForKey(event: String, object anObject: AnyObject, arguments dict: [Object : AnyObject]?)
 }
-extension NSNull : CAAction {
-  func runActionForKey(event: String, object anObject: AnyObject, arguments dict: [NSObject : AnyObject]?)
+extension Null : CAAction {
+  func runActionForKey(event: String, object anObject: AnyObject, arguments dict: [Object : AnyObject]?)
 }
-extension NSObject {
-  class func displayLayer(layer: CALayer)
-  func displayLayer(layer: CALayer)
-  class func drawLayer(layer: CALayer, inContext ctx: CGContext)
-  func drawLayer(layer: CALayer, inContext ctx: CGContext)
-  class func actionForLayer(layer: CALayer, forKey event: String) -> CAAction?
-  func actionForLayer(layer: CALayer, forKey event: String) -> CAAction?
+extension Object {
+  class func display(layer: CALayer)
+  func display(layer: CALayer)
+  class func draw(layer: CALayer, in ctx: CGContext)
+  func draw(layer: CALayer, in ctx: CGContext)
+  class func actionFor(layer: CALayer, forKey event: String) -> CAAction?
+  func actionFor(layer: CALayer, forKey event: String) -> CAAction?
 }
 let kCAGravityCenter: String
 let kCAGravityTop: String
@@ -428,13 +428,13 @@ let kCAFillModeForwards: String
 let kCAFillModeBackwards: String
 let kCAFillModeBoth: String
 let kCAFillModeRemoved: String
-class CAMediaTimingFunction : NSObject, NSCoding {
+class CAMediaTimingFunction : Object, Coding {
   convenience init(name: String)
   init(controlPoints c1x: Float, _ c1y: Float, _ c2x: Float, _ c2y: Float)
-  func getControlPointAtIndex(idx: Int, values ptr: UnsafeMutablePointer<Float>)
+  func getControlPointAt(idx: Int, values ptr: UnsafeMutablePointer<Float>)
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let kCAMediaTimingFunctionLinear: String
 let kCAMediaTimingFunctionEaseIn: String
@@ -456,10 +456,10 @@ class CAMetalLayer : CALayer {
   var wantsExtendedDynamicRangeContent: Bool
   init()
   init(layer: AnyObject)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class CAOpenGLLayer : CALayer {
-  var asynchronous: Bool
+  var isAsynchronous: Bool
   func canDrawInCGLContext(ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>) -> Bool
   func drawInCGLContext(ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>)
   func copyCGLPixelFormatForDisplayMask(mask: UInt32) -> CGLPixelFormatObj
@@ -470,25 +470,25 @@ class CAOpenGLLayer : CALayer {
   var wantsExtendedDynamicRangeContent: Bool
   init()
   init(layer: AnyObject)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class CARemoteLayerClient : NSObject {
+class CARemoteLayerClient : Object {
   init(serverPort port: mach_port_t)
   func invalidate()
   var clientId: UInt32 { get }
   var layer: CALayer?
   init()
 }
-class CARemoteLayerServer : NSObject {
-  class func sharedServer() -> CARemoteLayerServer
+class CARemoteLayerServer : Object {
+  class func shared() -> CARemoteLayerServer
   var serverPort: mach_port_t { get }
   init()
 }
 extension CALayer {
    init(remoteClientId client_id: UInt32)
 }
-class CARenderer : NSObject {
-   init(CGLContext ctx: UnsafeMutablePointer<Void>, options dict: [NSObject : AnyObject]?)
+class CARenderer : Object {
+   init(cglContext ctx: UnsafeMutablePointer<Void>, options dict: [Object : AnyObject]? = [:])
   var layer: CALayer?
   var bounds: CGRect
   func beginFrameAtTime(t: CFTimeInterval, timeStamp ts: UnsafeMutablePointer<CVTimeStamp>)
@@ -511,18 +511,18 @@ class CAReplicatorLayer : CALayer {
   var instanceAlphaOffset: Float
   init()
   init(layer: AnyObject)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class CAScrollLayer : CALayer {
-  func scrollToPoint(p: CGPoint)
-  func scrollToRect(r: CGRect)
+  func scrollTo(p: CGPoint)
+  func scrollTo(r: CGRect)
   var scrollMode: String
   init()
   init(layer: AnyObject)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 extension CALayer {
-  func scrollPoint(p: CGPoint)
+  func scroll(p: CGPoint)
   func scrollRectToVisible(r: CGRect)
   var visibleRect: CGRect { get }
 }
@@ -542,10 +542,10 @@ class CAShapeLayer : CALayer {
   var lineCap: String
   var lineJoin: String
   var lineDashPhase: CGFloat
-  var lineDashPattern: [NSNumber]?
+  var lineDashPattern: [Number]?
   init()
   init(layer: AnyObject)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 let kCAFillRuleNonZero: String
 let kCAFillRuleEvenOdd: String
@@ -560,13 +560,13 @@ class CATextLayer : CALayer {
   var font: AnyObject?
   var fontSize: CGFloat
   var foregroundColor: CGColor?
-  var wrapped: Bool
+  var isWrapped: Bool
   var truncationMode: String
   var alignmentMode: String
   var allowsFontSubpixelQuantization: Bool
   init()
   init(layer: AnyObject)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 let kCATruncationNone: String
 let kCATruncationStart: String
@@ -584,9 +584,9 @@ class CATiledLayer : CALayer {
   var tileSize: CGSize
   init()
   init(layer: AnyObject)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class CATransaction : NSObject {
+class CATransaction : Object {
   class func begin()
   class func commit()
   class func flush()
@@ -642,21 +642,21 @@ func CATransform3DInvert(t: CATransform3D) -> CATransform3D
 func CATransform3DMakeAffineTransform(m: CGAffineTransform) -> CATransform3D
 func CATransform3DIsAffine(t: CATransform3D) -> Bool
 func CATransform3DGetAffineTransform(t: CATransform3D) -> CGAffineTransform
-extension NSValue {
-   init(CATransform3D t: CATransform3D)
-  var CATransform3DValue: CATransform3D { get }
+extension Value {
+   init(caTransform3D t: CATransform3D)
+  var caTransform3DValue: CATransform3D { get }
 }
 class CATransformLayer : CALayer {
   init()
   init(layer: AnyObject)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class CAValueFunction : NSObject, NSCoding {
+class CAValueFunction : Object, Coding {
   convenience init?(name: String)
   var name: String { get }
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let kCAValueFunctionRotateX: String
 let kCAValueFunctionRotateY: String

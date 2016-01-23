@@ -15,23 +15,23 @@ let ICOverwrite: String
 let ICDeleteAfterSuccessfulDownload: String
 let ICDownloadSidecarFiles: String
 protocol ICCameraDeviceDelegate : ICDeviceDelegate {
-  optional func cameraDevice(camera: ICCameraDevice, didAddItem item: ICCameraItem)
-  optional func cameraDevice(camera: ICCameraDevice, didAddItems items: [ICCameraItem])
-  optional func cameraDevice(camera: ICCameraDevice, didRemoveItem item: ICCameraItem)
-  optional func cameraDevice(camera: ICCameraDevice, didRemoveItems items: [ICCameraItem])
+  optional func cameraDevice(camera: ICCameraDevice, didAdd item: ICCameraItem)
+  optional func cameraDevice(camera: ICCameraDevice, didAdd items: [ICCameraItem])
+  optional func cameraDevice(camera: ICCameraDevice, didRemove item: ICCameraItem)
+  optional func cameraDevice(camera: ICCameraDevice, didRemove items: [ICCameraItem])
   optional func cameraDevice(camera: ICCameraDevice, didRenameItems items: [ICCameraItem])
-  optional func cameraDevice(scanner: ICCameraDevice, didCompleteDeleteFilesWithError error: NSError?)
+  optional func cameraDevice(scanner: ICCameraDevice, didCompleteDeleteFilesWithError error: Error?)
   optional func cameraDeviceDidChangeCapability(camera: ICCameraDevice)
-  optional func cameraDevice(camera: ICCameraDevice, didReceiveThumbnailForItem item: ICCameraItem)
-  optional func cameraDevice(camera: ICCameraDevice, didReceiveMetadataForItem item: ICCameraItem)
-  optional func cameraDevice(camera: ICCameraDevice, didReceivePTPEvent eventData: NSData)
+  optional func cameraDevice(camera: ICCameraDevice, didReceiveThumbnailFor item: ICCameraItem)
+  optional func cameraDevice(camera: ICCameraDevice, didReceiveMetadataFor item: ICCameraItem)
+  optional func cameraDevice(camera: ICCameraDevice, didReceivePTPEvent eventData: Data)
   optional func deviceDidBecomeReadyWithCompleteContentCatalog(device: ICDevice)
-  optional func cameraDevice(cameraDevice: ICCameraDevice, shouldGetThumbnailOfItem item: ICCameraItem) -> Bool
-  optional func cameraDevice(cameraDevice: ICCameraDevice, shouldGetMetadataOfItem item: ICCameraItem) -> Bool
+  optional func cameraDevice(cameraDevice: ICCameraDevice, shouldGetThumbnailOf item: ICCameraItem) -> Bool
+  optional func cameraDevice(cameraDevice: ICCameraDevice, shouldGetMetadataOf item: ICCameraItem) -> Bool
 }
-protocol ICCameraDeviceDownloadDelegate : NSObjectProtocol {
-  optional func didDownloadFile(file: ICCameraFile, error: NSError?, options: [String : AnyObject]?, contextInfo: UnsafeMutablePointer<Void>)
-  optional func didReceiveDownloadProgressForFile(file: ICCameraFile, downloadedBytes: off_t, maxBytes: off_t)
+protocol ICCameraDeviceDownloadDelegate : ObjectProtocol {
+  optional func didDownloadFile(file: ICCameraFile, error: Error?, options: [String : AnyObject]? = [:], contextInfo: UnsafeMutablePointer<Void>)
+  optional func didReceiveDownloadProgressFor(file: ICCameraFile, downloadedBytes: off_t, maxBytes: off_t)
 }
 class ICCameraDevice : ICDevice {
   var batteryLevelAvailable: Bool { get }
@@ -39,7 +39,7 @@ class ICCameraDevice : ICDevice {
   var contentCatalogPercentCompleted: Int { get }
   var contents: [ICCameraItem]? { get }
   var mediaFiles: [ICCameraItem]? { get }
-  var timeOffset: NSTimeInterval { get }
+  var timeOffset: TimeInterval { get }
   var isAccessRestrictedAppleDevice: Bool { get }
   var mountPoint: String? { get }
   var tetheredCaptureEnabled: Bool
@@ -50,30 +50,30 @@ class ICCameraDevice : ICDevice {
   func requestTakePicture()
   func requestDeleteFiles(files: [ICCameraItem])
   func cancelDelete()
-  func requestDownloadFile(file: ICCameraFile, options: [String : AnyObject]?, downloadDelegate: ICCameraDeviceDownloadDelegate, didDownloadSelector selector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func requestDownloadFile(file: ICCameraFile, options: [String : AnyObject]? = [:], downloadDelegate: ICCameraDeviceDownloadDelegate, didDownloadSelector selector: Selector, contextInfo: UnsafeMutablePointer<Void>)
   func cancelDownload()
-  func requestUploadFile(fileURL: NSURL, options: [String : AnyObject]?, uploadDelegate: AnyObject, didUploadSelector selector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func requestReadDataFromFile(file: ICCameraFile, atOffset offset: off_t, length: off_t, readDelegate: AnyObject, didReadDataSelector selector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func requestSendPTPCommand(command: NSData, outData data: NSData, sendCommandDelegate: AnyObject, didSendCommandSelector selector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func requestUploadFile(fileURL: URL, options: [String : AnyObject]? = [:], uploadDelegate: AnyObject, didUploadSelector selector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func requestReadDataFrom(file: ICCameraFile, atOffset offset: off_t, length: off_t, readDelegate: AnyObject, didReadDataSelector selector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func requestSendPTPCommand(command: Data, outData data: Data, sendCommandDelegate: AnyObject, didSendCommand selector: Selector, contextInfo: UnsafeMutablePointer<Void>)
   init()
 }
-class ICCameraItem : NSObject {
+class ICCameraItem : Object {
   var device: ICCameraDevice { get }
   var parentFolder: ICCameraFolder { get }
   var name: String { get }
-  var UTI: String { get }
+  var uti: String { get }
   var fileSystemPath: String { get }
-  var locked: Bool { get }
-  var raw: Bool { get }
-  var inTemporaryStore: Bool { get }
-  var creationDate: NSDate { get }
-  var modificationDate: NSDate { get }
+  var isLocked: Bool { get }
+  var isRaw: Bool { get }
+  var isInTemporaryStore: Bool { get }
+  var creationDate: Date { get }
+  var modificationDate: Date { get }
   var thumbnailIfAvailable: CGImage? { get }
   var largeThumbnailIfAvailable: CGImage? { get }
   var metadataIfAvailable: [String : AnyObject]? { get }
-  var userData: NSMutableDictionary? { get }
+  var userData: MutableDictionary? { get }
   var ptpObjectHandle: UInt32 { get }
-  var addedAfterContentCatalogCompleted: Bool { get }
+  var wasAddedAfterContentCatalogCompleted: Bool { get }
   init()
 }
 class ICCameraFolder : ICCameraItem {
@@ -184,19 +184,19 @@ let ICStatusNotificationKey: String
 let ICStatusCodeKey: String
 let ICLocalizedStatusNotificationKey: String
 let ICDeviceCanEjectOrDisconnect: String
-protocol ICDeviceDelegate : NSObjectProtocol {
-  func didRemoveDevice(device: ICDevice)
-  optional func device(device: ICDevice, didOpenSessionWithError error: NSError?)
+protocol ICDeviceDelegate : ObjectProtocol {
+  func didRemove(device: ICDevice)
+  optional func device(device: ICDevice, didOpenSessionWithError error: Error?)
   optional func deviceDidBecomeReady(device: ICDevice)
-  optional func device(device: ICDevice, didCloseSessionWithError error: NSError?)
+  optional func device(device: ICDevice, didCloseSessionWithError error: Error?)
   optional func deviceDidChangeName(device: ICDevice)
   optional func deviceDidChangeSharingState(device: ICDevice)
   optional func device(device: ICDevice, didReceiveStatusInformation status: [String : AnyObject])
-  optional func device(device: ICDevice, didEncounterError error: NSError?)
+  optional func device(device: ICDevice, didEncounterError error: Error?)
   optional func device(device: ICDevice, didReceiveButtonPress buttonType: String)
-  optional func device(device: ICDevice, didReceiveCustomNotification notification: [String : AnyObject], data: NSData)
+  optional func device(device: ICDevice, didReceiveCustomNotification notification: [String : AnyObject], data: Data)
 }
-class ICDevice : NSObject {
+class ICDevice : Object {
   unowned(unsafe) var delegate: @sil_unmanaged ICDeviceDelegate?
   var type: ICDeviceType { get }
   var name: String? { get }
@@ -205,8 +205,8 @@ class ICDevice : NSObject {
   var modulePath: String { get }
   var moduleVersion: String { get }
   var moduleExecutableArchitecture: Int32 { get }
-  var remote: Bool { get }
-  var shared: Bool { get }
+  var isRemote: Bool { get }
+  var isShared: Bool { get }
   var hasConfigurableWiFiInterface: Bool { get }
   var transportType: String { get }
   var usbLocationID: Int32 { get }
@@ -216,29 +216,29 @@ class ICDevice : NSObject {
   var serialNumberString: String? { get }
   var locationDescription: String? { get }
   var hasOpenSession: Bool { get }
-  var UUIDString: String? { get }
+  var uuidString: String? { get }
   var persistentIDString: String? { get }
   var buttonPressed: String { get }
   var autolaunchApplicationPath: String?
-  var userData: NSMutableDictionary? { get }
+  var userData: MutableDictionary? { get }
   func requestOpenSession()
   func requestCloseSession()
   func requestYield()
-  func requestSendMessage(messageCode: UInt32, outData data: NSData, maxReturnedDataSize: UInt32, sendMessageDelegate: AnyObject, didSendMessageSelector selector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func requestSendMessage(messageCode: UInt32, outData data: Data, maxReturnedDataSize: UInt32, sendMessageDelegate: AnyObject, didSendMessageSelector selector: Selector, contextInfo: UnsafeMutablePointer<Void>)
   func requestEjectOrDisconnect()
   init()
 }
-protocol ICDeviceBrowserDelegate : NSObjectProtocol {
-  func deviceBrowser(browser: ICDeviceBrowser, didAddDevice device: ICDevice, moreComing: Bool)
-  func deviceBrowser(browser: ICDeviceBrowser, didRemoveDevice device: ICDevice, moreGoing: Bool)
+protocol ICDeviceBrowserDelegate : ObjectProtocol {
+  func deviceBrowser(browser: ICDeviceBrowser, didAdd device: ICDevice, moreComing: Bool)
+  func deviceBrowser(browser: ICDeviceBrowser, didRemove device: ICDevice, moreGoing: Bool)
   optional func deviceBrowser(browser: ICDeviceBrowser, deviceDidChangeName device: ICDevice)
   optional func deviceBrowser(browser: ICDeviceBrowser, deviceDidChangeSharingState device: ICDevice)
-  optional func deviceBrowser(browser: ICDeviceBrowser, requestsSelectDevice device: ICDevice)
+  optional func deviceBrowser(browser: ICDeviceBrowser, requestsSelect device: ICDevice)
   optional func deviceBrowserDidEnumerateLocalDevices(browser: ICDeviceBrowser)
 }
-class ICDeviceBrowser : NSObject {
+class ICDeviceBrowser : Object {
   unowned(unsafe) var delegate: @sil_unmanaged ICDeviceBrowserDelegate?
-  var browsing: Bool { get }
+  var isBrowsing: Bool { get }
   var browsedDeviceTypeMask: ICDeviceTypeMask
   var devices: [ICDevice]? { get }
   func preferredDevice() -> ICDevice
@@ -246,20 +246,20 @@ class ICDeviceBrowser : NSObject {
   func start()
   func stop()
 }
-class ICScannerBandData : NSObject {
+class ICScannerBandData : Object {
   var fullImageWidth: Int { get }
   var fullImageHeight: Int { get }
   var bitsPerPixel: Int { get }
   var bitsPerComponent: Int { get }
   var numComponents: Int { get }
-  var bigEndian: Bool { get }
+  var isBigEndian: Bool { get }
   var pixelDataType: ICScannerPixelDataType { get }
   var colorSyncProfilePath: String? { get }
   var bytesPerRow: Int { get }
   var dataStartRow: Int { get }
   var dataNumRows: Int { get }
   var dataSize: Int { get }
-  var dataBuffer: NSData? { get }
+  var dataBuffer: Data? { get }
   init()
 }
 let ICScannerStatusWarmingUp: String
@@ -273,21 +273,21 @@ enum ICScannerTransferMode : UInt {
 }
 protocol ICScannerDeviceDelegate : ICDeviceDelegate {
   optional func scannerDeviceDidBecomeAvailable(scanner: ICScannerDevice)
-  optional func scannerDevice(scanner: ICScannerDevice, didSelectFunctionalUnit functionalUnit: ICScannerFunctionalUnit, error: NSError?)
-  optional func scannerDevice(scanner: ICScannerDevice, didScanToURL url: NSURL)
-  optional func scannerDevice(scanner: ICScannerDevice, didScanToBandData data: ICScannerBandData)
-  optional func scannerDevice(scanner: ICScannerDevice, didCompleteOverviewScanWithError error: NSError?)
-  optional func scannerDevice(scanner: ICScannerDevice, didCompleteScanWithError error: NSError?)
+  optional func scannerDevice(scanner: ICScannerDevice, didSelect functionalUnit: ICScannerFunctionalUnit, error: Error?)
+  optional func scannerDevice(scanner: ICScannerDevice, didScanTo url: URL)
+  optional func scannerDevice(scanner: ICScannerDevice, didScanTo data: ICScannerBandData)
+  optional func scannerDevice(scanner: ICScannerDevice, didCompleteOverviewScanWithError error: Error?)
+  optional func scannerDevice(scanner: ICScannerDevice, didCompleteScanWithError error: Error?)
 }
 class ICScannerDevice : ICDevice {
-  var availableFunctionalUnitTypes: [NSNumber] { get }
+  var availableFunctionalUnitTypes: [Number] { get }
   var selectedFunctionalUnit: ICScannerFunctionalUnit { get }
   var transferMode: ICScannerTransferMode
   var maxMemoryBandSize: UInt32
-  var downloadsDirectory: NSURL
+  var downloadsDirectory: URL
   var documentName: String
   var documentUTI: String
-  func requestSelectFunctionalUnit(type: ICScannerFunctionalUnitType)
+  func requestSelect(type: ICScannerFunctionalUnitType)
   func requestOverviewScan()
   func requestScan()
   func cancelScan()
@@ -428,7 +428,7 @@ enum ICScannerFeatureType : UInt {
   case Boolean
   case Template
 }
-class ICScannerFeature : NSObject {
+class ICScannerFeature : Object {
   var type: ICScannerFeatureType { get }
   var internalName: String? { get }
   var humanReadableName: String? { get }
@@ -438,7 +438,7 @@ class ICScannerFeature : NSObject {
 class ICScannerFeatureEnumeration : ICScannerFeature {
   unowned(unsafe) var currentValue: @sil_unmanaged AnyObject
   var defaultValue: AnyObject { get }
-  var values: [NSNumber] { get }
+  var values: [Number] { get }
   var menuItemLabels: [String] { get }
   var menuItemLabelsTooltips: [String] { get }
   init()
@@ -456,28 +456,28 @@ class ICScannerFeatureBoolean : ICScannerFeature {
   init()
 }
 class ICScannerFeatureTemplate : ICScannerFeature {
-  var targets: [NSMutableArray] { get }
+  var targets: [MutableArray] { get }
   init()
 }
-class ICScannerFunctionalUnit : NSObject {
+class ICScannerFunctionalUnit : Object {
   var type: ICScannerFunctionalUnitType { get }
   var pixelDataType: ICScannerPixelDataType
-  var supportedBitDepths: NSIndexSet { get }
+  var supportedBitDepths: IndexSet { get }
   var bitDepth: ICScannerBitDepth
-  var supportedMeasurementUnits: NSIndexSet { get }
+  var supportedMeasurementUnits: IndexSet { get }
   var measurementUnit: ICScannerMeasurementUnit
-  var supportedResolutions: NSIndexSet { get }
-  var preferredResolutions: NSIndexSet { get }
+  var supportedResolutions: IndexSet { get }
+  var preferredResolutions: IndexSet { get }
   var resolution: Int
   var nativeXResolution: Int { get }
   var nativeYResolution: Int { get }
-  var supportedScaleFactors: NSIndexSet { get }
-  var preferredScaleFactors: NSIndexSet { get }
+  var supportedScaleFactors: IndexSet { get }
+  var preferredScaleFactors: IndexSet { get }
   var scaleFactor: Int
   var templates: [ICScannerFeatureTemplate] { get }
   var vendorFeatures: [ICScannerFeature]? { get }
-  var physicalSize: NSSize { get }
-  var scanArea: NSRect
+  var physicalSize: Size { get }
+  var scanArea: Rect
   var scanAreaOrientation: ICEXIFOrientationType
   var acceptsThresholdForBlackAndWhiteScanning: Bool { get }
   var usesThresholdForBlackAndWhiteScanning: Bool
@@ -493,27 +493,27 @@ class ICScannerFunctionalUnit : NSObject {
   init()
 }
 class ICScannerFunctionalUnitFlatbed : ICScannerFunctionalUnit {
-  var supportedDocumentTypes: NSIndexSet { get }
+  var supportedDocumentTypes: IndexSet { get }
   var documentType: ICScannerDocumentType
-  var documentSize: NSSize { get }
+  var documentSize: Size { get }
   init()
 }
 class ICScannerFunctionalUnitPositiveTransparency : ICScannerFunctionalUnit {
-  var supportedDocumentTypes: NSIndexSet { get }
+  var supportedDocumentTypes: IndexSet { get }
   var documentType: ICScannerDocumentType
-  var documentSize: NSSize { get }
+  var documentSize: Size { get }
   init()
 }
 class ICScannerFunctionalUnitNegativeTransparency : ICScannerFunctionalUnit {
-  var supportedDocumentTypes: NSIndexSet { get }
+  var supportedDocumentTypes: IndexSet { get }
   var documentType: ICScannerDocumentType
-  var documentSize: NSSize { get }
+  var documentSize: Size { get }
   init()
 }
 class ICScannerFunctionalUnitDocumentFeeder : ICScannerFunctionalUnit {
-  var supportedDocumentTypes: NSIndexSet { get }
+  var supportedDocumentTypes: IndexSet { get }
   var documentType: ICScannerDocumentType
-  var documentSize: NSSize { get }
+  var documentSize: Size { get }
   var supportsDuplexScanning: Bool { get }
   var duplexScanningEnabled: Bool
   var documentLoaded: Bool { get }

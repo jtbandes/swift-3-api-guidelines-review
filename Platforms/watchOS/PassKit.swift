@@ -5,8 +5,8 @@ let PKPaymentNetworkDiscover: String
 let PKPaymentNetworkMasterCard: String
 let PKPaymentNetworkPrivateLabel: String
 let PKPaymentNetworkVisa: String
-class PKContact : NSObject {
-  var name: NSPersonNameComponents?
+class PKContact : Object {
+  var name: PersonNameComponents?
   var postalAddress: CNPostalAddress?
   var emailAddress: String?
   var phoneNumber: CNPhoneNumber?
@@ -26,7 +26,7 @@ extension PKPassKitErrorCode : _BridgedNSError {
   static var _NSErrorDomain: String { get }
   typealias RawValue = Int
 }
-class PKObject : NSObject {
+class PKObject : Object {
   init()
 }
 enum PKPassType : UInt {
@@ -37,20 +37,20 @@ enum PKPassType : UInt {
   case Any
 }
 class PKPass : PKObject {
-  init(data: NSData, error: NSErrorPointer)
+  init(data: Data, error: ErrorPointer)
   var passType: PKPassType { get }
   unowned(unsafe) var paymentPass: @sil_unmanaged PKPaymentPass? { get }
   var serialNumber: String { get }
   var passTypeIdentifier: String { get }
-  @NSCopying var webServiceURL: NSURL? { get }
+  @NSCopying var webServiceURL: URL? { get }
   var authenticationToken: String? { get }
   var localizedName: String { get }
   var localizedDescription: String { get }
   var organizationName: String { get }
-  @NSCopying var relevantDate: NSDate? { get }
-  var userInfo: [NSObject : AnyObject]? { get }
-  @NSCopying var passURL: NSURL { get }
-  var remotePass: Bool { get }
+  @NSCopying var relevantDate: Date? { get }
+  var userInfo: [Object : AnyObject]? { get }
+  @NSCopying var passURL: URL { get }
+  var isRemotePass: Bool { get }
   var deviceName: String { get }
   func localizedValueForFieldKey(key: String) -> AnyObject?
   init()
@@ -63,18 +63,18 @@ enum PKPassLibraryAddPassesStatus : Int {
   case DidCancelAddPasses
 }
 typealias PKSuppressionRequestToken = Int
-class PKPassLibrary : NSObject {
+class PKPassLibrary : Object {
   class func isPassLibraryAvailable() -> Bool
   class func isPaymentPassActivationAvailable() -> Bool
   func isPaymentPassActivationAvailable() -> Bool
   func passes() -> [PKPass]
   func passWithPassTypeIdentifier(identifier: String, serialNumber: String) -> PKPass?
-  func passesOfType(passType: PKPassType) -> [PKPass]
+  func passesOf(passType: PKPassType) -> [PKPass]
   func remotePaymentPasses() -> [PKPaymentPass]
   func removePass(pass: PKPass)
   func containsPass(pass: PKPass) -> Bool
-  func replacePassWithPass(pass: PKPass) -> Bool
-  func addPasses(passes: [PKPass], withCompletionHandler completion: ((PKPassLibraryAddPassesStatus) -> Void)?)
+  func replacePassWith(pass: PKPass) -> Bool
+  func addPasses(passes: [PKPass], withCompletionHandler completion: ((PKPassLibraryAddPassesStatus) -> Void)? = nil)
   func canAddPaymentPassWithPrimaryAccountIdentifier(primaryAccountIdentifier: String) -> Bool
   init()
 }
@@ -100,6 +100,6 @@ class PKPaymentPass : PKPass {
   var deviceAccountIdentifier: String { get }
   var deviceAccountNumberSuffix: String { get }
   var activationState: PKPaymentPassActivationState { get }
-  init(data: NSData, error: NSErrorPointer)
+  init(data: Data, error: ErrorPointer)
   init()
 }

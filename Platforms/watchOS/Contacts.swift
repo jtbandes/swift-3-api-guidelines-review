@@ -13,11 +13,11 @@ enum CNContactSortOrder : Int {
   case GivenName
   case FamilyName
 }
-protocol CNKeyDescriptor : NSObjectProtocol, NSSecureCoding, NSCopying {
+protocol CNKeyDescriptor : ObjectProtocol, SecureCoding, Copying {
 }
 extension NSString : CNKeyDescriptor {
 }
-class CNContact : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
+class CNContact : Object, Copying, MutableCopying, SecureCoding {
   var identifier: String { get }
   var contactType: CNContactType { get }
   var namePrefix: String { get }
@@ -34,8 +34,8 @@ class CNContact : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
   var departmentName: String { get }
   var jobTitle: String { get }
   var note: String { get }
-  @NSCopying var imageData: NSData? { get }
-  @NSCopying var thumbnailImageData: NSData? { get }
+  @NSCopying var imageData: Data? { get }
+  @NSCopying var thumbnailImageData: Data? { get }
   var imageDataAvailable: Bool { get }
   var phoneNumbers: [CNLabeledValue] { get }
   var emailAddresses: [CNLabeledValue] { get }
@@ -44,21 +44,21 @@ class CNContact : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
   var contactRelations: [CNLabeledValue] { get }
   var socialProfiles: [CNLabeledValue] { get }
   var instantMessageAddresses: [CNLabeledValue] { get }
-  @NSCopying var birthday: NSDateComponents? { get }
-  @NSCopying var nonGregorianBirthday: NSDateComponents? { get }
+  @NSCopying var birthday: DateComponents? { get }
+  @NSCopying var nonGregorianBirthday: DateComponents? { get }
   var dates: [CNLabeledValue] { get }
   func isKeyAvailable(key: String) -> Bool
   func areKeysAvailable(keyDescriptors: [CNKeyDescriptor]) -> Bool
   class func localizedStringForKey(key: String) -> String
-  class func comparatorForNameSortOrder(sortOrder: CNContactSortOrder) -> NSComparator
+  class func comparatorForNameSortOrder(sortOrder: CNContactSortOrder) -> Comparator
   class func descriptorForAllComparatorKeys() -> CNKeyDescriptor
   func isUnifiedWithContactWithIdentifier(contactIdentifier: String) -> Bool
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let CNContactPropertyNotFetchedExceptionName: String
 let CNContactIdentifierKey: String
@@ -90,9 +90,9 @@ let CNContactUrlAddressesKey: String
 let CNContactRelationsKey: String
 let CNContactSocialProfilesKey: String
 let CNContactInstantMessageAddressesKey: String
-class CNContactFetchRequest : NSObject {
+class CNContactFetchRequest : Object {
   init(keysToFetch: [CNKeyDescriptor])
-  @NSCopying var predicate: NSPredicate?
+  @NSCopying var predicate: Predicate?
   var keysToFetch: [CNKeyDescriptor]
   var mutableObjects: Bool
   var unifyResults: Bool
@@ -112,39 +112,39 @@ enum CNContactDisplayNameOrder : Int {
   case GivenNameFirst
   case FamilyNameFirst
 }
-class CNContactFormatter : NSFormatter {
-  class func descriptorForRequiredKeysForStyle(style: CNContactFormatterStyle) -> CNKeyDescriptor
-  class func stringFromContact(contact: CNContact, style: CNContactFormatterStyle) -> String?
-  class func attributedStringFromContact(contact: CNContact, style: CNContactFormatterStyle, defaultAttributes attributes: [NSObject : AnyObject]?) -> NSAttributedString?
-  class func nameOrderForContact(contact: CNContact) -> CNContactDisplayNameOrder
-  class func delimiterForContact(contact: CNContact) -> String
+class CNContactFormatter : Formatter {
+  class func descriptorForRequiredKeysFor(style: CNContactFormatterStyle) -> CNKeyDescriptor
+  class func stringFrom(contact: CNContact, style: CNContactFormatterStyle) -> String?
+  class func attributedStringFrom(contact: CNContact, style: CNContactFormatterStyle, defaultAttributes attributes: [Object : AnyObject]? = [:]) -> AttributedString?
+  class func nameOrderFor(contact: CNContact) -> CNContactDisplayNameOrder
+  class func delimiterFor(contact: CNContact) -> String
   var style: CNContactFormatterStyle
-  func stringFromContact(contact: CNContact) -> String?
-  func attributedStringFromContact(contact: CNContact, defaultAttributes attributes: [NSObject : AnyObject]?) -> NSAttributedString?
+  func stringFrom(contact: CNContact) -> String?
+  func attributedStringFrom(contact: CNContact, defaultAttributes attributes: [Object : AnyObject]? = [:]) -> AttributedString?
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 let CNContactPropertyAttribute: String
-class CNContactProperty : NSObject, NSCopying, NSSecureCoding {
+class CNContactProperty : Object, Copying, SecureCoding {
   @NSCopying var contact: CNContact { get }
   var key: String { get }
   var value: AnyObject? { get }
   var identifier: String? { get }
   var label: String? { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class CNContactRelation : NSObject, NSCopying, NSSecureCoding {
+class CNContactRelation : Object, Copying, SecureCoding {
   init(name: String)
   var name: String { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let CNLabelContactRelationFather: String
 let CNLabelContactRelationMother: String
@@ -170,32 +170,32 @@ enum CNAuthorizationStatus : Int {
   case Denied
   case Authorized
 }
-class CNContactStore : NSObject {
-  class func authorizationStatusForEntityType(entityType: CNEntityType) -> CNAuthorizationStatus
-  func requestAccessForEntityType(entityType: CNEntityType, completionHandler: (Bool, NSError?) -> Void)
-  func unifiedContactsMatchingPredicate(predicate: NSPredicate, keysToFetch keys: [CNKeyDescriptor]) throws -> [CNContact]
+class CNContactStore : Object {
+  class func authorizationStatusFor(entityType: CNEntityType) -> CNAuthorizationStatus
+  func requestAccessFor(entityType: CNEntityType, completionHandler: (Bool, Error?) -> Void)
+  func unifiedContactsMatching(predicate: Predicate, keysToFetch keys: [CNKeyDescriptor]) throws -> [CNContact]
   func unifiedContactWithIdentifier(identifier: String, keysToFetch keys: [CNKeyDescriptor]) throws -> CNContact
-  func enumerateContactsWithFetchRequest(fetchRequest: CNContactFetchRequest, usingBlock block: (CNContact, UnsafeMutablePointer<ObjCBool>) -> Void) throws
-  func groupsMatchingPredicate(predicate: NSPredicate?) throws -> [CNGroup]
-  func containersMatchingPredicate(predicate: NSPredicate?) throws -> [CNContainer]
+  func enumerateContactsWith(fetchRequest: CNContactFetchRequest, usingBlock block: (CNContact, UnsafeMutablePointer<ObjCBool>) -> Void) throws
+  func groupsMatching(predicate: Predicate?) throws -> [CNGroup]
+  func containersMatching(predicate: Predicate?) throws -> [CNContainer]
   func defaultContainerIdentifier() -> String
   init()
 }
 let CNContactStoreDidChangeNotification: String
-class CNContactVCardSerialization : NSObject {
+class CNContactVCardSerialization : Object {
   class func descriptorForRequiredKeys() -> CNKeyDescriptor
-  class func dataWithContacts(contacts: [AnyObject]) throws -> NSData
-  class func contactsWithData(data: NSData) throws -> [AnyObject]
+  class func dataWithContacts(contacts: [AnyObject]) throws -> Data
+  class func contactsWith(data: Data) throws -> [AnyObject]
   init()
 }
 extension CNContact {
-  class func predicateForContactsMatchingName(name: String) -> NSPredicate
-  class func predicateForContactsWithIdentifiers(identifiers: [String]) -> NSPredicate
-  class func predicateForContactsInGroupWithIdentifier(groupIdentifier: String) -> NSPredicate
-  class func predicateForContactsInContainerWithIdentifier(containerIdentifier: String) -> NSPredicate
+  class func predicateForContactsMatchingName(name: String) -> Predicate
+  class func predicateForContactsWithIdentifiers(identifiers: [String]) -> Predicate
+  class func predicateForContactsInGroupWithIdentifier(groupIdentifier: String) -> Predicate
+  class func predicateForContactsInContainerWithIdentifier(containerIdentifier: String) -> Predicate
 }
-class CNContactsUserDefaults : NSObject {
-  class func sharedDefaults() -> Self
+class CNContactsUserDefaults : Object {
+  class func shared() -> Self
   var sortOrder: CNContactSortOrder { get }
   var countryCode: String { get }
   init()
@@ -208,23 +208,23 @@ enum CNContainerType : Int {
   case Exchange
   case CardDAV
 }
-class CNContainer : NSObject, NSCopying, NSSecureCoding {
+class CNContainer : Object, Copying, SecureCoding {
   var identifier: String { get }
   var name: String { get }
   var type: CNContainerType { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let CNContainerIdentifierKey: String
 let CNContainerNameKey: String
 let CNContainerTypeKey: String
 extension CNContainer {
-  class func predicateForContainersWithIdentifiers(identifiers: [String]) -> NSPredicate
-  class func predicateForContainerOfContactWithIdentifier(contactIdentifier: String) -> NSPredicate
-  class func predicateForContainerOfGroupWithIdentifier(groupIdentifier: String) -> NSPredicate
+  class func predicateForContainersWithIdentifiers(identifiers: [String]) -> Predicate
+  class func predicateForContainerOfContactWithIdentifier(contactIdentifier: String) -> Predicate
+  class func predicateForContainerOfGroupWithIdentifier(groupIdentifier: String) -> Predicate
 }
 let CNErrorDomain: String
 enum CNErrorCode : Int {
@@ -252,33 +252,33 @@ let CNErrorUserInfoAffectedRecordsKey: String
 let CNErrorUserInfoAffectedRecordIdentifiersKey: String
 let CNErrorUserInfoValidationErrorsKey: String
 let CNErrorUserInfoKeyPathsKey: String
-class CNGroup : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
+class CNGroup : Object, Copying, MutableCopying, SecureCoding {
   var identifier: String { get }
   var name: String { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let CNGroupIdentifierKey: String
 let CNGroupNameKey: String
 extension CNGroup {
-  class func predicateForGroupsWithIdentifiers(identifiers: [String]) -> NSPredicate
-  class func predicateForGroupsInContainerWithIdentifier(containerIdentifier: String) -> NSPredicate
+  class func predicateForGroupsWithIdentifiers(identifiers: [String]) -> Predicate
+  class func predicateForGroupsInContainerWithIdentifier(containerIdentifier: String) -> Predicate
 }
-class CNInstantMessageAddress : NSObject, NSCopying, NSSecureCoding {
+class CNInstantMessageAddress : Object, Copying, SecureCoding {
   var username: String { get }
   var service: String { get }
   init(username: String, service: String)
   class func localizedStringForKey(key: String) -> String
   class func localizedStringForService(service: String) -> String
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let CNInstantMessageAddressUsernameKey: String
 let CNInstantMessageAddressServiceKey: String
@@ -292,20 +292,20 @@ let CNInstantMessageServiceMSN: String
 let CNInstantMessageServiceQQ: String
 let CNInstantMessageServiceSkype: String
 let CNInstantMessageServiceYahoo: String
-class CNLabeledValue : NSObject, NSCopying, NSSecureCoding {
+class CNLabeledValue : Object, Copying, SecureCoding {
   var identifier: String { get }
   var label: String { get }
-  @NSCopying var value: protocol<NSCopying, NSSecureCoding> { get }
-  init(label: String?, value: protocol<NSCopying, NSSecureCoding>)
-  func labeledValueBySettingLabel(label: String?) -> Self
-  func labeledValueBySettingValue(value: protocol<NSCopying, NSSecureCoding>) -> Self
-  func labeledValueBySettingLabel(label: String?, value: protocol<NSCopying, NSSecureCoding>) -> Self
+  @NSCopying var value: protocol<Copying, SecureCoding> { get }
+  init(label: String?, value: protocol<Copying, SecureCoding>)
+  func bySettingLabel(label: String?) -> Self
+  func bySettingValue(value: protocol<Copying, SecureCoding>) -> Self
+  func bySettingLabel(label: String?, value: protocol<Copying, SecureCoding>) -> Self
   class func localizedStringForLabel(label: String) -> String
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let CNLabelHome: String
 let CNLabelWork: String
@@ -329,7 +329,7 @@ class CNMutableContact : CNContact {
   var departmentName: String
   var jobTitle: String
   var note: String
-  @NSCopying var imageData: NSData?
+  @NSCopying var imageData: Data?
   var phoneNumbers: [CNLabeledValue]
   var emailAddresses: [CNLabeledValue]
   var postalAddresses: [CNLabeledValue]
@@ -337,16 +337,16 @@ class CNMutableContact : CNContact {
   var contactRelations: [CNLabeledValue]
   var socialProfiles: [CNLabeledValue]
   var instantMessageAddresses: [CNLabeledValue]
-  @NSCopying var birthday: NSDateComponents?
-  @NSCopying var nonGregorianBirthday: NSDateComponents?
+  @NSCopying var birthday: DateComponents?
+  @NSCopying var nonGregorianBirthday: DateComponents?
   var dates: [CNLabeledValue]
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class CNMutableGroup : CNGroup {
   var name: String
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class CNMutablePostalAddress : CNPostalAddress {
   var street: String
@@ -354,18 +354,18 @@ class CNMutablePostalAddress : CNPostalAddress {
   var state: String
   var postalCode: String
   var country: String
-  var ISOCountryCode: String
+  var isoCountryCode: String
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class CNPhoneNumber : NSObject, NSCopying, NSSecureCoding {
+class CNPhoneNumber : Object, Copying, SecureCoding {
   init(stringValue string: String)
   var stringValue: String { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let CNLabelPhoneNumberiPhone: String
 let CNLabelPhoneNumberMobile: String
@@ -374,20 +374,20 @@ let CNLabelPhoneNumberHomeFax: String
 let CNLabelPhoneNumberWorkFax: String
 let CNLabelPhoneNumberOtherFax: String
 let CNLabelPhoneNumberPager: String
-class CNPostalAddress : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
+class CNPostalAddress : Object, Copying, MutableCopying, SecureCoding {
   var street: String { get }
   var city: String { get }
   var state: String { get }
   var postalCode: String { get }
   var country: String { get }
-  var ISOCountryCode: String { get }
+  var isoCountryCode: String { get }
   class func localizedStringForKey(key: String) -> String
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let CNPostalAddressStreetKey: String
 let CNPostalAddressCityKey: String
@@ -400,18 +400,18 @@ enum CNPostalAddressFormatterStyle : Int {
   var rawValue: Int { get }
   case MailingAddress
 }
-class CNPostalAddressFormatter : NSFormatter {
-  class func stringFromPostalAddress(postalAddress: CNPostalAddress, style: CNPostalAddressFormatterStyle) -> String
-  class func attributedStringFromPostalAddress(postalAddress: CNPostalAddress, style: CNPostalAddressFormatterStyle, withDefaultAttributes attributes: [NSObject : AnyObject]) -> NSAttributedString
+class CNPostalAddressFormatter : Formatter {
+  class func stringFrom(postalAddress: CNPostalAddress, style: CNPostalAddressFormatterStyle) -> String
+  class func attributedStringFrom(postalAddress: CNPostalAddress, style: CNPostalAddressFormatterStyle, withDefaultAttributes attributes: [Object : AnyObject] = [:]) -> AttributedString
   var style: CNPostalAddressFormatterStyle
-  func stringFromPostalAddress(postalAddress: CNPostalAddress) -> String
-  func attributedStringFromPostalAddress(postalAddress: CNPostalAddress, withDefaultAttributes attributes: [NSObject : AnyObject]) -> NSAttributedString
+  func stringFrom(postalAddress: CNPostalAddress) -> String
+  func attributedStringFrom(postalAddress: CNPostalAddress, withDefaultAttributes attributes: [Object : AnyObject] = [:]) -> AttributedString
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 let CNPostalAddressPropertyAttribute: String
 let CNPostalAddressLocalizedPropertyNameAttribute: String
-class CNSocialProfile : NSObject, NSCopying, NSSecureCoding {
+class CNSocialProfile : Object, Copying, SecureCoding {
   var urlString: String { get }
   var username: String { get }
   var userIdentifier: String { get }
@@ -420,10 +420,10 @@ class CNSocialProfile : NSObject, NSCopying, NSSecureCoding {
   class func localizedStringForKey(key: String) -> String
   class func localizedStringForService(service: String) -> String
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let CNSocialProfileURLStringKey: String
 let CNSocialProfileUsernameKey: String

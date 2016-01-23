@@ -1,33 +1,33 @@
 
-class TVContentIdentifier : NSObject, NSCopying, NSSecureCoding {
+class TVContentIdentifier : Object, Copying, SecureCoding {
   var identifier: String { get }
   @NSCopying var container: TVContentIdentifier? { get }
   init?(identifier: String, container: TVContentIdentifier?)
-  init?(coder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  init?(coder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
+  func encodeWith(aCoder: Coder)
 }
-class TVContentItem : NSObject, NSCopying, NSSecureCoding {
+class TVContentItem : Object, Copying, SecureCoding {
   @NSCopying var contentIdentifier: TVContentIdentifier { get }
-  @NSCopying var imageURL: NSURL?
+  @NSCopying var imageURL: URL?
   var imageShape: TVContentItemImageShape
   var title: String?
-  @NSCopying var lastAccessedDate: NSDate?
-  @NSCopying var expirationDate: NSDate?
-  @NSCopying var creationDate: NSDate?
-  @NSCopying var badgeCount: NSNumber?
-  @NSCopying var duration: NSNumber?
-  @NSCopying var currentPosition: NSNumber?
-  @NSCopying var hasPlayedToEnd: NSNumber?
-  @NSCopying var playURL: NSURL?
-  @NSCopying var displayURL: NSURL?
+  @NSCopying var lastAccessedDate: Date?
+  @NSCopying var expirationDate: Date?
+  @NSCopying var creationDate: Date?
+  @NSCopying var badgeCount: Number?
+  @NSCopying var duration: Number?
+  @NSCopying var currentPosition: Number?
+  @NSCopying var hasPlayedToEnd: Number?
+  @NSCopying var playURL: URL?
+  @NSCopying var displayURL: URL?
   var topShelfItems: [TVContentItem]?
   init?(contentIdentifier ident: TVContentIdentifier)
-  init?(coder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  init?(coder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
+  func encodeWith(aCoder: Coder)
 }
 enum TVContentItemImageShape : Int {
   init?(rawValue: Int)

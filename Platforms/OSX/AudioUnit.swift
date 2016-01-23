@@ -26,10 +26,10 @@ struct AUHostTransportStateFlags : OptionSetType {
   static var Cycling: AUHostTransportStateFlags { get }
 }
 typealias AUHostTransportStateBlock = (UnsafeMutablePointer<AUHostTransportStateFlags>, UnsafeMutablePointer<Double>, UnsafeMutablePointer<Double>, UnsafeMutablePointer<Double>) -> Bool
-class AUAudioUnit : NSObject {
-  init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions) throws
+class AUAudioUnit : Object {
+  init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions = []) throws
   convenience init(componentDescription: AudioComponentDescription) throws
-  class func instantiateWithComponentDescription(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions, completionHandler: (AUAudioUnit?, NSError?) -> Void)
+  class func instantiateWith(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions = [], completionHandler: (AUAudioUnit?, Error?) -> Void)
   var componentDescription: AudioComponentDescription { get }
   var component: AudioComponent { get }
   var componentName: String? { get }
@@ -48,22 +48,22 @@ class AUAudioUnit : NSObject {
   func removeRenderObserver(token: Int)
   var maximumFramesToRender: AUAudioFrameCount
   var parameterTree: AUParameterTree? { get }
-  func parametersForOverviewWithCount(count: Int) -> [NSNumber]
+  func parametersForOverviewWithCount(count: Int) -> [Number]
   var allParameterValues: Bool { get }
-  var musicDeviceOrEffect: Bool { get }
+  var isMusicDeviceOrEffect: Bool { get }
   var virtualMIDICableCount: Int { get }
   var scheduleMIDIEventBlock: AUScheduleMIDIEventBlock? { get }
   var fullState: [String : AnyObject]?
   var fullStateForDocument: [String : AnyObject]?
   var factoryPresets: [AUAudioUnitPreset]? { get }
   var currentPreset: AUAudioUnitPreset?
-  var latency: NSTimeInterval { get }
-  var tailTime: NSTimeInterval { get }
+  var latency: TimeInterval { get }
+  var tailTime: TimeInterval { get }
   var renderQuality: Int
   var shouldBypassEffect: Bool
   var canProcessInPlace: Bool { get }
-  var renderingOffline: Bool
-  var channelCapabilities: [NSNumber]? { get }
+  var isRenderingOffline: Bool
+  var channelCapabilities: [Number]? { get }
   var musicalContextBlock: AUHostMusicalContextBlock?
   var transportStateBlock: AUHostTransportStateBlock?
   var contextName: String?
@@ -72,8 +72,8 @@ typealias AUInputHandler = (UnsafeMutablePointer<AudioUnitRenderActionFlags>, Un
 extension AUAudioUnit {
   var canPerformInput: Bool { get }
   var canPerformOutput: Bool { get }
-  var inputEnabled: Bool
-  var outputEnabled: Bool
+  var isInputEnabled: Bool
+  var isOutputEnabled: Bool
   var outputProvider: AURenderPullInputBlock?
   var inputHandler: AUInputHandler?
   var deviceID: AudioObjectID { get }
@@ -81,38 +81,38 @@ extension AUAudioUnit {
   func startHardware() throws
   func stopHardware()
 }
-class AUAudioUnitBusArray : NSObject, NSFastEnumeration {
+class AUAudioUnitBusArray : Object, FastEnumeration {
   init(audioUnit owner: AUAudioUnit, busType: AUAudioUnitBusType, busses busArray: [AUAudioUnitBus])
   convenience init(audioUnit owner: AUAudioUnit, busType: AUAudioUnitBusType)
   var count: Int { get }
   subscript (index: Int) -> AUAudioUnitBus { get }
-  var countChangeable: Bool { get }
+  var isCountChangeable: Bool { get }
   func setBusCount(count: Int) throws
-  func addObserverToAllBusses(observer: NSObject, forKeyPath keyPath: String, options: NSKeyValueObservingOptions, context: UnsafeMutablePointer<Void>)
-  func removeObserverFromAllBusses(observer: NSObject, forKeyPath keyPath: String, context: UnsafeMutablePointer<Void>)
+  func addObserverToAllBusses(observer: Object, forKeyPath keyPath: String, options: KeyValueObservingOptions = [], context: UnsafeMutablePointer<Void>)
+  func removeObserverFromAllBusses(observer: Object, forKeyPath keyPath: String, context: UnsafeMutablePointer<Void>)
   /// The audio unit that owns the bus.
   unowned(unsafe) var ownerAudioUnit: @sil_unmanaged AUAudioUnit { get }
   /// Which bus array this is (input or output).
   var busType: AUAudioUnitBusType { get }
-  func countByEnumeratingWithState(state: UnsafeMutablePointer<NSFastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
+  func countByEnumeratingWith(state: UnsafeMutablePointer<FastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
 }
-class AUAudioUnitBus : NSObject {
-  var enabled: Bool
+class AUAudioUnitBus : Object {
+  var isEnabled: Bool
   var name: String?
   var index: Int { get }
   var busType: AUAudioUnitBusType { get }
   unowned(unsafe) var ownerAudioUnit: @sil_unmanaged AUAudioUnit { get }
-  var supportedChannelLayoutTags: [NSNumber]? { get }
-  var contextPresentationLatency: NSTimeInterval
+  var supportedChannelLayoutTags: [Number]? { get }
+  var contextPresentationLatency: TimeInterval
   init()
 }
-class AUAudioUnitPreset : NSObject, NSSecureCoding {
+class AUAudioUnitPreset : Object, SecureCoding {
   var number: Int
   var name: String
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 /// Describes the type of a render event.
 enum AURenderEventType : UInt8 {
@@ -185,14 +185,14 @@ struct AURenderEvent {
 typealias AUInternalRenderBlock = (UnsafeMutablePointer<AudioUnitRenderActionFlags>, UnsafePointer<AudioTimeStamp>, AUAudioFrameCount, Int, UnsafeMutablePointer<AudioBufferList>, UnsafePointer<AURenderEvent>, AURenderPullInputBlock?) -> AUAudioUnitStatus
 /// Aspects of AUAudioUnit of interest only to subclassers.
 extension AUAudioUnit {
-  class func registerSubclass(cls: AnyClass, asComponentDescription componentDescription: AudioComponentDescription, name: String, version: UInt32)
+  class func registerSubclass(cls: AnyClass, as componentDescription: AudioComponentDescription, name: String, version: UInt32)
   /// Block which subclassers must provide (via a getter) to implement rendering.
   var internalRenderBlock: AUInternalRenderBlock { get }
   func setRenderResourcesAllocated(flag: Bool)
 }
 /// Aspects of AUAudioUnitBus of interest only to the implementation of v3 AUs.
 extension AUAudioUnitBus {
-  var supportedChannelCounts: [NSNumber]?
+  var supportedChannelCounts: [Number]?
   var maximumChannelCount: AUAudioChannelCount
 }
 /// Aspects of AUAudioUnitBusArray of interest only to subclassers.
@@ -203,7 +203,7 @@ extension AUAudioUnitBusArray {
 extension AUParameterTree {
   ///	Create an AUParameter.
   /// See AUParameter's properties for descriptions of the arguments.
-  class func createParameterWithIdentifier(identifier: String, name: String, address: AUParameterAddress, min: AUValue, max: AUValue, unit: AudioUnitParameterUnit, unitName: String?, flags: AudioUnitParameterOptions, valueStrings: [String]?, dependentParameters: [NSNumber]?) -> AUParameter
+  class func createParameterWithIdentifier(identifier: String, name: String, address: AUParameterAddress, min: AUValue, max: AUValue, unit: AudioUnitParameterUnit, unitName: String?, flags: AudioUnitParameterOptions = [], valueStrings: [String]?, dependentParameters: [Number]?) -> AUParameter
   class func createGroupWithIdentifier(identifier: String, name: String, children: [AUParameterNode]) -> AUParameterGroup
   class func createGroupTemplate(children: [AUParameterNode]) -> AUParameterGroup
   class func createGroupFromTemplate(templateGroup: AUParameterGroup, identifier: String, name: String, addressOffset: AUParameterAddress) -> AUParameterGroup
@@ -232,15 +232,15 @@ extension AUParameterNode {
   var implementorDisplayNameWithLengthCallback: AUImplementorDisplayNameWithLengthCallback
 }
 class AUAudioUnitV2Bridge : AUAudioUnit {
-  init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions) throws
+  init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions = []) throws
   convenience init(componentDescription: AudioComponentDescription) throws
 }
-protocol AUAudioUnitFactory : NSExtensionRequestHandling {
-  func createAudioUnitWithComponentDescription(desc: AudioComponentDescription) throws -> AUAudioUnit
+protocol AUAudioUnitFactory : ExtensionRequestHandling {
+  func createAudioUnitWith(desc: AudioComponentDescription) throws -> AUAudioUnit
 }
 protocol AUCocoaUIBase {
   func interfaceVersion() -> UInt32
-  func uiViewForAudioUnit(inAudioUnit: AudioUnit, withSize inPreferredSize: NSSize) -> NSView?
+  func uiViewForAudioUnit(inAudioUnit: AudioUnit, withSize inPreferredSize: Size) -> NSView?
 }
 typealias AudioUnit = AudioComponentInstance
 var kAudioUnitType_Output: UInt32 { get }
@@ -463,7 +463,7 @@ struct AURecordedParameterEvent {
 typealias AUParameterObserver = (AUParameterAddress, AUValue) -> Void
 typealias AUParameterRecordingObserver = (Int, UnsafePointer<AURecordedParameterEvent>) -> Void
 typealias AUParameterObserverToken = UnsafeMutablePointer<Void>
-class AUParameterNode : NSObject {
+class AUParameterNode : Object {
   var identifier: String { get }
   var keyPath: String { get }
   var displayName: String { get }
@@ -473,23 +473,23 @@ class AUParameterNode : NSObject {
   func removeParameterObserver(token: AUParameterObserverToken)
   init()
 }
-class AUParameterGroup : AUParameterNode, NSSecureCoding {
+class AUParameterGroup : AUParameterNode, SecureCoding {
   /// The group's child nodes (AUParameterGroupNode).
   var children: [AUParameterNode] { get }
   /// Returns a flat array of all parameters in the group, including those in child groups.
   var allParameters: [AUParameter] { get }
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class AUParameterTree : AUParameterGroup, NSSecureCoding {
+class AUParameterTree : AUParameterGroup, SecureCoding {
   func parameterWithAddress(address: AUParameterAddress) -> AUParameter?
   func parameterWithID(paramID: AudioUnitParameterID, scope: AudioUnitScope, element: AudioUnitElement) -> AUParameter?
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class AUParameter : AUParameterNode, NSSecureCoding {
+class AUParameter : AUParameterNode, SecureCoding {
   /// The parameter's minimum value.
   var minValue: AUValue { get }
   /// The parameter's maximum value.
@@ -505,7 +505,7 @@ class AUParameter : AUParameterNode, NSSecureCoding {
   /// For parameters with kAudioUnitParameterUnit_Indexed, localized strings corresponding
   ///	to the values.
   var valueStrings: [String]? { get }
-  var dependentParameters: [NSNumber]? { get }
+  var dependentParameters: [Number]? { get }
   /// The parameter's current value.
   var value: AUValue
   /// Set the parameter's value, avoiding redundant notifications to the originator.
@@ -515,11 +515,11 @@ class AUParameter : AUParameterNode, NSSecureCoding {
   /// Get a textual representation of a value for the parameter. Use value==nil to use the current value.
   func stringFromValue(value: UnsafePointer<AUValue>) -> String
   /// Convert a textual representation of a value to a numeric one.
-  func valueFromString(string: String) -> AUValue
+  func valueFrom(string: String) -> AUValue
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 typealias AudioCodec = AudioComponentInstance
 typealias AudioCodecPropertyID = UInt32

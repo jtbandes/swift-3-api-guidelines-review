@@ -9,38 +9,38 @@ class SLComposeServiceViewController : NSViewController, NSTextViewDelegate {
   func cancel()
   func isContentValid() -> Bool
   func validateContent()
-  var charactersRemaining: NSNumber!
-  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder: NSCoder)
+  var charactersRemaining: Number!
+  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder: Coder)
   convenience init()
-  func textView(textView: NSTextView, clickedOnLink link: AnyObject, atIndex charIndex: Int) -> Bool
-  func textView(textView: NSTextView, clickedOnCell cell: NSTextAttachmentCellProtocol, inRect cellFrame: NSRect, atIndex charIndex: Int)
-  func textView(textView: NSTextView, doubleClickedOnCell cell: NSTextAttachmentCellProtocol, inRect cellFrame: NSRect, atIndex charIndex: Int)
-  func textView(view: NSTextView, draggedCell cell: NSTextAttachmentCellProtocol, inRect rect: NSRect, event: NSEvent, atIndex charIndex: Int)
-  func textView(view: NSTextView, writablePasteboardTypesForCell cell: NSTextAttachmentCellProtocol, atIndex charIndex: Int) -> [String]
-  func textView(view: NSTextView, writeCell cell: NSTextAttachmentCellProtocol, atIndex charIndex: Int, toPasteboard pboard: NSPasteboard, type: String) -> Bool
+  func textView(textView: NSTextView, clickedOnLink link: AnyObject, at charIndex: Int) -> Bool
+  func textView(textView: NSTextView, clickedOn cell: NSTextAttachmentCellProtocol, in cellFrame: Rect, at charIndex: Int)
+  func textView(textView: NSTextView, doubleClickedOn cell: NSTextAttachmentCellProtocol, in cellFrame: Rect, at charIndex: Int)
+  func textView(view: NSTextView, draggedCell cell: NSTextAttachmentCellProtocol, in rect: Rect, event: NSEvent, at charIndex: Int)
+  func textView(view: NSTextView, writablePasteboardTypesFor cell: NSTextAttachmentCellProtocol, at charIndex: Int) -> [String]
+  func textView(view: NSTextView, write cell: NSTextAttachmentCellProtocol, at charIndex: Int, to pboard: NSPasteboard, type: String) -> Bool
   func textView(textView: NSTextView, willChangeSelectionFromCharacterRange oldSelectedCharRange: NSRange, toCharacterRange newSelectedCharRange: NSRange) -> NSRange
-  func textView(textView: NSTextView, willChangeSelectionFromCharacterRanges oldSelectedCharRanges: [NSValue], toCharacterRanges newSelectedCharRanges: [NSValue]) -> [NSValue]
-  func textView(textView: NSTextView, shouldChangeTextInRanges affectedRanges: [NSValue], replacementStrings: [String]?) -> Bool
-  func textView(textView: NSTextView, shouldChangeTypingAttributes oldTypingAttributes: [String : AnyObject], toAttributes newTypingAttributes: [String : AnyObject]) -> [String : AnyObject]
-  func textViewDidChangeSelection(notification: NSNotification)
-  func textViewDidChangeTypingAttributes(notification: NSNotification)
-  func textView(textView: NSTextView, willDisplayToolTip tooltip: String, forCharacterAtIndex characterIndex: Int) -> String?
+  func textView(textView: NSTextView, willChangeSelectionFromCharacterRanges oldSelectedCharRanges: [Value], toCharacterRanges newSelectedCharRanges: [Value]) -> [Value]
+  func textView(textView: NSTextView, shouldChangeTextInRanges affectedRanges: [Value], replacementStrings: [String]?) -> Bool
+  func textView(textView: NSTextView, shouldChangeTypingAttributes oldTypingAttributes: [String : AnyObject] = [:], toAttributes newTypingAttributes: [String : AnyObject] = [:]) -> [String : AnyObject]
+  func textViewDidChangeSelection(notification: Notification)
+  func textViewDidChangeTypingAttributes(notification: Notification)
+  func textView(textView: NSTextView, willDisplayToolTip tooltip: String, forCharacterAt characterIndex: Int) -> String?
   func textView(textView: NSTextView, completions words: [String], forPartialWordRange charRange: NSRange, indexOfSelectedItem index: UnsafeMutablePointer<Int>) -> [String]
-  func textView(textView: NSTextView, shouldChangeTextInRange affectedCharRange: NSRange, replacementString: String?) -> Bool
-  func textView(textView: NSTextView, doCommandBySelector commandSelector: Selector) -> Bool
+  func textView(textView: NSTextView, shouldChangeTextIn affectedCharRange: NSRange, replacementString: String?) -> Bool
+  func textView(textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool
   func textView(textView: NSTextView, shouldSetSpellingState value: Int, range affectedCharRange: NSRange) -> Int
-  func textView(view: NSTextView, menu: NSMenu, forEvent event: NSEvent, atIndex charIndex: Int) -> NSMenu?
-  func textView(view: NSTextView, willCheckTextInRange range: NSRange, options: [String : AnyObject], types checkingTypes: UnsafeMutablePointer<NSTextCheckingTypes>) -> [String : AnyObject]
-  func textView(view: NSTextView, didCheckTextInRange range: NSRange, types checkingTypes: NSTextCheckingTypes, options: [String : AnyObject], results: [NSTextCheckingResult], orthography: NSOrthography, wordCount: Int) -> [NSTextCheckingResult]
-  func textView(textView: NSTextView, URLForContentsOfTextAttachment textAttachment: NSTextAttachment, atIndex charIndex: Int) -> NSURL?
-  func textView(textView: NSTextView, willShowSharingServicePicker servicePicker: NSSharingServicePicker, forItems items: [AnyObject]) -> NSSharingServicePicker?
-  func undoManagerForTextView(view: NSTextView) -> NSUndoManager?
+  func textView(view: NSTextView, menu: NSMenu, forEvent event: NSEvent, at charIndex: Int) -> NSMenu?
+  func textView(view: NSTextView, willCheckTextIn range: NSRange, options: [String : AnyObject] = [:], types checkingTypes: UnsafeMutablePointer<TextCheckingTypes>) -> [String : AnyObject]
+  func textView(view: NSTextView, didCheckTextIn range: NSRange, types checkingTypes: TextCheckingTypes, options: [String : AnyObject] = [:], results: [TextCheckingResult], orthography: Orthography, wordCount: Int) -> [TextCheckingResult]
+  func textView(textView: NSTextView, urlForContentsOf textAttachment: NSTextAttachment, at charIndex: Int) -> URL?
+  func textView(textView: NSTextView, willShow servicePicker: NSSharingServicePicker, forItems items: [AnyObject]) -> NSSharingServicePicker?
+  func undoManagerFor(view: NSTextView) -> UndoManager?
   func textShouldBeginEditing(textObject: NSText) -> Bool
   func textShouldEndEditing(textObject: NSText) -> Bool
-  func textDidBeginEditing(notification: NSNotification)
-  func textDidEndEditing(notification: NSNotification)
-  func textDidChange(notification: NSNotification)
+  func textDidBeginEditing(notification: Notification)
+  func textDidEndEditing(notification: Notification)
+  func textDidChange(notification: Notification)
 }
 enum SLRequestMethod : Int {
   init?(rawValue: Int)
@@ -50,16 +50,16 @@ enum SLRequestMethod : Int {
   case DELETE
   case PUT
 }
-typealias SLRequestHandler = (NSData!, NSHTTPURLResponse!, NSError!) -> Void
-class SLRequest : NSObject {
-   init!(forServiceType serviceType: String!, requestMethod: SLRequestMethod, URL url: NSURL!, parameters: [NSObject : AnyObject]!)
+typealias SLRequestHandler = (Data!, HTTPURLResponse!, Error!) -> Void
+class SLRequest : Object {
+   init!(forServiceType serviceType: String!, requestMethod: SLRequestMethod, url: URL!, parameters: [Object : AnyObject]!)
   var requestMethod: SLRequestMethod { get }
-  var URL: NSURL! { get }
-  var parameters: [NSObject : AnyObject]! { get }
-  func addMultipartData(data: NSData!, withName name: String!, type: String!, filename: String!)
-  func addMultipartData(data: NSData!, withName name: String!, type: String!)
-  func preparedURLRequest() -> NSURLRequest!
-  func performRequestWithHandler(handler: SLRequestHandler!)
+  var url: URL! { get }
+  var parameters: [Object : AnyObject]! { get }
+  func addMultipartData(data: Data!, withName name: String!, type: String!, filename: String!)
+  func addMultipartData(data: Data!, withName name: String!, type: String!)
+  func preparedURLRequest() -> URLRequest!
+  func performWithHandler(handler: SLRequestHandler!)
   init()
 }
 let SLServiceTypeTwitter: String

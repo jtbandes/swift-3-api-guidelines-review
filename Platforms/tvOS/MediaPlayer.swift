@@ -54,7 +54,7 @@ protocol MPMediaPlayback {
   func play()
   func pause()
   func stop()
-  var currentPlaybackTime: NSTimeInterval { get set }
+  var currentPlaybackTime: TimeInterval { get set }
   var currentPlaybackRate: Float { get set }
   func beginSeekingForward()
   func beginSeekingBackward()
@@ -71,13 +71,13 @@ extension MPMediaItem {
 extension MPMoviePlayerController {
   var movieMediaTypes: MPMovieMediaTypeMask { get }
   var movieSourceType: MPMovieSourceType
-  var duration: NSTimeInterval { get }
-  var playableDuration: NSTimeInterval { get }
+  var duration: TimeInterval { get }
+  var playableDuration: TimeInterval { get }
   var naturalSize: CGSize { get }
-  var initialPlaybackTime: NSTimeInterval
-  var endPlaybackTime: NSTimeInterval
+  var initialPlaybackTime: TimeInterval
+  var endPlaybackTime: TimeInterval
   var allowsAirPlay: Bool
-  var airPlayVideoActive: Bool { get }
+  var isAirPlayVideoActive: Bool { get }
 }
 let MPMoviePlayerScalingModeDidChangeNotification: String
 let MPMoviePlayerPlaybackDidFinishNotification: String
@@ -129,15 +129,15 @@ extension MPMusicPlayerController {
   var shuffleMode: MPMusicShuffleMode
   @NSCopying var nowPlayingItem: MPMediaItem?
   var indexOfNowPlayingItem: Int { get }
-  func setQueueWithQuery(query: MPMediaQuery)
-  func setQueueWithItemCollection(itemCollection: MPMediaItemCollection)
+  func setQueueWith(query: MPMediaQuery)
+  func setQueueWith(itemCollection: MPMediaItemCollection)
   func skipToNextItem()
   func skipToBeginning()
   func skipToPreviousItem()
   func beginGeneratingPlaybackNotifications()
   func endGeneratingPlaybackNotifications()
 }
-class MPNowPlayingInfoCenter : NSObject {
+class MPNowPlayingInfoCenter : Object {
   class func defaultCenter() -> MPNowPlayingInfoCenter
   var nowPlayingInfo: [String : AnyObject]?
   init()
@@ -168,7 +168,7 @@ enum MPNowPlayingInfoLanguageOptionType : UInt {
   case Legible
 }
 /// Represents a single language option option.
-class MPNowPlayingInfoLanguageOption : NSObject {
+class MPNowPlayingInfoLanguageOption : Object {
   init(type languageOptionType: MPNowPlayingInfoLanguageOptionType, languageTag: String, characteristics languageOptionCharacteristics: [String]?, displayName: String, identifier: String)
   /// Represents a special case that is used to
   /// represent the best legible language option based on system preferences.
@@ -194,7 +194,7 @@ class MPNowPlayingInfoLanguageOption : NSObject {
   var identifier: String? { get }
   init()
 }
-class MPNowPlayingInfoLanguageOptionGroup : NSObject {
+class MPNowPlayingInfoLanguageOptionGroup : Object {
   init(languageOptions: [MPNowPlayingInfoLanguageOption], defaultLanguageOption: MPNowPlayingInfoLanguageOption?, allowEmptySelection: Bool)
   /// The available language options within this group.
   var languageOptions: [MPNowPlayingInfoLanguageOption] { get }
@@ -220,10 +220,10 @@ enum MPRemoteCommandHandlerStatus : Int {
   /// The command could not be executed for another reason.
   case CommandFailed
 }
-class MPRemoteCommand : NSObject {
+class MPRemoteCommand : Object {
   /// Whether a button (for example) should be enabled and tappable for this
   /// particular command.
-  var enabled: Bool
+  var isEnabled: Bool
   func addTarget(target: AnyObject, action: Selector)
   func removeTarget(target: AnyObject, action: Selector)
   func removeTarget(target: AnyObject?)
@@ -240,7 +240,7 @@ class MPFeedbackCommand : MPRemoteCommand {
   /// Whether the feedback command is in an "active" state. An example of when a
   /// feedback command would be active is if the user already "liked" a particular
   /// content item.
-  var active: Bool
+  var isActive: Bool
   /// A localized string briefly describing the context of the command.
   var localizedTitle: String
   /// An optional shorter version of the localized title for this feedback
@@ -259,13 +259,13 @@ class MPRatingCommand : MPRemoteCommand {
 class MPChangePlaybackRateCommand : MPRemoteCommand {
   /// An array of NSNumbers (floats) that contain supported playback rates that
   /// the command can send.
-  var supportedPlaybackRates: [NSNumber]
+  var supportedPlaybackRates: [Number]
   init()
 }
 class MPChangePlaybackPositionCommand : MPRemoteCommand {
   init()
 }
-class MPRemoteCommandCenter : NSObject {
+class MPRemoteCommandCenter : Object {
   var pauseCommand: MPRemoteCommand { get }
   var playCommand: MPRemoteCommand { get }
   var stopCommand: MPRemoteCommand { get }
@@ -284,19 +284,19 @@ class MPRemoteCommandCenter : NSObject {
   var dislikeCommand: MPFeedbackCommand { get }
   var bookmarkCommand: MPFeedbackCommand { get }
   var changePlaybackPositionCommand: MPChangePlaybackPositionCommand { get }
-  class func sharedCommandCenter() -> MPRemoteCommandCenter
+  class func shared() -> MPRemoteCommandCenter
   init()
 }
-class MPRemoteCommandEvent : NSObject {
+class MPRemoteCommandEvent : Object {
   /// The command that sent the event.
   var command: MPRemoteCommand { get }
   /// The time when the event occurred.
-  var timestamp: NSTimeInterval { get }
+  var timestamp: TimeInterval { get }
   init()
 }
 class MPSkipIntervalCommandEvent : MPRemoteCommandEvent {
   /// The chosen interval for this skip command event.
-  var interval: NSTimeInterval { get }
+  var interval: TimeInterval { get }
   init()
 }
 enum MPSeekCommandEventType : UInt {
@@ -334,7 +334,7 @@ class MPFeedbackCommandEvent : MPRemoteCommandEvent {
   /// dislike command. The app might want to remove the "like" flag from the
   /// current track, but not blacklist and skip to the next track as it would for
   /// a dislike command.
-  var negative: Bool { get }
+  var isNegative: Bool { get }
   init()
 }
 class MPChangeLanguageOptionCommandEvent : MPRemoteCommandEvent {
@@ -347,6 +347,6 @@ class MPChangeLanguageOptionCommandEvent : MPRemoteCommandEvent {
 }
 class MPChangePlaybackPositionCommandEvent : MPRemoteCommandEvent {
   /// The desired playback position to use when setting the current time of the player.
-  var positionTime: NSTimeInterval { get }
+  var positionTime: TimeInterval { get }
   init()
 }

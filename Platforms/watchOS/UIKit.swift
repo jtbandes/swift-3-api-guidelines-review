@@ -41,8 +41,8 @@ enum NSWritingDirectionFormatType : Int {
   case Override
 }
 let NSTextEffectLetterpressStyle: String
-extension NSMutableAttributedString {
-  func fixAttributesInRange(range: NSRange)
+extension MutableAttributedString {
+  func fixAttributesIn(range: NSRange)
 }
 let NSPlainTextDocumentType: String
 let NSRTFTextDocumentType: String
@@ -63,18 +63,18 @@ let NSBackgroundColorDocumentAttribute: String
 let NSHyphenationFactorDocumentAttribute: String
 let NSDefaultTabIntervalDocumentAttribute: String
 let NSTextLayoutSectionsAttribute: String
-extension NSAttributedString {
-  init(URL url: NSURL, options: [String : AnyObject], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
-  init(data: NSData, options: [String : AnyObject], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
-  func dataFromRange(range: NSRange, documentAttributes dict: [String : AnyObject]) throws -> NSData
-  func fileWrapperFromRange(range: NSRange, documentAttributes dict: [String : AnyObject]) throws -> NSFileWrapper
+extension AttributedString {
+  init(url: URL, options: [String : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
+  init(data: Data, options: [String : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
+  func dataFrom(range: NSRange, documentAttributes dict: [String : AnyObject] = [:]) throws -> Data
+  func fileWrapperFrom(range: NSRange, documentAttributes dict: [String : AnyObject] = [:]) throws -> FileWrapper
 }
-extension NSMutableAttributedString {
-  func readFromURL(url: NSURL, options opts: [String : AnyObject], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
-  func readFromData(data: NSData, options opts: [String : AnyObject], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
+extension MutableAttributedString {
+  func readFrom(url: URL, options opts: [String : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
+  func readFrom(data: Data, options opts: [String : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
 }
-extension NSAttributedString {
-  func containsAttachmentsInRange(range: NSRange) -> Bool
+extension AttributedString {
+  func containsAttachmentsIn(range: NSRange) -> Bool
 }
 enum NSTextWritingDirection : Int {
   init?(rawValue: Int)
@@ -82,23 +82,23 @@ enum NSTextWritingDirection : Int {
   case Embedding
   case Override
 }
-extension NSAttributedString {
-  init(fileURL url: NSURL, options: [NSObject : AnyObject], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
+extension AttributedString {
+  init(fileURL url: URL, options: [Object : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
 }
-extension NSMutableAttributedString {
-  func readFromFileURL(url: NSURL, options opts: [NSObject : AnyObject], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
+extension MutableAttributedString {
+  func readFromFileURL(url: URL, options opts: [Object : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
 }
 let NSTabColumnTerminatorsAttributeName: String
-class NSTextTab : NSObject, NSCopying, NSCoding {
-  class func columnTerminatorsForLocale(aLocale: NSLocale?) -> NSCharacterSet
-  init(textAlignment alignment: NSTextAlignment, location loc: CGFloat, options: [String : AnyObject])
+class NSTextTab : Object, Copying, Coding {
+  class func columnTerminatorsFor(aLocale: Locale?) -> CharacterSet
+  init(textAlignment alignment: NSTextAlignment, location loc: CGFloat, options: [String : AnyObject] = [:])
   var alignment: NSTextAlignment { get }
   var location: CGFloat { get }
   var options: [String : AnyObject] { get }
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 enum NSLineBreakMode : Int {
   init?(rawValue: Int)
@@ -110,7 +110,7 @@ enum NSLineBreakMode : Int {
   case ByTruncatingTail
   case ByTruncatingMiddle
 }
-class NSParagraphStyle : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
+class NSParagraphStyle : Object, Copying, MutableCopying, SecureCoding {
   class func defaultParagraphStyle() -> NSParagraphStyle
   class func defaultWritingDirectionForLanguage(languageName: String?) -> NSWritingDirection
   var lineSpacing: CGFloat { get }
@@ -130,11 +130,11 @@ class NSParagraphStyle : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
   var defaultTabInterval: CGFloat { get }
   var allowsDefaultTighteningForTruncation: Bool { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 class NSMutableParagraphStyle : NSParagraphStyle {
   var lineSpacing: CGFloat
@@ -157,23 +157,23 @@ class NSMutableParagraphStyle : NSParagraphStyle {
   func removeTabStop(anObject: NSTextTab)
   func setParagraphStyle(obj: NSParagraphStyle)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class NSStringDrawingContext : NSObject {
+class NSStringDrawingContext : Object {
   var minimumScaleFactor: CGFloat
   var actualScaleFactor: CGFloat { get }
   var totalBounds: CGRect { get }
   init()
 }
 extension NSString {
-  func sizeWithAttributes(attrs: [String : AnyObject]?) -> CGSize
-  func drawAtPoint(point: CGPoint, withAttributes attrs: [String : AnyObject]?)
-  func drawInRect(rect: CGRect, withAttributes attrs: [String : AnyObject]?)
+  func size(attributes attrs: [String : AnyObject]? = [:]) -> CGSize
+  func drawAt(point: CGPoint, withAttributes attrs: [String : AnyObject]? = [:])
+  func drawIn(rect: CGRect, withAttributes attrs: [String : AnyObject]? = [:])
 }
-extension NSAttributedString {
+extension AttributedString {
   func size() -> CGSize
-  func drawAtPoint(point: CGPoint)
-  func drawInRect(rect: CGRect)
+  func drawAt(point: CGPoint)
+  func drawIn(rect: CGRect)
 }
 struct NSStringDrawingOptions : OptionSetType {
   init(rawValue: Int)
@@ -184,12 +184,12 @@ struct NSStringDrawingOptions : OptionSetType {
   static var TruncatesLastVisibleLine: NSStringDrawingOptions { get }
 }
 extension NSString {
-  func drawWithRect(rect: CGRect, options: NSStringDrawingOptions, attributes: [String : AnyObject]?, context: NSStringDrawingContext?)
-  func boundingRectWithSize(size: CGSize, options: NSStringDrawingOptions, attributes: [String : AnyObject]?, context: NSStringDrawingContext?) -> CGRect
+  func drawWith(rect: CGRect, options: NSStringDrawingOptions = [], attributes: [String : AnyObject]? = [:], context: NSStringDrawingContext?)
+  func boundingRectWith(size: CGSize, options: NSStringDrawingOptions = [], attributes: [String : AnyObject]? = [:], context: NSStringDrawingContext?) -> CGRect
 }
-extension NSAttributedString {
-  func drawWithRect(rect: CGRect, options: NSStringDrawingOptions, context: NSStringDrawingContext?)
-  func boundingRectWithSize(size: CGSize, options: NSStringDrawingOptions, context: NSStringDrawingContext?) -> CGRect
+extension AttributedString {
+  func drawWith(rect: CGRect, options: NSStringDrawingOptions = [], context: NSStringDrawingContext?)
+  func boundingRectWith(size: CGSize, options: NSStringDrawingOptions = [], context: NSStringDrawingContext?) -> CGRect
 }
 extension NSStringDrawingContext {
   var minimumTrackingAdjustment: CGFloat
@@ -264,30 +264,30 @@ struct UIRectCorner : OptionSetType {
   static var BottomRight: UIRectCorner { get }
   static var AllCorners: UIRectCorner { get }
 }
-class UIBezierPath : NSObject, NSCopying, NSCoding {
+class UIBezierPath : Object, Copying, Coding {
   convenience init(rect: CGRect)
-  convenience init(ovalInRect rect: CGRect)
+  convenience init(ovalIn rect: CGRect)
   convenience init(roundedRect rect: CGRect, cornerRadius: CGFloat)
   convenience init(roundedRect rect: CGRect, byRoundingCorners corners: UIRectCorner, cornerRadii: CGSize)
   convenience init(arcCenter center: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool)
-  convenience init(CGPath: CGPath)
+  convenience init(cgPath CGPath: CGPath)
   init()
-  init?(coder aDecoder: NSCoder)
-  var CGPath: CGPath
-  func moveToPoint(point: CGPoint)
-  func addLineToPoint(point: CGPoint)
-  func addCurveToPoint(endPoint: CGPoint, controlPoint1: CGPoint, controlPoint2: CGPoint)
-  func addQuadCurveToPoint(endPoint: CGPoint, controlPoint: CGPoint)
+  init?(coder aDecoder: Coder)
+  var cgPath: CGPath
+  func moveTo(point: CGPoint)
+  func addLineTo(point: CGPoint)
+  func addCurveTo(endPoint: CGPoint, controlPoint1: CGPoint, controlPoint2: CGPoint)
+  func addQuadCurveTo(endPoint: CGPoint, controlPoint: CGPoint)
   func addArcWithCenter(center: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool)
-  func closePath()
+  func close()
   func removeAllPoints()
-  func appendPath(bezierPath: UIBezierPath)
-  func bezierPathByReversingPath() -> UIBezierPath
-  func applyTransform(transform: CGAffineTransform)
-  var empty: Bool { get }
+  func append(bezierPath: UIBezierPath)
+  func reversing() -> UIBezierPath
+  func apply(transform: CGAffineTransform)
+  var isEmpty: Bool { get }
   var bounds: CGRect { get }
   var currentPoint: CGPoint { get }
-  func containsPoint(point: CGPoint) -> Bool
+  func contains(point: CGPoint) -> Bool
   var lineWidth: CGFloat
   var lineCapStyle: CGLineCap
   var lineJoinStyle: CGLineJoin
@@ -298,51 +298,51 @@ class UIBezierPath : NSObject, NSCopying, NSCoding {
   func getLineDash(pattern: UnsafeMutablePointer<CGFloat>, count: UnsafeMutablePointer<Int>, phase: UnsafeMutablePointer<CGFloat>)
   func fill()
   func stroke()
-  func fillWithBlendMode(blendMode: CGBlendMode, alpha: CGFloat)
-  func strokeWithBlendMode(blendMode: CGBlendMode, alpha: CGFloat)
+  func fillWith(blendMode: CGBlendMode, alpha: CGFloat)
+  func strokeWith(blendMode: CGBlendMode, alpha: CGFloat)
   func addClip()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
 }
-class UIColor : NSObject, NSSecureCoding, NSCopying {
+class UIColor : Object, SecureCoding, Copying {
   init(white: CGFloat, alpha: CGFloat)
   init(hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat)
   init(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat)
-  init(CGColor cgColor: CGColor)
+  init(cgColor: CGColor)
   init(patternImage image: UIImage)
-  class func blackColor() -> UIColor
-  class func darkGrayColor() -> UIColor
-  class func lightGrayColor() -> UIColor
-  class func whiteColor() -> UIColor
-  class func grayColor() -> UIColor
-  class func redColor() -> UIColor
-  class func greenColor() -> UIColor
-  class func blueColor() -> UIColor
-  class func cyanColor() -> UIColor
-  class func yellowColor() -> UIColor
-  class func magentaColor() -> UIColor
-  class func orangeColor() -> UIColor
-  class func purpleColor() -> UIColor
-  class func brownColor() -> UIColor
-  class func clearColor() -> UIColor
+  class func black() -> UIColor
+  class func darkGray() -> UIColor
+  class func lightGray() -> UIColor
+  class func white() -> UIColor
+  class func gray() -> UIColor
+  class func red() -> UIColor
+  class func green() -> UIColor
+  class func blue() -> UIColor
+  class func cyan() -> UIColor
+  class func yellow() -> UIColor
+  class func magenta() -> UIColor
+  class func orange() -> UIColor
+  class func purple() -> UIColor
+  class func brown() -> UIColor
+  class func clear() -> UIColor
   func set()
   func setFill()
   func setStroke()
   func getWhite(white: UnsafeMutablePointer<CGFloat>, alpha: UnsafeMutablePointer<CGFloat>) -> Bool
   func getHue(hue: UnsafeMutablePointer<CGFloat>, saturation: UnsafeMutablePointer<CGFloat>, brightness: UnsafeMutablePointer<CGFloat>, alpha: UnsafeMutablePointer<CGFloat>) -> Bool
   func getRed(red: UnsafeMutablePointer<CGFloat>, green: UnsafeMutablePointer<CGFloat>, blue: UnsafeMutablePointer<CGFloat>, alpha: UnsafeMutablePointer<CGFloat>) -> Bool
-  func colorWithAlphaComponent(alpha: CGFloat) -> UIColor
-  var CGColor: CGColor { get }
+  func withAlphaComponent(alpha: CGFloat) -> UIColor
+  var cgColor: CGColor { get }
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 extension UIColor : _ColorLiteralConvertible {
   required convenience init(colorLiteralRed red: Float, green: Float, blue: Float, alpha: Float)
 }
-class UIFont : NSObject, NSCopying {
+class UIFont : Object, Copying {
   class func preferredFontForTextStyle(style: String) -> UIFont
    init?(name fontName: String, size fontSize: CGFloat)
   class func familyNames() -> [String]
@@ -361,11 +361,11 @@ class UIFont : NSObject, NSCopying {
   var xHeight: CGFloat { get }
   var lineHeight: CGFloat { get }
   var leading: CGFloat { get }
-  func fontWithSize(fontSize: CGFloat) -> UIFont
+  func withSize(fontSize: CGFloat) -> UIFont
    init(descriptor: UIFontDescriptor, size pointSize: CGFloat)
   func fontDescriptor() -> UIFontDescriptor
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 struct UIFontDescriptorSymbolicTraits : OptionSetType {
   init(rawValue: UInt32)
@@ -393,9 +393,9 @@ struct UIFontDescriptorSymbolicTraits : OptionSetType {
   static var ClassSymbolic: UIFontDescriptorSymbolicTraits { get }
 }
 typealias UIFontDescriptorClass = Int
-class UIFontDescriptor : NSObject, NSCopying, NSSecureCoding {
+class UIFontDescriptor : Object, Copying, SecureCoding {
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   var postscriptName: String { get }
   var pointSize: CGFloat { get }
   var matrix: CGAffineTransform { get }
@@ -406,16 +406,16 @@ class UIFontDescriptor : NSObject, NSCopying, NSSecureCoding {
    init(name fontName: String, size: CGFloat)
    init(name fontName: String, matrix: CGAffineTransform)
   class func preferredFontDescriptorWithTextStyle(style: String) -> UIFontDescriptor
-  init(fontAttributes attributes: [String : AnyObject])
-  func fontDescriptorByAddingAttributes(attributes: [String : AnyObject]) -> UIFontDescriptor
-  func fontDescriptorWithSymbolicTraits(symbolicTraits: UIFontDescriptorSymbolicTraits) -> UIFontDescriptor
-  func fontDescriptorWithSize(newPointSize: CGFloat) -> UIFontDescriptor
-  func fontDescriptorWithMatrix(matrix: CGAffineTransform) -> UIFontDescriptor
-  func fontDescriptorWithFace(newFace: String) -> UIFontDescriptor
-  func fontDescriptorWithFamily(newFamily: String) -> UIFontDescriptor
-  func copyWithZone(zone: NSZone) -> AnyObject
+  init(fontAttributes attributes: [String : AnyObject] = [:])
+  func addingAttributes(attributes: [String : AnyObject] = [:]) -> UIFontDescriptor
+  func withSymbolicTraits(symbolicTraits: UIFontDescriptorSymbolicTraits) -> UIFontDescriptor
+  func withSize(newPointSize: CGFloat) -> UIFontDescriptor
+  func withMatrix(matrix: CGAffineTransform) -> UIFontDescriptor
+  func withFace(newFace: String) -> UIFontDescriptor
+  func withFamily(newFamily: String) -> UIFontDescriptor
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
+  func encodeWith(aCoder: Coder)
 }
 let UIFontDescriptorFamilyAttribute: String
 let UIFontDescriptorNameAttribute: String
@@ -503,30 +503,30 @@ func CGRectFromString(string: String) -> CGRect
 func CGAffineTransformFromString(string: String) -> CGAffineTransform
 func UIEdgeInsetsFromString(string: String) -> UIEdgeInsets
 func UIOffsetFromString(string: String) -> UIOffset
-extension NSValue {
-   init(CGPoint point: CGPoint)
-   init(CGVector vector: CGVector)
-   init(CGSize size: CGSize)
-   init(CGRect rect: CGRect)
-   init(CGAffineTransform transform: CGAffineTransform)
-   init(UIEdgeInsets insets: UIEdgeInsets)
-   init(UIOffset insets: UIOffset)
-  func CGPointValue() -> CGPoint
-  func CGVectorValue() -> CGVector
-  func CGSizeValue() -> CGSize
-  func CGRectValue() -> CGRect
-  func CGAffineTransformValue() -> CGAffineTransform
-  func UIEdgeInsetsValue() -> UIEdgeInsets
-  func UIOffsetValue() -> UIOffset
+extension Value {
+   init(cgPoint point: CGPoint)
+   init(cgVector vector: CGVector)
+   init(cgSize size: CGSize)
+   init(cgRect rect: CGRect)
+   init(cgAffineTransform transform: CGAffineTransform)
+   init(uiEdgeInsets insets: UIEdgeInsets)
+   init(uiOffset insets: UIOffset)
+  func cgPointValue() -> CGPoint
+  func cgVectorValue() -> CGVector
+  func cgSizeValue() -> CGSize
+  func cgRectValue() -> CGRect
+  func cgAffineTransform() -> CGAffineTransform
+  func uiEdgeInsetsValue() -> UIEdgeInsets
+  func uiOffsetValue() -> UIOffset
 }
-extension NSCoder {
-  func encodeCGPoint(point: CGPoint, forKey key: String)
-  func encodeCGVector(vector: CGVector, forKey key: String)
-  func encodeCGSize(size: CGSize, forKey key: String)
-  func encodeCGRect(rect: CGRect, forKey key: String)
-  func encodeCGAffineTransform(transform: CGAffineTransform, forKey key: String)
-  func encodeUIEdgeInsets(insets: UIEdgeInsets, forKey key: String)
-  func encodeUIOffset(offset: UIOffset, forKey key: String)
+extension Coder {
+  func encode(point: CGPoint, forKey key: String)
+  func encode(vector: CGVector, forKey key: String)
+  func encode(size: CGSize, forKey key: String)
+  func encode(rect: CGRect, forKey key: String)
+  func encode(transform: CGAffineTransform, forKey key: String)
+  func encode(insets: UIEdgeInsets, forKey key: String)
+  func encode(offset: UIOffset, forKey key: String)
   func decodeCGPointForKey(key: String) -> CGPoint
   func decodeCGVectorForKey(key: String) -> CGVector
   func decodeCGSizeForKey(key: String) -> CGSize
@@ -547,13 +547,13 @@ func UIGraphicsBeginImageContext(size: CGSize)
 func UIGraphicsBeginImageContextWithOptions(size: CGSize, _ opaque: Bool, _ scale: CGFloat)
 func UIGraphicsGetImageFromCurrentImageContext() -> UIImage!
 func UIGraphicsEndImageContext()
-func UIGraphicsBeginPDFContextToFile(path: String, _ bounds: CGRect, _ documentInfo: [NSObject : AnyObject]?) -> Bool
-func UIGraphicsBeginPDFContextToData(data: NSMutableData, _ bounds: CGRect, _ documentInfo: [NSObject : AnyObject]?)
+func UIGraphicsBeginPDFContextToFile(path: String, _ bounds: CGRect, _ documentInfo: [Object : AnyObject]?) -> Bool
+func UIGraphicsBeginPDFContextToData(data: MutableData, _ bounds: CGRect, _ documentInfo: [Object : AnyObject]?)
 func UIGraphicsEndPDFContext()
 func UIGraphicsBeginPDFPage()
-func UIGraphicsBeginPDFPageWithInfo(bounds: CGRect, _ pageInfo: [NSObject : AnyObject]?)
+func UIGraphicsBeginPDFPageWithInfo(bounds: CGRect, _ pageInfo: [Object : AnyObject]?)
 func UIGraphicsGetPDFContextBounds() -> CGRect
-func UIGraphicsSetPDFContextURLForRect(url: NSURL, _ rect: CGRect)
+func UIGraphicsSetPDFContextURLForRect(url: URL, _ rect: CGRect)
 func UIGraphicsAddPDFContextDestinationAtPoint(name: String, _ point: CGPoint)
 func UIGraphicsSetPDFContextDestinationForRect(name: String, _ rect: CGRect)
 enum UIImageOrientation : Int {
@@ -581,42 +581,42 @@ enum UIImageRenderingMode : Int {
   case AlwaysOriginal
   case AlwaysTemplate
 }
-class UIImage : NSObject, NSSecureCoding {
+class UIImage : Object, SecureCoding {
    init?(named name: String)
   init?(contentsOfFile path: String)
-  init?(data: NSData)
-  init?(data: NSData, scale: CGFloat)
-  init(CGImage cgImage: CGImage)
-  init(CGImage cgImage: CGImage, scale: CGFloat, orientation: UIImageOrientation)
+  init?(data: Data)
+  init?(data: Data, scale: CGFloat)
+  init(cgImage: CGImage)
+  init(cgImage: CGImage, scale: CGFloat, orientation: UIImageOrientation)
   var size: CGSize { get }
-  var CGImage: CGImage? { get }
+  var cgImage: CGImage? { get }
   var imageOrientation: UIImageOrientation { get }
   var scale: CGFloat { get }
-  class func animatedImageNamed(name: String, duration: NSTimeInterval) -> UIImage?
-  class func animatedResizableImageNamed(name: String, capInsets: UIEdgeInsets, duration: NSTimeInterval) -> UIImage?
-  class func animatedResizableImageNamed(name: String, capInsets: UIEdgeInsets, resizingMode: UIImageResizingMode, duration: NSTimeInterval) -> UIImage?
-  class func animatedImageWithImages(images: [UIImage], duration: NSTimeInterval) -> UIImage?
+  class func animatedImageNamed(name: String, duration: TimeInterval) -> UIImage?
+  class func animatedResizableImageNamed(name: String, capInsets: UIEdgeInsets, duration: TimeInterval) -> UIImage?
+  class func animatedResizableImageNamed(name: String, capInsets: UIEdgeInsets, resizingMode: UIImageResizingMode, duration: TimeInterval) -> UIImage?
+  class func animatedImageWith(images: [UIImage], duration: TimeInterval) -> UIImage?
   var images: [UIImage]? { get }
-  var duration: NSTimeInterval { get }
-  func drawAtPoint(point: CGPoint)
-  func drawAtPoint(point: CGPoint, blendMode: CGBlendMode, alpha: CGFloat)
-  func drawInRect(rect: CGRect)
-  func drawInRect(rect: CGRect, blendMode: CGBlendMode, alpha: CGFloat)
-  func drawAsPatternInRect(rect: CGRect)
+  var duration: TimeInterval { get }
+  func drawAt(point: CGPoint)
+  func drawAt(point: CGPoint, blendMode: CGBlendMode, alpha: CGFloat)
+  func drawIn(rect: CGRect)
+  func drawIn(rect: CGRect, blendMode: CGBlendMode, alpha: CGFloat)
+  func drawAsPatternIn(rect: CGRect)
   func resizableImageWithCapInsets(capInsets: UIEdgeInsets) -> UIImage
   func resizableImageWithCapInsets(capInsets: UIEdgeInsets, resizingMode: UIImageResizingMode) -> UIImage
   var capInsets: UIEdgeInsets { get }
   var resizingMode: UIImageResizingMode { get }
-  func imageWithAlignmentRectInsets(alignmentInsets: UIEdgeInsets) -> UIImage
+  func withAlignmentRectInsets(alignmentInsets: UIEdgeInsets) -> UIImage
   var alignmentRectInsets: UIEdgeInsets { get }
-  func imageWithRenderingMode(renderingMode: UIImageRenderingMode) -> UIImage
+  func withRenderingMode(renderingMode: UIImageRenderingMode) -> UIImage
   var renderingMode: UIImageRenderingMode { get }
   func imageFlippedForRightToLeftLayoutDirection() -> UIImage
   var flipsForRightToLeftLayoutDirection: Bool { get }
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 extension UIImage : _ImageLiteralConvertible {
   convenience init!(failableImageLiteral name: String)
@@ -627,15 +627,15 @@ extension UIImage {
   var leftCapWidth: Int { get }
   var topCapHeight: Int { get }
 }
-func UIImagePNGRepresentation(image: UIImage) -> NSData?
-func UIImageJPEGRepresentation(image: UIImage, _ compressionQuality: CGFloat) -> NSData?
-class UILocalNotification : NSObject, NSCopying, NSCoding {
+func UIImagePNGRepresentation(image: UIImage) -> Data?
+func UIImageJPEGRepresentation(image: UIImage, _ compressionQuality: CGFloat) -> Data?
+class UILocalNotification : Object, Copying, Coding {
   init()
-  init?(coder aDecoder: NSCoder)
-  @NSCopying var fireDate: NSDate?
-  @NSCopying var timeZone: NSTimeZone?
-  var repeatInterval: NSCalendarUnit
-  @NSCopying var repeatCalendar: NSCalendar?
+  init?(coder aDecoder: Coder)
+  @NSCopying var fireDate: Date?
+  @NSCopying var timeZone: TimeZone?
+  var repeatInterval: CalendarUnit
+  @NSCopying var repeatCalendar: Calendar?
   var regionTriggersOnce: Bool
   var alertBody: String?
   var hasAction: Bool
@@ -644,9 +644,9 @@ class UILocalNotification : NSObject, NSCopying, NSCoding {
   var alertTitle: String?
   var soundName: String?
   var applicationIconBadgeNumber: Int
-  var userInfo: [NSObject : AnyObject]?
+  var userInfo: [Object : AnyObject]?
   var category: String?
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
 }
 let UILocalNotificationDefaultSoundName: String

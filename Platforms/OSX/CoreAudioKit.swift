@@ -14,21 +14,21 @@ class AUGenericView : NSView, AUCustomViewPersistentData {
   var showsExpertParameters: Bool
   init(audioUnit au: AudioUnit)
   init(audioUnit inAudioUnit: AudioUnit, displayFlags inFlags: AUGenericViewDisplayFlags)
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
   var customViewPersistentData: [String : AnyObject]?
 }
 class AUPannerView : NSView {
   var audioUnit: AudioUnit { get }
    init(audioUnit au: AudioUnit)
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
-class AUViewController : NSViewController, NSExtensionRequestHandling {
-  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder: NSCoder)
+class AUViewController : NSViewController, ExtensionRequestHandling {
+  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder: Coder)
   convenience init()
 }
 extension AUAudioUnit {
@@ -36,22 +36,22 @@ extension AUAudioUnit {
 }
 class CABTLEMIDIWindowController : NSWindowController {
   init(window: NSWindow?)
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init(windowNibName: String)
   convenience init(windowNibName: String, owner: AnyObject)
   convenience init(windowNibPath: String, owner: AnyObject)
   convenience init()
 }
 class CAInterDeviceAudioViewController : NSViewController {
-  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder: NSCoder)
+  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder: Coder)
   convenience init()
 }
 class CANetworkBrowserWindowController : NSWindowController {
   class func isAVBSupported() -> Bool
   init()
   convenience init(window: NSWindow?)
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init(windowNibName: String)
   convenience init(windowNibName: String, owner: AnyObject)
   convenience init(windowNibPath: String, owner: AnyObject)

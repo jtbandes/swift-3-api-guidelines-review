@@ -1,27 +1,27 @@
 
-class HMAccessory : NSObject {
+class HMAccessory : Object {
   var name: String { get }
-  @NSCopying var uniqueIdentifier: NSUUID { get }
+  @NSCopying var uniqueIdentifier: UUID { get }
   weak var delegate: @sil_weak HMAccessoryDelegate?
-  var reachable: Bool { get }
-  var bridged: Bool { get }
-  var uniqueIdentifiersForBridgedAccessories: [NSUUID]? { get }
+  var isReachable: Bool { get }
+  var isBridged: Bool { get }
+  var uniqueIdentifiersForBridgedAccessories: [UUID]? { get }
   var category: HMAccessoryCategory { get }
   weak var room: @sil_weak HMRoom? { get }
   var services: [HMService] { get }
-  var blocked: Bool { get }
-  func identifyWithCompletionHandler(completion: (NSError?) -> Void)
+  var isBlocked: Bool { get }
+  func identifyWithCompletionHandler(completion: (Error?) -> Void)
   init()
 }
-protocol HMAccessoryDelegate : NSObjectProtocol {
+protocol HMAccessoryDelegate : ObjectProtocol {
   optional func accessoryDidUpdateName(accessory: HMAccessory)
-  optional func accessory(accessory: HMAccessory, didUpdateNameForService service: HMService)
-  optional func accessory(accessory: HMAccessory, didUpdateAssociatedServiceTypeForService service: HMService)
+  optional func accessory(accessory: HMAccessory, didUpdateNameFor service: HMService)
+  optional func accessory(accessory: HMAccessory, didUpdateAssociatedServiceTypeFor service: HMService)
   optional func accessoryDidUpdateServices(accessory: HMAccessory)
   optional func accessoryDidUpdateReachability(accessory: HMAccessory)
-  optional func accessory(accessory: HMAccessory, service: HMService, didUpdateValueForCharacteristic characteristic: HMCharacteristic)
+  optional func accessory(accessory: HMAccessory, service: HMService, didUpdateValueFor characteristic: HMCharacteristic)
 }
-class HMAccessoryCategory : NSObject {
+class HMAccessoryCategory : Object {
   var categoryType: String { get }
   var localizedDescription: String { get }
   init()
@@ -41,34 +41,34 @@ let HMAccessoryCategoryTypeSwitch: String
 let HMAccessoryCategoryTypeThermostat: String
 let HMAccessoryCategoryTypeWindow: String
 let HMAccessoryCategoryTypeWindowCovering: String
-class HMAction : NSObject {
-  @NSCopying var uniqueIdentifier: NSUUID { get }
+class HMAction : Object {
+  @NSCopying var uniqueIdentifier: UUID { get }
   init()
 }
-class HMActionSet : NSObject {
+class HMActionSet : Object {
   var name: String { get }
   var actions: Set<HMAction> { get }
-  var executing: Bool { get }
+  var isExecuting: Bool { get }
   var actionSetType: String { get }
-  @NSCopying var uniqueIdentifier: NSUUID { get }
+  @NSCopying var uniqueIdentifier: UUID { get }
 }
 let HMActionSetTypeWakeUp: String
 let HMActionSetTypeSleep: String
 let HMActionSetTypeHomeDeparture: String
 let HMActionSetTypeHomeArrival: String
 let HMActionSetTypeUserDefined: String
-class HMCharacteristic : NSObject {
+class HMCharacteristic : Object {
   var characteristicType: String { get }
   var localizedDescription: String { get }
   weak var service: @sil_weak HMService? { get }
   var properties: [String] { get }
   var metadata: HMCharacteristicMetadata? { get }
   @NSCopying var value: AnyObject? { get }
-  var notificationEnabled: Bool { get }
-  @NSCopying var uniqueIdentifier: NSUUID { get }
-  func writeValue(value: AnyObject?, completionHandler completion: (NSError?) -> Void)
-  func readValueWithCompletionHandler(completion: (NSError?) -> Void)
-  func enableNotification(enable: Bool, completionHandler completion: (NSError?) -> Void)
+  var isNotificationEnabled: Bool { get }
+  @NSCopying var uniqueIdentifier: UUID { get }
+  func writeValue(value: AnyObject?, completionHandler completion: (Error?) -> Void)
+  func readValueWithCompletionHandler(completion: (Error?) -> Void)
+  func enableNotification(enable: Bool, completionHandler completion: (Error?) -> Void)
   init()
 }
 enum HMCharacteristicValueDoorState : Int {
@@ -165,13 +165,13 @@ enum HMCharacteristicValueTargetSecuritySystemState : Int {
 }
 class HMCharacteristicEvent : HMEvent {
   var characteristic: HMCharacteristic { get }
-  @NSCopying var triggerValue: NSCopying? { get }
+  @NSCopying var triggerValue: Copying? { get }
 }
-class HMCharacteristicMetadata : NSObject {
-  var minimumValue: NSNumber? { get }
-  var maximumValue: NSNumber? { get }
-  var stepValue: NSNumber? { get }
-  var maxLength: NSNumber? { get }
+class HMCharacteristicMetadata : Object {
+  var minimumValue: Number? { get }
+  var maximumValue: Number? { get }
+  var stepValue: Number? { get }
+  var maxLength: Number? { get }
   var format: String? { get }
   var units: String? { get }
   var manufacturerDescription: String? { get }
@@ -270,7 +270,7 @@ let HMCharacteristicTypeTargetPosition: String
 let HMCharacteristicTypeTargetVerticalTilt: String
 class HMCharacteristicWriteAction : HMAction {
   var characteristic: HMCharacteristic { get }
-  @NSCopying var targetValue: NSCopying { get }
+  @NSCopying var targetValue: Copying { get }
 }
 let HMErrorDomain: String
 enum HMErrorCode : Int {
@@ -362,8 +362,8 @@ enum HMErrorCode : Int {
   case LocationForHomeDisabled
   case NotAuthorizedForLocationServices
 }
-class HMEvent : NSObject {
-  @NSCopying var uniqueIdentifier: NSUUID { get }
+class HMEvent : Object {
+  @NSCopying var uniqueIdentifier: UUID { get }
   init()
 }
 let HMSignificantEventSunrise: String
@@ -372,19 +372,19 @@ let HMCharacteristicKeyPath: String
 let HMCharacteristicValueKeyPath: String
 class HMEventTrigger : HMTrigger {
   var events: [HMEvent] { get }
-  @NSCopying var predicate: NSPredicate? { get }
-  class func predicateForEvaluatingTriggerOccurringBeforeSignificantEvent(significantEvent: String, applyingOffset offset: NSDateComponents?) -> NSPredicate
-  class func predicateForEvaluatingTriggerOccurringAfterSignificantEvent(significantEvent: String, applyingOffset offset: NSDateComponents?) -> NSPredicate
-  class func predicateForEvaluatingTriggerOccurringBeforeDateWithComponents(dateComponents: NSDateComponents) -> NSPredicate
-  class func predicateForEvaluatingTriggerOccurringOnDateWithComponents(dateComponents: NSDateComponents) -> NSPredicate
-  class func predicateForEvaluatingTriggerOccurringAfterDateWithComponents(dateComponents: NSDateComponents) -> NSPredicate
-  class func predicateForEvaluatingTriggerWithCharacteristic(characteristic: HMCharacteristic, relatedBy operatorType: NSPredicateOperatorType, toValue value: AnyObject) -> NSPredicate
+  @NSCopying var predicate: Predicate? { get }
+  class func predicateForEvaluatingTriggerOccurringBeforeSignificantEvent(significantEvent: String, applyingOffset offset: DateComponents?) -> Predicate
+  class func predicateForEvaluatingTriggerOccurringAfterSignificantEvent(significantEvent: String, applyingOffset offset: DateComponents?) -> Predicate
+  class func predicateForEvaluatingTriggerOccurringBeforeDateWith(dateComponents: DateComponents) -> Predicate
+  class func predicateForEvaluatingTriggerOccurringOnDateWith(dateComponents: DateComponents) -> Predicate
+  class func predicateForEvaluatingTriggerOccurringAfterDateWith(dateComponents: DateComponents) -> Predicate
+  class func predicateForEvaluatingTriggerWith(characteristic: HMCharacteristic, relatedBy operatorType: PredicateOperatorType, toValue value: AnyObject) -> Predicate
 }
-class HMHome : NSObject {
+class HMHome : Object {
   weak var delegate: @sil_weak HMHomeDelegate?
   var name: String { get }
-  var primary: Bool { get }
-  @NSCopying var uniqueIdentifier: NSUUID { get }
+  var isPrimary: Bool { get }
+  @NSCopying var uniqueIdentifier: UUID { get }
 }
 extension HMHome {
   var accessories: [HMAccessory] { get }
@@ -392,7 +392,7 @@ extension HMHome {
 }
 extension HMHome {
   var currentUser: HMUser { get }
-  func homeAccessControlForUser(user: HMUser) -> HMHomeAccessControl
+  func homeAccessControlFor(user: HMUser) -> HMHomeAccessControl
 }
 extension HMHome {
   var rooms: [HMRoom] { get }
@@ -406,81 +406,81 @@ extension HMHome {
 }
 extension HMHome {
   var actionSets: [HMActionSet] { get }
-  func executeActionSet(actionSet: HMActionSet, completionHandler completion: (NSError?) -> Void)
+  func executeActionSet(actionSet: HMActionSet, completionHandler completion: (Error?) -> Void)
   func builtinActionSetOfType(actionSetType: String) -> HMActionSet?
 }
 extension HMHome {
   var triggers: [HMTrigger] { get }
 }
-protocol HMHomeDelegate : NSObjectProtocol {
+protocol HMHomeDelegate : ObjectProtocol {
   optional func homeDidUpdateName(home: HMHome)
-  optional func home(home: HMHome, didAddAccessory accessory: HMAccessory)
-  optional func home(home: HMHome, didRemoveAccessory accessory: HMAccessory)
-  optional func home(home: HMHome, didAddUser user: HMUser)
-  optional func home(home: HMHome, didRemoveUser user: HMUser)
+  optional func home(home: HMHome, didAdd accessory: HMAccessory)
+  optional func home(home: HMHome, didRemove accessory: HMAccessory)
+  optional func home(home: HMHome, didAdd user: HMUser)
+  optional func home(home: HMHome, didRemove user: HMUser)
   optional func home(home: HMHome, didUpdateRoom room: HMRoom, forAccessory accessory: HMAccessory)
-  optional func home(home: HMHome, didAddRoom room: HMRoom)
-  optional func home(home: HMHome, didRemoveRoom room: HMRoom)
-  optional func home(home: HMHome, didUpdateNameForRoom room: HMRoom)
-  optional func home(home: HMHome, didAddZone zone: HMZone)
-  optional func home(home: HMHome, didRemoveZone zone: HMZone)
-  optional func home(home: HMHome, didUpdateNameForZone zone: HMZone)
-  optional func home(home: HMHome, didAddRoom room: HMRoom, toZone zone: HMZone)
-  optional func home(home: HMHome, didRemoveRoom room: HMRoom, fromZone zone: HMZone)
-  optional func home(home: HMHome, didAddServiceGroup group: HMServiceGroup)
-  optional func home(home: HMHome, didRemoveServiceGroup group: HMServiceGroup)
-  optional func home(home: HMHome, didUpdateNameForServiceGroup group: HMServiceGroup)
-  optional func home(home: HMHome, didAddService service: HMService, toServiceGroup group: HMServiceGroup)
-  optional func home(home: HMHome, didRemoveService service: HMService, fromServiceGroup group: HMServiceGroup)
-  optional func home(home: HMHome, didAddActionSet actionSet: HMActionSet)
-  optional func home(home: HMHome, didRemoveActionSet actionSet: HMActionSet)
-  optional func home(home: HMHome, didUpdateNameForActionSet actionSet: HMActionSet)
-  optional func home(home: HMHome, didUpdateActionsForActionSet actionSet: HMActionSet)
-  optional func home(home: HMHome, didAddTrigger trigger: HMTrigger)
-  optional func home(home: HMHome, didRemoveTrigger trigger: HMTrigger)
-  optional func home(home: HMHome, didUpdateNameForTrigger trigger: HMTrigger)
+  optional func home(home: HMHome, didAdd room: HMRoom)
+  optional func home(home: HMHome, didRemove room: HMRoom)
+  optional func home(home: HMHome, didUpdateNameFor room: HMRoom)
+  optional func home(home: HMHome, didAdd zone: HMZone)
+  optional func home(home: HMHome, didRemove zone: HMZone)
+  optional func home(home: HMHome, didUpdateNameFor zone: HMZone)
+  optional func home(home: HMHome, didAdd room: HMRoom, to zone: HMZone)
+  optional func home(home: HMHome, didRemove room: HMRoom, from zone: HMZone)
+  optional func home(home: HMHome, didAdd group: HMServiceGroup)
+  optional func home(home: HMHome, didRemove group: HMServiceGroup)
+  optional func home(home: HMHome, didUpdateNameFor group: HMServiceGroup)
+  optional func home(home: HMHome, didAdd service: HMService, to group: HMServiceGroup)
+  optional func home(home: HMHome, didRemove service: HMService, from group: HMServiceGroup)
+  optional func home(home: HMHome, didAdd actionSet: HMActionSet)
+  optional func home(home: HMHome, didRemove actionSet: HMActionSet)
+  optional func home(home: HMHome, didUpdateNameFor actionSet: HMActionSet)
+  optional func home(home: HMHome, didUpdateActionsFor actionSet: HMActionSet)
+  optional func home(home: HMHome, didAdd trigger: HMTrigger)
+  optional func home(home: HMHome, didRemove trigger: HMTrigger)
+  optional func home(home: HMHome, didUpdateNameFor trigger: HMTrigger)
   optional func home(home: HMHome, didUpdateTrigger trigger: HMTrigger)
   optional func home(home: HMHome, didUnblockAccessory accessory: HMAccessory)
-  optional func home(home: HMHome, didEncounterError error: NSError, forAccessory accessory: HMAccessory)
+  optional func home(home: HMHome, didEncounterError error: Error, forAccessory accessory: HMAccessory)
 }
 let HMUserFailedAccessoriesKey: String
-class HMHomeAccessControl : NSObject {
-  var administrator: Bool { get }
+class HMHomeAccessControl : Object {
+  var isAdministrator: Bool { get }
 }
-class HMHomeManager : NSObject {
+class HMHomeManager : Object {
   weak var delegate: @sil_weak HMHomeManagerDelegate?
   var primaryHome: HMHome? { get }
   var homes: [HMHome] { get }
   init()
 }
-protocol HMHomeManagerDelegate : NSObjectProtocol {
+protocol HMHomeManagerDelegate : ObjectProtocol {
   optional func homeManagerDidUpdateHomes(manager: HMHomeManager)
   optional func homeManagerDidUpdatePrimaryHome(manager: HMHomeManager)
-  optional func homeManager(manager: HMHomeManager, didAddHome home: HMHome)
-  optional func homeManager(manager: HMHomeManager, didRemoveHome home: HMHome)
+  optional func homeManager(manager: HMHomeManager, didAdd home: HMHome)
+  optional func homeManager(manager: HMHomeManager, didRemove home: HMHome)
 }
 class HMLocationEvent : HMEvent {
 }
-class HMRoom : NSObject {
+class HMRoom : Object {
   var name: String { get }
   var accessories: [HMAccessory] { get }
-  @NSCopying var uniqueIdentifier: NSUUID { get }
+  @NSCopying var uniqueIdentifier: UUID { get }
 }
-class HMService : NSObject {
+class HMService : Object {
   weak var accessory: @sil_weak HMAccessory? { get }
   var serviceType: String { get }
   var localizedDescription: String { get }
   var name: String { get }
   var associatedServiceType: String? { get }
   var characteristics: [HMCharacteristic] { get }
-  @NSCopying var uniqueIdentifier: NSUUID { get }
-  var userInteractive: Bool { get }
+  @NSCopying var uniqueIdentifier: UUID { get }
+  var isUserInteractive: Bool { get }
   init()
 }
-class HMServiceGroup : NSObject {
+class HMServiceGroup : Object {
   var name: String { get }
   var services: [HMService] { get }
-  @NSCopying var uniqueIdentifier: NSUUID { get }
+  @NSCopying var uniqueIdentifier: UUID { get }
 }
 let HMServiceTypeLightbulb: String
 let HMServiceTypeSwitch: String
@@ -510,24 +510,24 @@ let HMServiceTypeTemperatureSensor: String
 let HMServiceTypeWindow: String
 let HMServiceTypeWindowCovering: String
 class HMTimerTrigger : HMTrigger {
-  @NSCopying var fireDate: NSDate { get }
-  @NSCopying var timeZone: NSTimeZone? { get }
-  @NSCopying var recurrence: NSDateComponents? { get }
-  @NSCopying var recurrenceCalendar: NSCalendar? { get }
+  @NSCopying var fireDate: Date { get }
+  @NSCopying var timeZone: TimeZone? { get }
+  @NSCopying var recurrence: DateComponents? { get }
+  @NSCopying var recurrenceCalendar: Calendar? { get }
 }
-class HMTrigger : NSObject {
+class HMTrigger : Object {
   var name: String { get }
-  var enabled: Bool { get }
+  var isEnabled: Bool { get }
   var actionSets: [HMActionSet] { get }
-  @NSCopying var lastFireDate: NSDate? { get }
-  @NSCopying var uniqueIdentifier: NSUUID { get }
+  @NSCopying var lastFireDate: Date? { get }
+  @NSCopying var uniqueIdentifier: UUID { get }
 }
-class HMUser : NSObject {
+class HMUser : Object {
   var name: String { get }
-  @NSCopying var uniqueIdentifier: NSUUID { get }
+  @NSCopying var uniqueIdentifier: UUID { get }
 }
-class HMZone : NSObject {
+class HMZone : Object {
   var name: String { get }
   var rooms: [HMRoom] { get }
-  @NSCopying var uniqueIdentifier: NSUUID { get }
+  @NSCopying var uniqueIdentifier: UUID { get }
 }

@@ -2,25 +2,25 @@
 let DRBurnProgressPanelWillBeginNotification: String
 let DRBurnProgressPanelDidFinishNotification: String
 class DRBurnProgressPanel : NSPanel {
-  func beginProgressSheetForBurn(burn: DRBurn!, layout: AnyObject!, modalForWindow docWindow: NSWindow!)
-  func beginProgressPanelForBurn(burn: DRBurn!, layout: AnyObject!)
+  func beginProgressSheetFor(burn: DRBurn!, layout: AnyObject!, modalFor docWindow: NSWindow!)
+  func beginFor(burn: DRBurn!, layout: AnyObject!)
   func setDescription(description: String!)
   func description() -> String!
   func setVerboseProgressStatus(verbose: Bool)
   func verboseProgressStatus() -> Bool
   @IBAction func stopBurn(sender: AnyObject!)
-  init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
-  convenience init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
+  init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
+  convenience init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
   convenience init(contentViewController: NSViewController)
   convenience init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init?(windowRef: UnsafeMutablePointer<Void>)
 }
-extension NSObject {
-  class func burnProgressPanelWillBegin(aNotification: NSNotification!)
-  func burnProgressPanelWillBegin(aNotification: NSNotification!)
-  class func burnProgressPanelDidFinish(aNotification: NSNotification!)
-  func burnProgressPanelDidFinish(aNotification: NSNotification!)
+extension Object {
+  class func burnProgressPanelWillBegin(aNotification: Notification!)
+  func burnProgressPanelWillBegin(aNotification: Notification!)
+  class func burnProgressPanelDidFinish(aNotification: Notification!)
+  func burnProgressPanelDidFinish(aNotification: Notification!)
   class func burnProgressPanel(theBurnPanel: DRBurnProgressPanel!, burnDidFinish burn: DRBurn!) -> Bool
   func burnProgressPanel(theBurnPanel: DRBurnProgressPanel!, burnDidFinish burn: DRBurn!) -> Bool
 }
@@ -95,33 +95,33 @@ class DRBurnSetupPanel : DRSetupPanel {
   @IBAction func testBurn(sender: AnyObject!)
   @IBAction func verifyBurn(sender: AnyObject!)
   init!(nibName: String!)
-  init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
-  convenience init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
+  init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
+  convenience init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
   convenience init(contentViewController: NSViewController)
   convenience init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init?(windowRef: UnsafeMutablePointer<Void>)
 }
 let DRBurnSetupPanelDefaultButtonDefaultTitle: String
 let DREraseProgressPanelWillBeginNotification: String
 let DREraseProgressPanelDidFinishNotification: String
 class DREraseProgressPanel : NSPanel {
-  func beginProgressSheetForErase(erase: DRErase!, modalForWindow docWindow: NSWindow!)
-  func beginProgressPanelForErase(erase: DRErase!)
+  func beginProgressSheetFor(erase: DRErase!, modalFor docWindow: NSWindow!)
+  func beginFor(erase: DRErase!)
   func setDescription(description: String!)
   func description() -> String!
-  init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
-  convenience init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
+  init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
+  convenience init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
   convenience init(contentViewController: NSViewController)
   convenience init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init?(windowRef: UnsafeMutablePointer<Void>)
 }
-extension NSObject {
-  class func eraseProgressPanelWillBegin(aNotification: NSNotification!)
-  func eraseProgressPanelWillBegin(aNotification: NSNotification!)
-  class func eraseProgressPanelDidFinish(aNotification: NSNotification!)
-  func eraseProgressPanelDidFinish(aNotification: NSNotification!)
+extension Object {
+  class func eraseProgressPanelWillBegin(aNotification: Notification!)
+  func eraseProgressPanelWillBegin(aNotification: Notification!)
+  class func eraseProgressPanelDidFinish(aNotification: Notification!)
+  func eraseProgressPanelDidFinish(aNotification: Notification!)
   class func eraseProgressPanel(theErasePanel: DREraseProgressPanel!, eraseDidFinish erase: DRErase!) -> Bool
   func eraseProgressPanel(theErasePanel: DREraseProgressPanel!, eraseDidFinish erase: DRErase!) -> Bool
 }
@@ -184,41 +184,41 @@ class DREraseSetupPanel : DRSetupPanel {
   func eraseObject() -> DRErase!
   @IBAction func eraseType(sender: AnyObject!)
   init!(nibName: String!)
-  init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
-  convenience init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
+  init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
+  convenience init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
   convenience init(contentViewController: NSViewController)
   convenience init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init?(windowRef: UnsafeMutablePointer<Void>)
 }
 class DRSetupPanel : NSPanel {
   init!(nibName: String!)
-  func runSetupPanel() -> Int
-  func beginSetupSheetForWindow(owner: NSWindow!, modalDelegate: AnyObject!, didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func run() -> Int
+  func beginSetupSheetFor(owner: NSWindow!, modalDelegate: AnyObject!, didEnd didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
   @IBAction func ok(sender: AnyObject!)
   @IBAction func cancel(sender: AnyObject!)
   @IBAction func eject(sender: AnyObject!)
   @IBAction func open(sender: AnyObject!)
   @IBAction func close(sender: AnyObject!)
   func deviceSelectionChanged(device: DRDevice!)
-  func mediaStateChanged(status: [NSObject : AnyObject]!) -> Bool
+  func mediaStateChanged(status: [Object : AnyObject]!) -> Bool
   func setupForDisplay()
-  init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
-  convenience init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
+  init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
+  convenience init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
   convenience init(contentViewController: NSViewController)
   convenience init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init?(windowRef: UnsafeMutablePointer<Void>)
 }
 let DRSetupPanelDeviceSelectionChangedNotification: String
 let DRSetupPanelSelectedDeviceKey: String
-extension NSObject {
+extension Object {
   class func setupPanel(aPanel: DRSetupPanel!, deviceCouldBeTarget device: DRDevice!) -> Bool
   func setupPanel(aPanel: DRSetupPanel!, deviceCouldBeTarget device: DRDevice!) -> Bool
   class func setupPanel(aPanel: DRSetupPanel!, determineBestDeviceOfA deviceA: DRDevice!, orB device: DRDevice!) -> DRDevice!
   func setupPanel(aPanel: DRSetupPanel!, determineBestDeviceOfA deviceA: DRDevice!, orB device: DRDevice!) -> DRDevice!
-  class func setupPanelDeviceSelectionChanged(aNotification: NSNotification!)
-  func setupPanelDeviceSelectionChanged(aNotification: NSNotification!)
+  class func setupPanelDeviceSelectionChanged(aNotification: Notification!)
+  func setupPanelDeviceSelectionChanged(aNotification: Notification!)
   class func setupPanelShouldHandleMediaReservations(aPanel: DRSetupPanel!) -> Bool
   func setupPanelShouldHandleMediaReservations(aPanel: DRSetupPanel!) -> Bool
   class func setupPanel(aPanel: DRSetupPanel!, deviceContainsSuitableMedia device: DRDevice!, promptString prompt: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool

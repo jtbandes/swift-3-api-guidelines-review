@@ -16,10 +16,10 @@ extension WatchKitErrorCode : _BridgedNSError {
 }
 class WKInterfaceButton : WKInterfaceObject {
   func setTitle(title: String?)
-  func setAttributedTitle(attributedTitle: NSAttributedString?)
+  func setAttributedTitle(attributedTitle: AttributedString?)
   func setBackgroundColor(color: UIColor?)
   func setBackgroundImage(image: UIImage?)
-  func setBackgroundImageData(imageData: NSData?)
+  func setBackgroundImageData(imageData: Data?)
   func setBackgroundImageNamed(imageName: String?)
   func setEnabled(enabled: Bool)
 }
@@ -56,39 +56,39 @@ enum WKTextInputMode : Int {
   case AllowEmoji
   case AllowAnimatedEmoji
 }
-class WKInterfaceController : NSObject {
+class WKInterfaceController : Object {
   init()
   func awakeWithContext(context: AnyObject?)
   var contentFrame: CGRect { get }
   func willActivate()
   func didDeactivate()
-  func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int)
-  func handleActionWithIdentifier(identifier: String?, forRemoteNotification remoteNotification: [NSObject : AnyObject])
+  func table(table: WKInterfaceTable, didSelectRowAt rowIndex: Int)
+  func handleActionWithIdentifier(identifier: String?, forRemoteNotification remoteNotification: [Object : AnyObject])
   func handleActionWithIdentifier(identifier: String?, forLocalNotification localNotification: UILocalNotification)
-  func handleUserActivity(userInfo: [NSObject : AnyObject]?)
+  func handleUserActivity(userInfo: [Object : AnyObject]?)
   func setTitle(title: String?)
-  func pushControllerWithName(name: String, context: AnyObject?)
-  func popController()
+  func pushWithName(name: String, context: AnyObject?)
+  func pop()
   func popToRootController()
   class func reloadRootControllersWithNames(names: [String], contexts: [AnyObject]?)
   func becomeCurrentPage()
-  func presentControllerWithName(name: String, context: AnyObject?)
-  func presentControllerWithNames(names: [String], contexts: [AnyObject]?)
-  func dismissController()
+  func presentWithName(name: String, context: AnyObject?)
+  func presentWithNames(names: [String], contexts: [AnyObject]?)
+  func dismiss()
   func presentTextInputControllerWithSuggestions(suggestions: [String]?, allowedInputMode inputMode: WKTextInputMode, completion: ([AnyObject]?) -> Void)
   func presentTextInputControllerWithSuggestionsForLanguage(suggestionsHandler: ((String) -> [AnyObject]?)?, allowedInputMode inputMode: WKTextInputMode, completion: ([AnyObject]?) -> Void)
   func dismissTextInputController()
   func contextForSegueWithIdentifier(segueIdentifier: String) -> AnyObject?
   func contextsForSegueWithIdentifier(segueIdentifier: String) -> [AnyObject]?
-  func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject?
-  func contextsForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> [AnyObject]?
-  func addMenuItemWithImage(image: UIImage, title: String, action: Selector)
+  func contextForSegueWithIdentifier(segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> AnyObject?
+  func contextsForSegueWithIdentifier(segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> [AnyObject]?
+  func addMenuItemWith(image: UIImage, title: String, action: Selector)
   func addMenuItemWithImageNamed(imageName: String, title: String, action: Selector)
-  func addMenuItemWithItemIcon(itemIcon: WKMenuItemIcon, title: String, action: Selector)
+  func addMenuItemWith(itemIcon: WKMenuItemIcon, title: String, action: Selector)
   func clearAllMenuItems()
-  func updateUserActivity(type: String, userInfo: [NSObject : AnyObject]?, webpageURL: NSURL?)
+  func updateUserActivity(type: String, userInfo: [Object : AnyObject]? = [:], webpageURL: URL?)
   func invalidateUserActivity()
-  class func openParentApplication(userInfo: [NSObject : AnyObject], reply: (([NSObject : AnyObject], NSError?) -> Void)?) -> Bool
+  class func openParentApplication(userInfo: [Object : AnyObject], reply: (([Object : AnyObject], Error?) -> Void)? = nil) -> Bool
 }
 extension WKInterfaceController {
   class func reloadRootControllers(namesAndContexts: [(name: String, context: AnyObject)])
@@ -96,21 +96,21 @@ extension WKInterfaceController {
 }
 class WKUserNotificationInterfaceController : WKInterfaceController {
   init()
-  func didReceiveRemoteNotification(remoteNotification: [NSObject : AnyObject], withCompletion completionHandler: (WKUserNotificationInterfaceType) -> Void)
-  func didReceiveLocalNotification(localNotification: UILocalNotification, withCompletion completionHandler: (WKUserNotificationInterfaceType) -> Void)
+  func didReceiveRemoteNotification(remoteNotification: [Object : AnyObject], withCompletion completionHandler: (WKUserNotificationInterfaceType) -> Void)
+  func didReceive(localNotification: UILocalNotification, withCompletion completionHandler: (WKUserNotificationInterfaceType) -> Void)
 }
 class WKInterfaceDate : WKInterfaceObject {
   func setTextColor(color: UIColor?)
-  func setTimeZone(timeZone: NSTimeZone?)
-  func setCalendar(calendar: NSCalendar?)
+  func setTimeZone(timeZone: TimeZone?)
+  func setCalendar(calendar: Calendar?)
 }
-class WKInterfaceDevice : NSObject {
-  class func currentDevice() -> WKInterfaceDevice
+class WKInterfaceDevice : Object {
+  class func current() -> WKInterfaceDevice
   func addCachedImage(image: UIImage, name: String) -> Bool
-  func addCachedImageWithData(imageData: NSData, name: String) -> Bool
+  func addCachedImageWith(imageData: Data, name: String) -> Bool
   func removeCachedImageWithName(name: String)
   func removeAllCachedImages()
-  var cachedImages: [String : NSNumber] { get }
+  var cachedImages: [String : Number] { get }
   var screenBounds: CGRect { get }
   var screenScale: CGFloat { get }
   var preferredContentSizeCategory: String { get }
@@ -125,30 +125,30 @@ class WKInterfaceGroup : WKInterfaceObject, WKImageAnimatable {
   func setCornerRadius(cornerRadius: CGFloat)
   func setBackgroundColor(color: UIColor?)
   func setBackgroundImage(image: UIImage?)
-  func setBackgroundImageData(imageData: NSData?)
+  func setBackgroundImageData(imageData: Data?)
   func setBackgroundImageNamed(imageName: String?)
   func startAnimating()
-  func startAnimatingWithImagesInRange(imageRange: NSRange, duration: NSTimeInterval, repeatCount: Int)
+  func startAnimatingWithImagesIn(imageRange: NSRange, duration: TimeInterval, repeatCount: Int)
   func stopAnimating()
 }
-protocol WKImageAnimatable : NSObjectProtocol {
+protocol WKImageAnimatable : ObjectProtocol {
   func startAnimating()
-  func startAnimatingWithImagesInRange(imageRange: NSRange, duration: NSTimeInterval, repeatCount: Int)
+  func startAnimatingWithImagesIn(imageRange: NSRange, duration: TimeInterval, repeatCount: Int)
   func stopAnimating()
 }
 class WKInterfaceImage : WKInterfaceObject, WKImageAnimatable {
   func setImage(image: UIImage?)
-  func setImageData(imageData: NSData?)
+  func setImageData(imageData: Data?)
   func setImageNamed(imageName: String?)
   func setTintColor(tintColor: UIColor?)
   func startAnimating()
-  func startAnimatingWithImagesInRange(imageRange: NSRange, duration: NSTimeInterval, repeatCount: Int)
+  func startAnimatingWithImagesIn(imageRange: NSRange, duration: TimeInterval, repeatCount: Int)
   func stopAnimating()
 }
 class WKInterfaceLabel : WKInterfaceObject {
   func setText(text: String?)
   func setTextColor(color: UIColor?)
-  func setAttributedText(attributedText: NSAttributedString?)
+  func setAttributedText(attributedText: AttributedString?)
 }
 enum WKInterfaceMapPinColor : Int {
   init?(rawValue: Int)
@@ -165,7 +165,7 @@ class WKInterfaceMap : WKInterfaceObject {
   func addAnnotation(location: CLLocationCoordinate2D, withPinColor pinColor: WKInterfaceMapPinColor)
   func removeAllAnnotations()
 }
-class WKInterfaceObject : NSObject {
+class WKInterfaceObject : Object {
   func setHidden(hidden: Bool)
   func setAlpha(alpha: CGFloat)
   func setWidth(width: CGFloat)
@@ -181,7 +181,7 @@ extension WKInterfaceObject {
   func setAccessibilityTraits(accessibilityTraits: UIAccessibilityTraits)
   func setAccessibilityImageRegions(accessibilityImageRegions: [WKAccessibilityImageRegion])
 }
-class WKAccessibilityImageRegion : NSObject {
+class WKAccessibilityImageRegion : Object {
   var frame: CGRect
   var label: String
   init()
@@ -197,7 +197,7 @@ class WKInterfaceSlider : WKInterfaceObject {
 }
 class WKInterfaceSwitch : WKInterfaceObject {
   func setTitle(title: String?)
-  func setAttributedTitle(attributedTitle: NSAttributedString?)
+  func setAttributedTitle(attributedTitle: AttributedString?)
   func setEnabled(enabled: Bool)
   func setOn(on: Bool)
   func setColor(color: UIColor?)
@@ -206,14 +206,14 @@ class WKInterfaceTable : WKInterfaceObject {
   func setRowTypes(rowTypes: [String])
   func setNumberOfRows(numberOfRows: Int, withRowType rowType: String)
   var numberOfRows: Int { get }
-  func rowControllerAtIndex(index: Int) -> AnyObject?
-  func insertRowsAtIndexes(rows: NSIndexSet, withRowType rowType: String)
-  func removeRowsAtIndexes(rows: NSIndexSet)
-  func scrollToRowAtIndex(index: Int)
+  func rowControllerAt(index: Int) -> AnyObject?
+  func insertRowsAt(rows: IndexSet, withRowType rowType: String)
+  func removeRowsAt(rows: IndexSet)
+  func scrollToRowAt(index: Int)
 }
 class WKInterfaceTimer : WKInterfaceObject {
   func setTextColor(color: UIColor?)
-  func setDate(date: NSDate)
+  func setDate(date: Date)
   func start()
   func stop()
 }

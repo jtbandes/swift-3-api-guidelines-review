@@ -37,9 +37,9 @@ enum MIDINetworkConnectionPolicy : UInt {
   case HostsInContactList
   case Anyone
 }
-class MIDINetworkHost : NSObject {
+class MIDINetworkHost : Object {
   convenience init(name: String, address: String, port: Int)
-  convenience init(name: String, netService: NSNetService)
+  convenience init(name: String, netService: NetService)
   convenience init(name: String, netServiceName: String, netServiceDomain: String)
   func hasSameAddressAs(other: MIDINetworkHost) -> Bool
   var name: String { get }
@@ -49,14 +49,14 @@ class MIDINetworkHost : NSObject {
   var netServiceDomain: String? { get }
   init()
 }
-class MIDINetworkConnection : NSObject {
+class MIDINetworkConnection : Object {
   convenience init(host: MIDINetworkHost)
   var host: MIDINetworkHost { get }
   init()
 }
-class MIDINetworkSession : NSObject {
+class MIDINetworkSession : Object {
   class func defaultSession() -> MIDINetworkSession
-  var enabled: Bool
+  var isEnabled: Bool
   var networkPort: Int { get }
   var networkName: String { get }
   var localName: String { get }

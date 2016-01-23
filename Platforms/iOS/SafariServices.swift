@@ -7,24 +7,24 @@ enum SFContentBlockerErrorCode : Int {
   case NoAttachmentFound
   case LoadingInterrupted
 }
-class SFContentBlockerManager : NSObject {
-  class func reloadContentBlockerWithIdentifier(identifier: String, completionHandler: ((NSError?) -> Void)?)
+class SFContentBlockerManager : Object {
+  class func reloadContentBlockerWithIdentifier(identifier: String, completionHandler: ((Error?) -> Void)? = nil)
   init()
 }
 class SFSafariViewController : UIViewController {
   weak var delegate: @sil_weak SFSafariViewControllerDelegate?
-  init(URL: NSURL, entersReaderIfAvailable: Bool)
-  convenience init(URL: NSURL)
+  init(url URL: URL, entersReaderIfAvailable: Bool)
+  convenience init(url URL: URL)
 }
-protocol SFSafariViewControllerDelegate : NSObjectProtocol {
-  optional func safariViewController(controller: SFSafariViewController, activityItemsForURL URL: NSURL, title: String?) -> [UIActivity]
+protocol SFSafariViewControllerDelegate : ObjectProtocol {
+  optional func safariViewController(controller: SFSafariViewController, activityItemsFor URL: URL, title: String?) -> [UIActivity]
   optional func safariViewControllerDidFinish(controller: SFSafariViewController)
   optional func safariViewController(controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool)
 }
-class SSReadingList : NSObject {
+class SSReadingList : Object {
   class func defaultReadingList() -> SSReadingList?
-  class func supportsURL(URL: NSURL) -> Bool
-  func addReadingListItemWithURL(URL: NSURL, title: String?, previewText: String?) throws
+  class func supportsURL(URL: URL) -> Bool
+  func addItemWith(URL: URL, title: String?, previewText: String?) throws
 }
 let SSReadingListErrorDomain: String
 enum SSReadingListErrorCode : Int {

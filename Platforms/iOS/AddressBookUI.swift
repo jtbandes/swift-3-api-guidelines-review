@@ -1,28 +1,28 @@
 
-func ABCreateStringWithAddressDictionary(address: [NSObject : AnyObject], _ addCountryName: Bool) -> String
+func ABCreateStringWithAddressDictionary(address: [Object : AnyObject], _ addCountryName: Bool) -> String
 class ABNewPersonViewController : UIViewController {
   unowned(unsafe) var newPersonViewDelegate: @sil_unmanaged ABNewPersonViewControllerDelegate?
   var addressBook: ABAddressBook?
   var displayedPerson: ABRecord?
   var parentGroup: ABRecord?
-  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder aDecoder: NSCoder)
+  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
-protocol ABNewPersonViewControllerDelegate : NSObjectProtocol {
+protocol ABNewPersonViewControllerDelegate : ObjectProtocol {
   func newPersonViewController(newPersonView: ABNewPersonViewController, didCompleteWithNewPerson person: ABRecord?)
 }
 class ABPeoplePickerNavigationController : UINavigationController {
   unowned(unsafe) var peoplePickerDelegate: @sil_unmanaged ABPeoplePickerNavigationControllerDelegate?
-  var displayedProperties: [NSNumber]?
+  var displayedProperties: [Number]?
   var addressBook: ABAddressBook?
-  @NSCopying var predicateForEnablingPerson: NSPredicate?
-  @NSCopying var predicateForSelectionOfPerson: NSPredicate?
-  @NSCopying var predicateForSelectionOfProperty: NSPredicate?
+  @NSCopying var predicateForEnablingPerson: Predicate?
+  @NSCopying var predicateForSelectionOfPerson: Predicate?
+  @NSCopying var predicateForSelectionOfProperty: Predicate?
   init(navigationBarClass: AnyClass?, toolbarClass: AnyClass?)
   init(rootViewController: UIViewController)
-  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder aDecoder: NSCoder)
+  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
 let ABPersonNamePrefixProperty: String
@@ -48,7 +48,7 @@ let ABPersonInstantMessageAddressesProperty: String
 let ABPersonRelatedNamesProperty: String
 let ABPersonSocialProfilesProperty: String
 let ABPersonPostalAddressesProperty: String
-protocol ABPeoplePickerNavigationControllerDelegate : NSObjectProtocol {
+protocol ABPeoplePickerNavigationControllerDelegate : ObjectProtocol {
   optional func peoplePickerNavigationController(peoplePicker: ABPeoplePickerNavigationController, didSelectPerson person: ABRecord)
   optional func peoplePickerNavigationController(peoplePicker: ABPeoplePickerNavigationController, didSelectPerson person: ABRecord, property: ABPropertyID, identifier: ABMultiValueIdentifier)
   optional func peoplePickerNavigationControllerDidCancel(peoplePicker: ABPeoplePickerNavigationController)
@@ -59,17 +59,17 @@ class ABPersonViewController : UIViewController, UIViewControllerRestoration {
   unowned(unsafe) var personViewDelegate: @sil_unmanaged ABPersonViewControllerDelegate?
   var addressBook: ABAddressBook?
   var displayedPerson: ABRecord
-  var displayedProperties: [NSNumber]?
+  var displayedProperties: [Number]?
   var allowsEditing: Bool
   var allowsActions: Bool
   var shouldShowLinkedPeople: Bool
   func setHighlightedItemForProperty(property: ABPropertyID, withIdentifier identifier: ABMultiValueIdentifier)
-  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder aDecoder: NSCoder)
+  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder aDecoder: Coder)
   convenience init()
-  class func viewControllerWithRestorationIdentifierPath(identifierComponents: [AnyObject], coder: NSCoder) -> UIViewController?
+  class func viewControllerWithRestorationIdentifierPath(identifierComponents: [AnyObject], coder: Coder) -> UIViewController?
 }
-protocol ABPersonViewControllerDelegate : NSObjectProtocol {
+protocol ABPersonViewControllerDelegate : ObjectProtocol {
   func personViewController(personViewController: ABPersonViewController, shouldPerformDefaultActionForPerson person: ABRecord, property: ABPropertyID, identifier: ABMultiValueIdentifier) -> Bool
 }
 class ABUnknownPersonViewController : UIViewController {
@@ -80,11 +80,11 @@ class ABUnknownPersonViewController : UIViewController {
   var message: String?
   var allowsActions: Bool
   var allowsAddingToAddressBook: Bool
-  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder aDecoder: NSCoder)
+  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
-protocol ABUnknownPersonViewControllerDelegate : NSObjectProtocol {
+protocol ABUnknownPersonViewControllerDelegate : ObjectProtocol {
   func unknownPersonViewController(unknownCardViewController: ABUnknownPersonViewController, didResolveToPerson person: ABRecord?)
   optional func unknownPersonViewController(personViewController: ABUnknownPersonViewController, shouldPerformDefaultActionForPerson person: ABRecord, property: ABPropertyID, identifier: ABMultiValueIdentifier) -> Bool
 }

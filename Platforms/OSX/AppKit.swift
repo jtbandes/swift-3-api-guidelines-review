@@ -15,7 +15,7 @@ var NSSharingServiceNotConfiguredError: Int { get }
 var NSSharingServiceErrorMinimum: Int { get }
 var NSSharingServiceErrorMaximum: Int { get }
 class NSATSTypesetter : NSTypesetter {
-  class func sharedTypesetter() -> NSATSTypesetter
+  class func shared() -> NSATSTypesetter
   init()
 }
 extension NSATSTypesetter {
@@ -25,45 +25,45 @@ extension NSATSTypesetter {
   var typesetterBehavior: NSTypesetterBehavior
   var hyphenationFactor: Float
   var lineFragmentPadding: CGFloat
-  func substituteFontForFont(originalFont: NSFont) -> NSFont
+  func substituteFontFor(originalFont: NSFont) -> NSFont
   func textTabForGlyphLocation(glyphLocation: CGFloat, writingDirection direction: NSWritingDirection, maxLocation: CGFloat) -> NSTextTab?
   var bidiProcessingEnabled: Bool
-  unowned(unsafe) var attributedString: @sil_unmanaged NSAttributedString?
+  unowned(unsafe) var attributedString: @sil_unmanaged AttributedString?
   func setParagraphGlyphRange(paragraphRange: NSRange, separatorGlyphRange paragraphSeparatorRange: NSRange)
   var paragraphGlyphRange: NSRange { get }
   var paragraphSeparatorGlyphRange: NSRange { get }
-  func layoutParagraphAtPoint(lineFragmentOrigin: UnsafeMutablePointer<NSPoint>) -> Int
-  func lineSpacingAfterGlyphAtIndex(glyphIndex: Int, withProposedLineFragmentRect rect: NSRect) -> CGFloat
-  func paragraphSpacingBeforeGlyphAtIndex(glyphIndex: Int, withProposedLineFragmentRect rect: NSRect) -> CGFloat
-  func paragraphSpacingAfterGlyphAtIndex(glyphIndex: Int, withProposedLineFragmentRect rect: NSRect) -> CGFloat
+  func layoutParagraphAt(lineFragmentOrigin: UnsafeMutablePointer<Point>) -> Int
+  func lineSpacingAfterGlyphAt(glyphIndex: Int, withProposedLineFragmentRect rect: Rect) -> CGFloat
+  func paragraphSpacingBeforeGlyphAt(glyphIndex: Int, withProposedLineFragmentRect rect: Rect) -> CGFloat
+  func paragraphSpacingAfterGlyphAt(glyphIndex: Int, withProposedLineFragmentRect rect: Rect) -> CGFloat
   unowned(unsafe) var layoutManager: @sil_unmanaged NSLayoutManager? { get }
   unowned(unsafe) var currentTextContainer: @sil_unmanaged NSTextContainer? { get }
   func setHardInvalidation(flag: Bool, forGlyphRange glyphRange: NSRange)
-  func getLineFragmentRect(lineFragmentRect: UnsafeMutablePointer<NSRect>, usedRect lineFragmentUsedRect: UnsafeMutablePointer<NSRect>, forParagraphSeparatorGlyphRange paragraphSeparatorGlyphRange: NSRange, atProposedOrigin lineOrigin: NSPoint)
+  func getLineFragmentRect(lineFragmentRect: UnsafeMutablePointer<Rect>, usedRect lineFragmentUsedRect: UnsafeMutablePointer<Rect>, forParagraphSeparatorGlyphRange paragraphSeparatorGlyphRange: NSRange, atProposedOrigin lineOrigin: Point)
 }
 extension NSATSTypesetter {
-  func willSetLineFragmentRect(lineRect: UnsafeMutablePointer<NSRect>, forGlyphRange glyphRange: NSRange, usedRect: UnsafeMutablePointer<NSRect>, baselineOffset: UnsafeMutablePointer<CGFloat>)
-  func shouldBreakLineByWordBeforeCharacterAtIndex(charIndex: Int) -> Bool
-  func shouldBreakLineByHyphenatingBeforeCharacterAtIndex(charIndex: Int) -> Bool
-  func hyphenationFactorForGlyphAtIndex(glyphIndex: Int) -> Float
-  func hyphenCharacterForGlyphAtIndex(glyphIndex: Int) -> UTF32Char
-  func boundingBoxForControlGlyphAtIndex(glyphIndex: Int, forTextContainer textContainer: NSTextContainer, proposedLineFragment proposedRect: NSRect, glyphPosition: NSPoint, characterIndex charIndex: Int) -> NSRect
+  func willSetLineFragmentRect(lineRect: UnsafeMutablePointer<Rect>, forGlyphRange glyphRange: NSRange, usedRect: UnsafeMutablePointer<Rect>, baselineOffset: UnsafeMutablePointer<CGFloat>)
+  func shouldBreakLineByWordBeforeCharacterAt(charIndex: Int) -> Bool
+  func shouldBreakLineByHyphenatingBeforeCharacterAt(charIndex: Int) -> Bool
+  func hyphenationFactorForGlyphAt(glyphIndex: Int) -> Float
+  func hyphenCharacterForGlyphAt(glyphIndex: Int) -> UTF32Char
+  func boundingBoxForControlGlyphAt(glyphIndex: Int, forTextContainer textContainer: NSTextContainer, proposedLineFragment proposedRect: Rect, glyphPosition: Point, characterIndex charIndex: Int) -> Rect
 }
 extension NSATSTypesetter {
-  func characterRangeForGlyphRange(glyphRange: NSRange, actualGlyphRange: NSRangePointer) -> NSRange
-  func glyphRangeForCharacterRange(charRange: NSRange, actualCharacterRange actualCharRange: NSRangePointer) -> NSRange
-  func getGlyphsInRange(glyphsRange: NSRange, glyphs glyphBuffer: UnsafeMutablePointer<NSGlyph>, characterIndexes charIndexBuffer: UnsafeMutablePointer<Int>, glyphInscriptions inscribeBuffer: UnsafeMutablePointer<NSGlyphInscription>, elasticBits elasticBuffer: UnsafeMutablePointer<ObjCBool>) -> Int
-  func setLineFragmentRect(fragmentRect: NSRect, forGlyphRange glyphRange: NSRange, usedRect: NSRect, baselineOffset: CGFloat)
-  func substituteGlyphsInRange(glyphRange: NSRange, withGlyphs glyphs: UnsafeMutablePointer<NSGlyph>)
+  func characterRangeForGlyphRange(glyphRange: NSRange, actualGlyphRange: RangePointer) -> NSRange
+  func glyphRangeForCharacterRange(charRange: NSRange, actualCharacterRange actualCharRange: RangePointer) -> NSRange
+  func getGlyphsIn(glyphsRange: NSRange, glyphs glyphBuffer: UnsafeMutablePointer<NSGlyph>, characterIndexes charIndexBuffer: UnsafeMutablePointer<Int>, glyphInscriptions inscribeBuffer: UnsafeMutablePointer<NSGlyphInscription>, elasticBits elasticBuffer: UnsafeMutablePointer<ObjCBool>) -> Int
+  func setLineFragmentRect(fragmentRect: Rect, forGlyphRange glyphRange: NSRange, usedRect: Rect, baselineOffset: CGFloat)
+  func substituteGlyphsIn(glyphRange: NSRange, withGlyphs glyphs: UnsafeMutablePointer<NSGlyph>)
   func insertGlyph(glyph: NSGlyph, atGlyphIndex glyphIndex: Int, characterIndex: Int)
-  func deleteGlyphsInRange(glyphRange: NSRange)
+  func deleteGlyphsIn(glyphRange: NSRange)
   func setNotShownAttribute(flag: Bool, forGlyphRange glyphRange: NSRange)
   func setDrawsOutsideLineFragment(flag: Bool, forGlyphRange glyphRange: NSRange)
-  func setLocation(location: NSPoint, withAdvancements advancements: UnsafePointer<CGFloat>, forStartOfGlyphRange glyphRange: NSRange)
-  func setAttachmentSize(attachmentSize: NSSize, forGlyphRange glyphRange: NSRange)
+  func setLocation(location: Point, withAdvancements advancements: UnsafePointer<CGFloat>, forStartOfGlyphRange glyphRange: NSRange)
+  func setAttachmentSize(attachmentSize: Size, forGlyphRange glyphRange: NSRange)
   func setBidiLevels(levels: UnsafePointer<UInt8>, forGlyphRange glyphRange: NSRange)
 }
-extension NSObject {
+extension Object {
   class func accessibilityAttributeNames() -> [AnyObject]
   func accessibilityAttributeNames() -> [AnyObject]
   class func accessibilityAttributeValue(attribute: String) -> AnyObject?
@@ -84,8 +84,8 @@ extension NSObject {
   func accessibilityPerformAction(action: String)
   class func accessibilityIsIgnored() -> Bool
   func accessibilityIsIgnored() -> Bool
-  class func accessibilityHitTest(point: NSPoint) -> AnyObject?
-  func accessibilityHitTest(point: NSPoint) -> AnyObject?
+  class func accessibilityHitTest(point: Point) -> AnyObject?
+  func accessibilityHitTest(point: Point) -> AnyObject?
   var accessibilityFocusedUIElement: AnyObject? { get }
   class func accessibilityIndexOfChild(child: AnyObject) -> Int
   func accessibilityIndexOfChild(child: AnyObject) -> Int
@@ -103,12 +103,12 @@ extension NSWorkspace {
   var accessibilityDisplayShouldReduceTransparency: Bool { get }
 }
 let NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification: String
-extension NSObject {
+extension Object {
   class func accessibilitySetOverrideValue(value: AnyObject?, forAttribute attribute: String) -> Bool
   func accessibilitySetOverrideValue(value: AnyObject?, forAttribute attribute: String) -> Bool
 }
-func NSAccessibilityFrameInView(parentView: NSView, _ frame: NSRect) -> NSRect
-func NSAccessibilityPointInView(parentView: NSView, _ point: NSPoint) -> NSPoint
+func NSAccessibilityFrameInView(parentView: NSView, _ frame: Rect) -> Rect
+func NSAccessibilityPointInView(parentView: NSView, _ point: Point) -> Point
 func NSAccessibilitySetMayContainProtectedContent(flag: Bool) -> Bool
 func NSAccessibilityRoleDescription(role: String, _ subrole: String?) -> String?
 func NSAccessibilityRoleDescriptionForUIElement(element: AnyObject) -> String?
@@ -456,7 +456,7 @@ let NSAccessibilityFullScreenButtonSubrole: String
 let NSAccessibilityToggleSubrole: String
 let NSAccessibilitySwitchSubrole: String
 let NSAccessibilityDescriptionListSubrole: String
-func NSAccessibilityPostNotificationWithUserInfo(element: AnyObject, _ notification: String, _ userInfo: [NSObject : AnyObject])
+func NSAccessibilityPostNotificationWithUserInfo(element: AnyObject, _ notification: String, _ userInfo: [Object : AnyObject])
 let NSAccessibilityUIElementsKey: String
 let NSAccessibilityPriorityKey: String
 let NSAccessibilityAnnouncementKey: String
@@ -467,26 +467,26 @@ enum NSAccessibilityPriorityLevel : Int {
   case Medium
   case High
 }
-class NSAccessibilityElement : NSObject, NSAccessibility {
-  class func accessibilityElementWithRole(role: String, frame: NSRect, label: String?, parent: AnyObject?) -> AnyObject
+class NSAccessibilityElement : Object, NSAccessibility {
+  class func accessibilityElementWithRole(role: String, frame: Rect, label: String?, parent: AnyObject?) -> AnyObject
   func accessibilityAddChildElement(childElement: NSAccessibilityElement)
-  func accessibilityFrameInParentSpace() -> NSRect
-  func setAccessibilityFrameInParentSpace(accessibilityFrameInParentSpace: NSRect)
+  func accessibilityFrameInParentSpace() -> Rect
+  func setAccessibilityFrameInParentSpace(accessibilityFrameInParentSpace: Rect)
   init()
-  func accessibilityLayoutPointForScreenPoint(point: NSPoint) -> NSPoint
-  func accessibilityLayoutSizeForScreenSize(size: NSSize) -> NSSize
-  func accessibilityScreenPointForLayoutPoint(point: NSPoint) -> NSPoint
-  func accessibilityScreenSizeForLayoutSize(size: NSSize) -> NSSize
+  func accessibilityLayoutPointForScreenPoint(point: Point) -> Point
+  func accessibilityLayoutSizeForScreenSize(size: Size) -> Size
+  func accessibilityScreenPointForLayoutPoint(point: Point) -> Point
+  func accessibilityScreenSizeForLayoutSize(size: Size) -> Size
   func accessibilityCellForColumn(column: Int, row: Int) -> AnyObject?
-  func accessibilityAttributedStringForRange(range: NSRange) -> NSAttributedString?
+  func accessibilityAttributedStringFor(range: NSRange) -> AttributedString?
   func accessibilityRangeForLine(line: Int) -> NSRange
-  func accessibilityStringForRange(range: NSRange) -> String?
-  func accessibilityRangeForPosition(point: NSPoint) -> NSRange
-  func accessibilityRangeForIndex(index: Int) -> NSRange
-  func accessibilityFrameForRange(range: NSRange) -> NSRect
-  func accessibilityRTFForRange(range: NSRange) -> NSData?
-  func accessibilityStyleRangeForIndex(index: Int) -> NSRange
-  func accessibilityLineForIndex(index: Int) -> Int
+  func accessibilityStringFor(range: NSRange) -> String?
+  func accessibilityRangeForPosition(point: Point) -> NSRange
+  func accessibilityRangeFor(index: Int) -> NSRange
+  func accessibilityFrameFor(range: NSRange) -> Rect
+  func accessibilityRTFFor(range: NSRange) -> Data?
+  func accessibilityStyleRangeFor(index: Int) -> NSRange
+  func accessibilityLineFor(index: Int) -> Int
   func accessibilityPerformCancel() -> Bool
   func accessibilityPerformConfirm() -> Bool
   func accessibilityPerformDecrement() -> Bool
@@ -501,16 +501,16 @@ class NSAccessibilityElement : NSObject, NSAccessibility {
   func isAccessibilitySelectorAllowed(selector: Selector) -> Bool
   func isAccessibilityElement() -> Bool
   func setAccessibilityElement(accessibilityElement: Bool)
-  func accessibilityFrame() -> NSRect
-  func setAccessibilityFrame(accessibilityFrame: NSRect)
+  func accessibilityFrame() -> Rect
+  func setAccessibilityFrame(accessibilityFrame: Rect)
   func isAccessibilityFocused() -> Bool
   func setAccessibilityFocused(accessibilityFocused: Bool)
-  func accessibilityActivationPoint() -> NSPoint
-  func setAccessibilityActivationPoint(accessibilityActivationPoint: NSPoint)
+  func accessibilityActivationPoint() -> Point
+  func setAccessibilityActivationPoint(accessibilityActivationPoint: Point)
   func accessibilityTopLevelUIElement() -> AnyObject?
   func setAccessibilityTopLevelUIElement(accessibilityTopLevelUIElement: AnyObject?)
-  func accessibilityURL() -> NSURL?
-  func setAccessibilityURL(accessibilityURL: NSURL?)
+  func accessibilityURL() -> URL?
+  func setAccessibilityURL(accessibilityURL: URL?)
   func accessibilityValue() -> AnyObject?
   func setAccessibilityValue(accessibilityValue: AnyObject?)
   func accessibilityValueDescription() -> String?
@@ -647,8 +647,8 @@ class NSAccessibilityElement : NSObject, NSAccessibility {
   func setAccessibilityHorizontalScrollBar(accessibilityHorizontalScrollBar: AnyObject?)
   func accessibilityVerticalScrollBar() -> AnyObject?
   func setAccessibilityVerticalScrollBar(accessibilityVerticalScrollBar: AnyObject?)
-  func accessibilityAllowedValues() -> [NSNumber]?
-  func setAccessibilityAllowedValues(accessibilityAllowedValues: [NSNumber]?)
+  func accessibilityAllowedValues() -> [Number]?
+  func setAccessibilityAllowedValues(accessibilityAllowedValues: [Number]?)
   func accessibilityLabelUIElements() -> [AnyObject]?
   func setAccessibilityLabelUIElements(accessibilityLabelUIElements: [AnyObject]?)
   func accessibilityLabelValue() -> Float
@@ -709,8 +709,8 @@ class NSAccessibilityElement : NSObject, NSAccessibility {
   func setAccessibilitySelectedText(accessibilitySelectedText: String?)
   func accessibilitySelectedTextRange() -> NSRange
   func setAccessibilitySelectedTextRange(accessibilitySelectedTextRange: NSRange)
-  func accessibilitySelectedTextRanges() -> [NSValue]?
-  func setAccessibilitySelectedTextRanges(accessibilitySelectedTextRanges: [NSValue]?)
+  func accessibilitySelectedTextRanges() -> [Value]?
+  func setAccessibilitySelectedTextRanges(accessibilitySelectedTextRanges: [Value]?)
   func accessibilityToolbarButton() -> AnyObject?
   func setAccessibilityToolbarButton(accessibilityToolbarButton: AnyObject?)
   func isAccessibilityModal() -> Bool
@@ -736,8 +736,8 @@ class NSAccessibilityElement : NSObject, NSAccessibility {
   func isAccessibilityMinimized() -> Bool
   func setAccessibilityMinimized(accessibilityMinimized: Bool)
 }
-protocol NSAccessibilityElementProtocol : NSObjectProtocol {
-  func accessibilityFrame() -> NSRect
+protocol NSAccessibilityElementProtocol : ObjectProtocol {
+  func accessibilityFrame() -> Rect
   func accessibilityParent() -> AnyObject?
   optional func isAccessibilityFocused() -> Bool
   optional func accessibilityIdentifier() -> String
@@ -754,24 +754,24 @@ protocol NSAccessibilitySwitch : NSAccessibilityButton {
   optional func accessibilityPerformDecrement() -> Bool
 }
 protocol NSAccessibilityRadioButton : NSAccessibilityButton {
-  func accessibilityValue() -> NSNumber?
+  func accessibilityValue() -> Number?
 }
 protocol NSAccessibilityCheckBox : NSAccessibilityButton {
-  func accessibilityValue() -> NSNumber?
+  func accessibilityValue() -> Number?
 }
 protocol NSAccessibilityStaticText : NSAccessibilityElementProtocol {
   func accessibilityValue() -> String?
-  optional func accessibilityAttributedStringForRange(range: NSRange) -> NSAttributedString?
+  optional func accessibilityAttributedStringFor(range: NSRange) -> AttributedString?
   optional func accessibilityVisibleCharacterRange() -> NSRange
 }
 protocol NSAccessibilityNavigableStaticText : NSAccessibilityStaticText {
-  func accessibilityStringForRange(range: NSRange) -> String?
-  func accessibilityLineForIndex(index: Int) -> Int
+  func accessibilityStringFor(range: NSRange) -> String?
+  func accessibilityLineFor(index: Int) -> Int
   func accessibilityRangeForLine(lineNumber: Int) -> NSRange
-  func accessibilityFrameForRange(range: NSRange) -> NSRect
+  func accessibilityFrameFor(range: NSRange) -> Rect
 }
 protocol NSAccessibilityProgressIndicator : NSAccessibilityGroup {
-  func accessibilityValue() -> NSNumber?
+  func accessibilityValue() -> Number?
 }
 protocol NSAccessibilityStepper : NSAccessibilityElementProtocol {
   func accessibilityLabel() -> String?
@@ -823,23 +823,23 @@ protocol NSAccessibilityLayoutArea : NSAccessibilityGroup {
   func accessibilityFocusedUIElement() -> AnyObject
 }
 protocol NSAccessibilityLayoutItem : NSAccessibilityGroup {
-  optional func setAccessibilityFrame(frame: NSRect)
+  optional func setAccessibilityFrame(frame: Rect)
 }
-protocol NSAccessibility : NSObjectProtocol {
-  func accessibilityLayoutPointForScreenPoint(point: NSPoint) -> NSPoint
-  func accessibilityLayoutSizeForScreenSize(size: NSSize) -> NSSize
-  func accessibilityScreenPointForLayoutPoint(point: NSPoint) -> NSPoint
-  func accessibilityScreenSizeForLayoutSize(size: NSSize) -> NSSize
+protocol NSAccessibility : ObjectProtocol {
+  func accessibilityLayoutPointForScreenPoint(point: Point) -> Point
+  func accessibilityLayoutSizeForScreenSize(size: Size) -> Size
+  func accessibilityScreenPointForLayoutPoint(point: Point) -> Point
+  func accessibilityScreenSizeForLayoutSize(size: Size) -> Size
   func accessibilityCellForColumn(column: Int, row: Int) -> AnyObject?
-  func accessibilityAttributedStringForRange(range: NSRange) -> NSAttributedString?
+  func accessibilityAttributedStringFor(range: NSRange) -> AttributedString?
   func accessibilityRangeForLine(line: Int) -> NSRange
-  func accessibilityStringForRange(range: NSRange) -> String?
-  func accessibilityRangeForPosition(point: NSPoint) -> NSRange
-  func accessibilityRangeForIndex(index: Int) -> NSRange
-  func accessibilityFrameForRange(range: NSRange) -> NSRect
-  func accessibilityRTFForRange(range: NSRange) -> NSData?
-  func accessibilityStyleRangeForIndex(index: Int) -> NSRange
-  func accessibilityLineForIndex(index: Int) -> Int
+  func accessibilityStringFor(range: NSRange) -> String?
+  func accessibilityRangeForPosition(point: Point) -> NSRange
+  func accessibilityRangeFor(index: Int) -> NSRange
+  func accessibilityFrameFor(range: NSRange) -> Rect
+  func accessibilityRTFFor(range: NSRange) -> Data?
+  func accessibilityStyleRangeFor(index: Int) -> NSRange
+  func accessibilityLineFor(index: Int) -> Int
   func accessibilityPerformCancel() -> Bool
   func accessibilityPerformConfirm() -> Bool
   func accessibilityPerformDecrement() -> Bool
@@ -854,16 +854,16 @@ protocol NSAccessibility : NSObjectProtocol {
   func isAccessibilitySelectorAllowed(selector: Selector) -> Bool
   func isAccessibilityElement() -> Bool
   func setAccessibilityElement(accessibilityElement: Bool)
-  func accessibilityFrame() -> NSRect
-  func setAccessibilityFrame(accessibilityFrame: NSRect)
+  func accessibilityFrame() -> Rect
+  func setAccessibilityFrame(accessibilityFrame: Rect)
   func isAccessibilityFocused() -> Bool
   func setAccessibilityFocused(accessibilityFocused: Bool)
-  func accessibilityActivationPoint() -> NSPoint
-  func setAccessibilityActivationPoint(accessibilityActivationPoint: NSPoint)
+  func accessibilityActivationPoint() -> Point
+  func setAccessibilityActivationPoint(accessibilityActivationPoint: Point)
   func accessibilityTopLevelUIElement() -> AnyObject?
   func setAccessibilityTopLevelUIElement(accessibilityTopLevelUIElement: AnyObject?)
-  func accessibilityURL() -> NSURL?
-  func setAccessibilityURL(accessibilityURL: NSURL?)
+  func accessibilityURL() -> URL?
+  func setAccessibilityURL(accessibilityURL: URL?)
   func accessibilityValue() -> AnyObject?
   func setAccessibilityValue(accessibilityValue: AnyObject?)
   func accessibilityValueDescription() -> String?
@@ -1000,8 +1000,8 @@ protocol NSAccessibility : NSObjectProtocol {
   func setAccessibilityHorizontalScrollBar(accessibilityHorizontalScrollBar: AnyObject?)
   func accessibilityVerticalScrollBar() -> AnyObject?
   func setAccessibilityVerticalScrollBar(accessibilityVerticalScrollBar: AnyObject?)
-  func accessibilityAllowedValues() -> [NSNumber]?
-  func setAccessibilityAllowedValues(accessibilityAllowedValues: [NSNumber]?)
+  func accessibilityAllowedValues() -> [Number]?
+  func setAccessibilityAllowedValues(accessibilityAllowedValues: [Number]?)
   func accessibilityLabelUIElements() -> [AnyObject]?
   func setAccessibilityLabelUIElements(accessibilityLabelUIElements: [AnyObject]?)
   func accessibilityLabelValue() -> Float
@@ -1062,8 +1062,8 @@ protocol NSAccessibility : NSObjectProtocol {
   func setAccessibilitySelectedText(accessibilitySelectedText: String?)
   func accessibilitySelectedTextRange() -> NSRange
   func setAccessibilitySelectedTextRange(accessibilitySelectedTextRange: NSRange)
-  func accessibilitySelectedTextRanges() -> [NSValue]?
-  func setAccessibilitySelectedTextRanges(accessibilitySelectedTextRanges: [NSValue]?)
+  func accessibilitySelectedTextRanges() -> [Value]?
+  func setAccessibilitySelectedTextRanges(accessibilitySelectedTextRanges: [Value]?)
   func accessibilityToolbarButton() -> AnyObject?
   func setAccessibilityToolbarButton(accessibilityToolbarButton: AnyObject?)
   func isAccessibilityModal() -> Bool
@@ -1096,10 +1096,10 @@ class NSActionCell : NSCell {
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-extension NSAffineTransform {
-  func transformBezierPath(aPath: NSBezierPath) -> NSBezierPath
+extension AffineTransform {
+  func transform(aPath: NSBezierPath) -> NSBezierPath
   func set()
   func concat()
 }
@@ -1110,8 +1110,8 @@ enum NSAlertStyle : UInt {
   case InformationalAlertStyle
   case CriticalAlertStyle
 }
-class NSAlert : NSObject {
-   init(error: NSError)
+class NSAlert : Object {
+   init(error: Error)
   var messageText: String
   var informativeText: String
   var icon: NSImage!
@@ -1126,26 +1126,26 @@ class NSAlert : NSObject {
   var accessoryView: NSView?
   func layout()
   func runModal() -> NSModalResponse
-  func beginSheetModalForWindow(window: NSWindow, modalDelegate delegate: AnyObject?, didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func beginSheetModalForWindow(sheetWindow: NSWindow, completionHandler handler: ((NSModalResponse) -> Void)?)
+  func beginSheetModalFor(window: NSWindow, modalDelegate delegate: AnyObject?, didEnd didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func beginSheetModalFor(sheetWindow: NSWindow, completionHandler handler: ((NSModalResponse) -> Void)? = nil)
   var window: NSWindow { get }
   init()
 }
 var NSAlertFirstButtonReturn: Int { get }
 var NSAlertSecondButtonReturn: Int { get }
 var NSAlertThirdButtonReturn: Int { get }
-protocol NSAlertDelegate : NSObjectProtocol {
+protocol NSAlertDelegate : ObjectProtocol {
   optional func alertShowHelp(alert: NSAlert) -> Bool
 }
-protocol NSAlignmentFeedbackToken : NSObjectProtocol {
+protocol NSAlignmentFeedbackToken : ObjectProtocol {
 }
-class NSAlignmentFeedbackFilter : NSObject {
+class NSAlignmentFeedbackFilter : Object {
   class func inputEventMask() -> NSEventMask
-  func updateWithEvent(event: NSEvent)
+  func updateWith(event: NSEvent)
   func updateWithPanRecognizer(panRecognizer: NSPanGestureRecognizer)
-  func alignmentFeedbackTokenForMovementInView(view: NSView?, previousPoint: NSPoint, alignedPoint: NSPoint, defaultPoint: NSPoint) -> NSAlignmentFeedbackToken?
-  func alignmentFeedbackTokenForHorizontalMovementInView(view: NSView?, previousX: CGFloat, alignedX: CGFloat, defaultX: CGFloat) -> NSAlignmentFeedbackToken?
-  func alignmentFeedbackTokenForVerticalMovementInView(view: NSView?, previousY: CGFloat, alignedY: CGFloat, defaultY: CGFloat) -> NSAlignmentFeedbackToken?
+  func alignmentFeedbackTokenForMovementIn(view: NSView?, previousPoint: Point, alignedPoint: Point, defaultPoint: Point) -> NSAlignmentFeedbackToken?
+  func alignmentFeedbackTokenForHorizontalMovementIn(view: NSView?, previousX: CGFloat, alignedX: CGFloat, defaultX: CGFloat) -> NSAlignmentFeedbackToken?
+  func alignmentFeedbackTokenForVerticalMovementIn(view: NSView?, previousY: CGFloat, alignedY: CGFloat, defaultY: CGFloat) -> NSAlignmentFeedbackToken?
   func performFeedback(alignmentFeedbackTokens: [NSAlignmentFeedbackToken], performanceTime: NSHapticFeedbackPerformanceTime)
   init()
 }
@@ -1167,30 +1167,30 @@ enum NSAnimationBlockingMode : UInt {
 typealias NSAnimationProgress = Float
 let NSAnimationProgressMarkNotification: String
 let NSAnimationProgressMark: String
-class NSAnimation : NSObject, NSCopying, NSCoding {
-  init(duration: NSTimeInterval, animationCurve: NSAnimationCurve)
-  func startAnimation()
-  func stopAnimation()
-  var animating: Bool { get }
+class NSAnimation : Object, Copying, Coding {
+  init(duration: TimeInterval, animationCurve: NSAnimationCurve)
+  func start()
+  func stop()
+  var isAnimating: Bool { get }
   var currentProgress: NSAnimationProgress
-  var duration: NSTimeInterval
+  var duration: TimeInterval
   var animationBlockingMode: NSAnimationBlockingMode
   var frameRate: Float
   var animationCurve: NSAnimationCurve
   var currentValue: Float { get }
   unowned(unsafe) var delegate: @sil_unmanaged NSAnimationDelegate?
-  var progressMarks: [NSNumber]
+  var progressMarks: [Number]
   func addProgressMark(progressMark: NSAnimationProgress)
   func removeProgressMark(progressMark: NSAnimationProgress)
   func startWhenAnimation(animation: NSAnimation, reachesProgress startProgress: NSAnimationProgress)
   func stopWhenAnimation(animation: NSAnimation, reachesProgress stopProgress: NSAnimationProgress)
-  func clearStartAnimation()
-  func clearStopAnimation()
+  func clearStart()
+  func clearStop()
   var runLoopModesForAnimating: [String]? { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 struct __aFlags {
   var delegateAnimationShouldStart: UInt32
@@ -1212,7 +1212,7 @@ struct __aSettings {
   init()
   init(animationCurve: UInt32, animationBlockingMode: UInt32, reserved: UInt32)
 }
-protocol NSAnimationDelegate : NSObjectProtocol {
+protocol NSAnimationDelegate : ObjectProtocol {
   optional func animationShouldStart(animation: NSAnimation) -> Bool
   optional func animationDidStop(animation: NSAnimation)
   optional func animationDidEnd(animation: NSAnimation)
@@ -1228,9 +1228,9 @@ let NSViewAnimationFadeOutEffect: String
 class NSViewAnimation : NSAnimation {
   init(viewAnimations: [[String : AnyObject]])
   var viewAnimations: [[String : AnyObject]]
-  init(duration: NSTimeInterval, animationCurve: NSAnimationCurve)
+  init(duration: TimeInterval, animationCurve: NSAnimationCurve)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 struct __vaFlags {
   var reserved: UInt32
@@ -1245,38 +1245,38 @@ protocol NSAnimatablePropertyContainer {
 }
 let NSAnimationTriggerOrderIn: String
 let NSAnimationTriggerOrderOut: String
-class NSAnimationContext : NSObject {
-  class func runAnimationGroup(changes: (NSAnimationContext) -> Void, completionHandler: (() -> Void)?)
+class NSAnimationContext : Object {
+  class func runAnimationGroup(changes: (NSAnimationContext) -> Void, completionHandler: (() -> Void)? = nil)
   class func beginGrouping()
   class func endGrouping()
-  class func currentContext() -> NSAnimationContext
-  var duration: NSTimeInterval
+  class func current() -> NSAnimationContext
+  var duration: TimeInterval
   var timingFunction: CAMediaTimingFunction?
   var completionHandler: (() -> Void)?
   var allowsImplicitAnimation: Bool
   init()
 }
-class NSAppearance : NSObject, NSCoding {
+class NSAppearance : Object, Coding {
   var name: String { get }
-  class func currentAppearance() -> NSAppearance
+  class func current() -> NSAppearance
   class func setCurrentAppearance(appearance: NSAppearance?)
    init?(named name: String)
-  init?(appearanceNamed name: String, bundle: NSBundle?)
+  init?(appearanceNamed name: String, bundle: Bundle?)
   var allowsVibrancy: Bool { get }
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let NSAppearanceNameAqua: String
 let NSAppearanceNameLightContent: String
 let NSAppearanceNameVibrantDark: String
 let NSAppearanceNameVibrantLight: String
-protocol NSAppearanceCustomization : NSObjectProtocol {
+protocol NSAppearanceCustomization : ObjectProtocol {
   var appearance: NSAppearance? { get set }
   var effectiveAppearance: NSAppearance { get }
 }
-extension NSAppleScript {
-  var richTextSource: NSAttributedString? { get }
+extension AppleScript {
+  var richTextSource: AttributedString? { get }
 }
 let NSAppKitVersionNumber: Double
 var NSAppKitVersionNumber10_0: Int32 { get }
@@ -1342,7 +1342,7 @@ struct NSApplicationOcclusionState : OptionSetType {
 }
 typealias NSModalSession = COpaquePointer
 class NSApplication : NSResponder, NSUserInterfaceValidations, NSAccessibilityElementProtocol, NSAccessibility {
-  class func sharedApplication() -> NSApplication
+  class func shared() -> NSApplication
   unowned(unsafe) var delegate: @sil_unmanaged NSApplicationDelegate?
   var context: NSGraphicsContext? { get }
   func hide(sender: AnyObject?)
@@ -1351,32 +1351,32 @@ class NSApplication : NSResponder, NSUserInterfaceValidations, NSAccessibilityEl
   func windowWithWindowNumber(windowNum: Int) -> NSWindow?
   unowned(unsafe) var mainWindow: @sil_unmanaged NSWindow? { get }
   unowned(unsafe) var keyWindow: @sil_unmanaged NSWindow? { get }
-  var active: Bool { get }
-  var hidden: Bool { get }
-  var running: Bool { get }
+  var isActive: Bool { get }
+  var isHidden: Bool { get }
+  var isRunning: Bool { get }
   func deactivate()
   func activateIgnoringOtherApps(flag: Bool)
   func hideOtherApplications(sender: AnyObject?)
   func unhideAllApplications(sender: AnyObject?)
   func finishLaunching()
   func run()
-  func runModalForWindow(theWindow: NSWindow) -> Int
+  func runModalFor(theWindow: NSWindow) -> Int
   func stop(sender: AnyObject?)
   func stopModal()
   func stopModalWithCode(returnCode: Int)
   func abortModal()
   var modalWindow: NSWindow? { get }
-  func beginModalSessionForWindow(theWindow: NSWindow) -> NSModalSession
-  func runModalSession(session: NSModalSession) -> Int
-  func endModalSession(session: NSModalSession)
+  func beginModalSessionFor(theWindow: NSWindow) -> NSModalSession
+  func run(session: NSModalSession) -> Int
+  func end(session: NSModalSession)
   func terminate(sender: AnyObject?)
   func requestUserAttention(requestType: NSRequestUserAttentionType) -> Int
   func cancelUserAttentionRequest(request: Int)
-  func nextEventMatchingMask(mask: Int, untilDate expiration: NSDate?, inMode mode: String, dequeue deqFlag: Bool) -> NSEvent?
-  func discardEventsMatchingMask(mask: Int, beforeEvent lastEvent: NSEvent?)
-  func postEvent(event: NSEvent, atStart flag: Bool)
+  func nextEventMatchingMask(mask: Int, until expiration: Date?, inMode mode: String, dequeue deqFlag: Bool) -> NSEvent?
+  func discardEventsMatchingMask(mask: Int, before lastEvent: NSEvent?)
+  func post(event: NSEvent, atStart flag: Bool)
   var currentEvent: NSEvent? { get }
-  func sendEvent(theEvent: NSEvent)
+  func send(theEvent: NSEvent)
   func preventWindowOrdering()
   func makeWindowsPerform(aSelector: Selector, inOrder flag: Bool) -> NSWindow?
   var windows: [NSWindow] { get }
@@ -1393,7 +1393,7 @@ class NSApplication : NSResponder, NSUserInterfaceValidations, NSAccessibilityEl
   func targetForAction(theAction: Selector, to theTarget: AnyObject?, from sender: AnyObject?) -> AnyObject?
   func tryToPerform(anAction: Selector, with anObject: AnyObject?) -> Bool
   func validRequestorForSendType(sendType: String, returnType: String) -> AnyObject?
-  func reportException(theException: NSException)
+  func report(theException: Exception)
   class func detachDrawingThread(selector: Selector, toTarget target: AnyObject, withObject argument: AnyObject?)
   func replyToApplicationShouldTerminate(shouldTerminate: Bool)
   func replyToOpenOrPrint(reply: NSApplicationDelegateReply)
@@ -1402,26 +1402,26 @@ class NSApplication : NSResponder, NSUserInterfaceValidations, NSAccessibilityEl
   var currentSystemPresentationOptions: NSApplicationPresentationOptions { get }
   var occlusionState: NSApplicationOcclusionState { get }
   init()
-  init?(coder: NSCoder)
-  func validateUserInterfaceItem(anItem: NSValidatedUserInterfaceItem) -> Bool
-  func accessibilityFrame() -> NSRect
+  init?(coder: Coder)
+  func validate(anItem: NSValidatedUserInterfaceItem) -> Bool
+  func accessibilityFrame() -> Rect
   func accessibilityParent() -> AnyObject?
   func isAccessibilityFocused() -> Bool
   func accessibilityIdentifier() -> String
-  func accessibilityLayoutPointForScreenPoint(point: NSPoint) -> NSPoint
-  func accessibilityLayoutSizeForScreenSize(size: NSSize) -> NSSize
-  func accessibilityScreenPointForLayoutPoint(point: NSPoint) -> NSPoint
-  func accessibilityScreenSizeForLayoutSize(size: NSSize) -> NSSize
+  func accessibilityLayoutPointForScreenPoint(point: Point) -> Point
+  func accessibilityLayoutSizeForScreenSize(size: Size) -> Size
+  func accessibilityScreenPointForLayoutPoint(point: Point) -> Point
+  func accessibilityScreenSizeForLayoutSize(size: Size) -> Size
   func accessibilityCellForColumn(column: Int, row: Int) -> AnyObject?
-  func accessibilityAttributedStringForRange(range: NSRange) -> NSAttributedString?
+  func accessibilityAttributedStringFor(range: NSRange) -> AttributedString?
   func accessibilityRangeForLine(line: Int) -> NSRange
-  func accessibilityStringForRange(range: NSRange) -> String?
-  func accessibilityRangeForPosition(point: NSPoint) -> NSRange
-  func accessibilityRangeForIndex(index: Int) -> NSRange
-  func accessibilityFrameForRange(range: NSRange) -> NSRect
-  func accessibilityRTFForRange(range: NSRange) -> NSData?
-  func accessibilityStyleRangeForIndex(index: Int) -> NSRange
-  func accessibilityLineForIndex(index: Int) -> Int
+  func accessibilityStringFor(range: NSRange) -> String?
+  func accessibilityRangeForPosition(point: Point) -> NSRange
+  func accessibilityRangeFor(index: Int) -> NSRange
+  func accessibilityFrameFor(range: NSRange) -> Rect
+  func accessibilityRTFFor(range: NSRange) -> Data?
+  func accessibilityStyleRangeFor(index: Int) -> NSRange
+  func accessibilityLineFor(index: Int) -> Int
   func accessibilityPerformCancel() -> Bool
   func accessibilityPerformConfirm() -> Bool
   func accessibilityPerformDecrement() -> Bool
@@ -1436,14 +1436,14 @@ class NSApplication : NSResponder, NSUserInterfaceValidations, NSAccessibilityEl
   func isAccessibilitySelectorAllowed(selector: Selector) -> Bool
   func isAccessibilityElement() -> Bool
   func setAccessibilityElement(accessibilityElement: Bool)
-  func setAccessibilityFrame(accessibilityFrame: NSRect)
+  func setAccessibilityFrame(accessibilityFrame: Rect)
   func setAccessibilityFocused(accessibilityFocused: Bool)
-  func accessibilityActivationPoint() -> NSPoint
-  func setAccessibilityActivationPoint(accessibilityActivationPoint: NSPoint)
+  func accessibilityActivationPoint() -> Point
+  func setAccessibilityActivationPoint(accessibilityActivationPoint: Point)
   func accessibilityTopLevelUIElement() -> AnyObject?
   func setAccessibilityTopLevelUIElement(accessibilityTopLevelUIElement: AnyObject?)
-  func accessibilityURL() -> NSURL?
-  func setAccessibilityURL(accessibilityURL: NSURL?)
+  func accessibilityURL() -> URL?
+  func setAccessibilityURL(accessibilityURL: URL?)
   func accessibilityValue() -> AnyObject?
   func setAccessibilityValue(accessibilityValue: AnyObject?)
   func accessibilityValueDescription() -> String?
@@ -1578,8 +1578,8 @@ class NSApplication : NSResponder, NSUserInterfaceValidations, NSAccessibilityEl
   func setAccessibilityHorizontalScrollBar(accessibilityHorizontalScrollBar: AnyObject?)
   func accessibilityVerticalScrollBar() -> AnyObject?
   func setAccessibilityVerticalScrollBar(accessibilityVerticalScrollBar: AnyObject?)
-  func accessibilityAllowedValues() -> [NSNumber]?
-  func setAccessibilityAllowedValues(accessibilityAllowedValues: [NSNumber]?)
+  func accessibilityAllowedValues() -> [Number]?
+  func setAccessibilityAllowedValues(accessibilityAllowedValues: [Number]?)
   func accessibilityLabelUIElements() -> [AnyObject]?
   func setAccessibilityLabelUIElements(accessibilityLabelUIElements: [AnyObject]?)
   func accessibilityLabelValue() -> Float
@@ -1640,8 +1640,8 @@ class NSApplication : NSResponder, NSUserInterfaceValidations, NSAccessibilityEl
   func setAccessibilitySelectedText(accessibilitySelectedText: String?)
   func accessibilitySelectedTextRange() -> NSRange
   func setAccessibilitySelectedTextRange(accessibilitySelectedTextRange: NSRange)
-  func accessibilitySelectedTextRanges() -> [NSValue]?
-  func setAccessibilitySelectedTextRanges(accessibilitySelectedTextRanges: [NSValue]?)
+  func accessibilitySelectedTextRanges() -> [Value]?
+  func setAccessibilitySelectedTextRanges(accessibilitySelectedTextRanges: [Value]?)
   func accessibilityToolbarButton() -> AnyObject?
   func setAccessibilityToolbarButton(accessibilityToolbarButton: AnyObject?)
   func isAccessibilityModal() -> Bool
@@ -1726,7 +1726,7 @@ extension NSApplication {
   func miniaturizeAll(sender: AnyObject?)
 }
 extension NSApplication {
-  var fullKeyboardAccessEnabled: Bool { get }
+  var isFullKeyboardAccessEnabled: Bool { get }
 }
 enum NSApplicationTerminateReply : UInt {
   init?(rawValue: UInt)
@@ -1743,7 +1743,7 @@ enum NSApplicationPrintReply : UInt {
   case PrintingFailure
   case PrintingReplyLater
 }
-protocol NSApplicationDelegate : NSObjectProtocol {
+protocol NSApplicationDelegate : ObjectProtocol {
   optional func applicationShouldTerminate(sender: NSApplication) -> NSApplicationTerminateReply
   optional func application(sender: NSApplication, openFile filename: String) -> Bool
   optional func application(sender: NSApplication, openFiles filenames: [String])
@@ -1756,46 +1756,46 @@ protocol NSApplicationDelegate : NSObjectProtocol {
   optional func applicationShouldTerminateAfterLastWindowClosed(sender: NSApplication) -> Bool
   optional func applicationShouldHandleReopen(sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool
   optional func applicationDockMenu(sender: NSApplication) -> NSMenu?
-  optional func application(application: NSApplication, willPresentError error: NSError) -> NSError
-  optional func application(application: NSApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData)
-  optional func application(application: NSApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError)
+  optional func application(application: NSApplication, willPresentError error: Error) -> Error
+  optional func application(application: NSApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
+  optional func application(application: NSApplication, didFailToRegisterForRemoteNotificationsWithError error: Error)
   optional func application(application: NSApplication, didReceiveRemoteNotification userInfo: [String : AnyObject])
-  optional func application(app: NSApplication, willEncodeRestorableState coder: NSCoder)
-  optional func application(app: NSApplication, didDecodeRestorableState coder: NSCoder)
+  optional func application(app: NSApplication, willEncodeRestorableState coder: Coder)
+  optional func application(app: NSApplication, didDecodeRestorableState coder: Coder)
   optional func application(application: NSApplication, willContinueUserActivityWithType userActivityType: String) -> Bool
-  optional func application(application: NSApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]) -> Void) -> Bool
-  optional func application(application: NSApplication, didFailToContinueUserActivityWithType userActivityType: String, error: NSError)
-  optional func application(application: NSApplication, didUpdateUserActivity userActivity: NSUserActivity)
-  optional func applicationWillFinishLaunching(notification: NSNotification)
-  optional func applicationDidFinishLaunching(notification: NSNotification)
-  optional func applicationWillHide(notification: NSNotification)
-  optional func applicationDidHide(notification: NSNotification)
-  optional func applicationWillUnhide(notification: NSNotification)
-  optional func applicationDidUnhide(notification: NSNotification)
-  optional func applicationWillBecomeActive(notification: NSNotification)
-  optional func applicationDidBecomeActive(notification: NSNotification)
-  optional func applicationWillResignActive(notification: NSNotification)
-  optional func applicationDidResignActive(notification: NSNotification)
-  optional func applicationWillUpdate(notification: NSNotification)
-  optional func applicationDidUpdate(notification: NSNotification)
-  optional func applicationWillTerminate(notification: NSNotification)
-  optional func applicationDidChangeScreenParameters(notification: NSNotification)
-  optional func applicationDidChangeOcclusionState(notification: NSNotification)
+  optional func application(application: NSApplication, continue userActivity: UserActivity, restorationHandler: ([AnyObject]) -> Void) -> Bool
+  optional func application(application: NSApplication, didFailToContinueUserActivityWithType userActivityType: String, error: Error)
+  optional func application(application: NSApplication, didUpdateUserActivity userActivity: UserActivity)
+  optional func applicationWillFinishLaunching(notification: Notification)
+  optional func applicationDidFinishLaunching(notification: Notification)
+  optional func applicationWillHide(notification: Notification)
+  optional func applicationDidHide(notification: Notification)
+  optional func applicationWillUnhide(notification: Notification)
+  optional func applicationDidUnhide(notification: Notification)
+  optional func applicationWillBecomeActive(notification: Notification)
+  optional func applicationDidBecomeActive(notification: Notification)
+  optional func applicationWillResignActive(notification: Notification)
+  optional func applicationDidResignActive(notification: Notification)
+  optional func applicationWillUpdate(notification: Notification)
+  optional func applicationDidUpdate(notification: Notification)
+  optional func applicationWillTerminate(notification: Notification)
+  optional func applicationDidChangeScreenParameters(notification: Notification)
+  optional func applicationDidChangeOcclusionState(notification: Notification)
 }
 extension NSApplication {
   var servicesMenu: NSMenu?
   func registerServicesMenuSendTypes(sendTypes: [String], returnTypes: [String])
 }
-protocol NSServicesMenuRequestor : NSObjectProtocol {
-  optional func writeSelectionToPasteboard(pboard: NSPasteboard, types: [String]) -> Bool
-  optional func readSelectionFromPasteboard(pboard: NSPasteboard) -> Bool
+protocol NSServicesMenuRequestor : ObjectProtocol {
+  optional func writeSelectionTo(pboard: NSPasteboard, types: [String]) -> Bool
+  optional func readSelectionFrom(pboard: NSPasteboard) -> Bool
 }
 extension NSApplication {
   var servicesProvider: AnyObject?
 }
 extension NSApplication {
   func orderFrontStandardAboutPanel(sender: AnyObject?)
-  func orderFrontStandardAboutPanelWithOptions(optionsDictionary: [String : AnyObject])
+  func orderFrontStandardAboutPanel(options optionsDictionary: [String : AnyObject] = [:])
 }
 extension NSApplication {
   var userInterfaceLayoutDirection: NSUserInterfaceLayoutDirection { get }
@@ -1843,7 +1843,7 @@ let NSApplicationLaunchIsDefaultLaunchKey: String
 let NSApplicationLaunchUserNotificationKey: String
 let NSApplicationDidChangeOcclusionStateNotification: String
 extension NSApplication {
-  func beginSheet(sheet: NSWindow, modalForWindow docWindow: NSWindow, modalDelegate: AnyObject?, didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func beginSheet(sheet: NSWindow, modalFor docWindow: NSWindow, modalDelegate: AnyObject?, didEnd didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
   func endSheet(sheet: NSWindow)
   func endSheet(sheet: NSWindow, returnCode: Int)
 }
@@ -1854,7 +1854,7 @@ extension NSApplication {
   var orderedDocuments: [NSDocument] { get }
   var orderedWindows: [NSWindow] { get }
 }
-extension NSObject {
+extension Object {
   class func application(sender: NSApplication, delegateHandlesKey key: String) -> Bool
   func application(sender: NSApplication, delegateHandlesKey key: String) -> Bool
 }
@@ -1863,21 +1863,21 @@ class NSArrayController : NSObjectController {
   var automaticallyRearrangesObjects: Bool
   var automaticRearrangementKeyPaths: [String]? { get }
   func didChangeArrangementCriteria()
-  var sortDescriptors: [NSSortDescriptor]
-  var filterPredicate: NSPredicate?
+  var sortDescriptors: [SortDescriptor]
+  var filterPredicate: Predicate?
   var clearsFilterPredicateOnInsertion: Bool
-  func arrangeObjects(objects: [AnyObject]) -> [AnyObject]
+  func arrange(objects: [AnyObject]) -> [AnyObject]
   var arrangedObjects: AnyObject { get }
   var avoidsEmptySelection: Bool
   var preservesSelection: Bool
   var selectsInsertedObjects: Bool
   var alwaysUsesMultipleValuesMarker: Bool
-  func setSelectionIndexes(indexes: NSIndexSet) -> Bool
-  @NSCopying var selectionIndexes: NSIndexSet { get }
+  func setSelectionIndexes(indexes: IndexSet) -> Bool
+  @NSCopying var selectionIndexes: IndexSet { get }
   func setSelectionIndex(index: Int) -> Bool
   var selectionIndex: Int { get }
-  func addSelectionIndexes(indexes: NSIndexSet) -> Bool
-  func removeSelectionIndexes(indexes: NSIndexSet) -> Bool
+  func addSelectionIndexes(indexes: IndexSet) -> Bool
+  func removeSelectionIndexes(indexes: IndexSet) -> Bool
   func setSelectedObjects(objects: [AnyObject]) -> Bool
   var selectedObjects: [AnyObject]! { get }
   func addSelectedObjects(objects: [AnyObject]) -> Bool
@@ -1890,16 +1890,16 @@ class NSArrayController : NSObjectController {
   func selectPrevious(sender: AnyObject?)
   var canSelectNext: Bool { get }
   var canSelectPrevious: Bool { get }
-  func addObject(object: AnyObject)
-  func addObjects(objects: [AnyObject])
-  func insertObject(object: AnyObject, atArrangedObjectIndex index: Int)
-  func insertObjects(objects: [AnyObject], atArrangedObjectIndexes indexes: NSIndexSet)
+  func add(object: AnyObject)
+  func add(objects: [AnyObject])
+  func insert(object: AnyObject, atArrangedObjectIndex index: Int)
+  func insert(objects: [AnyObject], atArrangedObjectIndexes indexes: IndexSet)
   func removeObjectAtArrangedObjectIndex(index: Int)
-  func removeObjectsAtArrangedObjectIndexes(indexes: NSIndexSet)
-  func removeObject(object: AnyObject)
-  func removeObjects(objects: [AnyObject])
+  func removeObjectsAtArrangedObjectIndexes(indexes: IndexSet)
+  func remove(object: AnyObject)
+  func remove(objects: [AnyObject])
   init(content: AnyObject?)
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init()
 }
 struct __arrayControllerFlags {
@@ -1973,11 +1973,11 @@ enum NSWritingDirectionFormatType : Int {
 let NSTextEffectLetterpressStyle: String
 var NSSpellingStateSpellingFlag: Int { get }
 var NSSpellingStateGrammarFlag: Int { get }
-extension NSMutableAttributedString {
-  func fixAttributesInRange(range: NSRange)
-  func fixFontAttributeInRange(range: NSRange)
-  func fixParagraphStyleAttributeInRange(range: NSRange)
-  func fixAttachmentAttributeInRange(range: NSRange)
+extension MutableAttributedString {
+  func fixAttributesIn(range: NSRange)
+  func fixFontAttributeIn(range: NSRange)
+  func fixParagraphStyleAttributeIn(range: NSRange)
+  func fixAttachmentAttributeIn(range: NSRange)
 }
 let NSPlainTextDocumentType: String
 let NSRTFTextDocumentType: String
@@ -2035,51 +2035,51 @@ let NSWebPreferencesDocumentOption: String
 let NSWebResourceLoadDelegateDocumentOption: String
 let NSTextSizeMultiplierDocumentOption: String
 let NSFileTypeDocumentOption: String
-extension NSAttributedString {
-  init(URL url: NSURL, options: [String : AnyObject], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
-  init(data: NSData, options: [String : AnyObject], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
-  func dataFromRange(range: NSRange, documentAttributes dict: [String : AnyObject]) throws -> NSData
-  func fileWrapperFromRange(range: NSRange, documentAttributes dict: [String : AnyObject]) throws -> NSFileWrapper
-  init?(RTF data: NSData, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
-  init?(RTFD data: NSData, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
-  init?(HTML data: NSData, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
-  init?(HTML data: NSData, baseURL base: NSURL, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
-  init?(docFormat data: NSData, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
-  init?(HTML data: NSData, options: [NSObject : AnyObject], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
-  init?(RTFDFileWrapper wrapper: NSFileWrapper, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
-  func RTFFromRange(range: NSRange, documentAttributes dict: [String : AnyObject]) -> NSData?
-  func RTFDFromRange(range: NSRange, documentAttributes dict: [String : AnyObject]) -> NSData?
-  func RTFDFileWrapperFromRange(range: NSRange, documentAttributes dict: [String : AnyObject]) -> NSFileWrapper?
-  func docFormatFromRange(range: NSRange, documentAttributes dict: [String : AnyObject]) -> NSData?
+extension AttributedString {
+  init(url: URL, options: [String : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
+  init(data: Data, options: [String : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
+  func dataFrom(range: NSRange, documentAttributes dict: [String : AnyObject] = [:]) throws -> Data
+  func fileWrapperFrom(range: NSRange, documentAttributes dict: [String : AnyObject] = [:]) throws -> FileWrapper
+  init?(rtf data: Data, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
+  init?(rtfd data: Data, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
+  init?(html data: Data, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
+  init?(html data: Data, baseURL base: URL, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
+  init?(docFormat data: Data, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
+  init?(html data: Data, options: [Object : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
+  init?(rtfdFileWrapper wrapper: FileWrapper, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
+  func rtfFrom(range: NSRange, documentAttributes dict: [String : AnyObject] = [:]) -> Data?
+  func rtfdFrom(range: NSRange, documentAttributes dict: [String : AnyObject] = [:]) -> Data?
+  func rtfdFileWrapperFrom(range: NSRange, documentAttributes dict: [String : AnyObject] = [:]) -> FileWrapper?
+  func docFormatFrom(range: NSRange, documentAttributes dict: [String : AnyObject] = [:]) -> Data?
 }
-extension NSMutableAttributedString {
-  func readFromURL(url: NSURL, options opts: [String : AnyObject], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>, error: ()) throws
-  func readFromData(data: NSData, options opts: [String : AnyObject], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>, error: ()) throws
+extension MutableAttributedString {
+  func readFrom(url: URL, options opts: [String : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>, error: ()) throws
+  func readFrom(data: Data, options opts: [String : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>, error: ()) throws
 }
-extension NSAttributedString {
-  func fontAttributesInRange(range: NSRange) -> [String : AnyObject]
-  func rulerAttributesInRange(range: NSRange) -> [String : AnyObject]
-  func containsAttachmentsInRange(range: NSRange) -> Bool
-  func lineBreakBeforeIndex(location: Int, withinRange aRange: NSRange) -> Int
-  func lineBreakByHyphenatingBeforeIndex(location: Int, withinRange aRange: NSRange) -> Int
-  func doubleClickAtIndex(location: Int) -> NSRange
-  func nextWordFromIndex(location: Int, forward isForward: Bool) -> Int
-  func rangeOfTextBlock(block: NSTextBlock, atIndex location: Int) -> NSRange
-  func rangeOfTextTable(table: NSTextTable, atIndex location: Int) -> NSRange
-  func rangeOfTextList(list: NSTextList, atIndex location: Int) -> NSRange
-  func itemNumberInTextList(list: NSTextList, atIndex location: Int) -> Int
+extension AttributedString {
+  func fontAttributesIn(range: NSRange) -> [String : AnyObject]
+  func rulerAttributesIn(range: NSRange) -> [String : AnyObject]
+  func containsAttachmentsIn(range: NSRange) -> Bool
+  func lineBreakBefore(location: Int, within aRange: NSRange) -> Int
+  func lineBreakByHyphenatingBefore(location: Int, within aRange: NSRange) -> Int
+  func doubleClickAt(location: Int) -> NSRange
+  func nextWordFrom(location: Int, forward isForward: Bool) -> Int
+  func rangeOf(block: NSTextBlock, at location: Int) -> NSRange
+  func rangeOf(table: NSTextTable, at location: Int) -> NSRange
+  func rangeOf(list: NSTextList, at location: Int) -> NSRange
+  func itemNumberIn(list: NSTextList, at location: Int) -> Int
 }
-extension NSAttributedString : NSPasteboardReading, NSPasteboardWriting {
+extension AttributedString : NSPasteboardReading, NSPasteboardWriting {
   class func textTypes() -> [String]
   class func textUnfilteredTypes() -> [String]
-  class func readableTypesForPasteboard(pasteboard: NSPasteboard) -> [String]
+  class func readableTypesFor(pasteboard: NSPasteboard) -> [String]
   class func readingOptionsForType(type: String, pasteboard: NSPasteboard) -> NSPasteboardReadingOptions
   init?(pasteboardPropertyList propertyList: AnyObject, ofType type: String)
-  func writableTypesForPasteboard(pasteboard: NSPasteboard) -> [String]
+  func writableTypesFor(pasteboard: NSPasteboard) -> [String]
   func writingOptionsForType(type: String, pasteboard: NSPasteboard) -> NSPasteboardWritingOptions
   func pasteboardPropertyListForType(type: String) -> AnyObject?
 }
-extension NSMutableAttributedString {
+extension MutableAttributedString {
   func superscriptRange(range: NSRange)
   func subscriptRange(range: NSRange)
   func unscriptRange(range: NSRange)
@@ -2090,15 +2090,15 @@ extension NSMutableAttributedString {
 let NSCharacterShapeAttributeName: String
 let NSUsesScreenFontsDocumentAttribute: String
 var NSUnderlineByWordMask: Int
-extension NSAttributedString {
+extension AttributedString {
   var containsAttachments: Bool { get }
-  init?(URL url: NSURL, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
+  init?(url: URL, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
   init?(path: String, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
-  func URLAtIndex(location: Int, effectiveRange: NSRangePointer) -> NSURL?
+  func urlAt(location: Int, effectiveRange: RangePointer) -> URL?
 }
-extension NSMutableAttributedString {
-  func readFromURL(url: NSURL, options: [NSObject : AnyObject], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) -> Bool
-  func readFromData(data: NSData, options: [NSObject : AnyObject], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) -> Bool
+extension MutableAttributedString {
+  func readFrom(url: URL, options: [Object : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) -> Bool
+  func readFrom(data: Data, options: [Object : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) -> Bool
 }
 enum NSLineCapStyle : UInt {
   init?(rawValue: UInt)
@@ -2128,15 +2128,15 @@ enum NSBezierPathElement : UInt {
   case CurveToBezierPathElement
   case ClosePathBezierPathElement
 }
-class NSBezierPath : NSObject, NSCopying, NSCoding {
-   init(rect: NSRect)
-   init(ovalInRect rect: NSRect)
-   init(roundedRect rect: NSRect, xRadius: CGFloat, yRadius: CGFloat)
-  class func fillRect(rect: NSRect)
-  class func strokeRect(rect: NSRect)
-  class func clipRect(rect: NSRect)
-  class func strokeLineFromPoint(point1: NSPoint, toPoint point2: NSPoint)
-  class func drawPackedGlyphs(packedGlyphs: UnsafePointer<Int8>, atPoint point: NSPoint)
+class NSBezierPath : Object, Copying, Coding {
+   init(rect: Rect)
+   init(ovalIn rect: Rect)
+   init(roundedRect rect: Rect, xRadius: CGFloat, yRadius: CGFloat)
+  class func fill(rect: Rect)
+  class func stroke(rect: Rect)
+  class func clip(rect: Rect)
+  class func strokeLineFrom(point1: Point, to point2: Point)
+  class func drawPackedGlyphs(packedGlyphs: UnsafePointer<Int8>, at point: Point)
   class func setDefaultMiterLimit(limit: CGFloat)
   class func defaultMiterLimit() -> CGFloat
   class func setDefaultFlatness(flatness: CGFloat)
@@ -2149,14 +2149,14 @@ class NSBezierPath : NSObject, NSCopying, NSCoding {
   class func defaultLineJoinStyle() -> NSLineJoinStyle
   class func setDefaultLineWidth(lineWidth: CGFloat)
   class func defaultLineWidth() -> CGFloat
-  func moveToPoint(point: NSPoint)
-  func lineToPoint(point: NSPoint)
-  func curveToPoint(endPoint: NSPoint, controlPoint1: NSPoint, controlPoint2: NSPoint)
-  func closePath()
+  func moveTo(point: Point)
+  func lineTo(point: Point)
+  func curveTo(endPoint: Point, controlPoint1: Point, controlPoint2: Point)
+  func close()
   func removeAllPoints()
-  func relativeMoveToPoint(point: NSPoint)
-  func relativeLineToPoint(point: NSPoint)
-  func relativeCurveToPoint(endPoint: NSPoint, controlPoint1: NSPoint, controlPoint2: NSPoint)
+  func relativeMoveTo(point: Point)
+  func relativeLineTo(point: Point)
+  func relativeCurveTo(endPoint: Point, controlPoint1: Point, controlPoint2: Point)
   var lineWidth: CGFloat
   var lineCapStyle: NSLineCapStyle
   var lineJoinStyle: NSLineJoinStyle
@@ -2169,33 +2169,33 @@ class NSBezierPath : NSObject, NSCopying, NSCoding {
   func fill()
   func addClip()
   func setClip()
-  @NSCopying var bezierPathByFlatteningPath: NSBezierPath { get }
-  @NSCopying var bezierPathByReversingPath: NSBezierPath { get }
-  func transformUsingAffineTransform(transform: NSAffineTransform)
-  var empty: Bool { get }
-  var currentPoint: NSPoint { get }
-  var controlPointBounds: NSRect { get }
-  var bounds: NSRect { get }
+  @NSCopying var flattening: NSBezierPath { get }
+  @NSCopying var reversing: NSBezierPath { get }
+  func transformUsing(transform: AffineTransform)
+  var isEmpty: Bool { get }
+  var currentPoint: Point { get }
+  var controlPointBounds: Rect { get }
+  var bounds: Rect { get }
   var elementCount: Int { get }
-  func elementAtIndex(index: Int, associatedPoints points: NSPointArray) -> NSBezierPathElement
-  func elementAtIndex(index: Int) -> NSBezierPathElement
-  func setAssociatedPoints(points: NSPointArray, atIndex index: Int)
-  func appendBezierPath(path: NSBezierPath)
-  func appendBezierPathWithRect(rect: NSRect)
-  func appendBezierPathWithPoints(points: NSPointArray, count: Int)
-  func appendBezierPathWithOvalInRect(rect: NSRect)
-  func appendBezierPathWithArcWithCenter(center: NSPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool)
-  func appendBezierPathWithArcWithCenter(center: NSPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat)
-  func appendBezierPathWithArcFromPoint(point1: NSPoint, toPoint point2: NSPoint, radius: CGFloat)
-  func appendBezierPathWithGlyph(glyph: NSGlyph, inFont font: NSFont)
-  func appendBezierPathWithGlyphs(glyphs: UnsafeMutablePointer<NSGlyph>, count: Int, inFont font: NSFont)
-  func appendBezierPathWithPackedGlyphs(packedGlyphs: UnsafePointer<Int8>)
-  func appendBezierPathWithRoundedRect(rect: NSRect, xRadius: CGFloat, yRadius: CGFloat)
-  func containsPoint(point: NSPoint) -> Bool
+  func elementAt(index: Int, associatedPoints points: PointArray) -> NSBezierPathElement
+  func elementAt(index: Int) -> NSBezierPathElement
+  func setAssociatedPoints(points: PointArray, at index: Int)
+  func append(path: NSBezierPath)
+  func appendWith(rect: Rect)
+  func appendWithPoints(points: PointArray, count: Int)
+  func appendWithOvalIn(rect: Rect)
+  func appendWithArcWithCenter(center: Point, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool)
+  func appendWithArcWithCenter(center: Point, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat)
+  func appendWithArcFrom(point1: Point, to point2: Point, radius: CGFloat)
+  func appendWithGlyph(glyph: NSGlyph, in font: NSFont)
+  func appendWithGlyphs(glyphs: UnsafeMutablePointer<NSGlyph>, count: Int, in font: NSFont)
+  func appendWithPackedGlyphs(packedGlyphs: UnsafePointer<Int8>)
+  func appendWithRoundedRect(rect: Rect, xRadius: CGFloat, yRadius: CGFloat)
+  func contains(point: Point) -> Bool
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 extension NSBezierPath {
 }
@@ -2256,17 +2256,17 @@ let NSImageGamma: String
 let NSImageProgressive: String
 let NSImageEXIFData: String
 let NSImageFallbackBackgroundColor: String
-class NSBitmapImageRep : NSImageRep, NSSecureCoding {
-  init?(focusedViewRect rect: NSRect)
+class NSBitmapImageRep : NSImageRep, SecureCoding {
+  init?(focusedViewRect rect: Rect)
   init?(bitmapDataPlanes planes: UnsafeMutablePointer<UnsafeMutablePointer<UInt8>>, pixelsWide width: Int, pixelsHigh height: Int, bitsPerSample bps: Int, samplesPerPixel spp: Int, hasAlpha alpha: Bool, isPlanar: Bool, colorSpaceName: String, bytesPerRow rBytes: Int, bitsPerPixel pBits: Int)
   init?(bitmapDataPlanes planes: UnsafeMutablePointer<UnsafeMutablePointer<UInt8>>, pixelsWide width: Int, pixelsHigh height: Int, bitsPerSample bps: Int, samplesPerPixel spp: Int, hasAlpha alpha: Bool, isPlanar: Bool, colorSpaceName: String, bitmapFormat: NSBitmapFormat, bytesPerRow rBytes: Int, bitsPerPixel pBits: Int)
-  init(CGImage cgImage: CGImage)
-  init(CIImage ciImage: CIImage)
-  class func imageRepsWithData(data: NSData) -> [NSImageRep]
-  init?(data: NSData)
+  init(cgImage: CGImage)
+  init(ciImage: CIImage)
+  class func imageRepsWith(data: Data) -> [NSImageRep]
+  init?(data: Data)
   var bitmapData: UnsafeMutablePointer<UInt8> { get }
   func getBitmapDataPlanes(data: UnsafeMutablePointer<UnsafeMutablePointer<UInt8>>)
-  var planar: Bool { get }
+  var isPlanar: Bool { get }
   var samplesPerPixel: Int { get }
   var bitsPerPixel: Int { get }
   var bytesPerRow: Int { get }
@@ -2275,26 +2275,26 @@ class NSBitmapImageRep : NSImageRep, NSSecureCoding {
   var bitmapFormat: NSBitmapFormat { get }
   func getCompression(compression: UnsafeMutablePointer<NSTIFFCompression>, factor: UnsafeMutablePointer<Float>)
   func setCompression(compression: NSTIFFCompression, factor: Float)
-  @NSCopying var TIFFRepresentation: NSData? { get }
-  func TIFFRepresentationUsingCompression(comp: NSTIFFCompression, factor: Float) -> NSData?
-  class func TIFFRepresentationOfImageRepsInArray(array: [NSImageRep]) -> NSData?
-  class func TIFFRepresentationOfImageRepsInArray(array: [NSImageRep], usingCompression comp: NSTIFFCompression, factor: Float) -> NSData?
+  @NSCopying var tiffRepresentation: Data? { get }
+  func tiffRepresentationUsing(comp: NSTIFFCompression, factor: Float) -> Data?
+  class func tiffRepresentationOfImageRepsIn(array: [NSImageRep]) -> Data?
+  class func tiffRepresentationOfImageRepsIn(array: [NSImageRep], usingCompression comp: NSTIFFCompression, factor: Float) -> Data?
   class func getTIFFCompressionTypes(list: UnsafeMutablePointer<UnsafePointer<NSTIFFCompression>>, count numTypes: UnsafeMutablePointer<Int>)
   class func localizedNameForTIFFCompressionType(compression: NSTIFFCompression) -> String?
   func canBeCompressedUsing(compression: NSTIFFCompression) -> Bool
-  func colorizeByMappingGray(midPoint: CGFloat, toColor midPointColor: NSColor?, blackMapping shadowColor: NSColor?, whiteMapping lightColor: NSColor?)
+  func colorizeByMappingGray(midPoint: CGFloat, to midPointColor: NSColor?, blackMapping shadowColor: NSColor?, whiteMapping lightColor: NSColor?)
   init(forIncrementalLoad: ())
-  func incrementalLoadFromData(data: NSData, complete: Bool) -> Int
+  func incrementalLoadFrom(data: Data, complete: Bool) -> Int
   func setColor(color: NSColor, atX x: Int, y: Int)
   func colorAtX(x: Int, y: Int) -> NSColor?
   func getPixel(p: UnsafeMutablePointer<Int>, atX x: Int, y: Int)
   func setPixel(p: UnsafeMutablePointer<Int>, atX x: Int, y: Int)
-  var CGImage: CGImage? { get }
+  var cgImage: CGImage? { get }
   var colorSpace: NSColorSpace { get }
-  func bitmapImageRepByConvertingToColorSpace(targetSpace: NSColorSpace, renderingIntent: NSColorRenderingIntent) -> NSBitmapImageRep?
-  func bitmapImageRepByRetaggingWithColorSpace(newSpace: NSColorSpace) -> NSBitmapImageRep?
+  func convertingTo(targetSpace: NSColorSpace, renderingIntent: NSColorRenderingIntent) -> NSBitmapImageRep?
+  func byRetaggingWith(newSpace: NSColorSpace) -> NSBitmapImageRep?
   init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   class func supportsSecureCoding() -> Bool
 }
 struct __bitmapRepFlags {
@@ -2315,8 +2315,8 @@ struct __bitmapRepFlags {
   init(bitsPerPixel: UInt32, isPlanar: UInt32, explicitPlanes: UInt32, imageSourceIsIndexed: UInt32, dataLoaded: UInt32, colorModel: UInt32, tierTwoInfoIsLoaded: UInt32, respectO: UInt32, compressionFactor: UInt32, imageNumber: UInt32, bitmapFormat: UInt32, cgImageIsPrimary: UInt32, compression: UInt32)
 }
 extension NSBitmapImageRep {
-  class func representationOfImageRepsInArray(imageReps: [NSImageRep], usingType storageType: NSBitmapImageFileType, properties: [String : AnyObject]) -> NSData?
-  func representationUsingType(storageType: NSBitmapImageFileType, properties: [String : AnyObject]) -> NSData?
+  class func representationOfImageRepsIn(imageReps: [NSImageRep], usingType storageType: NSBitmapImageFileType, properties: [String : AnyObject]) -> Data?
+  func representationUsing(storageType: NSBitmapImageFileType, properties: [String : AnyObject]) -> Data?
   func setProperty(property: String, withValue value: AnyObject?)
   func valueForProperty(property: String) -> AnyObject?
 }
@@ -2346,20 +2346,20 @@ class NSBox : NSView {
   var boxType: NSBoxType
   var title: String
   var titleFont: NSFont
-  var borderRect: NSRect { get }
-  var titleRect: NSRect { get }
+  var borderRect: Rect { get }
+  var titleRect: Rect { get }
   var titleCell: AnyObject { get }
   func sizeToFit()
-  var contentViewMargins: NSSize
-  func setFrameFromContentFrame(contentFrame: NSRect)
+  var contentViewMargins: Size
+  func setFrameFromContentFrame(contentFrame: Rect)
   unowned(unsafe) var contentView: @sil_unmanaged NSView?
-  var transparent: Bool
+  var isTransparent: Bool
   var borderWidth: CGFloat
   var cornerRadius: CGFloat
   @NSCopying var borderColor: NSColor
   @NSCopying var fillColor: NSColor
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 struct __bFlags {
@@ -2428,7 +2428,7 @@ enum NSBrowserDropOperation : UInt {
 class NSBrowser : NSControl {
   class func cellClass() -> AnyClass
   func loadColumnZero()
-  var loaded: Bool { get }
+  var isLoaded: Bool { get }
   var doubleAction: Selector
   func setCellClass(factoryId: AnyClass)
   var cellPrototype: AnyObject!
@@ -2437,7 +2437,7 @@ class NSBrowser : NSControl {
   var hasHorizontalScroller: Bool
   var autohidesScroller: Bool
   var separatesColumns: Bool
-  var titled: Bool
+  var isTitled: Bool
   var minColumnWidth: CGFloat
   var maxVisibleColumns: Int
   var allowsMultipleSelection: Bool
@@ -2445,11 +2445,11 @@ class NSBrowser : NSControl {
   var allowsEmptySelection: Bool
   var takesTitleFromPreviousColumn: Bool
   var sendsActionOnArrowKeys: Bool
-  func itemAtIndexPath(indexPath: NSIndexPath) -> AnyObject?
+  func itemAt(indexPath: IndexPath) -> AnyObject?
   func itemAtRow(row: Int, inColumn column: Int) -> AnyObject?
-  func indexPathForColumn(column: Int) -> NSIndexPath
+  func indexPathForColumn(column: Int) -> IndexPath
   func isLeafItem(item: AnyObject?) -> Bool
-  func reloadDataForRowIndexes(rowIndexes: NSIndexSet, inColumn column: Int)
+  func reloadDataForRowIndexes(rowIndexes: IndexSet, inColumn column: Int)
   func parentForItemsInColumn(column: Int) -> AnyObject?
   func scrollRowToVisible(row: Int, inColumn column: Int)
   func setTitle(aString: String, ofColumn column: Int)
@@ -2465,10 +2465,10 @@ class NSBrowser : NSControl {
   var selectedCells: [NSCell]? { get }
   func selectRow(row: Int, inColumn column: Int)
   func selectedRowInColumn(column: Int) -> Int
-  @NSCopying var selectionIndexPath: NSIndexPath
-  var selectionIndexPaths: [NSIndexPath]
-  func selectRowIndexes(indexes: NSIndexSet, inColumn column: Int)
-  func selectedRowIndexesInColumn(column: Int) -> NSIndexSet?
+  @NSCopying var selectionIndexPath: IndexPath
+  var selectionIndexPaths: [IndexPath]
+  func selectRowIndexes(indexes: IndexSet, inColumn column: Int)
+  func selectedRowIndexesInColumn(column: Int) -> IndexSet?
   func reloadColumn(column: Int)
   func validateVisibleColumns()
   func scrollColumnsRightBy(shiftAmount: Int)
@@ -2485,13 +2485,13 @@ class NSBrowser : NSControl {
   func doClick(sender: AnyObject?)
   func doDoubleClick(sender: AnyObject?)
   func sendAction() -> Bool
-  func titleFrameOfColumn(column: Int) -> NSRect
-  func drawTitleOfColumn(column: Int, inRect aRect: NSRect)
+  func titleFrameOfColumn(column: Int) -> Rect
+  func drawTitleOfColumn(column: Int, in aRect: Rect)
   var titleHeight: CGFloat { get }
-  func frameOfColumn(column: Int) -> NSRect
-  func frameOfInsideOfColumn(column: Int) -> NSRect
-  func frameOfRow(row: Int, inColumn column: Int) -> NSRect
-  func getRow(row: UnsafeMutablePointer<Int>, column: UnsafeMutablePointer<Int>, forPoint point: NSPoint) -> Bool
+  func frameOfColumn(column: Int) -> Rect
+  func frameOfInsideOfColumn(column: Int) -> Rect
+  func frameOfRow(row: Int, inColumn column: Int) -> Rect
+  func getRow(row: UnsafeMutablePointer<Int>, column: UnsafeMutablePointer<Int>, forPoint point: Point) -> Bool
   func columnWidthForColumnContentWidth(columnContentWidth: CGFloat) -> CGFloat
   func columnContentWidthForColumnWidth(columnWidth: CGFloat) -> CGFloat
   var columnResizingType: NSBrowserColumnResizingType
@@ -2499,71 +2499,71 @@ class NSBrowser : NSControl {
   func setWidth(columnWidth: CGFloat, ofColumn columnIndex: Int)
   func widthOfColumn(column: Int) -> CGFloat
   var rowHeight: CGFloat
-  func noteHeightOfRowsWithIndexesChanged(indexSet: NSIndexSet, inColumn columnIndex: Int)
+  func noteHeightOfRowsWithIndexesChanged(indexSet: IndexSet, inColumn columnIndex: Int)
   func setDefaultColumnWidth(columnWidth: CGFloat)
   func defaultColumnWidth() -> CGFloat
   var columnsAutosaveName: String
   class func removeSavedColumnsWithAutosaveName(name: String)
-  func canDragRowsWithIndexes(rowIndexes: NSIndexSet, inColumn column: Int, withEvent event: NSEvent) -> Bool
-  func draggingImageForRowsWithIndexes(rowIndexes: NSIndexSet, inColumn column: Int, withEvent event: NSEvent, offset dragImageOffset: NSPointPointer) -> NSImage?
+  func canDragRowsWith(rowIndexes: IndexSet, inColumn column: Int, withEvent event: NSEvent) -> Bool
+  func draggingImageForRowsWith(rowIndexes: IndexSet, inColumn column: Int, withEvent event: NSEvent, offset dragImageOffset: PointPointer) -> NSImage?
   func setDraggingSourceOperationMask(mask: NSDragOperation, forLocal isLocal: Bool)
   var allowsTypeSelect: Bool
   var backgroundColor: NSColor
-  func editItemAtIndexPath(indexPath: NSIndexPath, withEvent theEvent: NSEvent, select: Bool)
+  func editItemAt(indexPath: IndexPath, withEvent theEvent: NSEvent, select: Bool)
   func selectedCell() -> AnyObject?
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 let NSBrowserColumnConfigurationDidChangeNotification: String
-protocol NSBrowserDelegate : NSObjectProtocol {
+protocol NSBrowserDelegate : ObjectProtocol {
   optional func browser(sender: NSBrowser, numberOfRowsInColumn column: Int) -> Int
-  optional func browser(sender: NSBrowser, createRowsForColumn column: Int, inMatrix matrix: NSMatrix)
+  optional func browser(sender: NSBrowser, createRowsForColumn column: Int, in matrix: NSMatrix)
   optional func browser(browser: NSBrowser, numberOfChildrenOfItem item: AnyObject?) -> Int
   optional func browser(browser: NSBrowser, child index: Int, ofItem item: AnyObject?) -> AnyObject
   optional func browser(browser: NSBrowser, isLeafItem item: AnyObject?) -> Bool
   optional func browser(browser: NSBrowser, objectValueForItem item: AnyObject?) -> AnyObject?
   optional func browser(browser: NSBrowser, heightOfRow row: Int, inColumn columnIndex: Int) -> CGFloat
-  optional func rootItemForBrowser(browser: NSBrowser) -> AnyObject?
+  optional func rootItemFor(browser: NSBrowser) -> AnyObject?
   optional func browser(browser: NSBrowser, setObjectValue object: AnyObject?, forItem item: AnyObject?)
   optional func browser(browser: NSBrowser, shouldEditItem item: AnyObject?) -> Bool
   optional func browser(sender: NSBrowser, willDisplayCell cell: AnyObject, atRow row: Int, column: Int)
   optional func browser(sender: NSBrowser, titleOfColumn column: Int) -> String?
-  optional func browser(sender: NSBrowser, selectCellWithString title: String, inColumn column: Int) -> Bool
+  optional func browser(sender: NSBrowser, selectCellWith title: String, inColumn column: Int) -> Bool
   optional func browser(sender: NSBrowser, selectRow row: Int, inColumn column: Int) -> Bool
   optional func browser(sender: NSBrowser, isColumnValid column: Int) -> Bool
   optional func browserWillScroll(sender: NSBrowser)
   optional func browserDidScroll(sender: NSBrowser)
   optional func browser(browser: NSBrowser, shouldSizeColumn columnIndex: Int, forUserResize: Bool, toWidth suggestedWidth: CGFloat) -> CGFloat
   optional func browser(browser: NSBrowser, sizeToFitWidthOfColumn columnIndex: Int) -> CGFloat
-  optional func browserColumnConfigurationDidChange(notification: NSNotification)
+  optional func browserColumnConfigurationDidChange(notification: Notification)
   optional func browser(browser: NSBrowser, shouldShowCellExpansionForRow row: Int, column: Int) -> Bool
-  optional func browser(browser: NSBrowser, writeRowsWithIndexes rowIndexes: NSIndexSet, inColumn column: Int, toPasteboard pasteboard: NSPasteboard) -> Bool
-  optional func browser(browser: NSBrowser, namesOfPromisedFilesDroppedAtDestination dropDestination: NSURL, forDraggedRowsWithIndexes rowIndexes: NSIndexSet, inColumn column: Int) -> [String]
-  optional func browser(browser: NSBrowser, canDragRowsWithIndexes rowIndexes: NSIndexSet, inColumn column: Int, withEvent event: NSEvent) -> Bool
-  optional func browser(browser: NSBrowser, draggingImageForRowsWithIndexes rowIndexes: NSIndexSet, inColumn column: Int, withEvent event: NSEvent, offset dragImageOffset: NSPointPointer) -> NSImage?
+  optional func browser(browser: NSBrowser, writeRowsWith rowIndexes: IndexSet, inColumn column: Int, to pasteboard: NSPasteboard) -> Bool
+  optional func browser(browser: NSBrowser, namesOfPromisedFilesDroppedAtDestination dropDestination: URL, forDraggedRowsWith rowIndexes: IndexSet, inColumn column: Int) -> [String]
+  optional func browser(browser: NSBrowser, canDragRowsWith rowIndexes: IndexSet, inColumn column: Int, withEvent event: NSEvent) -> Bool
+  optional func browser(browser: NSBrowser, draggingImageForRowsWith rowIndexes: IndexSet, inColumn column: Int, withEvent event: NSEvent, offset dragImageOffset: PointPointer) -> NSImage?
   optional func browser(browser: NSBrowser, validateDrop info: NSDraggingInfo, proposedRow row: UnsafeMutablePointer<Int>, column: UnsafeMutablePointer<Int>, dropOperation: UnsafeMutablePointer<NSBrowserDropOperation>) -> NSDragOperation
   optional func browser(browser: NSBrowser, acceptDrop info: NSDraggingInfo, atRow row: Int, column: Int, dropOperation: NSBrowserDropOperation) -> Bool
   optional func browser(browser: NSBrowser, typeSelectStringForRow row: Int, inColumn column: Int) -> String
-  optional func browser(browser: NSBrowser, shouldTypeSelectForEvent event: NSEvent, withCurrentSearchString searchString: String?) -> Bool
+  optional func browser(browser: NSBrowser, shouldTypeSelectFor event: NSEvent, withCurrentSearch searchString: String?) -> Bool
   optional func browser(browser: NSBrowser, nextTypeSelectMatchFromRow startRow: Int, toRow endRow: Int, inColumn column: Int, forString searchString: String?) -> Int
   optional func browser(browser: NSBrowser, previewViewControllerForLeafItem item: AnyObject) -> NSViewController?
   optional func browser(browser: NSBrowser, headerViewControllerForItem item: AnyObject?) -> NSViewController?
   optional func browser(browser: NSBrowser, didChangeLastColumn oldLastColumn: Int, toColumn column: Int)
-  optional func browser(browser: NSBrowser, selectionIndexesForProposedSelection proposedSelectionIndexes: NSIndexSet, inColumn column: Int) -> NSIndexSet
+  optional func browser(browser: NSBrowser, selectionIndexesForProposedSelection proposedSelectionIndexes: IndexSet, inColumn column: Int) -> IndexSet
 }
 extension NSBrowser {
   func setMatrixClass(factoryId: AnyClass)
   func matrixClass() -> AnyClass
-  func columnOfMatrix(matrix: NSMatrix) -> Int
+  func columnOf(matrix: NSMatrix) -> Int
   func matrixInColumn(column: Int) -> NSMatrix?
 }
 class NSBrowserCell : NSCell {
   class func branchImage() -> NSImage?
   class func highlightedBranchImage() -> NSImage?
-  func highlightColorInView(controlView: NSView) -> NSColor?
-  var leaf: Bool
-  var loaded: Bool
+  func highlightColorIn(controlView: NSView) -> NSColor?
+  var isLeaf: Bool
+  var isLoaded: Bool
   func reset()
   func set()
   var image: NSImage?
@@ -2571,7 +2571,7 @@ class NSBrowserCell : NSCell {
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class NSButton : NSControl, NSUserInterfaceValidations, NSAccessibilityButton {
   var title: String
@@ -2581,26 +2581,26 @@ class NSButton : NSControl, NSUserInterfaceValidations, NSAccessibilityButton {
   var imagePosition: NSCellImagePosition
   func setButtonType(aType: NSButtonType)
   var state: Int
-  var bordered: Bool
-  var transparent: Bool
+  var isBordered: Bool
+  var isTransparent: Bool
   func setPeriodicDelay(delay: Float, interval: Float)
   func getPeriodicDelay(delay: UnsafeMutablePointer<Float>, interval: UnsafeMutablePointer<Float>)
   var keyEquivalent: String
   var keyEquivalentModifierMask: Int
   func highlight(flag: Bool)
   func performKeyEquivalent(key: NSEvent) -> Bool
-  var springLoaded: Bool
+  var isSpringLoaded: Bool
   var maxAcceleratorLevel: Int
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
-  func validateUserInterfaceItem(anItem: NSValidatedUserInterfaceItem) -> Bool
+  func validate(anItem: NSValidatedUserInterfaceItem) -> Bool
   func accessibilityLabel() -> String?
   func accessibilityPerformPress() -> Bool
 }
 extension NSButton {
-  @NSCopying var attributedTitle: NSAttributedString
-  @NSCopying var attributedAlternateTitle: NSAttributedString
+  @NSCopying var attributedTitle: AttributedString
+  @NSCopying var attributedAlternateTitle: AttributedString
 }
 extension NSButton {
   var bezelStyle: NSBezelStyle
@@ -2701,8 +2701,8 @@ class NSButtonCell : NSActionCell {
   var highlightsBy: NSCellStyleMask
   var showsStateBy: NSCellStyleMask
   func setButtonType(aType: NSButtonType)
-  var opaque: Bool { get }
-  var transparent: Bool
+  var isOpaque: Bool { get }
+  var isTransparent: Bool
   func setPeriodicDelay(delay: Float, interval: Float)
   func getPeriodicDelay(delay: UnsafeMutablePointer<Float>, interval: UnsafeMutablePointer<Float>)
   var keyEquivalent: String
@@ -2710,13 +2710,13 @@ class NSButtonCell : NSActionCell {
   var keyEquivalentFont: NSFont?
   func setKeyEquivalentFont(fontName: String, size fontSize: CGFloat)
   func performClick(sender: AnyObject?)
-  func drawImage(image: NSImage, withFrame frame: NSRect, inView controlView: NSView)
-  func drawTitle(title: NSAttributedString, withFrame frame: NSRect, inView controlView: NSView) -> NSRect
-  func drawBezelWithFrame(frame: NSRect, inView controlView: NSView)
+  func drawImage(image: NSImage, withFrame frame: Rect, in controlView: NSView)
+  func drawTitle(title: AttributedString, withFrame frame: Rect, in controlView: NSView) -> Rect
+  func drawBezelWithFrame(frame: Rect, in controlView: NSView)
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 enum NSGradientType : UInt {
   init?(rawValue: UInt)
@@ -2736,8 +2736,8 @@ extension NSButtonCell {
   @NSCopying var backgroundColor: NSColor?
 }
 extension NSButtonCell {
-  @NSCopying var attributedTitle: NSAttributedString
-  @NSCopying var attributedAlternateTitle: NSAttributedString
+  @NSCopying var attributedTitle: AttributedString
+  @NSCopying var attributedAlternateTitle: AttributedString
 }
 extension NSButtonCell {
   var bezelStyle: NSBezelStyle
@@ -2748,15 +2748,15 @@ extension NSButtonCell {
 extension NSButtonCell {
 }
 class NSCIImageRep : NSImageRep {
-  init(CIImage image: CIImage)
-  var CIImage: CIImage { get }
+  init(ciImage image: CIImage)
+  var ciImage: CIImage { get }
   init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
 }
 extension CIImage {
   init?(bitmapImageRep: NSBitmapImageRep)
-  func drawInRect(rect: NSRect, fromRect: NSRect, operation op: NSCompositingOperation, fraction delta: CGFloat)
-  func drawAtPoint(point: NSPoint, fromRect: NSRect, operation op: NSCompositingOperation, fraction delta: CGFloat)
+  func drawIn(rect: Rect, from fromRect: Rect, operation op: NSCompositingOperation, fraction delta: CGFloat)
+  func drawAt(point: Point, from fromRect: Rect, operation op: NSCompositingOperation, fraction delta: CGFloat)
 }
 enum NSCellType : UInt {
   init?(rawValue: UInt)
@@ -2891,7 +2891,7 @@ struct __CFlags {
   init(state: UInt32, highlighted: UInt32, disabled: UInt32, editable: UInt32, type: NSCellType, vCentered: UInt32, hCentered: UInt32, bordered: UInt32, bezeled: UInt32, selectable: UInt32, scrollable: UInt32, continuous: UInt32, actOnMouseDown: UInt32, isLeaf: UInt32, invalidObjectValue: UInt32, invalidFont: UInt32, lineBreakMode: NSLineBreakMode, weakTargetHelperFlag: UInt32, allowsAppearanceEffects: UInt32, singleLineMode: UInt32, actOnMouseDragged: UInt32, isLoaded: UInt32, truncateLastLine: UInt32, dontActOnMouseUp: UInt32, isWhite: UInt32, useUserKeyEquivalent: UInt32, showsFirstResponder: UInt32, focusRingType: UInt32, wasSelectable: UInt32, hasInvalidObject: UInt32, allowsEditingTextAttributes: UInt32, importsGraphics: UInt32, alignment: NSTextAlignment, layoutDirectionRTL: UInt32, backgroundStyle: UInt32, cellReserved2: UInt32, refusesFirstResponder: UInt32, needsHighlightedText: UInt32, dontAllowsUndo: UInt32, currentlyEditing: UInt32, allowsMixedState: UInt32, inMixedState: UInt32, sendsActionOnEndEditing: UInt32, inSendAction: UInt32, menuWasSet: UInt32, controlTint: UInt32, controlSize: UInt32, branchImageDisabled: UInt32, drawingInRevealover: UInt32, needsHighlightedTextHint: UInt32)
 }
 typealias _CFlags = __CFlags
-class NSCell : NSObject, NSCopying, NSCoding, NSUserInterfaceItemIdentification, NSAccessibilityElementProtocol, NSAccessibility {
+class NSCell : Object, Copying, Coding, NSUserInterfaceItemIdentification, NSAccessibilityElementProtocol, NSAccessibility {
   class func prefersTrackingUntilMouseUp() -> Bool
   init(textCell aString: String)
   init(imageCell image: NSImage?)
@@ -2902,25 +2902,25 @@ class NSCell : NSObject, NSCopying, NSCoding, NSUserInterfaceItemIdentification,
   var action: Selector
   var tag: Int
   var title: String
-  var opaque: Bool { get }
-  var enabled: Bool
+  var isOpaque: Bool { get }
+  var isEnabled: Bool
   func sendActionOn(mask: Int) -> Int
-  var continuous: Bool
-  var editable: Bool
-  var selectable: Bool
-  var bordered: Bool
-  var bezeled: Bool
-  var scrollable: Bool
-  var highlighted: Bool
+  var isContinuous: Bool
+  var isEditable: Bool
+  var isSelectable: Bool
+  var isBordered: Bool
+  var isBezeled: Bool
+  var isScrollable: Bool
+  var isHighlighted: Bool
   var alignment: NSTextAlignment
   var wraps: Bool
   var font: NSFont?
   var keyEquivalent: String { get }
-  var formatter: NSFormatter?
+  var formatter: Formatter?
   @NSCopying var objectValue: AnyObject?
   var hasValidObjectValue: Bool { get }
   var stringValue: String
-  func compare(otherCell: AnyObject) -> NSComparisonResult
+  func compare(otherCell: AnyObject) -> ComparisonResult
   var intValue: Int32
   var floatValue: Float
   var doubleValue: Double
@@ -2935,29 +2935,29 @@ class NSCell : NSObject, NSCopying, NSCoding, NSUserInterfaceItemIdentification,
   var representedObject: AnyObject?
   func cellAttribute(aParameter: NSCellAttribute) -> Int
   func setCellAttribute(aParameter: NSCellAttribute, to value: Int)
-  func imageRectForBounds(theRect: NSRect) -> NSRect
-  func titleRectForBounds(theRect: NSRect) -> NSRect
-  func drawingRectForBounds(theRect: NSRect) -> NSRect
-  var cellSize: NSSize { get }
-  func cellSizeForBounds(aRect: NSRect) -> NSSize
-  func highlightColorWithFrame(cellFrame: NSRect, inView controlView: NSView) -> NSColor
-  func calcDrawInfo(aRect: NSRect)
+  func imageRectForBounds(theRect: Rect) -> Rect
+  func titleRectForBounds(theRect: Rect) -> Rect
+  func drawingRectForBounds(theRect: Rect) -> Rect
+  var cellSize: Size { get }
+  func cellSizeForBounds(aRect: Rect) -> Size
+  func highlightColorWithFrame(cellFrame: Rect, in controlView: NSView) -> NSColor
+  func calcDrawInfo(aRect: Rect)
   func setUpFieldEditorAttributes(textObj: NSText) -> NSText
-  func drawInteriorWithFrame(cellFrame: NSRect, inView controlView: NSView)
-  func drawWithFrame(cellFrame: NSRect, inView controlView: NSView)
-  func highlight(flag: Bool, withFrame cellFrame: NSRect, inView controlView: NSView)
+  func drawInteriorWithFrame(cellFrame: Rect, in controlView: NSView)
+  func drawWithFrame(cellFrame: Rect, in controlView: NSView)
+  func highlight(flag: Bool, withFrame cellFrame: Rect, in controlView: NSView)
   var mouseDownFlags: Int { get }
   func getPeriodicDelay(delay: UnsafeMutablePointer<Float>, interval: UnsafeMutablePointer<Float>)
-  func startTrackingAt(startPoint: NSPoint, inView controlView: NSView) -> Bool
-  func continueTracking(lastPoint: NSPoint, at currentPoint: NSPoint, inView controlView: NSView) -> Bool
-  func stopTracking(lastPoint: NSPoint, at stopPoint: NSPoint, inView controlView: NSView, mouseIsUp flag: Bool)
-  func trackMouse(theEvent: NSEvent, inRect cellFrame: NSRect, ofView controlView: NSView, untilMouseUp flag: Bool) -> Bool
-  func editWithFrame(aRect: NSRect, inView controlView: NSView, editor textObj: NSText, delegate anObject: AnyObject?, event theEvent: NSEvent)
-  func selectWithFrame(aRect: NSRect, inView controlView: NSView, editor textObj: NSText, delegate anObject: AnyObject?, start selStart: Int, length selLength: Int)
+  func startTrackingAt(startPoint: Point, in controlView: NSView) -> Bool
+  func continueTracking(lastPoint: Point, at currentPoint: Point, in controlView: NSView) -> Bool
+  func stopTracking(lastPoint: Point, at stopPoint: Point, in controlView: NSView, mouseIsUp flag: Bool)
+  func trackMouse(theEvent: NSEvent, in cellFrame: Rect, of controlView: NSView, untilMouseUp flag: Bool) -> Bool
+  func editWithFrame(aRect: Rect, in controlView: NSView, editor textObj: NSText, delegate anObject: AnyObject?, event theEvent: NSEvent)
+  func selectWithFrame(aRect: Rect, in controlView: NSView, editor textObj: NSText, delegate anObject: AnyObject?, start selStart: Int, length selLength: Int)
   func endEditing(textObj: NSText)
-  func resetCursorRect(cellFrame: NSRect, inView controlView: NSView)
+  func resetCursorRect(cellFrame: Rect, in controlView: NSView)
   var menu: NSMenu?
-  func menuForEvent(event: NSEvent, inRect cellFrame: NSRect, ofView view: NSView) -> NSMenu?
+  func menuFor(event: NSEvent, in cellFrame: Rect, of view: NSView) -> NSMenu?
   class func defaultMenu() -> NSMenu?
   var sendsActionOnEndEditing: Bool
   var baseWritingDirection: NSWritingDirection
@@ -2967,32 +2967,32 @@ class NSCell : NSObject, NSCopying, NSCoding, NSUserInterfaceItemIdentification,
   func takeIntegerValueFrom(sender: AnyObject?)
   var truncatesLastVisibleLine: Bool
   var userInterfaceLayoutDirection: NSUserInterfaceLayoutDirection
-  func fieldEditorForView(aControlView: NSView) -> NSTextView?
+  func fieldEditorFor(aControlView: NSView) -> NSTextView?
   var usesSingleLineMode: Bool
-  func draggingImageComponentsWithFrame(frame: NSRect, inView view: NSView) -> [NSDraggingImageComponent]
+  func draggingImageComponentsWithFrame(frame: Rect, in view: NSView) -> [NSDraggingImageComponent]
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
   var identifier: String?
-  func accessibilityFrame() -> NSRect
+  func accessibilityFrame() -> Rect
   func accessibilityParent() -> AnyObject?
   func isAccessibilityFocused() -> Bool
   func accessibilityIdentifier() -> String
-  func accessibilityLayoutPointForScreenPoint(point: NSPoint) -> NSPoint
-  func accessibilityLayoutSizeForScreenSize(size: NSSize) -> NSSize
-  func accessibilityScreenPointForLayoutPoint(point: NSPoint) -> NSPoint
-  func accessibilityScreenSizeForLayoutSize(size: NSSize) -> NSSize
+  func accessibilityLayoutPointForScreenPoint(point: Point) -> Point
+  func accessibilityLayoutSizeForScreenSize(size: Size) -> Size
+  func accessibilityScreenPointForLayoutPoint(point: Point) -> Point
+  func accessibilityScreenSizeForLayoutSize(size: Size) -> Size
   func accessibilityCellForColumn(column: Int, row: Int) -> AnyObject?
-  func accessibilityAttributedStringForRange(range: NSRange) -> NSAttributedString?
+  func accessibilityAttributedStringFor(range: NSRange) -> AttributedString?
   func accessibilityRangeForLine(line: Int) -> NSRange
-  func accessibilityStringForRange(range: NSRange) -> String?
-  func accessibilityRangeForPosition(point: NSPoint) -> NSRange
-  func accessibilityRangeForIndex(index: Int) -> NSRange
-  func accessibilityFrameForRange(range: NSRange) -> NSRect
-  func accessibilityRTFForRange(range: NSRange) -> NSData?
-  func accessibilityStyleRangeForIndex(index: Int) -> NSRange
-  func accessibilityLineForIndex(index: Int) -> Int
+  func accessibilityStringFor(range: NSRange) -> String?
+  func accessibilityRangeForPosition(point: Point) -> NSRange
+  func accessibilityRangeFor(index: Int) -> NSRange
+  func accessibilityFrameFor(range: NSRange) -> Rect
+  func accessibilityRTFFor(range: NSRange) -> Data?
+  func accessibilityStyleRangeFor(index: Int) -> NSRange
+  func accessibilityLineFor(index: Int) -> Int
   func accessibilityPerformCancel() -> Bool
   func accessibilityPerformConfirm() -> Bool
   func accessibilityPerformDecrement() -> Bool
@@ -3007,14 +3007,14 @@ class NSCell : NSObject, NSCopying, NSCoding, NSUserInterfaceItemIdentification,
   func isAccessibilitySelectorAllowed(selector: Selector) -> Bool
   func isAccessibilityElement() -> Bool
   func setAccessibilityElement(accessibilityElement: Bool)
-  func setAccessibilityFrame(accessibilityFrame: NSRect)
+  func setAccessibilityFrame(accessibilityFrame: Rect)
   func setAccessibilityFocused(accessibilityFocused: Bool)
-  func accessibilityActivationPoint() -> NSPoint
-  func setAccessibilityActivationPoint(accessibilityActivationPoint: NSPoint)
+  func accessibilityActivationPoint() -> Point
+  func setAccessibilityActivationPoint(accessibilityActivationPoint: Point)
   func accessibilityTopLevelUIElement() -> AnyObject?
   func setAccessibilityTopLevelUIElement(accessibilityTopLevelUIElement: AnyObject?)
-  func accessibilityURL() -> NSURL?
-  func setAccessibilityURL(accessibilityURL: NSURL?)
+  func accessibilityURL() -> URL?
+  func setAccessibilityURL(accessibilityURL: URL?)
   func accessibilityValue() -> AnyObject?
   func setAccessibilityValue(accessibilityValue: AnyObject?)
   func accessibilityValueDescription() -> String?
@@ -3149,8 +3149,8 @@ class NSCell : NSObject, NSCopying, NSCoding, NSUserInterfaceItemIdentification,
   func setAccessibilityHorizontalScrollBar(accessibilityHorizontalScrollBar: AnyObject?)
   func accessibilityVerticalScrollBar() -> AnyObject?
   func setAccessibilityVerticalScrollBar(accessibilityVerticalScrollBar: AnyObject?)
-  func accessibilityAllowedValues() -> [NSNumber]?
-  func setAccessibilityAllowedValues(accessibilityAllowedValues: [NSNumber]?)
+  func accessibilityAllowedValues() -> [Number]?
+  func setAccessibilityAllowedValues(accessibilityAllowedValues: [Number]?)
   func accessibilityLabelUIElements() -> [AnyObject]?
   func setAccessibilityLabelUIElements(accessibilityLabelUIElements: [AnyObject]?)
   func accessibilityLabelValue() -> Float
@@ -3211,8 +3211,8 @@ class NSCell : NSObject, NSCopying, NSCoding, NSUserInterfaceItemIdentification,
   func setAccessibilitySelectedText(accessibilitySelectedText: String?)
   func accessibilitySelectedTextRange() -> NSRange
   func setAccessibilitySelectedTextRange(accessibilitySelectedTextRange: NSRange)
-  func accessibilitySelectedTextRanges() -> [NSValue]?
-  func setAccessibilitySelectedTextRanges(accessibilitySelectedTextRanges: [NSValue]?)
+  func accessibilitySelectedTextRanges() -> [Value]?
+  func setAccessibilitySelectedTextRanges(accessibilitySelectedTextRanges: [Value]?)
   func accessibilityToolbarButton() -> AnyObject?
   func setAccessibilityToolbarButton(accessibilityToolbarButton: AnyObject?)
   func isAccessibilityModal() -> Bool
@@ -3245,12 +3245,12 @@ extension NSCell {
   func performClick(sender: AnyObject?)
   var focusRingType: NSFocusRingType
   class func defaultFocusRingType() -> NSFocusRingType
-  func drawFocusRingMaskWithFrame(cellFrame: NSRect, inView controlView: NSView)
-  func focusRingMaskBoundsForFrame(cellFrame: NSRect, inView controlView: NSView) -> NSRect
+  func drawFocusRingMaskWithFrame(cellFrame: Rect, in controlView: NSView)
+  func focusRingMaskBoundsForFrame(cellFrame: Rect, in controlView: NSView) -> Rect
   var wantsNotificationForMarkedText: Bool { get }
 }
 extension NSCell {
-  @NSCopying var attributedStringValue: NSAttributedString
+  @NSCopying var attributedStringValue: AttributedString
   var allowsEditingTextAttributes: Bool
   var importsGraphics: Bool
 }
@@ -3269,11 +3269,11 @@ struct NSCellHitResult : OptionSetType {
   static var TrackableArea: NSCellHitResult { get }
 }
 extension NSCell {
-  func hitTestForEvent(event: NSEvent, inRect cellFrame: NSRect, ofView controlView: NSView) -> NSCellHitResult
+  func hitTestFor(event: NSEvent, in cellFrame: Rect, of controlView: NSView) -> NSCellHitResult
 }
 extension NSCell {
-  func expansionFrameWithFrame(cellFrame: NSRect, inView view: NSView) -> NSRect
-  func drawWithExpansionFrame(cellFrame: NSRect, inView view: NSView)
+  func expansionFrameWithFrame(cellFrame: Rect, in view: NSView) -> Rect
+  func drawWithExpansionFrame(cellFrame: Rect, in view: NSView)
 }
 enum NSBackgroundStyle : Int {
   init?(rawValue: Int)
@@ -3289,8 +3289,8 @@ extension NSCell {
 }
 extension NSCell {
 }
-func NSDrawThreePartImage(frame: NSRect, _ startCap: NSImage?, _ centerFill: NSImage?, _ endCap: NSImage?, _ vertical: Bool, _ op: NSCompositingOperation, _ alphaFraction: CGFloat, _ flipped: Bool)
-func NSDrawNinePartImage(frame: NSRect, _ topLeftCorner: NSImage, _ topEdgeFill: NSImage, _ topRightCorner: NSImage, _ leftEdgeFill: NSImage, _ centerFill: NSImage, _ rightEdgeFill: NSImage, _ bottomLeftCorner: NSImage, _ bottomEdgeFill: NSImage, _ bottomRightCorner: NSImage, _ op: NSCompositingOperation, _ alphaFraction: CGFloat, _ flipped: Bool)
+func NSDrawThreePartImage(frame: Rect, _ startCap: NSImage?, _ centerFill: NSImage?, _ endCap: NSImage?, _ vertical: Bool, _ op: NSCompositingOperation, _ alphaFraction: CGFloat, _ flipped: Bool)
+func NSDrawNinePartImage(frame: Rect, _ topLeftCorner: NSImage, _ topEdgeFill: NSImage, _ topRightCorner: NSImage, _ leftEdgeFill: NSImage, _ centerFill: NSImage, _ rightEdgeFill: NSImage, _ bottomLeftCorner: NSImage, _ bottomEdgeFill: NSImage, _ bottomRightCorner: NSImage, _ op: NSCompositingOperation, _ alphaFraction: CGFloat, _ flipped: Bool)
 var NSAnyType: Int { get }
 var NSIntType: Int { get }
 var NSPositiveIntType: Int { get }
@@ -3302,19 +3302,19 @@ class NSClipView : NSView {
   @NSCopying var backgroundColor: NSColor
   var drawsBackground: Bool
   unowned(unsafe) var documentView: @sil_unmanaged AnyObject?
-  var documentRect: NSRect { get }
+  var documentRect: Rect { get }
   var documentCursor: NSCursor?
-  var documentVisibleRect: NSRect { get }
-  func viewFrameChanged(notification: NSNotification)
-  func viewBoundsChanged(notification: NSNotification)
+  var documentVisibleRect: Rect { get }
+  func viewFrameChanged(notification: Notification)
+  func viewBoundsChanged(notification: Notification)
   var copiesOnScroll: Bool
   func autoscroll(theEvent: NSEvent) -> Bool
-  func scrollToPoint(newOrigin: NSPoint)
-  func constrainBoundsRect(proposedBounds: NSRect) -> NSRect
-  var contentInsets: NSEdgeInsets
+  func scrollTo(newOrigin: Point)
+  func constrainBoundsRect(proposedBounds: Rect) -> Rect
+  var contentInsets: EdgeInsets
   var automaticallyAdjustsContentInsets: Bool
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 struct __cvFlags {
@@ -3346,11 +3346,11 @@ struct __cvFlags {
   init(onlyUncovered: UInt32, reflectScroll: UInt32, usedByCell: UInt32, scrollClipTo: UInt32, noCopyOnScroll: UInt32, drawsBackground: UInt32, scrollInProgress: UInt32, skipRemoveSuperviewCheck: UInt32, animateCurrentScroll: UInt32, canAnimateScrolls: UInt32, nextScrollRelativeToCurrentPosition: UInt32, viewBoundsChangedOverridden: UInt32, viewFrameChangedOverridden: UInt32, documentViewAlignment: UInt32, redrawnWhileScrolling: UInt32, dontConstrainScroll: UInt32, lastAtEdgesState: UInt32, showOverlayScrollersForScrollStep: UInt32, scrollerKnobFlashSpecifier: UInt32, drawsContentShadow: UInt32, dontConstrainBoundsChange: UInt32, isScrollDueToUserAction: UInt32, hasOverlappingViews: UInt32, automaticallyCalculateContentSize: UInt32)
 }
 extension NSClipView {
-  func constrainScrollPoint(newOrigin: NSPoint) -> NSPoint
+  func constrainScroll(newOrigin: Point) -> Point
 }
 extension NSView {
-  func reflectScrolledClipView(aClipView: NSClipView)
-  func scrollClipView(aClipView: NSClipView, toPoint aPoint: NSPoint)
+  func reflectScrolledClip(aClipView: NSClipView)
+  func scrollClip(aClipView: NSClipView, to aPoint: Point)
 }
 enum NSCollectionViewDropOperation : Int {
   init?(rawValue: Int)
@@ -3381,29 +3381,29 @@ struct NSCollectionViewScrollPosition : OptionSetType {
   static var TrailingEdge: NSCollectionViewScrollPosition { get }
   static var NearestVerticalEdge: NSCollectionViewScrollPosition { get }
 }
-protocol NSCollectionViewElement : NSObjectProtocol, NSUserInterfaceItemIdentification {
+protocol NSCollectionViewElement : ObjectProtocol, NSUserInterfaceItemIdentification {
   optional func prepareForReuse()
-  optional func applyLayoutAttributes(layoutAttributes: NSCollectionViewLayoutAttributes)
-  optional func willTransitionFromLayout(oldLayout: NSCollectionViewLayout, toLayout newLayout: NSCollectionViewLayout)
-  optional func didTransitionFromLayout(oldLayout: NSCollectionViewLayout, toLayout newLayout: NSCollectionViewLayout)
-  optional func preferredLayoutAttributesFittingAttributes(layoutAttributes: NSCollectionViewLayoutAttributes) -> NSCollectionViewLayoutAttributes
+  optional func apply(layoutAttributes: NSCollectionViewLayoutAttributes)
+  optional func willTransitionFrom(oldLayout: NSCollectionViewLayout, to newLayout: NSCollectionViewLayout)
+  optional func didTransitionFrom(oldLayout: NSCollectionViewLayout, to newLayout: NSCollectionViewLayout)
+  optional func preferredLayoutAttributesFitting(layoutAttributes: NSCollectionViewLayoutAttributes) -> NSCollectionViewLayoutAttributes
 }
-class NSCollectionViewItem : NSViewController, NSCopying, NSCollectionViewElement {
+class NSCollectionViewItem : NSViewController, Copying, NSCollectionViewElement {
   var collectionView: NSCollectionView { get }
-  var selected: Bool
+  var isSelected: Bool
   var highlightState: NSCollectionViewItemHighlightState
   @IBOutlet unowned(unsafe) var imageView: @sil_unmanaged NSImageView?
   @IBOutlet unowned(unsafe) var textField: @sil_unmanaged NSTextField?
   var draggingImageComponents: [NSDraggingImageComponent] { get }
-  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder: NSCoder)
+  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder: Coder)
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   func prepareForReuse()
-  func applyLayoutAttributes(layoutAttributes: NSCollectionViewLayoutAttributes)
-  func willTransitionFromLayout(oldLayout: NSCollectionViewLayout, toLayout newLayout: NSCollectionViewLayout)
-  func didTransitionFromLayout(oldLayout: NSCollectionViewLayout, toLayout newLayout: NSCollectionViewLayout)
-  func preferredLayoutAttributesFittingAttributes(layoutAttributes: NSCollectionViewLayoutAttributes) -> NSCollectionViewLayoutAttributes
+  func apply(layoutAttributes: NSCollectionViewLayoutAttributes)
+  func willTransitionFrom(oldLayout: NSCollectionViewLayout, to newLayout: NSCollectionViewLayout)
+  func didTransitionFrom(oldLayout: NSCollectionViewLayout, to newLayout: NSCollectionViewLayout)
+  func preferredLayoutAttributesFitting(layoutAttributes: NSCollectionViewLayoutAttributes) -> NSCollectionViewLayoutAttributes
 }
 class NSCollectionView : NSView, NSDraggingSource, NSDraggingDestination {
   weak var dataSource: @sil_weak NSCollectionViewDataSource?
@@ -3412,112 +3412,112 @@ class NSCollectionView : NSView, NSDraggingSource, NSDraggingDestination {
   unowned(unsafe) var delegate: @sil_unmanaged NSCollectionViewDelegate?
   var backgroundView: NSView?
   var collectionViewLayout: NSCollectionViewLayout?
-  func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> NSCollectionViewLayoutAttributes?
-  func layoutAttributesForSupplementaryElementOfKind(kind: String, atIndexPath indexPath: NSIndexPath) -> NSCollectionViewLayoutAttributes?
-  func frameForItemAtIndex(index: Int) -> NSRect
-  func frameForItemAtIndex(index: Int, withNumberOfItems numberOfItems: Int) -> NSRect
+  func layoutAttributesForItemAt(indexPath: IndexPath) -> NSCollectionViewLayoutAttributes?
+  func layoutAttributesForSupplementaryElementOfKind(kind: String, at indexPath: IndexPath) -> NSCollectionViewLayoutAttributes?
+  func frameForItemAt(index: Int) -> Rect
+  func frameForItemAt(index: Int, withNumberOfItems numberOfItems: Int) -> Rect
   var maxNumberOfRows: Int
   var maxNumberOfColumns: Int
-  var minItemSize: NSSize
-  var maxItemSize: NSSize
+  var minItemSize: Size
+  var maxItemSize: Size
   var backgroundColors: [NSColor]!
   var numberOfSections: Int { get }
   func numberOfItemsInSection(section: Int) -> Int
-  var firstResponder: Bool { get }
-  var selectable: Bool
+  var isFirstResponder: Bool { get }
+  var isSelectable: Bool
   var allowsEmptySelection: Bool
   var allowsMultipleSelection: Bool
-  @NSCopying var selectionIndexes: NSIndexSet
-  var selectionIndexPaths: Set<NSIndexPath>
-  func selectItemsAtIndexPaths(indexPaths: Set<NSIndexPath>, scrollPosition: NSCollectionViewScrollPosition)
-  func deselectItemsAtIndexPaths(indexPaths: Set<NSIndexPath>)
+  @NSCopying var selectionIndexes: IndexSet
+  var selectionIndexPaths: Set<IndexPath>
+  func selectItemsAt(indexPaths: Set<IndexPath>, scrollPosition: NSCollectionViewScrollPosition)
+  func deselectItemsAt(indexPaths: Set<IndexPath>)
   @IBAction func selectAll(sender: AnyObject?)
   @IBAction func deselectAll(sender: AnyObject?)
-  func registerClass(itemClass: AnyClass?, forItemWithIdentifier identifier: String)
-  func registerNib(nib: NSNib?, forItemWithIdentifier identifier: String)
-  func registerClass(viewClass: AnyClass?, forSupplementaryViewOfKind kind: String, withIdentifier identifier: String)
-  func registerNib(nib: NSNib?, forSupplementaryViewOfKind kind: String, withIdentifier identifier: String)
-  func makeItemWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> NSCollectionViewItem
-  func makeSupplementaryViewOfKind(elementKind: String, withIdentifier identifier: String, forIndexPath indexPath: NSIndexPath) -> NSView
+  func register(itemClass: AnyClass?, forItemWithIdentifier identifier: String)
+  func register(nib: NSNib?, forItemWithIdentifier identifier: String)
+  func register(viewClass: AnyClass?, forSupplementaryViewOfKind kind: String, withIdentifier identifier: String)
+  func register(nib: NSNib?, forSupplementaryViewOfKind kind: String, withIdentifier identifier: String)
+  func makeItemWithIdentifier(identifier: String, forIndexPath indexPath: IndexPath) -> NSCollectionViewItem
+  func makeSupplementaryViewOfKind(elementKind: String, withIdentifier identifier: String, forIndexPath indexPath: IndexPath) -> NSView
   func newItemForRepresentedObject(object: AnyObject) -> NSCollectionViewItem
   var itemPrototype: NSCollectionViewItem?
-  func itemAtIndex(index: Int) -> NSCollectionViewItem?
-  func itemAtIndexPath(indexPath: NSIndexPath) -> NSCollectionViewItem?
+  func itemAt(index: Int) -> NSCollectionViewItem?
+  func itemAt(indexPath: IndexPath) -> NSCollectionViewItem?
   func visibleItems() -> [NSCollectionViewItem]
-  func indexPathsForVisibleItems() -> Set<NSIndexPath>
-  func indexPathForItem(item: NSCollectionViewItem) -> NSIndexPath?
-  func indexPathForItemAtPoint(point: NSPoint) -> NSIndexPath?
-  func supplementaryViewForElementKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> NSView?
+  func indexPathsForVisibleItems() -> Set<IndexPath>
+  func indexPathFor(item: NSCollectionViewItem) -> IndexPath?
+  func indexPathForItemAt(point: Point) -> IndexPath?
+  func supplementaryViewForElementKind(elementKind: String, at indexPath: IndexPath) -> NSView?
   func visibleSupplementaryViewsOfKind(elementKind: String) -> [NSView]
-  func indexPathsForVisibleSupplementaryElementsOfKind(elementKind: String) -> Set<NSIndexPath>
-  func insertSections(sections: NSIndexSet)
-  func deleteSections(sections: NSIndexSet)
-  func reloadSections(sections: NSIndexSet)
+  func indexPathsForVisibleSupplementaryElementsOfKind(elementKind: String) -> Set<IndexPath>
+  func insertSections(sections: IndexSet)
+  func deleteSections(sections: IndexSet)
+  func reloadSections(sections: IndexSet)
   func moveSection(section: Int, toSection newSection: Int)
-  func insertItemsAtIndexPaths(indexPaths: Set<NSIndexPath>)
-  func deleteItemsAtIndexPaths(indexPaths: Set<NSIndexPath>)
-  func reloadItemsAtIndexPaths(indexPaths: Set<NSIndexPath>)
-  func moveItemAtIndexPath(indexPath: NSIndexPath, toIndexPath newIndexPath: NSIndexPath)
-  func performBatchUpdates(updates: (() -> Void)?, completionHandler: ((Bool) -> Void)?)
-  func scrollToItemsAtIndexPaths(indexPaths: Set<NSIndexPath>, scrollPosition: NSCollectionViewScrollPosition)
+  func insertItemsAt(indexPaths: Set<IndexPath>)
+  func deleteItemsAt(indexPaths: Set<IndexPath>)
+  func reloadItemsAt(indexPaths: Set<IndexPath>)
+  func moveItemAt(indexPath: IndexPath, to newIndexPath: IndexPath)
+  func performBatchUpdates(updates: (() -> Void)?, completionHandler: ((Bool) -> Void)? = nil)
+  func scrollToItemsAt(indexPaths: Set<IndexPath>, scrollPosition: NSCollectionViewScrollPosition)
   func setDraggingSourceOperationMask(dragOperationMask: NSDragOperation, forLocal localDestination: Bool)
-  func draggingImageForItemsAtIndexPaths(indexPaths: Set<NSIndexPath>, withEvent event: NSEvent, offset dragImageOffset: NSPointPointer) -> NSImage
-  func draggingImageForItemsAtIndexes(indexes: NSIndexSet, withEvent event: NSEvent, offset dragImageOffset: NSPointPointer) -> NSImage
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  func draggingImageForItemsAt(indexPaths: Set<IndexPath>, withEvent event: NSEvent, offset dragImageOffset: PointPointer) -> NSImage
+  func draggingImageForItemsAt(indexes: IndexSet, withEvent event: NSEvent, offset dragImageOffset: PointPointer) -> NSImage
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
-  func draggingSession(session: NSDraggingSession, sourceOperationMaskForDraggingContext context: NSDraggingContext) -> NSDragOperation
-  func draggingSession(session: NSDraggingSession, willBeginAtPoint screenPoint: NSPoint)
-  func draggingSession(session: NSDraggingSession, movedToPoint screenPoint: NSPoint)
-  func draggingSession(session: NSDraggingSession, endedAtPoint screenPoint: NSPoint, operation: NSDragOperation)
-  func ignoreModifierKeysForDraggingSession(session: NSDraggingSession) -> Bool
+  func draggingSession(session: NSDraggingSession, sourceOperationMaskFor context: NSDraggingContext) -> NSDragOperation
+  func draggingSession(session: NSDraggingSession, willBeginAt screenPoint: Point)
+  func draggingSession(session: NSDraggingSession, movedTo screenPoint: Point)
+  func draggingSession(session: NSDraggingSession, endedAt screenPoint: Point, operation: NSDragOperation)
+  func ignoreModifierKeysFor(session: NSDraggingSession) -> Bool
 }
-protocol NSCollectionViewDataSource : NSObjectProtocol {
+protocol NSCollectionViewDataSource : ObjectProtocol {
   func collectionView(collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int
-  func collectionView(collectionView: NSCollectionView, itemForRepresentedObjectAtIndexPath indexPath: NSIndexPath) -> NSCollectionViewItem
-  optional func numberOfSectionsInCollectionView(collectionView: NSCollectionView) -> Int
-  optional func collectionView(collectionView: NSCollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> NSView
+  func collectionView(collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem
+  optional func numberOfSectionsIn(collectionView: NSCollectionView) -> Int
+  optional func collectionView(collectionView: NSCollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> NSView
 }
-protocol NSCollectionViewDelegate : NSObjectProtocol {
-  optional func collectionView(collectionView: NSCollectionView, canDragItemsAtIndexPaths indexPaths: Set<NSIndexPath>, withEvent event: NSEvent) -> Bool
-  optional func collectionView(collectionView: NSCollectionView, canDragItemsAtIndexes indexes: NSIndexSet, withEvent event: NSEvent) -> Bool
-  optional func collectionView(collectionView: NSCollectionView, writeItemsAtIndexPaths indexPaths: Set<NSIndexPath>, toPasteboard pasteboard: NSPasteboard) -> Bool
-  optional func collectionView(collectionView: NSCollectionView, writeItemsAtIndexes indexes: NSIndexSet, toPasteboard pasteboard: NSPasteboard) -> Bool
-  optional func collectionView(collectionView: NSCollectionView, namesOfPromisedFilesDroppedAtDestination dropURL: NSURL, forDraggedItemsAtIndexPaths indexPaths: Set<NSIndexPath>) -> [String]
-  optional func collectionView(collectionView: NSCollectionView, namesOfPromisedFilesDroppedAtDestination dropURL: NSURL, forDraggedItemsAtIndexes indexes: NSIndexSet) -> [String]
-  optional func collectionView(collectionView: NSCollectionView, draggingImageForItemsAtIndexPaths indexPaths: Set<NSIndexPath>, withEvent event: NSEvent, offset dragImageOffset: NSPointPointer) -> NSImage
-  optional func collectionView(collectionView: NSCollectionView, draggingImageForItemsAtIndexes indexes: NSIndexSet, withEvent event: NSEvent, offset dragImageOffset: NSPointPointer) -> NSImage
-  optional func collectionView(collectionView: NSCollectionView, validateDrop draggingInfo: NSDraggingInfo, proposedIndexPath proposedDropIndexPath: AutoreleasingUnsafeMutablePointer<NSIndexPath?>, dropOperation proposedDropOperation: UnsafeMutablePointer<NSCollectionViewDropOperation>) -> NSDragOperation
+protocol NSCollectionViewDelegate : ObjectProtocol {
+  optional func collectionView(collectionView: NSCollectionView, canDragItemsAt indexPaths: Set<IndexPath>, withEvent event: NSEvent) -> Bool
+  optional func collectionView(collectionView: NSCollectionView, canDragItemsAt indexes: IndexSet, withEvent event: NSEvent) -> Bool
+  optional func collectionView(collectionView: NSCollectionView, writeItemsAt indexPaths: Set<IndexPath>, to pasteboard: NSPasteboard) -> Bool
+  optional func collectionView(collectionView: NSCollectionView, writeItemsAt indexes: IndexSet, to pasteboard: NSPasteboard) -> Bool
+  optional func collectionView(collectionView: NSCollectionView, namesOfPromisedFilesDroppedAtDestination dropURL: URL, forDraggedItemsAt indexPaths: Set<IndexPath>) -> [String]
+  optional func collectionView(collectionView: NSCollectionView, namesOfPromisedFilesDroppedAtDestination dropURL: URL, forDraggedItemsAt indexes: IndexSet) -> [String]
+  optional func collectionView(collectionView: NSCollectionView, draggingImageForItemsAt indexPaths: Set<IndexPath>, withEvent event: NSEvent, offset dragImageOffset: PointPointer) -> NSImage
+  optional func collectionView(collectionView: NSCollectionView, draggingImageForItemsAt indexes: IndexSet, withEvent event: NSEvent, offset dragImageOffset: PointPointer) -> NSImage
+  optional func collectionView(collectionView: NSCollectionView, validateDrop draggingInfo: NSDraggingInfo, proposedIndexPath proposedDropIndexPath: AutoreleasingUnsafeMutablePointer<IndexPath?>, dropOperation proposedDropOperation: UnsafeMutablePointer<NSCollectionViewDropOperation>) -> NSDragOperation
   optional func collectionView(collectionView: NSCollectionView, validateDrop draggingInfo: NSDraggingInfo, proposedIndex proposedDropIndex: UnsafeMutablePointer<Int>, dropOperation proposedDropOperation: UnsafeMutablePointer<NSCollectionViewDropOperation>) -> NSDragOperation
-  optional func collectionView(collectionView: NSCollectionView, acceptDrop draggingInfo: NSDraggingInfo, indexPath: NSIndexPath, dropOperation: NSCollectionViewDropOperation) -> Bool
+  optional func collectionView(collectionView: NSCollectionView, acceptDrop draggingInfo: NSDraggingInfo, indexPath: IndexPath, dropOperation: NSCollectionViewDropOperation) -> Bool
   optional func collectionView(collectionView: NSCollectionView, acceptDrop draggingInfo: NSDraggingInfo, index: Int, dropOperation: NSCollectionViewDropOperation) -> Bool
-  optional func collectionView(collectionView: NSCollectionView, pasteboardWriterForItemAtIndexPath indexPath: NSIndexPath) -> NSPasteboardWriting?
-  optional func collectionView(collectionView: NSCollectionView, pasteboardWriterForItemAtIndex index: Int) -> NSPasteboardWriting?
-  optional func collectionView(collectionView: NSCollectionView, draggingSession session: NSDraggingSession, willBeginAtPoint screenPoint: NSPoint, forItemsAtIndexPaths indexPaths: Set<NSIndexPath>)
-  optional func collectionView(collectionView: NSCollectionView, draggingSession session: NSDraggingSession, willBeginAtPoint screenPoint: NSPoint, forItemsAtIndexes indexes: NSIndexSet)
-  optional func collectionView(collectionView: NSCollectionView, draggingSession session: NSDraggingSession, endedAtPoint screenPoint: NSPoint, dragOperation operation: NSDragOperation)
+  optional func collectionView(collectionView: NSCollectionView, pasteboardWriterForItemAt indexPath: IndexPath) -> NSPasteboardWriting?
+  optional func collectionView(collectionView: NSCollectionView, pasteboardWriterForItemAt index: Int) -> NSPasteboardWriting?
+  optional func collectionView(collectionView: NSCollectionView, draggingSession session: NSDraggingSession, willBeginAt screenPoint: Point, forItemsAt indexPaths: Set<IndexPath>)
+  optional func collectionView(collectionView: NSCollectionView, draggingSession session: NSDraggingSession, willBeginAt screenPoint: Point, forItemsAt indexes: IndexSet)
+  optional func collectionView(collectionView: NSCollectionView, draggingSession session: NSDraggingSession, endedAt screenPoint: Point, dragOperation operation: NSDragOperation)
   optional func collectionView(collectionView: NSCollectionView, updateDraggingItemsForDrag draggingInfo: NSDraggingInfo)
-  optional func collectionView(collectionView: NSCollectionView, shouldChangeItemsAtIndexPaths indexPaths: Set<NSIndexPath>, toHighlightState highlightState: NSCollectionViewItemHighlightState) -> Set<NSIndexPath>
-  optional func collectionView(collectionView: NSCollectionView, didChangeItemsAtIndexPaths indexPaths: Set<NSIndexPath>, toHighlightState highlightState: NSCollectionViewItemHighlightState)
-  optional func collectionView(collectionView: NSCollectionView, shouldSelectItemsAtIndexPaths indexPaths: Set<NSIndexPath>) -> Set<NSIndexPath>
-  optional func collectionView(collectionView: NSCollectionView, shouldDeselectItemsAtIndexPaths indexPaths: Set<NSIndexPath>) -> Set<NSIndexPath>
-  optional func collectionView(collectionView: NSCollectionView, didSelectItemsAtIndexPaths indexPaths: Set<NSIndexPath>)
-  optional func collectionView(collectionView: NSCollectionView, didDeselectItemsAtIndexPaths indexPaths: Set<NSIndexPath>)
-  optional func collectionView(collectionView: NSCollectionView, willDisplayItem item: NSCollectionViewItem, forRepresentedObjectAtIndexPath indexPath: NSIndexPath)
-  optional func collectionView(collectionView: NSCollectionView, willDisplaySupplementaryView view: NSView, forElementKind elementKind: String, atIndexPath indexPath: NSIndexPath)
-  optional func collectionView(collectionView: NSCollectionView, didEndDisplayingItem item: NSCollectionViewItem, forRepresentedObjectAtIndexPath indexPath: NSIndexPath)
-  optional func collectionView(collectionView: NSCollectionView, didEndDisplayingSupplementaryView view: NSView, forElementOfKind elementKind: String, atIndexPath indexPath: NSIndexPath)
+  optional func collectionView(collectionView: NSCollectionView, shouldChangeItemsAt indexPaths: Set<IndexPath>, to highlightState: NSCollectionViewItemHighlightState) -> Set<IndexPath>
+  optional func collectionView(collectionView: NSCollectionView, didChangeItemsAt indexPaths: Set<IndexPath>, to highlightState: NSCollectionViewItemHighlightState)
+  optional func collectionView(collectionView: NSCollectionView, shouldSelectItemsAt indexPaths: Set<IndexPath>) -> Set<IndexPath>
+  optional func collectionView(collectionView: NSCollectionView, shouldDeselectItemsAt indexPaths: Set<IndexPath>) -> Set<IndexPath>
+  optional func collectionView(collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>)
+  optional func collectionView(collectionView: NSCollectionView, didDeselectItemsAt indexPaths: Set<IndexPath>)
+  optional func collectionView(collectionView: NSCollectionView, willDisplay item: NSCollectionViewItem, forRepresentedObjectAt indexPath: IndexPath)
+  optional func collectionView(collectionView: NSCollectionView, willDisplaySupplementaryView view: NSView, forElementKind elementKind: String, at indexPath: IndexPath)
+  optional func collectionView(collectionView: NSCollectionView, didEndDisplaying item: NSCollectionViewItem, forRepresentedObjectAt indexPath: IndexPath)
+  optional func collectionView(collectionView: NSCollectionView, didEndDisplayingSupplementaryView view: NSView, forElementOfKind elementKind: String, at indexPath: IndexPath)
   optional func collectionView(collectionView: NSCollectionView, transitionLayoutForOldLayout fromLayout: NSCollectionViewLayout, newLayout toLayout: NSCollectionViewLayout) -> NSCollectionViewTransitionLayout
 }
-extension NSIndexPath {
+extension IndexPath {
    init(forItem item: Int, inSection section: Int)
   var item: Int { get }
   var section: Int { get }
 }
 extension NSSet {
-  convenience init(collectionViewIndexPath indexPath: NSIndexPath)
-  convenience init(collectionViewIndexPaths indexPaths: [NSIndexPath])
-  func enumerateIndexPathsWithOptions(opts: NSEnumerationOptions, usingBlock block: (NSIndexPath, UnsafeMutablePointer<ObjCBool>) -> Void)
+  convenience init(collectionViewIndexPath indexPath: IndexPath)
+  convenience init(collectionViewIndexPaths indexPaths: [IndexPath])
+  func enumerateIndexPaths(options opts: EnumerationOptions = [], usingBlock block: (IndexPath, UnsafeMutablePointer<ObjCBool>) -> Void)
 }
 enum NSCollectionViewScrollDirection : Int {
   init?(rawValue: Int)
@@ -3533,36 +3533,36 @@ class NSCollectionViewFlowLayoutInvalidationContext : NSCollectionViewLayoutInva
   init()
 }
 protocol NSCollectionViewDelegateFlowLayout : NSCollectionViewDelegate {
-  optional func collectionView(collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> NSSize
-  optional func collectionView(collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, insetForSectionAtIndex section: Int) -> NSEdgeInsets
-  optional func collectionView(collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat
-  optional func collectionView(collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat
-  optional func collectionView(collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> NSSize
-  optional func collectionView(collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, referenceSizeForFooterInSection section: Int) -> NSSize
+  optional func collectionView(collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> Size
+  optional func collectionView(collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, insetForSectionAt section: Int) -> EdgeInsets
+  optional func collectionView(collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat
+  optional func collectionView(collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat
+  optional func collectionView(collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> Size
+  optional func collectionView(collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, referenceSizeForFooterInSection section: Int) -> Size
 }
 class NSCollectionViewFlowLayout : NSCollectionViewLayout {
   var minimumLineSpacing: CGFloat
   var minimumInteritemSpacing: CGFloat
-  var itemSize: NSSize
-  var estimatedItemSize: NSSize
+  var itemSize: Size
+  var estimatedItemSize: Size
   var scrollDirection: NSCollectionViewScrollDirection
-  var headerReferenceSize: NSSize
-  var footerReferenceSize: NSSize
-  var sectionInset: NSEdgeInsets
+  var headerReferenceSize: Size
+  var footerReferenceSize: Size
+  var sectionInset: EdgeInsets
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class NSCollectionViewGridLayout : NSCollectionViewLayout {
-  var margins: NSEdgeInsets
+  var margins: EdgeInsets
   var minimumInteritemSpacing: CGFloat
   var minimumLineSpacing: CGFloat
   var maximumNumberOfRows: Int
   var maximumNumberOfColumns: Int
-  var minimumItemSize: NSSize
-  var maximumItemSize: NSSize
+  var minimumItemSize: Size
+  var maximumItemSize: Size
   var backgroundColors: [NSColor]!
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 enum NSCollectionElementCategory : Int {
   init?(rawValue: Int)
@@ -3573,21 +3573,21 @@ enum NSCollectionElementCategory : Int {
   case InterItemGap
 }
 let NSCollectionElementKindInterItemGapIndicator: String
-class NSCollectionViewLayoutAttributes : NSObject, NSCopying {
-  var frame: NSRect
-  var size: NSSize
+class NSCollectionViewLayoutAttributes : Object, Copying {
+  var frame: Rect
+  var size: Size
   var alpha: CGFloat
   var zIndex: Int
-  var hidden: Bool
-  var indexPath: NSIndexPath?
+  var isHidden: Bool
+  var indexPath: IndexPath?
   var representedElementCategory: NSCollectionElementCategory { get }
   var representedElementKind: String? { get }
-  convenience init(forItemWithIndexPath indexPath: NSIndexPath)
-  convenience init(forInterItemGapBeforeIndexPath indexPath: NSIndexPath)
-  convenience init(forSupplementaryViewOfKind elementKind: String, withIndexPath indexPath: NSIndexPath)
-  convenience init(forDecorationViewOfKind decorationViewKind: String, withIndexPath indexPath: NSIndexPath)
+  convenience init(forItemWith indexPath: IndexPath)
+  convenience init(forInterItemGapBefore indexPath: IndexPath)
+  convenience init(forSupplementaryViewOfKind elementKind: String, withIndexPath indexPath: IndexPath)
+  convenience init(forDecorationViewOfKind decorationViewKind: String, withIndexPath indexPath: IndexPath)
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 enum NSCollectionUpdateAction : Int {
   init?(rawValue: Int)
@@ -3598,71 +3598,71 @@ enum NSCollectionUpdateAction : Int {
   case Move
   case None
 }
-class NSCollectionViewUpdateItem : NSObject {
-  var indexPathBeforeUpdate: NSIndexPath? { get }
-  var indexPathAfterUpdate: NSIndexPath? { get }
+class NSCollectionViewUpdateItem : Object {
+  var indexPathBeforeUpdate: IndexPath? { get }
+  var indexPathAfterUpdate: IndexPath? { get }
   var updateAction: NSCollectionUpdateAction { get }
   init()
 }
-class NSCollectionViewLayoutInvalidationContext : NSObject {
+class NSCollectionViewLayoutInvalidationContext : Object {
   var invalidateEverything: Bool { get }
   var invalidateDataSourceCounts: Bool { get }
-  func invalidateItemsAtIndexPaths(indexPaths: Set<NSIndexPath>)
-  func invalidateSupplementaryElementsOfKind(elementKind: String, atIndexPaths indexPaths: Set<NSIndexPath>)
-  func invalidateDecorationElementsOfKind(elementKind: String, atIndexPaths indexPaths: Set<NSIndexPath>)
-  var invalidatedItemIndexPaths: Set<NSIndexPath>? { get }
-  var invalidatedSupplementaryIndexPaths: [String : Set<NSIndexPath>]? { get }
-  var invalidatedDecorationIndexPaths: [String : Set<NSIndexPath>]? { get }
-  var contentOffsetAdjustment: NSPoint
-  var contentSizeAdjustment: NSSize
+  func invalidateItemsAt(indexPaths: Set<IndexPath>)
+  func invalidateSupplementaryElementsOfKind(elementKind: String, at indexPaths: Set<IndexPath>)
+  func invalidateDecorationElementsOfKind(elementKind: String, at indexPaths: Set<IndexPath>)
+  var invalidatedItemIndexPaths: Set<IndexPath>? { get }
+  var invalidatedSupplementaryIndexPaths: [String : Set<IndexPath>]? { get }
+  var invalidatedDecorationIndexPaths: [String : Set<IndexPath>]? { get }
+  var contentOffsetAdjustment: Point
+  var contentSizeAdjustment: Size
   init()
 }
-class NSCollectionViewLayout : NSObject, NSCoding {
+class NSCollectionViewLayout : Object, Coding {
   weak var collectionView: @sil_weak NSCollectionView? { get }
   func invalidateLayout()
-  func invalidateLayoutWithContext(context: NSCollectionViewLayoutInvalidationContext)
-  func registerClass(viewClass: AnyClass?, forDecorationViewOfKind elementKind: String)
-  func registerNib(nib: NSNib?, forDecorationViewOfKind elementKind: String)
+  func invalidateLayoutWith(context: NSCollectionViewLayoutInvalidationContext)
+  func register(viewClass: AnyClass?, forDecorationViewOfKind elementKind: String)
+  func register(nib: NSNib?, forDecorationViewOfKind elementKind: String)
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 extension NSCollectionViewLayout {
   class func layoutAttributesClass() -> AnyClass
   class func invalidationContextClass() -> AnyClass
-  func prepareLayout()
-  func layoutAttributesForElementsInRect(rect: NSRect) -> [NSCollectionViewLayoutAttributes]
-  func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> NSCollectionViewLayoutAttributes?
-  func layoutAttributesForSupplementaryViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> NSCollectionViewLayoutAttributes?
-  func layoutAttributesForDecorationViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> NSCollectionViewLayoutAttributes?
-  func layoutAttributesForDropTargetAtPoint(pointInCollectionView: NSPoint) -> NSCollectionViewLayoutAttributes?
-  func layoutAttributesForInterItemGapBeforeIndexPath(indexPath: NSIndexPath) -> NSCollectionViewLayoutAttributes?
-  func shouldInvalidateLayoutForBoundsChange(newBounds: NSRect) -> Bool
-  func invalidationContextForBoundsChange(newBounds: NSRect) -> NSCollectionViewLayoutInvalidationContext
+  func prepare()
+  func layoutAttributesForElementsIn(rect: Rect) -> [NSCollectionViewLayoutAttributes]
+  func layoutAttributesForItemAt(indexPath: IndexPath) -> NSCollectionViewLayoutAttributes?
+  func layoutAttributesForSupplementaryViewOfKind(elementKind: String, at indexPath: IndexPath) -> NSCollectionViewLayoutAttributes?
+  func layoutAttributesForDecorationViewOfKind(elementKind: String, at indexPath: IndexPath) -> NSCollectionViewLayoutAttributes?
+  func layoutAttributesForDropTargetAt(pointInCollectionView: Point) -> NSCollectionViewLayoutAttributes?
+  func layoutAttributesForInterItemGapBefore(indexPath: IndexPath) -> NSCollectionViewLayoutAttributes?
+  func shouldInvalidateLayoutForBoundsChange(newBounds: Rect) -> Bool
+  func invalidationContextForBoundsChange(newBounds: Rect) -> NSCollectionViewLayoutInvalidationContext
   func shouldInvalidateLayoutForPreferredLayoutAttributes(preferredAttributes: NSCollectionViewLayoutAttributes, withOriginalAttributes originalAttributes: NSCollectionViewLayoutAttributes) -> Bool
   func invalidationContextForPreferredLayoutAttributes(preferredAttributes: NSCollectionViewLayoutAttributes, withOriginalAttributes originalAttributes: NSCollectionViewLayoutAttributes) -> NSCollectionViewLayoutInvalidationContext
-  func targetContentOffsetForProposedContentOffset(proposedContentOffset: NSPoint, withScrollingVelocity velocity: NSPoint) -> NSPoint
-  func targetContentOffsetForProposedContentOffset(proposedContentOffset: NSPoint) -> NSPoint
-  var collectionViewContentSize: NSSize { get }
+  func targetContentOffsetForProposedContentOffset(proposedContentOffset: Point, withScrollingVelocity velocity: Point) -> Point
+  func targetContentOffsetForProposedContentOffset(proposedContentOffset: Point) -> Point
+  var collectionViewContentSize: Size { get }
 }
 extension NSCollectionViewLayout {
   func prepareForCollectionViewUpdates(updateItems: [NSCollectionViewUpdateItem])
   func finalizeCollectionViewUpdates()
-  func prepareForAnimatedBoundsChange(oldBounds: NSRect)
+  func prepareForAnimatedBoundsChange(oldBounds: Rect)
   func finalizeAnimatedBoundsChange()
-  func prepareForTransitionToLayout(newLayout: NSCollectionViewLayout)
-  func prepareForTransitionFromLayout(oldLayout: NSCollectionViewLayout)
+  func prepareForTransitionTo(newLayout: NSCollectionViewLayout)
+  func prepareForTransitionFrom(oldLayout: NSCollectionViewLayout)
   func finalizeLayoutTransition()
-  func initialLayoutAttributesForAppearingItemAtIndexPath(itemIndexPath: NSIndexPath) -> NSCollectionViewLayoutAttributes?
-  func finalLayoutAttributesForDisappearingItemAtIndexPath(itemIndexPath: NSIndexPath) -> NSCollectionViewLayoutAttributes?
-  func initialLayoutAttributesForAppearingSupplementaryElementOfKind(elementKind: String, atIndexPath elementIndexPath: NSIndexPath) -> NSCollectionViewLayoutAttributes?
-  func finalLayoutAttributesForDisappearingSupplementaryElementOfKind(elementKind: String, atIndexPath elementIndexPath: NSIndexPath) -> NSCollectionViewLayoutAttributes?
-  func initialLayoutAttributesForAppearingDecorationElementOfKind(elementKind: String, atIndexPath decorationIndexPath: NSIndexPath) -> NSCollectionViewLayoutAttributes?
-  func finalLayoutAttributesForDisappearingDecorationElementOfKind(elementKind: String, atIndexPath decorationIndexPath: NSIndexPath) -> NSCollectionViewLayoutAttributes?
-  func indexPathsToDeleteForSupplementaryViewOfKind(elementKind: String) -> Set<NSIndexPath>
-  func indexPathsToDeleteForDecorationViewOfKind(elementKind: String) -> Set<NSIndexPath>
-  func indexPathsToInsertForSupplementaryViewOfKind(elementKind: String) -> Set<NSIndexPath>
-  func indexPathsToInsertForDecorationViewOfKind(elementKind: String) -> Set<NSIndexPath>
+  func initialLayoutAttributesForAppearingItemAt(itemIndexPath: IndexPath) -> NSCollectionViewLayoutAttributes?
+  func finalLayoutAttributesForDisappearingItemAt(itemIndexPath: IndexPath) -> NSCollectionViewLayoutAttributes?
+  func initialLayoutAttributesForAppearingSupplementaryElementOfKind(elementKind: String, at elementIndexPath: IndexPath) -> NSCollectionViewLayoutAttributes?
+  func finalLayoutAttributesForDisappearingSupplementaryElementOfKind(elementKind: String, at elementIndexPath: IndexPath) -> NSCollectionViewLayoutAttributes?
+  func initialLayoutAttributesForAppearingDecorationElementOfKind(elementKind: String, at decorationIndexPath: IndexPath) -> NSCollectionViewLayoutAttributes?
+  func finalLayoutAttributesForDisappearingDecorationElementOfKind(elementKind: String, at decorationIndexPath: IndexPath) -> NSCollectionViewLayoutAttributes?
+  func indexPathsToDeleteForSupplementaryViewOfKind(elementKind: String) -> Set<IndexPath>
+  func indexPathsToDeleteForDecorationViewOfKind(elementKind: String) -> Set<IndexPath>
+  func indexPathsToInsertForSupplementaryViewOfKind(elementKind: String) -> Set<IndexPath>
+  func indexPathsToInsertForDecorationViewOfKind(elementKind: String) -> Set<IndexPath>
 }
 class NSCollectionViewTransitionLayout : NSCollectionViewLayout {
   var transitionProgress: CGFloat
@@ -3672,12 +3672,12 @@ class NSCollectionViewTransitionLayout : NSCollectionViewLayout {
   func updateValue(value: CGFloat, forAnimatedKey key: String)
   func valueForAnimatedKey(key: String) -> CGFloat
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 var NSAppKitVersionNumberWithPatternColorLeakFix: Double { get }
-class NSColor : NSObject, NSCopying, NSSecureCoding, NSPasteboardReading, NSPasteboardWriting {
+class NSColor : Object, Copying, SecureCoding, NSPasteboardReading, NSPasteboardWriting {
   init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
    init(calibratedWhite white: CGFloat, alpha: CGFloat)
    init(calibratedHue hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat)
    init(calibratedRed red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat)
@@ -3688,61 +3688,61 @@ class NSColor : NSObject, NSCopying, NSSecureCoding, NSPasteboardReading, NSPast
    init?(catalogName listName: String, colorName: String)
    init(colorSpace space: NSColorSpace, components: UnsafePointer<CGFloat>, count numberOfComponents: Int)
    init(genericGamma22White white: CGFloat, alpha: CGFloat)
-   init(SRGBRed red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat)
+   init(srgbRed red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat)
    init(white: CGFloat, alpha: CGFloat)
    init(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat)
    init(hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat)
-  class func blackColor() -> NSColor
-  class func darkGrayColor() -> NSColor
-  class func lightGrayColor() -> NSColor
-  class func whiteColor() -> NSColor
-  class func grayColor() -> NSColor
-  class func redColor() -> NSColor
-  class func greenColor() -> NSColor
-  class func blueColor() -> NSColor
-  class func cyanColor() -> NSColor
-  class func yellowColor() -> NSColor
-  class func magentaColor() -> NSColor
-  class func orangeColor() -> NSColor
-  class func purpleColor() -> NSColor
-  class func brownColor() -> NSColor
-  class func clearColor() -> NSColor
-  class func controlShadowColor() -> NSColor
-  class func controlDarkShadowColor() -> NSColor
-  class func controlColor() -> NSColor
-  class func controlHighlightColor() -> NSColor
-  class func controlLightHighlightColor() -> NSColor
-  class func controlTextColor() -> NSColor
-  class func controlBackgroundColor() -> NSColor
-  class func selectedControlColor() -> NSColor
-  class func secondarySelectedControlColor() -> NSColor
-  class func selectedControlTextColor() -> NSColor
-  class func disabledControlTextColor() -> NSColor
-  class func textColor() -> NSColor
-  class func textBackgroundColor() -> NSColor
-  class func selectedTextColor() -> NSColor
-  class func selectedTextBackgroundColor() -> NSColor
-  class func gridColor() -> NSColor
-  class func keyboardFocusIndicatorColor() -> NSColor
-  class func windowBackgroundColor() -> NSColor
-  class func underPageBackgroundColor() -> NSColor
-  class func labelColor() -> NSColor
-  class func secondaryLabelColor() -> NSColor
-  class func tertiaryLabelColor() -> NSColor
-  class func quaternaryLabelColor() -> NSColor
-  class func scrollBarColor() -> NSColor
-  class func knobColor() -> NSColor
-  class func selectedKnobColor() -> NSColor
-  class func windowFrameColor() -> NSColor
-  class func windowFrameTextColor() -> NSColor
-  class func selectedMenuItemColor() -> NSColor
-  class func selectedMenuItemTextColor() -> NSColor
-  class func highlightColor() -> NSColor
-  class func shadowColor() -> NSColor
-  class func headerColor() -> NSColor
-  class func headerTextColor() -> NSColor
-  class func alternateSelectedControlColor() -> NSColor
-  class func alternateSelectedControlTextColor() -> NSColor
+  class func black() -> NSColor
+  class func darkGray() -> NSColor
+  class func lightGray() -> NSColor
+  class func white() -> NSColor
+  class func gray() -> NSColor
+  class func red() -> NSColor
+  class func green() -> NSColor
+  class func blue() -> NSColor
+  class func cyan() -> NSColor
+  class func yellow() -> NSColor
+  class func magenta() -> NSColor
+  class func orange() -> NSColor
+  class func purple() -> NSColor
+  class func brown() -> NSColor
+  class func clear() -> NSColor
+  class func controlShadow() -> NSColor
+  class func controlDarkShadow() -> NSColor
+  class func control() -> NSColor
+  class func controlHighlight() -> NSColor
+  class func controlLightHighlight() -> NSColor
+  class func controlText() -> NSColor
+  class func controlBackground() -> NSColor
+  class func selectedControl() -> NSColor
+  class func secondarySelectedControl() -> NSColor
+  class func selectedControlText() -> NSColor
+  class func disabledControlText() -> NSColor
+  class func text() -> NSColor
+  class func textBackground() -> NSColor
+  class func selectedText() -> NSColor
+  class func selectedTextBackground() -> NSColor
+  class func grid() -> NSColor
+  class func keyboardFocusIndicator() -> NSColor
+  class func windowBackground() -> NSColor
+  class func underPageBackground() -> NSColor
+  class func label() -> NSColor
+  class func secondaryLabel() -> NSColor
+  class func tertiaryLabel() -> NSColor
+  class func quaternaryLabel() -> NSColor
+  class func scrollBar() -> NSColor
+  class func knob() -> NSColor
+  class func selectedKnob() -> NSColor
+  class func windowFrame() -> NSColor
+  class func windowFrameText() -> NSColor
+  class func selectedMenuItem() -> NSColor
+  class func selectedMenuItemText() -> NSColor
+  class func highlight() -> NSColor
+  class func shadow() -> NSColor
+  class func header() -> NSColor
+  class func headerText() -> NSColor
+  class func alternateSelectedControl() -> NSColor
+  class func alternateSelectedControlText() -> NSColor
   class func controlAlternatingRowBackgroundColors() -> [NSColor]
   func highlightWithLevel(val: CGFloat) -> NSColor?
   func shadowWithLevel(val: CGFloat) -> NSColor?
@@ -3752,11 +3752,11 @@ class NSColor : NSObject, NSCopying, NSSecureCoding, NSPasteboardReading, NSPast
   func setFill()
   func setStroke()
   var colorSpaceName: String { get }
-  func colorUsingColorSpaceName(colorSpace: String) -> NSColor?
-  func colorUsingColorSpaceName(colorSpace: String?, device deviceDescription: [String : AnyObject]?) -> NSColor?
-  func colorUsingColorSpace(space: NSColorSpace) -> NSColor?
-  func blendedColorWithFraction(fraction: CGFloat, ofColor color: NSColor) -> NSColor?
-  func colorWithAlphaComponent(alpha: CGFloat) -> NSColor
+  func usingColorSpaceName(colorSpace: String) -> NSColor?
+  func usingColorSpaceName(colorSpace: String?, device deviceDescription: [String : AnyObject]?) -> NSColor?
+  func usingColorSpace(space: NSColorSpace) -> NSColor?
+  func blendedColorWithFraction(fraction: CGFloat, of color: NSColor) -> NSColor?
+  func withAlphaComponent(alpha: CGFloat) -> NSColor
   var catalogNameComponent: String { get }
   var colorNameComponent: String { get }
   var localizedCatalogNameComponent: String { get }
@@ -3780,22 +3780,22 @@ class NSColor : NSObject, NSCopying, NSSecureCoding, NSPasteboardReading, NSPast
   var numberOfComponents: Int { get }
   func getComponents(components: UnsafeMutablePointer<CGFloat>)
   var alphaComponent: CGFloat { get }
-   init?(fromPasteboard pasteBoard: NSPasteboard)
-  func writeToPasteboard(pasteBoard: NSPasteboard)
+   init?(from pasteBoard: NSPasteboard)
+  func writeTo(pasteBoard: NSPasteboard)
    init(patternImage image: NSImage)
   var patternImage: NSImage { get }
-  func drawSwatchInRect(rect: NSRect)
-   init?(CGColor cgColor: CGColor)
-  var CGColor: CGColor { get }
+  func drawSwatchIn(rect: Rect)
+   init?(cgColor: CGColor)
+  var cgColor: CGColor { get }
   class func setIgnoresAlpha(flag: Bool)
   class func ignoresAlpha() -> Bool
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  class func readableTypesForPasteboard(pasteboard: NSPasteboard) -> [String]
+  func encodeWith(aCoder: Coder)
+  class func readableTypesFor(pasteboard: NSPasteboard) -> [String]
   class func readingOptionsForType(type: String, pasteboard: NSPasteboard) -> NSPasteboardReadingOptions
   init?(pasteboardPropertyList propertyList: AnyObject, ofType type: String)
-  func writableTypesForPasteboard(pasteboard: NSPasteboard) -> [String]
+  func writableTypesFor(pasteboard: NSPasteboard) -> [String]
   func writingOptionsForType(type: String, pasteboard: NSPasteboard) -> NSPasteboardWritingOptions
   func pasteboardPropertyListForType(type: String) -> AnyObject?
 }
@@ -3803,32 +3803,32 @@ extension NSColor : _ColorLiteralConvertible {
   required convenience init(colorLiteralRed red: Float, green: Float, blue: Float, alpha: Float)
 }
 extension NSColor {
-   init(CIColor color: CIColor)
+   init(ciColor color: CIColor)
 }
 extension CIColor {
   convenience init?(color: NSColor)
 }
-extension NSCoder {
+extension Coder {
 }
 let NSSystemColorsDidChangeNotification: String
-class NSColorList : NSObject, NSSecureCoding {
+class NSColorList : Object, SecureCoding {
   class func availableColorLists() -> [NSColorList]
    init?(named name: String)
   init(name: String)
   init?(name: String, fromFile path: String?)
   var name: String? { get }
   func setColor(color: NSColor, forKey key: String)
-  func insertColor(color: NSColor, key: String, atIndex loc: Int)
+  func insert(color: NSColor, key: String, at loc: Int)
   func removeColorWithKey(key: String)
   func colorWithKey(key: String) -> NSColor?
   var allKeys: [String] { get }
-  var editable: Bool { get }
+  var isEditable: Bool { get }
   func writeToFile(path: String?) -> Bool
   func removeFile()
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 struct _colorListFlags {
   var colorsLoaded: UInt32
@@ -3870,47 +3870,47 @@ struct NSColorPanelOptions : OptionSetType {
   static var AllModesMask: NSColorPanelOptions { get }
 }
 class NSColorPanel : NSPanel {
-  class func sharedColorPanel() -> NSColorPanel
+  class func shared() -> NSColorPanel
   class func sharedColorPanelExists() -> Bool
-  class func dragColor(color: NSColor, withEvent theEvent: NSEvent, fromView sourceView: NSView) -> Bool
+  class func drag(color: NSColor, withEvent theEvent: NSEvent, from sourceView: NSView) -> Bool
   class func setPickerMask(mask: NSColorPanelOptions)
   class func setPickerMode(mode: NSColorPanelMode)
   var accessoryView: NSView?
-  var continuous: Bool
+  var isContinuous: Bool
   var showsAlpha: Bool
   var mode: NSColorPanelMode
   @NSCopying var color: NSColor
   var alpha: CGFloat { get }
   func setAction(aSelector: Selector)
   func setTarget(anObject: AnyObject?)
-  func attachColorList(colorList: NSColorList)
-  func detachColorList(colorList: NSColorList)
-  init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
-  convenience init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
+  func attach(colorList: NSColorList)
+  func detach(colorList: NSColorList)
+  init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
+  convenience init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
   convenience init(contentViewController: NSViewController)
   convenience init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init?(windowRef: UnsafeMutablePointer<Void>)
 }
 extension NSApplication {
   func orderFrontColorPanel(sender: AnyObject?)
 }
-extension NSObject {
+extension Object {
   class func changeColor(sender: AnyObject?)
   func changeColor(sender: AnyObject?)
 }
 let NSColorPanelColorDidChangeNotification: String
-class NSColorPicker : NSObject, NSColorPickingDefault {
+class NSColorPicker : Object, NSColorPickingDefault {
   init?(pickerMask mask: Int, colorPanel owningColorPanel: NSColorPanel)
   var colorPanel: NSColorPanel { get }
   var provideNewButtonImage: NSImage { get }
   func insertNewButtonImage(newButtonImage: NSImage, in buttonCell: NSButtonCell)
   func viewSizeChanged(sender: AnyObject?)
-  func attachColorList(colorList: NSColorList)
-  func detachColorList(colorList: NSColorList)
+  func attach(colorList: NSColorList)
+  func detach(colorList: NSColorList)
   func setMode(mode: NSColorPanelMode)
   var buttonToolTip: String { get }
-  var minContentSize: NSSize { get }
+  var minContentSize: Size { get }
   init()
   func alphaControlAddedOrRemoved(sender: AnyObject?)
 }
@@ -3920,11 +3920,11 @@ protocol NSColorPickingDefault {
   func insertNewButtonImage(newButtonImage: NSImage, in buttonCell: NSButtonCell)
   func viewSizeChanged(sender: AnyObject?)
   func alphaControlAddedOrRemoved(sender: AnyObject?)
-  func attachColorList(colorList: NSColorList)
-  func detachColorList(colorList: NSColorList)
+  func attach(colorList: NSColorList)
+  func detach(colorList: NSColorList)
   func setMode(mode: NSColorPanelMode)
   func buttonToolTip() -> String
-  func minContentSize() -> NSSize
+  func minContentSize() -> Size
 }
 protocol NSColorPickingCustom : NSColorPickingDefault {
   func supportsMode(mode: NSColorPanelMode) -> Bool
@@ -3944,41 +3944,41 @@ enum NSColorSpaceModel : Int {
   case NSIndexedColorSpaceModel
   case NSPatternColorSpaceModel
 }
-class NSColorSpace : NSObject, NSSecureCoding {
-  init?(ICCProfileData iccData: NSData)
-  var ICCProfileData: NSData? { get }
+class NSColorSpace : Object, SecureCoding {
+  init?(iccProfileData iccData: Data)
+  var iccProfileData: Data? { get }
   init?(colorSyncProfile prof: UnsafeMutablePointer<Void>)
   var colorSyncProfile: UnsafeMutablePointer<Void> { get }
-  init?(CGColorSpace cgColorSpace: CGColorSpace)
-  var CGColorSpace: CGColorSpace? { get }
+  init?(cgColorSpace: CGColorSpace)
+  var cgColorSpace: CGColorSpace? { get }
   var numberOfColorComponents: Int { get }
   var colorSpaceModel: NSColorSpaceModel { get }
   var localizedName: String? { get }
-  class func genericRGBColorSpace() -> NSColorSpace
-  class func genericGrayColorSpace() -> NSColorSpace
-  class func genericCMYKColorSpace() -> NSColorSpace
-  class func deviceRGBColorSpace() -> NSColorSpace
-  class func deviceGrayColorSpace() -> NSColorSpace
-  class func deviceCMYKColorSpace() -> NSColorSpace
-  class func sRGBColorSpace() -> NSColorSpace
-  class func genericGamma22GrayColorSpace() -> NSColorSpace
-  class func adobeRGB1998ColorSpace() -> NSColorSpace
-  class func availableColorSpacesWithModel(model: NSColorSpaceModel) -> [NSColorSpace]
+  class func genericRGB() -> NSColorSpace
+  class func genericGray() -> NSColorSpace
+  class func genericCMYK() -> NSColorSpace
+  class func deviceRGB() -> NSColorSpace
+  class func deviceGray() -> NSColorSpace
+  class func deviceCMYK() -> NSColorSpace
+  class func sRGB() -> NSColorSpace
+  class func genericGamma22Gray() -> NSColorSpace
+  class func adobeRGB1998() -> NSColorSpace
+  class func availableColorSpacesWith(model: NSColorSpaceModel) -> [NSColorSpace]
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 class NSColorWell : NSControl {
   func deactivate()
   func activate(exclusive: Bool)
-  var active: Bool { get }
-  func drawWellInside(insideRect: NSRect)
-  var bordered: Bool
+  var isActive: Bool { get }
+  func drawInside(insideRect: Rect)
+  var isBordered: Bool
   func takeColorFrom(sender: AnyObject?)
   @NSCopying var color: NSColor
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 struct __cwFlags {
@@ -3997,17 +3997,17 @@ let NSComboBoxSelectionDidChangeNotification: String
 let NSComboBoxSelectionIsChangingNotification: String
 class NSComboBox : NSTextField {
   var hasVerticalScroller: Bool
-  var intercellSpacing: NSSize
+  var intercellSpacing: Size
   var itemHeight: CGFloat
   var numberOfVisibleItems: Int
-  var buttonBordered: Bool
+  var isButtonBordered: Bool
   func reloadData()
   func noteNumberOfItemsChanged()
   var usesDataSource: Bool
   func scrollItemAtIndexToTop(index: Int)
   func scrollItemAtIndexToVisible(index: Int)
-  func selectItemAtIndex(index: Int)
-  func deselectItemAtIndex(index: Int)
+  func selectItemAt(index: Int)
+  func deselectItemAt(index: Int)
   var indexOfSelectedItem: Int { get }
   var numberOfItems: Int { get }
   var completes: Bool
@@ -4016,44 +4016,44 @@ class NSComboBox : NSTextField {
   unowned(unsafe) var dataSource: @sil_unmanaged NSComboBoxDataSource?
   func addItemWithObjectValue(object: AnyObject)
   func addItemsWithObjectValues(objects: [AnyObject])
-  func insertItemWithObjectValue(object: AnyObject, atIndex index: Int)
+  func insertItemWithObjectValue(object: AnyObject, at index: Int)
   func removeItemWithObjectValue(object: AnyObject)
-  func removeItemAtIndex(index: Int)
+  func removeItemAt(index: Int)
   func removeAllItems()
   func selectItemWithObjectValue(object: AnyObject?)
-  func itemObjectValueAtIndex(index: Int) -> AnyObject
+  func itemObjectValueAt(index: Int) -> AnyObject
   var objectValueOfSelectedItem: AnyObject? { get }
   func indexOfItemWithObjectValue(object: AnyObject) -> Int
   var objectValues: [AnyObject] { get }
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
-protocol NSComboBoxDataSource : NSObjectProtocol {
-  optional func numberOfItemsInComboBox(aComboBox: NSComboBox) -> Int
-  optional func comboBox(aComboBox: NSComboBox, objectValueForItemAtIndex index: Int) -> AnyObject
+protocol NSComboBoxDataSource : ObjectProtocol {
+  optional func numberOfItemsIn(aComboBox: NSComboBox) -> Int
+  optional func comboBox(aComboBox: NSComboBox, objectValueForItemAt index: Int) -> AnyObject
   optional func comboBox(aComboBox: NSComboBox, indexOfItemWithStringValue string: String) -> Int
   optional func comboBox(aComboBox: NSComboBox, completedString string: String) -> String?
 }
 protocol NSComboBoxDelegate : NSTextFieldDelegate {
-  optional func comboBoxWillPopUp(notification: NSNotification)
-  optional func comboBoxWillDismiss(notification: NSNotification)
-  optional func comboBoxSelectionDidChange(notification: NSNotification)
-  optional func comboBoxSelectionIsChanging(notification: NSNotification)
+  optional func comboBoxWillPopUp(notification: Notification)
+  optional func comboBoxWillDismiss(notification: Notification)
+  optional func comboBoxSelectionDidChange(notification: Notification)
+  optional func comboBoxSelectionIsChanging(notification: Notification)
 }
 class NSComboBoxCell : NSTextFieldCell {
   var hasVerticalScroller: Bool
-  var intercellSpacing: NSSize
+  var intercellSpacing: Size
   var itemHeight: CGFloat
   var numberOfVisibleItems: Int
-  var buttonBordered: Bool
+  var isButtonBordered: Bool
   func reloadData()
   func noteNumberOfItemsChanged()
   var usesDataSource: Bool
   func scrollItemAtIndexToTop(index: Int)
   func scrollItemAtIndexToVisible(index: Int)
-  func selectItemAtIndex(index: Int)
-  func deselectItemAtIndex(index: Int)
+  func selectItemAt(index: Int)
+  func deselectItemAt(index: Int)
   var indexOfSelectedItem: Int { get }
   var numberOfItems: Int { get }
   var completes: Bool
@@ -4061,19 +4061,19 @@ class NSComboBoxCell : NSTextFieldCell {
   unowned(unsafe) var dataSource: @sil_unmanaged NSComboBoxCellDataSource?
   func addItemWithObjectValue(object: AnyObject)
   func addItemsWithObjectValues(objects: [AnyObject])
-  func insertItemWithObjectValue(object: AnyObject, atIndex index: Int)
+  func insertItemWithObjectValue(object: AnyObject, at index: Int)
   func removeItemWithObjectValue(object: AnyObject)
-  func removeItemAtIndex(index: Int)
+  func removeItemAt(index: Int)
   func removeAllItems()
   func selectItemWithObjectValue(object: AnyObject?)
-  func itemObjectValueAtIndex(index: Int) -> AnyObject
+  func itemObjectValueAt(index: Int) -> AnyObject
   var objectValueOfSelectedItem: AnyObject? { get }
   func indexOfItemWithObjectValue(object: AnyObject) -> Int
   var objectValues: [AnyObject] { get }
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 struct __cbcFlags {
   var usesDataSource: UInt32
@@ -4088,9 +4088,9 @@ struct __cbcFlags {
   init()
   init(usesDataSource: UInt32, completes: UInt32, buttonBordered: UInt32, popUpIsUp: UInt32, filteringEvents: UInt32, drawing: UInt32, synchronizingSelection: UInt32, reserved: UInt32, visibleItems: UInt32)
 }
-protocol NSComboBoxCellDataSource : NSObjectProtocol {
-  optional func numberOfItemsInComboBoxCell(comboBoxCell: NSComboBoxCell) -> Int
-  optional func comboBoxCell(aComboBoxCell: NSComboBoxCell, objectValueForItemAtIndex index: Int) -> AnyObject
+protocol NSComboBoxCellDataSource : ObjectProtocol {
+  optional func numberOfItemsIn(comboBoxCell: NSComboBoxCell) -> Int
+  optional func comboBoxCell(aComboBoxCell: NSComboBoxCell, objectValueForItemAt index: Int) -> AnyObject
   optional func comboBoxCell(aComboBoxCell: NSComboBoxCell, indexOfItemWithStringValue string: String) -> Int
   optional func comboBoxCell(aComboBoxCell: NSComboBoxCell, completedString uncompletedString: String) -> String?
 }
@@ -4099,22 +4099,22 @@ class NSControl : NSView {
   var action: Selector
   var tag: Int
   var ignoresMultiClick: Bool
-  var continuous: Bool
-  var enabled: Bool
+  var isContinuous: Bool
+  var isEnabled: Bool
   var refusesFirstResponder: Bool
-  var highlighted: Bool
+  var isHighlighted: Bool
   var controlSize: NSControlSize
-  var formatter: NSFormatter?
+  var formatter: Formatter?
   var stringValue: String
-  @NSCopying var attributedStringValue: NSAttributedString
+  @NSCopying var attributedStringValue: AttributedString
   @NSCopying var objectValue: AnyObject?
   var intValue: Int32
   var integerValue: Int
   var floatValue: Float
   var doubleValue: Double
-  func sizeThatFits(size: NSSize) -> NSSize
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  func sizeThatFits(size: Size) -> Size
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   func sizeToFit()
   func sendActionOn(mask: Int) -> Int
   func sendAction(theAction: Selector, to theTarget: AnyObject?) -> Bool
@@ -4152,32 +4152,32 @@ extension NSControl {
   var usesSingleLineMode: Bool
   var baseWritingDirection: NSWritingDirection
   var allowsExpansionToolTips: Bool
-  func expansionFrameWithFrame(contentFrame: NSRect) -> NSRect
-  func drawWithExpansionFrame(contentFrame: NSRect, inView view: NSView)
+  func expansionFrameWithFrame(contentFrame: Rect) -> Rect
+  func drawWithExpansionFrame(contentFrame: Rect, in view: NSView)
 }
 extension NSControl {
   func currentEditor() -> NSText?
   func abortEditing() -> Bool
   func validateEditing()
-  func editWithFrame(aRect: NSRect, editor textObj: NSText, delegate anObject: AnyObject?, event theEvent: NSEvent)
-  func selectWithFrame(aRect: NSRect, editor textObj: NSText, delegate anObject: AnyObject?, start selStart: Int, length selLength: Int)
+  func editWithFrame(aRect: Rect, editor textObj: NSText, delegate anObject: AnyObject?, event theEvent: NSEvent)
+  func selectWithFrame(aRect: Rect, editor textObj: NSText, delegate anObject: AnyObject?, start selStart: Int, length selLength: Int)
   func endEditing(textObj: NSText)
 }
-extension NSObject {
-  class func controlTextDidBeginEditing(obj: NSNotification)
-  func controlTextDidBeginEditing(obj: NSNotification)
-  class func controlTextDidEndEditing(obj: NSNotification)
-  func controlTextDidEndEditing(obj: NSNotification)
-  class func controlTextDidChange(obj: NSNotification)
-  func controlTextDidChange(obj: NSNotification)
+extension Object {
+  class func controlTextDidBeginEditing(obj: Notification)
+  func controlTextDidBeginEditing(obj: Notification)
+  class func controlTextDidEndEditing(obj: Notification)
+  func controlTextDidEndEditing(obj: Notification)
+  class func controlTextDidChange(obj: Notification)
+  func controlTextDidChange(obj: Notification)
 }
-protocol NSControlTextEditingDelegate : NSObjectProtocol {
+protocol NSControlTextEditingDelegate : ObjectProtocol {
   optional func control(control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool
   optional func control(control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool
   optional func control(control: NSControl, didFailToFormatString string: String, errorDescription error: String?) -> Bool
   optional func control(control: NSControl, didFailToValidatePartialString string: String, errorDescription error: String?)
   optional func control(control: NSControl, isValidObject obj: AnyObject) -> Bool
-  optional func control(control: NSControl, textView: NSTextView, doCommandBySelector commandSelector: Selector) -> Bool
+  optional func control(control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool
   optional func control(control: NSControl, textView: NSTextView, completions words: [String], forPartialWordRange charRange: NSRange, indexOfSelectedItem index: UnsafeMutablePointer<Int>) -> [String]
 }
 let NSControlTextDidBeginEditingNotification: String
@@ -4197,16 +4197,16 @@ extension NSControl {
   func drawCell(aCell: NSCell)
   func selectCell(aCell: NSCell)
 }
-class NSController : NSObject, NSCoding {
+class NSController : Object, Coding {
   init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   func objectDidBeginEditing(editor: AnyObject)
   func objectDidEndEditing(editor: AnyObject)
   func discardEditing()
   func commitEditing() -> Bool
-  func commitEditingWithDelegate(delegate: AnyObject?, didCommitSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  var editing: Bool { get }
-  func encodeWithCoder(aCoder: NSCoder)
+  func commitEditingWithDelegate(delegate: AnyObject?, didCommit didCommitSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  var isEditing: Bool { get }
+  func encodeWith(aCoder: Coder)
 }
 struct __bindingsControllerFlags {
   var _alwaysPresentsApplicationModalAlerts: UInt32
@@ -4218,47 +4218,47 @@ struct __bindingsControllerFlags {
   init(_alwaysPresentsApplicationModalAlerts: UInt32, _refreshesAllModelKeys: UInt32, _multipleObservedModelObjects: UInt32, _isEditing: UInt32, _reservedController: UInt32)
 }
 var NSAppKitVersionNumberWithCursorSizeSupport: Double { get }
-class NSCursor : NSObject, NSCoding {
-  class func currentCursor() -> NSCursor
-  class func currentSystemCursor() -> NSCursor?
-  class func arrowCursor() -> NSCursor
-  class func IBeamCursor() -> NSCursor
-  class func pointingHandCursor() -> NSCursor
-  class func closedHandCursor() -> NSCursor
-  class func openHandCursor() -> NSCursor
-  class func resizeLeftCursor() -> NSCursor
-  class func resizeRightCursor() -> NSCursor
-  class func resizeLeftRightCursor() -> NSCursor
-  class func resizeUpCursor() -> NSCursor
-  class func resizeDownCursor() -> NSCursor
-  class func resizeUpDownCursor() -> NSCursor
-  class func crosshairCursor() -> NSCursor
-  class func disappearingItemCursor() -> NSCursor
-  class func operationNotAllowedCursor() -> NSCursor
-  class func dragLinkCursor() -> NSCursor
-  class func dragCopyCursor() -> NSCursor
-  class func contextualMenuCursor() -> NSCursor
-  class func IBeamCursorForVerticalLayout() -> NSCursor
-  init(image newImage: NSImage, hotSpot aPoint: NSPoint)
-  convenience init(image newImage: NSImage, foregroundColorHint fg: NSColor?, backgroundColorHint bg: NSColor?, hotSpot: NSPoint)
+class NSCursor : Object, Coding {
+  class func current() -> NSCursor
+  class func currentSystem() -> NSCursor?
+  class func arrow() -> NSCursor
+  class func iBeam() -> NSCursor
+  class func pointingHand() -> NSCursor
+  class func closedHand() -> NSCursor
+  class func openHand() -> NSCursor
+  class func resizeLeft() -> NSCursor
+  class func resizeRight() -> NSCursor
+  class func resizeLeftRight() -> NSCursor
+  class func resizeUp() -> NSCursor
+  class func resizeDown() -> NSCursor
+  class func resizeUpDown() -> NSCursor
+  class func crosshair() -> NSCursor
+  class func disappearingItem() -> NSCursor
+  class func operationNotAllowed() -> NSCursor
+  class func dragLink() -> NSCursor
+  class func dragCopy() -> NSCursor
+  class func contextualMenu() -> NSCursor
+  class func iBeamCursorForVerticalLayout() -> NSCursor
+  init(image newImage: NSImage, hotSpot aPoint: Point)
+  convenience init(image newImage: NSImage, foregroundColorHint fg: NSColor?, backgroundColorHint bg: NSColor?, hotSpot: Point)
   class func hide()
   class func unhide()
   class func setHiddenUntilMouseMoves(flag: Bool)
   class func pop()
   var image: NSImage { get }
-  var hotSpot: NSPoint { get }
+  var hotSpot: Point { get }
   func push()
   func pop()
   func set()
   func setOnMouseExited(flag: Bool)
   func setOnMouseEntered(flag: Bool)
-  var setOnMouseExited: Bool { get }
-  var setOnMouseEntered: Bool { get }
+  var isSetOnMouseExited: Bool { get }
+  var isSetOnMouseEntered: Bool { get }
   func mouseEntered(theEvent: NSEvent)
   func mouseExited(theEvent: NSEvent)
   convenience init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 extension NSCursor : _Reflectable {
   func _getMirror() -> _MirrorType
@@ -4271,46 +4271,46 @@ struct _cursorFlags {
   init(onMouseExited: UInt32, onMouseEntered: UInt32, cursorType: UInt32)
 }
 class NSCustomImageRep : NSImageRep {
-  init(size: NSSize, flipped drawingHandlerShouldBeCalledWithFlippedContext: Bool, drawingHandler: (NSRect) -> Bool)
-  var drawingHandler: ((NSRect) -> Bool)? { get }
-  init(drawSelector aMethod: Selector, delegate anObject: AnyObject)
+  init(size: Size, flipped drawingHandlerShouldBeCalledWithFlippedContext: Bool, drawingHandler: (Rect) -> Bool)
+  var drawingHandler: ((Rect) -> Bool)? { get }
+  init(draw aMethod: Selector, delegate anObject: AnyObject)
   var drawSelector: Selector { get }
   unowned(unsafe) var delegate: @sil_unmanaged AnyObject? { get }
   init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
 }
-class NSDataAsset : NSObject, NSCopying {
+class NSDataAsset : Object, Copying {
   /// Equivalent to -initWithName:name bundle:[NSBundle mainBundle];
   convenience init?(name: String)
   /// Create a data asset with the given name from the given bundle. Returns nil if the asset was not found.
-  init?(name: String, bundle: NSBundle)
+  init?(name: String, bundle: Bundle)
   /// The name used to reference the data asset
   var name: String { get }
   /// The data for this asset, as stored in the asset catalog
-  @NSCopying var data: NSData { get }
+  @NSCopying var data: Data { get }
   /// The Uniform Type Identifier for this data object.
   var typeIdentifier: String { get }
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 class NSDatePicker : NSControl {
   var datePickerStyle: NSDatePickerStyle
-  var bezeled: Bool
-  var bordered: Bool
+  var isBezeled: Bool
+  var isBordered: Bool
   var drawsBackground: Bool
   @NSCopying var backgroundColor: NSColor
   @NSCopying var textColor: NSColor
   var datePickerMode: NSDatePickerMode
   var datePickerElements: NSDatePickerElementFlags
-  @NSCopying var calendar: NSCalendar?
-  @NSCopying var locale: NSLocale?
-  @NSCopying var timeZone: NSTimeZone?
-  @NSCopying var dateValue: NSDate
-  var timeInterval: NSTimeInterval
-  @NSCopying var minDate: NSDate?
-  @NSCopying var maxDate: NSDate?
+  @NSCopying var calendar: Calendar?
+  @NSCopying var locale: Locale?
+  @NSCopying var timeZone: TimeZone?
+  @NSCopying var dateValue: Date
+  var timeInterval: TimeInterval
+  @NSCopying var minDate: Date?
+  @NSCopying var maxDate: Date?
   unowned(unsafe) var delegate: @sil_unmanaged NSDatePickerCellDelegate?
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 enum NSDatePickerStyle : UInt {
@@ -4343,18 +4343,18 @@ class NSDatePickerCell : NSActionCell {
   @NSCopying var textColor: NSColor
   var datePickerMode: NSDatePickerMode
   var datePickerElements: NSDatePickerElementFlags
-  @NSCopying var calendar: NSCalendar?
-  @NSCopying var locale: NSLocale?
-  @NSCopying var timeZone: NSTimeZone?
-  @NSCopying var dateValue: NSDate
-  var timeInterval: NSTimeInterval
-  @NSCopying var minDate: NSDate?
-  @NSCopying var maxDate: NSDate?
+  @NSCopying var calendar: Calendar?
+  @NSCopying var locale: Locale?
+  @NSCopying var timeZone: TimeZone?
+  @NSCopying var dateValue: Date
+  var timeInterval: TimeInterval
+  @NSCopying var minDate: Date?
+  @NSCopying var maxDate: Date?
   unowned(unsafe) var delegate: @sil_unmanaged NSDatePickerCellDelegate?
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 struct __dateCellFlags {
   var elements: UInt32
@@ -4369,14 +4369,14 @@ struct __dateCellFlags {
   init()
   init(elements: UInt32, controlStyle: UInt32, controlMode: UInt32, trackingHand: UInt32, reserved2: UInt32, drawsBackground: UInt32, digitsEntered: UInt32, forcesLeadingZeroes: UInt32, wrapsDateComponentArithmetic: UInt32)
 }
-protocol NSDatePickerCellDelegate : NSObjectProtocol {
-  optional func datePickerCell(aDatePickerCell: NSDatePickerCell, validateProposedDateValue proposedDateValue: AutoreleasingUnsafeMutablePointer<NSDate?>, timeInterval proposedTimeInterval: UnsafeMutablePointer<NSTimeInterval>)
+protocol NSDatePickerCellDelegate : ObjectProtocol {
+  optional func datePickerCell(aDatePickerCell: NSDatePickerCell, validateProposedDateValue proposedDateValue: AutoreleasingUnsafeMutablePointer<Date?>, timeInterval proposedTimeInterval: UnsafeMutablePointer<TimeInterval>)
 }
-class NSDictionaryControllerKeyValuePair : NSObject {
+class NSDictionaryControllerKeyValuePair : Object {
   var key: String?
   var value: AnyObject?
   var localizedKey: String?
-  var explicitlyIncluded: Bool { get }
+  var isExplicitlyIncluded: Bool { get }
 }
 class NSDictionaryController : NSArrayController {
   func newObject() -> NSDictionaryControllerKeyValuePair
@@ -4387,7 +4387,7 @@ class NSDictionaryController : NSArrayController {
   var localizedKeyDictionary: [String : String]
   var localizedKeyTable: String?
   init(content: AnyObject?)
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init()
 }
 struct __dictionaryControllerFlags {
@@ -4398,8 +4398,8 @@ struct __dictionaryControllerFlags {
   init(_deepCopiesValues: UInt32, _suppressBuildingDictionary: UInt32, _reservedDictionaryController: UInt32)
 }
 var NSAppKitVersionNumberWithDockTilePlugInSupport: Double { get }
-class NSDockTile : NSObject {
-  var size: NSSize { get }
+class NSDockTile : Object {
+  var size: Size { get }
   var contentView: NSView?
   func display()
   var showsApplicationBadge: Bool
@@ -4407,7 +4407,7 @@ class NSDockTile : NSObject {
   unowned(unsafe) var owner: @sil_unmanaged AnyObject { get }
   init()
 }
-protocol NSDockTilePlugIn : NSObjectProtocol {
+protocol NSDockTilePlugIn : ObjectProtocol {
   func setDockTile(dockTile: NSDockTile?)
   optional func dockMenu() -> NSMenu?
 }
@@ -4432,99 +4432,100 @@ enum NSSaveOperationType : UInt {
   case AutosaveElsewhereOperation
   case AutosaveAsOperation
 }
-class NSDocument : NSObject, NSFilePresenter, NSUserInterfaceValidations {
+class NSDocument : Object, FilePresenter, NSUserInterfaceValidations {
   init()
   convenience init(type typeName: String) throws
   class func canConcurrentlyReadDocumentsOfType(typeName: String) -> Bool
-  convenience init(contentsOfURL url: NSURL, ofType typeName: String) throws
-  convenience init(forURL urlOrNil: NSURL?, withContentsOfURL contentsURL: NSURL, ofType typeName: String) throws
+  convenience init(contentsOf url: URL, ofType typeName: String) throws
+  convenience init(forURL urlOrNil: URL?, withContentsOf contentsURL: URL, ofType typeName: String) throws
   var fileType: String?
-  @NSCopying var fileURL: NSURL?
-  @NSCopying var fileModificationDate: NSDate?
-  var draft: Bool
+  @NSCopying var fileURL: URL?
+  @NSCopying var fileModificationDate: Date?
+  var isDraft: Bool
   func performActivityWithSynchronousWaiting(waitSynchronously: Bool, usingBlock block: (() -> Void) -> Void)
-  func continueActivityUsingBlock(block: () -> Void)
-  func continueAsynchronousWorkOnMainThreadUsingBlock(block: () -> Void)
-  func performSynchronousFileAccessUsingBlock(block: () -> Void)
-  func performAsynchronousFileAccessUsingBlock(block: (() -> Void) -> Void)
+  func continueActivityUsing(block: () -> Void)
+  func continueAsynchronousWorkOnMainThreadUsing(block: () -> Void)
+  func performSynchronousFileAccessUsing(block: () -> Void)
+  func performAsynchronousFileAccessUsing(block: (() -> Void) -> Void)
   @IBAction func revertDocumentToSaved(sender: AnyObject?)
-  func revertToContentsOfURL(url: NSURL, ofType typeName: String) throws
-  func readFromURL(url: NSURL, ofType typeName: String) throws
-  func readFromFileWrapper(fileWrapper: NSFileWrapper, ofType typeName: String) throws
-  func readFromData(data: NSData, ofType typeName: String) throws
-  var entireFileLoaded: Bool { get }
-  func writeToURL(url: NSURL, ofType typeName: String) throws
-  func fileWrapperOfType(typeName: String) throws -> NSFileWrapper
-  func dataOfType(typeName: String) throws -> NSData
+  func revertToContentsOf(url: URL, ofType typeName: String) throws
+  func readFrom(url: URL, ofType typeName: String) throws
+  func readFrom(fileWrapper: FileWrapper, ofType typeName: String) throws
+  func readFrom(data: Data, ofType typeName: String) throws
+  var isEntireFileLoaded: Bool { get }
+  func writeTo(url: URL, ofType typeName: String) throws
+  func fileWrapperOfType(typeName: String) throws -> FileWrapper
+  func dataOfType(typeName: String) throws -> Data
   func unblockUserInteraction()
   var autosavingIsImplicitlyCancellable: Bool { get }
-  func writeSafelyToURL(url: NSURL, ofType typeName: String, forSaveOperation saveOperation: NSSaveOperationType) throws
-  func writeToURL(url: NSURL, ofType typeName: String, forSaveOperation saveOperation: NSSaveOperationType, originalContentsURL absoluteOriginalContentsURL: NSURL?) throws
-  func fileAttributesToWriteToURL(url: NSURL, ofType typeName: String, forSaveOperation saveOperation: NSSaveOperationType, originalContentsURL absoluteOriginalContentsURL: NSURL?) throws -> [String : AnyObject]
+  func writeSafelyTo(url: URL, ofType typeName: String, forSaveOperation saveOperation: NSSaveOperationType) throws
+  func writeTo(url: URL, ofType typeName: String, forSaveOperation saveOperation: NSSaveOperationType, originalContentsURL absoluteOriginalContentsURL: URL?) throws
+  func fileAttributesToWriteTo(url: URL, ofType typeName: String, forSaveOperation saveOperation: NSSaveOperationType, originalContentsURL absoluteOriginalContentsURL: URL?) throws -> [String : AnyObject]
   var keepBackupFile: Bool { get }
-  @NSCopying var backupFileURL: NSURL? { get }
-  @IBAction func saveDocument(sender: AnyObject?)
-  @IBAction func saveDocumentAs(sender: AnyObject?)
-  @IBAction func saveDocumentTo(sender: AnyObject?)
-  func saveDocumentWithDelegate(delegate: AnyObject?, didSaveSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func runModalSavePanelForSaveOperation(saveOperation: NSSaveOperationType, delegate: AnyObject?, didSaveSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  @NSCopying var backupFileURL: URL? { get }
+  @IBAction func save(sender: AnyObject?)
+  @IBAction func saveAs(sender: AnyObject?)
+  @IBAction func saveTo(sender: AnyObject?)
+  func saveWithDelegate(delegate: AnyObject?, didSave didSaveSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func runModalSavePanelFor(saveOperation: NSSaveOperationType, delegate: AnyObject?, didSave didSaveSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
   var shouldRunSavePanelWithAccessoryView: Bool { get }
-  func prepareSavePanel(savePanel: NSSavePanel) -> Bool
+  func prepare(savePanel: NSSavePanel) -> Bool
   var fileNameExtensionWasHiddenInLastRunSavePanel: Bool { get }
   var fileTypeFromLastRunSavePanel: String? { get }
-  func saveToURL(url: NSURL, ofType typeName: String, forSaveOperation saveOperation: NSSaveOperationType, delegate: AnyObject?, didSaveSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func saveToURL(url: NSURL, ofType typeName: String, forSaveOperation saveOperation: NSSaveOperationType, completionHandler: (NSError?) -> Void)
-  func canAsynchronouslyWriteToURL(url: NSURL, ofType typeName: String, forSaveOperation saveOperation: NSSaveOperationType) -> Bool
+  func saveTo(url: URL, ofType typeName: String, forSaveOperation saveOperation: NSSaveOperationType, delegate: AnyObject?, didSave didSaveSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func saveTo(url: URL, ofType typeName: String, forSaveOperation saveOperation: NSSaveOperationType, completionHandler: (Error?) -> Void)
+  func canAsynchronouslyWriteTo(url: URL, ofType typeName: String, forSaveOperation saveOperation: NSSaveOperationType) -> Bool
   func checkAutosavingSafety() throws
   func scheduleAutosaving()
   var hasUnautosavedChanges: Bool { get }
-  func autosaveDocumentWithDelegate(delegate: AnyObject?, didAutosaveSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func autosaveWithImplicitCancellability(autosavingIsImplicitlyCancellable: Bool, completionHandler: (NSError?) -> Void)
+  func autosaveWithDelegate(delegate: AnyObject?, didAutosaveSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func autosaveWithImplicitCancellability(autosavingIsImplicitlyCancellable: Bool, completionHandler: (Error?) -> Void)
   class func autosavesInPlace() -> Bool
   class func preservesVersions() -> Bool
   @IBAction func browseDocumentVersions(sender: AnyObject?)
   class func autosavesDrafts() -> Bool
   var autosavingFileType: String? { get }
-  @NSCopying var autosavedContentsFileURL: NSURL?
-  func canCloseDocumentWithDelegate(delegate: AnyObject, shouldCloseSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  @NSCopying var autosavedContentsFileURL: URL?
+  func canCloseWithDelegate(delegate: AnyObject, shouldClose shouldCloseSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
   func close()
-  @IBAction func duplicateDocument(sender: AnyObject?)
-  func duplicateDocumentWithDelegate(delegate: AnyObject?, didDuplicateSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  @IBAction func duplicate(sender: AnyObject?)
+  func duplicateWithDelegate(delegate: AnyObject?, didDuplicate didDuplicateSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
   func duplicate() throws -> NSDocument
   @IBAction func renameDocument(sender: AnyObject?)
-  @IBAction func moveDocumentToUbiquityContainer(sender: AnyObject?)
-  @IBAction func moveDocument(sender: AnyObject?)
-  func moveDocumentWithCompletionHandler(completionHandler: ((Bool) -> Void)?)
-  func moveToURL(url: NSURL, completionHandler: ((NSError?) -> Void)?)
-  @IBAction func lockDocument(sender: AnyObject?)
-  @IBAction func unlockDocument(sender: AnyObject?)
-  func lockDocumentWithCompletionHandler(completionHandler: ((Bool) -> Void)?)
-  func lockWithCompletionHandler(completionHandler: ((NSError?) -> Void)?)
-  func unlockDocumentWithCompletionHandler(completionHandler: ((Bool) -> Void)?)
-  func unlockWithCompletionHandler(completionHandler: ((NSError?) -> Void)?)
-  var locked: Bool { get }
+  @IBAction func moveToUbiquityContainer(sender: AnyObject?)
+  @IBAction func move(sender: AnyObject?)
+  func move(completionHandler completionHandler: ((Bool) -> Void)? = nil)
+  func moveTo(url: URL, completionHandler: ((Error?) -> Void)? = nil)
+  @IBAction func lock(sender: AnyObject?)
+  @IBAction func unlock(sender: AnyObject?)
+  func lock(completionHandler completionHandler: ((Bool) -> Void)? = nil)
+  func lock(completionHandler completionHandler: ((Error?) -> Void)? = nil)
+  func unlock(completionHandler completionHandler: ((Bool) -> Void)? = nil)
+  func unlock(completionHandler completionHandler: ((Error?) -> Void)? = nil)
+  var isLocked: Bool { get }
   @IBAction func runPageLayout(sender: AnyObject?)
-  func runModalPageLayoutWithPrintInfo(printInfo: NSPrintInfo, delegate: AnyObject?, didRunSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func preparePageLayout(pageLayout: NSPageLayout) -> Bool
+  func runModalPageLayoutWith(printInfo: NSPrintInfo, delegate: AnyObject?, didRun didRunSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func prepare(pageLayout: NSPageLayout) -> Bool
   func shouldChangePrintInfo(newPrintInfo: NSPrintInfo) -> Bool
   @NSCopying var printInfo: NSPrintInfo
-  @IBAction func printDocument(sender: AnyObject?)
-  func printDocumentWithSettings(printSettings: [String : AnyObject], showPrintPanel: Bool, delegate: AnyObject?, didPrintSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  @warn_unqualified_access
+  @IBAction func print(sender: AnyObject?)
+  func printWithSettings(printSettings: [String : AnyObject], showPrintPanel: Bool, delegate: AnyObject?, didPrint didPrintSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
   func printOperationWithSettings(printSettings: [String : AnyObject]) throws -> NSPrintOperation
-  func runModalPrintOperation(printOperation: NSPrintOperation, delegate: AnyObject?, didRunSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  @IBAction func saveDocumentToPDF(sender: AnyObject?)
-  var PDFPrintOperation: NSPrintOperation { get }
-  var documentEdited: Bool { get }
-  var inViewingMode: Bool { get }
+  func runModalPrintOperation(printOperation: NSPrintOperation, delegate: AnyObject?, didRun didRunSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  @IBAction func saveToPDF(sender: AnyObject?)
+  var pdfPrintOperation: NSPrintOperation { get }
+  var isDocumentEdited: Bool { get }
+  var isInViewingMode: Bool { get }
   func updateChangeCount(change: NSDocumentChangeType)
-  func changeCountTokenForSaveOperation(saveOperation: NSSaveOperationType) -> AnyObject
+  func changeCountTokenFor(saveOperation: NSSaveOperationType) -> AnyObject
   func updateChangeCountWithToken(changeCountToken: AnyObject, forSaveOperation saveOperation: NSSaveOperationType)
-  var undoManager: NSUndoManager?
+  var undoManager: UndoManager?
   var hasUndoManager: Bool
-  func presentError(error: NSError, modalForWindow window: NSWindow, delegate: AnyObject?, didPresentSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func presentError(error: NSError) -> Bool
-  func willPresentError(error: NSError) -> NSError
-  func willNotPresentError(error: NSError)
+  func presentError(error: Error, modalFor window: NSWindow, delegate: AnyObject?, didPresent didPresentSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func presentError(error: Error) -> Bool
+  func willPresentError(error: Error) -> Error
+  func willNotPresentError(error: Error)
   func makeWindowControllers()
   var windowNibName: String? { get }
   func windowControllerWillLoadNib(windowController: NSWindowController)
@@ -4534,7 +4535,7 @@ class NSDocument : NSObject, NSFilePresenter, NSUserInterfaceValidations {
   func removeWindowController(windowController: NSWindowController)
   func showWindows()
   var windowControllers: [NSWindowController] { get }
-  func shouldCloseWindowController(windowController: NSWindowController, delegate: AnyObject?, shouldCloseSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func shouldCloseWindowController(windowController: NSWindowController, delegate: AnyObject?, shouldClose shouldCloseSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
   func setDisplayName(displayNameOrNil: String?)
   var displayName: String { get }
   func defaultDraftName() -> String
@@ -4542,29 +4543,29 @@ class NSDocument : NSObject, NSFilePresenter, NSUserInterfaceValidations {
   class func readableTypes() -> [String]
   class func writableTypes() -> [String]
   class func isNativeType(type: String) -> Bool
-  func writableTypesForSaveOperation(saveOperation: NSSaveOperationType) -> [String]
+  func writableTypesFor(saveOperation: NSSaveOperationType) -> [String]
   func fileNameExtensionForType(typeName: String, saveOperation: NSSaveOperationType) -> String?
-  func validateUserInterfaceItem(anItem: NSValidatedUserInterfaceItem) -> Bool
+  func validate(anItem: NSValidatedUserInterfaceItem) -> Bool
   class func usesUbiquitousStorage() -> Bool
-  @NSCopying var presentedItemURL: NSURL? { get }
-  var presentedItemOperationQueue: NSOperationQueue { get }
-  @NSCopying var primaryPresentedItemURL: NSURL? { get }
+  @NSCopying var presentedItemURL: URL? { get }
+  var presentedItemOperationQueue: OperationQueue { get }
+  @NSCopying var primaryPresentedItemURL: URL? { get }
   func relinquishPresentedItemToReader(reader: ((() -> Void)?) -> Void)
   func relinquishPresentedItemToWriter(writer: ((() -> Void)?) -> Void)
-  func savePresentedItemChangesWithCompletionHandler(completionHandler: (NSError?) -> Void)
-  func accommodatePresentedItemDeletionWithCompletionHandler(completionHandler: (NSError?) -> Void)
-  func presentedItemDidMoveToURL(newURL: NSURL)
+  func savePresentedItemChangesWithCompletionHandler(completionHandler: (Error?) -> Void)
+  func accommodatePresentedItemDeletionWithCompletionHandler(completionHandler: (Error?) -> Void)
+  func presentedItemDidMoveTo(newURL: URL)
   func presentedItemDidChange()
-  func presentedItemDidGainVersion(version: NSFileVersion)
-  func presentedItemDidLoseVersion(version: NSFileVersion)
-  func presentedItemDidResolveConflictVersion(version: NSFileVersion)
-  func accommodatePresentedSubitemDeletionAtURL(url: NSURL, completionHandler: (NSError?) -> Void)
-  func presentedSubitemDidAppearAtURL(url: NSURL)
-  func presentedSubitemAtURL(oldURL: NSURL, didMoveToURL newURL: NSURL)
-  func presentedSubitemDidChangeAtURL(url: NSURL)
-  func presentedSubitemAtURL(url: NSURL, didGainVersion version: NSFileVersion)
-  func presentedSubitemAtURL(url: NSURL, didLoseVersion version: NSFileVersion)
-  func presentedSubitemAtURL(url: NSURL, didResolveConflictVersion version: NSFileVersion)
+  func presentedItemDidGainVersion(version: FileVersion)
+  func presentedItemDidLose(version: FileVersion)
+  func presentedItemDidResolveConflictVersion(version: FileVersion)
+  func accommodatePresentedSubitemDeletionAt(url: URL, completionHandler: (Error?) -> Void)
+  func presentedSubitemDidAppearAt(url: URL)
+  func presentedSubitemAt(oldURL: URL, didMoveTo newURL: URL)
+  func presentedSubitemDidChangeAt(url: URL)
+  func presentedSubitemAt(url: URL, didGainVersion version: FileVersion)
+  func presentedSubitemAt(url: URL, didLose version: FileVersion)
+  func presentedSubitemAt(url: URL, didResolveConflictVersion version: FileVersion)
 }
 struct __docFlags {
   var inClose: UInt32
@@ -4580,59 +4581,59 @@ struct __docFlags {
 }
 extension NSDocument {
 }
-class NSDocumentController : NSObject, NSCoding, NSUserInterfaceValidations {
-  class func sharedDocumentController() -> NSDocumentController
+class NSDocumentController : Object, Coding, NSUserInterfaceValidations {
+  class func shared() -> NSDocumentController
   init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   var documents: [NSDocument] { get }
   var currentDocument: NSDocument? { get }
   var currentDirectory: String? { get }
-  func documentForURL(url: NSURL) -> NSDocument?
-  func documentForWindow(window: NSWindow) -> NSDocument?
+  func documentFor(url: URL) -> NSDocument?
+  func documentFor(window: NSWindow) -> NSDocument?
   func addDocument(document: NSDocument)
   func removeDocument(document: NSDocument)
   @IBAction func newDocument(sender: AnyObject?)
   func openUntitledDocumentAndDisplay(displayDocument: Bool) throws -> NSDocument
   func makeUntitledDocumentOfType(typeName: String) throws -> NSDocument
   @IBAction func openDocument(sender: AnyObject?)
-  func URLsFromRunningOpenPanel() -> [NSURL]?
+  func urLsFromRunningOpenPanel() -> [URL]?
   func runModalOpenPanel(openPanel: NSOpenPanel, forTypes types: [String]?) -> Int
-  func beginOpenPanelWithCompletionHandler(completionHandler: ([NSURL]?) -> Void)
-  func beginOpenPanel(openPanel: NSOpenPanel, forTypes inTypes: [String]?, completionHandler: (Int) -> Void)
-  func openDocumentWithContentsOfURL(url: NSURL, display displayDocument: Bool, completionHandler: (NSDocument?, Bool, NSError?) -> Void)
-  func makeDocumentWithContentsOfURL(url: NSURL, ofType typeName: String) throws -> NSDocument
-  func reopenDocumentForURL(urlOrNil: NSURL?, withContentsOfURL contentsURL: NSURL, display displayDocument: Bool, completionHandler: (NSDocument?, Bool, NSError?) -> Void)
-  func makeDocumentForURL(urlOrNil: NSURL?, withContentsOfURL contentsURL: NSURL, ofType typeName: String) throws -> NSDocument
-  var autosavingDelay: NSTimeInterval
+  func beginOpenPanelWithCompletionHandler(completionHandler: ([URL]?) -> Void)
+  func begin(openPanel: NSOpenPanel, forTypes inTypes: [String]?, completionHandler: (Int) -> Void)
+  func openDocumentWithContentsOf(url: URL, display displayDocument: Bool, completionHandler: (NSDocument?, Bool, Error?) -> Void)
+  func makeDocumentWithContentsOf(url: URL, ofType typeName: String) throws -> NSDocument
+  func reopenDocumentFor(urlOrNil: URL?, withContentsOf contentsURL: URL, display displayDocument: Bool, completionHandler: (NSDocument?, Bool, Error?) -> Void)
+  func makeDocumentFor(urlOrNil: URL?, withContentsOf contentsURL: URL, ofType typeName: String) throws -> NSDocument
+  var autosavingDelay: TimeInterval
   @IBAction func saveAllDocuments(sender: AnyObject?)
   var hasEditedDocuments: Bool { get }
   func reviewUnsavedDocumentsWithAlertTitle(title: String?, cancellable: Bool, delegate: AnyObject?, didReviewAllSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
   func closeAllDocumentsWithDelegate(delegate: AnyObject?, didCloseAllSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func duplicateDocumentWithContentsOfURL(url: NSURL, copying duplicateByCopying: Bool, displayName displayNameOrNil: String?) throws -> NSDocument
-  func presentError(error: NSError, modalForWindow window: NSWindow, delegate: AnyObject?, didPresentSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func presentError(error: NSError) -> Bool
-  func willPresentError(error: NSError) -> NSError
+  func duplicateDocumentWithContentsOf(url: URL, copying duplicateByCopying: Bool, displayName displayNameOrNil: String?) throws -> NSDocument
+  func presentError(error: Error, modalFor window: NSWindow, delegate: AnyObject?, didPresent didPresentSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func presentError(error: Error) -> Bool
+  func willPresentError(error: Error) -> Error
   var maximumRecentDocumentCount: Int { get }
   @IBAction func clearRecentDocuments(sender: AnyObject?)
   func noteNewRecentDocument(document: NSDocument)
-  func noteNewRecentDocumentURL(url: NSURL)
-  var recentDocumentURLs: [NSURL] { get }
+  func noteNewRecentDocumentURL(url: URL)
+  var recentDocumentURLs: [URL] { get }
   var defaultType: String? { get }
-  func typeForContentsOfURL(url: NSURL) throws -> String
+  func typeForContentsOf(url: URL) throws -> String
   var documentClassNames: [String] { get }
   func documentClassForType(typeName: String) -> AnyClass?
   func displayNameForType(typeName: String) -> String?
-  func validateUserInterfaceItem(anItem: NSValidatedUserInterfaceItem) -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
+  func validate(anItem: NSValidatedUserInterfaceItem) -> Bool
+  func encodeWith(aCoder: Coder)
 }
 extension NSDocumentController {
 }
 extension NSDocument {
   var lastComponentOfFileName: String
-  func handleSaveScriptCommand(command: NSScriptCommand) -> AnyObject?
-  func handleCloseScriptCommand(command: NSCloseCommand) -> AnyObject?
-  func handlePrintScriptCommand(command: NSScriptCommand) -> AnyObject?
-  var objectSpecifier: NSScriptObjectSpecifier { get }
+  func handleSave(command: ScriptCommand) -> AnyObject?
+  func handleCloseScriptCommand(command: CloseCommand) -> AnyObject?
+  func handlePrint(command: ScriptCommand) -> AnyObject?
+  var objectSpecifier: ScriptObjectSpecifier { get }
 }
 struct NSDragOperation : OptionSetType {
   init(rawValue: UInt)
@@ -4676,25 +4677,25 @@ enum NSSpringLoadingHighlight : Int {
   case Standard
   case Emphasized
 }
-protocol NSDraggingInfo : NSObjectProtocol {
+protocol NSDraggingInfo : ObjectProtocol {
   func draggingDestinationWindow() -> NSWindow?
   func draggingSourceOperationMask() -> NSDragOperation
-  func draggingLocation() -> NSPoint
-  func draggedImageLocation() -> NSPoint
+  func draggingLocation() -> Point
+  func draggedImageLocation() -> Point
   func draggedImage() -> NSImage?
   func draggingPasteboard() -> NSPasteboard
   func draggingSource() -> AnyObject?
   func draggingSequenceNumber() -> Int
-  func slideDraggedImageTo(screenPoint: NSPoint)
-  func namesOfPromisedFilesDroppedAtDestination(dropDestination: NSURL) -> [String]?
+  func slideDraggedImageTo(screenPoint: Point)
+  func namesOfPromisedFilesDroppedAtDestination(dropDestination: URL) -> [String]?
   var draggingFormation: NSDraggingFormation { get set }
   var animatesToDestination: Bool { get set }
   var numberOfValidItemsForDrop: Int { get set }
-  func enumerateDraggingItemsWithOptions(enumOpts: NSDraggingItemEnumerationOptions, forView view: NSView, classes classArray: [AnyClass], searchOptions: [String : AnyObject], usingBlock block: (NSDraggingItem, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func enumerateDraggingItems(options enumOpts: NSDraggingItemEnumerationOptions = [], forView view: NSView, classes classArray: [AnyClass], searchOptions: [String : AnyObject] = [:], usingBlock block: (NSDraggingItem, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
   var springLoadingHighlight: NSSpringLoadingHighlight { get }
   func resetSpringLoading()
 }
-protocol NSDraggingDestination : NSObjectProtocol {
+protocol NSDraggingDestination : ObjectProtocol {
   optional func draggingEntered(sender: NSDraggingInfo) -> NSDragOperation
   optional func draggingUpdated(sender: NSDraggingInfo) -> NSDragOperation
   optional func draggingExited(sender: NSDraggingInfo?)
@@ -4705,12 +4706,12 @@ protocol NSDraggingDestination : NSObjectProtocol {
   optional func wantsPeriodicDraggingUpdates() -> Bool
   optional func updateDraggingItemsForDrag(sender: NSDraggingInfo?)
 }
-protocol NSDraggingSource : NSObjectProtocol {
-  func draggingSession(session: NSDraggingSession, sourceOperationMaskForDraggingContext context: NSDraggingContext) -> NSDragOperation
-  optional func draggingSession(session: NSDraggingSession, willBeginAtPoint screenPoint: NSPoint)
-  optional func draggingSession(session: NSDraggingSession, movedToPoint screenPoint: NSPoint)
-  optional func draggingSession(session: NSDraggingSession, endedAtPoint screenPoint: NSPoint, operation: NSDragOperation)
-  optional func ignoreModifierKeysForDraggingSession(session: NSDraggingSession) -> Bool
+protocol NSDraggingSource : ObjectProtocol {
+  func draggingSession(session: NSDraggingSession, sourceOperationMaskFor context: NSDraggingContext) -> NSDragOperation
+  optional func draggingSession(session: NSDraggingSession, willBeginAt screenPoint: Point)
+  optional func draggingSession(session: NSDraggingSession, movedTo screenPoint: Point)
+  optional func draggingSession(session: NSDraggingSession, endedAt screenPoint: Point, operation: NSDragOperation)
+  optional func ignoreModifierKeysFor(session: NSDraggingSession) -> Bool
 }
 struct NSSpringLoadingOptions : OptionSetType {
   init(rawValue: UInt)
@@ -4720,7 +4721,7 @@ struct NSSpringLoadingOptions : OptionSetType {
   static var ContinuousActivation: NSSpringLoadingOptions { get }
   static var NoHover: NSSpringLoadingOptions { get }
 }
-protocol NSSpringLoadingDestination : NSObjectProtocol {
+protocol NSSpringLoadingDestination : ObjectProtocol {
   func springLoadingActivated(activated: Bool, draggingInfo: NSDraggingInfo)
   func springLoadingHighlightChanged(draggingInfo: NSDraggingInfo)
   optional func springLoadingEntered(draggingInfo: NSDraggingInfo) -> NSSpringLoadingOptions
@@ -4728,36 +4729,36 @@ protocol NSSpringLoadingDestination : NSObjectProtocol {
   optional func springLoadingExited(draggingInfo: NSDraggingInfo)
   optional func draggingEnded(draggingInfo: NSDraggingInfo)
 }
-extension NSObject {
-  class func namesOfPromisedFilesDroppedAtDestination(dropDestination: NSURL) -> [String]?
-  func namesOfPromisedFilesDroppedAtDestination(dropDestination: NSURL) -> [String]?
+extension Object {
+  class func namesOfPromisedFilesDroppedAtDestination(dropDestination: URL) -> [String]?
+  func namesOfPromisedFilesDroppedAtDestination(dropDestination: URL) -> [String]?
 }
 let NSDraggingImageComponentIconKey: String
 let NSDraggingImageComponentLabelKey: String
-class NSDraggingImageComponent : NSObject {
+class NSDraggingImageComponent : Object {
   init(key: String)
   var key: String
   var contents: AnyObject?
-  var frame: NSRect
+  var frame: Rect
   convenience init()
 }
-class NSDraggingItem : NSObject {
+class NSDraggingItem : Object {
   init(pasteboardWriter: NSPasteboardWriting)
   var item: AnyObject { get }
-  var draggingFrame: NSRect
+  var draggingFrame: Rect
   var imageComponentsProvider: (() -> [NSDraggingImageComponent])?
-  func setDraggingFrame(frame: NSRect, contents: AnyObject)
+  func setDraggingFrame(frame: Rect, contents: AnyObject)
   var imageComponents: [NSDraggingImageComponent]? { get }
   convenience init()
 }
-class NSDraggingSession : NSObject {
+class NSDraggingSession : Object {
   var draggingFormation: NSDraggingFormation
   var animatesToStartingPositionsOnCancelOrFail: Bool
   var draggingLeaderIndex: Int
   var draggingPasteboard: NSPasteboard { get }
   var draggingSequenceNumber: Int { get }
-  var draggingLocation: NSPoint { get }
-  func enumerateDraggingItemsWithOptions(enumOpts: NSDraggingItemEnumerationOptions, forView view: NSView?, classes classArray: [AnyClass], searchOptions: [String : AnyObject], usingBlock block: (NSDraggingItem, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
+  var draggingLocation: Point { get }
+  func enumerateDraggingItems(options enumOpts: NSDraggingItemEnumerationOptions = [], forView view: NSView?, classes classArray: [AnyClass], searchOptions: [String : AnyObject] = [:], usingBlock block: (NSDraggingItem, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
   init()
 }
 enum NSDrawerState : UInt {
@@ -4769,44 +4770,44 @@ enum NSDrawerState : UInt {
   case ClosingState
 }
 class NSDrawer : NSResponder, NSAccessibilityElementProtocol, NSAccessibility {
-  init(contentSize: NSSize, preferredEdge edge: NSRectEdge)
+  init(contentSize: Size, preferredEdge edge: RectEdge)
   unowned(unsafe) var parentWindow: @sil_unmanaged NSWindow?
   var contentView: NSView?
-  var preferredEdge: NSRectEdge
+  var preferredEdge: RectEdge
   unowned(unsafe) var delegate: @sil_unmanaged NSDrawerDelegate?
   func open()
-  func openOnEdge(edge: NSRectEdge)
+  func openOn(edge: RectEdge)
   func close()
   func open(sender: AnyObject?)
   func close(sender: AnyObject?)
   func toggle(sender: AnyObject?)
   var state: Int { get }
-  var edge: NSRectEdge { get }
-  var contentSize: NSSize
-  var minContentSize: NSSize
-  var maxContentSize: NSSize
+  var edge: RectEdge { get }
+  var contentSize: Size
+  var minContentSize: Size
+  var maxContentSize: Size
   var leadingOffset: CGFloat
   var trailingOffset: CGFloat
   init()
-  init?(coder: NSCoder)
-  func accessibilityFrame() -> NSRect
+  init?(coder: Coder)
+  func accessibilityFrame() -> Rect
   func accessibilityParent() -> AnyObject?
   func isAccessibilityFocused() -> Bool
   func accessibilityIdentifier() -> String
-  func accessibilityLayoutPointForScreenPoint(point: NSPoint) -> NSPoint
-  func accessibilityLayoutSizeForScreenSize(size: NSSize) -> NSSize
-  func accessibilityScreenPointForLayoutPoint(point: NSPoint) -> NSPoint
-  func accessibilityScreenSizeForLayoutSize(size: NSSize) -> NSSize
+  func accessibilityLayoutPointForScreenPoint(point: Point) -> Point
+  func accessibilityLayoutSizeForScreenSize(size: Size) -> Size
+  func accessibilityScreenPointForLayoutPoint(point: Point) -> Point
+  func accessibilityScreenSizeForLayoutSize(size: Size) -> Size
   func accessibilityCellForColumn(column: Int, row: Int) -> AnyObject?
-  func accessibilityAttributedStringForRange(range: NSRange) -> NSAttributedString?
+  func accessibilityAttributedStringFor(range: NSRange) -> AttributedString?
   func accessibilityRangeForLine(line: Int) -> NSRange
-  func accessibilityStringForRange(range: NSRange) -> String?
-  func accessibilityRangeForPosition(point: NSPoint) -> NSRange
-  func accessibilityRangeForIndex(index: Int) -> NSRange
-  func accessibilityFrameForRange(range: NSRange) -> NSRect
-  func accessibilityRTFForRange(range: NSRange) -> NSData?
-  func accessibilityStyleRangeForIndex(index: Int) -> NSRange
-  func accessibilityLineForIndex(index: Int) -> Int
+  func accessibilityStringFor(range: NSRange) -> String?
+  func accessibilityRangeForPosition(point: Point) -> NSRange
+  func accessibilityRangeFor(index: Int) -> NSRange
+  func accessibilityFrameFor(range: NSRange) -> Rect
+  func accessibilityRTFFor(range: NSRange) -> Data?
+  func accessibilityStyleRangeFor(index: Int) -> NSRange
+  func accessibilityLineFor(index: Int) -> Int
   func accessibilityPerformCancel() -> Bool
   func accessibilityPerformConfirm() -> Bool
   func accessibilityPerformDecrement() -> Bool
@@ -4821,14 +4822,14 @@ class NSDrawer : NSResponder, NSAccessibilityElementProtocol, NSAccessibility {
   func isAccessibilitySelectorAllowed(selector: Selector) -> Bool
   func isAccessibilityElement() -> Bool
   func setAccessibilityElement(accessibilityElement: Bool)
-  func setAccessibilityFrame(accessibilityFrame: NSRect)
+  func setAccessibilityFrame(accessibilityFrame: Rect)
   func setAccessibilityFocused(accessibilityFocused: Bool)
-  func accessibilityActivationPoint() -> NSPoint
-  func setAccessibilityActivationPoint(accessibilityActivationPoint: NSPoint)
+  func accessibilityActivationPoint() -> Point
+  func setAccessibilityActivationPoint(accessibilityActivationPoint: Point)
   func accessibilityTopLevelUIElement() -> AnyObject?
   func setAccessibilityTopLevelUIElement(accessibilityTopLevelUIElement: AnyObject?)
-  func accessibilityURL() -> NSURL?
-  func setAccessibilityURL(accessibilityURL: NSURL?)
+  func accessibilityURL() -> URL?
+  func setAccessibilityURL(accessibilityURL: URL?)
   func accessibilityValue() -> AnyObject?
   func setAccessibilityValue(accessibilityValue: AnyObject?)
   func accessibilityValueDescription() -> String?
@@ -4963,8 +4964,8 @@ class NSDrawer : NSResponder, NSAccessibilityElementProtocol, NSAccessibility {
   func setAccessibilityHorizontalScrollBar(accessibilityHorizontalScrollBar: AnyObject?)
   func accessibilityVerticalScrollBar() -> AnyObject?
   func setAccessibilityVerticalScrollBar(accessibilityVerticalScrollBar: AnyObject?)
-  func accessibilityAllowedValues() -> [NSNumber]?
-  func setAccessibilityAllowedValues(accessibilityAllowedValues: [NSNumber]?)
+  func accessibilityAllowedValues() -> [Number]?
+  func setAccessibilityAllowedValues(accessibilityAllowedValues: [Number]?)
   func accessibilityLabelUIElements() -> [AnyObject]?
   func setAccessibilityLabelUIElements(accessibilityLabelUIElements: [AnyObject]?)
   func accessibilityLabelValue() -> Float
@@ -5025,8 +5026,8 @@ class NSDrawer : NSResponder, NSAccessibilityElementProtocol, NSAccessibility {
   func setAccessibilitySelectedText(accessibilitySelectedText: String?)
   func accessibilitySelectedTextRange() -> NSRange
   func setAccessibilitySelectedTextRange(accessibilitySelectedTextRange: NSRange)
-  func accessibilitySelectedTextRanges() -> [NSValue]?
-  func setAccessibilitySelectedTextRanges(accessibilitySelectedTextRanges: [NSValue]?)
+  func accessibilitySelectedTextRanges() -> [Value]?
+  func setAccessibilitySelectedTextRanges(accessibilitySelectedTextRanges: [Value]?)
   func accessibilityToolbarButton() -> AnyObject?
   func setAccessibilityToolbarButton(accessibilityToolbarButton: AnyObject?)
   func isAccessibilityModal() -> Bool
@@ -5055,26 +5056,26 @@ class NSDrawer : NSResponder, NSAccessibilityElementProtocol, NSAccessibility {
 extension NSWindow {
   var drawers: [NSDrawer]? { get }
 }
-protocol NSDrawerDelegate : NSObjectProtocol {
+protocol NSDrawerDelegate : ObjectProtocol {
   optional func drawerShouldOpen(sender: NSDrawer) -> Bool
   optional func drawerShouldClose(sender: NSDrawer) -> Bool
-  optional func drawerWillResizeContents(sender: NSDrawer, toSize contentSize: NSSize) -> NSSize
-  optional func drawerWillOpen(notification: NSNotification)
-  optional func drawerDidOpen(notification: NSNotification)
-  optional func drawerWillClose(notification: NSNotification)
-  optional func drawerDidClose(notification: NSNotification)
+  optional func drawerWillResizeContents(sender: NSDrawer, to contentSize: Size) -> Size
+  optional func drawerWillOpen(notification: Notification)
+  optional func drawerDidOpen(notification: Notification)
+  optional func drawerWillClose(notification: Notification)
+  optional func drawerDidClose(notification: Notification)
 }
 let NSDrawerWillOpenNotification: String
 let NSDrawerDidOpenNotification: String
 let NSDrawerWillCloseNotification: String
 let NSDrawerDidCloseNotification: String
 class NSEPSImageRep : NSImageRep {
-  init?(data epsData: NSData)
+  init?(data epsData: Data)
   func prepareGState()
-  @NSCopying var EPSRepresentation: NSData { get }
-  var boundingBox: NSRect { get }
+  @NSCopying var epsRepresentation: Data { get }
+  var boundingBox: Rect { get }
   init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
 }
 let NSTextLineTooLongException: String
 let NSTextNoSelectionException: String
@@ -5263,10 +5264,10 @@ enum NSPressureBehavior : Int {
   case PrimaryDeepClick
   case PrimaryDeepDrag
 }
-class NSEvent : NSObject, NSCopying, NSCoding {
+class NSEvent : Object, Copying, Coding {
   var type: NSEventType { get }
   var modifierFlags: NSEventModifierFlags { get }
-  var timestamp: NSTimeInterval { get }
+  var timestamp: TimeInterval { get }
   unowned(unsafe) var window: @sil_unmanaged NSWindow? { get }
   var windowNumber: Int { get }
   var context: NSGraphicsContext? { get }
@@ -5274,7 +5275,7 @@ class NSEvent : NSObject, NSCopying, NSCoding {
   var buttonNumber: Int { get }
   var eventNumber: Int { get }
   var pressure: Float { get }
-  var locationInWindow: NSPoint { get }
+  var locationInWindow: Point { get }
   var deltaX: CGFloat { get }
   var deltaY: CGFloat { get }
   var deltaZ: CGFloat { get }
@@ -5282,10 +5283,10 @@ class NSEvent : NSObject, NSCopying, NSCoding {
   var scrollingDeltaX: CGFloat { get }
   var scrollingDeltaY: CGFloat { get }
   var momentumPhase: NSEventPhase { get }
-  var directionInvertedFromDevice: Bool { get }
+  var isDirectionInvertedFromDevice: Bool { get }
   var characters: String? { get }
   var charactersIgnoringModifiers: String? { get }
-  var ARepeat: Bool { get }
+  var isARepeat: Bool { get }
   var keyCode: UInt16 { get }
   var trackingNumber: Int { get }
   var userData: UnsafeMutablePointer<Void> { get }
@@ -5295,8 +5296,8 @@ class NSEvent : NSObject, NSCopying, NSCoding {
   var data2: Int { get }
   var eventRef: UnsafePointer<Void> { get }
    init?(eventRef: UnsafePointer<Void>)
-  var CGEvent: CGEvent? { get }
-   init?(CGEvent cgEvent: CGEvent)
+  var cgEvent: CGEvent? { get }
+   init?(cgEvent: CGEvent)
   class func setMouseCoalescingEnabled(flag: Bool)
   class func isMouseCoalescingEnabled() -> Bool
   var magnification: CGFloat { get }
@@ -5306,7 +5307,7 @@ class NSEvent : NSObject, NSCopying, NSCoding {
   var absoluteY: Int { get }
   var absoluteZ: Int { get }
   var buttonMask: NSEventButtonMask { get }
-  var tilt: NSPoint { get }
+  var tilt: Point { get }
   var tangentialPressure: Float { get }
   var vendorDefined: AnyObject { get }
   var vendorID: Int { get }
@@ -5318,34 +5319,34 @@ class NSEvent : NSObject, NSCopying, NSCoding {
   var uniqueID: UInt64 { get }
   var capabilityMask: Int { get }
   var pointingDeviceType: NSPointingDeviceType { get }
-  var enteringProximity: Bool { get }
-  func touchesMatchingPhase(phase: NSTouchPhase, inView view: NSView?) -> Set<NSTouch>
+  var isEnteringProximity: Bool { get }
+  func touchesMatching(phase: NSTouchPhase, in view: NSView?) -> Set<NSTouch>
   var phase: NSEventPhase { get }
   var stage: Int { get }
   var stageTransition: CGFloat { get }
   var associatedEventsMask: NSEventMask { get }
   var pressureBehavior: NSPressureBehavior { get }
   class func isSwipeTrackingFromScrollEventsEnabled() -> Bool
-  func trackSwipeEventWithOptions(options: NSEventSwipeTrackingOptions, dampenAmountThresholdMin minDampenThreshold: CGFloat, max maxDampenThreshold: CGFloat, usingHandler trackingHandler: (CGFloat, NSEventPhase, Bool, UnsafeMutablePointer<ObjCBool>) -> Void)
-  class func startPeriodicEventsAfterDelay(delay: NSTimeInterval, withPeriod period: NSTimeInterval)
+  func trackSwipeEvent(options options: NSEventSwipeTrackingOptions = [], dampenAmountThresholdMin minDampenThreshold: CGFloat, max maxDampenThreshold: CGFloat, usingHandler trackingHandler: (CGFloat, NSEventPhase, Bool, UnsafeMutablePointer<ObjCBool>) -> Void)
+  class func startPeriodicEventsAfterDelay(delay: TimeInterval, withPeriod period: TimeInterval)
   class func stopPeriodicEvents()
-  class func mouseEventWithType(type: NSEventType, location: NSPoint, modifierFlags flags: NSEventModifierFlags, timestamp time: NSTimeInterval, windowNumber wNum: Int, context: NSGraphicsContext?, eventNumber eNum: Int, clickCount cNum: Int, pressure: Float) -> NSEvent?
-  class func keyEventWithType(type: NSEventType, location: NSPoint, modifierFlags flags: NSEventModifierFlags, timestamp time: NSTimeInterval, windowNumber wNum: Int, context: NSGraphicsContext?, characters keys: String, charactersIgnoringModifiers ukeys: String, isARepeat flag: Bool, keyCode code: UInt16) -> NSEvent?
-  class func enterExitEventWithType(type: NSEventType, location: NSPoint, modifierFlags flags: NSEventModifierFlags, timestamp time: NSTimeInterval, windowNumber wNum: Int, context: NSGraphicsContext?, eventNumber eNum: Int, trackingNumber tNum: Int, userData data: UnsafeMutablePointer<Void>) -> NSEvent?
-  class func otherEventWithType(type: NSEventType, location: NSPoint, modifierFlags flags: NSEventModifierFlags, timestamp time: NSTimeInterval, windowNumber wNum: Int, context: NSGraphicsContext?, subtype: Int16, data1 d1: Int, data2 d2: Int) -> NSEvent?
-  class func mouseLocation() -> NSPoint
+  class func mouseEventWith(type: NSEventType, location: Point, modifierFlags flags: NSEventModifierFlags, timestamp time: TimeInterval, windowNumber wNum: Int, context: NSGraphicsContext?, eventNumber eNum: Int, clickCount cNum: Int, pressure: Float) -> NSEvent?
+  class func keyEventWith(type: NSEventType, location: Point, modifierFlags flags: NSEventModifierFlags, timestamp time: TimeInterval, windowNumber wNum: Int, context: NSGraphicsContext?, characters keys: String, charactersIgnoringModifiers ukeys: String, isARepeat flag: Bool, keyCode code: UInt16) -> NSEvent?
+  class func enterExitEventWith(type: NSEventType, location: Point, modifierFlags flags: NSEventModifierFlags, timestamp time: TimeInterval, windowNumber wNum: Int, context: NSGraphicsContext?, eventNumber eNum: Int, trackingNumber tNum: Int, userData data: UnsafeMutablePointer<Void>) -> NSEvent?
+  class func otherEventWith(type: NSEventType, location: Point, modifierFlags flags: NSEventModifierFlags, timestamp time: TimeInterval, windowNumber wNum: Int, context: NSGraphicsContext?, subtype: Int16, data1 d1: Int, data2 d2: Int) -> NSEvent?
+  class func mouseLocation() -> Point
   class func modifierFlags() -> NSEventModifierFlags
   class func pressedMouseButtons() -> Int
-  class func doubleClickInterval() -> NSTimeInterval
-  class func keyRepeatDelay() -> NSTimeInterval
-  class func keyRepeatInterval() -> NSTimeInterval
-  class func addGlobalMonitorForEventsMatchingMask(mask: NSEventMask, handler block: (NSEvent) -> Void) -> AnyObject?
-  class func addLocalMonitorForEventsMatchingMask(mask: NSEventMask, handler block: (NSEvent) -> NSEvent?) -> AnyObject?
+  class func doubleClickInterval() -> TimeInterval
+  class func keyRepeatDelay() -> TimeInterval
+  class func keyRepeatInterval() -> TimeInterval
+  class func addGlobalMonitorForEventsMatching(mask: NSEventMask, handler block: (NSEvent) -> Void) -> AnyObject?
+  class func addLocalMonitorForEventsMatching(mask: NSEventMask, handler block: (NSEvent) -> NSEvent?) -> AnyObject?
   class func removeMonitor(eventMonitor: AnyObject)
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 var NSUpArrowFunctionKey: Int { get }
 var NSDownArrowFunctionKey: Int { get }
@@ -5419,7 +5420,7 @@ var NSRedoFunctionKey: Int { get }
 var NSFindFunctionKey: Int { get }
 var NSHelpFunctionKey: Int { get }
 var NSModeSwitchFunctionKey: Int { get }
-extension NSFileWrapper {
+extension FileWrapper {
   var icon: NSImage?
 }
 typealias NSGlyph = UInt32
@@ -5439,18 +5440,18 @@ enum NSFontRenderingMode : UInt {
   case IntegerAdvancementsRenderingMode
   case AntialiasedIntegerAdvancementsRenderingMode
 }
-class NSFont : NSObject, NSCopying, NSSecureCoding {
+class NSFont : Object, Copying, SecureCoding {
    init?(name fontName: String, size fontSize: CGFloat)
    init?(name fontName: String, matrix fontMatrix: UnsafePointer<CGFloat>)
    init?(descriptor fontDescriptor: NSFontDescriptor, size fontSize: CGFloat)
-   init?(descriptor fontDescriptor: NSFontDescriptor, textTransform: NSAffineTransform?)
+   init?(descriptor fontDescriptor: NSFontDescriptor, textTransform: AffineTransform?)
   class func userFontOfSize(fontSize: CGFloat) -> NSFont?
   class func userFixedPitchFontOfSize(fontSize: CGFloat) -> NSFont?
   class func setUserFont(aFont: NSFont?)
   class func setUserFixedPitchFont(aFont: NSFont?)
   class func systemFontOfSize(fontSize: CGFloat) -> NSFont
   class func boldSystemFontOfSize(fontSize: CGFloat) -> NSFont
-  class func labelFontOfSize(fontSize: CGFloat) -> NSFont
+  class func labelOfSize(fontSize: CGFloat) -> NSFont
   class func titleBarFontOfSize(fontSize: CGFloat) -> NSFont
   class func menuFontOfSize(fontSize: CGFloat) -> NSFont
   class func menuBarFontOfSize(fontSize: CGFloat) -> NSFont
@@ -5462,21 +5463,21 @@ class NSFont : NSObject, NSCopying, NSSecureCoding {
   class func monospacedDigitSystemFontOfSize(fontSize: CGFloat, weight: CGFloat) -> NSFont
   class func systemFontSize() -> CGFloat
   class func smallSystemFontSize() -> CGFloat
-  class func labelFontSize() -> CGFloat
-  class func systemFontSizeForControlSize(controlSize: NSControlSize) -> CGFloat
+  class func labelSize() -> CGFloat
+  class func systemFontSizeFor(controlSize: NSControlSize) -> CGFloat
   var fontName: String { get }
   var pointSize: CGFloat { get }
   var matrix: UnsafePointer<CGFloat> { get }
   var familyName: String? { get }
   var displayName: String? { get }
   var fontDescriptor: NSFontDescriptor { get }
-  @NSCopying var textTransform: NSAffineTransform { get }
+  @NSCopying var textTransform: AffineTransform { get }
   var numberOfGlyphs: Int { get }
   var mostCompatibleStringEncoding: UInt { get }
   func glyphWithName(aName: String) -> NSGlyph
-  var coveredCharacterSet: NSCharacterSet { get }
-  var boundingRectForFont: NSRect { get }
-  var maximumAdvancement: NSSize { get }
+  var coveredCharacterSet: CharacterSet { get }
+  var boundingRectForFont: Rect { get }
+  var maximumAdvancement: Size { get }
   var ascender: CGFloat { get }
   var descender: CGFloat { get }
   var leading: CGFloat { get }
@@ -5485,25 +5486,25 @@ class NSFont : NSObject, NSCopying, NSSecureCoding {
   var italicAngle: CGFloat { get }
   var capHeight: CGFloat { get }
   var xHeight: CGFloat { get }
-  var fixedPitch: Bool { get }
-  func boundingRectForGlyph(aGlyph: NSGlyph) -> NSRect
-  func advancementForGlyph(ag: NSGlyph) -> NSSize
-  func getBoundingRects(bounds: NSRectArray, forGlyphs glyphs: UnsafePointer<NSGlyph>, count glyphCount: Int)
-  func getAdvancements(advancements: NSSizeArray, forGlyphs glyphs: UnsafePointer<NSGlyph>, count glyphCount: Int)
-  func getAdvancements(advancements: NSSizeArray, forPackedGlyphs packedGlyphs: UnsafePointer<Void>, length: Int)
+  var isFixedPitch: Bool { get }
+  func boundingRectForGlyph(aGlyph: NSGlyph) -> Rect
+  func advancementForGlyph(ag: NSGlyph) -> Size
+  func getBoundingRects(bounds: RectArray, forGlyphs glyphs: UnsafePointer<NSGlyph>, count glyphCount: Int)
+  func getAdvancements(advancements: SizeArray, forGlyphs glyphs: UnsafePointer<NSGlyph>, count glyphCount: Int)
+  func getAdvancements(advancements: SizeArray, forPackedGlyphs packedGlyphs: UnsafePointer<Void>, length: Int)
   func set()
-  func setInContext(graphicsContext: NSGraphicsContext)
-  @NSCopying var printerFont: NSFont { get }
-  @NSCopying var screenFont: NSFont { get }
-  func screenFontWithRenderingMode(renderingMode: NSFontRenderingMode) -> NSFont
+  func setIn(graphicsContext: NSGraphicsContext)
+  @NSCopying var printer: NSFont { get }
+  @NSCopying var screen: NSFont { get }
+  func screenFontWith(renderingMode: NSFontRenderingMode) -> NSFont
   var renderingMode: NSFontRenderingMode { get }
-  @NSCopying var verticalFont: NSFont { get }
-  var vertical: Bool { get }
+  @NSCopying var vertical: NSFont { get }
+  var isVertical: Bool { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 struct __fFlags {
   var _isScreenFont: UInt32
@@ -5526,12 +5527,12 @@ struct NSFontCollectionVisibility : OptionSetType {
   static var User: NSFontCollectionVisibility { get }
   static var Computer: NSFontCollectionVisibility { get }
 }
-class NSFontCollection : NSObject, NSCopying, NSMutableCopying, NSCoding {
+class NSFontCollection : Object, Copying, MutableCopying, Coding {
    init(descriptors queryDescriptors: [NSFontDescriptor])
-  class func fontCollectionWithAllAvailableDescriptors() -> NSFontCollection
-   init?(locale: NSLocale)
-  class func showFontCollection(collection: NSFontCollection, withName name: String, visibility: NSFontCollectionVisibility) throws
-  class func hideFontCollectionWithName(name: String, visibility: NSFontCollectionVisibility) throws
+  class func withAllAvailableDescriptors() -> NSFontCollection
+   init?(locale: Locale)
+  class func show(collection: NSFontCollection, withName name: String, visibility: NSFontCollectionVisibility) throws
+  class func hideWithName(name: String, visibility: NSFontCollectionVisibility) throws
   class func renameFontCollectionWithName(name: String, visibility: NSFontCollectionVisibility, toName name: String) throws
   class func allFontCollectionNames() -> [String]
    init?(name: String)
@@ -5539,27 +5540,27 @@ class NSFontCollection : NSObject, NSCopying, NSMutableCopying, NSCoding {
   var queryDescriptors: [NSFontDescriptor]? { get }
   var exclusionDescriptors: [NSFontDescriptor]? { get }
   var matchingDescriptors: [NSFontDescriptor]? { get }
-  func matchingDescriptorsWithOptions(options: [String : NSNumber]?) -> [NSFontDescriptor]?
+  func matchingDescriptors(options options: [String : Number]? = [:]) -> [NSFontDescriptor]?
   func matchingDescriptorsForFamily(family: String) -> [NSFontDescriptor]?
-  func matchingDescriptorsForFamily(family: String, options: [String : NSNumber]?) -> [NSFontDescriptor]?
+  func matchingDescriptorsForFamily(family: String, options: [String : Number]? = [:]) -> [NSFontDescriptor]?
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 class NSMutableFontCollection : NSFontCollection {
    init(descriptors queryDescriptors: [NSFontDescriptor])
-  class func fontCollectionWithAllAvailableDescriptors() -> NSMutableFontCollection
-   init(locale: NSLocale)
+  class func withAllAvailableDescriptors() -> NSMutableFontCollection
+   init(locale: Locale)
    init?(name: String)
    init?(name: String, visibility: NSFontCollectionVisibility)
   var queryDescriptors: [NSFontDescriptor]?
   var exclusionDescriptors: [NSFontDescriptor]?
-  func addQueryForDescriptors(descriptors: [NSFontDescriptor])
-  func removeQueryForDescriptors(descriptors: [NSFontDescriptor])
+  func addQueryFor(descriptors: [NSFontDescriptor])
+  func removeQueryFor(descriptors: [NSFontDescriptor])
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 let NSFontCollectionIncludeDisabledFontsOption: String
 let NSFontCollectionRemoveDuplicatesOption: String
@@ -5597,29 +5598,29 @@ var NSFontCondensedTrait: Int { get }
 var NSFontMonoSpaceTrait: Int { get }
 var NSFontVerticalTrait: Int { get }
 var NSFontUIOptimizedTrait: Int { get }
-class NSFontDescriptor : NSObject, NSCopying, NSSecureCoding {
+class NSFontDescriptor : Object, Copying, SecureCoding {
   var postscriptName: String? { get }
   var pointSize: CGFloat { get }
-  @NSCopying var matrix: NSAffineTransform? { get }
+  @NSCopying var matrix: AffineTransform? { get }
   var symbolicTraits: NSFontSymbolicTraits { get }
   func objectForKey(anAttribute: String) -> AnyObject?
   var fontAttributes: [String : AnyObject] { get }
    init(name fontName: String, size: CGFloat)
-   init(name fontName: String, matrix: NSAffineTransform)
-  init(fontAttributes attributes: [String : AnyObject]?)
+   init(name fontName: String, matrix: AffineTransform)
+  init(fontAttributes attributes: [String : AnyObject]? = [:])
   func matchingFontDescriptorsWithMandatoryKeys(mandatoryKeys: Set<String>?) -> [NSFontDescriptor]
   func matchingFontDescriptorWithMandatoryKeys(mandatoryKeys: Set<String>?) -> NSFontDescriptor?
-  func fontDescriptorByAddingAttributes(attributes: [String : AnyObject]) -> NSFontDescriptor
-  func fontDescriptorWithSymbolicTraits(symbolicTraits: NSFontSymbolicTraits) -> NSFontDescriptor
-  func fontDescriptorWithSize(newPointSize: CGFloat) -> NSFontDescriptor
-  func fontDescriptorWithMatrix(matrix: NSAffineTransform) -> NSFontDescriptor
-  func fontDescriptorWithFace(newFace: String) -> NSFontDescriptor
-  func fontDescriptorWithFamily(newFamily: String) -> NSFontDescriptor
+  func addingAttributes(attributes: [String : AnyObject] = [:]) -> NSFontDescriptor
+  func withSymbolicTraits(symbolicTraits: NSFontSymbolicTraits) -> NSFontDescriptor
+  func withSize(newPointSize: CGFloat) -> NSFontDescriptor
+  func withMatrix(matrix: AffineTransform) -> NSFontDescriptor
+  func withFace(newFace: String) -> NSFontDescriptor
+  func withFamily(newFamily: String) -> NSFontDescriptor
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let NSFontFamilyAttribute: String
 let NSFontNameAttribute: String
@@ -5686,43 +5687,43 @@ enum NSFontAction : UInt {
   case LighterFontAction
   case RemoveTraitFontAction
 }
-class NSFontManager : NSObject {
+class NSFontManager : Object {
   class func setFontPanelFactory(factoryId: AnyClass?)
   class func setFontManagerFactory(factoryId: AnyClass?)
-  class func sharedFontManager() -> NSFontManager
-  var multiple: Bool { get }
+  class func shared() -> NSFontManager
+  var isMultiple: Bool { get }
   var selectedFont: NSFont? { get }
   func setSelectedFont(fontObj: NSFont, isMultiple flag: Bool)
   func setFontMenu(newMenu: NSMenu)
   func fontMenu(create: Bool) -> NSMenu?
   func fontPanel(create: Bool) -> NSFontPanel?
   func fontWithFamily(family: String, traits: NSFontTraitMask, weight: Int, size: CGFloat) -> NSFont?
-  func traitsOfFont(fontObj: NSFont) -> NSFontTraitMask
-  func weightOfFont(fontObj: NSFont) -> Int
+  func traitsOf(fontObj: NSFont) -> NSFontTraitMask
+  func weightOf(fontObj: NSFont) -> Int
   var availableFonts: [String] { get }
   var availableFontFamilies: [String] { get }
   func availableMembersOfFontFamily(fam: String) -> [[AnyObject]]?
-  func convertFont(fontObj: NSFont) -> NSFont
-  func convertFont(fontObj: NSFont, toSize size: CGFloat) -> NSFont
-  func convertFont(fontObj: NSFont, toFace typeface: String) -> NSFont?
-  func convertFont(fontObj: NSFont, toFamily family: String) -> NSFont
-  func convertFont(fontObj: NSFont, toHaveTrait trait: NSFontTraitMask) -> NSFont
-  func convertFont(fontObj: NSFont, toNotHaveTrait trait: NSFontTraitMask) -> NSFont
-  func convertWeight(upFlag: Bool, ofFont fontObj: NSFont) -> NSFont
-  var enabled: Bool
+  func convert(fontObj: NSFont) -> NSFont
+  func convert(fontObj: NSFont, toSize size: CGFloat) -> NSFont
+  func convert(fontObj: NSFont, toFace typeface: String) -> NSFont?
+  func convert(fontObj: NSFont, toFamily family: String) -> NSFont
+  func convert(fontObj: NSFont, toHaveTrait trait: NSFontTraitMask) -> NSFont
+  func convert(fontObj: NSFont, toNotHaveTrait trait: NSFontTraitMask) -> NSFont
+  func convertWeight(upFlag: Bool, of fontObj: NSFont) -> NSFont
+  var isEnabled: Bool
   var action: Selector
   unowned(unsafe) var delegate: @sil_unmanaged AnyObject?
   func sendAction() -> Bool
   func localizedNameForFamily(family: String, face faceKey: String?) -> String
-  func setSelectedAttributes(attributes: [String : AnyObject], isMultiple flag: Bool)
-  func convertAttributes(attributes: [String : AnyObject]) -> [String : AnyObject]
-  func availableFontNamesMatchingFontDescriptor(descriptor: NSFontDescriptor) -> [AnyObject]?
+  func setSelectedAttributes(attributes: [String : AnyObject] = [:], isMultiple flag: Bool)
+  func convertAttributes(attributes: [String : AnyObject] = [:]) -> [String : AnyObject]
+  func availableFontNamesMatching(descriptor: NSFontDescriptor) -> [AnyObject]?
   var collectionNames: [AnyObject] { get }
   func fontDescriptorsInCollection(collectionNames: String) -> [AnyObject]?
-  func addCollection(collectionName: String, options collectionOptions: NSFontCollectionOptions) -> Bool
+  func addCollection(collectionName: String, options collectionOptions: NSFontCollectionOptions = []) -> Bool
   func removeCollection(collectionName: String) -> Bool
   func addFontDescriptors(descriptors: [AnyObject], toCollection collectionName: String)
-  func removeFontDescriptor(descriptor: NSFontDescriptor, fromCollection collection: String)
+  func remove(descriptor: NSFontDescriptor, fromCollection collection: String)
   var currentFontAction: NSFontAction { get }
   func convertFontTraits(traits: NSFontTraitMask) -> NSFontTraitMask
   weak var target: @sil_weak AnyObject?
@@ -5746,32 +5747,32 @@ extension NSFontManager {
   func orderFrontFontPanel(sender: AnyObject?)
   func orderFrontStylesPanel(sender: AnyObject?)
 }
-extension NSObject {
+extension Object {
   class func fontManager(sender: AnyObject, willIncludeFont fontName: String) -> Bool
   func fontManager(sender: AnyObject, willIncludeFont fontName: String) -> Bool
 }
-extension NSObject {
+extension Object {
   class func changeFont(sender: AnyObject?)
   func changeFont(sender: AnyObject?)
 }
-extension NSObject {
-  class func validModesForFontPanel(fontPanel: NSFontPanel) -> Int
-  func validModesForFontPanel(fontPanel: NSFontPanel) -> Int
+extension Object {
+  class func validModesFor(fontPanel: NSFontPanel) -> Int
+  func validModesFor(fontPanel: NSFontPanel) -> Int
 }
 class NSFontPanel : NSPanel {
-  class func sharedFontPanel() -> NSFontPanel
+  class func shared() -> NSFontPanel
   class func sharedFontPanelExists() -> Bool
   var accessoryView: NSView?
   func setPanelFont(fontObj: NSFont, isMultiple flag: Bool)
-  func panelConvertFont(fontObj: NSFont) -> NSFont
+  func panelConvert(fontObj: NSFont) -> NSFont
   var worksWhenModal: Bool
-  var enabled: Bool
+  var isEnabled: Bool
   func reloadDefaultFontFamilies()
-  init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
-  convenience init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
+  init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
+  convenience init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
   convenience init(contentViewController: NSViewController)
   convenience init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init?(windowRef: UnsafeMutablePointer<Void>)
 }
 struct __fpFlags {
@@ -5819,57 +5820,57 @@ class NSForm : NSMatrix {
   func setTextAlignment(mode: NSTextAlignment)
   func setTitleFont(fontObj: NSFont)
   func setTextFont(fontObj: NSFont)
-  func cellAtIndex(index: Int) -> AnyObject!
-  func drawCellAtIndex(index: Int)
+  func cellAt(index: Int) -> AnyObject!
+  func drawCellAt(index: Int)
   func addEntry(title: String) -> NSFormCell
-  func insertEntry(title: String, atIndex index: Int) -> NSFormCell!
-  func removeEntryAtIndex(index: Int)
+  func insertEntry(title: String, at index: Int) -> NSFormCell!
+  func removeEntryAt(index: Int)
   func indexOfCellWithTag(aTag: Int) -> Int
-  func selectTextAtIndex(index: Int)
-  func setFrameSize(newSize: NSSize)
+  func selectTextAt(index: Int)
+  func setFrame(newSize: Size)
   func setTitleBaseWritingDirection(writingDirection: NSWritingDirection)
   func setTextBaseWritingDirection(writingDirection: NSWritingDirection)
   func setPreferredTextFieldWidth(preferredWidth: CGFloat)
   func preferredTextFieldWidth() -> CGFloat
-  convenience init(frame frameRect: NSRect)
-  init(frame frameRect: NSRect, mode aMode: NSMatrixMode, prototype aCell: NSCell, numberOfRows rowsHigh: Int, numberOfColumns colsWide: Int)
-  init(frame frameRect: NSRect, mode aMode: NSMatrixMode, cellClass factoryId: AnyClass?, numberOfRows rowsHigh: Int, numberOfColumns colsWide: Int)
-  init?(coder: NSCoder)
+  convenience init(frame frameRect: Rect)
+  init(frame frameRect: Rect, mode aMode: NSMatrixMode, prototype aCell: NSCell, numberOfRows rowsHigh: Int, numberOfColumns colsWide: Int)
+  init(frame frameRect: Rect, mode aMode: NSMatrixMode, cellClass factoryId: AnyClass?, numberOfRows rowsHigh: Int, numberOfColumns colsWide: Int)
+  init?(coder: Coder)
   convenience init()
 }
 class NSFormCell : NSActionCell {
   init(textCell aString: String?)
-  func titleWidth(aSize: NSSize) -> CGFloat
+  func titleWidth(aSize: Size) -> CGFloat
   var titleWidth: CGFloat
   var title: String
   var titleFont: NSFont
   var titleAlignment: NSTextAlignment
-  var opaque: Bool { get }
+  var isOpaque: Bool { get }
   var placeholderString: String?
-  @NSCopying var placeholderAttributedString: NSAttributedString?
+  @NSCopying var placeholderAttributedString: AttributedString?
   var titleBaseWritingDirection: NSWritingDirection
   var preferredTextFieldWidth: CGFloat
   convenience init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 extension NSFormCell {
 }
 extension NSFormCell {
-  @NSCopying var attributedTitle: NSAttributedString
+  @NSCopying var attributedTitle: AttributedString
 }
 var NSShowControlGlyphs: Int { get }
 var NSShowInvisibleGlyphs: Int { get }
 var NSWantsBidiLevels: Int { get }
 protocol NSGlyphStorage {
-  func insertGlyphs(glyphs: UnsafePointer<NSGlyph>, length: Int, forStartingGlyphAtIndex glyphIndex: Int, characterIndex charIndex: Int)
-  func setIntAttribute(attributeTag: Int, value val: Int, forGlyphAtIndex glyphIndex: Int)
-  func attributedString() -> NSAttributedString
+  func insertGlyphs(glyphs: UnsafePointer<NSGlyph>, length: Int, forStartingGlyphAt glyphIndex: Int, characterIndex charIndex: Int)
+  func setIntAttribute(attributeTag: Int, value val: Int, forGlyphAt glyphIndex: Int)
+  func attributedString() -> AttributedString
   func layoutOptions() -> Int
 }
-class NSGlyphGenerator : NSObject {
-  func generateGlyphsForGlyphStorage(glyphStorage: NSGlyphStorage, desiredNumberOfCharacters nChars: Int, glyphIndex: UnsafeMutablePointer<Int>, characterIndex charIndex: UnsafeMutablePointer<Int>)
-  class func sharedGlyphGenerator() -> NSGlyphGenerator
+class NSGlyphGenerator : Object {
+  func generateGlyphsFor(glyphStorage: NSGlyphStorage, desiredNumberOfCharacters nChars: Int, glyphIndex: UnsafeMutablePointer<Int>, characterIndex charIndex: UnsafeMutablePointer<Int>)
+  class func shared() -> NSGlyphGenerator
   init()
 }
 enum NSCharacterCollection : UInt {
@@ -5882,7 +5883,7 @@ enum NSCharacterCollection : UInt {
   case AdobeJapan2CharacterCollection
   case AdobeKorea1CharacterCollection
 }
-class NSGlyphInfo : NSObject, NSCopying, NSSecureCoding {
+class NSGlyphInfo : Object, Copying, SecureCoding {
    init?(glyphName: String, forFont font: NSFont, baseString theString: String)
    init?(glyph: NSGlyph, forFont font: NSFont, baseString theString: String)
    init?(characterIdentifier cid: Int, collection characterCollection: NSCharacterCollection, baseString theString: String)
@@ -5890,32 +5891,32 @@ class NSGlyphInfo : NSObject, NSCopying, NSSecureCoding {
   var characterIdentifier: Int { get }
   var characterCollection: NSCharacterCollection { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 typealias NSGradientDrawingOptions = Int
 var NSGradientDrawsBeforeStartingLocation: Int { get }
 var NSGradientDrawsAfterEndingLocation: Int { get }
-class NSGradient : NSObject, NSCopying, NSCoding {
-  convenience init?(startingColor: NSColor, endingColor: NSColor)
+class NSGradient : Object, Copying, Coding {
+  convenience init?(starting startingColor: NSColor, ending endingColor: NSColor)
   convenience init?(colors colorArray: [NSColor])
   init?(colors colorArray: [NSColor], atLocations locations: UnsafePointer<CGFloat>, colorSpace: NSColorSpace)
-  func drawFromPoint(startingPoint: NSPoint, toPoint endingPoint: NSPoint, options: NSGradientDrawingOptions)
-  func drawInRect(rect: NSRect, angle: CGFloat)
-  func drawInBezierPath(path: NSBezierPath, angle: CGFloat)
-  func drawFromCenter(startCenter: NSPoint, radius startRadius: CGFloat, toCenter endCenter: NSPoint, radius endRadius: CGFloat, options: NSGradientDrawingOptions)
-  func drawInRect(rect: NSRect, relativeCenterPosition: NSPoint)
-  func drawInBezierPath(path: NSBezierPath, relativeCenterPosition: NSPoint)
+  func drawFrom(startingPoint: Point, to endingPoint: Point, options: NSGradientDrawingOptions)
+  func drawIn(rect: Rect, angle: CGFloat)
+  func drawIn(path: NSBezierPath, angle: CGFloat)
+  func drawFromCenter(startCenter: Point, radius startRadius: CGFloat, toCenter endCenter: Point, radius endRadius: CGFloat, options: NSGradientDrawingOptions)
+  func drawIn(rect: Rect, relativeCenterPosition: Point)
+  func drawIn(path: NSBezierPath, relativeCenterPosition: Point)
   var colorSpace: NSColorSpace { get }
   var numberOfColorStops: Int { get }
-  func getColor(color: AutoreleasingUnsafeMutablePointer<NSColor?>, location: UnsafeMutablePointer<CGFloat>, atIndex index: Int)
+  func getColor(color: AutoreleasingUnsafeMutablePointer<NSColor?>, location: UnsafeMutablePointer<CGFloat>, at index: Int)
   func interpolatedColorAtLocation(location: CGFloat) -> NSColor
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 extension NSGradient {
   convenience init?(colorsAndLocations objects: (NSColor, CGFloat)...)
@@ -6018,33 +6019,33 @@ let NSDeviceBitsPerSample: String
 let NSDeviceIsScreen: String
 let NSDeviceIsPrinter: String
 let NSDeviceSize: String
-func NSRectFill(aRect: NSRect)
-func NSRectFillList(rects: UnsafePointer<NSRect>, _ count: Int)
-func NSRectFillListWithGrays(rects: UnsafePointer<NSRect>, _ grays: UnsafePointer<CGFloat>, _ num: Int)
-func NSRectFillListWithColors(rects: UnsafePointer<NSRect>, _ colors: UnsafePointer<NSColor?>, _ num: Int)
-func NSRectFillUsingOperation(aRect: NSRect, _ op: NSCompositingOperation)
-func NSRectFillListUsingOperation(rects: UnsafePointer<NSRect>, _ count: Int, _ op: NSCompositingOperation)
-func NSRectFillListWithColorsUsingOperation(rects: UnsafePointer<NSRect>, _ colors: UnsafePointer<NSColor?>, _ num: Int, _ op: NSCompositingOperation)
-func NSFrameRect(aRect: NSRect)
-func NSFrameRectWithWidth(aRect: NSRect, _ frameWidth: CGFloat)
-func NSFrameRectWithWidthUsingOperation(aRect: NSRect, _ frameWidth: CGFloat, _ op: NSCompositingOperation)
-func NSRectClip(aRect: NSRect)
-func NSRectClipList(rects: UnsafePointer<NSRect>, _ count: Int)
-func NSDrawTiledRects(boundsRect: NSRect, _ clipRect: NSRect, _ sides: UnsafePointer<NSRectEdge>, _ grays: UnsafePointer<CGFloat>, _ count: Int) -> NSRect
-func NSDrawGrayBezel(aRect: NSRect, _ clipRect: NSRect)
-func NSDrawGroove(aRect: NSRect, _ clipRect: NSRect)
-func NSDrawWhiteBezel(aRect: NSRect, _ clipRect: NSRect)
-func NSDrawButton(aRect: NSRect, _ clipRect: NSRect)
-func NSEraseRect(aRect: NSRect)
-func NSReadPixel(passedPoint: NSPoint) -> NSColor?
-func NSDrawBitmap(rect: NSRect, _ width: Int, _ height: Int, _ bps: Int, _ spp: Int, _ bpp: Int, _ bpr: Int, _ isPlanar: Bool, _ hasAlpha: Bool, _ colorSpaceName: String, _ data: UnsafePointer<UnsafePointer<UInt8>>)
+func NSRectFill(aRect: Rect)
+func NSRectFillList(rects: UnsafePointer<Rect>, _ count: Int)
+func NSRectFillListWithGrays(rects: UnsafePointer<Rect>, _ grays: UnsafePointer<CGFloat>, _ num: Int)
+func NSRectFillListWithColors(rects: UnsafePointer<Rect>, _ colors: UnsafePointer<NSColor?>, _ num: Int)
+func NSRectFillUsingOperation(aRect: Rect, _ op: NSCompositingOperation)
+func NSRectFillListUsingOperation(rects: UnsafePointer<Rect>, _ count: Int, _ op: NSCompositingOperation)
+func NSRectFillListWithColorsUsingOperation(rects: UnsafePointer<Rect>, _ colors: UnsafePointer<NSColor?>, _ num: Int, _ op: NSCompositingOperation)
+func NSFrameRect(aRect: Rect)
+func NSFrameRectWithWidth(aRect: Rect, _ frameWidth: CGFloat)
+func NSFrameRectWithWidthUsingOperation(aRect: Rect, _ frameWidth: CGFloat, _ op: NSCompositingOperation)
+func NSRectClip(aRect: Rect)
+func NSRectClipList(rects: UnsafePointer<Rect>, _ count: Int)
+func NSDrawTiledRects(boundsRect: Rect, _ clipRect: Rect, _ sides: UnsafePointer<RectEdge>, _ grays: UnsafePointer<CGFloat>, _ count: Int) -> Rect
+func NSDrawGrayBezel(aRect: Rect, _ clipRect: Rect)
+func NSDrawGroove(aRect: Rect, _ clipRect: Rect)
+func NSDrawWhiteBezel(aRect: Rect, _ clipRect: Rect)
+func NSDrawButton(aRect: Rect, _ clipRect: Rect)
+func NSEraseRect(aRect: Rect)
+func NSReadPixel(passedPoint: Point) -> NSColor?
+func NSDrawBitmap(rect: Rect, _ width: Int, _ height: Int, _ bps: Int, _ spp: Int, _ bpp: Int, _ bpr: Int, _ isPlanar: Bool, _ hasAlpha: Bool, _ colorSpaceName: String, _ data: UnsafePointer<UnsafePointer<UInt8>>)
 func NSBeep()
 func NSGetWindowServerMemory(context: Int, _ virtualMemory: UnsafeMutablePointer<Int>, _ windowBackingMemory: UnsafeMutablePointer<Int>, _ windowDumpString: AutoreleasingUnsafeMutablePointer<NSString?>) -> Int
-func NSDrawColorTiledRects(boundsRect: NSRect, _ clipRect: NSRect, _ sides: UnsafePointer<NSRectEdge>, _ colors: AutoreleasingUnsafeMutablePointer<NSColor?>, _ count: Int) -> NSRect
-func NSDrawDarkBezel(aRect: NSRect, _ clipRect: NSRect)
-func NSDrawLightBezel(aRect: NSRect, _ clipRect: NSRect)
-func NSDottedFrameRect(aRect: NSRect)
-func NSDrawWindowBackground(aRect: NSRect)
+func NSDrawColorTiledRects(boundsRect: Rect, _ clipRect: Rect, _ sides: UnsafePointer<RectEdge>, _ colors: AutoreleasingUnsafeMutablePointer<NSColor?>, _ count: Int) -> Rect
+func NSDrawDarkBezel(aRect: Rect, _ clipRect: Rect)
+func NSDrawLightBezel(aRect: Rect, _ clipRect: Rect)
+func NSDottedFrameRect(aRect: Rect)
+func NSDrawWindowBackground(aRect: Rect)
 func NSSetFocusRingStyle(placement: NSFocusRingPlacement)
 func NSDisableScreenUpdates()
 func NSEnableScreenUpdates()
@@ -6054,8 +6055,8 @@ enum NSAnimationEffect : UInt {
   case DisappearingItemDefault
   case Poof
 }
-func NSShowAnimationEffect(animationEffect: NSAnimationEffect, _ centerLocation: NSPoint, _ size: NSSize, _ animationDelegate: AnyObject?, _ didEndSelector: Selector, _ contextInfo: UnsafeMutablePointer<Void>)
-func NSCopyBits(srcGState: Int, _ srcRect: NSRect, _ destPoint: NSPoint)
+func NSShowAnimationEffect(animationEffect: NSAnimationEffect, _ centerLocation: Point, _ size: Size, _ animationDelegate: AnyObject?, _ didEndSelector: Selector, _ contextInfo: UnsafeMutablePointer<Void>)
+func NSCopyBits(srcGState: Int, _ srcRect: Rect, _ destPoint: Point)
 let NSGraphicsContextDestinationAttributeName: String
 let NSGraphicsContextRepresentationFormatAttributeName: String
 let NSGraphicsContextPSFormat: String
@@ -6069,34 +6070,34 @@ enum NSImageInterpolation : UInt {
   case Medium
   case High
 }
-class NSGraphicsContext : NSObject {
-   init?(attributes: [String : AnyObject])
+class NSGraphicsContext : Object {
+   init?(attributes: [String : AnyObject] = [:])
    init(window: NSWindow)
    init?(bitmapImageRep bitmapRep: NSBitmapImageRep)
-   init(CGContext graphicsPort: CGContext, flipped initialFlippedState: Bool)
-  class func currentContext() -> NSGraphicsContext?
+   init(cgContext graphicsPort: CGContext, flipped initialFlippedState: Bool)
+  class func current() -> NSGraphicsContext?
   class func setCurrentContext(context: NSGraphicsContext?)
   class func currentContextDrawingToScreen() -> Bool
   class func saveGraphicsState()
   class func restoreGraphicsState()
   var attributes: [String : AnyObject]? { get }
-  var drawingToScreen: Bool { get }
+  var isDrawingToScreen: Bool { get }
   func saveGraphicsState()
   func restoreGraphicsState()
   func flushGraphics()
-  var CGContext: CGContext { get }
-  var flipped: Bool { get }
+  var cgContext: CGContext { get }
+  var isFlipped: Bool { get }
   init()
 }
 extension NSGraphicsContext {
   var shouldAntialias: Bool
   var imageInterpolation: NSImageInterpolation
-  var patternPhase: NSPoint
+  var patternPhase: Point
   var compositingOperation: NSCompositingOperation
   var colorRenderingIntent: NSColorRenderingIntent
 }
 extension NSGraphicsContext {
-  var CIContext: CIContext? { get }
+  var ciContext: CIContext? { get }
 }
 extension NSGraphicsContext {
   class func setGraphicsState(gState: Int)
@@ -6117,30 +6118,30 @@ enum NSHapticFeedbackPerformanceTime : UInt {
   case Now
   case DrawCompleted
 }
-protocol NSHapticFeedbackPerformer : NSObjectProtocol {
-  func performFeedbackPattern(pattern: NSHapticFeedbackPattern, performanceTime: NSHapticFeedbackPerformanceTime)
+protocol NSHapticFeedbackPerformer : ObjectProtocol {
+  func perform(pattern: NSHapticFeedbackPattern, performanceTime: NSHapticFeedbackPerformanceTime)
 }
-class NSHapticFeedbackManager : NSObject {
+class NSHapticFeedbackManager : Object {
   class func defaultPerformer() -> NSHapticFeedbackPerformer
   init()
 }
-class NSHelpManager : NSObject {
-  class func sharedHelpManager() -> NSHelpManager
+class NSHelpManager : Object {
+  class func shared() -> NSHelpManager
   class func setContextHelpModeActive(active: Bool)
   class func isContextHelpModeActive() -> Bool
-  func setContextHelp(attrString: NSAttributedString, forObject object: AnyObject)
-  func removeContextHelpForObject(object: AnyObject)
-  func contextHelpForObject(object: AnyObject) -> NSAttributedString?
-  func showContextHelpForObject(object: AnyObject, locationHint pt: NSPoint) -> Bool
+  func setContextHelp(attrString: AttributedString, forObject object: AnyObject)
+  func removeContextHelpFor(object: AnyObject)
+  func contextHelpFor(object: AnyObject) -> AttributedString?
+  func showContextHelpFor(object: AnyObject, locationHint pt: Point) -> Bool
   func openHelpAnchor(anchor: String, inBook book: String?)
-  func findString(query: String, inBook book: String?)
-  func registerBooksInBundle(bundle: NSBundle) -> Bool
+  func find(query: String, inBook book: String?)
+  func registerBooksIn(bundle: Bundle) -> Bool
   init()
 }
 let NSContextHelpModeDidActivateNotification: String
 let NSContextHelpModeDidDeactivateNotification: String
-extension NSBundle {
-  func contextHelpForKey(key: String) -> NSAttributedString?
+extension Bundle {
+  func contextHelpForKey(key: String) -> AttributedString?
 }
 extension NSApplication {
   func activateContextHelpMode(sender: AnyObject?)
@@ -6169,19 +6170,19 @@ enum NSImageResizingMode : Int {
   case Stretch
   case Tile
 }
-class NSImage : NSObject, NSCopying, NSCoding, NSSecureCoding, NSPasteboardReading, NSPasteboardWriting {
+class NSImage : Object, Copying, Coding, SecureCoding, NSPasteboardReading, NSPasteboardWriting {
    init?(named name: String)
-  init(size aSize: NSSize)
-  init?(data: NSData)
+  init(size aSize: Size)
+  init?(data: Data)
   init?(contentsOfFile fileName: String)
-  init?(contentsOfURL url: NSURL)
+  init?(contentsOf url: URL)
   init?(byReferencingFile fileName: String)
-  init(byReferencingURL url: NSURL)
+  init(byReferencingURL url: URL)
   init(iconRef: IconRef)
   init?(pasteboard: NSPasteboard)
-  init?(dataIgnoringOrientation data: NSData)
-   init(size: NSSize, flipped drawingHandlerShouldBeCalledWithFlippedContext: Bool, drawingHandler: (NSRect) -> Bool)
-  var size: NSSize
+  init?(dataIgnoringOrientation data: Data)
+   init(size: Size, flipped drawingHandlerShouldBeCalledWithFlippedContext: Bool, drawingHandler: (Rect) -> Bool)
+  var size: Size
   func setName(string: String?) -> Bool
   func name() -> String?
   @NSCopying var backgroundColor: NSColor
@@ -6189,19 +6190,19 @@ class NSImage : NSObject, NSCopying, NSCoding, NSSecureCoding, NSPasteboardReadi
   var prefersColorMatch: Bool
   var matchesOnMultipleResolution: Bool
   var matchesOnlyOnBestFittingAxis: Bool
-  func drawAtPoint(point: NSPoint, fromRect: NSRect, operation op: NSCompositingOperation, fraction delta: CGFloat)
-  func drawInRect(rect: NSRect, fromRect: NSRect, operation op: NSCompositingOperation, fraction delta: CGFloat)
-  func drawInRect(dstSpacePortionRect: NSRect, fromRect srcSpacePortionRect: NSRect, operation op: NSCompositingOperation, fraction requestedAlpha: CGFloat, respectFlipped respectContextIsFlipped: Bool, hints: [String : AnyObject]?)
-  func drawRepresentation(imageRep: NSImageRep, inRect rect: NSRect) -> Bool
-  func drawInRect(rect: NSRect)
+  func drawAt(point: Point, from fromRect: Rect, operation op: NSCompositingOperation, fraction delta: CGFloat)
+  func drawIn(rect: Rect, from fromRect: Rect, operation op: NSCompositingOperation, fraction delta: CGFloat)
+  func drawIn(dstSpacePortionRect: Rect, from srcSpacePortionRect: Rect, operation op: NSCompositingOperation, fraction requestedAlpha: CGFloat, respectFlipped respectContextIsFlipped: Bool, hints: [String : AnyObject]?)
+  func drawRepresentation(imageRep: NSImageRep, in rect: Rect) -> Bool
+  func drawIn(rect: Rect)
   func recache()
-  var TIFFRepresentation: NSData? { get }
-  func TIFFRepresentationUsingCompression(comp: NSTIFFCompression, factor aFloat: Float) -> NSData?
+  var tiffRepresentation: Data? { get }
+  func tiffRepresentationUsing(comp: NSTIFFCompression, factor aFloat: Float) -> Data?
   var representations: [NSImageRep] { get }
   func addRepresentations(imageReps: [NSImageRep])
   func addRepresentation(imageRep: NSImageRep)
   func removeRepresentation(imageRep: NSImageRep)
-  var valid: Bool { get }
+  var isValid: Bool { get }
   func lockFocus()
   func lockFocusFlipped(flipped: Bool)
   func unlockFocus()
@@ -6212,29 +6213,29 @@ class NSImage : NSObject, NSCopying, NSCoding, NSSecureCoding, NSPasteboardReadi
   class func imagePasteboardTypes() -> [String]
   class func imageTypes() -> [String]
   class func imageUnfilteredTypes() -> [String]
-  class func canInitWithPasteboard(pasteboard: NSPasteboard) -> Bool
+  class func canInitWith(pasteboard: NSPasteboard) -> Bool
   func cancelIncrementalLoad()
   var cacheMode: NSImageCacheMode
-  var alignmentRect: NSRect
-  var template: Bool
+  var alignmentRect: Rect
+  var isTemplate: Bool
   var accessibilityDescription: String?
-  init(CGImage cgImage: CGImage, size: NSSize)
-  func CGImageForProposedRect(proposedDestRect: UnsafeMutablePointer<NSRect>, context referenceContext: NSGraphicsContext?, hints: [String : AnyObject]?) -> CGImage?
-  func bestRepresentationForRect(rect: NSRect, context referenceContext: NSGraphicsContext?, hints: [String : AnyObject]?) -> NSImageRep?
-  func hitTestRect(testRectDestSpace: NSRect, withImageDestinationRect imageRectDestSpace: NSRect, context: NSGraphicsContext?, hints: [String : AnyObject]?, flipped: Bool) -> Bool
+  init(cgImage: CGImage, size: Size)
+  func cgImageForProposedRect(proposedDestRect: UnsafeMutablePointer<Rect>, context referenceContext: NSGraphicsContext?, hints: [String : AnyObject]?) -> CGImage?
+  func bestRepresentationFor(rect: Rect, context referenceContext: NSGraphicsContext?, hints: [String : AnyObject]?) -> NSImageRep?
+  func hitTest(testRectDestSpace: Rect, withImageDestinationRect imageRectDestSpace: Rect, context: NSGraphicsContext?, hints: [String : AnyObject]?, flipped: Bool) -> Bool
   func recommendedLayerContentsScale(preferredContentsScale: CGFloat) -> CGFloat
   func layerContentsForContentsScale(layerContentsScale: CGFloat) -> AnyObject
-  var capInsets: NSEdgeInsets
+  var capInsets: EdgeInsets
   var resizingMode: NSImageResizingMode
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
   class func supportsSecureCoding() -> Bool
-  class func readableTypesForPasteboard(pasteboard: NSPasteboard) -> [String]
+  class func readableTypesFor(pasteboard: NSPasteboard) -> [String]
   class func readingOptionsForType(type: String, pasteboard: NSPasteboard) -> NSPasteboardReadingOptions
   init?(pasteboardPropertyList propertyList: AnyObject, ofType type: String)
-  func writableTypesForPasteboard(pasteboard: NSPasteboard) -> [String]
+  func writableTypesFor(pasteboard: NSPasteboard) -> [String]
   func writingOptionsForType(type: String, pasteboard: NSPasteboard) -> NSPasteboardWritingOptions
   func pasteboardPropertyListForType(type: String) -> AnyObject?
 }
@@ -6270,17 +6271,17 @@ struct __imageFlags {
 }
 let NSImageHintCTM: String
 let NSImageHintInterpolation: String
-protocol NSImageDelegate : NSObjectProtocol {
-  optional func imageDidNotDraw(sender: NSImage, inRect aRect: NSRect) -> NSImage?
+protocol NSImageDelegate : ObjectProtocol {
+  optional func imageDidNotDraw(sender: NSImage, in aRect: Rect) -> NSImage?
   optional func image(image: NSImage, willLoadRepresentation rep: NSImageRep)
   optional func image(image: NSImage, didLoadRepresentationHeader rep: NSImageRep)
   optional func image(image: NSImage, didLoadPartOfRepresentation rep: NSImageRep, withValidRows rows: Int)
   optional func image(image: NSImage, didLoadRepresentation rep: NSImageRep, withStatus status: NSImageLoadStatus)
 }
-extension NSBundle {
+extension Bundle {
   func imageForResource(name: String) -> NSImage?
   func pathForImageResource(name: String) -> String?
-  func URLForImageResource(name: String) -> NSURL?
+  func urlForImageResource(name: String) -> URL?
 }
 extension NSImage {
 }
@@ -6365,14 +6366,14 @@ enum NSImageFrameStyle : UInt {
   case Groove
   case Button
 }
-class NSImageCell : NSCell, NSCopying, NSCoding {
+class NSImageCell : NSCell, Copying, Coding {
   var imageAlignment: NSImageAlignment
   var imageScaling: NSImageScaling
   var imageFrameStyle: NSImageFrameStyle
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 struct __ICFlags {
   var _unused: UInt32
@@ -6384,44 +6385,44 @@ struct __ICFlags {
   init(_unused: UInt32, _animates: UInt32, _align: UInt32, _scale: UInt32, _style: UInt32)
 }
 var NSImageRepMatchesDevice: Int { get }
-class NSImageRep : NSObject, NSCopying, NSCoding {
+class NSImageRep : Object, Copying, Coding {
   init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   func draw() -> Bool
-  func drawAtPoint(point: NSPoint) -> Bool
-  func drawInRect(rect: NSRect) -> Bool
-  func drawInRect(dstSpacePortionRect: NSRect, fromRect srcSpacePortionRect: NSRect, operation op: NSCompositingOperation, fraction requestedAlpha: CGFloat, respectFlipped respectContextIsFlipped: Bool, hints: [String : AnyObject]?) -> Bool
-  var size: NSSize
-  var alpha: Bool
-  var opaque: Bool
+  func drawAt(point: Point) -> Bool
+  func drawIn(rect: Rect) -> Bool
+  func drawIn(dstSpacePortionRect: Rect, from srcSpacePortionRect: Rect, operation op: NSCompositingOperation, fraction requestedAlpha: CGFloat, respectFlipped respectContextIsFlipped: Bool, hints: [String : AnyObject]?) -> Bool
+  var size: Size
+  var hasAlpha: Bool
+  var isOpaque: Bool
   var colorSpaceName: String
   var bitsPerSample: Int
   var pixelsWide: Int
   var pixelsHigh: Int
-  class func registerImageRepClass(imageRepClass: AnyClass)
+  class func registerClass(imageRepClass: AnyClass)
   class func unregisterImageRepClass(imageRepClass: AnyClass)
   class func registeredImageRepClasses() -> [AnyClass]
   class func imageRepClassForFileType(type: String) -> AnyClass?
   class func imageRepClassForPasteboardType(type: String) -> AnyClass?
   class func imageRepClassForType(type: String) -> AnyClass?
-  class func imageRepClassForData(data: NSData) -> AnyClass?
-  class func canInitWithData(data: NSData) -> Bool
+  class func imageRepClassFor(data: Data) -> AnyClass?
+  class func canInitWith(data: Data) -> Bool
   class func imageUnfilteredFileTypes() -> [String]
   class func imageUnfilteredPasteboardTypes() -> [String]
   class func imageFileTypes() -> [String]
   class func imagePasteboardTypes() -> [String]
   class func imageUnfilteredTypes() -> [String]
   class func imageTypes() -> [String]
-  class func canInitWithPasteboard(pasteboard: NSPasteboard) -> Bool
+  class func canInitWith(pasteboard: NSPasteboard) -> Bool
   class func imageRepsWithContentsOfFile(filename: String) -> [NSImageRep]?
    init?(contentsOfFile filename: String)
-  class func imageRepsWithContentsOfURL(url: NSURL) -> [NSImageRep]?
-   init?(contentsOfURL url: NSURL)
-  class func imageRepsWithPasteboard(pasteboard: NSPasteboard) -> [NSImageRep]?
+  class func imageRepsWithContentsOf(url: URL) -> [NSImageRep]?
+   init?(contentsOf url: URL)
+  class func imageRepsWith(pasteboard: NSPasteboard) -> [NSImageRep]?
    init?(pasteboard: NSPasteboard)
-  func CGImageForProposedRect(proposedDestRect: UnsafeMutablePointer<NSRect>, context: NSGraphicsContext?, hints: [String : AnyObject]?) -> CGImage?
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
+  func cgImageForProposedRect(proposedDestRect: UnsafeMutablePointer<Rect>, context: NSGraphicsContext?, hints: [String : AnyObject]?) -> CGImage?
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
 }
 struct __repFlags {
   var hasAlpha: UInt32
@@ -6442,11 +6443,11 @@ class NSImageView : NSControl, NSAccessibilityImage {
   var imageAlignment: NSImageAlignment
   var imageScaling: NSImageScaling
   var imageFrameStyle: NSImageFrameStyle
-  var editable: Bool
+  var isEditable: Bool
   var animates: Bool
   var allowsCutCopyPaste: Bool
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
   func accessibilityLabel() -> String?
 }
@@ -6474,10 +6475,10 @@ var NSWindows95InterfaceStyle: Int { get }
 var NSMacintoshInterfaceStyle: Int { get }
 extension NSResponder {
 }
-extension NSItemProvider {
-  var sourceFrame: NSRect { get }
-  var containerFrame: NSRect { get }
-  var preferredPresentationSize: NSSize { get }
+extension ItemProvider {
+  var sourceFrame: Rect { get }
+  var containerFrame: Rect { get }
+  var preferredPresentationSize: Size { get }
 }
 let NSTypeIdentifierDateText: String
 let NSTypeIdentifierAddressText: String
@@ -6490,13 +6491,13 @@ func NSIsControllerMarker(object: AnyObject?) -> Bool
 let NSObservedObjectKey: String
 let NSObservedKeyPathKey: String
 let NSOptionsKey: String
-extension NSObject {
+extension Object {
   class func exposeBinding(binding: String)
   var exposedBindings: [String] { get }
   class func valueClassForBinding(binding: String) -> AnyClass?
   func valueClassForBinding(binding: String) -> AnyClass?
-  class func bind(binding: String, toObject observable: AnyObject, withKeyPath keyPath: String, options: [String : AnyObject]?)
-  func bind(binding: String, toObject observable: AnyObject, withKeyPath keyPath: String, options: [String : AnyObject]?)
+  class func bind(binding: String, to observable: AnyObject, withKeyPath keyPath: String, options: [String : AnyObject]? = [:])
+  func bind(binding: String, to observable: AnyObject, withKeyPath keyPath: String, options: [String : AnyObject]? = [:])
   class func unbind(binding: String)
   func unbind(binding: String)
   class func infoForBinding(binding: String) -> [String : AnyObject]?
@@ -6505,23 +6506,23 @@ extension NSObject {
   func optionDescriptionsForBinding(aBinding: String) -> [NSAttributeDescription]
   class func exposedBindings() -> [String]
 }
-extension NSObject {
+extension Object {
   class func setDefaultPlaceholder(placeholder: AnyObject?, forMarker marker: AnyObject?, withBinding binding: String)
   class func defaultPlaceholderForMarker(marker: AnyObject?, withBinding binding: String) -> AnyObject?
 }
-extension NSObject {
+extension Object {
   class func objectDidBeginEditing(editor: AnyObject)
   func objectDidBeginEditing(editor: AnyObject)
   class func objectDidEndEditing(editor: AnyObject)
   func objectDidEndEditing(editor: AnyObject)
 }
-extension NSObject {
+extension Object {
   class func discardEditing()
   func discardEditing()
   class func commitEditing() -> Bool
   func commitEditing() -> Bool
-  class func commitEditingWithDelegate(delegate: AnyObject?, didCommitSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func commitEditingWithDelegate(delegate: AnyObject?, didCommitSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  class func commitEditingWithDelegate(delegate: AnyObject?, didCommit didCommitSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func commitEditingWithDelegate(delegate: AnyObject?, didCommit didCommitSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
   class func commitEditingAndReturnError() throws
   func commitEditingAndReturnError() throws
 }
@@ -6630,13 +6631,13 @@ let NSSelectsAllWhenSettingContentBindingOption: String
 let NSValidatesImmediatelyBindingOption: String
 let NSValueTransformerNameBindingOption: String
 let NSValueTransformerBindingOption: String
-class NSLayoutAnchor : NSObject {
-  func constraintEqualToAnchor(anchor: NSLayoutAnchor!) -> NSLayoutConstraint!
-  func constraintGreaterThanOrEqualToAnchor(anchor: NSLayoutAnchor!) -> NSLayoutConstraint!
-  func constraintLessThanOrEqualToAnchor(anchor: NSLayoutAnchor!) -> NSLayoutConstraint!
-  func constraintEqualToAnchor(anchor: NSLayoutAnchor!, constant c: CGFloat) -> NSLayoutConstraint!
-  func constraintGreaterThanOrEqualToAnchor(anchor: NSLayoutAnchor!, constant c: CGFloat) -> NSLayoutConstraint!
-  func constraintLessThanOrEqualToAnchor(anchor: NSLayoutAnchor!, constant c: CGFloat) -> NSLayoutConstraint!
+class NSLayoutAnchor : Object {
+  func constraintEqualTo(anchor: NSLayoutAnchor!) -> NSLayoutConstraint!
+  func constraintGreaterThanOrEqualTo(anchor: NSLayoutAnchor!) -> NSLayoutConstraint!
+  func constraintLessThanOrEqualTo(anchor: NSLayoutAnchor!) -> NSLayoutConstraint!
+  func constraintEqualTo(anchor: NSLayoutAnchor!, constant c: CGFloat) -> NSLayoutConstraint!
+  func constraintGreaterThanOrEqualTo(anchor: NSLayoutAnchor!, constant c: CGFloat) -> NSLayoutConstraint!
+  func constraintLessThanOrEqualTo(anchor: NSLayoutAnchor!, constant c: CGFloat) -> NSLayoutConstraint!
   init()
 }
 class NSLayoutXAxisAnchor : NSLayoutAnchor {
@@ -6716,8 +6717,8 @@ let NSLayoutPriorityWindowSizeStayPut: NSLayoutPriority
 let NSLayoutPriorityDragThatCannotResizeWindow: NSLayoutPriority
 let NSLayoutPriorityDefaultLow: NSLayoutPriority
 let NSLayoutPriorityFittingSizeCompression: NSLayoutPriority
-class NSLayoutConstraint : NSObject, NSAnimatablePropertyContainer {
-  class func constraintsWithVisualFormat(format: String, options opts: NSLayoutFormatOptions, metrics: [String : NSNumber]?, views: [String : AnyObject]) -> [NSLayoutConstraint]
+class NSLayoutConstraint : Object, NSAnimatablePropertyContainer {
+  class func constraintsWithVisualFormat(format: String, options opts: NSLayoutFormatOptions = [], metrics: [String : Number]?, views: [String : AnyObject]) -> [NSLayoutConstraint]
   convenience init(item view1: AnyObject, attribute attr1: NSLayoutAttribute, relatedBy relation: NSLayoutRelation, toItem view2: AnyObject?, attribute attr2: NSLayoutAttribute, multiplier: CGFloat, constant c: CGFloat)
   var priority: NSLayoutPriority
   var shouldBeArchived: Bool
@@ -6728,7 +6729,7 @@ class NSLayoutConstraint : NSObject, NSAnimatablePropertyContainer {
   var secondAttribute: NSLayoutAttribute { get }
   var multiplier: CGFloat { get }
   var constant: CGFloat
-  var active: Bool
+  var isActive: Bool
   class func activateConstraints(constraints: [NSLayoutConstraint])
   class func deactivateConstraints(constraints: [NSLayoutConstraint])
   init()
@@ -6776,41 +6777,41 @@ extension NSView {
   class func requiresConstraintBasedLayout() -> Bool
 }
 extension NSView {
-  func alignmentRectForFrame(frame: NSRect) -> NSRect
-  func frameForAlignmentRect(alignmentRect: NSRect) -> NSRect
-  var alignmentRectInsets: NSEdgeInsets { get }
+  func alignmentRectForFrame(frame: Rect) -> Rect
+  func frameForAlignmentRect(alignmentRect: Rect) -> Rect
+  var alignmentRectInsets: EdgeInsets { get }
   var firstBaselineOffsetFromTop: CGFloat { get }
   var lastBaselineOffsetFromBottom: CGFloat { get }
   var baselineOffsetFromBottom: CGFloat { get }
-  var intrinsicContentSize: NSSize { get }
+  var intrinsicContentSize: Size { get }
   func invalidateIntrinsicContentSize()
-  func contentHuggingPriorityForOrientation(orientation: NSLayoutConstraintOrientation) -> NSLayoutPriority
+  func contentHuggingPriorityFor(orientation: NSLayoutConstraintOrientation) -> NSLayoutPriority
   func setContentHuggingPriority(priority: NSLayoutPriority, forOrientation orientation: NSLayoutConstraintOrientation)
-  func contentCompressionResistancePriorityForOrientation(orientation: NSLayoutConstraintOrientation) -> NSLayoutPriority
+  func contentCompressionResistancePriorityFor(orientation: NSLayoutConstraintOrientation) -> NSLayoutPriority
   func setContentCompressionResistancePriority(priority: NSLayoutPriority, forOrientation orientation: NSLayoutConstraintOrientation)
 }
 let NSViewNoInstrinsicMetric: CGFloat
 let NSViewNoIntrinsicMetric: CGFloat
 extension NSControl {
-  func invalidateIntrinsicContentSizeForCell(cell: NSCell)
+  func invalidateIntrinsicContentSizeFor(cell: NSCell)
 }
 extension NSWindow {
-  func anchorAttributeForOrientation(orientation: NSLayoutConstraintOrientation) -> NSLayoutAttribute
+  func anchorAttributeFor(orientation: NSLayoutConstraintOrientation) -> NSLayoutAttribute
   func setAnchorAttribute(attr: NSLayoutAttribute, forOrientation orientation: NSLayoutConstraintOrientation)
 }
 extension NSView {
-  var fittingSize: NSSize { get }
+  var fittingSize: Size { get }
 }
 extension NSView {
-  func constraintsAffectingLayoutForOrientation(orientation: NSLayoutConstraintOrientation) -> [NSLayoutConstraint]
+  func constraintsAffectingLayoutFor(orientation: NSLayoutConstraintOrientation) -> [NSLayoutConstraint]
   var hasAmbiguousLayout: Bool { get }
   func exerciseAmbiguityInLayout()
 }
 extension NSWindow {
   func visualizeConstraints(constraints: [NSLayoutConstraint])
 }
-class NSLayoutGuide : NSObject, NSCoding, NSUserInterfaceItemIdentification {
-  var frame: NSRect { get }
+class NSLayoutGuide : Object, Coding, NSUserInterfaceItemIdentification {
+  var frame: Rect { get }
   weak var owningView: @sil_weak NSView?
   var identifier: String
   var leadingAnchor: NSLayoutXAxisAnchor { get }
@@ -6824,8 +6825,8 @@ class NSLayoutGuide : NSObject, NSCoding, NSUserInterfaceItemIdentification {
   var centerXAnchor: NSLayoutXAxisAnchor { get }
   var centerYAnchor: NSLayoutYAxisAnchor { get }
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 extension NSView {
   func addLayoutGuide(guide: NSLayoutGuide)
@@ -6869,15 +6870,15 @@ enum NSTypesetterBehavior : Int {
   case Behavior_10_3
   case Behavior_10_4
 }
-class NSLayoutManager : NSObject, NSCoding {
+class NSLayoutManager : Object, Coding {
   init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   unowned(unsafe) var textStorage: @sil_unmanaged NSTextStorage?
   func replaceTextStorage(newTextStorage: NSTextStorage)
   var textContainers: [NSTextContainer] { get }
   func addTextContainer(container: NSTextContainer)
-  func insertTextContainer(container: NSTextContainer, atIndex index: Int)
-  func removeTextContainerAtIndex(index: Int)
+  func insertTextContainer(container: NSTextContainer, at index: Int)
+  func removeTextContainerAt(index: Int)
   func textContainerChangedGeometry(container: NSTextContainer)
   func textContainerChangedTextView(container: NSTextContainer)
   unowned(unsafe) var delegate: @sil_unmanaged NSLayoutManagerDelegate?
@@ -6891,91 +6892,91 @@ class NSLayoutManager : NSObject, NSCoding {
   var defaultAttachmentScaling: NSImageScaling
   var typesetter: NSTypesetter
   var typesetterBehavior: NSTypesetterBehavior
-  func invalidateGlyphsForCharacterRange(charRange: NSRange, changeInLength delta: Int, actualCharacterRange actualCharRange: NSRangePointer)
-  func invalidateLayoutForCharacterRange(charRange: NSRange, actualCharacterRange actualCharRange: NSRangePointer)
+  func invalidateGlyphsForCharacterRange(charRange: NSRange, changeInLength delta: Int, actualCharacterRange actualCharRange: RangePointer)
+  func invalidateLayoutForCharacterRange(charRange: NSRange, actualCharacterRange actualCharRange: RangePointer)
   func invalidateDisplayForCharacterRange(charRange: NSRange)
   func invalidateDisplayForGlyphRange(glyphRange: NSRange)
-  func processEditingForTextStorage(textStorage: NSTextStorage, edited editMask: NSTextStorageEditActions, range newCharRange: NSRange, changeInLength delta: Int, invalidatedRange invalidatedCharRange: NSRange)
+  func processEditingFor(textStorage: NSTextStorage, edited editMask: NSTextStorageEditActions, range newCharRange: NSRange, changeInLength delta: Int, invalidatedRange invalidatedCharRange: NSRange)
   func ensureGlyphsForCharacterRange(charRange: NSRange)
   func ensureGlyphsForGlyphRange(glyphRange: NSRange)
   func ensureLayoutForCharacterRange(charRange: NSRange)
   func ensureLayoutForGlyphRange(glyphRange: NSRange)
-  func ensureLayoutForTextContainer(container: NSTextContainer)
-  func ensureLayoutForBoundingRect(bounds: NSRect, inTextContainer container: NSTextContainer)
+  func ensureLayoutFor(container: NSTextContainer)
+  func ensureLayoutForBoundingRect(bounds: Rect, in container: NSTextContainer)
   func setGlyphs(glyphs: UnsafePointer<CGGlyph>, properties props: UnsafePointer<NSGlyphProperty>, characterIndexes charIndexes: UnsafePointer<Int>, font aFont: NSFont, forGlyphRange glyphRange: NSRange)
   var numberOfGlyphs: Int { get }
-  func CGGlyphAtIndex(glyphIndex: Int, isValidIndex: UnsafeMutablePointer<ObjCBool>) -> CGGlyph
-  func CGGlyphAtIndex(glyphIndex: Int) -> CGGlyph
+  func cgGlyphAt(glyphIndex: Int, isValidIndex: UnsafeMutablePointer<ObjCBool>) -> CGGlyph
+  func cgGlyphAt(glyphIndex: Int) -> CGGlyph
   func isValidGlyphIndex(glyphIndex: Int) -> Bool
-  func propertyForGlyphAtIndex(glyphIndex: Int) -> NSGlyphProperty
-  func characterIndexForGlyphAtIndex(glyphIndex: Int) -> Int
-  func glyphIndexForCharacterAtIndex(charIndex: Int) -> Int
-  func getGlyphsInRange(glyphRange: NSRange, glyphs glyphBuffer: UnsafeMutablePointer<CGGlyph>, properties props: UnsafeMutablePointer<NSGlyphProperty>, characterIndexes charIndexBuffer: UnsafeMutablePointer<Int>, bidiLevels bidiLevelBuffer: UnsafeMutablePointer<UInt8>) -> Int
+  func propertyForGlyphAt(glyphIndex: Int) -> NSGlyphProperty
+  func characterIndexForGlyphAt(glyphIndex: Int) -> Int
+  func glyphIndexForCharacterAt(charIndex: Int) -> Int
+  func getGlyphsIn(glyphRange: NSRange, glyphs glyphBuffer: UnsafeMutablePointer<CGGlyph>, properties props: UnsafeMutablePointer<NSGlyphProperty>, characterIndexes charIndexBuffer: UnsafeMutablePointer<Int>, bidiLevels bidiLevelBuffer: UnsafeMutablePointer<UInt8>) -> Int
   func setTextContainer(container: NSTextContainer, forGlyphRange glyphRange: NSRange)
-  func setLineFragmentRect(fragmentRect: NSRect, forGlyphRange glyphRange: NSRange, usedRect: NSRect)
-  func setExtraLineFragmentRect(fragmentRect: NSRect, usedRect: NSRect, textContainer container: NSTextContainer)
-  func setLocation(location: NSPoint, forStartOfGlyphRange glyphRange: NSRange)
-  func setNotShownAttribute(flag: Bool, forGlyphAtIndex glyphIndex: Int)
-  func setDrawsOutsideLineFragment(flag: Bool, forGlyphAtIndex glyphIndex: Int)
-  func setAttachmentSize(attachmentSize: NSSize, forGlyphRange glyphRange: NSRange)
+  func setLineFragmentRect(fragmentRect: Rect, forGlyphRange glyphRange: NSRange, usedRect: Rect)
+  func setExtraLineFragmentRect(fragmentRect: Rect, usedRect: Rect, textContainer container: NSTextContainer)
+  func setLocation(location: Point, forStartOfGlyphRange glyphRange: NSRange)
+  func setNotShownAttribute(flag: Bool, forGlyphAt glyphIndex: Int)
+  func setDrawsOutsideLineFragment(flag: Bool, forGlyphAt glyphIndex: Int)
+  func setAttachmentSize(attachmentSize: Size, forGlyphRange glyphRange: NSRange)
   func getFirstUnlaidCharacterIndex(charIndex: UnsafeMutablePointer<Int>, glyphIndex: UnsafeMutablePointer<Int>)
   func firstUnlaidCharacterIndex() -> Int
   func firstUnlaidGlyphIndex() -> Int
-  func textContainerForGlyphAtIndex(glyphIndex: Int, effectiveRange effectiveGlyphRange: NSRangePointer) -> NSTextContainer?
-  func textContainerForGlyphAtIndex(glyphIndex: Int, effectiveRange effectiveGlyphRange: NSRangePointer, withoutAdditionalLayout flag: Bool) -> NSTextContainer?
-  func usedRectForTextContainer(container: NSTextContainer) -> NSRect
-  func lineFragmentRectForGlyphAtIndex(glyphIndex: Int, effectiveRange effectiveGlyphRange: NSRangePointer) -> NSRect
-  func lineFragmentRectForGlyphAtIndex(glyphIndex: Int, effectiveRange effectiveGlyphRange: NSRangePointer, withoutAdditionalLayout flag: Bool) -> NSRect
-  func lineFragmentUsedRectForGlyphAtIndex(glyphIndex: Int, effectiveRange effectiveGlyphRange: NSRangePointer) -> NSRect
-  func lineFragmentUsedRectForGlyphAtIndex(glyphIndex: Int, effectiveRange effectiveGlyphRange: NSRangePointer, withoutAdditionalLayout flag: Bool) -> NSRect
-  var extraLineFragmentRect: NSRect { get }
-  var extraLineFragmentUsedRect: NSRect { get }
+  func textContainerForGlyphAt(glyphIndex: Int, effectiveRange effectiveGlyphRange: RangePointer) -> NSTextContainer?
+  func textContainerForGlyphAt(glyphIndex: Int, effectiveRange effectiveGlyphRange: RangePointer, withoutAdditionalLayout flag: Bool) -> NSTextContainer?
+  func usedRectFor(container: NSTextContainer) -> Rect
+  func lineFragmentRectForGlyphAt(glyphIndex: Int, effectiveRange effectiveGlyphRange: RangePointer) -> Rect
+  func lineFragmentRectForGlyphAt(glyphIndex: Int, effectiveRange effectiveGlyphRange: RangePointer, withoutAdditionalLayout flag: Bool) -> Rect
+  func lineFragmentUsedRectForGlyphAt(glyphIndex: Int, effectiveRange effectiveGlyphRange: RangePointer) -> Rect
+  func lineFragmentUsedRectForGlyphAt(glyphIndex: Int, effectiveRange effectiveGlyphRange: RangePointer, withoutAdditionalLayout flag: Bool) -> Rect
+  var extraLineFragmentRect: Rect { get }
+  var extraLineFragmentUsedRect: Rect { get }
   var extraLineFragmentTextContainer: NSTextContainer? { get }
-  func locationForGlyphAtIndex(glyphIndex: Int) -> NSPoint
-  func notShownAttributeForGlyphAtIndex(glyphIndex: Int) -> Bool
-  func drawsOutsideLineFragmentForGlyphAtIndex(glyphIndex: Int) -> Bool
-  func attachmentSizeForGlyphAtIndex(glyphIndex: Int) -> NSSize
-  func truncatedGlyphRangeInLineFragmentForGlyphAtIndex(glyphIndex: Int) -> NSRange
-  func glyphRangeForCharacterRange(charRange: NSRange, actualCharacterRange actualCharRange: NSRangePointer) -> NSRange
-  func characterRangeForGlyphRange(glyphRange: NSRange, actualGlyphRange: NSRangePointer) -> NSRange
-  func glyphRangeForTextContainer(container: NSTextContainer) -> NSRange
-  func rangeOfNominallySpacedGlyphsContainingIndex(glyphIndex: Int) -> NSRange
-  func boundingRectForGlyphRange(glyphRange: NSRange, inTextContainer container: NSTextContainer) -> NSRect
-  func glyphRangeForBoundingRect(bounds: NSRect, inTextContainer container: NSTextContainer) -> NSRange
-  func glyphRangeForBoundingRectWithoutAdditionalLayout(bounds: NSRect, inTextContainer container: NSTextContainer) -> NSRange
-  func glyphIndexForPoint(point: NSPoint, inTextContainer container: NSTextContainer, fractionOfDistanceThroughGlyph partialFraction: UnsafeMutablePointer<CGFloat>) -> Int
-  func glyphIndexForPoint(point: NSPoint, inTextContainer container: NSTextContainer) -> Int
-  func fractionOfDistanceThroughGlyphForPoint(point: NSPoint, inTextContainer container: NSTextContainer) -> CGFloat
-  func characterIndexForPoint(point: NSPoint, inTextContainer container: NSTextContainer, fractionOfDistanceBetweenInsertionPoints partialFraction: UnsafeMutablePointer<CGFloat>) -> Int
-  func getLineFragmentInsertionPointsForCharacterAtIndex(charIndex: Int, alternatePositions aFlag: Bool, inDisplayOrder dFlag: Bool, positions: UnsafeMutablePointer<CGFloat>, characterIndexes charIndexes: UnsafeMutablePointer<Int>) -> Int
-  func enumerateLineFragmentsForGlyphRange(glyphRange: NSRange, usingBlock block: (NSRect, NSRect, NSTextContainer, NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func enumerateEnclosingRectsForGlyphRange(glyphRange: NSRange, withinSelectedGlyphRange selectedRange: NSRange, inTextContainer textContainer: NSTextContainer, usingBlock block: (NSRect, UnsafeMutablePointer<ObjCBool>) -> Void)
-  func drawBackgroundForGlyphRange(glyphsToShow: NSRange, atPoint origin: NSPoint)
-  func drawGlyphsForGlyphRange(glyphsToShow: NSRange, atPoint origin: NSPoint)
-  func showCGGlyphs(glyphs: UnsafePointer<CGGlyph>, positions: UnsafePointer<NSPoint>, count glyphCount: Int, font: NSFont, matrix textMatrix: NSAffineTransform, attributes: [String : AnyObject], inContext graphicsContext: NSGraphicsContext)
-  func fillBackgroundRectArray(rectArray: UnsafePointer<NSRect>, count rectCount: Int, forCharacterRange charRange: NSRange, color: NSColor)
-  func drawUnderlineForGlyphRange(glyphRange: NSRange, underlineType underlineVal: NSUnderlineStyle, baselineOffset: CGFloat, lineFragmentRect lineRect: NSRect, lineFragmentGlyphRange lineGlyphRange: NSRange, containerOrigin: NSPoint)
-  func underlineGlyphRange(glyphRange: NSRange, underlineType underlineVal: NSUnderlineStyle, lineFragmentRect lineRect: NSRect, lineFragmentGlyphRange lineGlyphRange: NSRange, containerOrigin: NSPoint)
-  func drawStrikethroughForGlyphRange(glyphRange: NSRange, strikethroughType strikethroughVal: NSUnderlineStyle, baselineOffset: CGFloat, lineFragmentRect lineRect: NSRect, lineFragmentGlyphRange lineGlyphRange: NSRange, containerOrigin: NSPoint)
-  func strikethroughGlyphRange(glyphRange: NSRange, strikethroughType strikethroughVal: NSUnderlineStyle, lineFragmentRect lineRect: NSRect, lineFragmentGlyphRange lineGlyphRange: NSRange, containerOrigin: NSPoint)
-  func showAttachmentCell(cell: NSCell, inRect rect: NSRect, characterIndex attachmentIndex: Int)
-  func setLayoutRect(rect: NSRect, forTextBlock block: NSTextBlock, glyphRange: NSRange)
-  func setBoundsRect(rect: NSRect, forTextBlock block: NSTextBlock, glyphRange: NSRange)
-  func layoutRectForTextBlock(block: NSTextBlock, glyphRange: NSRange) -> NSRect
-  func boundsRectForTextBlock(block: NSTextBlock, glyphRange: NSRange) -> NSRect
-  func layoutRectForTextBlock(block: NSTextBlock, atIndex glyphIndex: Int, effectiveRange effectiveGlyphRange: NSRangePointer) -> NSRect
-  func boundsRectForTextBlock(block: NSTextBlock, atIndex glyphIndex: Int, effectiveRange effectiveGlyphRange: NSRangePointer) -> NSRect
-  func temporaryAttributesAtCharacterIndex(charIndex: Int, effectiveRange effectiveCharRange: NSRangePointer) -> [String : AnyObject]
-  func setTemporaryAttributes(attrs: [String : AnyObject], forCharacterRange charRange: NSRange)
-  func addTemporaryAttributes(attrs: [String : AnyObject], forCharacterRange charRange: NSRange)
+  func locationForGlyphAt(glyphIndex: Int) -> Point
+  func notShownAttributeForGlyphAt(glyphIndex: Int) -> Bool
+  func drawsOutsideLineFragmentForGlyphAt(glyphIndex: Int) -> Bool
+  func attachmentSizeForGlyphAt(glyphIndex: Int) -> Size
+  func truncatedGlyphRangeInLineFragmentForGlyphAt(glyphIndex: Int) -> NSRange
+  func glyphRangeForCharacterRange(charRange: NSRange, actualCharacterRange actualCharRange: RangePointer) -> NSRange
+  func characterRangeForGlyphRange(glyphRange: NSRange, actualGlyphRange: RangePointer) -> NSRange
+  func glyphRangeFor(container: NSTextContainer) -> NSRange
+  func rangeOfNominallySpacedGlyphsContaining(glyphIndex: Int) -> NSRange
+  func boundingRectForGlyphRange(glyphRange: NSRange, in container: NSTextContainer) -> Rect
+  func glyphRangeForBoundingRect(bounds: Rect, in container: NSTextContainer) -> NSRange
+  func glyphRangeForBoundingRectWithoutAdditionalLayout(bounds: Rect, in container: NSTextContainer) -> NSRange
+  func glyphIndexFor(point: Point, in container: NSTextContainer, fractionOfDistanceThroughGlyph partialFraction: UnsafeMutablePointer<CGFloat>) -> Int
+  func glyphIndexFor(point: Point, in container: NSTextContainer) -> Int
+  func fractionOfDistanceThroughGlyphFor(point: Point, in container: NSTextContainer) -> CGFloat
+  func characterIndexFor(point: Point, in container: NSTextContainer, fractionOfDistanceBetweenInsertionPoints partialFraction: UnsafeMutablePointer<CGFloat>) -> Int
+  func getLineFragmentInsertionPointsForCharacterAt(charIndex: Int, alternatePositions aFlag: Bool, inDisplayOrder dFlag: Bool, positions: UnsafeMutablePointer<CGFloat>, characterIndexes charIndexes: UnsafeMutablePointer<Int>) -> Int
+  func enumerateLineFragmentsForGlyphRange(glyphRange: NSRange, usingBlock block: (Rect, Rect, NSTextContainer, NSRange, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func enumerateEnclosingRectsForGlyphRange(glyphRange: NSRange, withinSelectedGlyphRange selectedRange: NSRange, in textContainer: NSTextContainer, usingBlock block: (Rect, UnsafeMutablePointer<ObjCBool>) -> Void)
+  func drawBackgroundForGlyphRange(glyphsToShow: NSRange, at origin: Point)
+  func drawGlyphsForGlyphRange(glyphsToShow: NSRange, at origin: Point)
+  func showCGGlyphs(glyphs: UnsafePointer<CGGlyph>, positions: UnsafePointer<Point>, count glyphCount: Int, font: NSFont, matrix textMatrix: AffineTransform, attributes: [String : AnyObject] = [:], in graphicsContext: NSGraphicsContext)
+  func fillBackgroundRectArray(rectArray: UnsafePointer<Rect>, count rectCount: Int, forCharacterRange charRange: NSRange, color: NSColor)
+  func drawUnderlineForGlyphRange(glyphRange: NSRange, underlineType underlineVal: NSUnderlineStyle, baselineOffset: CGFloat, lineFragmentRect lineRect: Rect, lineFragmentGlyphRange lineGlyphRange: NSRange, containerOrigin: Point)
+  func underlineGlyphRange(glyphRange: NSRange, underlineType underlineVal: NSUnderlineStyle, lineFragmentRect lineRect: Rect, lineFragmentGlyphRange lineGlyphRange: NSRange, containerOrigin: Point)
+  func drawStrikethroughForGlyphRange(glyphRange: NSRange, strikethroughType strikethroughVal: NSUnderlineStyle, baselineOffset: CGFloat, lineFragmentRect lineRect: Rect, lineFragmentGlyphRange lineGlyphRange: NSRange, containerOrigin: Point)
+  func strikethroughGlyphRange(glyphRange: NSRange, strikethroughType strikethroughVal: NSUnderlineStyle, lineFragmentRect lineRect: Rect, lineFragmentGlyphRange lineGlyphRange: NSRange, containerOrigin: Point)
+  func showAttachmentCell(cell: NSCell, in rect: Rect, characterIndex attachmentIndex: Int)
+  func setLayoutRect(rect: Rect, forTextBlock block: NSTextBlock, glyphRange: NSRange)
+  func setBoundsRect(rect: Rect, forTextBlock block: NSTextBlock, glyphRange: NSRange)
+  func layoutRectFor(block: NSTextBlock, glyphRange: NSRange) -> Rect
+  func boundsRectFor(block: NSTextBlock, glyphRange: NSRange) -> Rect
+  func layoutRectFor(block: NSTextBlock, at glyphIndex: Int, effectiveRange effectiveGlyphRange: RangePointer) -> Rect
+  func boundsRectFor(block: NSTextBlock, at glyphIndex: Int, effectiveRange effectiveGlyphRange: RangePointer) -> Rect
+  func temporaryAttributesAtCharacterIndex(charIndex: Int, effectiveRange effectiveCharRange: RangePointer) -> [String : AnyObject]
+  func setTemporaryAttributes(attrs: [String : AnyObject] = [:], forCharacterRange charRange: NSRange)
+  func addTemporaryAttributes(attrs: [String : AnyObject] = [:], forCharacterRange charRange: NSRange)
   func removeTemporaryAttribute(attrName: String, forCharacterRange charRange: NSRange)
-  func temporaryAttribute(attrName: String, atCharacterIndex location: Int, effectiveRange range: NSRangePointer) -> AnyObject?
-  func temporaryAttribute(attrName: String, atCharacterIndex location: Int, longestEffectiveRange range: NSRangePointer, inRange rangeLimit: NSRange) -> AnyObject?
-  func temporaryAttributesAtCharacterIndex(location: Int, longestEffectiveRange range: NSRangePointer, inRange rangeLimit: NSRange) -> [String : AnyObject]
+  func temporaryAttribute(attrName: String, atCharacterIndex location: Int, effectiveRange range: RangePointer) -> AnyObject?
+  func temporaryAttribute(attrName: String, atCharacterIndex location: Int, longestEffectiveRange range: RangePointer, in rangeLimit: NSRange) -> AnyObject?
+  func temporaryAttributesAtCharacterIndex(location: Int, longestEffectiveRange range: RangePointer, in rangeLimit: NSRange) -> [String : AnyObject]
   func addTemporaryAttribute(attrName: String, value: AnyObject, forCharacterRange charRange: NSRange)
-  func defaultLineHeightForFont(theFont: NSFont) -> CGFloat
-  func defaultBaselineOffsetForFont(theFont: NSFont) -> CGFloat
-  func encodeWithCoder(aCoder: NSCoder)
+  func defaultLineHeightFor(theFont: NSFont) -> CGFloat
+  func defaultBaselineOffsetFor(theFont: NSFont) -> CGFloat
+  func encodeWith(aCoder: Coder)
 }
 struct __lmFlags {
   var containersAreFull: UInt32
@@ -7013,30 +7014,30 @@ struct __lmFlags {
 }
 extension NSLayoutManager : NSGlyphStorage {
   var glyphGenerator: NSGlyphGenerator
-  func attributedString() -> NSAttributedString
+  func attributedString() -> AttributedString
   func layoutOptions() -> Int
 }
 extension NSLayoutManager {
-  func rulerMarkersForTextView(view: NSTextView, paragraphStyle style: NSParagraphStyle, ruler: NSRulerView) -> [NSRulerMarker]
-  func rulerAccessoryViewForTextView(view: NSTextView, paragraphStyle style: NSParagraphStyle, ruler: NSRulerView, enabled isEnabled: Bool) -> NSView?
-  func layoutManagerOwnsFirstResponderInWindow(window: NSWindow) -> Bool
+  func rulerMarkersFor(view: NSTextView, paragraphStyle style: NSParagraphStyle, ruler: NSRulerView) -> [NSRulerMarker]
+  func rulerAccessoryViewFor(view: NSTextView, paragraphStyle style: NSParagraphStyle, ruler: NSRulerView, enabled isEnabled: Bool) -> NSView?
+  func layoutManagerOwnsFirstResponderIn(window: NSWindow) -> Bool
   unowned(unsafe) var firstTextView: @sil_unmanaged NSTextView? { get }
   unowned(unsafe) var textViewForBeginningOfSelection: @sil_unmanaged NSTextView? { get }
 }
-protocol NSLayoutManagerDelegate : NSObjectProtocol {
+protocol NSLayoutManagerDelegate : ObjectProtocol {
   optional func layoutManager(layoutManager: NSLayoutManager, shouldGenerateGlyphs glyphs: UnsafePointer<CGGlyph>, properties props: UnsafePointer<NSGlyphProperty>, characterIndexes charIndexes: UnsafePointer<Int>, font aFont: NSFont, forGlyphRange glyphRange: NSRange) -> Int
-  optional func layoutManager(layoutManager: NSLayoutManager, lineSpacingAfterGlyphAtIndex glyphIndex: Int, withProposedLineFragmentRect rect: NSRect) -> CGFloat
-  optional func layoutManager(layoutManager: NSLayoutManager, paragraphSpacingBeforeGlyphAtIndex glyphIndex: Int, withProposedLineFragmentRect rect: NSRect) -> CGFloat
-  optional func layoutManager(layoutManager: NSLayoutManager, paragraphSpacingAfterGlyphAtIndex glyphIndex: Int, withProposedLineFragmentRect rect: NSRect) -> CGFloat
-  optional func layoutManager(layoutManager: NSLayoutManager, shouldUseAction action: NSControlCharacterAction, forControlCharacterAtIndex charIndex: Int) -> NSControlCharacterAction
-  optional func layoutManager(layoutManager: NSLayoutManager, shouldBreakLineByWordBeforeCharacterAtIndex charIndex: Int) -> Bool
-  optional func layoutManager(layoutManager: NSLayoutManager, shouldBreakLineByHyphenatingBeforeCharacterAtIndex charIndex: Int) -> Bool
-  optional func layoutManager(layoutManager: NSLayoutManager, boundingBoxForControlGlyphAtIndex glyphIndex: Int, forTextContainer textContainer: NSTextContainer, proposedLineFragment proposedRect: NSRect, glyphPosition: NSPoint, characterIndex charIndex: Int) -> NSRect
-  optional func layoutManager(layoutManager: NSLayoutManager, shouldSetLineFragmentRect lineFragmentRect: UnsafeMutablePointer<NSRect>, lineFragmentUsedRect: UnsafeMutablePointer<NSRect>, baselineOffset: UnsafeMutablePointer<CGFloat>, inTextContainer textContainer: NSTextContainer, forGlyphRange glyphRange: NSRange) -> Bool
+  optional func layoutManager(layoutManager: NSLayoutManager, lineSpacingAfterGlyphAt glyphIndex: Int, withProposedLineFragmentRect rect: Rect) -> CGFloat
+  optional func layoutManager(layoutManager: NSLayoutManager, paragraphSpacingBeforeGlyphAt glyphIndex: Int, withProposedLineFragmentRect rect: Rect) -> CGFloat
+  optional func layoutManager(layoutManager: NSLayoutManager, paragraphSpacingAfterGlyphAt glyphIndex: Int, withProposedLineFragmentRect rect: Rect) -> CGFloat
+  optional func layoutManager(layoutManager: NSLayoutManager, shouldUse action: NSControlCharacterAction, forControlCharacterAt charIndex: Int) -> NSControlCharacterAction
+  optional func layoutManager(layoutManager: NSLayoutManager, shouldBreakLineByWordBeforeCharacterAt charIndex: Int) -> Bool
+  optional func layoutManager(layoutManager: NSLayoutManager, shouldBreakLineByHyphenatingBeforeCharacterAt charIndex: Int) -> Bool
+  optional func layoutManager(layoutManager: NSLayoutManager, boundingBoxForControlGlyphAt glyphIndex: Int, forTextContainer textContainer: NSTextContainer, proposedLineFragment proposedRect: Rect, glyphPosition: Point, characterIndex charIndex: Int) -> Rect
+  optional func layoutManager(layoutManager: NSLayoutManager, shouldSetLineFragmentRect lineFragmentRect: UnsafeMutablePointer<Rect>, lineFragmentUsedRect: UnsafeMutablePointer<Rect>, baselineOffset: UnsafeMutablePointer<CGFloat>, in textContainer: NSTextContainer, forGlyphRange glyphRange: NSRange) -> Bool
   optional func layoutManagerDidInvalidateLayout(sender: NSLayoutManager)
-  optional func layoutManager(layoutManager: NSLayoutManager, didCompleteLayoutForTextContainer textContainer: NSTextContainer?, atEnd layoutFinishedFlag: Bool)
-  optional func layoutManager(layoutManager: NSLayoutManager, textContainer: NSTextContainer, didChangeGeometryFromSize oldSize: NSSize)
-  optional func layoutManager(layoutManager: NSLayoutManager, shouldUseTemporaryAttributes attrs: [String : AnyObject], forDrawingToScreen toScreen: Bool, atCharacterIndex charIndex: Int, effectiveRange effectiveCharRange: NSRangePointer) -> [String : AnyObject]?
+  optional func layoutManager(layoutManager: NSLayoutManager, didCompleteLayoutFor textContainer: NSTextContainer?, atEnd layoutFinishedFlag: Bool)
+  optional func layoutManager(layoutManager: NSLayoutManager, textContainer: NSTextContainer, didChangeGeometryFrom oldSize: Size)
+  optional func layoutManager(layoutManager: NSLayoutManager, shouldUseTemporaryAttributes attrs: [String : AnyObject] = [:], forDrawingToScreen toScreen: Bool, atCharacterIndex charIndex: Int, effectiveRange effectiveCharRange: RangePointer) -> [String : AnyObject]?
 }
 var NSGlyphAttributeSoft: Int { get }
 var NSGlyphAttributeElastic: Int { get }
@@ -7052,26 +7053,26 @@ enum NSGlyphInscription : UInt {
   case InscribeOverBelow
 }
 extension NSLayoutManager {
-  func glyphAtIndex(glyphIndex: Int, isValidIndex: UnsafeMutablePointer<ObjCBool>) -> NSGlyph
-  func glyphAtIndex(glyphIndex: Int) -> NSGlyph
-  func rectArrayForCharacterRange(charRange: NSRange, withinSelectedCharacterRange selCharRange: NSRange, inTextContainer container: NSTextContainer, rectCount: UnsafeMutablePointer<Int>) -> NSRectArray
-  func rectArrayForGlyphRange(glyphRange: NSRange, withinSelectedGlyphRange selGlyphRange: NSRange, inTextContainer container: NSTextContainer, rectCount: UnsafeMutablePointer<Int>) -> NSRectArray
+  func glyphAt(glyphIndex: Int, isValidIndex: UnsafeMutablePointer<ObjCBool>) -> NSGlyph
+  func glyphAt(glyphIndex: Int) -> NSGlyph
+  func rectArrayForCharacterRange(charRange: NSRange, withinSelectedCharacterRange selCharRange: NSRange, in container: NSTextContainer, rectCount: UnsafeMutablePointer<Int>) -> RectArray
+  func rectArrayForGlyphRange(glyphRange: NSRange, withinSelectedGlyphRange selGlyphRange: NSRange, in container: NSTextContainer, rectCount: UnsafeMutablePointer<Int>) -> RectArray
   var usesScreenFonts: Bool
-  func substituteFontForFont(originalFont: NSFont) -> NSFont
-  func insertGlyphs(glyphs: UnsafePointer<NSGlyph>, length: Int, forStartingGlyphAtIndex glyphIndex: Int, characterIndex charIndex: Int)
+  func substituteFontFor(originalFont: NSFont) -> NSFont
+  func insertGlyphs(glyphs: UnsafePointer<NSGlyph>, length: Int, forStartingGlyphAt glyphIndex: Int, characterIndex charIndex: Int)
   func insertGlyph(glyph: NSGlyph, atGlyphIndex glyphIndex: Int, characterIndex charIndex: Int)
-  func replaceGlyphAtIndex(glyphIndex: Int, withGlyph newGlyph: NSGlyph)
-  func deleteGlyphsInRange(glyphRange: NSRange)
-  func setCharacterIndex(charIndex: Int, forGlyphAtIndex glyphIndex: Int)
-  func setIntAttribute(attributeTag: Int, value val: Int, forGlyphAtIndex glyphIndex: Int)
+  func replaceGlyphAt(glyphIndex: Int, withGlyph newGlyph: NSGlyph)
+  func deleteGlyphsIn(glyphRange: NSRange)
+  func setCharacterIndex(charIndex: Int, forGlyphAt glyphIndex: Int)
+  func setIntAttribute(attributeTag: Int, value val: Int, forGlyphAt glyphIndex: Int)
   func invalidateGlyphsOnLayoutInvalidationForGlyphRange(glyphRange: NSRange)
-  func intAttribute(attributeTag: Int, forGlyphAtIndex glyphIndex: Int) -> Int
-  func getGlyphsInRange(glyphRange: NSRange, glyphs glyphBuffer: UnsafeMutablePointer<NSGlyph>, characterIndexes charIndexBuffer: UnsafeMutablePointer<Int>, glyphInscriptions inscribeBuffer: UnsafeMutablePointer<NSGlyphInscription>, elasticBits elasticBuffer: UnsafeMutablePointer<ObjCBool>) -> Int
-  func getGlyphsInRange(glyphRange: NSRange, glyphs glyphBuffer: UnsafeMutablePointer<NSGlyph>, characterIndexes charIndexBuffer: UnsafeMutablePointer<Int>, glyphInscriptions inscribeBuffer: UnsafeMutablePointer<NSGlyphInscription>, elasticBits elasticBuffer: UnsafeMutablePointer<ObjCBool>, bidiLevels bidiLevelBuffer: UnsafeMutablePointer<UInt8>) -> Int
+  func intAttribute(attributeTag: Int, forGlyphAt glyphIndex: Int) -> Int
+  func getGlyphsIn(glyphRange: NSRange, glyphs glyphBuffer: UnsafeMutablePointer<NSGlyph>, characterIndexes charIndexBuffer: UnsafeMutablePointer<Int>, glyphInscriptions inscribeBuffer: UnsafeMutablePointer<NSGlyphInscription>, elasticBits elasticBuffer: UnsafeMutablePointer<ObjCBool>) -> Int
+  func getGlyphsIn(glyphRange: NSRange, glyphs glyphBuffer: UnsafeMutablePointer<NSGlyph>, characterIndexes charIndexBuffer: UnsafeMutablePointer<Int>, glyphInscriptions inscribeBuffer: UnsafeMutablePointer<NSGlyphInscription>, elasticBits elasticBuffer: UnsafeMutablePointer<ObjCBool>, bidiLevels bidiLevelBuffer: UnsafeMutablePointer<UInt8>) -> Int
   func getGlyphs(glyphArray: UnsafeMutablePointer<NSGlyph>, range glyphRange: NSRange) -> Int
-  func invalidateLayoutForCharacterRange(charRange: NSRange, isSoft flag: Bool, actualCharacterRange actualCharRange: NSRangePointer)
+  func invalidateLayoutForCharacterRange(charRange: NSRange, isSoft flag: Bool, actualCharacterRange actualCharRange: RangePointer)
   func textStorage(str: NSTextStorage, edited editedMask: NSTextStorageEditedOptions, range newCharRange: NSRange, changeInLength delta: Int, invalidatedRange invalidatedCharRange: NSRange)
-  func setLocations(locations: NSPointArray, startingGlyphIndexes glyphIndexes: UnsafeMutablePointer<Int>, count: Int, forGlyphRange glyphRange: NSRange)
+  func setLocations(locations: PointArray, startingGlyphIndexes glyphIndexes: UnsafeMutablePointer<Int>, count: Int, forGlyphRange glyphRange: NSRange)
 }
 class NSLevelIndicator : NSControl {
   var levelIndicatorStyle: NSLevelIndicatorStyle
@@ -7082,10 +7083,10 @@ class NSLevelIndicator : NSControl {
   var tickMarkPosition: NSTickMarkPosition
   var numberOfTickMarks: Int
   var numberOfMajorTickMarks: Int
-  func tickMarkValueAtIndex(index: Int) -> Double
-  func rectOfTickMarkAtIndex(index: Int) -> NSRect
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  func tickMarkValueAt(index: Int) -> Double
+  func rectOfTickMarkAt(index: Int) -> Rect
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 enum NSLevelIndicatorStyle : UInt {
@@ -7106,13 +7107,13 @@ class NSLevelIndicatorCell : NSActionCell {
   var tickMarkPosition: NSTickMarkPosition
   var numberOfTickMarks: Int
   var numberOfMajorTickMarks: Int
-  func rectOfTickMarkAtIndex(index: Int) -> NSRect
-  func tickMarkValueAtIndex(index: Int) -> Double
+  func rectOfTickMarkAt(index: Int) -> Rect
+  func tickMarkValueAt(index: Int) -> Double
   func setImage(image: NSImage?)
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 enum NSMatrixMode : UInt {
   init?(rawValue: UInt)
@@ -7159,9 +7160,9 @@ struct __MFlags {
 }
 typealias _MFlags = __MFlags
 class NSMatrix : NSControl, NSUserInterfaceValidations {
-  convenience init(frame frameRect: NSRect)
-  init(frame frameRect: NSRect, mode aMode: NSMatrixMode, prototype aCell: NSCell, numberOfRows rowsHigh: Int, numberOfColumns colsWide: Int)
-  init(frame frameRect: NSRect, mode aMode: NSMatrixMode, cellClass factoryId: AnyClass?, numberOfRows rowsHigh: Int, numberOfColumns colsWide: Int)
+  convenience init(frame frameRect: Rect)
+  init(frame frameRect: Rect, mode aMode: NSMatrixMode, prototype aCell: NSCell, numberOfRows rowsHigh: Int, numberOfColumns colsWide: Int)
+  init(frame frameRect: Rect, mode aMode: NSMatrixMode, cellClass factoryId: AnyClass?, numberOfRows rowsHigh: Int, numberOfColumns colsWide: Int)
   var cellClass: AnyClass
   @NSCopying var prototype: NSCell?
   func makeCellAtRow(row: Int, column col: Int) -> NSCell
@@ -7169,20 +7170,20 @@ class NSMatrix : NSControl, NSUserInterfaceValidations {
   var allowsEmptySelection: Bool
   func sendAction(aSelector: Selector, to anObject: AnyObject, forAllCells flag: Bool)
   var cells: [NSCell] { get }
-  func sortUsingSelector(comparator: Selector)
-  func sortUsingFunction(compare: @convention(c) (AnyObject, AnyObject, UnsafeMutablePointer<Void>) -> Int, context: UnsafeMutablePointer<Void>)
+  func sortUsing(comparator: Selector)
+  func sortUsing(compare: @convention(c) (AnyObject, AnyObject, UnsafeMutablePointer<Void>) -> Int, context: UnsafeMutablePointer<Void>)
   var selectedCells: [NSCell] { get }
   var selectedRow: Int { get }
   var selectedColumn: Int { get }
-  var selectionByRect: Bool
+  var isSelectionByRect: Bool
   func setSelectionFrom(startPos: Int, to endPos: Int, anchor anchorPos: Int, highlight lit: Bool)
   func deselectSelectedCell()
   func deselectAllCells()
   func selectCellAtRow(row: Int, column col: Int)
   func selectAll(sender: AnyObject?)
   func selectCellWithTag(anInt: Int) -> Bool
-  var cellSize: NSSize
-  var intercellSpacing: NSSize
+  var cellSize: Size
+  var intercellSpacing: Size
   func setScrollable(flag: Bool)
   @NSCopying var backgroundColor: NSColor
   @NSCopying var cellBackgroundColor: NSColor?
@@ -7193,18 +7194,18 @@ class NSMatrix : NSControl, NSUserInterfaceValidations {
   var numberOfRows: Int { get }
   var numberOfColumns: Int { get }
   func cellAtRow(row: Int, column col: Int) -> NSCell?
-  func cellFrameAtRow(row: Int, column col: Int) -> NSRect
-  func getRow(row: UnsafeMutablePointer<Int>, column col: UnsafeMutablePointer<Int>, ofCell aCell: NSCell) -> Bool
-  func getRow(row: UnsafeMutablePointer<Int>, column col: UnsafeMutablePointer<Int>, forPoint aPoint: NSPoint) -> Bool
+  func cellFrameAtRow(row: Int, column col: Int) -> Rect
+  func getRow(row: UnsafeMutablePointer<Int>, column col: UnsafeMutablePointer<Int>, of aCell: NSCell) -> Bool
+  func getRow(row: UnsafeMutablePointer<Int>, column col: UnsafeMutablePointer<Int>, forPoint aPoint: Point) -> Bool
   func renewRows(newRows: Int, columns newCols: Int)
   func putCell(newCell: NSCell, atRow row: Int, column col: Int)
   func addRow()
-  func addRowWithCells(newCells: [NSCell])
+  func addRowWith(newCells: [NSCell])
   func insertRow(row: Int)
   func insertRow(row: Int, withCells newCells: [NSCell])
   func removeRow(row: Int)
   func addColumn()
-  func addColumnWithCells(newCells: [NSCell])
+  func addColumnWith(newCells: [NSCell])
   func insertColumn(column: Int)
   func insertColumn(column: Int, withCells newCells: [NSCell])
   func removeColumn(col: Int)
@@ -7215,7 +7216,7 @@ class NSMatrix : NSControl, NSUserInterfaceValidations {
   func setValidateSize(flag: Bool)
   func drawCellAtRow(row: Int, column col: Int)
   func highlightCell(flag: Bool, atRow row: Int, column col: Int)
-  var autoscroll: Bool
+  var isAutoscroll: Bool
   func scrollCellToVisibleAtRow(row: Int, column col: Int)
   var mouseDownFlags: Int { get }
   func mouseDown(theEvent: NSEvent)
@@ -7225,20 +7226,20 @@ class NSMatrix : NSControl, NSUserInterfaceValidations {
   unowned(unsafe) var delegate: @sil_unmanaged NSMatrixDelegate?
   func textShouldBeginEditing(textObject: NSText) -> Bool
   func textShouldEndEditing(textObject: NSText) -> Bool
-  func textDidBeginEditing(notification: NSNotification)
-  func textDidEndEditing(notification: NSNotification)
-  func textDidChange(notification: NSNotification)
+  func textDidBeginEditing(notification: Notification)
+  func textDidEndEditing(notification: Notification)
+  func textDidChange(notification: Notification)
   func selectText(sender: AnyObject?)
   func selectTextAtRow(row: Int, column col: Int) -> NSCell?
   func acceptsFirstMouse(theEvent: NSEvent?) -> Bool
   func resetCursorRects()
   func setToolTip(toolTipString: String?, forCell cell: NSCell)
-  func toolTipForCell(cell: NSCell) -> String?
+  func toolTipFor(cell: NSCell) -> String?
   var autorecalculatesCellSize: Bool
   func selectedCell() -> NSCell?
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init()
-  func validateUserInterfaceItem(anItem: NSValidatedUserInterfaceItem) -> Bool
+  func validate(anItem: NSValidatedUserInterfaceItem) -> Bool
 }
 extension NSMatrix {
   var tabKeyTraversesCells: Bool
@@ -7253,35 +7254,35 @@ struct NSMediaLibrary : OptionSetType {
   static var Image: NSMediaLibrary { get }
   static var Movie: NSMediaLibrary { get }
 }
-class NSMediaLibraryBrowserController : NSObject {
-  var visible: Bool
-  var frame: NSRect
+class NSMediaLibraryBrowserController : Object {
+  var isVisible: Bool
+  var frame: Rect
   var mediaLibraries: NSMediaLibrary
-  class func sharedMediaLibraryBrowserController() -> NSMediaLibraryBrowserController
+  class func shared() -> NSMediaLibraryBrowserController
   @IBAction func togglePanel(sender: AnyObject?)
   init()
 }
-class NSMenu : NSObject, NSCopying, NSCoding {
+class NSMenu : Object, Copying, Coding {
   init(title aTitle: String)
   var title: String
   class func popUpContextMenu(menu: NSMenu, withEvent event: NSEvent, forView view: NSView)
   class func popUpContextMenu(menu: NSMenu, withEvent event: NSEvent, forView view: NSView, withFont font: NSFont?)
-  func popUpMenuPositioningItem(item: NSMenuItem?, atLocation location: NSPoint, inView view: NSView?) -> Bool
+  func popUpPositioningItem(item: NSMenuItem?, atLocation location: Point, in view: NSView?) -> Bool
   class func setMenuBarVisible(visible: Bool)
   class func menuBarVisible() -> Bool
   unowned(unsafe) var supermenu: @sil_unmanaged NSMenu?
-  func insertItem(newItem: NSMenuItem, atIndex index: Int)
-  func addItem(newItem: NSMenuItem)
-  func insertItemWithTitle(aString: String, action aSelector: Selector, keyEquivalent charCode: String, atIndex index: Int) -> NSMenuItem?
+  func insert(newItem: NSMenuItem, at index: Int)
+  func add(newItem: NSMenuItem)
+  func insertItemWithTitle(aString: String, action aSelector: Selector, keyEquivalent charCode: String, at index: Int) -> NSMenuItem?
   func addItemWithTitle(aString: String, action aSelector: Selector, keyEquivalent charCode: String) -> NSMenuItem?
-  func removeItemAtIndex(index: Int)
-  func removeItem(item: NSMenuItem)
+  func removeItemAt(index: Int)
+  func remove(item: NSMenuItem)
   func setSubmenu(aMenu: NSMenu?, forItem anItem: NSMenuItem)
   func removeAllItems()
   var itemArray: [NSMenuItem] { get }
   var numberOfItems: Int { get }
-  func itemAtIndex(index: Int) -> NSMenuItem?
-  func indexOfItem(item: NSMenuItem) -> Int
+  func itemAt(index: Int) -> NSMenuItem?
+  func indexOf(item: NSMenuItem) -> Int
   func indexOfItemWithTitle(aTitle: String) -> Int
   func indexOfItemWithTag(aTag: Int) -> Int
   func indexOfItemWithRepresentedObject(object: AnyObject) -> Int
@@ -7293,22 +7294,22 @@ class NSMenu : NSObject, NSCopying, NSCoding {
   func update()
   func performKeyEquivalent(theEvent: NSEvent) -> Bool
   func itemChanged(item: NSMenuItem)
-  func performActionForItemAtIndex(index: Int)
+  func performActionForItemAt(index: Int)
   unowned(unsafe) var delegate: @sil_unmanaged NSMenuDelegate?
   var menuBarHeight: CGFloat { get }
   func cancelTracking()
   func cancelTrackingWithoutAnimation()
   var highlightedItem: NSMenuItem? { get }
   var minimumWidth: CGFloat
-  var size: NSSize { get }
+  var size: Size { get }
   var font: NSFont!
   var allowsContextMenuPlugIns: Bool
   var showsStateColumn: Bool
   var userInterfaceLayoutDirection: NSUserInterfaceLayoutDirection
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 struct __mFlags {
   var noAutoenable: UInt32
@@ -7337,19 +7338,19 @@ struct __mFlags {
 extension NSMenu {
   func submenuAction(sender: AnyObject?)
 }
-extension NSObject {
-  class func validateMenuItem(menuItem: NSMenuItem) -> Bool
-  func validateMenuItem(menuItem: NSMenuItem) -> Bool
+extension Object {
+  class func validate(menuItem: NSMenuItem) -> Bool
+  func validate(menuItem: NSMenuItem) -> Bool
 }
-protocol NSMenuDelegate : NSObjectProtocol {
+protocol NSMenuDelegate : ObjectProtocol {
   optional func menuNeedsUpdate(menu: NSMenu)
-  optional func numberOfItemsInMenu(menu: NSMenu) -> Int
-  optional func menu(menu: NSMenu, updateItem item: NSMenuItem, atIndex index: Int, shouldCancel: Bool) -> Bool
+  optional func numberOfItemsIn(menu: NSMenu) -> Int
+  optional func menu(menu: NSMenu, updateItem item: NSMenuItem, at index: Int, shouldCancel: Bool) -> Bool
   optional func menuHasKeyEquivalent(menu: NSMenu, forEvent event: NSEvent, target: AutoreleasingUnsafeMutablePointer<AnyObject?>, action: UnsafeMutablePointer<Selector>) -> Bool
   optional func menuWillOpen(menu: NSMenu)
   optional func menuDidClose(menu: NSMenu)
-  optional func menu(menu: NSMenu, willHighlightItem item: NSMenuItem?)
-  optional func confinementRectForMenu(menu: NSMenu, onScreen screen: NSScreen?) -> NSRect
+  optional func menu(menu: NSMenu, willHighlight item: NSMenuItem?)
+  optional func confinementRectFor(menu: NSMenu, on screen: NSScreen?) -> Rect
 }
 struct NSMenuProperties : OptionSetType {
   init(rawValue: UInt)
@@ -7372,23 +7373,23 @@ let NSMenuDidChangeItemNotification: String
 let NSMenuDidBeginTrackingNotification: String
 let NSMenuDidEndTrackingNotification: String
 extension NSMenu {
-  class func menuZone() -> NSZone
+  class func menuZone() -> Zone
   var menuChangedMessagesEnabled: Bool
   func helpRequested(eventPtr: NSEvent)
-  var tornOff: Bool { get }
+  var isTornOff: Bool { get }
 }
-class NSMenuItem : NSObject, NSCopying, NSCoding, NSValidatedUserInterfaceItem {
+class NSMenuItem : Object, Copying, Coding, NSValidatedUserInterfaceItem {
   class func setUsesUserKeyEquivalents(flag: Bool)
   class func usesUserKeyEquivalents() -> Bool
-  class func separatorItem() -> NSMenuItem
+  class func separator() -> NSMenuItem
   init(title aString: String, action aSelector: Selector, keyEquivalent charCode: String)
   unowned(unsafe) var menu: @sil_unmanaged NSMenu?
   var hasSubmenu: Bool { get }
   var submenu: NSMenu?
-  unowned(unsafe) var parentItem: @sil_unmanaged NSMenuItem? { get }
+  unowned(unsafe) var parent: @sil_unmanaged NSMenuItem? { get }
   var title: String
-  @NSCopying var attributedTitle: NSAttributedString?
-  var separatorItem: Bool { get }
+  @NSCopying var attributedTitle: AttributedString?
+  var isSeparatorItem: Bool { get }
   var keyEquivalent: String
   var keyEquivalentModifierMask: Int
   var userKeyEquivalent: String { get }
@@ -7398,22 +7399,22 @@ class NSMenuItem : NSObject, NSCopying, NSCoding, NSValidatedUserInterfaceItem {
   var onStateImage: NSImage!
   var offStateImage: NSImage!
   var mixedStateImage: NSImage!
-  var enabled: Bool
-  var alternate: Bool
+  var isEnabled: Bool
+  var isAlternate: Bool
   var indentationLevel: Int
   weak var target: @sil_weak AnyObject?
   var action: Selector
   var tag: Int
   var representedObject: AnyObject?
   var view: NSView?
-  var highlighted: Bool { get }
-  var hidden: Bool
-  var hiddenOrHasHiddenAncestor: Bool { get }
+  var isHighlighted: Bool { get }
+  var isHidden: Bool
+  var isHiddenOrHasHiddenAncestor: Bool { get }
   var toolTip: String?
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 struct __miFlags {
   var keGenerationCount: UInt32
@@ -7452,20 +7453,20 @@ class NSMenuItemCell : NSButtonCell {
   var imageWidth: CGFloat { get }
   var titleWidth: CGFloat { get }
   var keyEquivalentWidth: CGFloat { get }
-  func stateImageRectForBounds(cellFrame: NSRect) -> NSRect
-  func titleRectForBounds(cellFrame: NSRect) -> NSRect
-  func keyEquivalentRectForBounds(cellFrame: NSRect) -> NSRect
-  func drawSeparatorItemWithFrame(cellFrame: NSRect, inView controlView: NSView)
-  func drawStateImageWithFrame(cellFrame: NSRect, inView controlView: NSView)
-  func drawImageWithFrame(cellFrame: NSRect, inView controlView: NSView)
-  func drawTitleWithFrame(cellFrame: NSRect, inView controlView: NSView)
-  func drawKeyEquivalentWithFrame(cellFrame: NSRect, inView controlView: NSView)
-  func drawBorderAndBackgroundWithFrame(cellFrame: NSRect, inView controlView: NSView)
+  func stateImageRectForBounds(cellFrame: Rect) -> Rect
+  func titleRectForBounds(cellFrame: Rect) -> Rect
+  func keyEquivalentRectForBounds(cellFrame: Rect) -> Rect
+  func drawSeparatorItemWithFrame(cellFrame: Rect, in controlView: NSView)
+  func drawStateImageWithFrame(cellFrame: Rect, in controlView: NSView)
+  func drawImageWithFrame(cellFrame: Rect, in controlView: NSView)
+  func drawTitleWithFrame(cellFrame: Rect, in controlView: NSView)
+  func drawKeyEquivalentWithFrame(cellFrame: Rect, in controlView: NSView)
+  func drawBorderAndBackgroundWithFrame(cellFrame: Rect, in controlView: NSView)
   var tag: Int
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 struct __micFlags {
   var needsSizing: UInt32
@@ -7477,13 +7478,13 @@ struct __micFlags {
   init()
   init(needsSizing: UInt32, reserved: UInt32, needsDisplay: UInt32, keyEquivGlyphWidth: UInt32, uniqueAgainstMain: UInt32, RESERVED: UInt32)
 }
-class NSNib : NSObject, NSCoding {
-  init?(nibNamed nibName: String, bundle: NSBundle?)
-  init(nibData: NSData, bundle: NSBundle?)
-  func instantiateWithOwner(owner: AnyObject?, topLevelObjects: AutoreleasingUnsafeMutablePointer<NSArray?>) -> Bool
+class NSNib : Object, Coding {
+  init?(nibNamed nibName: String, bundle: Bundle?)
+  init(nibData: Data, bundle: Bundle?)
+  func instantiateWithOwner(owner: AnyObject?, topLevel topLevelObjects: AutoreleasingUnsafeMutablePointer<NSArray?>) -> Bool
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 struct _NSNibFlags {
   var _isKeyed: UInt32
@@ -7495,20 +7496,20 @@ struct _NSNibFlags {
 }
 extension NSNib {
 }
-extension NSBundle {
-  func loadNibNamed(nibName: String, owner: AnyObject?, topLevelObjects: AutoreleasingUnsafeMutablePointer<NSArray?>) -> Bool
+extension Bundle {
+  func loadNibNamed(nibName: String, owner: AnyObject?, topLevel topLevelObjects: AutoreleasingUnsafeMutablePointer<NSArray?>) -> Bool
 }
-extension NSObject {
+extension Object {
   class func awakeFromNib()
   func awakeFromNib()
   class func prepareForInterfaceBuilder()
   func prepareForInterfaceBuilder()
 }
-extension NSBundle {
+extension Bundle {
 }
 class NSObjectController : NSController {
   init(content: AnyObject?)
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   var content: AnyObject?
   var selection: AnyObject { get }
   var selectedObjects: [AnyObject] { get }
@@ -7516,14 +7517,14 @@ class NSObjectController : NSController {
   func prepareContent()
   var objectClass: AnyClass!
   func newObject() -> AnyObject
-  func addObject(object: AnyObject)
-  func removeObject(object: AnyObject)
-  var editable: Bool
+  func add(object: AnyObject)
+  func remove(object: AnyObject)
+  var isEditable: Bool
   func add(sender: AnyObject?)
   var canAdd: Bool { get }
   func remove(sender: AnyObject?)
   var canRemove: Bool { get }
-  func validateUserInterfaceItem(item: NSValidatedUserInterfaceItem) -> Bool
+  func validate(item: NSValidatedUserInterfaceItem) -> Bool
   convenience init()
 }
 struct __objectControllerFlags {
@@ -7542,8 +7543,8 @@ struct __objectControllerFlags {
 extension NSObjectController {
   var managedObjectContext: NSManagedObjectContext?
   var entityName: String?
-  var fetchPredicate: NSPredicate?
-  func fetchWithRequest(fetchRequest: NSFetchRequest?, merge: Bool) throws
+  var fetchPredicate: Predicate?
+  func fetchWith(fetchRequest: NSFetchRequest?, merge: Bool) throws
   func fetch(sender: AnyObject?)
   var usesLazyFetching: Bool
   func defaultFetchRequest() -> NSFetchRequest
@@ -7594,15 +7595,15 @@ typealias NSOpenGLPixelFormatAttribute = UInt32
 var NSOpenGLProfileVersionLegacy: Int { get }
 var NSOpenGLProfileVersion3_2Core: Int { get }
 var NSOpenGLProfileVersion4_1Core: Int { get }
-class NSOpenGLPixelFormat : NSObject, NSCoding {
+class NSOpenGLPixelFormat : Object, Coding {
   init?(attributes attribs: UnsafePointer<NSOpenGLPixelFormatAttribute>)
-  init?(CGLPixelFormatObj format: COpaquePointer)
+  init?(cglPixelFormatObj format: COpaquePointer)
   func getValues(vals: UnsafeMutablePointer<GLint>, forAttribute attrib: NSOpenGLPixelFormatAttribute, forVirtualScreen screen: GLint)
   var numberOfVirtualScreens: GLint { get }
-  var CGLPixelFormatObj: COpaquePointer { get }
+  var cglPixelFormatObj: COpaquePointer { get }
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 enum NSOpenGLContextParameter : Int {
   init?(rawValue: Int)
@@ -7624,9 +7625,9 @@ enum NSOpenGLContextParameter : Int {
   case GLCPSurfaceSurfaceVolatile
 }
 typealias NSOpenGLContextAuxiliary = _CGLContextObject
-class NSOpenGLContext : NSObject, NSLocking {
-  init?(format: NSOpenGLPixelFormat, shareContext share: NSOpenGLContext?)
-  init?(CGLContextObj context: UnsafeMutablePointer<_CGLContextObject>)
+class NSOpenGLContext : Object, Locking {
+  init?(format: NSOpenGLPixelFormat, share: NSOpenGLContext?)
+  init?(cglContextObj context: UnsafeMutablePointer<_CGLContextObject>)
   var pixelFormat: NSOpenGLPixelFormat { get }
   unowned(unsafe) var view: @sil_unmanaged NSView?
   func clearDrawable()
@@ -7634,11 +7635,11 @@ class NSOpenGLContext : NSObject, NSLocking {
   func flushBuffer()
   func makeCurrentContext()
   class func clearCurrentContext()
-  class func currentContext() -> NSOpenGLContext?
+  class func current() -> NSOpenGLContext?
   func setValues(vals: UnsafePointer<GLint>, forParameter param: NSOpenGLContextParameter)
   func getValues(vals: UnsafeMutablePointer<GLint>, forParameter param: NSOpenGLContextParameter)
   var currentVirtualScreen: GLint
-  var CGLContextObj: UnsafeMutablePointer<_CGLContextObject> { get }
+  var cglContextObj: UnsafeMutablePointer<_CGLContextObject> { get }
   init()
   func lock()
   func unlock()
@@ -7650,24 +7651,24 @@ class NSOpenGLLayer : CAOpenGLLayer {
   var openGLPixelFormat: NSOpenGLPixelFormat?
   var openGLContext: NSOpenGLContext?
   func openGLPixelFormatForDisplayMask(mask: UInt32) -> NSOpenGLPixelFormat
-  func openGLContextForPixelFormat(pixelFormat: NSOpenGLPixelFormat) -> NSOpenGLContext
-  func canDrawInOpenGLContext(context: NSOpenGLContext, pixelFormat: NSOpenGLPixelFormat, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>) -> Bool
-  func drawInOpenGLContext(context: NSOpenGLContext, pixelFormat: NSOpenGLPixelFormat, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>)
+  func openGLContextFor(pixelFormat: NSOpenGLPixelFormat) -> NSOpenGLContext
+  func canDrawIn(context: NSOpenGLContext, pixelFormat: NSOpenGLPixelFormat, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>) -> Bool
+  func drawIn(context: NSOpenGLContext, pixelFormat: NSOpenGLPixelFormat, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>)
   init()
   init(layer: AnyObject)
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class NSOpenGLView : NSView {
   class func defaultPixelFormat() -> NSOpenGLPixelFormat
-  init?(frame frameRect: NSRect, pixelFormat format: NSOpenGLPixelFormat?)
+  init?(frame frameRect: Rect, pixelFormat format: NSOpenGLPixelFormat?)
   var openGLContext: NSOpenGLContext?
   func clearGLContext()
   func update()
   func reshape()
   var pixelFormat: NSOpenGLPixelFormat?
   func prepareOpenGL()
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 extension NSView {
@@ -7677,19 +7678,19 @@ extension NSView {
   var wantsExtendedDynamicRangeOpenGLSurface: Bool
 }
 class NSOpenPanel : NSSavePanel {
-  var URLs: [NSURL] { get }
+  var urLs: [URL] { get }
   var resolvesAliases: Bool
   var canChooseDirectories: Bool
   var allowsMultipleSelection: Bool
   var canChooseFiles: Bool
   var canResolveUbiquitousConflicts: Bool
   var canDownloadUbiquitousContents: Bool
-  var accessoryViewDisclosed: Bool
-  init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
-  convenience init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
+  var isAccessoryViewDisclosed: Bool
+  init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
+  convenience init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
   convenience init(contentViewController: NSViewController)
   convenience init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init?(windowRef: UnsafeMutablePointer<Void>)
 }
 extension NSOpenPanel {
@@ -7757,58 +7758,58 @@ class NSOutlineView : NSTableView, NSAccessibilityOutline {
   var indentationPerLevel: CGFloat
   var indentationMarkerFollowsCell: Bool
   var autoresizesOutlineColumn: Bool
-  func frameOfOutlineCellAtRow(row: Int) -> NSRect
+  func frameOfOutlineCellAtRow(row: Int) -> Rect
   func setDropItem(item: AnyObject?, dropChildIndex index: Int)
   func shouldCollapseAutoExpandedItemsForDeposited(deposited: Bool) -> Bool
   var autosaveExpandedItems: Bool
-  func insertItemsAtIndexes(indexes: NSIndexSet, inParent parent: AnyObject?, withAnimation animationOptions: NSTableViewAnimationOptions)
-  func removeItemsAtIndexes(indexes: NSIndexSet, inParent parent: AnyObject?, withAnimation animationOptions: NSTableViewAnimationOptions)
-  func moveItemAtIndex(fromIndex: Int, inParent oldParent: AnyObject?, toIndex: Int, inParent newParent: AnyObject?)
+  func insertItemsAt(indexes: IndexSet, inParent parent: AnyObject?, withAnimation animationOptions: NSTableViewAnimationOptions = [])
+  func removeItemsAt(indexes: IndexSet, inParent parent: AnyObject?, withAnimation animationOptions: NSTableViewAnimationOptions = [])
+  func moveItemAt(fromIndex: Int, inParent oldParent: AnyObject?, to toIndex: Int, inParent newParent: AnyObject?)
   var userInterfaceLayoutDirection: NSUserInterfaceLayoutDirection
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
-protocol NSOutlineViewDataSource : NSObjectProtocol {
+protocol NSOutlineViewDataSource : ObjectProtocol {
   optional func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int
   optional func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject
   optional func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool
-  optional func outlineView(outlineView: NSOutlineView, objectValueForTableColumn tableColumn: NSTableColumn?, byItem item: AnyObject?) -> AnyObject?
+  optional func outlineView(outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: AnyObject?) -> AnyObject?
   optional func outlineView(outlineView: NSOutlineView, setObjectValue object: AnyObject?, forTableColumn tableColumn: NSTableColumn?, byItem item: AnyObject?)
   optional func outlineView(outlineView: NSOutlineView, itemForPersistentObject object: AnyObject) -> AnyObject?
   optional func outlineView(outlineView: NSOutlineView, persistentObjectForItem item: AnyObject?) -> AnyObject?
-  optional func outlineView(outlineView: NSOutlineView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor])
+  optional func outlineView(outlineView: NSOutlineView, sortDescriptorsDidChange oldDescriptors: [SortDescriptor])
   optional func outlineView(outlineView: NSOutlineView, pasteboardWriterForItem item: AnyObject) -> NSPasteboardWriting?
-  optional func outlineView(outlineView: NSOutlineView, draggingSession session: NSDraggingSession, willBeginAtPoint screenPoint: NSPoint, forItems draggedItems: [AnyObject])
-  optional func outlineView(outlineView: NSOutlineView, draggingSession session: NSDraggingSession, endedAtPoint screenPoint: NSPoint, operation: NSDragOperation)
-  optional func outlineView(outlineView: NSOutlineView, writeItems items: [AnyObject], toPasteboard pasteboard: NSPasteboard) -> Bool
+  optional func outlineView(outlineView: NSOutlineView, draggingSession session: NSDraggingSession, willBeginAt screenPoint: Point, forItems draggedItems: [AnyObject])
+  optional func outlineView(outlineView: NSOutlineView, draggingSession session: NSDraggingSession, endedAt screenPoint: Point, operation: NSDragOperation)
+  optional func outlineView(outlineView: NSOutlineView, writeItems items: [AnyObject], to pasteboard: NSPasteboard) -> Bool
   optional func outlineView(outlineView: NSOutlineView, updateDraggingItemsForDrag draggingInfo: NSDraggingInfo)
   optional func outlineView(outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: AnyObject?, proposedChildIndex index: Int) -> NSDragOperation
   optional func outlineView(outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: AnyObject?, childIndex index: Int) -> Bool
-  optional func outlineView(outlineView: NSOutlineView, namesOfPromisedFilesDroppedAtDestination dropDestination: NSURL, forDraggedItems items: [AnyObject]) -> [String]
+  optional func outlineView(outlineView: NSOutlineView, namesOfPromisedFilesDroppedAtDestination dropDestination: URL, forDraggedItems items: [AnyObject]) -> [String]
 }
 protocol NSOutlineViewDelegate : NSControlTextEditingDelegate {
-  optional func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView?
+  optional func outlineView(outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: AnyObject) -> NSView?
   optional func outlineView(outlineView: NSOutlineView, rowViewForItem item: AnyObject) -> NSTableRowView?
-  optional func outlineView(outlineView: NSOutlineView, didAddRowView rowView: NSTableRowView, forRow row: Int)
-  optional func outlineView(outlineView: NSOutlineView, didRemoveRowView rowView: NSTableRowView, forRow row: Int)
+  optional func outlineView(outlineView: NSOutlineView, didAdd rowView: NSTableRowView, forRow row: Int)
+  optional func outlineView(outlineView: NSOutlineView, didRemove rowView: NSTableRowView, forRow row: Int)
   optional func outlineView(outlineView: NSOutlineView, willDisplayCell cell: AnyObject, forTableColumn tableColumn: NSTableColumn?, item: AnyObject)
-  optional func outlineView(outlineView: NSOutlineView, shouldEditTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> Bool
-  optional func selectionShouldChangeInOutlineView(outlineView: NSOutlineView) -> Bool
+  optional func outlineView(outlineView: NSOutlineView, shouldEdit tableColumn: NSTableColumn?, item: AnyObject) -> Bool
+  optional func selectionShouldChangeIn(outlineView: NSOutlineView) -> Bool
   optional func outlineView(outlineView: NSOutlineView, shouldSelectItem item: AnyObject) -> Bool
-  optional func outlineView(outlineView: NSOutlineView, selectionIndexesForProposedSelection proposedSelectionIndexes: NSIndexSet) -> NSIndexSet
-  optional func outlineView(outlineView: NSOutlineView, shouldSelectTableColumn tableColumn: NSTableColumn?) -> Bool
-  optional func outlineView(outlineView: NSOutlineView, mouseDownInHeaderOfTableColumn tableColumn: NSTableColumn)
-  optional func outlineView(outlineView: NSOutlineView, didClickTableColumn tableColumn: NSTableColumn)
-  optional func outlineView(outlineView: NSOutlineView, didDragTableColumn tableColumn: NSTableColumn)
-  optional func outlineView(outlineView: NSOutlineView, toolTipForCell cell: NSCell, rect: NSRectPointer, tableColumn: NSTableColumn?, item: AnyObject, mouseLocation: NSPoint) -> String
+  optional func outlineView(outlineView: NSOutlineView, selectionIndexesForProposedSelection proposedSelectionIndexes: IndexSet) -> IndexSet
+  optional func outlineView(outlineView: NSOutlineView, shouldSelect tableColumn: NSTableColumn?) -> Bool
+  optional func outlineView(outlineView: NSOutlineView, mouseDownInHeaderOf tableColumn: NSTableColumn)
+  optional func outlineView(outlineView: NSOutlineView, didClick tableColumn: NSTableColumn)
+  optional func outlineView(outlineView: NSOutlineView, didDrag tableColumn: NSTableColumn)
+  optional func outlineView(outlineView: NSOutlineView, toolTipFor cell: NSCell, rect: RectPointer, tableColumn: NSTableColumn?, item: AnyObject, mouseLocation: Point) -> String
   optional func outlineView(outlineView: NSOutlineView, heightOfRowByItem item: AnyObject) -> CGFloat
-  optional func outlineView(outlineView: NSOutlineView, typeSelectStringForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> String?
+  optional func outlineView(outlineView: NSOutlineView, typeSelectStringFor tableColumn: NSTableColumn?, item: AnyObject) -> String?
   optional func outlineView(outlineView: NSOutlineView, nextTypeSelectMatchFromItem startItem: AnyObject, toItem endItem: AnyObject, forString searchString: String) -> AnyObject?
-  optional func outlineView(outlineView: NSOutlineView, shouldTypeSelectForEvent event: NSEvent, withCurrentSearchString searchString: String?) -> Bool
-  optional func outlineView(outlineView: NSOutlineView, shouldShowCellExpansionForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> Bool
-  optional func outlineView(outlineView: NSOutlineView, shouldTrackCell cell: NSCell, forTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> Bool
-  optional func outlineView(outlineView: NSOutlineView, dataCellForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSCell?
+  optional func outlineView(outlineView: NSOutlineView, shouldTypeSelectFor event: NSEvent, withCurrentSearch searchString: String?) -> Bool
+  optional func outlineView(outlineView: NSOutlineView, shouldShowCellExpansionFor tableColumn: NSTableColumn?, item: AnyObject) -> Bool
+  optional func outlineView(outlineView: NSOutlineView, shouldTrack cell: NSCell, forTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> Bool
+  optional func outlineView(outlineView: NSOutlineView, dataCellFor tableColumn: NSTableColumn?, item: AnyObject) -> NSCell?
   optional func outlineView(outlineView: NSOutlineView, isGroupItem item: AnyObject) -> Bool
   optional func outlineView(outlineView: NSOutlineView, shouldExpandItem item: AnyObject) -> Bool
   optional func outlineView(outlineView: NSOutlineView, shouldCollapseItem item: AnyObject) -> Bool
@@ -7816,14 +7817,14 @@ protocol NSOutlineViewDelegate : NSControlTextEditingDelegate {
   optional func outlineView(outlineView: NSOutlineView, sizeToFitWidthOfColumn column: Int) -> CGFloat
   optional func outlineView(outlineView: NSOutlineView, shouldReorderColumn columnIndex: Int, toColumn newColumnIndex: Int) -> Bool
   optional func outlineView(outlineView: NSOutlineView, shouldShowOutlineCellForItem item: AnyObject) -> Bool
-  optional func outlineViewSelectionDidChange(notification: NSNotification)
-  optional func outlineViewColumnDidMove(notification: NSNotification)
-  optional func outlineViewColumnDidResize(notification: NSNotification)
-  optional func outlineViewSelectionIsChanging(notification: NSNotification)
-  optional func outlineViewItemWillExpand(notification: NSNotification)
-  optional func outlineViewItemDidExpand(notification: NSNotification)
-  optional func outlineViewItemWillCollapse(notification: NSNotification)
-  optional func outlineViewItemDidCollapse(notification: NSNotification)
+  optional func outlineViewSelectionDidChange(notification: Notification)
+  optional func outlineViewColumnDidMove(notification: Notification)
+  optional func outlineViewColumnDidResize(notification: Notification)
+  optional func outlineViewSelectionIsChanging(notification: Notification)
+  optional func outlineViewItemWillExpand(notification: Notification)
+  optional func outlineViewItemDidExpand(notification: Notification)
+  optional func outlineViewItemWillCollapse(notification: Notification)
+  optional func outlineViewItemDidCollapse(notification: Notification)
 }
 let NSOutlineViewDisclosureButtonKey: String
 let NSOutlineViewShowHideButtonKey: String
@@ -7836,25 +7837,25 @@ let NSOutlineViewItemDidExpandNotification: String
 let NSOutlineViewItemWillCollapseNotification: String
 let NSOutlineViewItemDidCollapseNotification: String
 class NSPDFImageRep : NSImageRep {
-  init?(data pdfData: NSData)
-  var PDFRepresentation: NSData { get }
-  var bounds: NSRect { get }
+  init?(data pdfData: Data)
+  var pdfRepresentation: Data { get }
+  var bounds: Rect { get }
   var currentPage: Int
   var pageCount: Int { get }
   init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
 }
-class NSPDFInfo : NSObject, NSCopying, NSCoding {
-  @NSCopying var URL: NSURL?
-  var fileExtensionHidden: Bool
+class NSPDFInfo : Object, Copying, Coding {
+  @NSCopying var url: URL?
+  var isFileExtensionHidden: Bool
   var tagNames: [String]
   var orientation: NSPaperOrientation
-  var paperSize: NSSize
-  var attributes: NSMutableDictionary { get }
+  var paperSize: Size
+  var attributes: MutableDictionary { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 struct NSPDFPanelOptions : OptionSetType {
   init(rawValue: Int)
@@ -7863,19 +7864,19 @@ struct NSPDFPanelOptions : OptionSetType {
   static var ShowsOrientation: NSPDFPanelOptions { get }
   static var RequestsParentDirectory: NSPDFPanelOptions { get }
 }
-class NSPDFPanel : NSObject {
+class NSPDFPanel : Object {
   var accessoryController: NSViewController?
   var options: NSPDFPanelOptions
   var defaultFileName: String
-  func beginSheetWithPDFInfo(pdfInfo: NSPDFInfo, modalForWindow docWindow: NSWindow?, completionHandler: (Int) -> Void)
+  func beginSheetWith(pdfInfo: NSPDFInfo, modalFor docWindow: NSWindow?, completionHandler: (Int) -> Void)
   init()
 }
 class NSPICTImageRep : NSImageRep {
-  init?(data pictData: NSData)
-  @NSCopying var PICTRepresentation: NSData { get }
-  var boundingBox: NSRect { get }
+  init?(data pictData: Data)
+  @NSCopying var pictRepresentation: Data { get }
+  var boundingBox: Rect { get }
   init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
 }
 enum NSPageControllerTransitionStyle : Int {
   init?(rawValue: Int)
@@ -7884,19 +7885,19 @@ enum NSPageControllerTransitionStyle : Int {
   case StackBook
   case HorizontalStrip
 }
-class NSPageController : NSViewController, NSAnimatablePropertyContainer, NSCoding {
+class NSPageController : NSViewController, NSAnimatablePropertyContainer, Coding {
   @IBOutlet unowned(unsafe) var delegate: @sil_unmanaged NSPageControllerDelegate?
   var selectedViewController: NSViewController? { get }
   var transitionStyle: NSPageControllerTransitionStyle
   var arrangedObjects: [AnyObject]
   var selectedIndex: Int
-  func navigateForwardToObject(object: AnyObject)
+  func navigateForwardTo(object: AnyObject)
   func completeTransition()
   @IBAction func navigateBack(sender: AnyObject?)
   @IBAction func navigateForward(sender: AnyObject?)
   @IBAction func takeSelectedIndexFrom(sender: AnyObject?)
-  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder: NSCoder)
+  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder: Coder)
   convenience init()
   func animator() -> Self
   var animations: [String : AnyObject]
@@ -7925,21 +7926,21 @@ struct __pcFlags {
   init()
   init(templateCacheIsInvalid: UInt32, private1: UInt32, private2: UInt32, inSwipeGesture: UInt32, reserved: UInt32)
 }
-protocol NSPageControllerDelegate : NSObjectProtocol {
-  optional func pageController(pageController: NSPageController, identifierForObject object: AnyObject) -> String
+protocol NSPageControllerDelegate : ObjectProtocol {
+  optional func pageController(pageController: NSPageController, identifierFor object: AnyObject) -> String
   optional func pageController(pageController: NSPageController, viewControllerForIdentifier identifier: String) -> NSViewController
-  optional func pageController(pageController: NSPageController, frameForObject object: AnyObject) -> NSRect
-  optional func pageController(pageController: NSPageController, prepareViewController viewController: NSViewController, withObject object: AnyObject)
-  optional func pageController(pageController: NSPageController, didTransitionToObject object: AnyObject)
+  optional func pageController(pageController: NSPageController, frameFor object: AnyObject) -> Rect
+  optional func pageController(pageController: NSPageController, prepare viewController: NSViewController, withObject object: AnyObject)
+  optional func pageController(pageController: NSPageController, didTransitionTo object: AnyObject)
   optional func pageControllerWillStartLiveTransition(pageController: NSPageController)
   optional func pageControllerDidEndLiveTransition(pageController: NSPageController)
 }
-class NSPageLayout : NSObject {
+class NSPageLayout : Object {
   func addAccessoryController(accessoryController: NSViewController)
   func removeAccessoryController(accessoryController: NSViewController)
   var accessoryControllers: [NSViewController] { get }
-  func beginSheetWithPrintInfo(printInfo: NSPrintInfo, modalForWindow docWindow: NSWindow, delegate: AnyObject?, didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func runModalWithPrintInfo(printInfo: NSPrintInfo) -> Int
+  func beginSheetWith(printInfo: NSPrintInfo, modalFor docWindow: NSWindow, delegate: AnyObject?, didEnd didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func runModalWith(printInfo: NSPrintInfo) -> Int
   func runModal() -> Int
   var printInfo: NSPrintInfo? { get }
   init()
@@ -7954,14 +7955,14 @@ var NSDocModalWindowMask: Int { get }
 var NSNonactivatingPanelMask: Int { get }
 var NSHUDWindowMask: Int { get }
 class NSPanel : NSWindow {
-  var floatingPanel: Bool
+  var isFloatingPanel: Bool
   var becomesKeyOnlyIfNeeded: Bool
   var worksWhenModal: Bool
-  init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
-  convenience init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
+  init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
+  convenience init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
   convenience init(contentViewController: NSViewController)
   convenience init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init?(windowRef: UnsafeMutablePointer<Void>)
 }
 func NSReleaseAlertPanel(panel: AnyObject!)
@@ -7972,16 +7973,16 @@ var NSAlertErrorReturn: Int { get }
 var NSOKButton: Int { get }
 var NSCancelButton: Int { get }
 let NSTabColumnTerminatorsAttributeName: String
-class NSTextTab : NSObject, NSCopying, NSCoding {
-  class func columnTerminatorsForLocale(aLocale: NSLocale?) -> NSCharacterSet
-  init(textAlignment alignment: NSTextAlignment, location loc: CGFloat, options: [String : AnyObject])
+class NSTextTab : Object, Copying, Coding {
+  class func columnTerminatorsFor(aLocale: Locale?) -> CharacterSet
+  init(textAlignment alignment: NSTextAlignment, location loc: CGFloat, options: [String : AnyObject] = [:])
   var alignment: NSTextAlignment { get }
   var location: CGFloat { get }
   var options: [String : AnyObject] { get }
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 enum NSLineBreakMode : UInt {
   init?(rawValue: UInt)
@@ -7993,7 +7994,7 @@ enum NSLineBreakMode : UInt {
   case ByTruncatingTail
   case ByTruncatingMiddle
 }
-class NSParagraphStyle : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
+class NSParagraphStyle : Object, Copying, MutableCopying, SecureCoding {
   class func defaultParagraphStyle() -> NSParagraphStyle
   class func defaultWritingDirectionForLanguage(languageName: String?) -> NSWritingDirection
   var lineSpacing: CGFloat { get }
@@ -8017,11 +8018,11 @@ class NSParagraphStyle : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
   var textLists: [NSTextList] { get }
   var headerLevel: Int { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func mutableCopyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func mutableCopy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 class NSMutableParagraphStyle : NSParagraphStyle {
   var lineSpacing: CGFloat
@@ -8048,7 +8049,7 @@ class NSMutableParagraphStyle : NSParagraphStyle {
   var textLists: [NSTextList]
   var headerLevel: Int
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 enum NSTextTabType : UInt {
   init?(rawValue: UInt)
@@ -8081,28 +8082,28 @@ let NSFontPboard: String
 let NSRulerPboard: String
 let NSFindPboard: String
 let NSDragPboard: String
-class NSPasteboard : NSObject {
-  class func generalPasteboard() -> NSPasteboard
+class NSPasteboard : Object {
+  class func general() -> NSPasteboard
    init(name: String)
-  class func pasteboardWithUniqueName() -> NSPasteboard
+  class func withUniqueName() -> NSPasteboard
   var name: String { get }
   var changeCount: Int { get }
   func releaseGlobally()
   func clearContents() -> Int
   func writeObjects(objects: [NSPasteboardWriting]) -> Bool
-  func readObjectsForClasses(classArray: [AnyClass], options: [String : AnyObject]?) -> [AnyObject]?
+  func readObjectsForClasses(classArray: [AnyClass], options: [String : AnyObject]? = [:]) -> [AnyObject]?
   var pasteboardItems: [NSPasteboardItem]? { get }
-  func indexOfPasteboardItem(pasteboardItem: NSPasteboardItem) -> Int
+  func indexOf(pasteboardItem: NSPasteboardItem) -> Int
   func canReadItemWithDataConformingToTypes(types: [String]) -> Bool
-  func canReadObjectForClasses(classArray: [AnyClass], options: [String : AnyObject]?) -> Bool
+  func canReadObjectForClasses(classArray: [AnyClass], options: [String : AnyObject]? = [:]) -> Bool
   func declareTypes(newTypes: [String], owner newOwner: AnyObject?) -> Int
   func addTypes(newTypes: [String], owner newOwner: AnyObject?) -> Int
   var types: [String]? { get }
-  func availableTypeFromArray(types: [String]) -> String?
-  func setData(data: NSData?, forType dataType: String) -> Bool
+  func availableTypeFrom(types: [String]) -> String?
+  func setData(data: Data?, forType dataType: String) -> Bool
   func setPropertyList(plist: AnyObject, forType dataType: String) -> Bool
   func setString(string: String, forType dataType: String) -> Bool
-  func dataForType(dataType: String) -> NSData?
+  func dataForType(dataType: String) -> Data?
   func propertyListForType(dataType: String) -> AnyObject?
   func stringForType(dataType: String) -> String?
   init()
@@ -8110,10 +8111,10 @@ class NSPasteboard : NSObject {
 extension NSPasteboard {
   class func typesFilterableTo(type: String) -> [String]
    init(byFilteringFile filename: String)
-   init(byFilteringData data: NSData, ofType type: String)
-   init(byFilteringTypesInPasteboard pboard: NSPasteboard)
+   init(byFilteringData data: Data, ofType type: String)
+   init(byFilteringTypesIn pboard: NSPasteboard)
 }
-extension NSObject {
+extension Object {
   class func pasteboard(sender: NSPasteboard, provideDataForType type: String)
   func pasteboard(sender: NSPasteboard, provideDataForType type: String)
   class func pasteboardChangedOwner(sender: NSPasteboard)
@@ -8126,8 +8127,8 @@ struct NSPasteboardWritingOptions : OptionSetType {
   let rawValue: UInt
   static var Promised: NSPasteboardWritingOptions { get }
 }
-protocol NSPasteboardWriting : NSObjectProtocol {
-  func writableTypesForPasteboard(pasteboard: NSPasteboard) -> [String]
+protocol NSPasteboardWriting : ObjectProtocol {
+  func writableTypesFor(pasteboard: NSPasteboard) -> [String]
   optional func writingOptionsForType(type: String, pasteboard: NSPasteboard) -> NSPasteboardWritingOptions
   func pasteboardPropertyListForType(type: String) -> AnyObject?
 }
@@ -8139,26 +8140,26 @@ struct NSPasteboardReadingOptions : OptionSetType {
   static var AsPropertyList: NSPasteboardReadingOptions { get }
   static var AsKeyedArchive: NSPasteboardReadingOptions { get }
 }
-protocol NSPasteboardReading : NSObjectProtocol {
-  static func readableTypesForPasteboard(pasteboard: NSPasteboard) -> [String]
+protocol NSPasteboardReading : ObjectProtocol {
+  static func readableTypesFor(pasteboard: NSPasteboard) -> [String]
   optional static func readingOptionsForType(type: String, pasteboard: NSPasteboard) -> NSPasteboardReadingOptions
   init?(pasteboardPropertyList propertyList: AnyObject, ofType type: String)
 }
-extension NSURL : NSPasteboardWriting, NSPasteboardReading {
-   init?(fromPasteboard pasteBoard: NSPasteboard)
-  func writeToPasteboard(pasteBoard: NSPasteboard)
-  func writableTypesForPasteboard(pasteboard: NSPasteboard) -> [String]
+extension URL : NSPasteboardWriting, NSPasteboardReading {
+   init?(from pasteBoard: NSPasteboard)
+  func writeTo(pasteBoard: NSPasteboard)
+  func writableTypesFor(pasteboard: NSPasteboard) -> [String]
   func writingOptionsForType(type: String, pasteboard: NSPasteboard) -> NSPasteboardWritingOptions
   func pasteboardPropertyListForType(type: String) -> AnyObject?
-  class func readableTypesForPasteboard(pasteboard: NSPasteboard) -> [String]
+  class func readableTypesFor(pasteboard: NSPasteboard) -> [String]
   class func readingOptionsForType(type: String, pasteboard: NSPasteboard) -> NSPasteboardReadingOptions
   init?(pasteboardPropertyList propertyList: AnyObject, ofType type: String)
 }
 extension NSString : NSPasteboardWriting, NSPasteboardReading {
-  func writableTypesForPasteboard(pasteboard: NSPasteboard) -> [String]
+  func writableTypesFor(pasteboard: NSPasteboard) -> [String]
   func writingOptionsForType(type: String, pasteboard: NSPasteboard) -> NSPasteboardWritingOptions
   func pasteboardPropertyListForType(type: String) -> AnyObject?
-  class func readableTypesForPasteboard(pasteboard: NSPasteboard) -> [String]
+  class func readableTypesFor(pasteboard: NSPasteboard) -> [String]
   class func readingOptionsForType(type: String, pasteboard: NSPasteboard) -> NSPasteboardReadingOptions
   init?(pasteboardPropertyList propertyList: AnyObject, ofType type: String)
 }
@@ -8183,33 +8184,33 @@ let NSPasteboardTypeFindPanelSearchOptions: String
 extension NSPasteboard {
   func writeFileContents(filename: String) -> Bool
   func readFileContentsType(type: String?, toFile filename: String) -> String?
-  func writeFileWrapper(wrapper: NSFileWrapper) -> Bool
-  func readFileWrapper() -> NSFileWrapper?
+  func write(wrapper: FileWrapper) -> Bool
+  func readFileWrapper() -> FileWrapper?
 }
 let NSFileContentsPboardType: String
 func NSCreateFilenamePboardType(fileType: String) -> String?
 func NSCreateFileContentsPboardType(fileType: String) -> String?
 func NSGetFileType(pboardType: String) -> String?
 func NSGetFileTypes(pboardTypes: [String]) -> [String]?
-class NSPasteboardItem : NSObject, NSPasteboardWriting, NSPasteboardReading {
+class NSPasteboardItem : Object, NSPasteboardWriting, NSPasteboardReading {
   var types: [String] { get }
-  func availableTypeFromArray(types: [String]) -> String?
+  func availableTypeFrom(types: [String]) -> String?
   func setDataProvider(dataProvider: NSPasteboardItemDataProvider, forTypes types: [AnyObject]) -> Bool
-  func setData(data: NSData?, forType type: String) -> Bool
+  func setData(data: Data?, forType type: String) -> Bool
   func setString(string: String?, forType type: String) -> Bool
   func setPropertyList(propertyList: AnyObject?, forType type: String) -> Bool
-  func dataForType(type: String) -> NSData?
+  func dataForType(type: String) -> Data?
   func stringForType(type: String) -> String?
   func propertyListForType(type: String) -> AnyObject?
   init()
-  func writableTypesForPasteboard(pasteboard: NSPasteboard) -> [String]
+  func writableTypesFor(pasteboard: NSPasteboard) -> [String]
   func writingOptionsForType(type: String, pasteboard: NSPasteboard) -> NSPasteboardWritingOptions
   func pasteboardPropertyListForType(type: String) -> AnyObject?
-  class func readableTypesForPasteboard(pasteboard: NSPasteboard) -> [String]
+  class func readableTypesFor(pasteboard: NSPasteboard) -> [String]
   class func readingOptionsForType(type: String, pasteboard: NSPasteboard) -> NSPasteboardReadingOptions
   init?(pasteboardPropertyList propertyList: AnyObject, ofType type: String)
 }
-protocol NSPasteboardItemDataProvider : NSObjectProtocol {
+protocol NSPasteboardItemDataProvider : ObjectProtocol {
   func pasteboard(pasteboard: NSPasteboard?, item: NSPasteboardItem, provideDataForType type: String)
   optional func pasteboardFinishedWithDataProvider(pasteboard: NSPasteboard)
 }
@@ -8221,50 +8222,50 @@ enum NSPathStyle : Int {
 }
 class NSPathCell : NSActionCell, NSOpenSavePanelDelegate {
   var pathStyle: NSPathStyle
-  @NSCopying var URL: NSURL?
-  func setObjectValue(obj: NSCopying?)
+  @NSCopying var url: URL?
+  func setObjectValue(obj: Copying?)
   var allowedTypes: [String]?
   unowned(unsafe) var delegate: @sil_unmanaged NSPathCellDelegate?
   class func pathComponentCellClass() -> AnyClass
   var pathComponentCells: [NSPathComponentCell]
-  func rectOfPathComponentCell(cell: NSPathComponentCell, withFrame frame: NSRect, inView view: NSView) -> NSRect
-  func pathComponentCellAtPoint(point: NSPoint, withFrame frame: NSRect, inView view: NSView) -> NSPathComponentCell?
+  func rectOf(cell: NSPathComponentCell, withFrame frame: Rect, in view: NSView) -> Rect
+  func pathComponentCellAt(point: Point, withFrame frame: Rect, in view: NSView) -> NSPathComponentCell?
   var clickedPathComponentCell: NSPathComponentCell? { get }
-  func mouseEntered(event: NSEvent, withFrame frame: NSRect, inView view: NSView)
-  func mouseExited(event: NSEvent, withFrame frame: NSRect, inView view: NSView)
+  func mouseEntered(event: NSEvent, withFrame frame: Rect, in view: NSView)
+  func mouseExited(event: NSEvent, withFrame frame: Rect, in view: NSView)
   var doubleAction: Selector
   @NSCopying var backgroundColor: NSColor?
   var placeholderString: String?
-  @NSCopying var placeholderAttributedString: NSAttributedString?
+  @NSCopying var placeholderAttributedString: AttributedString?
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
-  func panel(sender: AnyObject, shouldEnableURL url: NSURL) -> Bool
-  func panel(sender: AnyObject, validateURL url: NSURL) throws
-  func panel(sender: AnyObject, didChangeToDirectoryURL url: NSURL?)
+  init?(coder aDecoder: Coder)
+  func panel(sender: AnyObject, shouldEnable url: URL) -> Bool
+  func panel(sender: AnyObject, validate url: URL) throws
+  func panel(sender: AnyObject, didChangeToDirectoryURL url: URL?)
   func panel(sender: AnyObject, userEnteredFilename filename: String, confirmed okFlag: Bool) -> String?
   func panel(sender: AnyObject, willExpand expanding: Bool)
   func panelSelectionDidChange(sender: AnyObject?)
 }
-protocol NSPathCellDelegate : NSObjectProtocol {
-  optional func pathCell(pathCell: NSPathCell, willDisplayOpenPanel openPanel: NSOpenPanel)
-  optional func pathCell(pathCell: NSPathCell, willPopUpMenu menu: NSMenu)
+protocol NSPathCellDelegate : ObjectProtocol {
+  optional func pathCell(pathCell: NSPathCell, willDisplay openPanel: NSOpenPanel)
+  optional func pathCell(pathCell: NSPathCell, willPopUp menu: NSMenu)
 }
 class NSPathComponentCell : NSTextFieldCell {
   @NSCopying var image: NSImage?
-  @NSCopying var URL: NSURL?
+  @NSCopying var url: URL?
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class NSPathControl : NSControl {
-  var editable: Bool
+  var isEditable: Bool
   var allowedTypes: [String]?
   var placeholderString: String?
-  @NSCopying var placeholderAttributedString: NSAttributedString?
-  @NSCopying var URL: NSURL?
+  @NSCopying var placeholderAttributedString: AttributedString?
+  @NSCopying var url: URL?
   var doubleAction: Selector
   var pathStyle: NSPathStyle
   var clickedPathItem: NSPathControlItem? { get }
@@ -8273,17 +8274,17 @@ class NSPathControl : NSControl {
   weak var delegate: @sil_weak NSPathControlDelegate?
   func setDraggingSourceOperationMask(mask: NSDragOperation, forLocal isLocal: Bool)
   var menu: NSMenu?
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
-protocol NSPathControlDelegate : NSObjectProtocol {
-  optional func pathControl(pathControl: NSPathControl, shouldDragItem pathItem: NSPathControlItem, withPasteboard pasteboard: NSPasteboard) -> Bool
-  optional func pathControl(pathControl: NSPathControl, shouldDragPathComponentCell pathComponentCell: NSPathComponentCell, withPasteboard pasteboard: NSPasteboard) -> Bool
+protocol NSPathControlDelegate : ObjectProtocol {
+  optional func pathControl(pathControl: NSPathControl, shouldDrag pathItem: NSPathControlItem, withPasteboard pasteboard: NSPasteboard) -> Bool
+  optional func pathControl(pathControl: NSPathControl, shouldDrag pathComponentCell: NSPathComponentCell, withPasteboard pasteboard: NSPasteboard) -> Bool
   optional func pathControl(pathControl: NSPathControl, validateDrop info: NSDraggingInfo) -> NSDragOperation
   optional func pathControl(pathControl: NSPathControl, acceptDrop info: NSDraggingInfo) -> Bool
-  optional func pathControl(pathControl: NSPathControl, willDisplayOpenPanel openPanel: NSOpenPanel)
-  optional func pathControl(pathControl: NSPathControl, willPopUpMenu menu: NSMenu)
+  optional func pathControl(pathControl: NSPathControl, willDisplay openPanel: NSOpenPanel)
+  optional func pathControl(pathControl: NSPathControl, willPopUp menu: NSMenu)
 }
 extension NSPathControl {
   func clickedPathComponentCell() -> NSPathComponentCell?
@@ -8293,54 +8294,54 @@ extension NSPathControl {
 class NSPersistentDocument : NSDocument {
   var managedObjectContext: NSManagedObjectContext?
   var managedObjectModel: NSManagedObjectModel? { get }
-  func configurePersistentStoreCoordinatorForURL(url: NSURL, ofType fileType: String, modelConfiguration configuration: String?, storeOptions: [String : AnyObject]?) throws
+  func configurePersistentStoreCoordinatorFor(url: URL, ofType fileType: String, modelConfiguration configuration: String?, storeOptions: [String : AnyObject]? = [:]) throws
   func persistentStoreTypeForFileType(fileType: String) -> String
-  func writeToURL(absoluteURL: NSURL, ofType typeName: String, forSaveOperation saveOperation: NSSaveOperationType, originalContentsURL absoluteOriginalContentsURL: NSURL?) throws
-  func readFromURL(absoluteURL: NSURL, ofType typeName: String) throws
-  func revertToContentsOfURL(inAbsoluteURL: NSURL, ofType inTypeName: String) throws
+  func writeTo(absoluteURL: URL, ofType typeName: String, forSaveOperation saveOperation: NSSaveOperationType, originalContentsURL absoluteOriginalContentsURL: URL?) throws
+  func readFrom(absoluteURL: URL, ofType typeName: String) throws
+  func revertToContentsOf(inAbsoluteURL: URL, ofType inTypeName: String) throws
   init()
   convenience init(type typeName: String) throws
-  convenience init(contentsOfURL url: NSURL, ofType typeName: String) throws
-  convenience init(forURL urlOrNil: NSURL?, withContentsOfURL contentsURL: NSURL, ofType typeName: String) throws
+  convenience init(contentsOf url: URL, ofType typeName: String) throws
+  convenience init(forURL urlOrNil: URL?, withContentsOf contentsURL: URL, ofType typeName: String) throws
 }
 extension NSPersistentDocument {
 }
 class NSPopUpButton : NSButton {
-  init(frame buttonFrame: NSRect, pullsDown flag: Bool)
+  init(frame buttonFrame: Rect, pullsDown flag: Bool)
   var menu: NSMenu?
   var pullsDown: Bool
   var autoenablesItems: Bool
-  var preferredEdge: NSRectEdge
+  var preferredEdge: RectEdge
   func addItemWithTitle(title: String)
   func addItemsWithTitles(itemTitles: [String])
-  func insertItemWithTitle(title: String, atIndex index: Int)
+  func insertItemWithTitle(title: String, at index: Int)
   func removeItemWithTitle(title: String)
-  func removeItemAtIndex(index: Int)
+  func removeItemAt(index: Int)
   func removeAllItems()
   var itemArray: [NSMenuItem] { get }
   var numberOfItems: Int { get }
-  func indexOfItem(item: NSMenuItem) -> Int
+  func indexOf(item: NSMenuItem) -> Int
   func indexOfItemWithTitle(title: String) -> Int
   func indexOfItemWithTag(tag: Int) -> Int
   func indexOfItemWithRepresentedObject(obj: AnyObject?) -> Int
   func indexOfItemWithTarget(target: AnyObject?, andAction actionSelector: Selector) -> Int
-  func itemAtIndex(index: Int) -> NSMenuItem?
+  func itemAt(index: Int) -> NSMenuItem?
   func itemWithTitle(title: String) -> NSMenuItem?
   var lastItem: NSMenuItem? { get }
-  func selectItem(item: NSMenuItem?)
-  func selectItemAtIndex(index: Int)
+  func select(item: NSMenuItem?)
+  func selectItemAt(index: Int)
   func selectItemWithTitle(title: String)
   func selectItemWithTag(tag: Int) -> Bool
   func setTitle(aString: String)
   var selectedItem: NSMenuItem? { get }
   var indexOfSelectedItem: Int { get }
   func synchronizeTitleAndSelectedItem()
-  func itemTitleAtIndex(index: Int) -> String
+  func itemTitleAt(index: Int) -> String
   var itemTitles: [String] { get }
   var titleOfSelectedItem: String? { get }
   func selectedTag() -> Int
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 struct __pbFlags {
@@ -8362,44 +8363,44 @@ class NSPopUpButtonCell : NSMenuItemCell {
   var menu: NSMenu?
   var pullsDown: Bool
   var autoenablesItems: Bool
-  var preferredEdge: NSRectEdge
+  var preferredEdge: RectEdge
   var usesItemFromMenu: Bool
   var altersStateOfSelectedItem: Bool
   func addItemWithTitle(title: String)
   func addItemsWithTitles(itemTitles: [String])
-  func insertItemWithTitle(title: String, atIndex index: Int)
+  func insertItemWithTitle(title: String, at index: Int)
   func removeItemWithTitle(title: String)
-  func removeItemAtIndex(index: Int)
+  func removeItemAt(index: Int)
   func removeAllItems()
   var itemArray: [NSMenuItem] { get }
   var numberOfItems: Int { get }
-  func indexOfItem(item: NSMenuItem) -> Int
+  func indexOf(item: NSMenuItem) -> Int
   func indexOfItemWithTitle(title: String) -> Int
   func indexOfItemWithTag(tag: Int) -> Int
   func indexOfItemWithRepresentedObject(obj: AnyObject?) -> Int
   func indexOfItemWithTarget(target: AnyObject?, andAction actionSelector: Selector) -> Int
-  func itemAtIndex(index: Int) -> NSMenuItem?
+  func itemAt(index: Int) -> NSMenuItem?
   func itemWithTitle(title: String) -> NSMenuItem?
   var lastItem: NSMenuItem? { get }
-  func selectItem(item: NSMenuItem?)
-  func selectItemAtIndex(index: Int)
+  func select(item: NSMenuItem?)
+  func selectItemAt(index: Int)
   func selectItemWithTitle(title: String)
   func selectItemWithTag(tag: Int) -> Bool
   func setTitle(aString: String?)
   var selectedItem: NSMenuItem? { get }
   var indexOfSelectedItem: Int { get }
   func synchronizeTitleAndSelectedItem()
-  func itemTitleAtIndex(index: Int) -> String
+  func itemTitleAt(index: Int) -> String
   var itemTitles: [String] { get }
   var titleOfSelectedItem: String? { get }
-  func attachPopUpWithFrame(cellFrame: NSRect, inView controlView: NSView)
+  func attachPopUpWithFrame(cellFrame: Rect, in controlView: NSView)
   func dismissPopUp()
-  func performClickWithFrame(frame: NSRect, inView controlView: NSView)
+  func performClickWithFrame(frame: Rect, in controlView: NSView)
   var arrowPosition: NSPopUpArrowPosition
   convenience init(textCell aString: String)
   convenience init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 struct __pbcFlags {
   var pullsDown: UInt32
@@ -8434,39 +8435,39 @@ enum NSPopoverBehavior : Int {
 }
 class NSPopover : NSResponder, NSAppearanceCustomization, NSAccessibilityElementProtocol, NSAccessibility {
   init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   @IBOutlet unowned(unsafe) var delegate: @sil_unmanaged NSPopoverDelegate?
   var appearance: NSAppearance?
   var effectiveAppearance: NSAppearance { get }
   var behavior: NSPopoverBehavior
   var animates: Bool
   @IBOutlet var contentViewController: NSViewController?
-  var contentSize: NSSize
-  var shown: Bool { get }
+  var contentSize: Size
+  var isShown: Bool { get }
   /// Returns \c YES if the window is detached to an implicitly created detached window, \c NO otherwise. This method does not apply when the popover is detached to a window returned with \c -detachableWindowForPopover:.
-  var detached: Bool { get }
-  var positioningRect: NSRect
-  func showRelativeToRect(positioningRect: NSRect, ofView positioningView: NSView, preferredEdge: NSRectEdge)
+  var isDetached: Bool { get }
+  var positioningRect: Rect
+  func showRelativeTo(positioningRect: Rect, of positioningView: NSView, preferredEdge: RectEdge)
   @IBAction func performClose(sender: AnyObject?)
   func close()
-  func accessibilityFrame() -> NSRect
+  func accessibilityFrame() -> Rect
   func accessibilityParent() -> AnyObject?
   func isAccessibilityFocused() -> Bool
   func accessibilityIdentifier() -> String
-  func accessibilityLayoutPointForScreenPoint(point: NSPoint) -> NSPoint
-  func accessibilityLayoutSizeForScreenSize(size: NSSize) -> NSSize
-  func accessibilityScreenPointForLayoutPoint(point: NSPoint) -> NSPoint
-  func accessibilityScreenSizeForLayoutSize(size: NSSize) -> NSSize
+  func accessibilityLayoutPointForScreenPoint(point: Point) -> Point
+  func accessibilityLayoutSizeForScreenSize(size: Size) -> Size
+  func accessibilityScreenPointForLayoutPoint(point: Point) -> Point
+  func accessibilityScreenSizeForLayoutSize(size: Size) -> Size
   func accessibilityCellForColumn(column: Int, row: Int) -> AnyObject?
-  func accessibilityAttributedStringForRange(range: NSRange) -> NSAttributedString?
+  func accessibilityAttributedStringFor(range: NSRange) -> AttributedString?
   func accessibilityRangeForLine(line: Int) -> NSRange
-  func accessibilityStringForRange(range: NSRange) -> String?
-  func accessibilityRangeForPosition(point: NSPoint) -> NSRange
-  func accessibilityRangeForIndex(index: Int) -> NSRange
-  func accessibilityFrameForRange(range: NSRange) -> NSRect
-  func accessibilityRTFForRange(range: NSRange) -> NSData?
-  func accessibilityStyleRangeForIndex(index: Int) -> NSRange
-  func accessibilityLineForIndex(index: Int) -> Int
+  func accessibilityStringFor(range: NSRange) -> String?
+  func accessibilityRangeForPosition(point: Point) -> NSRange
+  func accessibilityRangeFor(index: Int) -> NSRange
+  func accessibilityFrameFor(range: NSRange) -> Rect
+  func accessibilityRTFFor(range: NSRange) -> Data?
+  func accessibilityStyleRangeFor(index: Int) -> NSRange
+  func accessibilityLineFor(index: Int) -> Int
   func accessibilityPerformCancel() -> Bool
   func accessibilityPerformConfirm() -> Bool
   func accessibilityPerformDecrement() -> Bool
@@ -8481,14 +8482,14 @@ class NSPopover : NSResponder, NSAppearanceCustomization, NSAccessibilityElement
   func isAccessibilitySelectorAllowed(selector: Selector) -> Bool
   func isAccessibilityElement() -> Bool
   func setAccessibilityElement(accessibilityElement: Bool)
-  func setAccessibilityFrame(accessibilityFrame: NSRect)
+  func setAccessibilityFrame(accessibilityFrame: Rect)
   func setAccessibilityFocused(accessibilityFocused: Bool)
-  func accessibilityActivationPoint() -> NSPoint
-  func setAccessibilityActivationPoint(accessibilityActivationPoint: NSPoint)
+  func accessibilityActivationPoint() -> Point
+  func setAccessibilityActivationPoint(accessibilityActivationPoint: Point)
   func accessibilityTopLevelUIElement() -> AnyObject?
   func setAccessibilityTopLevelUIElement(accessibilityTopLevelUIElement: AnyObject?)
-  func accessibilityURL() -> NSURL?
-  func setAccessibilityURL(accessibilityURL: NSURL?)
+  func accessibilityURL() -> URL?
+  func setAccessibilityURL(accessibilityURL: URL?)
   func accessibilityValue() -> AnyObject?
   func setAccessibilityValue(accessibilityValue: AnyObject?)
   func accessibilityValueDescription() -> String?
@@ -8623,8 +8624,8 @@ class NSPopover : NSResponder, NSAppearanceCustomization, NSAccessibilityElement
   func setAccessibilityHorizontalScrollBar(accessibilityHorizontalScrollBar: AnyObject?)
   func accessibilityVerticalScrollBar() -> AnyObject?
   func setAccessibilityVerticalScrollBar(accessibilityVerticalScrollBar: AnyObject?)
-  func accessibilityAllowedValues() -> [NSNumber]?
-  func setAccessibilityAllowedValues(accessibilityAllowedValues: [NSNumber]?)
+  func accessibilityAllowedValues() -> [Number]?
+  func setAccessibilityAllowedValues(accessibilityAllowedValues: [Number]?)
   func accessibilityLabelUIElements() -> [AnyObject]?
   func setAccessibilityLabelUIElements(accessibilityLabelUIElements: [AnyObject]?)
   func accessibilityLabelValue() -> Float
@@ -8685,8 +8686,8 @@ class NSPopover : NSResponder, NSAppearanceCustomization, NSAccessibilityElement
   func setAccessibilitySelectedText(accessibilitySelectedText: String?)
   func accessibilitySelectedTextRange() -> NSRange
   func setAccessibilitySelectedTextRange(accessibilitySelectedTextRange: NSRange)
-  func accessibilitySelectedTextRanges() -> [NSValue]?
-  func setAccessibilitySelectedTextRanges(accessibilitySelectedTextRanges: [NSValue]?)
+  func accessibilitySelectedTextRanges() -> [Value]?
+  func setAccessibilitySelectedTextRanges(accessibilitySelectedTextRanges: [Value]?)
   func accessibilityToolbarButton() -> AnyObject?
   func setAccessibilityToolbarButton(accessibilityToolbarButton: AnyObject?)
   func isAccessibilityModal() -> Bool
@@ -8719,45 +8720,45 @@ let NSPopoverWillShowNotification: String
 let NSPopoverDidShowNotification: String
 let NSPopoverWillCloseNotification: String
 let NSPopoverDidCloseNotification: String
-protocol NSPopoverDelegate : NSObjectProtocol {
+protocol NSPopoverDelegate : ObjectProtocol {
   optional func popoverShouldClose(popover: NSPopover) -> Bool
   optional func popoverShouldDetach(popover: NSPopover) -> Bool
   optional func popoverDidDetach(popover: NSPopover)
-  optional func detachableWindowForPopover(popover: NSPopover) -> NSWindow?
-  optional func popoverWillShow(notification: NSNotification)
-  optional func popoverDidShow(notification: NSNotification)
-  optional func popoverWillClose(notification: NSNotification)
-  optional func popoverDidClose(notification: NSNotification)
+  optional func detachableWindowFor(popover: NSPopover) -> NSWindow?
+  optional func popoverWillShow(notification: Notification)
+  optional func popoverDidShow(notification: Notification)
+  optional func popoverWillClose(notification: Notification)
+  optional func popoverDidClose(notification: Notification)
 }
 class NSPredicateEditor : NSRuleEditor {
   var rowTemplates: [NSPredicateEditorRowTemplate]
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
-class NSPredicateEditorRowTemplate : NSObject, NSCoding, NSCopying {
-  func matchForPredicate(predicate: NSPredicate) -> Double
+class NSPredicateEditorRowTemplate : Object, Coding, Copying {
+  func matchFor(predicate: Predicate) -> Double
   var templateViews: [NSView] { get }
-  func setPredicate(predicate: NSPredicate)
-  func predicateWithSubpredicates(subpredicates: [NSPredicate]?) -> NSPredicate
-  func displayableSubpredicatesOfPredicate(predicate: NSPredicate) -> [NSPredicate]?
-  init(leftExpressions: [NSExpression], rightExpressions: [NSExpression], modifier: NSComparisonPredicateModifier, operators: [NSNumber], options: Int)
-  init(leftExpressions: [NSExpression], rightExpressionAttributeType attributeType: NSAttributeType, modifier: NSComparisonPredicateModifier, operators: [NSNumber], options: Int)
-  init(compoundTypes: [NSNumber])
-  var leftExpressions: [NSExpression]? { get }
-  var rightExpressions: [NSExpression]? { get }
+  func setPredicate(predicate: Predicate)
+  func predicateWithSubpredicates(subpredicates: [Predicate]?) -> Predicate
+  func displayableSubpredicatesOf(predicate: Predicate) -> [Predicate]?
+  init(leftExpressions: [Expression], rightExpressions: [Expression], modifier: ComparisonPredicateModifier, operators: [Number], options: Int)
+  init(leftExpressions: [Expression], rightExpressionAttributeType attributeType: NSAttributeType, modifier: ComparisonPredicateModifier, operators: [Number], options: Int)
+  init(compoundTypes: [Number])
+  var leftExpressions: [Expression]? { get }
+  var rightExpressions: [Expression]? { get }
   var rightExpressionAttributeType: NSAttributeType { get }
-  var modifier: NSComparisonPredicateModifier { get }
-  var operators: [NSNumber]? { get }
+  var modifier: ComparisonPredicateModifier { get }
+  var operators: [Number]? { get }
   var options: Int { get }
-  var compoundTypes: [NSNumber]? { get }
-  class func templatesWithAttributeKeyPaths(keyPaths: [String], inEntityDescription entityDescription: NSEntityDescription) -> [NSPredicateEditorRowTemplate]
+  var compoundTypes: [Number]? { get }
+  class func templatesWithAttributeKeyPaths(keyPaths: [String], in entityDescription: NSEntityDescription) -> [NSPredicateEditorRowTemplate]
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class NSPressureConfiguration : NSObject {
+class NSPressureConfiguration : Object {
   var pressureBehavior: NSPressureBehavior { get }
   init(pressureBehavior: NSPressureBehavior)
   func set()
@@ -8813,41 +8814,41 @@ let NSPrintSelectionOnly: String
 let NSPrintJobSavingURL: String
 let NSPrintJobSavingFileNameExtensionHidden: String
 let NSPrintHeaderAndFooter: String
-class NSPrintInfo : NSObject, NSCopying, NSCoding {
+class NSPrintInfo : Object, Copying, Coding {
   class func setSharedPrintInfo(printInfo: NSPrintInfo)
-  class func sharedPrintInfo() -> NSPrintInfo
+  class func shared() -> NSPrintInfo
   init(dictionary attributes: [String : AnyObject])
-  func dictionary() -> NSMutableDictionary
+  func dictionary() -> MutableDictionary
   var paperName: String?
-  var paperSize: NSSize
+  var paperSize: Size
   var orientation: NSPaperOrientation
   var scalingFactor: CGFloat
   var leftMargin: CGFloat
   var rightMargin: CGFloat
   var topMargin: CGFloat
   var bottomMargin: CGFloat
-  var horizontallyCentered: Bool
-  var verticallyCentered: Bool
+  var isHorizontallyCentered: Bool
+  var isVerticallyCentered: Bool
   var horizontalPagination: NSPrintingPaginationMode
   var verticalPagination: NSPrintingPaginationMode
   var jobDisposition: String
   @NSCopying var printer: NSPrinter
   func setUpPrintOperationDefaultValues()
-  var imageablePageBounds: NSRect { get }
+  var imageablePageBounds: Rect { get }
   var localizedPaperName: String? { get }
   class func defaultPrinter() -> NSPrinter?
-  var printSettings: NSMutableDictionary { get }
-  func PMPrintSession() -> UnsafeMutablePointer<Void>
-  func PMPageFormat() -> UnsafeMutablePointer<Void>
-  func PMPrintSettings() -> UnsafeMutablePointer<Void>
+  var printSettings: MutableDictionary { get }
+  func pmPrintSession() -> UnsafeMutablePointer<Void>
+  func pmPageFormat() -> UnsafeMutablePointer<Void>
+  func pmPrintSettings() -> UnsafeMutablePointer<Void>
   func updateFromPMPageFormat()
   func updateFromPMPrintSettings()
-  var selectionOnly: Bool
-  func takeSettingsFromPDFInfo(inPDFInfo: NSPDFInfo)
+  var isSelectionOnly: Bool
+  func takeSettingsFrom(inPDFInfo: NSPDFInfo)
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 extension NSPrintInfo {
 }
@@ -8872,28 +8873,28 @@ enum NSPrintRenderingQuality : Int {
   case Responsive
 }
 let NSPrintOperationExistsException: String
-class NSPrintOperation : NSObject {
+class NSPrintOperation : Object {
    init(view: NSView, printInfo: NSPrintInfo)
-  class func PDFOperationWithView(view: NSView, insideRect rect: NSRect, toData data: NSMutableData, printInfo: NSPrintInfo) -> NSPrintOperation
-  class func PDFOperationWithView(view: NSView, insideRect rect: NSRect, toPath path: String, printInfo: NSPrintInfo) -> NSPrintOperation
-  class func EPSOperationWithView(view: NSView, insideRect rect: NSRect, toData data: NSMutableData, printInfo: NSPrintInfo) -> NSPrintOperation
-  class func EPSOperationWithView(view: NSView, insideRect rect: NSRect, toPath path: String, printInfo: NSPrintInfo) -> NSPrintOperation
+  class func pdfOperationWith(view: NSView, inside rect: Rect, to data: MutableData, printInfo: NSPrintInfo) -> NSPrintOperation
+  class func pdfOperationWith(view: NSView, inside rect: Rect, toPath path: String, printInfo: NSPrintInfo) -> NSPrintOperation
+  class func epsOperationWith(view: NSView, inside rect: Rect, to data: MutableData, printInfo: NSPrintInfo) -> NSPrintOperation
+  class func epsOperationWith(view: NSView, inside rect: Rect, toPath path: String, printInfo: NSPrintInfo) -> NSPrintOperation
    init(view: NSView)
-  class func PDFOperationWithView(view: NSView, insideRect rect: NSRect, toData data: NSMutableData) -> NSPrintOperation
-  class func EPSOperationWithView(view: NSView, insideRect rect: NSRect, toData data: NSMutableData?) -> NSPrintOperation
-  class func currentOperation() -> NSPrintOperation?
+  class func pdfOperationWith(view: NSView, inside rect: Rect, to data: MutableData) -> NSPrintOperation
+  class func epsOperationWith(view: NSView, inside rect: Rect, to data: MutableData?) -> NSPrintOperation
+  class func current() -> NSPrintOperation?
   class func setCurrentOperation(operation: NSPrintOperation?)
-  var copyingOperation: Bool { get }
+  var isCopyingOperation: Bool { get }
   var preferredRenderingQuality: NSPrintRenderingQuality { get }
   var jobTitle: String?
   var showsPrintPanel: Bool
   var showsProgressPanel: Bool
   var printPanel: NSPrintPanel
-  var PDFPanel: NSPDFPanel
+  var pdfPanel: NSPDFPanel
   var canSpawnSeparateThread: Bool
   var pageOrder: NSPrintingPageOrder
-  func runOperationModalForWindow(docWindow: NSWindow, delegate: AnyObject?, didRunSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func runOperation() -> Bool
+  func runModalFor(docWindow: NSWindow, delegate: AnyObject?, didRun didRunSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func run() -> Bool
   var view: NSView? { get }
   @NSCopying var printInfo: NSPrintInfo
   var context: NSGraphicsContext? { get }
@@ -8902,7 +8903,7 @@ class NSPrintOperation : NSObject {
   func createContext() -> NSGraphicsContext?
   func destroyContext()
   func deliverResult() -> Bool
-  func cleanUpOperation()
+  func cleanUp()
   init()
 }
 extension NSPrintOperation {
@@ -8928,7 +8929,7 @@ protocol NSPrintPanelAccessorizing {
   func localizedSummaryItems() -> [[String : String]]
   optional func keyPathsForValuesAffectingPreview() -> Set<String>
 }
-class NSPrintPanel : NSObject {
+class NSPrintPanel : Object {
   func addAccessoryController(accessoryController: NSViewController)
   func removeAccessoryController(accessoryController: NSViewController)
   var accessoryControllers: [NSViewController] { get }
@@ -8937,8 +8938,8 @@ class NSPrintPanel : NSObject {
   func defaultButtonTitle() -> String?
   var helpAnchor: String?
   var jobStyleHint: String?
-  func beginSheetWithPrintInfo(printInfo: NSPrintInfo, modalForWindow docWindow: NSWindow, delegate: AnyObject?, didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func runModalWithPrintInfo(printInfo: NSPrintInfo) -> Int
+  func beginSheetWith(printInfo: NSPrintInfo, modalFor docWindow: NSWindow, delegate: AnyObject?, didEnd didEndSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func runModalWith(printInfo: NSPrintInfo) -> Int
   func runModal() -> Int
   var printInfo: NSPrintInfo { get }
   init()
@@ -8952,7 +8953,7 @@ enum NSPrinterTableStatus : UInt {
   case NotFound
   case Error
 }
-class NSPrinter : NSObject, NSCopying, NSCoding {
+class NSPrinter : Object, Copying, Coding {
   class func printerNames() -> [String]
   class func printerTypes() -> [String]
    init?(name: String)
@@ -8960,12 +8961,12 @@ class NSPrinter : NSObject, NSCopying, NSCoding {
   var name: String { get }
   var type: String { get }
   var languageLevel: Int { get }
-  func pageSizeForPaper(paperName: String) -> NSSize
+  func pageSizeForPaper(paperName: String) -> Size
   var deviceDescription: [String : AnyObject] { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 extension NSPrinter {
 }
@@ -8984,8 +8985,8 @@ enum NSProgressIndicatorStyle : UInt {
   case SpinningStyle
 }
 class NSProgressIndicator : NSView, NSAccessibilityProgressIndicator {
-  var indeterminate: Bool
-  var bezeled: Bool
+  var isIndeterminate: Bool
+  var isBezeled: Bool
   var controlTint: NSControlTint
   var controlSize: NSControlSize
   var doubleValue: Double
@@ -8997,11 +8998,11 @@ class NSProgressIndicator : NSView, NSAccessibilityProgressIndicator {
   func stopAnimation(sender: AnyObject?)
   var style: NSProgressIndicatorStyle
   func sizeToFit()
-  var displayedWhenStopped: Bool
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  var isDisplayedWhenStopped: Bool
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
-  func accessibilityValue() -> NSNumber?
+  func accessibilityValue() -> Number?
 }
 struct __progressIndicatorFlags {
   var isSpinning: UInt32
@@ -9025,10 +9026,10 @@ struct __progressIndicatorFlags {
 }
 extension NSProgressIndicator {
 }
-class NSResponder : NSObject, NSCoding {
+class NSResponder : Object, Coding {
   init()
-  init?(coder: NSCoder)
-  unowned(unsafe) var nextResponder: @sil_unmanaged NSResponder?
+  init?(coder: Coder)
+  unowned(unsafe) var next: @sil_unmanaged NSResponder?
   func tryToPerform(anAction: Selector, with anObject: AnyObject?) -> Bool
   func performKeyEquivalent(theEvent: NSEvent) -> Bool
   func validRequestorForSendType(sendType: String, returnType: String) -> AnyObject?
@@ -9051,18 +9052,18 @@ class NSResponder : NSObject, NSCoding {
   func tabletPoint(theEvent: NSEvent)
   func tabletProximity(theEvent: NSEvent)
   func cursorUpdate(event: NSEvent)
-  func magnifyWithEvent(event: NSEvent)
-  func rotateWithEvent(event: NSEvent)
-  func swipeWithEvent(event: NSEvent)
-  func beginGestureWithEvent(event: NSEvent)
-  func endGestureWithEvent(event: NSEvent)
-  func smartMagnifyWithEvent(event: NSEvent)
-  func touchesBeganWithEvent(event: NSEvent)
-  func touchesMovedWithEvent(event: NSEvent)
-  func touchesEndedWithEvent(event: NSEvent)
-  func touchesCancelledWithEvent(event: NSEvent)
-  func quickLookWithEvent(event: NSEvent)
-  func pressureChangeWithEvent(event: NSEvent)
+  func magnifyWith(event: NSEvent)
+  func rotateWith(event: NSEvent)
+  func swipeWith(event: NSEvent)
+  func beginGestureWith(event: NSEvent)
+  func endGestureWith(event: NSEvent)
+  func smartMagnifyWith(event: NSEvent)
+  func touchesBeganWith(event: NSEvent)
+  func touchesMovedWith(event: NSEvent)
+  func touchesEndedWith(event: NSEvent)
+  func touchesCancelledWith(event: NSEvent)
+  func quickLookWith(event: NSEvent)
+  func pressureChangeWith(event: NSEvent)
   func noResponderFor(eventSelector: Selector)
   var acceptsFirstResponder: Bool { get }
   func becomeFirstResponder() -> Bool
@@ -9073,14 +9074,14 @@ class NSResponder : NSObject, NSCoding {
   func showContextHelp(sender: AnyObject?)
   func helpRequested(eventPtr: NSEvent)
   func shouldBeTreatedAsInkEvent(theEvent: NSEvent) -> Bool
-  func wantsScrollEventsForSwipeTrackingOnAxis(axis: NSEventGestureAxis) -> Bool
-  func wantsForwardedScrollEventsForAxis(axis: NSEventGestureAxis) -> Bool
+  func wantsScrollEventsForSwipeTrackingOn(axis: NSEventGestureAxis) -> Bool
+  func wantsForwardedScrollEventsFor(axis: NSEventGestureAxis) -> Bool
   func supplementalTargetForAction(action: Selector, sender: AnyObject?) -> AnyObject?
-  func encodeWithCoder(aCoder: NSCoder)
+  func encodeWith(aCoder: Coder)
 }
 extension NSResponder {
   func insertText(insertString: AnyObject)
-  func doCommandBySelector(aSelector: Selector)
+  func doCommandBy(aSelector: Selector)
   func moveForward(sender: AnyObject?)
   func moveRight(sender: AnyObject?)
   func moveBackward(sender: AnyObject?)
@@ -9176,15 +9177,15 @@ extension NSResponder {
   func quickLookPreviewItems(sender: AnyObject?)
 }
 extension NSResponder {
-  var undoManager: NSUndoManager? { get }
+  var undoManager: UndoManager? { get }
 }
 extension NSResponder {
   func validateProposedFirstResponder(responder: NSResponder, forEvent event: NSEvent?) -> Bool
 }
 extension NSResponder {
-  func presentError(error: NSError, modalForWindow window: NSWindow, delegate: AnyObject?, didPresentSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
-  func presentError(error: NSError) -> Bool
-  func willPresentError(error: NSError) -> NSError
+  func presentError(error: Error, modalFor window: NSWindow, delegate: AnyObject?, didPresent didPresentSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func presentError(error: Error) -> Bool
+  func willPresentError(error: Error) -> Error
 }
 extension NSResponder {
   func performTextFinderAction(sender: AnyObject?)
@@ -9212,40 +9213,40 @@ class NSRuleEditor : NSControl {
   func reloadCriteria()
   var nestingMode: NSRuleEditorNestingMode
   var rowHeight: CGFloat
-  var editable: Bool
+  var isEditable: Bool
   var canRemoveAllRows: Bool
-  var predicate: NSPredicate? { get }
+  var predicate: Predicate? { get }
   func reloadPredicate()
-  func predicateForRow(row: Int) -> NSPredicate?
+  func predicateForRow(row: Int) -> Predicate?
   var numberOfRows: Int { get }
-  func subrowIndexesForRow(rowIndex: Int) -> NSIndexSet
+  func subrowIndexesForRow(rowIndex: Int) -> IndexSet
   func criteriaForRow(row: Int) -> [AnyObject]
   func displayValuesForRow(row: Int) -> [AnyObject]
   func rowForDisplayValue(displayValue: AnyObject) -> Int
   func rowTypeForRow(rowIndex: Int) -> NSRuleEditorRowType
   func parentRowForRow(rowIndex: Int) -> Int
   func addRow(sender: AnyObject?)
-  func insertRowAtIndex(rowIndex: Int, withType rowType: NSRuleEditorRowType, asSubrowOfRow parentRow: Int, animate shouldAnimate: Bool)
-  func setCriteria(criteria: [AnyObject], andDisplayValues values: [AnyObject], forRowAtIndex rowIndex: Int)
-  func removeRowAtIndex(rowIndex: Int)
-  func removeRowsAtIndexes(rowIndexes: NSIndexSet, includeSubrows: Bool)
-  @NSCopying var selectedRowIndexes: NSIndexSet { get }
-  func selectRowIndexes(indexes: NSIndexSet, byExtendingSelection extend: Bool)
+  func insertRowAt(rowIndex: Int, withType rowType: NSRuleEditorRowType, asSubrowOfRow parentRow: Int, animate shouldAnimate: Bool)
+  func setCriteria(criteria: [AnyObject], andDisplayValues values: [AnyObject], forRowAt rowIndex: Int)
+  func removeRowAt(rowIndex: Int)
+  func removeRowsAt(rowIndexes: IndexSet, includeSubrows: Bool)
+  @NSCopying var selectedRowIndexes: IndexSet { get }
+  func selectRowIndexes(indexes: IndexSet, byExtendingSelection extend: Bool)
   var rowClass: AnyClass
   var rowTypeKeyPath: String
   var subrowsKeyPath: String
   var criteriaKeyPath: String
   var displayValuesKeyPath: String
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
-protocol NSRuleEditorDelegate : NSObjectProtocol {
+protocol NSRuleEditorDelegate : ObjectProtocol {
   func ruleEditor(editor: NSRuleEditor, numberOfChildrenForCriterion criterion: AnyObject?, withRowType rowType: NSRuleEditorRowType) -> Int
   func ruleEditor(editor: NSRuleEditor, child index: Int, forCriterion criterion: AnyObject?, withRowType rowType: NSRuleEditorRowType) -> AnyObject
   func ruleEditor(editor: NSRuleEditor, displayValueForCriterion criterion: AnyObject, inRow row: Int) -> AnyObject
   optional func ruleEditor(editor: NSRuleEditor, predicatePartsForCriterion criterion: AnyObject, withDisplayValue value: AnyObject, inRow row: Int) -> [String : AnyObject]?
-  optional func ruleEditorRowsDidChange(notification: NSNotification)
+  optional func ruleEditorRowsDidChange(notification: Notification)
 }
 let NSRuleEditorPredicateLeftExpression: String
 let NSRuleEditorPredicateRightExpression: String
@@ -9255,24 +9256,24 @@ let NSRuleEditorPredicateOperatorType: String
 let NSRuleEditorPredicateCustomSelector: String
 let NSRuleEditorPredicateCompoundType: String
 let NSRuleEditorRowsDidChangeNotification: String
-class NSRulerMarker : NSObject, NSCopying, NSCoding {
-  init(rulerView ruler: NSRulerView, markerLocation location: CGFloat, image: NSImage, imageOrigin: NSPoint)
+class NSRulerMarker : Object, Copying, Coding {
+  init(rulerView ruler: NSRulerView, markerLocation location: CGFloat, image: NSImage, imageOrigin: Point)
   unowned(unsafe) var ruler: @sil_unmanaged NSRulerView { get }
   var markerLocation: CGFloat
   var image: NSImage
-  var imageOrigin: NSPoint
-  var movable: Bool
-  var removable: Bool
-  var dragging: Bool { get }
-  var representedObject: NSCopying?
-  var imageRectInRuler: NSRect { get }
+  var imageOrigin: Point
+  var isMovable: Bool
+  var isRemovable: Bool
+  var isDragging: Bool { get }
+  var representedObject: Copying?
+  var imageRectInRuler: Rect { get }
   var thicknessRequiredInRuler: CGFloat { get }
-  func drawRect(rect: NSRect)
+  func draw(rect: Rect)
   func trackMouse(mouseDownEvent: NSEvent, adding isAdding: Bool) -> Bool
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 struct __rFlags {
   var movable: UInt32
@@ -9290,7 +9291,7 @@ enum NSRulerOrientation : UInt {
   case VerticalRuler
 }
 class NSRulerView : NSView {
-  class func registerUnitWithName(unitName: String, abbreviation: String, unitToPointsConversionFactor conversionFactor: CGFloat, stepUpCycle: [NSNumber], stepDownCycle: [NSNumber])
+  class func registerUnitWithName(unitName: String, abbreviation: String, unitToPointsConversionFactor conversionFactor: CGFloat, stepUpCycle: [Number], stepDownCycle: [Number])
   init(scrollView: NSScrollView?, orientation: NSRulerOrientation)
   unowned(unsafe) var scrollView: @sil_unmanaged NSScrollView?
   var orientation: NSRulerOrientation
@@ -9309,26 +9310,26 @@ class NSRulerView : NSView {
   var accessoryView: NSView?
   func moveRulerlineFromLocation(oldLocation: CGFloat, toLocation newLocation: CGFloat)
   func invalidateHashMarks()
-  func drawHashMarksAndLabelsInRect(rect: NSRect)
-  func drawMarkersInRect(rect: NSRect)
-  var flipped: Bool { get }
-  convenience init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  func drawHashMarksAndLabelsIn(rect: Rect)
+  func drawMarkersIn(rect: Rect)
+  var isFlipped: Bool { get }
+  convenience init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 extension NSView {
-  func rulerView(ruler: NSRulerView, shouldMoveMarker marker: NSRulerMarker) -> Bool
-  func rulerView(ruler: NSRulerView, willMoveMarker marker: NSRulerMarker, toLocation location: CGFloat) -> CGFloat
-  func rulerView(ruler: NSRulerView, didMoveMarker marker: NSRulerMarker)
-  func rulerView(ruler: NSRulerView, shouldRemoveMarker marker: NSRulerMarker) -> Bool
-  func rulerView(ruler: NSRulerView, didRemoveMarker marker: NSRulerMarker)
-  func rulerView(ruler: NSRulerView, shouldAddMarker marker: NSRulerMarker) -> Bool
-  func rulerView(ruler: NSRulerView, willAddMarker marker: NSRulerMarker, atLocation location: CGFloat) -> CGFloat
-  func rulerView(ruler: NSRulerView, didAddMarker marker: NSRulerMarker)
+  func rulerView(ruler: NSRulerView, shouldMove marker: NSRulerMarker) -> Bool
+  func rulerView(ruler: NSRulerView, willMove marker: NSRulerMarker, toLocation location: CGFloat) -> CGFloat
+  func rulerView(ruler: NSRulerView, didMove marker: NSRulerMarker)
+  func rulerView(ruler: NSRulerView, shouldRemove marker: NSRulerMarker) -> Bool
+  func rulerView(ruler: NSRulerView, didRemove marker: NSRulerMarker)
+  func rulerView(ruler: NSRulerView, shouldAdd marker: NSRulerMarker) -> Bool
+  func rulerView(ruler: NSRulerView, willAdd marker: NSRulerMarker, atLocation location: CGFloat) -> CGFloat
+  func rulerView(ruler: NSRulerView, didAdd marker: NSRulerMarker)
   func rulerView(ruler: NSRulerView, handleMouseDown event: NSEvent)
   func rulerView(ruler: NSRulerView, willSetClientView newClient: NSView)
-  func rulerView(ruler: NSRulerView, locationForPoint aPoint: NSPoint) -> CGFloat
-  func rulerView(ruler: NSRulerView, pointForLocation aPoint: CGFloat) -> NSPoint
+  func rulerView(ruler: NSRulerView, locationFor aPoint: Point) -> CGFloat
+  func rulerView(ruler: NSRulerView, pointForLocation aPoint: CGFloat) -> Point
 }
 struct NSApplicationActivationOptions : OptionSetType {
   init(rawValue: UInt)
@@ -9343,29 +9344,29 @@ enum NSApplicationActivationPolicy : Int {
   case Accessory
   case Prohibited
 }
-class NSRunningApplication : NSObject {
-  var terminated: Bool { get }
-  var finishedLaunching: Bool { get }
-  var hidden: Bool { get }
-  var active: Bool { get }
+class NSRunningApplication : Object {
+  var isTerminated: Bool { get }
+  var isFinishedLaunching: Bool { get }
+  var isHidden: Bool { get }
+  var isActive: Bool { get }
   var ownsMenuBar: Bool { get }
   var activationPolicy: NSApplicationActivationPolicy { get }
   var localizedName: String? { get }
   var bundleIdentifier: String? { get }
-  @NSCopying var bundleURL: NSURL? { get }
-  @NSCopying var executableURL: NSURL? { get }
+  @NSCopying var bundleURL: URL? { get }
+  @NSCopying var executableURL: URL? { get }
   var processIdentifier: pid_t { get }
-  @NSCopying var launchDate: NSDate? { get }
+  @NSCopying var launchDate: Date? { get }
   var icon: NSImage? { get }
   var executableArchitecture: Int { get }
   func hide() -> Bool
   func unhide() -> Bool
-  func activateWithOptions(options: NSApplicationActivationOptions) -> Bool
+  func activate(options options: NSApplicationActivationOptions = []) -> Bool
   func terminate() -> Bool
   func forceTerminate() -> Bool
   class func runningApplicationsWithBundleIdentifier(bundleIdentifier: String) -> [NSRunningApplication]
   convenience init?(processIdentifier pid: pid_t)
-  class func currentApplication() -> Self
+  class func current() -> Self
   class func terminateAutomaticallyTerminableApplications()
   init()
 }
@@ -9408,16 +9409,16 @@ struct __SPFlags {
 }
 typealias _SPFlags = __SPFlags
 class NSSavePanel : NSPanel {
-  @NSCopying var URL: NSURL? { get }
-  @NSCopying var directoryURL: NSURL?
+  @NSCopying var url: URL? { get }
+  @NSCopying var directoryURL: URL?
   var allowedFileTypes: [String]?
   var allowsOtherFileTypes: Bool
   var accessoryView: NSView?
   unowned(unsafe) var delegate: @sil_unmanaged NSOpenSavePanelDelegate?
-  var expanded: Bool { get }
+  var isExpanded: Bool { get }
   var canCreateDirectories: Bool
   var canSelectHiddenExtension: Bool
-  var extensionHidden: Bool
+  var isExtensionHidden: Bool
   var treatsFilePackagesAsDirectories: Bool
   var prompt: String!
   var title: String!
@@ -9430,42 +9431,42 @@ class NSSavePanel : NSPanel {
   var tagNames: [String]?
   @IBAction func ok(sender: AnyObject?)
   @IBAction func cancel(sender: AnyObject?)
-  func beginSheetModalForWindow(window: NSWindow, completionHandler handler: (Int) -> Void)
+  func beginSheetModalFor(window: NSWindow, completionHandler handler: (Int) -> Void)
   func beginWithCompletionHandler(handler: (Int) -> Void)
   func runModal() -> Int
-  init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
-  convenience init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
+  init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
+  convenience init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
   convenience init(contentViewController: NSViewController)
   convenience init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init?(windowRef: UnsafeMutablePointer<Void>)
 }
-protocol NSOpenSavePanelDelegate : NSObjectProtocol {
-  optional func panel(sender: AnyObject, shouldEnableURL url: NSURL) -> Bool
-  optional func panel(sender: AnyObject, validateURL url: NSURL) throws
-  optional func panel(sender: AnyObject, didChangeToDirectoryURL url: NSURL?)
+protocol NSOpenSavePanelDelegate : ObjectProtocol {
+  optional func panel(sender: AnyObject, shouldEnable url: URL) -> Bool
+  optional func panel(sender: AnyObject, validate url: URL) throws
+  optional func panel(sender: AnyObject, didChangeToDirectoryURL url: URL?)
   optional func panel(sender: AnyObject, userEnteredFilename filename: String, confirmed okFlag: Bool) -> String?
   optional func panel(sender: AnyObject, willExpand expanding: Bool)
   optional func panelSelectionDidChange(sender: AnyObject?)
 }
-extension NSObject {
+extension Object {
 }
 extension NSSavePanel {
 }
-class NSScreen : NSObject {
+class NSScreen : Object {
   class func screens() -> [NSScreen]?
-  class func mainScreen() -> NSScreen?
-  class func deepestScreen() -> NSScreen?
+  class func main() -> NSScreen?
+  class func deepest() -> NSScreen?
   class func screensHaveSeparateSpaces() -> Bool
   var depth: NSWindowDepth { get }
-  var frame: NSRect { get }
-  var visibleFrame: NSRect { get }
+  var frame: Rect { get }
+  var visibleFrame: Rect { get }
   var deviceDescription: [String : AnyObject] { get }
   var colorSpace: NSColorSpace? { get }
   var supportedWindowDepths: UnsafePointer<NSWindowDepth> { get }
-  func convertRectToBacking(aRect: NSRect) -> NSRect
-  func convertRectFromBacking(aRect: NSRect) -> NSRect
-  func backingAlignedRect(aRect: NSRect, options: NSAlignmentOptions) -> NSRect
+  func convertRectToBacking(aRect: Rect) -> Rect
+  func convertRectFromBacking(aRect: Rect) -> Rect
+  func backingAlignedRect(aRect: Rect, options: AlignmentOptions = []) -> Rect
   var backingScaleFactor: CGFloat { get }
   init()
 }
@@ -9514,12 +9515,12 @@ struct __SFlags {
 }
 typealias _SFlags = __SFlags
 class NSScrollView : NSView, NSTextFinderBarContainer {
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
-  class func frameSizeForContentSize(cSize: NSSize, horizontalScrollerClass: AnyClass?, verticalScrollerClass: AnyClass?, borderType aType: NSBorderType, controlSize: NSControlSize, scrollerStyle: NSScrollerStyle) -> NSSize
-  class func contentSizeForFrameSize(fSize: NSSize, horizontalScrollerClass: AnyClass?, verticalScrollerClass: AnyClass?, borderType aType: NSBorderType, controlSize: NSControlSize, scrollerStyle: NSScrollerStyle) -> NSSize
-  var documentVisibleRect: NSRect { get }
-  var contentSize: NSSize { get }
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
+  class func frameSizeForContentSize(cSize: Size, horizontalScrollerClass: AnyClass?, verticalScrollerClass: AnyClass?, borderType aType: NSBorderType, controlSize: NSControlSize, scrollerStyle: NSScrollerStyle) -> Size
+  class func contentSizeForFrame(fSize: Size, horizontalScrollerClass: AnyClass?, verticalScrollerClass: AnyClass?, borderType aType: NSBorderType, controlSize: NSControlSize, scrollerStyle: NSScrollerStyle) -> Size
+  var documentVisibleRect: Rect { get }
+  var contentSize: Size { get }
   unowned(unsafe) var documentView: @sil_unmanaged AnyObject?
   var contentView: NSClipView
   var documentCursor: NSCursor?
@@ -9539,7 +9540,7 @@ class NSScrollView : NSView, NSTextFinderBarContainer {
   var pageScroll: CGFloat
   var scrollsDynamically: Bool
   func tile()
-  func reflectScrolledClipView(cView: NSClipView)
+  func reflectScrolledClip(cView: NSClipView)
   func scrollWheel(theEvent: NSEvent)
   var scrollerStyle: NSScrollerStyle
   var scrollerKnobStyle: NSScrollerKnobStyle
@@ -9551,15 +9552,15 @@ class NSScrollView : NSView, NSTextFinderBarContainer {
   var magnification: CGFloat
   var maxMagnification: CGFloat
   var minMagnification: CGFloat
-  func magnifyToFitRect(rect: NSRect)
-  func setMagnification(magnification: CGFloat, centeredAtPoint point: NSPoint)
+  func magnifyToFit(rect: Rect)
+  func setMagnification(magnification: CGFloat, centeredAt point: Point)
   func addFloatingSubview(view: NSView, forAxis axis: NSEventGestureAxis)
   var automaticallyAdjustsContentInsets: Bool
-  var contentInsets: NSEdgeInsets
-  var scrollerInsets: NSEdgeInsets
+  var contentInsets: EdgeInsets
+  var scrollerInsets: EdgeInsets
   convenience init()
   var findBarView: NSView?
-  var findBarVisible: Bool
+  var isFindBarVisible: Bool
   func findBarViewDidChangeHeight()
 }
 let NSScrollViewWillStartLiveMagnifyNotification: String
@@ -9633,27 +9634,27 @@ enum NSScrollerKnobStyle : Int {
 }
 class NSScroller : NSControl {
   class func isCompatibleWithOverlayScrollers() -> Bool
-  class func scrollerWidthForControlSize(controlSize: NSControlSize, scrollerStyle: NSScrollerStyle) -> CGFloat
+  class func scrollerWidthFor(controlSize: NSControlSize, scrollerStyle: NSScrollerStyle) -> CGFloat
   class func preferredScrollerStyle() -> NSScrollerStyle
   var scrollerStyle: NSScrollerStyle
   var knobStyle: NSScrollerKnobStyle
-  func rectForPart(partCode: NSScrollerPart) -> NSRect
+  func rectFor(partCode: NSScrollerPart) -> Rect
   func checkSpaceForParts()
   var usableParts: NSUsableScrollerParts { get }
   var arrowsPosition: NSScrollArrowPosition
   var controlTint: NSControlTint
   var controlSize: NSControlSize
-  func drawArrow(whichArrow: NSScrollerArrow, highlight flag: Bool)
+  func draw(whichArrow: NSScrollerArrow, highlight flag: Bool)
   func drawKnob()
-  func drawKnobSlotInRect(slotRect: NSRect, highlight flag: Bool)
+  func drawKnobSlotIn(slotRect: Rect, highlight flag: Bool)
   func highlight(flag: Bool)
-  func testPart(thePoint: NSPoint) -> NSScrollerPart
+  func testPart(thePoint: Point) -> NSScrollerPart
   func trackKnob(theEvent: NSEvent)
   func trackScrollButtons(theEvent: NSEvent)
   var hitPart: NSScrollerPart { get }
   var knobProportion: CGFloat
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 struct __sFlags2 {
@@ -9698,9 +9699,9 @@ protocol NSSearchFieldDelegate : NSTextFieldDelegate {
   optional func searchFieldDidEndSearching(sender: NSSearchField)
 }
 class NSSearchField : NSTextField {
-  func rectForSearchTextWhenCentered(isCentered: Bool) -> NSRect
-  func rectForSearchButtonWhenCentered(isCentered: Bool) -> NSRect
-  func rectForCancelButtonWhenCentered(isCentered: Bool) -> NSRect
+  func rectForSearchTextWhenCentered(isCentered: Bool) -> Rect
+  func rectForSearchButtonWhenCentered(isCentered: Bool) -> Rect
+  func rectForCancelButtonWhenCentered(isCentered: Bool) -> Rect
   var recentSearches: [String]
   var recentsAutosaveName: String?
   var searchMenuTemplate: NSMenu?
@@ -9709,8 +9710,8 @@ class NSSearchField : NSTextField {
   var sendsSearchStringImmediately: Bool
   unowned(unsafe) var delegate: @sil_unmanaged NSSearchFieldDelegate?
   var centersPlaceholder: Bool
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 var NSSearchFieldRecentsTitleMenuItemTag: Int32 { get }
@@ -9722,9 +9723,9 @@ class NSSearchFieldCell : NSTextFieldCell {
   var cancelButtonCell: NSButtonCell?
   func resetSearchButtonCell()
   func resetCancelButtonCell()
-  func searchTextRectForBounds(rect: NSRect) -> NSRect
-  func searchButtonRectForBounds(rect: NSRect) -> NSRect
-  func cancelButtonRectForBounds(rect: NSRect) -> NSRect
+  func searchTextRectForBounds(rect: Rect) -> Rect
+  func searchButtonRectForBounds(rect: Rect) -> Rect
+  func cancelButtonRectForBounds(rect: Rect) -> Rect
   var searchMenuTemplate: NSMenu?
   var sendsWholeSearchString: Bool
   var maximumRecents: Int
@@ -9734,7 +9735,7 @@ class NSSearchFieldCell : NSTextFieldCell {
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 struct __sfFlags {
   var sendsWholeSearchString: UInt32
@@ -9758,8 +9759,8 @@ struct __sfFlags {
   init(sendsWholeSearchString: UInt32, maximumRecents: UInt32, cancelVisible: UInt32, reserved2: UInt32, disableText: UInt32, menuTracking: UInt32, deferredUpdate: UInt32, sendsImmediately: UInt32, centeredLook: UInt32, renderingCentered: UInt32, becomeTransition: UInt32, resignTransition: UInt32, subclassOverridesRectForSearchButtonWhenCentered: UInt32, subclassOverridesRectForSearchTextWhenCentered: UInt32, subclassOverridesRectForCancelButtonWhenCentered: UInt32, resumeEditingOnCancel: UInt32, reserved: UInt32)
 }
 class NSSecureTextField : NSTextField {
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 class NSSecureTextFieldCell : NSTextFieldCell {
@@ -9767,7 +9768,7 @@ class NSSecureTextFieldCell : NSTextFieldCell {
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class NSSegmentedCell : NSActionCell {
   var segmentCount: Int
@@ -9795,11 +9796,11 @@ class NSSegmentedCell : NSActionCell {
   func setTag(tag: Int, forSegment segment: Int)
   func tagForSegment(segment: Int) -> Int
   var segmentStyle: NSSegmentStyle
-  func drawSegment(segment: Int, inFrame frame: NSRect, withView controlView: NSView)
+  func drawSegment(segment: Int, inFrame frame: Rect, withView controlView: NSView)
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 extension NSSegmentedCell {
   func interiorBackgroundStyleForSegment(segment: Int) -> NSBackgroundStyle
@@ -9843,22 +9844,22 @@ class NSSegmentedControl : NSControl {
   func setEnabled(enabled: Bool, forSegment segment: Int)
   func isEnabledForSegment(segment: Int) -> Bool
   var segmentStyle: NSSegmentStyle
-  var springLoaded: Bool
+  var isSpringLoaded: Bool
   var trackingMode: NSSegmentSwitchTracking
   var doubleValueForSelectedSegment: Double { get }
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
-class NSShadow : NSObject, NSCopying, NSCoding {
+class NSShadow : Object, Copying, Coding {
   init()
-  var shadowOffset: NSSize
+  var shadowOffset: Size
   var shadowBlurRadius: CGFloat
   @NSCopying var shadowColor: NSColor?
   func set()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 let NSSharingServiceNamePostOnFacebook: String
 let NSSharingServiceNamePostOnTwitter: String
@@ -9879,7 +9880,7 @@ let NSSharingServiceNamePostImageOnFlickr: String
 let NSSharingServiceNamePostVideoOnVimeo: String
 let NSSharingServiceNamePostVideoOnYouku: String
 let NSSharingServiceNamePostVideoOnTudou: String
-class NSSharingService : NSObject {
+class NSSharingService : Object {
   unowned(unsafe) var delegate: @sil_unmanaged NSSharingServiceDelegate?
   var title: String { get }
   var image: NSImage { get }
@@ -9888,9 +9889,9 @@ class NSSharingService : NSObject {
   var recipients: [String]?
   var subject: String?
   var messageBody: String? { get }
-  @NSCopying var permanentLink: NSURL? { get }
+  @NSCopying var permanentLink: URL? { get }
   var accountName: String? { get }
-  var attachmentFileURLs: [NSURL]? { get }
+  var attachmentFileURLs: [URL]? { get }
   class func sharingServicesForItems(items: [AnyObject]) -> [NSSharingService]
    init?(named serviceName: String)
   init(title: String, image: NSImage, alternateImage: NSImage?, handler block: () -> Void)
@@ -9904,23 +9905,23 @@ enum NSSharingContentScope : Int {
   case Partial
   case Full
 }
-protocol NSSharingServiceDelegate : NSObjectProtocol {
+protocol NSSharingServiceDelegate : ObjectProtocol {
   optional func sharingService(sharingService: NSSharingService, willShareItems items: [AnyObject])
-  optional func sharingService(sharingService: NSSharingService, didFailToShareItems items: [AnyObject], error: NSError)
+  optional func sharingService(sharingService: NSSharingService, didFailToShareItems items: [AnyObject], error: Error)
   optional func sharingService(sharingService: NSSharingService, didShareItems items: [AnyObject])
-  optional func sharingService(sharingService: NSSharingService, sourceFrameOnScreenForShareItem item: AnyObject) -> NSRect
-  optional func sharingService(sharingService: NSSharingService, transitionImageForShareItem item: AnyObject, contentRect: UnsafeMutablePointer<NSRect>) -> NSImage
+  optional func sharingService(sharingService: NSSharingService, sourceFrameOnScreenForShareItem item: AnyObject) -> Rect
+  optional func sharingService(sharingService: NSSharingService, transitionImageForShareItem item: AnyObject, contentRect: UnsafeMutablePointer<Rect>) -> NSImage
   optional func sharingService(sharingService: NSSharingService, sourceWindowForShareItems items: [AnyObject], sharingContentScope: UnsafeMutablePointer<NSSharingContentScope>) -> NSWindow?
 }
-class NSSharingServicePicker : NSObject {
+class NSSharingServicePicker : Object {
   unowned(unsafe) var delegate: @sil_unmanaged NSSharingServicePickerDelegate?
   init(items: [AnyObject])
-  func showRelativeToRect(rect: NSRect, ofView view: NSView, preferredEdge: NSRectEdge)
+  func showRelativeTo(rect: Rect, of view: NSView, preferredEdge: RectEdge)
 }
-protocol NSSharingServicePickerDelegate : NSObjectProtocol {
+protocol NSSharingServicePickerDelegate : ObjectProtocol {
   optional func sharingServicePicker(sharingServicePicker: NSSharingServicePicker, sharingServicesForItems items: [AnyObject], proposedSharingServices proposedServices: [NSSharingService]) -> [NSSharingService]
-  optional func sharingServicePicker(sharingServicePicker: NSSharingServicePicker, delegateForSharingService sharingService: NSSharingService) -> NSSharingServiceDelegate?
-  optional func sharingServicePicker(sharingServicePicker: NSSharingServicePicker, didChooseSharingService service: NSSharingService?)
+  optional func sharingServicePicker(sharingServicePicker: NSSharingServicePicker, delegateFor sharingService: NSSharingService) -> NSSharingServiceDelegate?
+  optional func sharingServicePicker(sharingServicePicker: NSSharingServicePicker, didChoose service: NSSharingService?)
 }
 class NSSlider : NSControl, NSAccessibilitySlider {
   var sliderType: NSSliderType
@@ -9930,8 +9931,8 @@ class NSSlider : NSControl, NSAccessibilitySlider {
   var knobThickness: CGFloat { get }
   var vertical: Int { get }
   func acceptsFirstMouse(theEvent: NSEvent?) -> Bool
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
   func accessibilityLabel() -> String?
   func accessibilityValue() -> AnyObject?
@@ -9942,9 +9943,9 @@ extension NSSlider {
   var numberOfTickMarks: Int
   var tickMarkPosition: NSTickMarkPosition
   var allowsTickMarkValuesOnly: Bool
-  func tickMarkValueAtIndex(index: Int) -> Double
-  func rectOfTickMarkAtIndex(index: Int) -> NSRect
-  func indexOfTickMarkAtPoint(point: NSPoint) -> Int
+  func tickMarkValueAt(index: Int) -> Double
+  func rectOfTickMarkAt(index: Int) -> Rect
+  func indexOfTickMarkAt(point: Point) -> Int
   func closestTickMarkValueToValue(value: Double) -> Double
 }
 enum NSTickMarkPosition : UInt {
@@ -9968,17 +9969,17 @@ class NSSliderCell : NSActionCell {
   var altIncrementValue: Double
   var sliderType: NSSliderType
   var vertical: Int { get }
-  var trackRect: NSRect { get }
+  var trackRect: Rect { get }
   var knobThickness: CGFloat { get }
-  func knobRectFlipped(flipped: Bool) -> NSRect
-  func drawKnob(knobRect: NSRect)
+  func knobRectFlipped(flipped: Bool) -> Rect
+  func drawKnob(knobRect: Rect)
   func drawKnob()
-  func barRectFlipped(flipped: Bool) -> NSRect
-  func drawBarInside(aRect: NSRect, flipped: Bool)
+  func barRectFlipped(flipped: Bool) -> Rect
+  func drawBarInside(aRect: Rect, flipped: Bool)
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 struct __sliderCellFlags {
   var weAreVertical: UInt32
@@ -10001,55 +10002,55 @@ extension NSSliderCell {
   var numberOfTickMarks: Int
   var tickMarkPosition: NSTickMarkPosition
   var allowsTickMarkValuesOnly: Bool
-  func tickMarkValueAtIndex(index: Int) -> Double
-  func rectOfTickMarkAtIndex(index: Int) -> NSRect
-  func indexOfTickMarkAtPoint(point: NSPoint) -> Int
+  func tickMarkValueAt(index: Int) -> Double
+  func rectOfTickMarkAt(index: Int) -> Rect
+  func indexOfTickMarkAt(point: Point) -> Int
   func closestTickMarkValueToValue(value: Double) -> Double
   func drawTickMarks()
 }
 let NSSoundPboardType: String
-class NSSound : NSObject, NSCopying, NSCoding, NSPasteboardReading, NSPasteboardWriting {
+class NSSound : Object, Copying, Coding, NSPasteboardReading, NSPasteboardWriting {
    init?(named name: String)
-  init?(contentsOfURL url: NSURL, byReference byRef: Bool)
+  init?(contentsOf url: URL, byReference byRef: Bool)
   init?(contentsOfFile path: String, byReference byRef: Bool)
-  init?(data: NSData)
+  init?(data: Data)
   func setName(string: String?) -> Bool
   var name: String? { get }
-  class func canInitWithPasteboard(pasteboard: NSPasteboard) -> Bool
+  class func canInitWith(pasteboard: NSPasteboard) -> Bool
   class func soundUnfilteredTypes() -> [String]
   init?(pasteboard: NSPasteboard)
-  func writeToPasteboard(pasteboard: NSPasteboard)
+  func writeTo(pasteboard: NSPasteboard)
   func play() -> Bool
   func pause() -> Bool
   func resume() -> Bool
   func stop() -> Bool
-  var playing: Bool { get }
+  var isPlaying: Bool { get }
   unowned(unsafe) var delegate: @sil_unmanaged NSSoundDelegate?
-  var duration: NSTimeInterval { get }
+  var duration: TimeInterval { get }
   var volume: Float
-  var currentTime: NSTimeInterval
+  var currentTime: TimeInterval
   var loops: Bool
   var playbackDeviceIdentifier: String?
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  class func readableTypesForPasteboard(pasteboard: NSPasteboard) -> [String]
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  class func readableTypesFor(pasteboard: NSPasteboard) -> [String]
   class func readingOptionsForType(type: String, pasteboard: NSPasteboard) -> NSPasteboardReadingOptions
   init?(pasteboardPropertyList propertyList: AnyObject, ofType type: String)
-  func writableTypesForPasteboard(pasteboard: NSPasteboard) -> [String]
+  func writableTypesFor(pasteboard: NSPasteboard) -> [String]
   func writingOptionsForType(type: String, pasteboard: NSPasteboard) -> NSPasteboardWritingOptions
   func pasteboardPropertyListForType(type: String) -> AnyObject?
 }
 extension NSSound {
 }
-protocol NSSoundDelegate : NSObjectProtocol {
+protocol NSSoundDelegate : ObjectProtocol {
   optional func sound(sound: NSSound, didFinishPlaying aBool: Bool)
 }
-extension NSBundle {
+extension Bundle {
   func pathForSoundResource(name: String) -> String?
 }
-class NSSpeechRecognizer : NSObject {
+class NSSpeechRecognizer : Object {
   init?()
   func startListening()
   func stopListening()
@@ -10059,7 +10060,7 @@ class NSSpeechRecognizer : NSObject {
   var listensInForegroundOnly: Bool
   var blocksOtherRecognizers: Bool
 }
-protocol NSSpeechRecognizerDelegate : NSObjectProtocol {
+protocol NSSpeechRecognizerDelegate : ObjectProtocol {
   optional func speechRecognizer(sender: NSSpeechRecognizer, didRecognizeCommand command: String)
 }
 let NSVoiceName: String
@@ -10080,14 +10081,14 @@ enum NSSpeechBoundary : UInt {
   case WordBoundary
   case SentenceBoundary
 }
-class NSSpeechSynthesizer : NSObject {
+class NSSpeechSynthesizer : Object {
   init?(voice: String?)
-  func startSpeakingString(string: String) -> Bool
-  func startSpeakingString(string: String, toURL url: NSURL) -> Bool
-  var speaking: Bool { get }
+  func startSpeaking(string: String) -> Bool
+  func startSpeaking(string: String, to url: URL) -> Bool
+  var isSpeaking: Bool { get }
   func stopSpeaking()
-  func stopSpeakingAtBoundary(boundary: NSSpeechBoundary)
-  func pauseSpeakingAtBoundary(boundary: NSSpeechBoundary)
+  func stopSpeakingAt(boundary: NSSpeechBoundary)
+  func pauseSpeakingAt(boundary: NSSpeechBoundary)
   func continueSpeaking()
   unowned(unsafe) var delegate: @sil_unmanaged NSSpeechSynthesizerDelegate?
   func voice() -> String?
@@ -10105,11 +10106,11 @@ class NSSpeechSynthesizer : NSObject {
   class func attributesForVoice(voice: String) -> [String : AnyObject]
   init()
 }
-protocol NSSpeechSynthesizerDelegate : NSObjectProtocol {
+protocol NSSpeechSynthesizerDelegate : ObjectProtocol {
   optional func speechSynthesizer(sender: NSSpeechSynthesizer, didFinishSpeaking finishedSpeaking: Bool)
-  optional func speechSynthesizer(sender: NSSpeechSynthesizer, willSpeakWord characterRange: NSRange, ofString string: String)
+  optional func speechSynthesizer(sender: NSSpeechSynthesizer, willSpeakWord characterRange: NSRange, of string: String)
   optional func speechSynthesizer(sender: NSSpeechSynthesizer, willSpeakPhoneme phonemeOpcode: Int16)
-  optional func speechSynthesizer(sender: NSSpeechSynthesizer, didEncounterErrorAtIndex characterIndex: Int, ofString string: String, message: String)
+  optional func speechSynthesizer(sender: NSSpeechSynthesizer, didEncounterErrorAt characterIndex: Int, of string: String, message: String)
   optional func speechSynthesizer(sender: NSSpeechSynthesizer, didEncounterSyncMessage message: String)
 }
 let NSSpeechStatusProperty: String
@@ -10156,17 +10157,17 @@ let NSSpeechDictionaryPronunciations: String
 let NSSpeechDictionaryAbbreviations: String
 let NSSpeechDictionaryEntrySpelling: String
 let NSSpeechDictionaryEntryPhonemes: String
-class NSSpellChecker : NSObject {
-  class func sharedSpellChecker() -> NSSpellChecker
+class NSSpellChecker : Object {
+  class func shared() -> NSSpellChecker
   class func sharedSpellCheckerExists() -> Bool
   class func uniqueSpellDocumentTag() -> Int
-  func checkSpellingOfString(stringToCheck: String, startingAt startingOffset: Int, language: String?, wrap wrapFlag: Bool, inSpellDocumentWithTag tag: Int, wordCount: UnsafeMutablePointer<Int>) -> NSRange
-  func checkSpellingOfString(stringToCheck: String, startingAt startingOffset: Int) -> NSRange
-  func countWordsInString(stringToCount: String, language: String?) -> Int
-  func checkGrammarOfString(stringToCheck: String, startingAt startingOffset: Int, language: String?, wrap wrapFlag: Bool, inSpellDocumentWithTag tag: Int, details: AutoreleasingUnsafeMutablePointer<NSArray?>) -> NSRange
-  func checkString(stringToCheck: String, range: NSRange, types checkingTypes: NSTextCheckingTypes, options: [String : AnyObject]?, inSpellDocumentWithTag tag: Int, orthography: AutoreleasingUnsafeMutablePointer<NSOrthography?>, wordCount: UnsafeMutablePointer<Int>) -> [NSTextCheckingResult]
-  func requestCheckingOfString(stringToCheck: String, range: NSRange, types checkingTypes: NSTextCheckingTypes, options: [String : AnyObject]?, inSpellDocumentWithTag tag: Int, completionHandler: ((Int, [NSTextCheckingResult], NSOrthography, Int) -> Void)?) -> Int
-  func menuForResult(result: NSTextCheckingResult, string checkedString: String, options: [String : AnyObject]?, atLocation location: NSPoint, inView view: NSView) -> NSMenu?
+  func checkSpellingOf(stringToCheck: String, startingAt startingOffset: Int, language: String?, wrap wrapFlag: Bool, inSpellDocumentWithTag tag: Int, wordCount: UnsafeMutablePointer<Int>) -> NSRange
+  func checkSpellingOf(stringToCheck: String, startingAt startingOffset: Int) -> NSRange
+  func countWordsIn(stringToCount: String, language: String?) -> Int
+  func checkGrammarOf(stringToCheck: String, startingAt startingOffset: Int, language: String?, wrap wrapFlag: Bool, inSpellDocumentWithTag tag: Int, details: AutoreleasingUnsafeMutablePointer<NSArray?>) -> NSRange
+  func check(stringToCheck: String, range: NSRange, types checkingTypes: TextCheckingTypes, options: [String : AnyObject]? = [:], inSpellDocumentWithTag tag: Int, orthography: AutoreleasingUnsafeMutablePointer<Orthography?>, wordCount: UnsafeMutablePointer<Int>) -> [TextCheckingResult]
+  func requestCheckingOf(stringToCheck: String, range: NSRange, types checkingTypes: TextCheckingTypes, options: [String : AnyObject]? = [:], inSpellDocumentWithTag tag: Int, completionHandler: ((Int, [TextCheckingResult], Orthography, Int) -> Void)? = nil) -> Int
+  func menuFor(result: TextCheckingResult, string checkedString: String, options: [String : AnyObject]? = [:], atLocation location: Point, in view: NSView) -> NSMenu?
   func userQuotesArrayForLanguage(language: String) -> [String]
   var userReplacementsDictionary: [String : String] { get }
   func updateSpellingPanelWithMisspelledWord(word: String)
@@ -10179,14 +10180,14 @@ class NSSpellChecker : NSObject {
   func ignoreWord(wordToIgnore: String, inSpellDocumentWithTag tag: Int)
   func ignoredWordsInSpellDocumentWithTag(tag: Int) -> [String]?
   func setIgnoredWords(words: [String], inSpellDocumentWithTag tag: Int)
-  func guessesForWordRange(range: NSRange, inString string: String, language: String?, inSpellDocumentWithTag tag: Int) -> [String]?
-  func correctionForWordRange(range: NSRange, inString string: String, language: String, inSpellDocumentWithTag tag: Int) -> String?
-  func completionsForPartialWordRange(range: NSRange, inString string: String, language: String?, inSpellDocumentWithTag tag: Int) -> [String]?
-  func languageForWordRange(range: NSRange, inString string: String, orthography: NSOrthography?) -> String?
+  func guessesForWordRange(range: NSRange, in string: String, language: String?, inSpellDocumentWithTag tag: Int) -> [String]?
+  func correctionForWordRange(range: NSRange, in string: String, language: String, inSpellDocumentWithTag tag: Int) -> String?
+  func completionsForPartialWordRange(range: NSRange, in string: String, language: String?, inSpellDocumentWithTag tag: Int) -> [String]?
+  func languageForWordRange(range: NSRange, in string: String, orthography: Orthography?) -> String?
   func closeSpellDocumentWithTag(tag: Int)
-  func recordResponse(response: NSCorrectionResponse, toCorrection correction: String, forWord word: String, language: String?, inSpellDocumentWithTag tag: Int)
-  func showCorrectionIndicatorOfType(type: NSCorrectionIndicatorType, primaryString: String, alternativeStrings: [String], forStringInRect rectOfTypedString: NSRect, view: NSView, completionHandler completionBlock: ((String!) -> Void)?)
-  func dismissCorrectionIndicatorForView(view: NSView)
+  func record(response: NSCorrectionResponse, toCorrection correction: String, forWord word: String, language: String?, inSpellDocumentWithTag tag: Int)
+  func showCorrectionIndicatorOf(type: NSCorrectionIndicatorType, primaryString: String, alternativeStrings: [String], forStringIn rectOfTypedString: Rect, view: NSView, completionHandler completionBlock: ((String!) -> Void)? = nil)
+  func dismissCorrectionIndicatorFor(view: NSView)
   var availableLanguages: [String] { get }
   var userPreferredLanguages: [String] { get }
   var automaticallyIdentifiesLanguages: Bool
@@ -10264,44 +10265,44 @@ enum NSSplitViewDividerStyle : Int {
   case PaneSplitter
 }
 class NSSplitView : NSView {
-  var vertical: Bool
+  var isVertical: Bool
   var dividerStyle: NSSplitViewDividerStyle
   var autosaveName: String?
   unowned(unsafe) var delegate: @sil_unmanaged NSSplitViewDelegate?
-  func drawDividerInRect(rect: NSRect)
+  func drawDividerIn(rect: Rect)
   @NSCopying var dividerColor: NSColor { get }
   var dividerThickness: CGFloat { get }
   func adjustSubviews()
   func isSubviewCollapsed(subview: NSView) -> Bool
-  func minPossiblePositionOfDividerAtIndex(dividerIndex: Int) -> CGFloat
-  func maxPossiblePositionOfDividerAtIndex(dividerIndex: Int) -> CGFloat
-  func setPosition(position: CGFloat, ofDividerAtIndex dividerIndex: Int)
-  func holdingPriorityForSubviewAtIndex(subviewIndex: Int) -> NSLayoutPriority
-  func setHoldingPriority(priority: NSLayoutPriority, forSubviewAtIndex subviewIndex: Int)
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  func minPossiblePositionOfDividerAt(dividerIndex: Int) -> CGFloat
+  func maxPossiblePositionOfDividerAt(dividerIndex: Int) -> CGFloat
+  func setPosition(position: CGFloat, ofDividerAt dividerIndex: Int)
+  func holdingPriorityForSubviewAt(subviewIndex: Int) -> NSLayoutPriority
+  func setHoldingPriority(priority: NSLayoutPriority, forSubviewAt subviewIndex: Int)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 extension NSSplitView {
   var arrangesAllSubviews: Bool
   var arrangedSubviews: [NSView] { get }
   func addArrangedSubview(view: NSView)
-  func insertArrangedSubview(view: NSView, atIndex index: Int)
+  func insertArrangedSubview(view: NSView, at index: Int)
   func removeArrangedSubview(view: NSView)
 }
-protocol NSSplitViewDelegate : NSObjectProtocol {
+protocol NSSplitViewDelegate : ObjectProtocol {
   optional func splitView(splitView: NSSplitView, canCollapseSubview subview: NSView) -> Bool
-  optional func splitView(splitView: NSSplitView, shouldCollapseSubview subview: NSView, forDoubleClickOnDividerAtIndex dividerIndex: Int) -> Bool
+  optional func splitView(splitView: NSSplitView, shouldCollapseSubview subview: NSView, forDoubleClickOnDividerAt dividerIndex: Int) -> Bool
   optional func splitView(splitView: NSSplitView, constrainMinCoordinate proposedMinimumPosition: CGFloat, ofSubviewAt dividerIndex: Int) -> CGFloat
   optional func splitView(splitView: NSSplitView, constrainMaxCoordinate proposedMaximumPosition: CGFloat, ofSubviewAt dividerIndex: Int) -> CGFloat
   optional func splitView(splitView: NSSplitView, constrainSplitPosition proposedPosition: CGFloat, ofSubviewAt dividerIndex: Int) -> CGFloat
-  optional func splitView(splitView: NSSplitView, resizeSubviewsWithOldSize oldSize: NSSize)
+  optional func splitView(splitView: NSSplitView, resizeSubviewsWithOldSize oldSize: Size)
   optional func splitView(splitView: NSSplitView, shouldAdjustSizeOfSubview view: NSView) -> Bool
-  optional func splitView(splitView: NSSplitView, shouldHideDividerAtIndex dividerIndex: Int) -> Bool
-  optional func splitView(splitView: NSSplitView, effectiveRect proposedEffectiveRect: NSRect, forDrawnRect drawnRect: NSRect, ofDividerAtIndex dividerIndex: Int) -> NSRect
-  optional func splitView(splitView: NSSplitView, additionalEffectiveRectOfDividerAtIndex dividerIndex: Int) -> NSRect
-  optional func splitViewWillResizeSubviews(notification: NSNotification)
-  optional func splitViewDidResizeSubviews(notification: NSNotification)
+  optional func splitView(splitView: NSSplitView, shouldHideDividerAt dividerIndex: Int) -> Bool
+  optional func splitView(splitView: NSSplitView, effectiveRect proposedEffectiveRect: Rect, forDrawnRect drawnRect: Rect, ofDividerAt dividerIndex: Int) -> Rect
+  optional func splitView(splitView: NSSplitView, additionalEffectiveRectOfDividerAt dividerIndex: Int) -> Rect
+  optional func splitViewWillResizeSubviews(notification: Notification)
+  optional func splitViewDidResizeSubviews(notification: Notification)
 }
 let NSSplitViewWillResizeSubviewsNotification: String
 let NSSplitViewDidResizeSubviewsNotification: String
@@ -10315,26 +10316,26 @@ class NSSplitViewController : NSViewController, NSSplitViewDelegate {
   /// The array of SplitViewItems that correspond to the current child view controllers. After a child view controller is added to the receiving splitViewController, a NSSplitViewItem with the default values will be created for it. Once the child is removed, its corresponding splitViewItem will be removed from the splitViewItems array. Setting this will call through to \c -insertSplitViewItem:atIndex and \c -removeSplitViewItem: for items that are new or need removal.
   var splitViewItems: [NSSplitViewItem]
   func addSplitViewItem(splitViewItem: NSSplitViewItem)
-  func insertSplitViewItem(splitViewItem: NSSplitViewItem, atIndex index: Int)
+  func insertSplitViewItem(splitViewItem: NSSplitViewItem, at index: Int)
   func removeSplitViewItem(splitViewItem: NSSplitViewItem)
-  func splitViewItemForViewController(viewController: NSViewController) -> NSSplitViewItem?
+  func splitViewItemFor(viewController: NSViewController) -> NSSplitViewItem?
   var minimumThicknessForInlineSidebars: CGFloat
   func viewDidLoad()
   func splitView(splitView: NSSplitView, canCollapseSubview subview: NSView) -> Bool
-  func splitView(splitView: NSSplitView, shouldCollapseSubview subview: NSView, forDoubleClickOnDividerAtIndex dividerIndex: Int) -> Bool
-  func splitView(splitView: NSSplitView, shouldHideDividerAtIndex dividerIndex: Int) -> Bool
-  func splitView(splitView: NSSplitView, effectiveRect proposedEffectiveRect: NSRect, forDrawnRect drawnRect: NSRect, ofDividerAtIndex dividerIndex: Int) -> NSRect
-  func splitView(splitView: NSSplitView, additionalEffectiveRectOfDividerAtIndex dividerIndex: Int) -> NSRect
-  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder: NSCoder)
+  func splitView(splitView: NSSplitView, shouldCollapseSubview subview: NSView, forDoubleClickOnDividerAt dividerIndex: Int) -> Bool
+  func splitView(splitView: NSSplitView, shouldHideDividerAt dividerIndex: Int) -> Bool
+  func splitView(splitView: NSSplitView, effectiveRect proposedEffectiveRect: Rect, forDrawnRect drawnRect: Rect, ofDividerAt dividerIndex: Int) -> Rect
+  func splitView(splitView: NSSplitView, additionalEffectiveRectOfDividerAt dividerIndex: Int) -> Rect
+  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder: Coder)
   convenience init()
   func splitView(splitView: NSSplitView, constrainMinCoordinate proposedMinimumPosition: CGFloat, ofSubviewAt dividerIndex: Int) -> CGFloat
   func splitView(splitView: NSSplitView, constrainMaxCoordinate proposedMaximumPosition: CGFloat, ofSubviewAt dividerIndex: Int) -> CGFloat
   func splitView(splitView: NSSplitView, constrainSplitPosition proposedPosition: CGFloat, ofSubviewAt dividerIndex: Int) -> CGFloat
-  func splitView(splitView: NSSplitView, resizeSubviewsWithOldSize oldSize: NSSize)
+  func splitView(splitView: NSSplitView, resizeSubviewsWithOldSize oldSize: Size)
   func splitView(splitView: NSSplitView, shouldAdjustSizeOfSubview view: NSView) -> Bool
-  func splitViewWillResizeSubviews(notification: NSNotification)
-  func splitViewDidResizeSubviews(notification: NSNotification)
+  func splitViewWillResizeSubviews(notification: Notification)
+  func splitViewDidResizeSubviews(notification: Notification)
 }
 extension NSSplitViewController {
   /// Animatedly collapses or uncollapses the first sidebar split view item in the receiver. Does nothing if the receiver does not contain any sidebars.
@@ -10361,7 +10362,7 @@ enum NSSplitViewItemCollapseBehavior : Int {
 }
 /// This constant can be used with any sizing related \c NSSplitViewItem properties to unset their values.
 let NSSplitViewItemUnspecifiedDimension: CGFloat
-class NSSplitViewItem : NSObject, NSAnimatablePropertyContainer, NSCoding {
+class NSSplitViewItem : Object, NSAnimatablePropertyContainer, Coding {
   convenience init(viewController: NSViewController)
   convenience init(sidebarWithViewController viewController: NSViewController)
   convenience init(contentListWithViewController viewController: NSViewController)
@@ -10370,7 +10371,7 @@ class NSSplitViewItem : NSObject, NSAnimatablePropertyContainer, NSCoding {
   /// The view controller represented by the SplitViewItem. An exception will be thrown if a new viewController is set while the receiving SplitViewItem is added to a SplitViewController.
   var viewController: NSViewController
   /// Whether or not the child ViewController corresponding to the SplitViewItem is collapsed in the SplitViewController. The default is \c NO. This can be set with the animator proxy to animate the collapse or uncollapse. The exact animation used can be customized by setting it in the -animations dictionary with a key of "collapsed". If this is set to YES before it is added to the SplitViewController, it will be initially collapsed and the SplitViewController will not cause the view to be loaded until it is uncollapsed. This is KVC/KVO compliant and will be updated if the value changes from user interaction.
-  var collapsed: Bool
+  var isCollapsed: Bool
   /// Whether or not the child view controller is collapsible from user interaction - whether by dragging or double clicking a divider. The default is \c NO.
   var canCollapse: Bool
   /// The resize behavior when the receiver toggles its `collapsed` state programmatically, both animatedly and not. Defaults to `.Default`.
@@ -10386,14 +10387,14 @@ class NSSplitViewItem : NSObject, NSAnimatablePropertyContainer, NSCoding {
   /// The maximum thickness of the split view item when resizing due to automatic sizing, such as entering fullscreen with a set preferredThicknessFraction or proportional sizing. The user can still resize up to the absolute maximum size by dragging the divider or otherwise. If NSSplitViewItemUnspecifiedDimension, no automatic maximum is enforced. Defaults to NSSplitViewItemUnspecifiedDimension.
   var automaticMaximumThickness: CGFloat
   /// If YES, the split view item can be temporarily uncollapsed during a drag by hovering or deep clicking on its neighboring divider. Defaults to NO.
-  var springLoaded: Bool
+  var isSpringLoaded: Bool
   init()
   func animator() -> Self
   var animations: [String : AnyObject]
   func animationForKey(key: String) -> AnyObject?
   class func defaultAnimationForKey(key: String) -> AnyObject?
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 enum NSStackViewGravity : Int {
   init?(rawValue: Int)
@@ -10430,40 +10431,40 @@ class NSStackView : NSView {
   unowned(unsafe) var delegate: @sil_unmanaged NSStackViewDelegate?
   var orientation: NSUserInterfaceLayoutOrientation
   var alignment: NSLayoutAttribute
-  var edgeInsets: NSEdgeInsets
-  func addView(aView: NSView, inGravity gravity: NSStackViewGravity)
-  func insertView(aView: NSView, atIndex index: Int, inGravity gravity: NSStackViewGravity)
-  func removeView(aView: NSView)
-  func viewsInGravity(gravity: NSStackViewGravity) -> [NSView]
-  func setViews(views: [NSView], inGravity gravity: NSStackViewGravity)
+  var edgeInsets: EdgeInsets
+  func add(aView: NSView, in gravity: NSStackViewGravity)
+  func insert(aView: NSView, at index: Int, in gravity: NSStackViewGravity)
+  func remove(aView: NSView)
+  func viewsIn(gravity: NSStackViewGravity) -> [NSView]
+  func setViews(views: [NSView], in gravity: NSStackViewGravity)
   var views: [NSView] { get }
   var detachedViews: [NSView] { get }
   /// If YES, when a stacked view's `hidden` property is set to YES, the view will be detached from the stack and reattached when set to NO. Similarly, if the view has a lowered visibility priority and is detached from the stack view, it will be set as `hidden` rather than removed from the view hierarchy. Defaults to YES for apps linked on the 10.11 SDK or later.
   var detachesHiddenViews: Bool
   func setVisibilityPriority(priority: NSStackViewVisibilityPriority, forView aView: NSView)
-  func visibilityPriorityForView(aView: NSView) -> NSStackViewVisibilityPriority
+  func visibilityPriorityFor(aView: NSView) -> NSStackViewVisibilityPriority
   var spacing: CGFloat
-  func setCustomSpacing(spacing: CGFloat, afterView aView: NSView)
-  func customSpacingAfterView(aView: NSView) -> CGFloat
+  func setCustomSpacing(spacing: CGFloat, after aView: NSView)
+  func customSpacingAfter(aView: NSView) -> CGFloat
   /// The spacing and sizing distribution of stacked views along the primary axis. Defaults to GravityAreas.
   var distribution: NSStackViewDistribution
-  func clippingResistancePriorityForOrientation(orientation: NSLayoutConstraintOrientation) -> NSLayoutPriority
+  func clippingResistancePriorityFor(orientation: NSLayoutConstraintOrientation) -> NSLayoutPriority
   func setClippingResistancePriority(clippingResistancePriority: NSLayoutPriority, forOrientation orientation: NSLayoutConstraintOrientation)
-  func huggingPriorityForOrientation(orientation: NSLayoutConstraintOrientation) -> NSLayoutPriority
+  func huggingPriorityFor(orientation: NSLayoutConstraintOrientation) -> NSLayoutPriority
   func setHuggingPriority(huggingPriority: NSLayoutPriority, forOrientation orientation: NSLayoutConstraintOrientation)
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 extension NSStackView {
   /// The list of views that are arranged in a stack by the receiver. They are a subset of \c -subviews, with potential difference in ordering.
   var arrangedSubviews: [NSView] { get }
   func addArrangedSubview(view: NSView)
-  func insertArrangedSubview(view: NSView, atIndex index: Int)
+  func insertArrangedSubview(view: NSView, at index: Int)
   func removeArrangedSubview(view: NSView)
 }
-protocol NSStackViewDelegate : NSObjectProtocol {
-  optional func stackView(stackView: NSStackView, willDetachViews views: [NSView])
+protocol NSStackViewDelegate : ObjectProtocol {
+  optional func stackView(stackView: NSStackView, willDetach views: [NSView])
   optional func stackView(stackView: NSStackView, didReattachViews views: [NSView])
 }
 extension NSStackView {
@@ -10471,22 +10472,22 @@ extension NSStackView {
 }
 let NSVariableStatusItemLength: CGFloat
 let NSSquareStatusItemLength: CGFloat
-class NSStatusBar : NSObject {
-  class func systemStatusBar() -> NSStatusBar
+class NSStatusBar : Object {
+  class func system() -> NSStatusBar
   func statusItemWithLength(length: CGFloat) -> NSStatusItem
-  func removeStatusItem(item: NSStatusItem)
-  var vertical: Bool { get }
+  func remove(item: NSStatusItem)
+  var isVertical: Bool { get }
   var thickness: CGFloat { get }
   init()
 }
 class NSStatusBarButton : NSButton {
   /// When YES the status bar icon has a disabled/off appearance while still being functional, such as allowing selection and actions. Defaults to NO.
   var appearsDisabled: Bool
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
-class NSStatusItem : NSObject {
+class NSStatusItem : Object {
   /// The status bar that the receiver is displayed in.
   unowned(unsafe) var statusBar: @sil_unmanaged NSStatusBar { get }
   /// The amount of space in the status bar that should be allocated to the receiver. \c NSVariableStatusItemLength will adjust the length to the size of the status item's contents and \c NSSquareStatusItemLength will keep the length the same as the status bar's height.
@@ -10502,16 +10503,16 @@ extension NSStatusItem {
   var doubleAction: Selector
   weak var target: @sil_weak AnyObject?
   var title: String?
-  @NSCopying var attributedTitle: NSAttributedString?
+  @NSCopying var attributedTitle: AttributedString?
   var image: NSImage?
   var alternateImage: NSImage?
-  var enabled: Bool
+  var isEnabled: Bool
   var highlightMode: Bool
   var toolTip: String?
   func sendActionOn(mask: Int) -> Int
   var view: NSView?
-  func drawStatusBarBackgroundInRect(rect: NSRect, withHighlight highlight: Bool)
-  func popUpStatusItemMenu(menu: NSMenu)
+  func drawStatusBarBackgroundIn(rect: Rect, withHighlight highlight: Bool)
+  func popUpMenu(menu: NSMenu)
 }
 class NSStepper : NSControl, NSAccessibilityStepper {
   var minValue: Double
@@ -10519,8 +10520,8 @@ class NSStepper : NSControl, NSAccessibilityStepper {
   var increment: Double
   var valueWraps: Bool
   var autorepeat: Bool
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
   func accessibilityLabel() -> String?
   func accessibilityPerformIncrement() -> Bool
@@ -10536,10 +10537,10 @@ class NSStepperCell : NSActionCell {
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-class NSStoryboard : NSObject {
-  convenience init(name: String, bundle storyboardBundleOrNil: NSBundle?)
+class NSStoryboard : Object {
+  convenience init(name: String, bundle storyboardBundleOrNil: Bundle?)
   func instantiateInitialController() -> AnyObject?
   func instantiateControllerWithIdentifier(identifier: String) -> AnyObject
   init()
@@ -10549,7 +10550,7 @@ struct _storyboardFlags {
   init()
   init(reserved: UInt32)
 }
-class NSStoryboardSegue : NSObject {
+class NSStoryboardSegue : Object {
   convenience init(identifier: String, source sourceController: AnyObject, destination destinationController: AnyObject, performHandler: () -> Void)
   init(identifier: String, source sourceController: AnyObject, destination destinationController: AnyObject)
   var identifier: String? { get }
@@ -10558,26 +10559,26 @@ class NSStoryboardSegue : NSObject {
   func perform()
   convenience init()
 }
-protocol NSSeguePerforming : NSObjectProtocol {
-  optional func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?)
+protocol NSSeguePerforming : ObjectProtocol {
+  optional func prepareFor(segue: NSStoryboardSegue, sender: AnyObject?)
   optional func performSegueWithIdentifier(identifier: String, sender: AnyObject?)
   optional func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool
 }
-class NSStringDrawingContext : NSObject {
+class NSStringDrawingContext : Object {
   var minimumScaleFactor: CGFloat
   var actualScaleFactor: CGFloat { get }
-  var totalBounds: NSRect { get }
+  var totalBounds: Rect { get }
   init()
 }
 extension NSString {
-  func sizeWithAttributes(attrs: [String : AnyObject]?) -> NSSize
-  func drawAtPoint(point: NSPoint, withAttributes attrs: [String : AnyObject]?)
-  func drawInRect(rect: NSRect, withAttributes attrs: [String : AnyObject]?)
+  func size(attributes attrs: [String : AnyObject]? = [:]) -> Size
+  func drawAt(point: Point, withAttributes attrs: [String : AnyObject]? = [:])
+  func drawIn(rect: Rect, withAttributes attrs: [String : AnyObject]? = [:])
 }
-extension NSAttributedString {
-  func size() -> NSSize
-  func drawAtPoint(point: NSPoint)
-  func drawInRect(rect: NSRect)
+extension AttributedString {
+  func size() -> Size
+  func drawAt(point: Point)
+  func drawIn(rect: Rect)
 }
 struct NSStringDrawingOptions : OptionSetType {
   init(rawValue: Int)
@@ -10590,20 +10591,20 @@ struct NSStringDrawingOptions : OptionSetType {
   static var OneShot: NSStringDrawingOptions { get }
 }
 extension NSString {
-  func drawWithRect(rect: NSRect, options: NSStringDrawingOptions, attributes: [String : AnyObject]?, context: NSStringDrawingContext?)
-  func boundingRectWithSize(size: NSSize, options: NSStringDrawingOptions, attributes: [String : AnyObject]?, context: NSStringDrawingContext?) -> NSRect
+  func drawWith(rect: Rect, options: NSStringDrawingOptions = [], attributes: [String : AnyObject]? = [:], context: NSStringDrawingContext?)
+  func boundingRectWith(size: Size, options: NSStringDrawingOptions = [], attributes: [String : AnyObject]? = [:], context: NSStringDrawingContext?) -> Rect
 }
-extension NSAttributedString {
-  func drawWithRect(rect: NSRect, options: NSStringDrawingOptions, context: NSStringDrawingContext?)
-  func boundingRectWithSize(size: NSSize, options: NSStringDrawingOptions, context: NSStringDrawingContext?) -> NSRect
+extension AttributedString {
+  func drawWith(rect: Rect, options: NSStringDrawingOptions = [], context: NSStringDrawingContext?)
+  func boundingRectWith(size: Size, options: NSStringDrawingOptions = [], context: NSStringDrawingContext?) -> Rect
 }
 extension NSString {
-  func drawWithRect(rect: NSRect, options: NSStringDrawingOptions, attributes: [String : AnyObject]?)
-  func boundingRectWithSize(size: NSSize, options: NSStringDrawingOptions, attributes: [String : AnyObject]?) -> NSRect
+  func drawWith(rect: Rect, options: NSStringDrawingOptions = [], attributes: [String : AnyObject]? = [:])
+  func boundingRectWith(size: Size, options: NSStringDrawingOptions = [], attributes: [String : AnyObject]? = [:]) -> Rect
 }
-extension NSAttributedString {
-  func drawWithRect(rect: NSRect, options: NSStringDrawingOptions)
-  func boundingRectWithSize(size: NSSize, options: NSStringDrawingOptions) -> NSRect
+extension AttributedString {
+  func drawWith(rect: Rect, options: NSStringDrawingOptions = [])
+  func boundingRectWith(size: Size, options: NSStringDrawingOptions = []) -> Rect
 }
 var NSAppKitVersionNumberWithDirectionalTabs: Double { get }
 enum NSTabViewType : UInt {
@@ -10618,12 +10619,12 @@ enum NSTabViewType : UInt {
   case NoTabsNoBorder
 }
 class NSTabView : NSView {
-  func selectTabViewItem(tabViewItem: NSTabViewItem?)
-  func selectTabViewItemAtIndex(index: Int)
-  func selectTabViewItemWithIdentifier(identifier: AnyObject)
+  func select(tabViewItem: NSTabViewItem?)
+  func selectItemAt(index: Int)
+  func selectItemWithIdentifier(identifier: AnyObject)
   func takeSelectedTabViewItemFromSender(sender: AnyObject?)
   func selectFirstTabViewItem(sender: AnyObject?)
-  func selectLastTabViewItem(sender: AnyObject?)
+  func selectLastItem(sender: AnyObject?)
   func selectNextTabViewItem(sender: AnyObject?)
   func selectPreviousTabViewItem(sender: AnyObject?)
   var selectedTabViewItem: NSTabViewItem? { get }
@@ -10631,22 +10632,22 @@ class NSTabView : NSView {
   var tabViewType: NSTabViewType
   var tabViewItems: [NSTabViewItem] { get }
   var allowsTruncatedLabels: Bool
-  var minimumSize: NSSize { get }
+  var minimumSize: Size { get }
   var drawsBackground: Bool
   var controlTint: NSControlTint
   var controlSize: NSControlSize
-  func addTabViewItem(tabViewItem: NSTabViewItem)
-  func insertTabViewItem(tabViewItem: NSTabViewItem, atIndex index: Int)
-  func removeTabViewItem(tabViewItem: NSTabViewItem)
+  func add(tabViewItem: NSTabViewItem)
+  func insert(tabViewItem: NSTabViewItem, at index: Int)
+  func remove(tabViewItem: NSTabViewItem)
   unowned(unsafe) var delegate: @sil_unmanaged NSTabViewDelegate?
-  func tabViewItemAtPoint(point: NSPoint) -> NSTabViewItem?
-  var contentRect: NSRect { get }
+  func tabViewItemAt(point: Point) -> NSTabViewItem?
+  var contentRect: Rect { get }
   var numberOfTabViewItems: Int { get }
-  func indexOfTabViewItem(tabViewItem: NSTabViewItem) -> Int
-  func tabViewItemAtIndex(index: Int) -> NSTabViewItem
+  func indexOf(tabViewItem: NSTabViewItem) -> Int
+  func tabViewItemAt(index: Int) -> NSTabViewItem
   func indexOfTabViewItemWithIdentifier(identifier: AnyObject) -> Int
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 struct __NSTabViewDelegateRespondTo {
@@ -10673,10 +10674,10 @@ struct __NSTabViewFlags {
   init()
   init(needsLayout: UInt32, controlTint: UInt32, controlSize: UInt32, wiringNibConnections: UInt32, wiringInteriorLastKeyView: UInt32, originalNextKeyViewChanged: UInt32, liveResizeSkippedResetToolTips: UInt32, subviewsAddedForTabs: UInt32, allowsPropertyChange: UInt32, ownedByTabViewController: UInt32, reserved: UInt32)
 }
-protocol NSTabViewDelegate : NSObjectProtocol {
-  optional func tabView(tabView: NSTabView, shouldSelectTabViewItem tabViewItem: NSTabViewItem?) -> Bool
-  optional func tabView(tabView: NSTabView, willSelectTabViewItem tabViewItem: NSTabViewItem?)
-  optional func tabView(tabView: NSTabView, didSelectTabViewItem tabViewItem: NSTabViewItem?)
+protocol NSTabViewDelegate : ObjectProtocol {
+  optional func tabView(tabView: NSTabView, shouldSelect tabViewItem: NSTabViewItem?) -> Bool
+  optional func tabView(tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?)
+  optional func tabView(tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?)
   optional func tabViewDidChangeNumberOfTabViewItems(tabView: NSTabView)
 }
 enum NSTabViewControllerTabStyle : Int {
@@ -10705,23 +10706,23 @@ class NSTabViewController : NSViewController, NSTabViewDelegate, NSToolbarDelega
   /// Read and write the current selected TabViewItem that is being shown. This value is KVC compliant and can be the target of a binding. For instance, a NSSegmentedControl's selection can be bound to this value with: \code [segmentedControl bind:NSSelectedIndexBinding toObject:tabViewController withKeyPath:@“selectedTabViewItemIndex" options:nil];
   var selectedTabViewItemIndex: Int
   func addTabViewItem(tabViewItem: NSTabViewItem)
-  func insertTabViewItem(tabViewItem: NSTabViewItem, atIndex index: Int)
+  func insertTabViewItem(tabViewItem: NSTabViewItem, at index: Int)
   func removeTabViewItem(tabViewItem: NSTabViewItem)
-  func tabViewItemForViewController(viewController: NSViewController) -> NSTabViewItem?
+  func tabViewItemFor(viewController: NSViewController) -> NSTabViewItem?
   func viewDidLoad()
-  func tabView(tabView: NSTabView, willSelectTabViewItem tabViewItem: NSTabViewItem?)
-  func tabView(tabView: NSTabView, didSelectTabViewItem tabViewItem: NSTabViewItem?)
-  func tabView(tabView: NSTabView, shouldSelectTabViewItem tabViewItem: NSTabViewItem?) -> Bool
+  func tabView(tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?)
+  func tabView(tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?)
+  func tabView(tabView: NSTabView, shouldSelect tabViewItem: NSTabViewItem?) -> Bool
   func toolbar(toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: String, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem?
   func toolbarDefaultItemIdentifiers(toolbar: NSToolbar) -> [String]
   func toolbarAllowedItemIdentifiers(toolbar: NSToolbar) -> [String]
   func toolbarSelectableItemIdentifiers(toolbar: NSToolbar) -> [String]
-  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder: NSCoder)
+  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder: Coder)
   convenience init()
   func tabViewDidChangeNumberOfTabViewItems(tabView: NSTabView)
-  func toolbarWillAddItem(notification: NSNotification)
-  func toolbarDidRemoveItem(notification: NSNotification)
+  func toolbarWillAddItem(notification: Notification)
+  func toolbarDidRemoveItem(notification: Notification)
 }
 enum NSTabState : UInt {
   init?(rawValue: UInt)
@@ -10730,7 +10731,7 @@ enum NSTabState : UInt {
   case BackgroundTab
   case PressedTab
 }
-class NSTabViewItem : NSObject, NSCoding {
+class NSTabViewItem : Object, Coding {
   convenience init(viewController: NSViewController)
   init(identifier: AnyObject)
   var identifier: AnyObject
@@ -10744,11 +10745,11 @@ class NSTabViewItem : NSObject, NSCoding {
   var tabView: NSTabView? { get }
   unowned(unsafe) var initialFirstResponder: @sil_unmanaged NSView?
   var toolTip: String?
-  func drawLabel(shouldTruncateLabel: Bool, inRect labelRect: NSRect)
-  func sizeOfLabel(computeMin: Bool) -> NSSize
+  func drawLabel(shouldTruncateLabel: Bool, in labelRect: Rect)
+  func sizeOfLabel(computeMin: Bool) -> Size
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 struct __tviFlags {
   var hasCustomColor: UInt32
@@ -10767,8 +10768,8 @@ class NSTableCellView : NSView {
   var backgroundStyle: NSBackgroundStyle
   var rowSizeStyle: NSTableViewRowSizeStyle
   var draggingImageComponents: [NSDraggingImageComponent] { get }
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 struct NSTableColumnResizingOptions : OptionSetType {
@@ -10778,7 +10779,7 @@ struct NSTableColumnResizingOptions : OptionSetType {
   static var AutoresizingMask: NSTableColumnResizingOptions { get }
   static var UserResizingMask: NSTableColumnResizingOptions { get }
 }
-class NSTableColumn : NSObject, NSCoding, NSUserInterfaceItemIdentification {
+class NSTableColumn : Object, Coding, NSUserInterfaceItemIdentification {
   init(identifier: String)
   var identifier: String
   unowned(unsafe) var tableView: @sil_unmanaged NSTableView?
@@ -10787,15 +10788,15 @@ class NSTableColumn : NSObject, NSCoding, NSUserInterfaceItemIdentification {
   var maxWidth: CGFloat
   var title: String
   var headerCell: NSTableHeaderCell
-  var editable: Bool
+  var isEditable: Bool
   func sizeToFit()
-  @NSCopying var sortDescriptorPrototype: NSSortDescriptor?
+  @NSCopying var sortDescriptorPrototype: SortDescriptor?
   var resizingMask: NSTableColumnResizingOptions
   var headerToolTip: String?
-  var hidden: Bool
+  var isHidden: Bool
   convenience init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 struct __colFlags {
   var oldIsResizable: UInt32
@@ -10814,45 +10815,45 @@ extension NSTableColumn {
   func dataCellForRow(row: Int) -> AnyObject
 }
 class NSTableHeaderCell : NSTextFieldCell {
-  func drawSortIndicatorWithFrame(cellFrame: NSRect, inView controlView: NSView, ascending: Bool, priority: Int)
-  func sortIndicatorRectForBounds(theRect: NSRect) -> NSRect
+  func drawSortIndicatorWithFrame(cellFrame: Rect, in controlView: NSView, ascending: Bool, priority: Int)
+  func sortIndicatorRectForBounds(theRect: Rect) -> Rect
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class NSTableHeaderView : NSView {
   unowned(unsafe) var tableView: @sil_unmanaged NSTableView?
   var draggedColumn: Int { get }
   var draggedDistance: CGFloat { get }
   var resizedColumn: Int { get }
-  func headerRectOfColumn(column: Int) -> NSRect
-  func columnAtPoint(point: NSPoint) -> Int
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  func headerRectOfColumn(column: Int) -> Rect
+  func columnAt(point: Point) -> Int
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 class NSTableRowView : NSView, NSAccessibilityRow {
   var selectionHighlightStyle: NSTableViewSelectionHighlightStyle
-  var emphasized: Bool
-  var groupRowStyle: Bool
-  var selected: Bool
-  var previousRowSelected: Bool
-  var nextRowSelected: Bool
-  var floating: Bool
-  var targetForDropOperation: Bool
+  var isEmphasized: Bool
+  var isGroupRowStyle: Bool
+  var isSelected: Bool
+  var isPreviousRowSelected: Bool
+  var isNextRowSelected: Bool
+  var isFloating: Bool
+  var isTargetForDropOperation: Bool
   var draggingDestinationFeedbackStyle: NSTableViewDraggingDestinationFeedbackStyle
   var indentationForDropOperation: CGFloat
   var interiorBackgroundStyle: NSBackgroundStyle { get }
   @NSCopying var backgroundColor: NSColor
-  func drawBackgroundInRect(dirtyRect: NSRect)
-  func drawSelectionInRect(dirtyRect: NSRect)
-  func drawSeparatorInRect(dirtyRect: NSRect)
-  func drawDraggingDestinationFeedbackInRect(dirtyRect: NSRect)
+  func drawBackgroundIn(dirtyRect: Rect)
+  func drawSelectionIn(dirtyRect: Rect)
+  func drawSeparatorIn(dirtyRect: Rect)
+  func drawDraggingDestinationFeedbackIn(dirtyRect: Rect)
   func viewAtColumn(column: Int) -> AnyObject?
   var numberOfColumns: Int { get }
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
   func accessibilityIndex() -> Int
   func accessibilityDisclosureLevel() -> Int
@@ -10936,8 +10937,8 @@ enum NSTableRowActionEdge : Int {
   case Trailing
 }
 class NSTableView : NSControl, NSUserInterfaceValidations, NSTextViewDelegate, NSDraggingSource, NSAccessibilityTable {
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   func setDataSource(aSource: NSTableViewDataSource?)
   func dataSource() -> NSTableViewDataSource?
   func setDelegate(delegate: NSTableViewDelegate?)
@@ -10948,14 +10949,14 @@ class NSTableView : NSControl, NSUserInterfaceValidations, NSTextViewDelegate, N
   var allowsColumnResizing: Bool
   var columnAutoresizingStyle: NSTableViewColumnAutoresizingStyle
   var gridStyleMask: NSTableViewGridLineStyle
-  var intercellSpacing: NSSize
+  var intercellSpacing: Size
   var usesAlternatingRowBackgroundColors: Bool
   @NSCopying var backgroundColor: NSColor
   @NSCopying var gridColor: NSColor
   var rowSizeStyle: NSTableViewRowSizeStyle
   var effectiveRowSizeStyle: NSTableViewRowSizeStyle { get }
   var rowHeight: CGFloat
-  func noteHeightOfRowsWithIndexesChanged(indexSet: NSIndexSet)
+  func noteHeightOfRowsWithIndexesChanged(indexSet: IndexSet)
   var tableColumns: [NSTableColumn] { get }
   var numberOfColumns: Int { get }
   var numberOfRows: Int { get }
@@ -10971,19 +10972,19 @@ class NSTableView : NSControl, NSUserInterfaceValidations, NSTextViewDelegate, N
   func scrollColumnToVisible(column: Int)
   func reloadData()
   func noteNumberOfRowsChanged()
-  func reloadDataForRowIndexes(rowIndexes: NSIndexSet, columnIndexes: NSIndexSet)
+  func reloadDataForRowIndexes(rowIndexes: IndexSet, columnIndexes: IndexSet)
   var editedColumn: Int { get }
   var editedRow: Int { get }
   var clickedColumn: Int { get }
   var clickedRow: Int { get }
   var doubleAction: Selector
-  var sortDescriptors: [NSSortDescriptor]
-  func setIndicatorImage(anImage: NSImage?, inTableColumn tableColumn: NSTableColumn)
-  func indicatorImageInTableColumn(tableColumn: NSTableColumn) -> NSImage?
+  var sortDescriptors: [SortDescriptor]
+  func setIndicatorImage(anImage: NSImage?, in tableColumn: NSTableColumn)
+  func indicatorImageIn(tableColumn: NSTableColumn) -> NSImage?
   unowned(unsafe) var highlightedTableColumn: @sil_unmanaged NSTableColumn?
   var verticalMotionCanBeginDrag: Bool
-  func canDragRowsWithIndexes(rowIndexes: NSIndexSet, atPoint mouseDownPoint: NSPoint) -> Bool
-  func dragImageForRowsWithIndexes(dragRows: NSIndexSet, tableColumns: [NSTableColumn], event dragEvent: NSEvent, offset dragImageOffset: NSPointPointer) -> NSImage
+  func canDragRowsWith(rowIndexes: IndexSet, at mouseDownPoint: Point) -> Bool
+  func dragImageForRowsWith(dragRows: IndexSet, tableColumns: [NSTableColumn], event dragEvent: NSEvent, offset dragImageOffset: PointPointer) -> NSImage
   func setDraggingSourceOperationMask(mask: NSDragOperation, forLocal isLocal: Bool)
   func setDropRow(row: Int, dropOperation: NSTableViewDropOperation)
   var allowsMultipleSelection: Bool
@@ -10991,10 +10992,10 @@ class NSTableView : NSControl, NSUserInterfaceValidations, NSTextViewDelegate, N
   var allowsColumnSelection: Bool
   func selectAll(sender: AnyObject?)
   func deselectAll(sender: AnyObject?)
-  func selectColumnIndexes(indexes: NSIndexSet, byExtendingSelection extend: Bool)
-  func selectRowIndexes(indexes: NSIndexSet, byExtendingSelection extend: Bool)
-  @NSCopying var selectedColumnIndexes: NSIndexSet { get }
-  @NSCopying var selectedRowIndexes: NSIndexSet { get }
+  func selectColumnIndexes(indexes: IndexSet, byExtendingSelection extend: Bool)
+  func selectRowIndexes(indexes: IndexSet, byExtendingSelection extend: Bool)
+  @NSCopying var selectedColumnIndexes: IndexSet { get }
+  @NSCopying var selectedRowIndexes: IndexSet { get }
   func deselectColumn(column: Int)
   func deselectRow(row: Int)
   var selectedColumn: Int { get }
@@ -11006,71 +11007,71 @@ class NSTableView : NSControl, NSUserInterfaceValidations, NSTextViewDelegate, N
   var allowsTypeSelect: Bool
   var selectionHighlightStyle: NSTableViewSelectionHighlightStyle
   var draggingDestinationFeedbackStyle: NSTableViewDraggingDestinationFeedbackStyle
-  func rectOfColumn(column: Int) -> NSRect
-  func rectOfRow(row: Int) -> NSRect
-  func columnIndexesInRect(rect: NSRect) -> NSIndexSet
-  func rowsInRect(rect: NSRect) -> NSRange
-  func columnAtPoint(point: NSPoint) -> Int
-  func rowAtPoint(point: NSPoint) -> Int
-  func frameOfCellAtColumn(column: Int, row: Int) -> NSRect
+  func rectOfColumn(column: Int) -> Rect
+  func rectOfRow(row: Int) -> Rect
+  func columnIndexesIn(rect: Rect) -> IndexSet
+  func rowsIn(rect: Rect) -> NSRange
+  func columnAt(point: Point) -> Int
+  func rowAt(point: Point) -> Int
+  func frameOfCellAtColumn(column: Int, row: Int) -> Rect
   var autosaveName: String?
   var autosaveTableColumns: Bool
   func editColumn(column: Int, row: Int, withEvent theEvent: NSEvent?, select: Bool)
-  func drawRow(row: Int, clipRect: NSRect)
-  func highlightSelectionInClipRect(clipRect: NSRect)
-  func drawGridInClipRect(clipRect: NSRect)
-  func drawBackgroundInClipRect(clipRect: NSRect)
+  func drawRow(row: Int, clip clipRect: Rect)
+  func highlightSelectionInClip(clipRect: Rect)
+  func drawGridInClip(clipRect: Rect)
+  func drawBackgroundInClip(clipRect: Rect)
   func viewAtColumn(column: Int, row: Int, makeIfNecessary: Bool) -> NSView?
   func rowViewAtRow(row: Int, makeIfNecessary: Bool) -> NSTableRowView?
-  func rowForView(view: NSView) -> Int
-  func columnForView(view: NSView) -> Int
-  func makeViewWithIdentifier(identifier: String, owner: AnyObject?) -> NSView?
-  func enumerateAvailableRowViewsUsingBlock(handler: (NSTableRowView, Int) -> Void)
+  func rowFor(view: NSView) -> Int
+  func columnFor(view: NSView) -> Int
+  func makeWithIdentifier(identifier: String, owner: AnyObject?) -> NSView?
+  func enumerateAvailableRowViewsUsing(handler: (NSTableRowView, Int) -> Void)
   var floatsGroupRows: Bool
   var rowActionsVisible: Bool
   func beginUpdates()
   func endUpdates()
-  func insertRowsAtIndexes(indexes: NSIndexSet, withAnimation animationOptions: NSTableViewAnimationOptions)
-  func removeRowsAtIndexes(indexes: NSIndexSet, withAnimation animationOptions: NSTableViewAnimationOptions)
-  func moveRowAtIndex(oldIndex: Int, toIndex newIndex: Int)
-  func hideRowsAtIndexes(indexes: NSIndexSet, withAnimation rowAnimation: NSTableViewAnimationOptions)
-  func unhideRowsAtIndexes(indexes: NSIndexSet, withAnimation rowAnimation: NSTableViewAnimationOptions)
-  @NSCopying var hiddenRowIndexes: NSIndexSet { get }
-  func registerNib(nib: NSNib?, forIdentifier identifier: String)
+  func insertRowsAt(indexes: IndexSet, withAnimation animationOptions: NSTableViewAnimationOptions = [])
+  func removeRowsAt(indexes: IndexSet, withAnimation animationOptions: NSTableViewAnimationOptions = [])
+  func moveRowAt(oldIndex: Int, to newIndex: Int)
+  func hideRowsAt(indexes: IndexSet, withAnimation rowAnimation: NSTableViewAnimationOptions = [])
+  func unhideRowsAt(indexes: IndexSet, withAnimation rowAnimation: NSTableViewAnimationOptions = [])
+  @NSCopying var hiddenRowIndexes: IndexSet { get }
+  func register(nib: NSNib?, forIdentifier identifier: String)
   var registeredNibsByIdentifier: [String : NSNib]? { get }
-  func didAddRowView(rowView: NSTableRowView, forRow row: Int)
-  func didRemoveRowView(rowView: NSTableRowView, forRow row: Int)
+  func didAdd(rowView: NSTableRowView, forRow row: Int)
+  func didRemove(rowView: NSTableRowView, forRow row: Int)
   var usesStaticContents: Bool
   convenience init()
-  func validateUserInterfaceItem(anItem: NSValidatedUserInterfaceItem) -> Bool
-  func textView(textView: NSTextView, clickedOnLink link: AnyObject, atIndex charIndex: Int) -> Bool
-  func textView(textView: NSTextView, clickedOnCell cell: NSTextAttachmentCellProtocol, inRect cellFrame: NSRect, atIndex charIndex: Int)
-  func textView(textView: NSTextView, doubleClickedOnCell cell: NSTextAttachmentCellProtocol, inRect cellFrame: NSRect, atIndex charIndex: Int)
-  func textView(view: NSTextView, draggedCell cell: NSTextAttachmentCellProtocol, inRect rect: NSRect, event: NSEvent, atIndex charIndex: Int)
-  func textView(view: NSTextView, writablePasteboardTypesForCell cell: NSTextAttachmentCellProtocol, atIndex charIndex: Int) -> [String]
-  func textView(view: NSTextView, writeCell cell: NSTextAttachmentCellProtocol, atIndex charIndex: Int, toPasteboard pboard: NSPasteboard, type: String) -> Bool
+  func validate(anItem: NSValidatedUserInterfaceItem) -> Bool
+  func textView(textView: NSTextView, clickedOnLink link: AnyObject, at charIndex: Int) -> Bool
+  func textView(textView: NSTextView, clickedOn cell: NSTextAttachmentCellProtocol, in cellFrame: Rect, at charIndex: Int)
+  func textView(textView: NSTextView, doubleClickedOn cell: NSTextAttachmentCellProtocol, in cellFrame: Rect, at charIndex: Int)
+  func textView(view: NSTextView, draggedCell cell: NSTextAttachmentCellProtocol, in rect: Rect, event: NSEvent, at charIndex: Int)
+  func textView(view: NSTextView, writablePasteboardTypesFor cell: NSTextAttachmentCellProtocol, at charIndex: Int) -> [String]
+  func textView(view: NSTextView, write cell: NSTextAttachmentCellProtocol, at charIndex: Int, to pboard: NSPasteboard, type: String) -> Bool
   func textView(textView: NSTextView, willChangeSelectionFromCharacterRange oldSelectedCharRange: NSRange, toCharacterRange newSelectedCharRange: NSRange) -> NSRange
-  func textView(textView: NSTextView, willChangeSelectionFromCharacterRanges oldSelectedCharRanges: [NSValue], toCharacterRanges newSelectedCharRanges: [NSValue]) -> [NSValue]
-  func textView(textView: NSTextView, shouldChangeTextInRanges affectedRanges: [NSValue], replacementStrings: [String]?) -> Bool
-  func textView(textView: NSTextView, shouldChangeTypingAttributes oldTypingAttributes: [String : AnyObject], toAttributes newTypingAttributes: [String : AnyObject]) -> [String : AnyObject]
-  func textViewDidChangeSelection(notification: NSNotification)
-  func textViewDidChangeTypingAttributes(notification: NSNotification)
-  func textView(textView: NSTextView, willDisplayToolTip tooltip: String, forCharacterAtIndex characterIndex: Int) -> String?
+  func textView(textView: NSTextView, willChangeSelectionFromCharacterRanges oldSelectedCharRanges: [Value], toCharacterRanges newSelectedCharRanges: [Value]) -> [Value]
+  func textView(textView: NSTextView, shouldChangeTextInRanges affectedRanges: [Value], replacementStrings: [String]?) -> Bool
+  func textView(textView: NSTextView, shouldChangeTypingAttributes oldTypingAttributes: [String : AnyObject] = [:], toAttributes newTypingAttributes: [String : AnyObject] = [:]) -> [String : AnyObject]
+  func textViewDidChangeSelection(notification: Notification)
+  func textViewDidChangeTypingAttributes(notification: Notification)
+  func textView(textView: NSTextView, willDisplayToolTip tooltip: String, forCharacterAt characterIndex: Int) -> String?
   func textView(textView: NSTextView, completions words: [String], forPartialWordRange charRange: NSRange, indexOfSelectedItem index: UnsafeMutablePointer<Int>) -> [String]
-  func textView(textView: NSTextView, shouldChangeTextInRange affectedCharRange: NSRange, replacementString: String?) -> Bool
-  func textView(textView: NSTextView, doCommandBySelector commandSelector: Selector) -> Bool
+  func textView(textView: NSTextView, shouldChangeTextIn affectedCharRange: NSRange, replacementString: String?) -> Bool
+  func textView(textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool
   func textView(textView: NSTextView, shouldSetSpellingState value: Int, range affectedCharRange: NSRange) -> Int
-  func textView(view: NSTextView, menu: NSMenu, forEvent event: NSEvent, atIndex charIndex: Int) -> NSMenu?
-  func textView(view: NSTextView, willCheckTextInRange range: NSRange, options: [String : AnyObject], types checkingTypes: UnsafeMutablePointer<NSTextCheckingTypes>) -> [String : AnyObject]
-  func textView(view: NSTextView, didCheckTextInRange range: NSRange, types checkingTypes: NSTextCheckingTypes, options: [String : AnyObject], results: [NSTextCheckingResult], orthography: NSOrthography, wordCount: Int) -> [NSTextCheckingResult]
-  func textView(textView: NSTextView, URLForContentsOfTextAttachment textAttachment: NSTextAttachment, atIndex charIndex: Int) -> NSURL?
-  func textView(textView: NSTextView, willShowSharingServicePicker servicePicker: NSSharingServicePicker, forItems items: [AnyObject]) -> NSSharingServicePicker?
-  func undoManagerForTextView(view: NSTextView) -> NSUndoManager?
-  func draggingSession(session: NSDraggingSession, sourceOperationMaskForDraggingContext context: NSDraggingContext) -> NSDragOperation
-  func draggingSession(session: NSDraggingSession, willBeginAtPoint screenPoint: NSPoint)
-  func draggingSession(session: NSDraggingSession, movedToPoint screenPoint: NSPoint)
-  func draggingSession(session: NSDraggingSession, endedAtPoint screenPoint: NSPoint, operation: NSDragOperation)
-  func ignoreModifierKeysForDraggingSession(session: NSDraggingSession) -> Bool
+  func textView(view: NSTextView, menu: NSMenu, forEvent event: NSEvent, at charIndex: Int) -> NSMenu?
+  func textView(view: NSTextView, willCheckTextIn range: NSRange, options: [String : AnyObject] = [:], types checkingTypes: UnsafeMutablePointer<TextCheckingTypes>) -> [String : AnyObject]
+  func textView(view: NSTextView, didCheckTextIn range: NSRange, types checkingTypes: TextCheckingTypes, options: [String : AnyObject] = [:], results: [TextCheckingResult], orthography: Orthography, wordCount: Int) -> [TextCheckingResult]
+  func textView(textView: NSTextView, urlForContentsOf textAttachment: NSTextAttachment, at charIndex: Int) -> URL?
+  func textView(textView: NSTextView, willShow servicePicker: NSSharingServicePicker, forItems items: [AnyObject]) -> NSSharingServicePicker?
+  func undoManagerFor(view: NSTextView) -> UndoManager?
+  func draggingSession(session: NSDraggingSession, sourceOperationMaskFor context: NSDraggingContext) -> NSDragOperation
+  func draggingSession(session: NSDraggingSession, willBeginAt screenPoint: Point)
+  func draggingSession(session: NSDraggingSession, movedTo screenPoint: Point)
+  func draggingSession(session: NSDraggingSession, endedAt screenPoint: Point, operation: NSDragOperation)
+  func ignoreModifierKeysFor(session: NSDraggingSession) -> Bool
   func accessibilityLabel() -> String?
   func accessibilityRows() -> [NSAccessibilityRow]?
   func accessibilitySelectedRows() -> [NSAccessibilityRow]?
@@ -11097,64 +11098,64 @@ struct NSTableViewAnimationOptions : OptionSetType {
   static var SlideRight: NSTableViewAnimationOptions { get }
 }
 protocol NSTableViewDelegate : NSControlTextEditingDelegate {
-  optional func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView?
+  optional func tableView(tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?
   optional func tableView(tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView?
-  optional func tableView(tableView: NSTableView, didAddRowView rowView: NSTableRowView, forRow row: Int)
-  optional func tableView(tableView: NSTableView, didRemoveRowView rowView: NSTableRowView, forRow row: Int)
+  optional func tableView(tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int)
+  optional func tableView(tableView: NSTableView, didRemove rowView: NSTableRowView, forRow row: Int)
   optional func tableView(tableView: NSTableView, willDisplayCell cell: AnyObject, forTableColumn tableColumn: NSTableColumn?, row: Int)
-  optional func tableView(tableView: NSTableView, shouldEditTableColumn tableColumn: NSTableColumn?, row: Int) -> Bool
-  optional func tableView(tableView: NSTableView, toolTipForCell cell: NSCell, rect: NSRectPointer, tableColumn: NSTableColumn?, row: Int, mouseLocation: NSPoint) -> String
-  optional func tableView(tableView: NSTableView, shouldShowCellExpansionForTableColumn tableColumn: NSTableColumn?, row: Int) -> Bool
-  optional func tableView(tableView: NSTableView, shouldTrackCell cell: NSCell, forTableColumn tableColumn: NSTableColumn?, row: Int) -> Bool
-  optional func tableView(tableView: NSTableView, dataCellForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSCell?
-  optional func selectionShouldChangeInTableView(tableView: NSTableView) -> Bool
+  optional func tableView(tableView: NSTableView, shouldEdit tableColumn: NSTableColumn?, row: Int) -> Bool
+  optional func tableView(tableView: NSTableView, toolTipFor cell: NSCell, rect: RectPointer, tableColumn: NSTableColumn?, row: Int, mouseLocation: Point) -> String
+  optional func tableView(tableView: NSTableView, shouldShowCellExpansionFor tableColumn: NSTableColumn?, row: Int) -> Bool
+  optional func tableView(tableView: NSTableView, shouldTrack cell: NSCell, forTableColumn tableColumn: NSTableColumn?, row: Int) -> Bool
+  optional func tableView(tableView: NSTableView, dataCellFor tableColumn: NSTableColumn?, row: Int) -> NSCell?
+  optional func selectionShouldChangeIn(tableView: NSTableView) -> Bool
   optional func tableView(tableView: NSTableView, shouldSelectRow row: Int) -> Bool
-  optional func tableView(tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: NSIndexSet) -> NSIndexSet
-  optional func tableView(tableView: NSTableView, shouldSelectTableColumn tableColumn: NSTableColumn?) -> Bool
-  optional func tableView(tableView: NSTableView, mouseDownInHeaderOfTableColumn tableColumn: NSTableColumn)
-  optional func tableView(tableView: NSTableView, didClickTableColumn tableColumn: NSTableColumn)
-  optional func tableView(tableView: NSTableView, didDragTableColumn tableColumn: NSTableColumn)
+  optional func tableView(tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: IndexSet) -> IndexSet
+  optional func tableView(tableView: NSTableView, shouldSelect tableColumn: NSTableColumn?) -> Bool
+  optional func tableView(tableView: NSTableView, mouseDownInHeaderOf tableColumn: NSTableColumn)
+  optional func tableView(tableView: NSTableView, didClick tableColumn: NSTableColumn)
+  optional func tableView(tableView: NSTableView, didDrag tableColumn: NSTableColumn)
   optional func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat
-  optional func tableView(tableView: NSTableView, typeSelectStringForTableColumn tableColumn: NSTableColumn?, row: Int) -> String?
+  optional func tableView(tableView: NSTableView, typeSelectStringFor tableColumn: NSTableColumn?, row: Int) -> String?
   optional func tableView(tableView: NSTableView, nextTypeSelectMatchFromRow startRow: Int, toRow endRow: Int, forString searchString: String) -> Int
-  optional func tableView(tableView: NSTableView, shouldTypeSelectForEvent event: NSEvent, withCurrentSearchString searchString: String?) -> Bool
+  optional func tableView(tableView: NSTableView, shouldTypeSelectFor event: NSEvent, withCurrentSearch searchString: String?) -> Bool
   optional func tableView(tableView: NSTableView, isGroupRow row: Int) -> Bool
   optional func tableView(tableView: NSTableView, sizeToFitWidthOfColumn column: Int) -> CGFloat
   optional func tableView(tableView: NSTableView, shouldReorderColumn columnIndex: Int, toColumn newColumnIndex: Int) -> Bool
   optional func tableView(tableView: NSTableView, rowActionsForRow row: Int, edge: NSTableRowActionEdge) -> [NSTableViewRowAction]
-  optional func tableViewSelectionDidChange(notification: NSNotification)
-  optional func tableViewColumnDidMove(notification: NSNotification)
-  optional func tableViewColumnDidResize(notification: NSNotification)
-  optional func tableViewSelectionIsChanging(notification: NSNotification)
+  optional func tableViewSelectionDidChange(notification: Notification)
+  optional func tableViewColumnDidMove(notification: Notification)
+  optional func tableViewColumnDidResize(notification: Notification)
+  optional func tableViewSelectionIsChanging(notification: Notification)
 }
 let NSTableViewSelectionDidChangeNotification: String
 let NSTableViewColumnDidMoveNotification: String
 let NSTableViewColumnDidResizeNotification: String
 let NSTableViewSelectionIsChangingNotification: String
 let NSTableViewRowViewKey: String
-protocol NSTableViewDataSource : NSObjectProtocol {
-  optional func numberOfRowsInTableView(tableView: NSTableView) -> Int
-  optional func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject?
+protocol NSTableViewDataSource : ObjectProtocol {
+  optional func numberOfRowsIn(tableView: NSTableView) -> Int
+  optional func tableView(tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> AnyObject?
   optional func tableView(tableView: NSTableView, setObjectValue object: AnyObject?, forTableColumn tableColumn: NSTableColumn?, row: Int)
-  optional func tableView(tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor])
+  optional func tableView(tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [SortDescriptor])
   optional func tableView(tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting?
-  optional func tableView(tableView: NSTableView, draggingSession session: NSDraggingSession, willBeginAtPoint screenPoint: NSPoint, forRowIndexes rowIndexes: NSIndexSet)
-  optional func tableView(tableView: NSTableView, draggingSession session: NSDraggingSession, endedAtPoint screenPoint: NSPoint, operation: NSDragOperation)
+  optional func tableView(tableView: NSTableView, draggingSession session: NSDraggingSession, willBeginAt screenPoint: Point, forRowIndexes rowIndexes: IndexSet)
+  optional func tableView(tableView: NSTableView, draggingSession session: NSDraggingSession, endedAt screenPoint: Point, operation: NSDragOperation)
   optional func tableView(tableView: NSTableView, updateDraggingItemsForDrag draggingInfo: NSDraggingInfo)
-  optional func tableView(tableView: NSTableView, writeRowsWithIndexes rowIndexes: NSIndexSet, toPasteboard pboard: NSPasteboard) -> Bool
+  optional func tableView(tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool
   optional func tableView(tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableViewDropOperation) -> NSDragOperation
   optional func tableView(tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableViewDropOperation) -> Bool
-  optional func tableView(tableView: NSTableView, namesOfPromisedFilesDroppedAtDestination dropDestination: NSURL, forDraggedRowsWithIndexes indexSet: NSIndexSet) -> [String]
+  optional func tableView(tableView: NSTableView, namesOfPromisedFilesDroppedAtDestination dropDestination: URL, forDraggedRowsWith indexSet: IndexSet) -> [String]
 }
-extension NSObject {
+extension Object {
 }
 extension NSTableView {
   func preparedCellAtColumn(column: Int, row: Int) -> NSCell?
   func textShouldBeginEditing(textObject: NSText) -> Bool
   func textShouldEndEditing(textObject: NSText) -> Bool
-  func textDidBeginEditing(notification: NSNotification)
-  func textDidEndEditing(notification: NSNotification)
-  func textDidChange(notification: NSNotification)
+  func textDidBeginEditing(notification: Notification)
+  func textDidEndEditing(notification: Notification)
+  func textDidChange(notification: Notification)
   func shouldFocusCell(cell: NSCell, atColumn column: Int, row: Int) -> Bool
   func focusedColumn() -> Int
   func setFocusedColumn(focusedColumn: Int)
@@ -11166,13 +11167,13 @@ enum NSTableViewRowActionStyle : Int {
   case Regular
   case Destructive
 }
-class NSTableViewRowAction : NSObject, NSCopying {
+class NSTableViewRowAction : Object, Copying {
   convenience init(style: NSTableViewRowActionStyle, title: String, handler: (NSTableViewRowAction, Int) -> Void)
   var style: NSTableViewRowActionStyle { get }
   var title: String
   @NSCopying var backgroundColor: NSColor!
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 var NSEnterCharacter: Int { get }
 var NSBackspaceCharacter: Int { get }
@@ -11211,26 +11212,26 @@ var NSDownTextMovement: Int { get }
 var NSCancelTextMovement: Int { get }
 var NSOtherTextMovement: Int { get }
 class NSText : NSView, NSChangeSpelling, NSIgnoreMisspelledWords {
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   var string: String?
-  func replaceCharactersInRange(range: NSRange, withString aString: String)
-  func replaceCharactersInRange(range: NSRange, withRTF rtfData: NSData)
-  func replaceCharactersInRange(range: NSRange, withRTFD rtfdData: NSData)
-  func RTFFromRange(range: NSRange) -> NSData?
-  func RTFDFromRange(range: NSRange) -> NSData?
+  func replaceCharactersIn(range: NSRange, withString aString: String)
+  func replaceCharactersIn(range: NSRange, withRTF rtfData: Data)
+  func replaceCharactersIn(range: NSRange, withRTFD rtfdData: Data)
+  func rtfFrom(range: NSRange) -> Data?
+  func rtfdFrom(range: NSRange) -> Data?
   func writeRTFDToFile(path: String, atomically flag: Bool) -> Bool
   func readRTFDFromFile(path: String) -> Bool
   unowned(unsafe) var delegate: @sil_unmanaged NSTextDelegate?
-  var editable: Bool
-  var selectable: Bool
-  var richText: Bool
+  var isEditable: Bool
+  var isSelectable: Bool
+  var isRichText: Bool
   var importsGraphics: Bool
-  var fieldEditor: Bool
+  var isFieldEditor: Bool
   var usesFontPanel: Bool
   var drawsBackground: Bool
   @NSCopying var backgroundColor: NSColor?
-  var rulerVisible: Bool { get }
+  var isRulerVisible: Bool { get }
   var selectedRange: NSRange
   func scrollRangeToVisible(range: NSRange)
   var font: NSFont?
@@ -11239,10 +11240,10 @@ class NSText : NSView, NSChangeSpelling, NSIgnoreMisspelledWords {
   var baseWritingDirection: NSWritingDirection
   func setTextColor(color: NSColor?, range: NSRange)
   func setFont(font: NSFont, range: NSRange)
-  var maxSize: NSSize
-  var minSize: NSSize
-  var horizontallyResizable: Bool
-  var verticallyResizable: Bool
+  var maxSize: Size
+  var minSize: Size
+  var isHorizontallyResizable: Bool
+  var isVerticallyResizable: Bool
   func sizeToFit()
   func copy(sender: AnyObject?)
   func copyFont(sender: AnyObject?)
@@ -11268,12 +11269,12 @@ class NSText : NSView, NSChangeSpelling, NSIgnoreMisspelledWords {
   func changeSpelling(sender: AnyObject?)
   func ignoreSpelling(sender: AnyObject?)
 }
-protocol NSTextDelegate : NSObjectProtocol {
+protocol NSTextDelegate : ObjectProtocol {
   optional func textShouldBeginEditing(textObject: NSText) -> Bool
   optional func textShouldEndEditing(textObject: NSText) -> Bool
-  optional func textDidBeginEditing(notification: NSNotification)
-  optional func textDidEndEditing(notification: NSNotification)
-  optional func textDidChange(notification: NSNotification)
+  optional func textDidBeginEditing(notification: Notification)
+  optional func textDidEndEditing(notification: Notification)
+  optional func textDidChange(notification: Notification)
 }
 let NSTextDidBeginEditingNotification: String
 let NSTextDidEndEditingNotification: String
@@ -11285,7 +11286,7 @@ let NSRightTextAlignment: NSTextAlignment
 let NSCenterTextAlignment: NSTextAlignment
 let NSJustifiedTextAlignment: NSTextAlignment
 let NSNaturalTextAlignment: NSTextAlignment
-class NSTextAlternatives : NSObject {
+class NSTextAlternatives : Object {
   init(primaryString: String, alternativeStrings: [String])
   var primaryString: String { get }
   var alternativeStrings: [String] { get }
@@ -11294,80 +11295,80 @@ class NSTextAlternatives : NSObject {
 }
 let NSTextAlternativesSelectedAlternativeStringNotification: String
 var NSAttachmentCharacter: Int { get }
-protocol NSTextAttachmentContainer : NSObjectProtocol {
-  func imageForBounds(imageBounds: NSRect, textContainer: NSTextContainer?, characterIndex charIndex: Int) -> NSImage?
-  func attachmentBoundsForTextContainer(textContainer: NSTextContainer?, proposedLineFragment lineFrag: NSRect, glyphPosition position: CGPoint, characterIndex charIndex: Int) -> NSRect
+protocol NSTextAttachmentContainer : ObjectProtocol {
+  func imageForBounds(imageBounds: Rect, textContainer: NSTextContainer?, characterIndex charIndex: Int) -> NSImage?
+  func attachmentBoundsFor(textContainer: NSTextContainer?, proposedLineFragment lineFrag: Rect, glyphPosition position: CGPoint, characterIndex charIndex: Int) -> Rect
 }
-class NSTextAttachment : NSObject, NSTextAttachmentContainer, NSCoding {
-  init(data contentData: NSData?, ofType uti: String?)
-  convenience init(fileWrapper: NSFileWrapper?)
-  @NSCopying var contents: NSData?
+class NSTextAttachment : Object, NSTextAttachmentContainer, Coding {
+  init(data contentData: Data?, ofType uti: String?)
+  convenience init(fileWrapper: FileWrapper?)
+  @NSCopying var contents: Data?
   var fileType: String?
   var image: NSImage?
-  var bounds: NSRect
-  var fileWrapper: NSFileWrapper?
+  var bounds: Rect
+  var fileWrapper: FileWrapper?
   var attachmentCell: NSTextAttachmentCellProtocol?
   convenience init()
-  func imageForBounds(imageBounds: NSRect, textContainer: NSTextContainer?, characterIndex charIndex: Int) -> NSImage?
-  func attachmentBoundsForTextContainer(textContainer: NSTextContainer?, proposedLineFragment lineFrag: NSRect, glyphPosition position: CGPoint, characterIndex charIndex: Int) -> NSRect
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func imageForBounds(imageBounds: Rect, textContainer: NSTextContainer?, characterIndex charIndex: Int) -> NSImage?
+  func attachmentBoundsFor(textContainer: NSTextContainer?, proposedLineFragment lineFrag: Rect, glyphPosition position: CGPoint, characterIndex charIndex: Int) -> Rect
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-extension NSAttributedString {
+extension AttributedString {
    init(attachment: NSTextAttachment)
 }
-extension NSMutableAttributedString {
+extension MutableAttributedString {
   func updateAttachmentsFromPath(path: String)
 }
-protocol NSTextAttachmentCellProtocol : NSObjectProtocol {
-  func drawWithFrame(cellFrame: NSRect, inView controlView: NSView?)
+protocol NSTextAttachmentCellProtocol : ObjectProtocol {
+  func drawWithFrame(cellFrame: Rect, in controlView: NSView?)
   func wantsToTrackMouse() -> Bool
-  func highlight(flag: Bool, withFrame cellFrame: NSRect, inView controlView: NSView?)
-  func trackMouse(theEvent: NSEvent, inRect cellFrame: NSRect, ofView controlView: NSView?, untilMouseUp flag: Bool) -> Bool
-  func cellSize() -> NSSize
-  func cellBaselineOffset() -> NSPoint
+  func highlight(flag: Bool, withFrame cellFrame: Rect, in controlView: NSView?)
+  func trackMouse(theEvent: NSEvent, in cellFrame: Rect, of controlView: NSView?, untilMouseUp flag: Bool) -> Bool
+  func cellSize() -> Size
+  func cellBaselineOffset() -> Point
   unowned(unsafe) var attachment: @sil_unmanaged NSTextAttachment? { get set }
-  func drawWithFrame(cellFrame: NSRect, inView controlView: NSView?, characterIndex charIndex: Int)
-  func drawWithFrame(cellFrame: NSRect, inView controlView: NSView?, characterIndex charIndex: Int, layoutManager: NSLayoutManager)
-  func wantsToTrackMouseForEvent(theEvent: NSEvent, inRect cellFrame: NSRect, ofView controlView: NSView?, atCharacterIndex charIndex: Int) -> Bool
-  func trackMouse(theEvent: NSEvent, inRect cellFrame: NSRect, ofView controlView: NSView?, atCharacterIndex charIndex: Int, untilMouseUp flag: Bool) -> Bool
-  func cellFrameForTextContainer(textContainer: NSTextContainer, proposedLineFragment lineFrag: NSRect, glyphPosition position: NSPoint, characterIndex charIndex: Int) -> NSRect
+  func drawWithFrame(cellFrame: Rect, in controlView: NSView?, characterIndex charIndex: Int)
+  func drawWithFrame(cellFrame: Rect, in controlView: NSView?, characterIndex charIndex: Int, layoutManager: NSLayoutManager)
+  func wantsToTrackMouseFor(theEvent: NSEvent, in cellFrame: Rect, of controlView: NSView?, atCharacterIndex charIndex: Int) -> Bool
+  func trackMouse(theEvent: NSEvent, in cellFrame: Rect, of controlView: NSView?, atCharacterIndex charIndex: Int, untilMouseUp flag: Bool) -> Bool
+  func cellFrameFor(textContainer: NSTextContainer, proposedLineFragment lineFrag: Rect, glyphPosition position: Point, characterIndex charIndex: Int) -> Rect
 }
 class NSTextAttachmentCell : NSCell, NSTextAttachmentCellProtocol {
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
-  func drawWithFrame(cellFrame: NSRect, inView controlView: NSView?)
+  init?(coder aDecoder: Coder)
+  func drawWithFrame(cellFrame: Rect, in controlView: NSView?)
   func wantsToTrackMouse() -> Bool
-  func highlight(flag: Bool, withFrame cellFrame: NSRect, inView controlView: NSView?)
-  func trackMouse(theEvent: NSEvent, inRect cellFrame: NSRect, ofView controlView: NSView?, untilMouseUp flag: Bool) -> Bool
-  func cellSize() -> NSSize
-  func cellBaselineOffset() -> NSPoint
+  func highlight(flag: Bool, withFrame cellFrame: Rect, in controlView: NSView?)
+  func trackMouse(theEvent: NSEvent, in cellFrame: Rect, of controlView: NSView?, untilMouseUp flag: Bool) -> Bool
+  func cellSize() -> Size
+  func cellBaselineOffset() -> Point
   unowned(unsafe) var attachment: @sil_unmanaged NSTextAttachment?
-  func drawWithFrame(cellFrame: NSRect, inView controlView: NSView?, characterIndex charIndex: Int)
-  func drawWithFrame(cellFrame: NSRect, inView controlView: NSView?, characterIndex charIndex: Int, layoutManager: NSLayoutManager)
-  func wantsToTrackMouseForEvent(theEvent: NSEvent, inRect cellFrame: NSRect, ofView controlView: NSView?, atCharacterIndex charIndex: Int) -> Bool
-  func trackMouse(theEvent: NSEvent, inRect cellFrame: NSRect, ofView controlView: NSView?, atCharacterIndex charIndex: Int, untilMouseUp flag: Bool) -> Bool
-  func cellFrameForTextContainer(textContainer: NSTextContainer, proposedLineFragment lineFrag: NSRect, glyphPosition position: NSPoint, characterIndex charIndex: Int) -> NSRect
+  func drawWithFrame(cellFrame: Rect, in controlView: NSView?, characterIndex charIndex: Int)
+  func drawWithFrame(cellFrame: Rect, in controlView: NSView?, characterIndex charIndex: Int, layoutManager: NSLayoutManager)
+  func wantsToTrackMouseFor(theEvent: NSEvent, in cellFrame: Rect, of controlView: NSView?, atCharacterIndex charIndex: Int) -> Bool
+  func trackMouse(theEvent: NSEvent, in cellFrame: Rect, of controlView: NSView?, atCharacterIndex charIndex: Int, untilMouseUp flag: Bool) -> Bool
+  func cellFrameFor(textContainer: NSTextContainer, proposedLineFragment lineFrag: Rect, glyphPosition position: Point, characterIndex charIndex: Int) -> Rect
 }
-class NSTextContainer : NSObject, NSCoding, NSTextLayoutOrientationProvider {
-  init(size: NSSize)
-  init(coder: NSCoder)
+class NSTextContainer : Object, Coding, NSTextLayoutOrientationProvider {
+  init(size: Size)
+  init(coder: Coder)
   unowned(unsafe) var layoutManager: @sil_unmanaged NSLayoutManager?
   func replaceLayoutManager(newLayoutManager: NSLayoutManager)
-  var size: NSSize
+  var size: Size
   var exclusionPaths: [NSBezierPath]
   var lineBreakMode: NSLineBreakMode
   var lineFragmentPadding: CGFloat
   var maximumNumberOfLines: Int
-  func lineFragmentRectForProposedRect(proposedRect: NSRect, atIndex characterIndex: Int, writingDirection baseWritingDirection: NSWritingDirection, remainingRect: UnsafeMutablePointer<NSRect>) -> NSRect
-  var simpleRectangularTextContainer: Bool { get }
+  func lineFragmentRectForProposedRect(proposedRect: Rect, at characterIndex: Int, writingDirection baseWritingDirection: NSWritingDirection, remaining remainingRect: UnsafeMutablePointer<Rect>) -> Rect
+  var isSimpleRectangularTextContainer: Bool { get }
   var widthTracksTextView: Bool
   var heightTracksTextView: Bool
   var textView: NSTextView?
   convenience init()
-  func encodeWithCoder(aCoder: NSCoder)
+  func encodeWith(aCoder: Coder)
   var layoutOrientation: NSTextLayoutOrientation { get }
 }
 struct __tcFlags {
@@ -11398,43 +11399,43 @@ enum NSLineMovementDirection : UInt {
   case MovesUp
 }
 extension NSTextContainer {
-  convenience init(containerSize aContainerSize: NSSize)
-  var containerSize: NSSize
-  func lineFragmentRectForProposedRect(proposedRect: NSRect, sweepDirection: NSLineSweepDirection, movementDirection: NSLineMovementDirection, remainingRect: NSRectPointer) -> NSRect
-  func containsPoint(point: NSPoint) -> Bool
+  convenience init(containerSize aContainerSize: Size)
+  var containerSize: Size
+  func lineFragmentRectForProposedRect(proposedRect: Rect, sweepDirection: NSLineSweepDirection, movementDirection: NSLineMovementDirection, remaining remainingRect: RectPointer) -> Rect
+  func contains(point: Point) -> Bool
 }
 class NSTextField : NSControl, NSUserInterfaceValidations, NSAccessibilityNavigableStaticText {
   var placeholderString: String?
-  @NSCopying var placeholderAttributedString: NSAttributedString?
+  @NSCopying var placeholderAttributedString: AttributedString?
   @NSCopying var backgroundColor: NSColor?
   var drawsBackground: Bool
   @NSCopying var textColor: NSColor?
-  var bordered: Bool
-  var bezeled: Bool
-  var editable: Bool
-  var selectable: Bool
+  var isBordered: Bool
+  var isBezeled: Bool
+  var isEditable: Bool
+  var isSelectable: Bool
   func selectText(sender: AnyObject?)
   unowned(unsafe) var delegate: @sil_unmanaged NSTextFieldDelegate?
   func textShouldBeginEditing(textObject: NSText) -> Bool
   func textShouldEndEditing(textObject: NSText) -> Bool
-  func textDidBeginEditing(notification: NSNotification)
-  func textDidEndEditing(notification: NSNotification)
-  func textDidChange(notification: NSNotification)
+  func textDidBeginEditing(notification: Notification)
+  func textDidEndEditing(notification: Notification)
+  func textDidChange(notification: Notification)
   var acceptsFirstResponder: Bool { get }
   var bezelStyle: NSTextFieldBezelStyle
   var preferredMaxLayoutWidth: CGFloat
   var maximumNumberOfLines: Int
   var allowsDefaultTighteningForTruncation: Bool
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
-  func validateUserInterfaceItem(anItem: NSValidatedUserInterfaceItem) -> Bool
-  func accessibilityStringForRange(range: NSRange) -> String?
-  func accessibilityLineForIndex(index: Int) -> Int
+  func validate(anItem: NSValidatedUserInterfaceItem) -> Bool
+  func accessibilityStringFor(range: NSRange) -> String?
+  func accessibilityLineFor(index: Int) -> Int
   func accessibilityRangeForLine(lineNumber: Int) -> NSRange
-  func accessibilityFrameForRange(range: NSRange) -> NSRect
+  func accessibilityFrameFor(range: NSRange) -> Rect
   func accessibilityValue() -> String?
-  func accessibilityAttributedStringForRange(range: NSRange) -> NSAttributedString?
+  func accessibilityAttributedStringFor(range: NSRange) -> AttributedString?
   func accessibilityVisibleCharacterRange() -> NSRange
 }
 extension NSTextField {
@@ -11458,13 +11459,13 @@ class NSTextFieldCell : NSActionCell {
   func setUpFieldEditorAttributes(textObj: NSText) -> NSText
   var bezelStyle: NSTextFieldBezelStyle
   var placeholderString: String?
-  @NSCopying var placeholderAttributedString: NSAttributedString?
+  @NSCopying var placeholderAttributedString: AttributedString?
   func setWantsNotificationForMarkedText(flag: Bool)
   var allowedInputSourceLocales: [String]?
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 struct __tfFlags {
   var drawsBackground: UInt32
@@ -11515,73 +11516,73 @@ enum NSTextFinderMatchingType : Int {
   case FullWord
   case EndsWith
 }
-class NSTextFinder : NSObject, NSCoding {
+class NSTextFinder : Object, Coding {
   init()
   @IBOutlet unowned(unsafe) var client: @sil_unmanaged NSTextFinderClient?
-  func performAction(op: NSTextFinderAction)
-  func validateAction(op: NSTextFinderAction) -> Bool
+  func perform(op: NSTextFinderAction)
+  func validate(op: NSTextFinderAction) -> Bool
   @IBOutlet unowned(unsafe) var findBarContainer: @sil_unmanaged NSTextFinderBarContainer?
   func cancelFindIndicator()
   var findIndicatorNeedsUpdate: Bool
-  var incrementalSearchingEnabled: Bool
+  var isIncrementalSearchingEnabled: Bool
   var incrementalSearchingShouldDimContentView: Bool
-  var incrementalMatchRanges: [NSValue] { get }
-  class func drawIncrementalMatchHighlightInRect(rect: NSRect)
+  var incrementalMatchRanges: [Value] { get }
+  class func drawIncrementalMatchHighlightIn(rect: Rect)
   func noteClientStringWillChange()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-protocol NSTextFinderClient : NSObjectProtocol {
-  optional var selectable: Bool { get }
+protocol NSTextFinderClient : ObjectProtocol {
+  optional var isSelectable: Bool { get }
   optional var allowsMultipleSelection: Bool { get }
-  optional var editable: Bool { get }
+  optional var isEditable: Bool { get }
   optional var string: String { get }
-  optional func stringAtIndex(characterIndex: Int, effectiveRange outRange: NSRangePointer, endsWithSearchBoundary outFlag: UnsafeMutablePointer<ObjCBool>) -> String
+  optional func stringAt(characterIndex: Int, effectiveRange outRange: RangePointer, endsWithSearchBoundary outFlag: UnsafeMutablePointer<ObjCBool>) -> String
   optional func stringLength() -> Int
   optional var firstSelectedRange: NSRange { get }
-  optional var selectedRanges: [NSValue] { get set }
+  optional var selectedRanges: [Value] { get set }
   optional func scrollRangeToVisible(range: NSRange)
-  optional func shouldReplaceCharactersInRanges(ranges: [NSValue], withStrings strings: [String]) -> Bool
-  optional func replaceCharactersInRange(range: NSRange, withString string: String)
+  optional func shouldReplaceCharactersInRanges(ranges: [Value], withStrings strings: [String]) -> Bool
+  optional func replaceCharactersIn(range: NSRange, withString string: String)
   optional func didReplaceCharacters()
-  optional func contentViewAtIndex(index: Int, effectiveCharacterRange outRange: NSRangePointer) -> NSView
-  optional func rectsForCharacterRange(range: NSRange) -> [NSValue]?
-  optional var visibleCharacterRanges: [NSValue] { get }
-  optional func drawCharactersInRange(range: NSRange, forContentView view: NSView)
+  optional func contentViewAt(index: Int, effectiveCharacterRange outRange: RangePointer) -> NSView
+  optional func rectsForCharacterRange(range: NSRange) -> [Value]?
+  optional var visibleCharacterRanges: [Value] { get }
+  optional func drawCharactersIn(range: NSRange, forContentView view: NSView)
 }
-protocol NSTextFinderBarContainer : NSObjectProtocol {
+protocol NSTextFinderBarContainer : ObjectProtocol {
   var findBarView: NSView? { get set }
-  var findBarVisible: Bool { get set }
+  var isFindBarVisible: Bool { get set }
   func findBarViewDidChangeHeight()
   optional func contentView() -> NSView?
 }
 protocol NSTextInputClient {
   func insertText(aString: AnyObject, replacementRange: NSRange)
-  func doCommandBySelector(aSelector: Selector)
+  func doCommandBy(aSelector: Selector)
   func setMarkedText(aString: AnyObject, selectedRange: NSRange, replacementRange: NSRange)
   func unmarkText()
   func selectedRange() -> NSRange
   func markedRange() -> NSRange
   func hasMarkedText() -> Bool
-  func attributedSubstringForProposedRange(aRange: NSRange, actualRange: NSRangePointer) -> NSAttributedString?
+  func attributedSubstringForProposedRange(aRange: NSRange, actualRange: RangePointer) -> AttributedString?
   func validAttributesForMarkedText() -> [String]
-  func firstRectForCharacterRange(aRange: NSRange, actualRange: NSRangePointer) -> NSRect
-  func characterIndexForPoint(aPoint: NSPoint) -> Int
-  optional func attributedString() -> NSAttributedString
-  optional func fractionOfDistanceThroughGlyphForPoint(aPoint: NSPoint) -> CGFloat
-  optional func baselineDeltaForCharacterAtIndex(anIndex: Int) -> CGFloat
+  func firstRectForCharacterRange(aRange: NSRange, actualRange: RangePointer) -> Rect
+  func characterIndexFor(aPoint: Point) -> Int
+  optional func attributedString() -> AttributedString
+  optional func fractionOfDistanceThroughGlyphFor(aPoint: Point) -> CGFloat
+  optional func baselineDeltaForCharacterAt(anIndex: Int) -> CGFloat
   optional func windowLevel() -> Int
-  optional func drawsVerticallyForCharacterAtIndex(charIndex: Int) -> Bool
+  optional func drawsVerticallyForCharacterAt(charIndex: Int) -> Bool
 }
-class NSTextInputContext : NSObject {
-  class func currentInputContext() -> NSTextInputContext?
+class NSTextInputContext : Object {
+  class func current() -> NSTextInputContext?
   init(client theClient: NSTextInputClient)
   var client: NSTextInputClient { get }
   var acceptsGlyphInfo: Bool
   var allowedInputSourceLocales: [String]?
   func activate()
   func deactivate()
-  func handleEvent(theEvent: NSEvent) -> Bool
+  func handle(theEvent: NSEvent) -> Bool
   func discardMarkedText()
   func invalidateCharacterCoordinates()
   var keyboardInputSources: [String]? { get }
@@ -11595,16 +11596,16 @@ struct NSTextListOptions : OptionSetType {
   let rawValue: UInt
   static var PrependEnclosingMarker: NSTextListOptions { get }
 }
-class NSTextList : NSObject, NSCoding, NSCopying {
+class NSTextList : Object, Coding, Copying {
   init(markerFormat format: String, options mask: Int)
   var markerFormat: String { get }
   var listOptions: NSTextListOptions { get }
   func markerForItemNumber(itemNum: Int) -> String
   var startingItemNumber: Int
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 struct NSTextStorageEditActions : OptionSetType {
   init(rawValue: UInt)
@@ -11612,7 +11613,7 @@ struct NSTextStorageEditActions : OptionSetType {
   static var EditedAttributes: NSTextStorageEditActions { get }
   static var EditedCharacters: NSTextStorageEditActions { get }
 }
-class NSTextStorage : NSMutableAttributedString {
+class NSTextStorage : MutableAttributedString {
   var layoutManagers: [NSLayoutManager] { get }
   func addLayoutManager(aLayoutManager: NSLayoutManager)
   func removeLayoutManager(aLayoutManager: NSLayoutManager)
@@ -11623,38 +11624,38 @@ class NSTextStorage : NSMutableAttributedString {
   func edited(editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int)
   func processEditing()
   var fixesAttributesLazily: Bool { get }
-  func invalidateAttributesInRange(range: NSRange)
-  func ensureAttributesAreFixedInRange(range: NSRange)
+  func invalidateAttributesIn(range: NSRange)
+  func ensureAttributesAreFixedIn(range: NSRange)
   init()
-  init?(coder aDecoder: NSCoder)
-  init(URL url: NSURL, options: [String : AnyObject], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
-  init(data: NSData, options: [String : AnyObject], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
-  init?(RTF data: NSData, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
-  init?(RTFD data: NSData, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
-  init?(HTML data: NSData, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
-  init?(HTML data: NSData, baseURL base: NSURL, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
-  init?(docFormat data: NSData, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
-  init?(HTML data: NSData, options: [NSObject : AnyObject], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
-  init?(RTFDFileWrapper wrapper: NSFileWrapper, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
+  init?(coder aDecoder: Coder)
+  init(url: URL, options: [String : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
+  init(data: Data, options: [String : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
+  init?(rtf data: Data, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
+  init?(rtfd data: Data, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
+  init?(html data: Data, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
+  init?(html data: Data, baseURL base: URL, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
+  init?(docFormat data: Data, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
+  init?(html data: Data, options: [Object : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
+  init?(rtfdFileWrapper wrapper: FileWrapper, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
   init?(pasteboardPropertyList propertyList: AnyObject, ofType type: String)
-  init?(URL url: NSURL, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
+  init?(url: URL, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
   init?(path: String, documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
   init(string str: String)
-  init(string str: String, attributes attrs: [String : AnyObject]?)
-  init(attributedString attrStr: NSAttributedString)
+  init(string str: String, attributes attrs: [String : AnyObject]? = [:])
+  init(attributedString attrStr: AttributedString)
 }
-protocol NSTextStorageDelegate : NSObjectProtocol {
+protocol NSTextStorageDelegate : ObjectProtocol {
   optional func textStorage(textStorage: NSTextStorage, willProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int)
   optional func textStorage(textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int)
 }
 let NSTextStorageWillProcessEditingNotification: String
 let NSTextStorageDidProcessEditingNotification: String
 typealias NSTextStorageEditedOptions = Int
-extension NSObject {
-  class func textStorageWillProcessEditing(notification: NSNotification)
-  func textStorageWillProcessEditing(notification: NSNotification)
-  class func textStorageDidProcessEditing(notification: NSNotification)
-  func textStorageDidProcessEditing(notification: NSNotification)
+extension Object {
+  class func textStorageWillProcessEditing(notification: Notification)
+  func textStorageWillProcessEditing(notification: Notification)
+  class func textStorageDidProcessEditing(notification: Notification)
+  func textStorageDidProcessEditing(notification: Notification)
 }
 extension NSTextStorage {
   var attributeRuns: [NSTextStorage]
@@ -11701,29 +11702,29 @@ enum NSTextTableLayoutAlgorithm : UInt {
   case AutomaticLayoutAlgorithm
   case FixedLayoutAlgorithm
 }
-class NSTextBlock : NSObject, NSCoding, NSCopying {
+class NSTextBlock : Object, Coding, Copying {
   init()
   func setValue(val: CGFloat, type: NSTextBlockValueType, forDimension dimension: NSTextBlockDimension)
-  func valueForDimension(dimension: NSTextBlockDimension) -> CGFloat
-  func valueTypeForDimension(dimension: NSTextBlockDimension) -> NSTextBlockValueType
+  func valueFor(dimension: NSTextBlockDimension) -> CGFloat
+  func valueTypeFor(dimension: NSTextBlockDimension) -> NSTextBlockValueType
   func setContentWidth(val: CGFloat, type: NSTextBlockValueType)
   var contentWidth: CGFloat { get }
   var contentWidthValueType: NSTextBlockValueType { get }
-  func setWidth(val: CGFloat, type: NSTextBlockValueType, forLayer layer: NSTextBlockLayer, edge: NSRectEdge)
+  func setWidth(val: CGFloat, type: NSTextBlockValueType, forLayer layer: NSTextBlockLayer, edge: RectEdge)
   func setWidth(val: CGFloat, type: NSTextBlockValueType, forLayer layer: NSTextBlockLayer)
-  func widthForLayer(layer: NSTextBlockLayer, edge: NSRectEdge) -> CGFloat
-  func widthValueTypeForLayer(layer: NSTextBlockLayer, edge: NSRectEdge) -> NSTextBlockValueType
+  func widthFor(layer: NSTextBlockLayer, edge: RectEdge) -> CGFloat
+  func widthValueTypeFor(layer: NSTextBlockLayer, edge: RectEdge) -> NSTextBlockValueType
   var verticalAlignment: NSTextBlockVerticalAlignment
   @NSCopying var backgroundColor: NSColor?
-  func setBorderColor(color: NSColor?, forEdge edge: NSRectEdge)
+  func setBorderColor(color: NSColor?, forEdge edge: RectEdge)
   func setBorderColor(color: NSColor?)
-  func borderColorForEdge(edge: NSRectEdge) -> NSColor?
-  func rectForLayoutAtPoint(startingPoint: NSPoint, inRect rect: NSRect, textContainer: NSTextContainer, characterRange charRange: NSRange) -> NSRect
-  func boundsRectForContentRect(contentRect: NSRect, inRect rect: NSRect, textContainer: NSTextContainer, characterRange charRange: NSRange) -> NSRect
-  func drawBackgroundWithFrame(frameRect: NSRect, inView controlView: NSView, characterRange charRange: NSRange, layoutManager: NSLayoutManager)
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func borderColorFor(edge: RectEdge) -> NSColor?
+  func rectForLayoutAt(startingPoint: Point, in rect: Rect, textContainer: NSTextContainer, characterRange charRange: NSRange) -> Rect
+  func boundsRectForContentRect(contentRect: Rect, in rect: Rect, textContainer: NSTextContainer, characterRange charRange: NSRange) -> Rect
+  func drawBackgroundWithFrame(frameRect: Rect, in controlView: NSView, characterRange charRange: NSRange, layoutManager: NSLayoutManager)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 class NSTextTableBlock : NSTextBlock {
   init(table: NSTextTable, startingRow row: Int, rowSpan: Int, startingColumn col: Int, columnSpan colSpan: Int)
@@ -11733,18 +11734,18 @@ class NSTextTableBlock : NSTextBlock {
   var startingColumn: Int { get }
   var columnSpan: Int { get }
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class NSTextTable : NSTextBlock {
   var numberOfColumns: Int
   var layoutAlgorithm: NSTextTableLayoutAlgorithm
   var collapsesBorders: Bool
   var hidesEmptyCells: Bool
-  func rectForBlock(block: NSTextTableBlock, layoutAtPoint startingPoint: NSPoint, inRect rect: NSRect, textContainer: NSTextContainer, characterRange charRange: NSRange) -> NSRect
-  func boundsRectForBlock(block: NSTextTableBlock, contentRect: NSRect, inRect rect: NSRect, textContainer: NSTextContainer, characterRange charRange: NSRange) -> NSRect
-  func drawBackgroundForBlock(block: NSTextTableBlock, withFrame frameRect: NSRect, inView controlView: NSView, characterRange charRange: NSRange, layoutManager: NSLayoutManager)
+  func rectFor(block: NSTextTableBlock, layoutAt startingPoint: Point, in rect: Rect, textContainer: NSTextContainer, characterRange charRange: NSRange) -> Rect
+  func boundsRectFor(block: NSTextTableBlock, contentRect: Rect, in rect: Rect, textContainer: NSTextContainer, characterRange charRange: NSRange) -> Rect
+  func drawBackgroundFor(block: NSTextTableBlock, withFrame frameRect: Rect, in controlView: NSView, characterRange charRange: NSRange, layoutManager: NSLayoutManager)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 enum NSSelectionGranularity : UInt {
   init?(rawValue: UInt)
@@ -11761,18 +11762,18 @@ enum NSSelectionAffinity : UInt {
 }
 let NSAllRomanInputSourcesLocaleIdentifier: String
 class NSTextView : NSText, NSUserInterfaceValidations, NSTextInputClient, NSTextLayoutOrientationProvider, NSDraggingSource, NSTextInput, NSAccessibilityNavigableStaticText {
-  init(frame frameRect: NSRect, textContainer container: NSTextContainer?)
-  init?(coder: NSCoder)
-  convenience init(frame frameRect: NSRect)
+  init(frame frameRect: Rect, textContainer container: NSTextContainer?)
+  init?(coder: Coder)
+  convenience init(frame frameRect: Rect)
   unowned(unsafe) var textContainer: @sil_unmanaged NSTextContainer?
   func replaceTextContainer(newContainer: NSTextContainer)
-  var textContainerInset: NSSize
-  var textContainerOrigin: NSPoint { get }
+  var textContainerInset: Size
+  var textContainerOrigin: Point { get }
   func invalidateTextContainerOrigin()
   unowned(unsafe) var layoutManager: @sil_unmanaged NSLayoutManager? { get }
   unowned(unsafe) var textStorage: @sil_unmanaged NSTextStorage? { get }
   func insertText(insertString: AnyObject)
-  func setConstrainedFrameSize(desiredSize: NSSize)
+  func setConstrainedFrame(desiredSize: Size)
   func setAlignment(alignment: NSTextAlignment, range: NSRange)
   func setBaseWritingDirection(writingDirection: NSWritingDirection, range: NSRange)
   func turnOffKerning(sender: AnyObject?)
@@ -11795,59 +11796,59 @@ class NSTextView : NSText, NSUserInterfaceValidations, NSTextInputClient, NSText
   func orderFrontLinkPanel(sender: AnyObject?)
   func orderFrontListPanel(sender: AnyObject?)
   func orderFrontTablePanel(sender: AnyObject?)
-  func rulerView(ruler: NSRulerView, didMoveMarker marker: NSRulerMarker)
-  func rulerView(ruler: NSRulerView, didRemoveMarker marker: NSRulerMarker)
-  func rulerView(ruler: NSRulerView, didAddMarker marker: NSRulerMarker)
-  func rulerView(ruler: NSRulerView, shouldMoveMarker marker: NSRulerMarker) -> Bool
-  func rulerView(ruler: NSRulerView, shouldAddMarker marker: NSRulerMarker) -> Bool
-  func rulerView(ruler: NSRulerView, willMoveMarker marker: NSRulerMarker, toLocation location: CGFloat) -> CGFloat
-  func rulerView(ruler: NSRulerView, shouldRemoveMarker marker: NSRulerMarker) -> Bool
-  func rulerView(ruler: NSRulerView, willAddMarker marker: NSRulerMarker, atLocation location: CGFloat) -> CGFloat
+  func rulerView(ruler: NSRulerView, didMove marker: NSRulerMarker)
+  func rulerView(ruler: NSRulerView, didRemove marker: NSRulerMarker)
+  func rulerView(ruler: NSRulerView, didAdd marker: NSRulerMarker)
+  func rulerView(ruler: NSRulerView, shouldMove marker: NSRulerMarker) -> Bool
+  func rulerView(ruler: NSRulerView, shouldAdd marker: NSRulerMarker) -> Bool
+  func rulerView(ruler: NSRulerView, willMove marker: NSRulerMarker, toLocation location: CGFloat) -> CGFloat
+  func rulerView(ruler: NSRulerView, shouldRemove marker: NSRulerMarker) -> Bool
+  func rulerView(ruler: NSRulerView, willAdd marker: NSRulerMarker, atLocation location: CGFloat) -> CGFloat
   func rulerView(ruler: NSRulerView, handleMouseDown event: NSEvent)
-  func setNeedsDisplayInRect(rect: NSRect, avoidAdditionalLayout flag: Bool)
+  func setNeedsDisplayIn(rect: Rect, avoidAdditionalLayout flag: Bool)
   var shouldDrawInsertionPoint: Bool { get }
-  func drawInsertionPointInRect(rect: NSRect, color: NSColor, turnedOn flag: Bool)
-  func drawViewBackgroundInRect(rect: NSRect)
+  func drawInsertionPointIn(rect: Rect, color: NSColor, turnedOn flag: Bool)
+  func drawBackgroundIn(rect: Rect)
   func updateRuler()
   func updateFontPanel()
   func updateDragTypeRegistration()
   func selectionRangeForProposedRange(proposedCharRange: NSRange, granularity: NSSelectionGranularity) -> NSRange
-  func clickedOnLink(link: AnyObject, atIndex charIndex: Int)
+  func clickedOnLink(link: AnyObject, at charIndex: Int)
   func startSpeaking(sender: AnyObject?)
   func stopSpeaking(sender: AnyObject?)
   func setLayoutOrientation(theOrientation: NSTextLayoutOrientation)
   func changeLayoutOrientation(sender: AnyObject?)
-  func characterIndexForInsertionAtPoint(point: NSPoint) -> Int
+  func characterIndexForInsertionAt(point: Point) -> Int
   convenience init()
-  func validateUserInterfaceItem(anItem: NSValidatedUserInterfaceItem) -> Bool
+  func validate(anItem: NSValidatedUserInterfaceItem) -> Bool
   func insertText(aString: AnyObject, replacementRange: NSRange)
-  func doCommandBySelector(aSelector: Selector)
+  func doCommandBy(aSelector: Selector)
   func setMarkedText(aString: AnyObject, selectedRange: NSRange, replacementRange: NSRange)
   func unmarkText()
   func selectedRange() -> NSRange
   func markedRange() -> NSRange
   func hasMarkedText() -> Bool
-  func attributedSubstringForProposedRange(aRange: NSRange, actualRange: NSRangePointer) -> NSAttributedString?
+  func attributedSubstringForProposedRange(aRange: NSRange, actualRange: RangePointer) -> AttributedString?
   func validAttributesForMarkedText() -> [String]
-  func firstRectForCharacterRange(aRange: NSRange, actualRange: NSRangePointer) -> NSRect
-  func characterIndexForPoint(aPoint: NSPoint) -> Int
-  func attributedString() -> NSAttributedString
-  func fractionOfDistanceThroughGlyphForPoint(aPoint: NSPoint) -> CGFloat
-  func baselineDeltaForCharacterAtIndex(anIndex: Int) -> CGFloat
+  func firstRectForCharacterRange(aRange: NSRange, actualRange: RangePointer) -> Rect
+  func characterIndexFor(aPoint: Point) -> Int
+  func attributedString() -> AttributedString
+  func fractionOfDistanceThroughGlyphFor(aPoint: Point) -> CGFloat
+  func baselineDeltaForCharacterAt(anIndex: Int) -> CGFloat
   func windowLevel() -> Int
-  func drawsVerticallyForCharacterAtIndex(charIndex: Int) -> Bool
+  func drawsVerticallyForCharacterAt(charIndex: Int) -> Bool
   var layoutOrientation: NSTextLayoutOrientation { get }
-  func draggingSession(session: NSDraggingSession, sourceOperationMaskForDraggingContext context: NSDraggingContext) -> NSDragOperation
-  func draggingSession(session: NSDraggingSession, willBeginAtPoint screenPoint: NSPoint)
-  func draggingSession(session: NSDraggingSession, movedToPoint screenPoint: NSPoint)
-  func draggingSession(session: NSDraggingSession, endedAtPoint screenPoint: NSPoint, operation: NSDragOperation)
-  func ignoreModifierKeysForDraggingSession(session: NSDraggingSession) -> Bool
-  func accessibilityStringForRange(range: NSRange) -> String?
-  func accessibilityLineForIndex(index: Int) -> Int
+  func draggingSession(session: NSDraggingSession, sourceOperationMaskFor context: NSDraggingContext) -> NSDragOperation
+  func draggingSession(session: NSDraggingSession, willBeginAt screenPoint: Point)
+  func draggingSession(session: NSDraggingSession, movedTo screenPoint: Point)
+  func draggingSession(session: NSDraggingSession, endedAt screenPoint: Point, operation: NSDragOperation)
+  func ignoreModifierKeysFor(session: NSDraggingSession) -> Bool
+  func accessibilityStringFor(range: NSRange) -> String?
+  func accessibilityLineFor(index: Int) -> Int
   func accessibilityRangeForLine(lineNumber: Int) -> NSRange
-  func accessibilityFrameForRange(range: NSRange) -> NSRect
+  func accessibilityFrameFor(range: NSRange) -> Rect
   func accessibilityValue() -> String?
-  func accessibilityAttributedStringForRange(range: NSRange) -> NSAttributedString?
+  func accessibilityAttributedStringFor(range: NSRange) -> AttributedString?
   func accessibilityVisibleCharacterRange() -> NSRange
 }
 extension NSTextView {
@@ -11858,27 +11859,27 @@ extension NSTextView {
 }
 extension NSTextView {
   var writablePasteboardTypes: [String] { get }
-  func writeSelectionToPasteboard(pboard: NSPasteboard, type: String) -> Bool
-  func writeSelectionToPasteboard(pboard: NSPasteboard, types: [String]) -> Bool
+  func writeSelectionTo(pboard: NSPasteboard, type: String) -> Bool
+  func writeSelectionTo(pboard: NSPasteboard, types: [String]) -> Bool
   var readablePasteboardTypes: [String] { get }
-  func preferredPasteboardTypeFromArray(availableTypes: [String], restrictedToTypesFromArray allowedTypes: [String]?) -> String?
-  func readSelectionFromPasteboard(pboard: NSPasteboard, type: String) -> Bool
-  func readSelectionFromPasteboard(pboard: NSPasteboard) -> Bool
+  func preferredPasteboardTypeFrom(availableTypes: [String], restrictedToTypesFrom allowedTypes: [String]?) -> String?
+  func readSelectionFrom(pboard: NSPasteboard, type: String) -> Bool
+  func readSelectionFrom(pboard: NSPasteboard) -> Bool
   class func registerForServices()
   func validRequestorForSendType(sendType: String, returnType: String) -> AnyObject?
   func pasteAsPlainText(sender: AnyObject?)
   func pasteAsRichText(sender: AnyObject?)
 }
 extension NSTextView {
-  func dragSelectionWithEvent(event: NSEvent, offset mouseOffset: NSSize, slideBack: Bool) -> Bool
-  func dragImageForSelectionWithEvent(event: NSEvent, origin: NSPointPointer) -> NSImage?
+  func dragSelectionWith(event: NSEvent, offset mouseOffset: Size, slideBack: Bool) -> Bool
+  func dragImageForSelectionWith(event: NSEvent, origin: PointPointer) -> NSImage?
   var acceptableDragTypes: [String] { get }
-  func dragOperationForDraggingInfo(dragInfo: NSDraggingInfo, type: String) -> NSDragOperation
+  func dragOperationFor(dragInfo: NSDraggingInfo, type: String) -> NSDragOperation
   func cleanUpAfterDragOperation()
 }
 extension NSTextView {
-  var selectedRanges: [NSValue]
-  func setSelectedRanges(ranges: [NSValue], affinity: NSSelectionAffinity, stillSelecting stillSelectingFlag: Bool)
+  var selectedRanges: [Value]
+  func setSelectedRanges(ranges: [Value], affinity: NSSelectionAffinity, stillSelecting stillSelectingFlag: Bool)
   func setSelectedRange(charRange: NSRange, affinity: NSSelectionAffinity, stillSelecting stillSelectingFlag: Bool)
   var selectionAffinity: NSSelectionAffinity { get }
   var selectionGranularity: NSSelectionGranularity
@@ -11891,18 +11892,18 @@ extension NSTextView {
   var acceptsGlyphInfo: Bool
   var usesRuler: Bool
   var usesInspectorBar: Bool
-  var continuousSpellCheckingEnabled: Bool
+  var isContinuousSpellCheckingEnabled: Bool
   func toggleContinuousSpellChecking(sender: AnyObject?)
   var spellCheckerDocumentTag: Int { get }
-  var grammarCheckingEnabled: Bool
+  var isGrammarCheckingEnabled: Bool
   func toggleGrammarChecking(sender: AnyObject?)
   func setSpellingState(value: Int, range charRange: NSRange)
   var typingAttributes: [String : AnyObject]
-  func shouldChangeTextInRanges(affectedRanges: [NSValue], replacementStrings: [String]?) -> Bool
-  var rangesForUserTextChange: [NSValue]? { get }
-  var rangesForUserCharacterAttributeChange: [NSValue]? { get }
-  var rangesForUserParagraphAttributeChange: [NSValue]? { get }
-  func shouldChangeTextInRange(affectedCharRange: NSRange, replacementString: String?) -> Bool
+  func shouldChangeTextInRanges(affectedRanges: [Value], replacementStrings: [String]?) -> Bool
+  var rangesForUserTextChange: [Value]? { get }
+  var rangesForUserCharacterAttributeChange: [Value]? { get }
+  var rangesForUserParagraphAttributeChange: [Value]? { get }
+  func shouldChangeTextIn(affectedCharRange: NSRange, replacementString: String?) -> Bool
   func didChangeText()
   var rangeForUserTextChange: NSRange { get }
   var rangeForUserCharacterAttributeChange: NSRange { get }
@@ -11911,20 +11912,20 @@ extension NSTextView {
   @NSCopying var defaultParagraphStyle: NSParagraphStyle?
   var allowsUndo: Bool
   func breakUndoCoalescing()
-  var coalescingUndo: Bool { get }
+  var isCoalescingUndo: Bool { get }
   var allowsImageEditing: Bool
-  func showFindIndicatorForRange(charRange: NSRange)
+  func showFindIndicatorFor(charRange: NSRange)
   var usesRolloverButtonForSelection: Bool
   unowned(unsafe) var delegate: @sil_unmanaged NSTextViewDelegate?
-  var editable: Bool
-  var selectable: Bool
-  var richText: Bool
+  var isEditable: Bool
+  var isSelectable: Bool
+  var isRichText: Bool
   var importsGraphics: Bool
   var drawsBackground: Bool
   @NSCopying var backgroundColor: NSColor
-  var fieldEditor: Bool
+  var isFieldEditor: Bool
   var usesFontPanel: Bool
-  var rulerVisible: Bool
+  var isRulerVisible: Bool
   func setSelectedRange(charRange: NSRange)
   var allowedInputSourceLocales: [String]?
 }
@@ -11932,34 +11933,34 @@ extension NSTextView {
   var smartInsertDeleteEnabled: Bool
   func smartDeleteRangeForProposedRange(proposedCharRange: NSRange) -> NSRange
   func toggleSmartInsertDelete(sender: AnyObject?)
-  func smartInsertForString(pasteString: String, replacingRange charRangeToReplace: NSRange, beforeString: AutoreleasingUnsafeMutablePointer<NSString?>, afterString: AutoreleasingUnsafeMutablePointer<NSString?>)
-  func smartInsertBeforeStringForString(pasteString: String, replacingRange charRangeToReplace: NSRange) -> String?
-  func smartInsertAfterStringForString(pasteString: String, replacingRange charRangeToReplace: NSRange) -> String?
-  var automaticQuoteSubstitutionEnabled: Bool
+  func smartInsertFor(pasteString: String, replacing charRangeToReplace: NSRange, before beforeString: AutoreleasingUnsafeMutablePointer<NSString?>, after afterString: AutoreleasingUnsafeMutablePointer<NSString?>)
+  func smartInsertBeforeStringFor(pasteString: String, replacing charRangeToReplace: NSRange) -> String?
+  func smartInsertAfterStringFor(pasteString: String, replacing charRangeToReplace: NSRange) -> String?
+  var isAutomaticQuoteSubstitutionEnabled: Bool
   func toggleAutomaticQuoteSubstitution(sender: AnyObject?)
-  var automaticLinkDetectionEnabled: Bool
+  var isAutomaticLinkDetectionEnabled: Bool
   func toggleAutomaticLinkDetection(sender: AnyObject?)
-  var automaticDataDetectionEnabled: Bool
+  var isAutomaticDataDetectionEnabled: Bool
   func toggleAutomaticDataDetection(sender: AnyObject?)
-  var automaticDashSubstitutionEnabled: Bool
+  var isAutomaticDashSubstitutionEnabled: Bool
   func toggleAutomaticDashSubstitution(sender: AnyObject?)
-  var automaticTextReplacementEnabled: Bool
+  var isAutomaticTextReplacementEnabled: Bool
   func toggleAutomaticTextReplacement(sender: AnyObject?)
-  var automaticSpellingCorrectionEnabled: Bool
+  var isAutomaticSpellingCorrectionEnabled: Bool
   func toggleAutomaticSpellingCorrection(sender: AnyObject?)
-  var enabledTextCheckingTypes: NSTextCheckingTypes
-  func checkTextInRange(range: NSRange, types checkingTypes: NSTextCheckingTypes, options: [String : AnyObject])
-  func handleTextCheckingResults(results: [NSTextCheckingResult], forRange range: NSRange, types checkingTypes: NSTextCheckingTypes, options: [String : AnyObject], orthography: NSOrthography, wordCount: Int)
+  var enabledTextCheckingTypes: TextCheckingTypes
+  func checkTextIn(range: NSRange, types checkingTypes: TextCheckingTypes, options: [String : AnyObject] = [:])
+  func handle(results: [TextCheckingResult], forRange range: NSRange, types checkingTypes: TextCheckingTypes, options: [String : AnyObject] = [:], orthography: Orthography, wordCount: Int)
   func orderFrontSubstitutionsPanel(sender: AnyObject?)
   func checkTextInSelection(sender: AnyObject?)
   func checkTextInDocument(sender: AnyObject?)
   var usesFindPanel: Bool
   var usesFindBar: Bool
-  var incrementalSearchingEnabled: Bool
+  var isIncrementalSearchingEnabled: Bool
 }
 extension NSTextView {
   @IBAction func toggleQuickLookPreviewPanel(sender: AnyObject?)
-  func quickLookPreviewableItemsInRanges(ranges: [NSValue]) -> [AnyObject]?
+  func quickLookPreviewableItemsInRanges(ranges: [Value]) -> [AnyObject]?
   func updateQuickLookPreviewPanel()
 }
 extension NSTextView {
@@ -11968,29 +11969,29 @@ extension NSTextView {
 extension NSTextView {
 }
 protocol NSTextViewDelegate : NSTextDelegate {
-  optional func textView(textView: NSTextView, clickedOnLink link: AnyObject, atIndex charIndex: Int) -> Bool
-  optional func textView(textView: NSTextView, clickedOnCell cell: NSTextAttachmentCellProtocol, inRect cellFrame: NSRect, atIndex charIndex: Int)
-  optional func textView(textView: NSTextView, doubleClickedOnCell cell: NSTextAttachmentCellProtocol, inRect cellFrame: NSRect, atIndex charIndex: Int)
-  optional func textView(view: NSTextView, draggedCell cell: NSTextAttachmentCellProtocol, inRect rect: NSRect, event: NSEvent, atIndex charIndex: Int)
-  optional func textView(view: NSTextView, writablePasteboardTypesForCell cell: NSTextAttachmentCellProtocol, atIndex charIndex: Int) -> [String]
-  optional func textView(view: NSTextView, writeCell cell: NSTextAttachmentCellProtocol, atIndex charIndex: Int, toPasteboard pboard: NSPasteboard, type: String) -> Bool
+  optional func textView(textView: NSTextView, clickedOnLink link: AnyObject, at charIndex: Int) -> Bool
+  optional func textView(textView: NSTextView, clickedOn cell: NSTextAttachmentCellProtocol, in cellFrame: Rect, at charIndex: Int)
+  optional func textView(textView: NSTextView, doubleClickedOn cell: NSTextAttachmentCellProtocol, in cellFrame: Rect, at charIndex: Int)
+  optional func textView(view: NSTextView, draggedCell cell: NSTextAttachmentCellProtocol, in rect: Rect, event: NSEvent, at charIndex: Int)
+  optional func textView(view: NSTextView, writablePasteboardTypesFor cell: NSTextAttachmentCellProtocol, at charIndex: Int) -> [String]
+  optional func textView(view: NSTextView, write cell: NSTextAttachmentCellProtocol, at charIndex: Int, to pboard: NSPasteboard, type: String) -> Bool
   optional func textView(textView: NSTextView, willChangeSelectionFromCharacterRange oldSelectedCharRange: NSRange, toCharacterRange newSelectedCharRange: NSRange) -> NSRange
-  optional func textView(textView: NSTextView, willChangeSelectionFromCharacterRanges oldSelectedCharRanges: [NSValue], toCharacterRanges newSelectedCharRanges: [NSValue]) -> [NSValue]
-  optional func textView(textView: NSTextView, shouldChangeTextInRanges affectedRanges: [NSValue], replacementStrings: [String]?) -> Bool
-  optional func textView(textView: NSTextView, shouldChangeTypingAttributes oldTypingAttributes: [String : AnyObject], toAttributes newTypingAttributes: [String : AnyObject]) -> [String : AnyObject]
-  optional func textViewDidChangeSelection(notification: NSNotification)
-  optional func textViewDidChangeTypingAttributes(notification: NSNotification)
-  optional func textView(textView: NSTextView, willDisplayToolTip tooltip: String, forCharacterAtIndex characterIndex: Int) -> String?
+  optional func textView(textView: NSTextView, willChangeSelectionFromCharacterRanges oldSelectedCharRanges: [Value], toCharacterRanges newSelectedCharRanges: [Value]) -> [Value]
+  optional func textView(textView: NSTextView, shouldChangeTextInRanges affectedRanges: [Value], replacementStrings: [String]?) -> Bool
+  optional func textView(textView: NSTextView, shouldChangeTypingAttributes oldTypingAttributes: [String : AnyObject] = [:], toAttributes newTypingAttributes: [String : AnyObject] = [:]) -> [String : AnyObject]
+  optional func textViewDidChangeSelection(notification: Notification)
+  optional func textViewDidChangeTypingAttributes(notification: Notification)
+  optional func textView(textView: NSTextView, willDisplayToolTip tooltip: String, forCharacterAt characterIndex: Int) -> String?
   optional func textView(textView: NSTextView, completions words: [String], forPartialWordRange charRange: NSRange, indexOfSelectedItem index: UnsafeMutablePointer<Int>) -> [String]
-  optional func textView(textView: NSTextView, shouldChangeTextInRange affectedCharRange: NSRange, replacementString: String?) -> Bool
-  optional func textView(textView: NSTextView, doCommandBySelector commandSelector: Selector) -> Bool
+  optional func textView(textView: NSTextView, shouldChangeTextIn affectedCharRange: NSRange, replacementString: String?) -> Bool
+  optional func textView(textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool
   optional func textView(textView: NSTextView, shouldSetSpellingState value: Int, range affectedCharRange: NSRange) -> Int
-  optional func textView(view: NSTextView, menu: NSMenu, forEvent event: NSEvent, atIndex charIndex: Int) -> NSMenu?
-  optional func textView(view: NSTextView, willCheckTextInRange range: NSRange, options: [String : AnyObject], types checkingTypes: UnsafeMutablePointer<NSTextCheckingTypes>) -> [String : AnyObject]
-  optional func textView(view: NSTextView, didCheckTextInRange range: NSRange, types checkingTypes: NSTextCheckingTypes, options: [String : AnyObject], results: [NSTextCheckingResult], orthography: NSOrthography, wordCount: Int) -> [NSTextCheckingResult]
-  optional func textView(textView: NSTextView, URLForContentsOfTextAttachment textAttachment: NSTextAttachment, atIndex charIndex: Int) -> NSURL?
-  optional func textView(textView: NSTextView, willShowSharingServicePicker servicePicker: NSSharingServicePicker, forItems items: [AnyObject]) -> NSSharingServicePicker?
-  optional func undoManagerForTextView(view: NSTextView) -> NSUndoManager?
+  optional func textView(view: NSTextView, menu: NSMenu, forEvent event: NSEvent, at charIndex: Int) -> NSMenu?
+  optional func textView(view: NSTextView, willCheckTextIn range: NSRange, options: [String : AnyObject] = [:], types checkingTypes: UnsafeMutablePointer<TextCheckingTypes>) -> [String : AnyObject]
+  optional func textView(view: NSTextView, didCheckTextIn range: NSRange, types checkingTypes: TextCheckingTypes, options: [String : AnyObject] = [:], results: [TextCheckingResult], orthography: Orthography, wordCount: Int) -> [TextCheckingResult]
+  optional func textView(textView: NSTextView, urlForContentsOf textAttachment: NSTextAttachment, at charIndex: Int) -> URL?
+  optional func textView(textView: NSTextView, willShow servicePicker: NSSharingServicePicker, forItems items: [AnyObject]) -> NSSharingServicePicker?
+  optional func undoManagerFor(view: NSTextView) -> UndoManager?
 }
 let NSTextViewWillChangeNotifyingTextViewNotification: String
 let NSTextViewDidChangeSelectionNotification: String
@@ -12026,30 +12027,30 @@ class NSTitlebarAccessoryViewController : NSViewController {
   func viewWillAppear()
   func viewDidAppear()
   func viewDidDisappear()
-  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder: NSCoder)
+  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder: Coder)
   convenience init()
 }
 class NSTokenField : NSTextField {
   func setDelegate(anObject: NSTokenFieldDelegate?)
   func delegate() -> NSTokenFieldDelegate?
   var tokenStyle: NSTokenStyle
-  var completionDelay: NSTimeInterval
-  class func defaultCompletionDelay() -> NSTimeInterval
-  @NSCopying var tokenizingCharacterSet: NSCharacterSet!
-  class func defaultTokenizingCharacterSet() -> NSCharacterSet
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  var completionDelay: TimeInterval
+  class func defaultCompletionDelay() -> TimeInterval
+  @NSCopying var tokenizingCharacterSet: CharacterSet!
+  class func defaultTokenizingCharacterSet() -> CharacterSet
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 protocol NSTokenFieldDelegate : NSTextFieldDelegate {
   optional func tokenField(tokenField: NSTokenField, completionsForSubstring substring: String, indexOfToken tokenIndex: Int, indexOfSelectedItem selectedIndex: UnsafeMutablePointer<Int>) -> [AnyObject]?
-  optional func tokenField(tokenField: NSTokenField, shouldAddObjects tokens: [AnyObject], atIndex index: Int) -> [AnyObject]
+  optional func tokenField(tokenField: NSTokenField, shouldAdd tokens: [AnyObject], at index: Int) -> [AnyObject]
   optional func tokenField(tokenField: NSTokenField, displayStringForRepresentedObject representedObject: AnyObject) -> String?
   optional func tokenField(tokenField: NSTokenField, editingStringForRepresentedObject representedObject: AnyObject) -> String?
-  optional func tokenField(tokenField: NSTokenField, representedObjectForEditingString editingString: String) -> AnyObject
-  optional func tokenField(tokenField: NSTokenField, writeRepresentedObjects objects: [AnyObject], toPasteboard pboard: NSPasteboard) -> Bool
-  optional func tokenField(tokenField: NSTokenField, readFromPasteboard pboard: NSPasteboard) -> [AnyObject]?
+  optional func tokenField(tokenField: NSTokenField, representedObjectForEditing editingString: String) -> AnyObject
+  optional func tokenField(tokenField: NSTokenField, writeRepresentedObjects objects: [AnyObject], to pboard: NSPasteboard) -> Bool
+  optional func tokenField(tokenField: NSTokenField, readFrom pboard: NSPasteboard) -> [AnyObject]?
   optional func tokenField(tokenField: NSTokenField, menuForRepresentedObject representedObject: AnyObject) -> NSMenu?
   optional func tokenField(tokenField: NSTokenField, hasMenuForRepresentedObject representedObject: AnyObject) -> Bool
   optional func tokenField(tokenField: NSTokenField, styleForRepresentedObject representedObject: AnyObject) -> NSTokenStyle
@@ -12068,24 +12069,24 @@ let NSPlainTextTokenStyle: NSTokenStyle
 let NSRoundedTokenStyle: NSTokenStyle
 class NSTokenFieldCell : NSTextFieldCell {
   var tokenStyle: NSTokenStyle
-  var completionDelay: NSTimeInterval
-  class func defaultCompletionDelay() -> NSTimeInterval
-  @NSCopying var tokenizingCharacterSet: NSCharacterSet!
-  class func defaultTokenizingCharacterSet() -> NSCharacterSet
+  var completionDelay: TimeInterval
+  class func defaultCompletionDelay() -> TimeInterval
+  @NSCopying var tokenizingCharacterSet: CharacterSet!
+  class func defaultTokenizingCharacterSet() -> CharacterSet
   unowned(unsafe) var delegate: @sil_unmanaged NSTokenFieldCellDelegate?
   init(textCell aString: String)
   init(imageCell image: NSImage?)
   convenience init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
-protocol NSTokenFieldCellDelegate : NSObjectProtocol {
+protocol NSTokenFieldCellDelegate : ObjectProtocol {
   optional func tokenFieldCell(tokenFieldCell: NSTokenFieldCell, completionsForSubstring substring: String, indexOfToken tokenIndex: Int, indexOfSelectedItem selectedIndex: UnsafeMutablePointer<Int>) -> [AnyObject]
-  optional func tokenFieldCell(tokenFieldCell: NSTokenFieldCell, shouldAddObjects tokens: [AnyObject], atIndex index: Int) -> [AnyObject]
+  optional func tokenFieldCell(tokenFieldCell: NSTokenFieldCell, shouldAdd tokens: [AnyObject], at index: Int) -> [AnyObject]
   optional func tokenFieldCell(tokenFieldCell: NSTokenFieldCell, displayStringForRepresentedObject representedObject: AnyObject) -> String?
   optional func tokenFieldCell(tokenFieldCell: NSTokenFieldCell, editingStringForRepresentedObject representedObject: AnyObject) -> String?
-  optional func tokenFieldCell(tokenFieldCell: NSTokenFieldCell, representedObjectForEditingString editingString: String) -> AnyObject
-  optional func tokenFieldCell(tokenFieldCell: NSTokenFieldCell, writeRepresentedObjects objects: [AnyObject], toPasteboard pboard: NSPasteboard) -> Bool
-  optional func tokenFieldCell(tokenFieldCell: NSTokenFieldCell, readFromPasteboard pboard: NSPasteboard) -> [AnyObject]?
+  optional func tokenFieldCell(tokenFieldCell: NSTokenFieldCell, representedObjectForEditing editingString: String) -> AnyObject
+  optional func tokenFieldCell(tokenFieldCell: NSTokenFieldCell, writeRepresentedObjects objects: [AnyObject], to pboard: NSPasteboard) -> Bool
+  optional func tokenFieldCell(tokenFieldCell: NSTokenFieldCell, readFrom pboard: NSPasteboard) -> [AnyObject]?
   optional func tokenFieldCell(tokenFieldCell: NSTokenFieldCell, menuForRepresentedObject representedObject: AnyObject) -> NSMenu?
   optional func tokenFieldCell(tokenFieldCell: NSTokenFieldCell, hasMenuForRepresentedObject representedObject: AnyObject) -> Bool
   optional func tokenFieldCell(tokenFieldCell: NSTokenFieldCell, styleForRepresentedObject representedObject: AnyObject) -> NSTokenStyle
@@ -12105,12 +12106,12 @@ enum NSToolbarSizeMode : UInt {
   case Regular
   case Small
 }
-class NSToolbar : NSObject {
+class NSToolbar : Object {
   init(identifier: String)
-  func insertItemWithItemIdentifier(itemIdentifier: String, atIndex index: Int)
-  func removeItemAtIndex(index: Int)
+  func insertItemWithItemIdentifier(itemIdentifier: String, at index: Int)
+  func removeItemAt(index: Int)
   unowned(unsafe) var delegate: @sil_unmanaged NSToolbarDelegate?
-  var visible: Bool
+  var isVisible: Bool
   func runCustomizationPalette(sender: AnyObject?)
   var customizationPaletteIsRunning: Bool { get }
   var displayMode: NSToolbarDisplayMode
@@ -12122,7 +12123,7 @@ class NSToolbar : NSObject {
   var items: [NSToolbarItem] { get }
   var visibleItems: [NSToolbarItem]? { get }
   var autosavesConfiguration: Bool
-  func setConfigurationFromDictionary(configDict: [String : AnyObject])
+  func setConfigurationFrom(configDict: [String : AnyObject])
   var configurationDictionary: [String : AnyObject] { get }
   func validateVisibleItems()
   var allowsExtensionItems: Bool
@@ -12162,13 +12163,13 @@ struct __tbFlags {
   init()
   init(allowsUserCustomization: UInt32, autosavesUsingIdentifier: UInt32, initialConfigurationDone: UInt32, doesNotAttachToMenuBar: UInt32, delegateDefaultItemIdentifiers: UInt32, delegateAllowedItemIdentifiers: UInt32, delegateItemWithItemIdentifier: UInt32, delegateNotificationsEnabled: UInt32, prefersToBeShown: UInt32, loadItemsImmediately: UInt32, currentItemsContainsPlaceholder: UInt32, customizationPanelIsRunning: UInt32, usesCustomSheetWidth: UInt32, clickAndDragPerformsCustomization: UInt32, showsNoContextMenu: UInt32, currentlyLoadingPlaceholders: UInt32, delegateItemWithItemIdentifier2: UInt32, inGlobalWindow: UInt32, hasOwnedFullscreenViewController: UInt32, usesServicesItems: UInt32, usingFSMetrics: UInt32, keyboardLoopNeedsUpdating: UInt32, showHideDuringConfigurationChangeDisabled: UInt32, displayMode: UInt32, sizeMode: UInt32, doNotShowBaselineSeparator: UInt32, hideWithoutResizingWindowHint: UInt32, autovalidatesItemsDisabled: UInt32, inAutovalidation: UInt32, loadedMetrics: UInt32)
 }
-protocol NSToolbarDelegate : NSObjectProtocol {
+protocol NSToolbarDelegate : ObjectProtocol {
   optional func toolbar(toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: String, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem?
   optional func toolbarDefaultItemIdentifiers(toolbar: NSToolbar) -> [String]
   optional func toolbarAllowedItemIdentifiers(toolbar: NSToolbar) -> [String]
   optional func toolbarSelectableItemIdentifiers(toolbar: NSToolbar) -> [String]
-  optional func toolbarWillAddItem(notification: NSNotification)
-  optional func toolbarDidRemoveItem(notification: NSNotification)
+  optional func toolbarWillAddItem(notification: Notification)
+  optional func toolbarDidRemoveItem(notification: Notification)
 }
 let NSToolbarWillAddItemNotification: String
 let NSToolbarDidRemoveItemNotification: String
@@ -12177,7 +12178,7 @@ extension NSToolbar {
   var fullScreenAccessoryViewMinHeight: CGFloat
   var fullScreenAccessoryViewMaxHeight: CGFloat
 }
-class NSToolbarItem : NSObject, NSCopying, NSValidatedUserInterfaceItem {
+class NSToolbarItem : Object, Copying, NSValidatedUserInterfaceItem {
   init(itemIdentifier: String)
   var itemIdentifier: String { get }
   unowned(unsafe) var toolbar: @sil_unmanaged NSToolbar? { get }
@@ -12188,17 +12189,17 @@ class NSToolbarItem : NSObject, NSCopying, NSValidatedUserInterfaceItem {
   var tag: Int
   weak var target: @sil_weak AnyObject?
   var action: Selector
-  var enabled: Bool
+  var isEnabled: Bool
   var image: NSImage?
   var view: NSView?
-  var minSize: NSSize
-  var maxSize: NSSize
+  var minSize: Size
+  var maxSize: Size
   var visibilityPriority: Int
   func validate()
   var autovalidates: Bool
   var allowsDuplicatesInToolbar: Bool { get }
   convenience init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 struct __tbiFlags {
   var viewRespondsToIsEnabled: UInt32
@@ -12234,9 +12235,9 @@ var NSToolbarItemVisibilityPriorityStandard: Int { get }
 var NSToolbarItemVisibilityPriorityLow: Int { get }
 var NSToolbarItemVisibilityPriorityHigh: Int { get }
 var NSToolbarItemVisibilityPriorityUser: Int { get }
-extension NSObject {
-  class func validateToolbarItem(theItem: NSToolbarItem) -> Bool
-  func validateToolbarItem(theItem: NSToolbarItem) -> Bool
+extension Object {
+  class func validate(theItem: NSToolbarItem) -> Bool
+  func validate(theItem: NSToolbarItem) -> Bool
 }
 let NSToolbarSeparatorItemIdentifier: String
 let NSToolbarSpaceItemIdentifier: String
@@ -12262,15 +12263,15 @@ struct NSTouchPhase : OptionSetType {
   static var Touching: NSTouchPhase { get }
   static var Any: NSTouchPhase { get }
 }
-class NSTouch : NSObject, NSCopying {
-  var identity: protocol<NSCopying, NSObjectProtocol> { get }
+class NSTouch : Object, Copying {
+  var identity: protocol<Copying, ObjectProtocol> { get }
   var phase: NSTouchPhase { get }
-  var normalizedPosition: NSPoint { get }
-  var resting: Bool { get }
+  var normalizedPosition: Point { get }
+  var isResting: Bool { get }
   var device: AnyObject? { get }
-  var deviceSize: NSSize { get }
+  var deviceSize: Size { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 struct NSTrackingAreaOptions : OptionSetType {
   init(rawValue: UInt)
@@ -12286,16 +12287,16 @@ struct NSTrackingAreaOptions : OptionSetType {
   static var InVisibleRect: NSTrackingAreaOptions { get }
   static var EnabledDuringMouseDrag: NSTrackingAreaOptions { get }
 }
-class NSTrackingArea : NSObject, NSCopying, NSCoding {
-  init(rect: NSRect, options: NSTrackingAreaOptions, owner: AnyObject?, userInfo: [NSObject : AnyObject]?)
-  var rect: NSRect { get }
+class NSTrackingArea : Object, Copying, Coding {
+  init(rect: Rect, options: NSTrackingAreaOptions = [], owner: AnyObject?, userInfo: [Object : AnyObject]? = [:])
+  var rect: Rect { get }
   var options: NSTrackingAreaOptions { get }
   unowned(unsafe) var owner: @sil_unmanaged AnyObject? { get }
-  var userInfo: [NSObject : AnyObject]? { get }
+  var userInfo: [Object : AnyObject]? { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 class NSTreeController : NSObjectController {
   func rearrangeObjects()
@@ -12303,7 +12304,7 @@ class NSTreeController : NSObjectController {
   var childrenKeyPath: String?
   var countKeyPath: String?
   var leafKeyPath: String?
-  var sortDescriptors: [NSSortDescriptor]
+  var sortDescriptors: [SortDescriptor]
   var content: AnyObject?
   func add(sender: AnyObject?)
   func remove(sender: AnyObject?)
@@ -12313,29 +12314,29 @@ class NSTreeController : NSObjectController {
   var canInsert: Bool { get }
   var canInsertChild: Bool { get }
   var canAddChild: Bool { get }
-  func insertObject(object: AnyObject?, atArrangedObjectIndexPath indexPath: NSIndexPath)
-  func insertObjects(objects: [AnyObject], atArrangedObjectIndexPaths indexPaths: [NSIndexPath])
-  func removeObjectAtArrangedObjectIndexPath(indexPath: NSIndexPath)
-  func removeObjectsAtArrangedObjectIndexPaths(indexPaths: [NSIndexPath])
+  func insert(object: AnyObject?, atArrangedObjectIndexPath indexPath: IndexPath)
+  func insert(objects: [AnyObject], atArrangedObjectIndexPaths indexPaths: [IndexPath])
+  func removeObjectAtArrangedObjectIndexPath(indexPath: IndexPath)
+  func removeObjectsAtArrangedObjectIndexPaths(indexPaths: [IndexPath])
   var avoidsEmptySelection: Bool
   var preservesSelection: Bool
   var selectsInsertedObjects: Bool
   var alwaysUsesMultipleValuesMarker: Bool
   var selectedObjects: [AnyObject] { get }
-  func setSelectionIndexPaths(indexPaths: [NSIndexPath]) -> Bool
-  var selectionIndexPaths: [NSIndexPath] { get }
-  func setSelectionIndexPath(indexPath: NSIndexPath?) -> Bool
-  @NSCopying var selectionIndexPath: NSIndexPath? { get }
-  func addSelectionIndexPaths(indexPaths: [NSIndexPath]) -> Bool
-  func removeSelectionIndexPaths(indexPaths: [NSIndexPath]) -> Bool
+  func setSelectionIndexPaths(indexPaths: [IndexPath]) -> Bool
+  var selectionIndexPaths: [IndexPath] { get }
+  func setSelectionIndexPath(indexPath: IndexPath?) -> Bool
+  @NSCopying var selectionIndexPath: IndexPath? { get }
+  func addSelectionIndexPaths(indexPaths: [IndexPath]) -> Bool
+  func removeSelectionIndexPaths(indexPaths: [IndexPath]) -> Bool
   var selectedNodes: [NSTreeNode] { get }
-  func moveNode(node: NSTreeNode, toIndexPath indexPath: NSIndexPath)
-  func moveNodes(nodes: [NSTreeNode], toIndexPath startingIndexPath: NSIndexPath)
-  func childrenKeyPathForNode(node: NSTreeNode) -> String?
-  func countKeyPathForNode(node: NSTreeNode) -> String?
-  func leafKeyPathForNode(node: NSTreeNode) -> String?
+  func move(node: NSTreeNode, to indexPath: IndexPath)
+  func move(nodes: [NSTreeNode], to startingIndexPath: IndexPath)
+  func childrenKeyPathFor(node: NSTreeNode) -> String?
+  func countKeyPathFor(node: NSTreeNode) -> String?
+  func leafKeyPathFor(node: NSTreeNode) -> String?
   init(content: AnyObject?)
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init()
 }
 struct __treeControllerFlags {
@@ -12355,16 +12356,16 @@ struct __treeControllerFlags {
   init()
   init(_avoidsEmptySelection: UInt32, _preservesSelection: UInt32, _selectsInsertedObjects: UInt32, _explicitlyCannotInsert: UInt32, _explicitlyCannotInsertChild: UInt32, _explicitlyCannotAddChild: UInt32, _alwaysUsesMultipleValuesMarker: UInt32, _observingThroughArrangedObjects: UInt32, _mutatingNodes: UInt32, _performingFetch: UInt32, _skipSortingAfterFetch: UInt32, _usesIdenticalComparisonOfModelObjects: UInt32, _reservedTreeController: UInt32)
 }
-class NSTreeNode : NSObject {
+class NSTreeNode : Object {
   init(representedObject modelObject: AnyObject?)
   var representedObject: AnyObject? { get }
-  var indexPath: NSIndexPath { get }
-  var leaf: Bool { get }
+  var indexPath: IndexPath { get }
+  var isLeaf: Bool { get }
   var childNodes: [NSTreeNode]? { get }
-  var mutableChildNodes: NSMutableArray { get }
-  func descendantNodeAtIndexPath(indexPath: NSIndexPath) -> NSTreeNode?
-  unowned(unsafe) var parentNode: @sil_unmanaged NSTreeNode? { get }
-  func sortWithSortDescriptors(sortDescriptors: [NSSortDescriptor], recursively: Bool)
+  var mutableChildNodes: MutableArray { get }
+  func descendantNodeAt(indexPath: IndexPath) -> NSTreeNode?
+  unowned(unsafe) var parent: @sil_unmanaged NSTreeNode? { get }
+  func sortWith(sortDescriptors: [SortDescriptor], recursively: Bool)
   init()
 }
 struct __NSTreeNodeFlags {
@@ -12383,85 +12384,85 @@ struct NSTypesetterControlCharacterAction : OptionSetType {
   static var ParagraphBreakAction: NSTypesetterControlCharacterAction { get }
   static var ContainerBreakAction: NSTypesetterControlCharacterAction { get }
 }
-class NSTypesetter : NSObject {
+class NSTypesetter : Object {
   var usesFontLeading: Bool
   var typesetterBehavior: NSTypesetterBehavior
   var hyphenationFactor: Float
   var lineFragmentPadding: CGFloat
-  func substituteFontForFont(originalFont: NSFont) -> NSFont
+  func substituteFontFor(originalFont: NSFont) -> NSFont
   func textTabForGlyphLocation(glyphLocation: CGFloat, writingDirection direction: NSWritingDirection, maxLocation: CGFloat) -> NSTextTab?
   var bidiProcessingEnabled: Bool
-  unowned(unsafe) var attributedString: @sil_unmanaged NSAttributedString?
+  unowned(unsafe) var attributedString: @sil_unmanaged AttributedString?
   func setParagraphGlyphRange(paragraphRange: NSRange, separatorGlyphRange paragraphSeparatorRange: NSRange)
   var paragraphGlyphRange: NSRange { get }
   var paragraphSeparatorGlyphRange: NSRange { get }
   var paragraphCharacterRange: NSRange { get }
   var paragraphSeparatorCharacterRange: NSRange { get }
-  func layoutParagraphAtPoint(lineFragmentOrigin: NSPointPointer) -> Int
+  func layoutParagraphAt(lineFragmentOrigin: PointPointer) -> Int
   func beginParagraph()
   func endParagraph()
-  func beginLineWithGlyphAtIndex(glyphIndex: Int)
+  func beginLineWithGlyphAt(glyphIndex: Int)
   func endLineWithGlyphRange(lineGlyphRange: NSRange)
-  func lineSpacingAfterGlyphAtIndex(glyphIndex: Int, withProposedLineFragmentRect rect: NSRect) -> CGFloat
-  func paragraphSpacingBeforeGlyphAtIndex(glyphIndex: Int, withProposedLineFragmentRect rect: NSRect) -> CGFloat
-  func paragraphSpacingAfterGlyphAtIndex(glyphIndex: Int, withProposedLineFragmentRect rect: NSRect) -> CGFloat
-  func getLineFragmentRect(lineFragmentRect: NSRectPointer, usedRect lineFragmentUsedRect: NSRectPointer, forParagraphSeparatorGlyphRange paragraphSeparatorGlyphRange: NSRange, atProposedOrigin lineOrigin: NSPoint)
+  func lineSpacingAfterGlyphAt(glyphIndex: Int, withProposedLineFragmentRect rect: Rect) -> CGFloat
+  func paragraphSpacingBeforeGlyphAt(glyphIndex: Int, withProposedLineFragmentRect rect: Rect) -> CGFloat
+  func paragraphSpacingAfterGlyphAt(glyphIndex: Int, withProposedLineFragmentRect rect: Rect) -> CGFloat
+  func getLineFragmentRect(lineFragmentRect: RectPointer, usedRect lineFragmentUsedRect: RectPointer, forParagraphSeparatorGlyphRange paragraphSeparatorGlyphRange: NSRange, atProposedOrigin lineOrigin: Point)
   var attributesForExtraLineFragment: [String : AnyObject]? { get }
-  func actionForControlCharacterAtIndex(charIndex: Int) -> NSTypesetterControlCharacterAction
+  func actionForControlCharacterAt(charIndex: Int) -> NSTypesetterControlCharacterAction
   unowned(unsafe) var layoutManager: @sil_unmanaged NSLayoutManager? { get }
   var textContainers: [NSTextContainer]? { get }
   unowned(unsafe) var currentTextContainer: @sil_unmanaged NSTextContainer? { get }
   @NSCopying var currentParagraphStyle: NSParagraphStyle? { get }
   func setHardInvalidation(flag: Bool, forGlyphRange glyphRange: NSRange)
-  func layoutGlyphsInLayoutManager(layoutManager: NSLayoutManager, startingAtGlyphIndex startGlyphIndex: Int, maxNumberOfLineFragments maxNumLines: Int, nextGlyphIndex nextGlyph: UnsafeMutablePointer<Int>)
-  func layoutCharactersInRange(characterRange: NSRange, forLayoutManager layoutManager: NSLayoutManager, maximumNumberOfLineFragments maxNumLines: Int) -> NSRange
-  class func printingAdjustmentInLayoutManager(layoutMgr: NSLayoutManager, forNominallySpacedGlyphRange nominallySpacedGlyphsRange: NSRange, packedGlyphs: UnsafePointer<UInt8>, count packedGlyphsCount: Int) -> NSSize
-  func baselineOffsetInLayoutManager(layoutMgr: NSLayoutManager, glyphIndex: Int) -> CGFloat
+  func layoutGlyphsIn(layoutManager: NSLayoutManager, startingAtGlyphIndex startGlyphIndex: Int, maxNumberOfLineFragments maxNumLines: Int, nextGlyphIndex nextGlyph: UnsafeMutablePointer<Int>)
+  func layoutCharactersIn(characterRange: NSRange, forLayoutManager layoutManager: NSLayoutManager, maximumNumberOfLineFragments maxNumLines: Int) -> NSRange
+  class func printingAdjustmentIn(layoutMgr: NSLayoutManager, forNominallySpacedGlyphRange nominallySpacedGlyphsRange: NSRange, packedGlyphs: UnsafePointer<UInt8>, count packedGlyphsCount: Int) -> Size
+  func baselineOffsetIn(layoutMgr: NSLayoutManager, glyphIndex: Int) -> CGFloat
   class func sharedSystemTypesetter() -> AnyObject
-  class func sharedSystemTypesetterForBehavior(theBehavior: NSTypesetterBehavior) -> AnyObject
+  class func sharedSystemTypesetterFor(theBehavior: NSTypesetterBehavior) -> AnyObject
   class func defaultTypesetterBehavior() -> NSTypesetterBehavior
   init()
 }
 extension NSTypesetter {
-  func willSetLineFragmentRect(lineRect: NSRectPointer, forGlyphRange glyphRange: NSRange, usedRect: NSRectPointer, baselineOffset: UnsafeMutablePointer<CGFloat>)
-  func shouldBreakLineByWordBeforeCharacterAtIndex(charIndex: Int) -> Bool
-  func shouldBreakLineByHyphenatingBeforeCharacterAtIndex(charIndex: Int) -> Bool
-  func hyphenationFactorForGlyphAtIndex(glyphIndex: Int) -> Float
-  func hyphenCharacterForGlyphAtIndex(glyphIndex: Int) -> UTF32Char
-  func boundingBoxForControlGlyphAtIndex(glyphIndex: Int, forTextContainer textContainer: NSTextContainer, proposedLineFragment proposedRect: NSRect, glyphPosition: NSPoint, characterIndex charIndex: Int) -> NSRect
+  func willSetLineFragmentRect(lineRect: RectPointer, forGlyphRange glyphRange: NSRange, usedRect: RectPointer, baselineOffset: UnsafeMutablePointer<CGFloat>)
+  func shouldBreakLineByWordBeforeCharacterAt(charIndex: Int) -> Bool
+  func shouldBreakLineByHyphenatingBeforeCharacterAt(charIndex: Int) -> Bool
+  func hyphenationFactorForGlyphAt(glyphIndex: Int) -> Float
+  func hyphenCharacterForGlyphAt(glyphIndex: Int) -> UTF32Char
+  func boundingBoxForControlGlyphAt(glyphIndex: Int, forTextContainer textContainer: NSTextContainer, proposedLineFragment proposedRect: Rect, glyphPosition: Point, characterIndex charIndex: Int) -> Rect
 }
 extension NSTypesetter {
-  func characterRangeForGlyphRange(glyphRange: NSRange, actualGlyphRange: NSRangePointer) -> NSRange
-  func glyphRangeForCharacterRange(charRange: NSRange, actualCharacterRange actualCharRange: NSRangePointer) -> NSRange
-  func getGlyphsInRange(glyphsRange: NSRange, glyphs glyphBuffer: UnsafeMutablePointer<NSGlyph>, characterIndexes charIndexBuffer: UnsafeMutablePointer<Int>, glyphInscriptions inscribeBuffer: UnsafeMutablePointer<NSGlyphInscription>, elasticBits elasticBuffer: UnsafeMutablePointer<ObjCBool>, bidiLevels bidiLevelBuffer: UnsafeMutablePointer<UInt8>) -> Int
-  func getLineFragmentRect(lineFragmentRect: NSRectPointer, usedRect lineFragmentUsedRect: NSRectPointer, remainingRect: NSRectPointer, forStartingGlyphAtIndex startingGlyphIndex: Int, proposedRect: NSRect, lineSpacing: CGFloat, paragraphSpacingBefore: CGFloat, paragraphSpacingAfter: CGFloat)
-  func setLineFragmentRect(fragmentRect: NSRect, forGlyphRange glyphRange: NSRange, usedRect: NSRect, baselineOffset: CGFloat)
-  func substituteGlyphsInRange(glyphRange: NSRange, withGlyphs glyphs: UnsafeMutablePointer<NSGlyph>)
+  func characterRangeForGlyphRange(glyphRange: NSRange, actualGlyphRange: RangePointer) -> NSRange
+  func glyphRangeForCharacterRange(charRange: NSRange, actualCharacterRange actualCharRange: RangePointer) -> NSRange
+  func getGlyphsIn(glyphsRange: NSRange, glyphs glyphBuffer: UnsafeMutablePointer<NSGlyph>, characterIndexes charIndexBuffer: UnsafeMutablePointer<Int>, glyphInscriptions inscribeBuffer: UnsafeMutablePointer<NSGlyphInscription>, elasticBits elasticBuffer: UnsafeMutablePointer<ObjCBool>, bidiLevels bidiLevelBuffer: UnsafeMutablePointer<UInt8>) -> Int
+  func getLineFragmentRect(lineFragmentRect: RectPointer, usedRect lineFragmentUsedRect: RectPointer, remaining remainingRect: RectPointer, forStartingGlyphAt startingGlyphIndex: Int, proposedRect: Rect, lineSpacing: CGFloat, paragraphSpacingBefore: CGFloat, paragraphSpacingAfter: CGFloat)
+  func setLineFragmentRect(fragmentRect: Rect, forGlyphRange glyphRange: NSRange, usedRect: Rect, baselineOffset: CGFloat)
+  func substituteGlyphsIn(glyphRange: NSRange, withGlyphs glyphs: UnsafeMutablePointer<NSGlyph>)
   func insertGlyph(glyph: NSGlyph, atGlyphIndex glyphIndex: Int, characterIndex: Int)
-  func deleteGlyphsInRange(glyphRange: NSRange)
+  func deleteGlyphsIn(glyphRange: NSRange)
   func setNotShownAttribute(flag: Bool, forGlyphRange glyphRange: NSRange)
   func setDrawsOutsideLineFragment(flag: Bool, forGlyphRange glyphRange: NSRange)
-  func setLocation(location: NSPoint, withAdvancements advancements: UnsafePointer<CGFloat>, forStartOfGlyphRange glyphRange: NSRange)
-  func setAttachmentSize(attachmentSize: NSSize, forGlyphRange glyphRange: NSRange)
+  func setLocation(location: Point, withAdvancements advancements: UnsafePointer<CGFloat>, forStartOfGlyphRange glyphRange: NSRange)
+  func setAttachmentSize(attachmentSize: Size, forGlyphRange glyphRange: NSRange)
   func setBidiLevels(levels: UnsafePointer<UInt8>, forGlyphRange glyphRange: NSRange)
 }
 var NS_USER_ACTIVITY_SUPPORTED: Int32 { get }
 extension NSResponder {
-  var userActivity: NSUserActivity?
-  func updateUserActivityState(userActivity: NSUserActivity)
-  func restoreUserActivityState(userActivity: NSUserActivity)
+  var userActivity: UserActivity?
+  func updateUserActivityState(userActivity: UserActivity)
+  func restoreUserActivityState(userActivity: UserActivity)
 }
 extension NSDocument {
-  var userActivity: NSUserActivity?
-  func updateUserActivityState(activity: NSUserActivity)
-  func restoreUserActivityState(activity: NSUserActivity)
+  var userActivity: UserActivity?
+  func updateUserActivityState(activity: UserActivity)
+  func restoreUserActivityState(activity: UserActivity)
 }
 let NSUserActivityDocumentURLKey: String
 class NSUserDefaultsController : NSController {
-  class func sharedUserDefaultsController() -> NSUserDefaultsController
-  init(defaults: NSUserDefaults?, initialValues: [String : AnyObject]?)
-  init?(coder: NSCoder)
-  var defaults: NSUserDefaults { get }
+  class func shared() -> NSUserDefaultsController
+  init(defaults: UserDefaults?, initialValues: [String : AnyObject]?)
+  init?(coder: Coder)
+  var defaults: UserDefaults { get }
   var initialValues: [String : AnyObject]?
   var appliesImmediately: Bool
   var hasUnappliedChanges: Bool { get }
@@ -12481,16 +12482,16 @@ struct __userDefaultsControllerFlags {
 protocol NSUserInterfaceItemIdentification {
   var identifier: String? { get set }
 }
-protocol NSUserInterfaceItemSearching : NSObjectProtocol {
-  func searchForItemsWithSearchString(searchString: String, resultLimit: Int, matchedItemHandler handleMatchedItems: ([AnyObject]) -> Void)
+protocol NSUserInterfaceItemSearching : ObjectProtocol {
+  func searchForItemsWithSearch(searchString: String, resultLimit: Int, matchedItemHandler handleMatchedItems: ([AnyObject]) -> Void)
   func localizedTitlesForItem(item: AnyObject) -> [String]
   optional func performActionForItem(item: AnyObject)
-  optional func showAllHelpTopicsForSearchString(searchString: String)
+  optional func showAllHelpTopicsForSearch(searchString: String)
 }
 extension NSApplication {
   func registerUserInterfaceItemSearchHandler(handler: NSUserInterfaceItemSearching)
   func unregisterUserInterfaceItemSearchHandler(handler: NSUserInterfaceItemSearching)
-  func searchString(searchString: String, inUserInterfaceItemString stringToSearch: String, searchRange: NSRange, foundRange: UnsafeMutablePointer<NSRange>) -> Bool
+  func search(searchString: String, inUserInterfaceItemString stringToSearch: String, search searchRange: NSRange, found foundRange: UnsafeMutablePointer<NSRange>) -> Bool
 }
 enum NSUserInterfaceLayoutDirection : Int {
   init?(rawValue: Int)
@@ -12509,7 +12510,7 @@ protocol NSValidatedUserInterfaceItem {
   func tag() -> Int
 }
 protocol NSUserInterfaceValidations {
-  func validateUserInterfaceItem(anItem: NSValidatedUserInterfaceItem) -> Bool
+  func validate(anItem: NSValidatedUserInterfaceItem) -> Bool
 }
 struct NSAutoresizingMaskOptions : OptionSetType {
   init(rawValue: UInt)
@@ -12585,25 +12586,25 @@ typealias _VFlags = __VFlags
 typealias NSTrackingRectTag = Int
 typealias NSToolTipTag = Int
 class NSView : NSResponder, NSAnimatablePropertyContainer, NSUserInterfaceItemIdentification, NSDraggingDestination, NSAppearanceCustomization, NSAccessibilityElementProtocol, NSAccessibility {
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   unowned(unsafe) var window: @sil_unmanaged NSWindow? { get }
   unowned(unsafe) var superview: @sil_unmanaged NSView? { get }
   var subviews: [NSView]
   func isDescendantOf(aView: NSView) -> Bool
-  func ancestorSharedWithView(aView: NSView) -> NSView?
+  func ancestorSharedWith(aView: NSView) -> NSView?
   unowned(unsafe) var opaqueAncestor: @sil_unmanaged NSView? { get }
-  var hidden: Bool
-  var hiddenOrHasHiddenAncestor: Bool { get }
-  func getRectsBeingDrawn(rects: UnsafeMutablePointer<UnsafePointer<NSRect>>, count: UnsafeMutablePointer<Int>)
-  func needsToDrawRect(aRect: NSRect) -> Bool
+  var isHidden: Bool
+  var isHiddenOrHasHiddenAncestor: Bool { get }
+  func getRectsBeingDrawn(rects: UnsafeMutablePointer<UnsafePointer<Rect>>, count: UnsafeMutablePointer<Int>)
+  func needsToDraw(aRect: Rect) -> Bool
   var wantsDefaultClipping: Bool { get }
   func viewDidHide()
   func viewDidUnhide()
   func addSubview(aView: NSView)
   func addSubview(aView: NSView, positioned place: NSWindowOrderingMode, relativeTo otherView: NSView?)
-  func sortSubviewsUsingFunction(compare: @convention(c) (NSView, NSView, UnsafeMutablePointer<Void>) -> NSComparisonResult, context: UnsafeMutablePointer<Void>)
-  func viewWillMoveToWindow(newWindow: NSWindow?)
+  func sortSubviewsUsing(compare: @convention(c) (NSView, NSView, UnsafeMutablePointer<Void>) -> ComparisonResult, context: UnsafeMutablePointer<Void>)
+  func viewWillMoveTo(newWindow: NSWindow?)
   func viewDidMoveToWindow()
   func viewWillMoveToSuperview(newSuperview: NSView?)
   func viewDidMoveToSuperview()
@@ -12614,90 +12615,90 @@ class NSView : NSResponder, NSAnimatablePropertyContainer, NSUserInterfaceItemId
   func removeFromSuperviewWithoutNeedingDisplay()
   func viewDidChangeBackingProperties()
   var postsFrameChangedNotifications: Bool
-  func resizeSubviewsWithOldSize(oldSize: NSSize)
-  func resizeWithOldSuperviewSize(oldSize: NSSize)
+  func resizeSubviewsWithOldSize(oldSize: Size)
+  func resizeWithOldSuperviewSize(oldSize: Size)
   var autoresizesSubviews: Bool
   var autoresizingMask: NSAutoresizingMaskOptions
-  func setFrameOrigin(newOrigin: NSPoint)
-  func setFrameSize(newSize: NSSize)
-  var frame: NSRect
+  func setFrameOrigin(newOrigin: Point)
+  func setFrame(newSize: Size)
+  var frame: Rect
   var frameRotation: CGFloat
   var frameCenterRotation: CGFloat
-  func setBoundsOrigin(newOrigin: NSPoint)
-  func setBoundsSize(newSize: NSSize)
+  func setBoundsOrigin(newOrigin: Point)
+  func setBoundsSize(newSize: Size)
   var boundsRotation: CGFloat
-  func translateOriginToPoint(translation: NSPoint)
-  func scaleUnitSquareToSize(newUnitSize: NSSize)
+  func translateOriginTo(translation: Point)
+  func scaleUnitSquareTo(newUnitSize: Size)
   func rotateByAngle(angle: CGFloat)
-  var bounds: NSRect
-  var flipped: Bool { get }
-  var rotatedFromBase: Bool { get }
-  var rotatedOrScaledFromBase: Bool { get }
-  var opaque: Bool { get }
-  func convertPoint(aPoint: NSPoint, fromView aView: NSView?) -> NSPoint
-  func convertPoint(aPoint: NSPoint, toView aView: NSView?) -> NSPoint
-  func convertSize(aSize: NSSize, fromView aView: NSView?) -> NSSize
-  func convertSize(aSize: NSSize, toView aView: NSView?) -> NSSize
-  func convertRect(aRect: NSRect, fromView aView: NSView?) -> NSRect
-  func convertRect(aRect: NSRect, toView aView: NSView?) -> NSRect
-  func backingAlignedRect(aRect: NSRect, options: NSAlignmentOptions) -> NSRect
-  func centerScanRect(aRect: NSRect) -> NSRect
-  func convertPointToBacking(aPoint: NSPoint) -> NSPoint
-  func convertPointFromBacking(aPoint: NSPoint) -> NSPoint
-  func convertSizeToBacking(aSize: NSSize) -> NSSize
-  func convertSizeFromBacking(aSize: NSSize) -> NSSize
-  func convertRectToBacking(aRect: NSRect) -> NSRect
-  func convertRectFromBacking(aRect: NSRect) -> NSRect
-  func convertPointToLayer(aPoint: NSPoint) -> NSPoint
-  func convertPointFromLayer(aPoint: NSPoint) -> NSPoint
-  func convertSizeToLayer(aSize: NSSize) -> NSSize
-  func convertSizeFromLayer(aSize: NSSize) -> NSSize
-  func convertRectToLayer(aRect: NSRect) -> NSRect
-  func convertRectFromLayer(aRect: NSRect) -> NSRect
+  var bounds: Rect
+  var isFlipped: Bool { get }
+  var isRotatedFromBase: Bool { get }
+  var isRotatedOrScaledFromBase: Bool { get }
+  var isOpaque: Bool { get }
+  func convert(aPoint: Point, from aView: NSView?) -> Point
+  func convert(aPoint: Point, to aView: NSView?) -> Point
+  func convert(aSize: Size, from aView: NSView?) -> Size
+  func convert(aSize: Size, to aView: NSView?) -> Size
+  func convert(aRect: Rect, from aView: NSView?) -> Rect
+  func convert(aRect: Rect, to aView: NSView?) -> Rect
+  func backingAlignedRect(aRect: Rect, options: AlignmentOptions = []) -> Rect
+  func centerScanRect(aRect: Rect) -> Rect
+  func convertPointToBacking(aPoint: Point) -> Point
+  func convertPointFromBacking(aPoint: Point) -> Point
+  func convertSizeToBacking(aSize: Size) -> Size
+  func convertSizeFromBacking(aSize: Size) -> Size
+  func convertRectToBacking(aRect: Rect) -> Rect
+  func convertRectFromBacking(aRect: Rect) -> Rect
+  func convertPointToLayer(aPoint: Point) -> Point
+  func convertPointFromLayer(aPoint: Point) -> Point
+  func convertSizeToLayer(aSize: Size) -> Size
+  func convertSizeFromLayer(aSize: Size) -> Size
+  func convertRectToLayer(aRect: Rect) -> Rect
+  func convertRectFromLayer(aRect: Rect) -> Rect
   var canDrawConcurrently: Bool
   var canDraw: Bool { get }
-  func setNeedsDisplayInRect(invalidRect: NSRect)
+  func setNeedsDisplayIn(invalidRect: Rect)
   var needsDisplay: Bool
   func lockFocus()
   func unlockFocus()
   func lockFocusIfCanDraw() -> Bool
-  func lockFocusIfCanDrawInContext(context: NSGraphicsContext) -> Bool
-  class func focusView() -> NSView?
-  var visibleRect: NSRect { get }
+  func lockFocusIfCanDrawIn(context: NSGraphicsContext) -> Bool
+  class func focus() -> NSView?
+  var visibleRect: Rect { get }
   func display()
   func displayIfNeeded()
   func displayIfNeededIgnoringOpacity()
-  func displayRect(rect: NSRect)
-  func displayIfNeededInRect(rect: NSRect)
-  func displayRectIgnoringOpacity(rect: NSRect)
-  func displayIfNeededInRectIgnoringOpacity(rect: NSRect)
-  func drawRect(dirtyRect: NSRect)
-  func displayRectIgnoringOpacity(aRect: NSRect, inContext context: NSGraphicsContext)
-  func bitmapImageRepForCachingDisplayInRect(rect: NSRect) -> NSBitmapImageRep?
-  func cacheDisplayInRect(rect: NSRect, toBitmapImageRep bitmapImageRep: NSBitmapImageRep)
+  func display(rect: Rect)
+  func displayIfNeededIn(rect: Rect)
+  func displayRectIgnoringOpacity(rect: Rect)
+  func displayIfNeededInRectIgnoringOpacity(rect: Rect)
+  func draw(dirtyRect: Rect)
+  func displayRectIgnoringOpacity(aRect: Rect, in context: NSGraphicsContext)
+  func bitmapImageRepForCachingDisplayIn(rect: Rect) -> NSBitmapImageRep?
+  func cacheDisplayIn(rect: Rect, to bitmapImageRep: NSBitmapImageRep)
   func viewWillDraw()
-  func scrollPoint(aPoint: NSPoint)
-  func scrollRectToVisible(aRect: NSRect) -> Bool
+  func scroll(aPoint: Point)
+  func scrollRectToVisible(aRect: Rect) -> Bool
   func autoscroll(theEvent: NSEvent) -> Bool
-  func adjustScroll(newVisible: NSRect) -> NSRect
-  func scrollRect(aRect: NSRect, by delta: NSSize)
-  func translateRectsNeedingDisplayInRect(clipRect: NSRect, by delta: NSSize)
-  func hitTest(aPoint: NSPoint) -> NSView?
-  func mouse(aPoint: NSPoint, inRect aRect: NSRect) -> Bool
-  func viewWithTag(aTag: Int) -> NSView?
+  func adjustScroll(newVisible: Rect) -> Rect
+  func scroll(aRect: Rect, by delta: Size)
+  func translateRectsNeedingDisplayIn(clipRect: Rect, by delta: Size)
+  func hitTest(aPoint: Point) -> NSView?
+  func mouse(aPoint: Point, in aRect: Rect) -> Bool
+  func withTag(aTag: Int) -> NSView?
   var tag: Int { get }
   func performKeyEquivalent(theEvent: NSEvent) -> Bool
   func acceptsFirstMouse(theEvent: NSEvent?) -> Bool
-  func shouldDelayWindowOrderingForEvent(theEvent: NSEvent) -> Bool
+  func shouldDelayWindowOrderingFor(theEvent: NSEvent) -> Bool
   var needsPanelToBecomeKey: Bool { get }
   var mouseDownCanMoveWindow: Bool { get }
   var acceptsTouchEvents: Bool
   var wantsRestingTouches: Bool
-  func addCursorRect(aRect: NSRect, cursor anObj: NSCursor)
-  func removeCursorRect(aRect: NSRect, cursor anObj: NSCursor)
+  func addCursorRect(aRect: Rect, cursor anObj: NSCursor)
+  func removeCursorRect(aRect: Rect, cursor anObj: NSCursor)
   func discardCursorRects()
   func resetCursorRects()
-  func addTrackingRect(aRect: NSRect, owner anObject: AnyObject, userData data: UnsafeMutablePointer<Void>, assumeInside flag: Bool) -> NSTrackingRectTag
+  func addTracking(aRect: Rect, owner anObject: AnyObject, userData data: UnsafeMutablePointer<Void>, assumeInside flag: Bool) -> NSTrackingRectTag
   func removeTrackingRect(tag: NSTrackingRectTag)
   func makeBackingLayer() -> CALayer
   var layerContentsRedrawPolicy: NSViewLayerContentsRedrawPolicy
@@ -12719,27 +12720,27 @@ class NSView : NSResponder, NSAnimatablePropertyContainer, NSUserInterfaceItemId
   func updateTrackingAreas()
   var postsBoundsChangedNotifications: Bool
   var enclosingScrollView: NSScrollView? { get }
-  func menuForEvent(event: NSEvent) -> NSMenu?
+  func menuFor(event: NSEvent) -> NSMenu?
   class func defaultMenu() -> NSMenu?
   func willOpenMenu(menu: NSMenu, withEvent event: NSEvent)
   func didCloseMenu(menu: NSMenu, withEvent event: NSEvent?)
   var toolTip: String?
-  func addToolTipRect(aRect: NSRect, owner anObject: AnyObject, userData data: UnsafeMutablePointer<Void>) -> NSToolTipTag
+  func addToolTip(aRect: Rect, owner anObject: AnyObject, userData data: UnsafeMutablePointer<Void>) -> NSToolTipTag
   func removeToolTip(tag: NSToolTipTag)
   func removeAllToolTips()
   func viewWillStartLiveResize()
   func viewDidEndLiveResize()
   var inLiveResize: Bool { get }
   var preservesContentDuringLiveResize: Bool { get }
-  var rectPreservedDuringLiveResize: NSRect { get }
-  func getRectsExposedDuringLiveResize(exposedRects: UnsafeMutablePointer<NSRect>, count: UnsafeMutablePointer<Int>)
+  var rectPreservedDuringLiveResize: Rect { get }
+  func getRectsExposedDuringLiveResize(exposedRects: UnsafeMutablePointer<Rect>, count: UnsafeMutablePointer<Int>)
   var inputContext: NSTextInputContext? { get }
-  func rectForSmartMagnificationAtPoint(location: NSPoint, inRect visibleRect: NSRect) -> NSRect
+  func rectForSmartMagnificationAt(location: Point, in visibleRect: Rect) -> Rect
   var userInterfaceLayoutDirection: NSUserInterfaceLayoutDirection
   func prepareForReuse()
   class func isCompatibleWithResponsiveScrolling() -> Bool
-  func prepareContentInRect(rect: NSRect)
-  var preparedContentRect: NSRect
+  func prepareContentIn(rect: Rect)
+  var preparedContentRect: Rect
   var allowsVibrancy: Bool { get }
   convenience init()
   func animator() -> Self
@@ -12758,24 +12759,24 @@ class NSView : NSResponder, NSAnimatablePropertyContainer, NSUserInterfaceItemId
   func updateDraggingItemsForDrag(sender: NSDraggingInfo?)
   var appearance: NSAppearance?
   var effectiveAppearance: NSAppearance { get }
-  func accessibilityFrame() -> NSRect
+  func accessibilityFrame() -> Rect
   func accessibilityParent() -> AnyObject?
   func isAccessibilityFocused() -> Bool
   func accessibilityIdentifier() -> String
-  func accessibilityLayoutPointForScreenPoint(point: NSPoint) -> NSPoint
-  func accessibilityLayoutSizeForScreenSize(size: NSSize) -> NSSize
-  func accessibilityScreenPointForLayoutPoint(point: NSPoint) -> NSPoint
-  func accessibilityScreenSizeForLayoutSize(size: NSSize) -> NSSize
+  func accessibilityLayoutPointForScreenPoint(point: Point) -> Point
+  func accessibilityLayoutSizeForScreenSize(size: Size) -> Size
+  func accessibilityScreenPointForLayoutPoint(point: Point) -> Point
+  func accessibilityScreenSizeForLayoutSize(size: Size) -> Size
   func accessibilityCellForColumn(column: Int, row: Int) -> AnyObject?
-  func accessibilityAttributedStringForRange(range: NSRange) -> NSAttributedString?
+  func accessibilityAttributedStringFor(range: NSRange) -> AttributedString?
   func accessibilityRangeForLine(line: Int) -> NSRange
-  func accessibilityStringForRange(range: NSRange) -> String?
-  func accessibilityRangeForPosition(point: NSPoint) -> NSRange
-  func accessibilityRangeForIndex(index: Int) -> NSRange
-  func accessibilityFrameForRange(range: NSRange) -> NSRect
-  func accessibilityRTFForRange(range: NSRange) -> NSData?
-  func accessibilityStyleRangeForIndex(index: Int) -> NSRange
-  func accessibilityLineForIndex(index: Int) -> Int
+  func accessibilityStringFor(range: NSRange) -> String?
+  func accessibilityRangeForPosition(point: Point) -> NSRange
+  func accessibilityRangeFor(index: Int) -> NSRange
+  func accessibilityFrameFor(range: NSRange) -> Rect
+  func accessibilityRTFFor(range: NSRange) -> Data?
+  func accessibilityStyleRangeFor(index: Int) -> NSRange
+  func accessibilityLineFor(index: Int) -> Int
   func accessibilityPerformCancel() -> Bool
   func accessibilityPerformConfirm() -> Bool
   func accessibilityPerformDecrement() -> Bool
@@ -12790,14 +12791,14 @@ class NSView : NSResponder, NSAnimatablePropertyContainer, NSUserInterfaceItemId
   func isAccessibilitySelectorAllowed(selector: Selector) -> Bool
   func isAccessibilityElement() -> Bool
   func setAccessibilityElement(accessibilityElement: Bool)
-  func setAccessibilityFrame(accessibilityFrame: NSRect)
+  func setAccessibilityFrame(accessibilityFrame: Rect)
   func setAccessibilityFocused(accessibilityFocused: Bool)
-  func accessibilityActivationPoint() -> NSPoint
-  func setAccessibilityActivationPoint(accessibilityActivationPoint: NSPoint)
+  func accessibilityActivationPoint() -> Point
+  func setAccessibilityActivationPoint(accessibilityActivationPoint: Point)
   func accessibilityTopLevelUIElement() -> AnyObject?
   func setAccessibilityTopLevelUIElement(accessibilityTopLevelUIElement: AnyObject?)
-  func accessibilityURL() -> NSURL?
-  func setAccessibilityURL(accessibilityURL: NSURL?)
+  func accessibilityURL() -> URL?
+  func setAccessibilityURL(accessibilityURL: URL?)
   func accessibilityValue() -> AnyObject?
   func setAccessibilityValue(accessibilityValue: AnyObject?)
   func accessibilityValueDescription() -> String?
@@ -12932,8 +12933,8 @@ class NSView : NSResponder, NSAnimatablePropertyContainer, NSUserInterfaceItemId
   func setAccessibilityHorizontalScrollBar(accessibilityHorizontalScrollBar: AnyObject?)
   func accessibilityVerticalScrollBar() -> AnyObject?
   func setAccessibilityVerticalScrollBar(accessibilityVerticalScrollBar: AnyObject?)
-  func accessibilityAllowedValues() -> [NSNumber]?
-  func setAccessibilityAllowedValues(accessibilityAllowedValues: [NSNumber]?)
+  func accessibilityAllowedValues() -> [Number]?
+  func setAccessibilityAllowedValues(accessibilityAllowedValues: [Number]?)
   func accessibilityLabelUIElements() -> [AnyObject]?
   func setAccessibilityLabelUIElements(accessibilityLabelUIElements: [AnyObject]?)
   func accessibilityLabelValue() -> Float
@@ -12994,8 +12995,8 @@ class NSView : NSResponder, NSAnimatablePropertyContainer, NSUserInterfaceItemId
   func setAccessibilitySelectedText(accessibilitySelectedText: String?)
   func accessibilitySelectedTextRange() -> NSRange
   func setAccessibilitySelectedTextRange(accessibilitySelectedTextRange: NSRange)
-  func accessibilitySelectedTextRanges() -> [NSValue]?
-  func setAccessibilitySelectedTextRanges(accessibilitySelectedTextRanges: [NSValue]?)
+  func accessibilitySelectedTextRanges() -> [Value]?
+  func setAccessibilitySelectedTextRanges(accessibilitySelectedTextRanges: [Value]?)
   func accessibilityToolbarButton() -> AnyObject?
   func setAccessibilityToolbarButton(accessibilityToolbarButton: AnyObject?)
   func isAccessibilityModal() -> Bool
@@ -13035,77 +13036,77 @@ struct __VFlags2 {
   init()
   init(nextKeyViewRefCount: UInt32, previousKeyViewRefCount: UInt32, isVisibleRect: UInt32, hasToolTip: UInt32, cachedIsFlipped: UInt32, menuWasSet: UInt32)
 }
-extension NSObject {
-  class func layer(layer: CALayer, shouldInheritContentsScale newScale: CGFloat, fromWindow window: NSWindow) -> Bool
-  func layer(layer: CALayer, shouldInheritContentsScale newScale: CGFloat, fromWindow window: NSWindow) -> Bool
+extension Object {
+  class func layer(layer: CALayer, shouldInheritContentsScale newScale: CGFloat, from window: NSWindow) -> Bool
+  func layer(layer: CALayer, shouldInheritContentsScale newScale: CGFloat, from window: NSWindow) -> Bool
 }
-extension NSObject {
-  class func view(view: NSView, stringForToolTip tag: NSToolTipTag, point: NSPoint, userData data: UnsafeMutablePointer<Void>) -> String
-  func view(view: NSView, stringForToolTip tag: NSToolTipTag, point: NSPoint, userData data: UnsafeMutablePointer<Void>) -> String
+extension Object {
+  class func view(view: NSView, stringForToolTip tag: NSToolTipTag, point: Point, userData data: UnsafeMutablePointer<Void>) -> String
+  func view(view: NSView, stringForToolTip tag: NSToolTipTag, point: Point, userData data: UnsafeMutablePointer<Void>) -> String
 }
 extension NSView {
-  unowned(unsafe) var nextKeyView: @sil_unmanaged NSView?
-  unowned(unsafe) var previousKeyView: @sil_unmanaged NSView? { get }
-  unowned(unsafe) var nextValidKeyView: @sil_unmanaged NSView? { get }
-  unowned(unsafe) var previousValidKeyView: @sil_unmanaged NSView? { get }
+  unowned(unsafe) var nextKey: @sil_unmanaged NSView?
+  unowned(unsafe) var previousKey: @sil_unmanaged NSView? { get }
+  unowned(unsafe) var nextValidKey: @sil_unmanaged NSView? { get }
+  unowned(unsafe) var previousValidKey: @sil_unmanaged NSView? { get }
   var canBecomeKeyView: Bool { get }
-  func setKeyboardFocusRingNeedsDisplayInRect(rect: NSRect)
+  func setKeyboardFocusRingNeedsDisplayIn(rect: Rect)
   var focusRingType: NSFocusRingType
   class func defaultFocusRingType() -> NSFocusRingType
   func drawFocusRingMask()
-  var focusRingMaskBounds: NSRect { get }
+  var focusRingMaskBounds: Rect { get }
   func noteFocusRingMaskChanged()
 }
 extension NSView {
-  func writeEPSInsideRect(rect: NSRect, toPasteboard pasteboard: NSPasteboard)
-  func dataWithEPSInsideRect(rect: NSRect) -> NSData
-  func writePDFInsideRect(rect: NSRect, toPasteboard pasteboard: NSPasteboard)
-  func dataWithPDFInsideRect(rect: NSRect) -> NSData
+  func writeEPSInside(rect: Rect, to pasteboard: NSPasteboard)
+  func dataWithEPSInside(rect: Rect) -> Data
+  func writePDFInside(rect: Rect, to pasteboard: NSPasteboard)
+  func dataWithPDFInside(rect: Rect) -> Data
   @warn_unqualified_access
   func print(sender: AnyObject?)
-  func knowsPageRange(range: NSRangePointer) -> Bool
+  func knowsPageRange(range: RangePointer) -> Bool
   var heightAdjustLimit: CGFloat { get }
   var widthAdjustLimit: CGFloat { get }
   func adjustPageWidthNew(newRight: UnsafeMutablePointer<CGFloat>, left oldLeft: CGFloat, right oldRight: CGFloat, limit rightLimit: CGFloat)
   func adjustPageHeightNew(newBottom: UnsafeMutablePointer<CGFloat>, top oldTop: CGFloat, bottom oldBottom: CGFloat, limit bottomLimit: CGFloat)
-  func rectForPage(page: Int) -> NSRect
-  func locationOfPrintRect(aRect: NSRect) -> NSPoint
-  func drawPageBorderWithSize(borderSize: NSSize)
-  @NSCopying var pageHeader: NSAttributedString { get }
-  @NSCopying var pageFooter: NSAttributedString { get }
-  func drawSheetBorderWithSize(borderSize: NSSize)
+  func rectForPage(page: Int) -> Rect
+  func locationOfPrint(aRect: Rect) -> Point
+  func drawPageBorderWith(borderSize: Size)
+  @NSCopying var pageHeader: AttributedString { get }
+  @NSCopying var pageFooter: AttributedString { get }
+  func drawSheetBorderWith(borderSize: Size)
   var printJobTitle: String { get }
   func beginDocument()
   func endDocument()
-  func beginPageInRect(aRect: NSRect, atPlacement location: NSPoint)
+  func beginPageIn(aRect: Rect, atPlacement location: Point)
   func endPage()
 }
 extension NSView {
-  func beginDraggingSessionWithItems(items: [NSDraggingItem], event: NSEvent, source: NSDraggingSource) -> NSDraggingSession
+  func beginDraggingSessionWith(items: [NSDraggingItem], event: NSEvent, source: NSDraggingSource) -> NSDraggingSession
   var registeredDraggedTypes: [String] { get }
   func registerForDraggedTypes(newTypes: [String])
   func unregisterDraggedTypes()
-  func dragFile(filename: String, fromRect rect: NSRect, slideBack aFlag: Bool, event: NSEvent) -> Bool
-  func dragPromisedFilesOfTypes(typeArray: [String], fromRect rect: NSRect, source sourceObject: AnyObject, slideBack aFlag: Bool, event: NSEvent) -> Bool
+  func dragFile(filename: String, from rect: Rect, slideBack aFlag: Bool, event: NSEvent) -> Bool
+  func dragPromisedFilesOfTypes(typeArray: [String], from rect: Rect, source sourceObject: AnyObject, slideBack aFlag: Bool, event: NSEvent) -> Bool
 }
 extension NSView {
-  func enterFullScreenMode(screen: NSScreen, withOptions options: [String : AnyObject]?) -> Bool
-  func exitFullScreenModeWithOptions(options: [String : AnyObject]?)
-  var inFullScreenMode: Bool { get }
+  func enterFullScreenMode(screen: NSScreen, withOptions options: [String : AnyObject]? = [:]) -> Bool
+  func exitFullScreenMode(options options: [String : AnyObject]? = [:])
+  var isInFullScreenMode: Bool { get }
 }
 let NSFullScreenModeAllScreens: String
 let NSFullScreenModeSetting: String
 let NSFullScreenModeWindowLevel: String
 let NSFullScreenModeApplicationPresentationOptions: String
 extension NSView {
-  func showDefinitionForAttributedString(attrString: NSAttributedString?, atPoint textBaselineOrigin: NSPoint)
-  func showDefinitionForAttributedString(attrString: NSAttributedString?, range targetRange: NSRange, options: [String : AnyObject]?, baselineOriginProvider originProvider: ((NSRange) -> NSPoint)?)
+  func showDefinitionFor(attrString: AttributedString?, at textBaselineOrigin: Point)
+  func showDefinitionFor(attrString: AttributedString?, range targetRange: NSRange, options: [String : AnyObject]? = [:], baselineOriginProvider originProvider: ((NSRange) -> Point)? = nil)
 }
 let NSDefinitionPresentationTypeKey: String
 let NSDefinitionPresentationTypeOverlay: String
 let NSDefinitionPresentationTypeDictionaryApplication: String
 extension NSView {
-  var drawingFindIndicator: Bool { get }
+  var isDrawingFindIndicator: Bool { get }
 }
 extension NSView {
   var gestureRecognizers: [NSGestureRecognizer]
@@ -13138,71 +13139,71 @@ struct NSViewControllerTransitionOptions : OptionSetType {
   static var SlideBackward: NSViewControllerTransitionOptions { get }
   static var AllowUserInteraction: NSViewControllerTransitionOptions { get }
 }
-class NSViewController : NSResponder, NSCoding, NSSeguePerforming, NSUserInterfaceItemIdentification {
-  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder: NSCoder)
+class NSViewController : NSResponder, Coding, NSSeguePerforming, NSUserInterfaceItemIdentification {
+  init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder: Coder)
   var nibName: String? { get }
-  var nibBundle: NSBundle? { get }
+  var nibBundle: Bundle? { get }
   var representedObject: AnyObject?
   var title: String?
   var view: NSView
   func loadView()
-  func commitEditingWithDelegate(delegate: AnyObject?, didCommitSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
+  func commitEditingWithDelegate(delegate: AnyObject?, didCommit didCommitSelector: Selector, contextInfo: UnsafeMutablePointer<Void>)
   func commitEditing() -> Bool
   func discardEditing()
   func viewDidLoad()
-  var viewLoaded: Bool { get }
+  var isViewLoaded: Bool { get }
   func viewWillAppear()
   func viewDidAppear()
   func viewWillDisappear()
   func viewDidDisappear()
-  var preferredContentSize: NSSize
+  var preferredContentSize: Size
   func updateViewConstraints()
   func viewWillLayout()
   func viewDidLayout()
   convenience init()
-  func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?)
+  func prepareFor(segue: NSStoryboardSegue, sender: AnyObject?)
   func performSegueWithIdentifier(identifier: String, sender: AnyObject?)
   func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool
   var identifier: String?
 }
 extension NSViewController {
-  func presentViewController(viewController: NSViewController, animator: NSViewControllerPresentationAnimator)
-  func dismissViewController(viewController: NSViewController)
-  @IBAction func dismissController(sender: AnyObject?)
+  func present(viewController: NSViewController, animator: NSViewControllerPresentationAnimator)
+  func dismiss(viewController: NSViewController)
+  @IBAction func dismiss(sender: AnyObject?)
   var presentedViewControllers: [NSViewController]? { get }
-  unowned(unsafe) var presentingViewController: @sil_unmanaged NSViewController? { get }
+  unowned(unsafe) var presenting: @sil_unmanaged NSViewController? { get }
 }
 extension NSViewController {
-  func presentViewControllerAsSheet(viewController: NSViewController)
-  func presentViewControllerAsModalWindow(viewController: NSViewController)
-  func presentViewController(viewController: NSViewController, asPopoverRelativeToRect positioningRect: NSRect, ofView positioningView: NSView, preferredEdge: NSRectEdge, behavior: NSPopoverBehavior)
-  func transitionFromViewController(fromViewController: NSViewController, toViewController: NSViewController, options: NSViewControllerTransitionOptions, completionHandler completion: (() -> Void)?)
+  func presentAsSheet(viewController: NSViewController)
+  func presentAsModalWindow(viewController: NSViewController)
+  func present(viewController: NSViewController, asPopoverRelativeTo positioningRect: Rect, of positioningView: NSView, preferredEdge: RectEdge, behavior: NSPopoverBehavior)
+  func transitionFrom(fromViewController: NSViewController, to toViewController: NSViewController, options: NSViewControllerTransitionOptions = [], completionHandler completion: (() -> Void)? = nil)
 }
 extension NSViewController {
-  var parentViewController: NSViewController? { get }
+  var parent: NSViewController? { get }
   var childViewControllers: [NSViewController]
   func addChildViewController(childViewController: NSViewController)
   func removeFromParentViewController()
-  func insertChildViewController(childViewController: NSViewController, atIndex index: Int)
-  func removeChildViewControllerAtIndex(index: Int)
-  func preferredContentSizeDidChangeForViewController(viewController: NSViewController)
-  func viewWillTransitionToSize(newSize: NSSize)
+  func insertChildViewController(childViewController: NSViewController, at index: Int)
+  func removeChildViewControllerAt(index: Int)
+  func preferredContentSizeDidChangeFor(viewController: NSViewController)
+  func viewWillTransitionTo(newSize: Size)
 }
-protocol NSViewControllerPresentationAnimator : NSObjectProtocol {
-  func animatePresentationOfViewController(viewController: NSViewController, fromViewController: NSViewController)
-  func animateDismissalOfViewController(viewController: NSViewController, fromViewController: NSViewController)
+protocol NSViewControllerPresentationAnimator : ObjectProtocol {
+  func animatePresentationOf(viewController: NSViewController, from fromViewController: NSViewController)
+  func animateDismissalOf(viewController: NSViewController, from fromViewController: NSViewController)
 }
 extension NSViewController {
   var storyboard: NSStoryboard? { get }
 }
-extension NSViewController : NSExtensionRequestHandling {
-  var extensionContext: NSExtensionContext? { get }
+extension NSViewController : ExtensionRequestHandling {
+  var extensionContext: ExtensionContext? { get }
   @IBOutlet var sourceItemView: NSView?
-  var preferredScreenOrigin: NSPoint
-  var preferredMinimumSize: NSSize { get }
-  var preferredMaximumSize: NSSize { get }
-  func beginRequestWithExtensionContext(context: NSExtensionContext)
+  var preferredScreenOrigin: Point
+  var preferredMinimumSize: Size { get }
+  var preferredMaximumSize: Size { get }
+  func beginRequestWith(context: ExtensionContext)
 }
 enum NSVisualEffectMaterial : Int {
   init?(rawValue: Int)
@@ -13237,9 +13238,9 @@ class NSVisualEffectView : NSView {
   var state: NSVisualEffectState
   var maskImage: NSImage?
   func viewDidMoveToWindow()
-  func viewWillMoveToWindow(newWindow: NSWindow?)
-  init(frame frameRect: NSRect)
-  init?(coder: NSCoder)
+  func viewWillMoveTo(newWindow: NSWindow?)
+  init(frame frameRect: Rect)
+  init?(coder: Coder)
   convenience init()
 }
 var NSAppKitVersionNumberWithCustomSheetPosition: Double { get }
@@ -13330,57 +13331,57 @@ enum NSWindowTitleVisibility : Int {
 }
 var NSEventDurationForever: Double { get }
 class NSWindow : NSResponder, NSAnimatablePropertyContainer, NSUserInterfaceValidations, NSUserInterfaceItemIdentification, NSAppearanceCustomization, NSAccessibilityElementProtocol, NSAccessibility {
-  class func frameRectForContentRect(cRect: NSRect, styleMask aStyle: Int) -> NSRect
-  class func contentRectForFrameRect(fRect: NSRect, styleMask aStyle: Int) -> NSRect
+  class func frameRectForContentRect(cRect: Rect, styleMask aStyle: Int) -> Rect
+  class func contentRectForFrame(fRect: Rect, styleMask aStyle: Int) -> Rect
   class func minFrameWidthWithTitle(aTitle: String, styleMask aStyle: Int) -> CGFloat
   class func defaultDepthLimit() -> NSWindowDepth
-  func frameRectForContentRect(contentRect: NSRect) -> NSRect
-  func contentRectForFrameRect(frameRect: NSRect) -> NSRect
-  init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
-  convenience init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
+  func frameRectForContentRect(contentRect: Rect) -> Rect
+  func contentRectForFrame(frameRect: Rect) -> Rect
+  init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool)
+  convenience init(contentRect: Rect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool, screen: NSScreen?)
   var title: String
   var titleVisibility: NSWindowTitleVisibility
   var titlebarAppearsTransparent: Bool
-  var contentLayoutRect: NSRect { get }
+  var contentLayoutRect: Rect { get }
   var contentLayoutGuide: AnyObject? { get }
   var titlebarAccessoryViewControllers: [NSTitlebarAccessoryViewController]
   func addTitlebarAccessoryViewController(childViewController: NSTitlebarAccessoryViewController)
-  func insertTitlebarAccessoryViewController(childViewController: NSTitlebarAccessoryViewController, atIndex index: Int)
-  func removeTitlebarAccessoryViewControllerAtIndex(index: Int)
-  @NSCopying var representedURL: NSURL?
+  func insertTitlebarAccessoryViewController(childViewController: NSTitlebarAccessoryViewController, at index: Int)
+  func removeTitlebarAccessoryViewControllerAt(index: Int)
+  @NSCopying var representedURL: URL?
   var representedFilename: String
   func setTitleWithRepresentedFilename(filename: String)
-  var excludedFromWindowsMenu: Bool
+  var isExcludedFromWindowsMenu: Bool
   var contentView: NSView?
   unowned(unsafe) var delegate: @sil_unmanaged NSWindowDelegate?
   var windowNumber: Int { get }
   var styleMask: Int
   func fieldEditor(createFlag: Bool, forObject anObject: AnyObject?) -> NSText?
   func endEditingFor(anObject: AnyObject?)
-  func constrainFrameRect(frameRect: NSRect, toScreen screen: NSScreen?) -> NSRect
-  func setFrame(frameRect: NSRect, display flag: Bool)
-  func setContentSize(aSize: NSSize)
-  func setFrameOrigin(aPoint: NSPoint)
-  func setFrameTopLeftPoint(aPoint: NSPoint)
-  func cascadeTopLeftFromPoint(topLeftPoint: NSPoint) -> NSPoint
-  var frame: NSRect { get }
-  func animationResizeTime(newFrame: NSRect) -> NSTimeInterval
-  func setFrame(frameRect: NSRect, display displayFlag: Bool, animate animateFlag: Bool)
+  func constrainFrame(frameRect: Rect, to screen: NSScreen?) -> Rect
+  func setFrame(frameRect: Rect, display flag: Bool)
+  func setContentSize(aSize: Size)
+  func setFrameOrigin(aPoint: Point)
+  func setFrameTopLeftPoint(aPoint: Point)
+  func cascadeTopLeftFrom(topLeftPoint: Point) -> Point
+  var frame: Rect { get }
+  func animationResizeTime(newFrame: Rect) -> TimeInterval
+  func setFrame(frameRect: Rect, display displayFlag: Bool, animate animateFlag: Bool)
   var inLiveResize: Bool { get }
   var showsResizeIndicator: Bool
-  var resizeIncrements: NSSize
-  var aspectRatio: NSSize
-  var contentResizeIncrements: NSSize
-  var contentAspectRatio: NSSize
+  var resizeIncrements: Size
+  var aspectRatio: Size
+  var contentResizeIncrements: Size
+  var contentAspectRatio: Size
   func disableFlushWindow()
   func enableFlushWindow()
-  var flushWindowDisabled: Bool { get }
+  var isFlushWindowDisabled: Bool { get }
   func flushWindow()
   func flushWindowIfNeeded()
   var viewsNeedDisplay: Bool
   func displayIfNeeded()
   func display()
-  var autodisplay: Bool
+  var isAutodisplay: Bool
   var preservesContentDuringLiveResize: Bool
   func update()
   func makeFirstResponder(aResponder: NSResponder?) -> Bool
@@ -13388,21 +13389,21 @@ class NSWindow : NSResponder, NSAnimatablePropertyContainer, NSUserInterfaceVali
   var resizeFlags: Int { get }
   func keyDown(theEvent: NSEvent)
   func close()
-  var releasedWhenClosed: Bool
+  var isReleasedWhenClosed: Bool
   func miniaturize(sender: AnyObject?)
   func deminiaturize(sender: AnyObject?)
-  var zoomed: Bool { get }
+  var isZoomed: Bool { get }
   func zoom(sender: AnyObject?)
-  var miniaturized: Bool { get }
+  var isMiniaturized: Bool { get }
   func tryToPerform(anAction: Selector, with anObject: AnyObject?) -> Bool
   func validRequestorForSendType(sendType: String, returnType: String) -> AnyObject?
   @NSCopying var backgroundColor: NSColor!
-  func setContentBorderThickness(thickness: CGFloat, forEdge edge: NSRectEdge)
-  func contentBorderThicknessForEdge(edge: NSRectEdge) -> CGFloat
-  func setAutorecalculatesContentBorderThickness(flag: Bool, forEdge edge: NSRectEdge)
-  func autorecalculatesContentBorderThicknessForEdge(edge: NSRectEdge) -> Bool
-  var movable: Bool
-  var movableByWindowBackground: Bool
+  func setContentBorderThickness(thickness: CGFloat, forEdge edge: RectEdge)
+  func contentBorderThicknessFor(edge: RectEdge) -> CGFloat
+  func setAutorecalculatesContentBorderThickness(flag: Bool, forEdge edge: RectEdge)
+  func autorecalculatesContentBorderThicknessFor(edge: RectEdge) -> Bool
+  var isMovable: Bool
+  var isMovableByWindowBackground: Bool
   var hidesOnDeactivate: Bool
   var canHide: Bool
   func center()
@@ -13410,15 +13411,15 @@ class NSWindow : NSResponder, NSAnimatablePropertyContainer, NSUserInterfaceVali
   func orderFront(sender: AnyObject?)
   func orderBack(sender: AnyObject?)
   func orderOut(sender: AnyObject?)
-  func orderWindow(place: NSWindowOrderingMode, relativeTo otherWin: Int)
+  func order(place: NSWindowOrderingMode, relativeTo otherWin: Int)
   func orderFrontRegardless()
   var miniwindowImage: NSImage?
   var miniwindowTitle: String!
   var dockTile: NSDockTile { get }
-  var documentEdited: Bool
-  var visible: Bool { get }
-  var keyWindow: Bool { get }
-  var mainWindow: Bool { get }
+  var isDocumentEdited: Bool
+  var isVisible: Bool { get }
+  var isKeyWindow: Bool { get }
+  var isMainWindow: Bool { get }
   var canBecomeKeyWindow: Bool { get }
   var canBecomeMainWindow: Bool { get }
   func makeKeyWindow()
@@ -13429,25 +13430,25 @@ class NSWindow : NSResponder, NSAnimatablePropertyContainer, NSUserInterfaceVali
   func resignMainWindow()
   var worksWhenModal: Bool { get }
   var preventsApplicationTerminationWhenModal: Bool
-  func convertRectToScreen(aRect: NSRect) -> NSRect
-  func convertRectFromScreen(aRect: NSRect) -> NSRect
-  func convertRectToBacking(aRect: NSRect) -> NSRect
-  func convertRectFromBacking(aRect: NSRect) -> NSRect
-  func backingAlignedRect(aRect: NSRect, options: NSAlignmentOptions) -> NSRect
+  func convertRectToScreen(aRect: Rect) -> Rect
+  func convertRectFromScreen(aRect: Rect) -> Rect
+  func convertRectToBacking(aRect: Rect) -> Rect
+  func convertRectFromBacking(aRect: Rect) -> Rect
+  func backingAlignedRect(aRect: Rect, options: AlignmentOptions = []) -> Rect
   var backingScaleFactor: CGFloat { get }
   func performClose(sender: AnyObject?)
   func performMiniaturize(sender: AnyObject?)
   func performZoom(sender: AnyObject?)
-  var oneShot: Bool
-  func dataWithEPSInsideRect(rect: NSRect) -> NSData
-  func dataWithPDFInsideRect(rect: NSRect) -> NSData
+  var isOneShot: Bool
+  func dataWithEPSInside(rect: Rect) -> Data
+  func dataWithPDFInside(rect: Rect) -> Data
   @warn_unqualified_access
   func print(sender: AnyObject?)
   func disableCursorRects()
   func enableCursorRects()
   func discardCursorRects()
   var areCursorRectsEnabled: Bool { get }
-  func invalidateCursorRectsForView(aView: NSView)
+  func invalidateCursorRectsFor(aView: NSView)
   func resetCursorRects()
   var allowsToolTipsWhenApplicationIsInactive: Bool
   var backingType: NSBackingStoreType
@@ -13460,7 +13461,7 @@ class NSWindow : NSResponder, NSAnimatablePropertyContainer, NSUserInterfaceVali
   var hasShadow: Bool
   func invalidateShadow()
   var alphaValue: CGFloat
-  var opaque: Bool
+  var isOpaque: Bool
   var sharingType: NSWindowSharingType
   var preferredBackingLocation: NSWindowBackingLocation
   var backingLocation: NSWindowBackingLocation { get }
@@ -13470,87 +13471,87 @@ class NSWindow : NSResponder, NSAnimatablePropertyContainer, NSUserInterfaceVali
   var canBecomeVisibleWithoutLogin: Bool
   var collectionBehavior: NSWindowCollectionBehavior
   var animationBehavior: NSWindowAnimationBehavior
-  var onActiveSpace: Bool { get }
+  var isOnActiveSpace: Bool { get }
   func toggleFullScreen(sender: AnyObject?)
   var stringWithSavedFrame: String { get }
-  func setFrameFromString(string: String)
+  func setFrameFrom(string: String)
   func saveFrameUsingName(name: String)
   func setFrameUsingName(name: String, force: Bool) -> Bool
   func setFrameUsingName(name: String) -> Bool
   func setFrameAutosaveName(name: String) -> Bool
   var frameAutosaveName: String { get }
   class func removeFrameUsingName(name: String)
-  func cacheImageInRect(aRect: NSRect)
+  func cacheImageIn(aRect: Rect)
   func restoreCachedImage()
   func discardCachedImage()
-  var minSize: NSSize
-  var maxSize: NSSize
-  var contentMinSize: NSSize
-  var contentMaxSize: NSSize
-  var minFullScreenContentSize: NSSize
-  var maxFullScreenContentSize: NSSize
-  func trackEventsMatchingMask(mask: NSEventMask, timeout: NSTimeInterval, mode: String, handler trackingHandler: (NSEvent, UnsafeMutablePointer<ObjCBool>) -> Void)
+  var minSize: Size
+  var maxSize: Size
+  var contentMinSize: Size
+  var contentMaxSize: Size
+  var minFullScreenContentSize: Size
+  var maxFullScreenContentSize: Size
+  func trackEventsMatching(mask: NSEventMask, timeout: TimeInterval, mode: String, handler trackingHandler: (NSEvent, UnsafeMutablePointer<ObjCBool>) -> Void)
   func nextEventMatchingMask(mask: Int) -> NSEvent?
-  func nextEventMatchingMask(mask: Int, untilDate expiration: NSDate?, inMode mode: String, dequeue deqFlag: Bool) -> NSEvent?
-  func discardEventsMatchingMask(mask: Int, beforeEvent lastEvent: NSEvent?)
-  func postEvent(event: NSEvent, atStart flag: Bool)
+  func nextEventMatchingMask(mask: Int, until expiration: Date?, inMode mode: String, dequeue deqFlag: Bool) -> NSEvent?
+  func discardEventsMatchingMask(mask: Int, before lastEvent: NSEvent?)
+  func post(event: NSEvent, atStart flag: Bool)
   var currentEvent: NSEvent? { get }
   var acceptsMouseMovedEvents: Bool
   var ignoresMouseEvents: Bool
   var deviceDescription: [String : AnyObject] { get }
-  func sendEvent(theEvent: NSEvent)
-  var mouseLocationOutsideOfEventStream: NSPoint { get }
+  func send(theEvent: NSEvent)
+  var mouseLocationOutsideOfEventStream: Point { get }
   unowned(unsafe) var windowController: @sil_unmanaged NSWindowController?
-  func beginSheet(sheetWindow: NSWindow, completionHandler handler: ((NSModalResponse) -> Void)?)
-  func beginCriticalSheet(sheetWindow: NSWindow, completionHandler handler: ((NSModalResponse) -> Void)?)
+  func beginSheet(sheetWindow: NSWindow, completionHandler handler: ((NSModalResponse) -> Void)? = nil)
+  func beginCriticalSheet(sheetWindow: NSWindow, completionHandler handler: ((NSModalResponse) -> Void)? = nil)
   func endSheet(sheetWindow: NSWindow)
   func endSheet(sheetWindow: NSWindow, returnCode: NSModalResponse)
   var sheets: [NSWindow] { get }
   var attachedSheet: NSWindow? { get }
-  var sheet: Bool { get }
+  var isSheet: Bool { get }
   var sheetParent: NSWindow? { get }
   class func standardWindowButton(b: NSWindowButton, forStyleMask styleMask: Int) -> NSButton?
   func standardWindowButton(b: NSWindowButton) -> NSButton?
   func addChildWindow(childWin: NSWindow, ordered place: NSWindowOrderingMode)
   func removeChildWindow(childWin: NSWindow)
   var childWindows: [NSWindow]? { get }
-  unowned(unsafe) var parentWindow: @sil_unmanaged NSWindow?
+  unowned(unsafe) var parent: @sil_unmanaged NSWindow?
   var graphicsContext: NSGraphicsContext? { get }
   var colorSpace: NSColorSpace?
-  class func windowNumbersWithOptions(options: NSWindowNumberListOptions) -> [NSNumber]?
-  class func windowNumberAtPoint(point: NSPoint, belowWindowWithWindowNumber windowNumber: Int) -> Int
+  class func windowNumbersWithOptions(options: NSWindowNumberListOptions) -> [Number]?
+  class func windowNumberAt(point: Point, belowWindowWithWindowNumber windowNumber: Int) -> Int
   var occlusionState: NSWindowOcclusionState { get }
   var contentViewController: NSViewController?
   convenience init(contentViewController: NSViewController)
-  func performWindowDragWithEvent(event: NSEvent)
+  func performDragWith(event: NSEvent)
   convenience init()
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   func animator() -> Self
   var animations: [String : AnyObject]
   func animationForKey(key: String) -> AnyObject?
   class func defaultAnimationForKey(key: String) -> AnyObject?
-  func validateUserInterfaceItem(anItem: NSValidatedUserInterfaceItem) -> Bool
+  func validate(anItem: NSValidatedUserInterfaceItem) -> Bool
   var identifier: String?
   var appearance: NSAppearance?
   var effectiveAppearance: NSAppearance { get }
-  func accessibilityFrame() -> NSRect
+  func accessibilityFrame() -> Rect
   func accessibilityParent() -> AnyObject?
   func isAccessibilityFocused() -> Bool
   func accessibilityIdentifier() -> String
-  func accessibilityLayoutPointForScreenPoint(point: NSPoint) -> NSPoint
-  func accessibilityLayoutSizeForScreenSize(size: NSSize) -> NSSize
-  func accessibilityScreenPointForLayoutPoint(point: NSPoint) -> NSPoint
-  func accessibilityScreenSizeForLayoutSize(size: NSSize) -> NSSize
+  func accessibilityLayoutPointForScreenPoint(point: Point) -> Point
+  func accessibilityLayoutSizeForScreenSize(size: Size) -> Size
+  func accessibilityScreenPointForLayoutPoint(point: Point) -> Point
+  func accessibilityScreenSizeForLayoutSize(size: Size) -> Size
   func accessibilityCellForColumn(column: Int, row: Int) -> AnyObject?
-  func accessibilityAttributedStringForRange(range: NSRange) -> NSAttributedString?
+  func accessibilityAttributedStringFor(range: NSRange) -> AttributedString?
   func accessibilityRangeForLine(line: Int) -> NSRange
-  func accessibilityStringForRange(range: NSRange) -> String?
-  func accessibilityRangeForPosition(point: NSPoint) -> NSRange
-  func accessibilityRangeForIndex(index: Int) -> NSRange
-  func accessibilityFrameForRange(range: NSRange) -> NSRect
-  func accessibilityRTFForRange(range: NSRange) -> NSData?
-  func accessibilityStyleRangeForIndex(index: Int) -> NSRange
-  func accessibilityLineForIndex(index: Int) -> Int
+  func accessibilityStringFor(range: NSRange) -> String?
+  func accessibilityRangeForPosition(point: Point) -> NSRange
+  func accessibilityRangeFor(index: Int) -> NSRange
+  func accessibilityFrameFor(range: NSRange) -> Rect
+  func accessibilityRTFFor(range: NSRange) -> Data?
+  func accessibilityStyleRangeFor(index: Int) -> NSRange
+  func accessibilityLineFor(index: Int) -> Int
   func accessibilityPerformCancel() -> Bool
   func accessibilityPerformConfirm() -> Bool
   func accessibilityPerformDecrement() -> Bool
@@ -13565,14 +13566,14 @@ class NSWindow : NSResponder, NSAnimatablePropertyContainer, NSUserInterfaceVali
   func isAccessibilitySelectorAllowed(selector: Selector) -> Bool
   func isAccessibilityElement() -> Bool
   func setAccessibilityElement(accessibilityElement: Bool)
-  func setAccessibilityFrame(accessibilityFrame: NSRect)
+  func setAccessibilityFrame(accessibilityFrame: Rect)
   func setAccessibilityFocused(accessibilityFocused: Bool)
-  func accessibilityActivationPoint() -> NSPoint
-  func setAccessibilityActivationPoint(accessibilityActivationPoint: NSPoint)
+  func accessibilityActivationPoint() -> Point
+  func setAccessibilityActivationPoint(accessibilityActivationPoint: Point)
   func accessibilityTopLevelUIElement() -> AnyObject?
   func setAccessibilityTopLevelUIElement(accessibilityTopLevelUIElement: AnyObject?)
-  func accessibilityURL() -> NSURL?
-  func setAccessibilityURL(accessibilityURL: NSURL?)
+  func accessibilityURL() -> URL?
+  func setAccessibilityURL(accessibilityURL: URL?)
   func accessibilityValue() -> AnyObject?
   func setAccessibilityValue(accessibilityValue: AnyObject?)
   func accessibilityValueDescription() -> String?
@@ -13707,8 +13708,8 @@ class NSWindow : NSResponder, NSAnimatablePropertyContainer, NSUserInterfaceVali
   func setAccessibilityHorizontalScrollBar(accessibilityHorizontalScrollBar: AnyObject?)
   func accessibilityVerticalScrollBar() -> AnyObject?
   func setAccessibilityVerticalScrollBar(accessibilityVerticalScrollBar: AnyObject?)
-  func accessibilityAllowedValues() -> [NSNumber]?
-  func setAccessibilityAllowedValues(accessibilityAllowedValues: [NSNumber]?)
+  func accessibilityAllowedValues() -> [Number]?
+  func setAccessibilityAllowedValues(accessibilityAllowedValues: [Number]?)
   func accessibilityLabelUIElements() -> [AnyObject]?
   func setAccessibilityLabelUIElements(accessibilityLabelUIElements: [AnyObject]?)
   func accessibilityLabelValue() -> Float
@@ -13769,8 +13770,8 @@ class NSWindow : NSResponder, NSAnimatablePropertyContainer, NSUserInterfaceVali
   func setAccessibilitySelectedText(accessibilitySelectedText: String?)
   func accessibilitySelectedTextRange() -> NSRange
   func setAccessibilitySelectedTextRange(accessibilitySelectedTextRange: NSRange)
-  func accessibilitySelectedTextRanges() -> [NSValue]?
-  func setAccessibilitySelectedTextRanges(accessibilitySelectedTextRanges: [NSValue]?)
+  func accessibilitySelectedTextRanges() -> [Value]?
+  func setAccessibilitySelectedTextRanges(accessibilitySelectedTextRanges: [Value]?)
   func accessibilityToolbarButton() -> AnyObject?
   func setAccessibilityToolbarButton(accessibilityToolbarButton: AnyObject?)
   func isAccessibilityModal() -> Bool
@@ -13862,8 +13863,8 @@ extension NSWindow {
   unowned(unsafe) var initialFirstResponder: @sil_unmanaged NSView?
   func selectNextKeyView(sender: AnyObject?)
   func selectPreviousKeyView(sender: AnyObject?)
-  func selectKeyViewFollowingView(aView: NSView)
-  func selectKeyViewPrecedingView(aView: NSView)
+  func selectKeyViewFollowing(aView: NSView)
+  func selectKeyViewPreceding(aView: NSView)
   var keyViewSelectionDirection: NSSelectionDirection { get }
   var defaultButtonCell: NSButtonCell?
   func disableKeyEquivalentForDefaultButtonCell()
@@ -13878,7 +13879,7 @@ extension NSWindow {
   var showsToolbarButton: Bool
 }
 extension NSWindow {
-  func dragImage(anImage: NSImage, at baseLocation: NSPoint, offset initialOffset: NSSize, event: NSEvent, pasteboard pboard: NSPasteboard, source sourceObj: AnyObject, slideBack slideFlag: Bool)
+  func drag(anImage: NSImage, at baseLocation: Point, offset initialOffset: Size, event: NSEvent, pasteboard pboard: NSPasteboard, source sourceObj: AnyObject, slideBack slideFlag: Bool)
   func registerForDraggedTypes(newTypes: [String])
   func unregisterDraggedTypes()
 }
@@ -13892,58 +13893,58 @@ extension NSWindow {
   func useOptimizedDrawing(flag: Bool)
   func canStoreColor() -> Bool
 }
-protocol NSWindowDelegate : NSObjectProtocol {
+protocol NSWindowDelegate : ObjectProtocol {
   optional func windowShouldClose(sender: AnyObject) -> Bool
-  optional func windowWillReturnFieldEditor(sender: NSWindow, toObject client: AnyObject?) -> AnyObject?
-  optional func windowWillResize(sender: NSWindow, toSize frameSize: NSSize) -> NSSize
-  optional func windowWillUseStandardFrame(window: NSWindow, defaultFrame newFrame: NSRect) -> NSRect
-  optional func windowShouldZoom(window: NSWindow, toFrame newFrame: NSRect) -> Bool
-  optional func windowWillReturnUndoManager(window: NSWindow) -> NSUndoManager?
-  optional func window(window: NSWindow, willPositionSheet sheet: NSWindow, usingRect rect: NSRect) -> NSRect
+  optional func windowWillReturnFieldEditor(sender: NSWindow, to client: AnyObject?) -> AnyObject?
+  optional func windowWillResize(sender: NSWindow, to frameSize: Size) -> Size
+  optional func windowWillUseStandardFrame(window: NSWindow, defaultFrame newFrame: Rect) -> Rect
+  optional func windowShouldZoom(window: NSWindow, toFrame newFrame: Rect) -> Bool
+  optional func windowWillReturnUndoManager(window: NSWindow) -> UndoManager?
+  optional func window(window: NSWindow, willPositionSheet sheet: NSWindow, usingRect rect: Rect) -> Rect
   optional func window(window: NSWindow, shouldPopUpDocumentPathMenu menu: NSMenu) -> Bool
-  optional func window(window: NSWindow, shouldDragDocumentWithEvent event: NSEvent, from dragImageLocation: NSPoint, withPasteboard pasteboard: NSPasteboard) -> Bool
-  optional func window(window: NSWindow, willUseFullScreenContentSize proposedSize: NSSize) -> NSSize
-  optional func window(window: NSWindow, willUseFullScreenPresentationOptions proposedOptions: NSApplicationPresentationOptions) -> NSApplicationPresentationOptions
-  optional func customWindowsToEnterFullScreenForWindow(window: NSWindow) -> [NSWindow]?
-  optional func window(window: NSWindow, startCustomAnimationToEnterFullScreenWithDuration duration: NSTimeInterval)
+  optional func window(window: NSWindow, shouldDragDocumentWith event: NSEvent, from dragImageLocation: Point, withPasteboard pasteboard: NSPasteboard) -> Bool
+  optional func window(window: NSWindow, willUseFullScreenContentSize proposedSize: Size) -> Size
+  optional func window(window: NSWindow, willUseFullScreenPresentationOptions proposedOptions: NSApplicationPresentationOptions = []) -> NSApplicationPresentationOptions
+  optional func customWindowsToEnterFullScreenFor(window: NSWindow) -> [NSWindow]?
+  optional func window(window: NSWindow, startCustomAnimationToEnterFullScreenWithDuration duration: TimeInterval)
   optional func windowDidFailToEnterFullScreen(window: NSWindow)
-  optional func customWindowsToExitFullScreenForWindow(window: NSWindow) -> [NSWindow]?
-  optional func window(window: NSWindow, startCustomAnimationToExitFullScreenWithDuration duration: NSTimeInterval)
-  optional func customWindowsToEnterFullScreenForWindow(window: NSWindow, onScreen screen: NSScreen) -> [NSWindow]?
-  optional func window(window: NSWindow, startCustomAnimationToEnterFullScreenOnScreen screen: NSScreen, withDuration duration: NSTimeInterval)
+  optional func customWindowsToExitFullScreenFor(window: NSWindow) -> [NSWindow]?
+  optional func window(window: NSWindow, startCustomAnimationToExitFullScreenWithDuration duration: TimeInterval)
+  optional func customWindowsToEnterFullScreenFor(window: NSWindow, on screen: NSScreen) -> [NSWindow]?
+  optional func window(window: NSWindow, startCustomAnimationToEnterFullScreenOn screen: NSScreen, withDuration duration: TimeInterval)
   optional func windowDidFailToExitFullScreen(window: NSWindow)
-  optional func window(window: NSWindow, willResizeForVersionBrowserWithMaxPreferredSize maxPreferredFrameSize: NSSize, maxAllowedSize maxAllowedFrameSize: NSSize) -> NSSize
-  optional func window(window: NSWindow, willEncodeRestorableState state: NSCoder)
-  optional func window(window: NSWindow, didDecodeRestorableState state: NSCoder)
-  optional func windowDidResize(notification: NSNotification)
-  optional func windowDidExpose(notification: NSNotification)
-  optional func windowWillMove(notification: NSNotification)
-  optional func windowDidMove(notification: NSNotification)
-  optional func windowDidBecomeKey(notification: NSNotification)
-  optional func windowDidResignKey(notification: NSNotification)
-  optional func windowDidBecomeMain(notification: NSNotification)
-  optional func windowDidResignMain(notification: NSNotification)
-  optional func windowWillClose(notification: NSNotification)
-  optional func windowWillMiniaturize(notification: NSNotification)
-  optional func windowDidMiniaturize(notification: NSNotification)
-  optional func windowDidDeminiaturize(notification: NSNotification)
-  optional func windowDidUpdate(notification: NSNotification)
-  optional func windowDidChangeScreen(notification: NSNotification)
-  optional func windowDidChangeScreenProfile(notification: NSNotification)
-  optional func windowDidChangeBackingProperties(notification: NSNotification)
-  optional func windowWillBeginSheet(notification: NSNotification)
-  optional func windowDidEndSheet(notification: NSNotification)
-  optional func windowWillStartLiveResize(notification: NSNotification)
-  optional func windowDidEndLiveResize(notification: NSNotification)
-  optional func windowWillEnterFullScreen(notification: NSNotification)
-  optional func windowDidEnterFullScreen(notification: NSNotification)
-  optional func windowWillExitFullScreen(notification: NSNotification)
-  optional func windowDidExitFullScreen(notification: NSNotification)
-  optional func windowWillEnterVersionBrowser(notification: NSNotification)
-  optional func windowDidEnterVersionBrowser(notification: NSNotification)
-  optional func windowWillExitVersionBrowser(notification: NSNotification)
-  optional func windowDidExitVersionBrowser(notification: NSNotification)
-  optional func windowDidChangeOcclusionState(notification: NSNotification)
+  optional func window(window: NSWindow, willResizeForVersionBrowserWithMaxPreferredSize maxPreferredFrameSize: Size, maxAllowedSize maxAllowedFrameSize: Size) -> Size
+  optional func window(window: NSWindow, willEncodeRestorableState state: Coder)
+  optional func window(window: NSWindow, didDecodeRestorableState state: Coder)
+  optional func windowDidResize(notification: Notification)
+  optional func windowDidExpose(notification: Notification)
+  optional func windowWillMove(notification: Notification)
+  optional func windowDidMove(notification: Notification)
+  optional func windowDidBecomeKey(notification: Notification)
+  optional func windowDidResignKey(notification: Notification)
+  optional func windowDidBecomeMain(notification: Notification)
+  optional func windowDidResignMain(notification: Notification)
+  optional func windowWillClose(notification: Notification)
+  optional func windowWillMiniaturize(notification: Notification)
+  optional func windowDidMiniaturize(notification: Notification)
+  optional func windowDidDeminiaturize(notification: Notification)
+  optional func windowDidUpdate(notification: Notification)
+  optional func windowDidChangeScreen(notification: Notification)
+  optional func windowDidChangeScreenProfile(notification: Notification)
+  optional func windowDidChangeBackingProperties(notification: Notification)
+  optional func windowWillBeginSheet(notification: Notification)
+  optional func windowDidEndSheet(notification: Notification)
+  optional func windowWillStartLiveResize(notification: Notification)
+  optional func windowDidEndLiveResize(notification: Notification)
+  optional func windowWillEnterFullScreen(notification: Notification)
+  optional func windowDidEnterFullScreen(notification: Notification)
+  optional func windowWillExitFullScreen(notification: Notification)
+  optional func windowDidExitFullScreen(notification: Notification)
+  optional func windowWillEnterVersionBrowser(notification: Notification)
+  optional func windowDidEnterVersionBrowser(notification: Notification)
+  optional func windowWillExitVersionBrowser(notification: Notification)
+  optional func windowDidExitVersionBrowser(notification: Notification)
+  optional func windowDidChangeOcclusionState(notification: Notification)
 }
 let NSWindowDidBecomeKeyNotification: String
 let NSWindowDidBecomeMainNotification: String
@@ -13977,9 +13978,9 @@ let NSWindowWillExitVersionBrowserNotification: String
 let NSWindowDidExitVersionBrowserNotification: String
 let NSWindowDidChangeOcclusionStateNotification: String
 var NSUnscaledWindowMask: Int { get }
-class NSWindowController : NSResponder, NSCoding, NSSeguePerforming {
+class NSWindowController : NSResponder, Coding, NSSeguePerforming {
   init(window: NSWindow?)
-  init?(coder: NSCoder)
+  init?(coder: Coder)
   convenience init(windowNibName: String)
   convenience init(windowNibName: String, owner: AnyObject)
   convenience init(windowNibPath: String, owner: AnyObject)
@@ -13995,14 +13996,14 @@ class NSWindowController : NSResponder, NSCoding, NSSeguePerforming {
   func windowTitleForDocumentDisplayName(displayName: String) -> String
   var contentViewController: NSViewController?
   var window: NSWindow?
-  var windowLoaded: Bool { get }
+  var isWindowLoaded: Bool { get }
   func windowWillLoad()
   func windowDidLoad()
   func loadWindow()
   func close()
   @IBAction func showWindow(sender: AnyObject?)
   convenience init()
-  func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?)
+  func prepareFor(segue: NSStoryboardSegue, sender: AnyObject?)
   func performSegueWithIdentifier(identifier: String, sender: AnyObject?)
   func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool
 }
@@ -14023,27 +14024,27 @@ extension NSWindowController {
   var storyboard: NSStoryboard? { get }
 }
 extension NSWindowController {
-  @IBAction func dismissController(sender: AnyObject?)
+  @IBAction func dismiss(sender: AnyObject?)
 }
-protocol NSWindowRestoration : NSObjectProtocol {
-  static func restoreWindowWithIdentifier(identifier: String, state: NSCoder, completionHandler: (NSWindow?, NSError?) -> Void)
+protocol NSWindowRestoration : ObjectProtocol {
+  static func restoreWindowWithIdentifier(identifier: String, state: Coder, completionHandler: (NSWindow?, Error?) -> Void)
 }
 extension NSDocumentController : NSWindowRestoration {
-  class func restoreWindowWithIdentifier(identifier: String, state: NSCoder, completionHandler: (NSWindow?, NSError?) -> Void)
+  class func restoreWindowWithIdentifier(identifier: String, state: Coder, completionHandler: (NSWindow?, Error?) -> Void)
 }
 extension NSApplication {
-  func restoreWindowWithIdentifier(identifier: String, state: NSCoder, completionHandler: (NSWindow?, NSError?) -> Void) -> Bool
+  func restoreWindowWithIdentifier(identifier: String, state: Coder, completionHandler: (NSWindow?, Error?) -> Void) -> Bool
 }
 let NSApplicationDidFinishRestoringWindowsNotification: String
 extension NSWindow {
-  var restorable: Bool
+  var isRestorable: Bool
   var restorationClass: AnyObject.Type?
   func disableSnapshotRestoration()
   func enableSnapshotRestoration()
 }
 extension NSResponder {
-  func encodeRestorableStateWithCoder(coder: NSCoder)
-  func restoreStateWithCoder(coder: NSCoder)
+  func encodeRestorableStateWith(coder: Coder)
+  func restoreStateWith(coder: Coder)
   func invalidateRestorableState()
   class func restorableStateKeyPaths() -> [String]
 }
@@ -14052,27 +14053,27 @@ extension NSApplication {
   func completeStateRestoration()
 }
 extension NSDocument {
-  func restoreDocumentWindowWithIdentifier(identifier: String, state: NSCoder, completionHandler: (NSWindow?, NSError?) -> Void)
-  func encodeRestorableStateWithCoder(coder: NSCoder)
-  func restoreStateWithCoder(coder: NSCoder)
+  func restoreWindowWithIdentifier(identifier: String, state: Coder, completionHandler: (NSWindow?, Error?) -> Void)
+  func encodeRestorableStateWith(coder: Coder)
+  func restoreStateWith(coder: Coder)
   func invalidateRestorableState()
   class func restorableStateKeyPaths() -> [String]
 }
 extension NSWindow {
   var hasCloseBox: Bool { get }
   var hasTitleBar: Bool { get }
-  var floatingPanel: Bool { get }
-  var miniaturizable: Bool { get }
-  var modalPanel: Bool { get }
-  var resizable: Bool { get }
-  var zoomable: Bool { get }
+  var isFloatingPanel: Bool { get }
+  var isMiniaturizable: Bool { get }
+  var isModalPanel: Bool { get }
+  var isResizable: Bool { get }
+  var isZoomable: Bool { get }
   var orderedIndex: Int
   func setIsMiniaturized(flag: Bool)
   func setIsVisible(flag: Bool)
   func setIsZoomed(flag: Bool)
-  func handleCloseScriptCommand(command: NSCloseCommand) -> AnyObject?
-  func handlePrintScriptCommand(command: NSScriptCommand) -> AnyObject?
-  func handleSaveScriptCommand(command: NSScriptCommand) -> AnyObject?
+  func handleCloseScriptCommand(command: CloseCommand) -> AnyObject?
+  func handlePrint(command: ScriptCommand) -> AnyObject?
+  func handleSave(command: ScriptCommand) -> AnyObject?
 }
 struct NSWorkspaceLaunchOptions : OptionSetType {
   init(rawValue: UInt)
@@ -14096,21 +14097,21 @@ struct NSWorkspaceIconCreationOptions : OptionSetType {
   static var ExcludeQuickDrawElementsIconCreationOption: NSWorkspaceIconCreationOptions { get }
   static var Exclude10_4ElementsIconCreationOption: NSWorkspaceIconCreationOptions { get }
 }
-class NSWorkspace : NSObject {
-  class func sharedWorkspace() -> NSWorkspace
-  var notificationCenter: NSNotificationCenter { get }
+class NSWorkspace : Object {
+  class func shared() -> NSWorkspace
+  var notificationCenter: NotificationCenter { get }
   func openFile(fullPath: String) -> Bool
   func openFile(fullPath: String, withApplication appName: String?) -> Bool
   func openFile(fullPath: String, withApplication appName: String?, andDeactivate flag: Bool) -> Bool
-  func openURL(url: NSURL) -> Bool
+  func open(url: URL) -> Bool
   func launchApplication(appName: String) -> Bool
-  func launchApplicationAtURL(url: NSURL, options: NSWorkspaceLaunchOptions, configuration: [String : AnyObject]) throws -> NSRunningApplication
-  func openURL(url: NSURL, options: NSWorkspaceLaunchOptions, configuration: [String : AnyObject]) throws -> NSRunningApplication
-  func openURLs(urls: [NSURL], withApplicationAtURL applicationURL: NSURL, options: NSWorkspaceLaunchOptions, configuration: [String : AnyObject]) throws -> NSRunningApplication
+  func launchApplicationAt(url: URL, options: NSWorkspaceLaunchOptions = [], configuration: [String : AnyObject]) throws -> NSRunningApplication
+  func open(url: URL, options: NSWorkspaceLaunchOptions = [], configuration: [String : AnyObject]) throws -> NSRunningApplication
+  func openURLs(urls: [URL], withApplicationAt applicationURL: URL, options: NSWorkspaceLaunchOptions = [], configuration: [String : AnyObject]) throws -> NSRunningApplication
   func launchApplication(appName: String, showIcon: Bool, autolaunch: Bool) -> Bool
   func fullPathForApplication(appName: String) -> String?
   func selectFile(fullPath: String?, inFileViewerRootedAtPath rootFullPath: String) -> Bool
-  func activateFileViewerSelectingURLs(fileURLs: [NSURL])
+  func activateFileViewerSelectingURLs(fileURLs: [URL])
   func showSearchResultsForQueryString(queryString: String) -> Bool
   func noteFileSystemChanged(path: String)
   func getInfoForFile(fullPath: String, application appName: AutoreleasingUnsafeMutablePointer<NSString?>, type: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
@@ -14118,21 +14119,21 @@ class NSWorkspace : NSObject {
   func iconForFile(fullPath: String) -> NSImage
   func iconForFiles(fullPaths: [String]) -> NSImage?
   func iconForFileType(fileType: String) -> NSImage
-  func setIcon(image: NSImage?, forFile fullPath: String, options: NSWorkspaceIconCreationOptions) -> Bool
+  func setIcon(image: NSImage?, forFile fullPath: String, options: NSWorkspaceIconCreationOptions = []) -> Bool
   var fileLabels: [String] { get }
   var fileLabelColors: [NSColor] { get }
-  func recycleURLs(URLs: [NSURL], completionHandler handler: (([NSURL : NSURL], NSError?) -> Void)?)
-  func duplicateURLs(URLs: [NSURL], completionHandler handler: (([NSURL : NSURL], NSError?) -> Void)?)
+  func recycleURLs(URLs: [URL], completionHandler handler: (([URL : URL], Error?) -> Void)? = nil)
+  func duplicateURLs(URLs: [URL], completionHandler handler: (([URL : URL], Error?) -> Void)? = nil)
   func getFileSystemInfoForPath(fullPath: String, isRemovable removableFlag: UnsafeMutablePointer<ObjCBool>, isWritable writableFlag: UnsafeMutablePointer<ObjCBool>, isUnmountable unmountableFlag: UnsafeMutablePointer<ObjCBool>, description: AutoreleasingUnsafeMutablePointer<NSString?>, type fileSystemType: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool
   func unmountAndEjectDeviceAtPath(path: String) -> Bool
-  func unmountAndEjectDeviceAtURL(url: NSURL) throws
+  func unmountAndEjectDeviceAt(url: URL) throws
   func extendPowerOffBy(requested: Int) -> Int
   func hideOtherApplications()
-  func URLForApplicationWithBundleIdentifier(bundleIdentifier: String) -> NSURL?
-  func URLForApplicationToOpenURL(url: NSURL) -> NSURL?
+  func urlForApplicationWithBundleIdentifier(bundleIdentifier: String) -> URL?
+  func urlForApplicationToOpen(url: URL) -> URL?
   func absolutePathForAppBundleWithIdentifier(bundleIdentifier: String) -> String?
-  func launchAppWithBundleIdentifier(bundleIdentifier: String, options: NSWorkspaceLaunchOptions, additionalEventParamDescriptor descriptor: NSAppleEventDescriptor?, launchIdentifier identifier: AutoreleasingUnsafeMutablePointer<NSNumber?>) -> Bool
-  func openURLs(urls: [NSURL], withAppBundleIdentifier bundleIdentifier: String?, options: NSWorkspaceLaunchOptions, additionalEventParamDescriptor descriptor: NSAppleEventDescriptor?, launchIdentifiers identifiers: AutoreleasingUnsafeMutablePointer<NSArray?>) -> Bool
+  func launchAppWithBundleIdentifier(bundleIdentifier: String, options: NSWorkspaceLaunchOptions = [], additionalEventParamDescriptor descriptor: AppleEventDescriptor?, launchIdentifier identifier: AutoreleasingUnsafeMutablePointer<Number?>) -> Bool
+  func openURLs(urls: [URL], withAppBundleIdentifier bundleIdentifier: String?, options: NSWorkspaceLaunchOptions = [], additionalEventParamDescriptor descriptor: AppleEventDescriptor?, launchIdentifiers identifiers: AutoreleasingUnsafeMutablePointer<NSArray?>) -> Bool
   var frontmostApplication: NSRunningApplication? { get }
   var menuBarOwningApplication: NSRunningApplication? { get }
   func typeOfFile(absoluteFilePath: String) throws -> String
@@ -14143,9 +14144,9 @@ class NSWorkspace : NSObject {
   init()
 }
 extension NSWorkspace {
-  func setDesktopImageURL(url: NSURL, forScreen screen: NSScreen, options: [String : AnyObject]) throws
-  func desktopImageURLForScreen(screen: NSScreen) -> NSURL?
-  func desktopImageOptionsForScreen(screen: NSScreen) -> [String : AnyObject]?
+  func setDesktopImageURL(url: URL, forScreen screen: NSScreen, options: [String : AnyObject] = [:]) throws
+  func desktopImageURLFor(screen: NSScreen) -> URL?
+  func desktopImageOptionsFor(screen: NSScreen) -> [String : AnyObject]?
 }
 let NSWorkspaceDesktopImageScalingKey: String
 let NSWorkspaceDesktopImageAllowClippingKey: String
@@ -14180,10 +14181,10 @@ let NSWorkspaceLaunchConfigurationArguments: String
 let NSWorkspaceLaunchConfigurationEnvironment: String
 let NSWorkspaceLaunchConfigurationArchitecture: String
 extension NSWorkspace {
-  func activeApplication() -> [NSObject : AnyObject]?
+  func activeApplication() -> [Object : AnyObject]?
   func mountedLocalVolumePaths() -> [AnyObject]?
   func mountedRemovableMedia() -> [AnyObject]?
-  func openFile(fullPath: String, fromImage anImage: NSImage?, at point: NSPoint, inView aView: NSView?) -> Bool
+  func openFile(fullPath: String, from anImage: NSImage?, at point: Point, in aView: NSView?) -> Bool
   func performFileOperation(operation: String, source: String, destination: String, files: [AnyObject], tag: UnsafeMutablePointer<Int>) -> Bool
 }
 let NSWorkspaceMoveOperation: String

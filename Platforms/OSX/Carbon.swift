@@ -4575,10 +4575,10 @@ protocol IMKTextInput {
   func setMarkedText(string: AnyObject!, selectionRange: NSRange, replacementRange: NSRange)
   func selectedRange() -> NSRange
   func markedRange() -> NSRange
-  func attributedSubstringFromRange(range: NSRange) -> NSAttributedString!
+  func attributedSubstringFrom(range: NSRange) -> AttributedString!
   func length() -> Int
-  func characterIndexForPoint(point: NSPoint, tracking mappingMode: IMKLocationToOffsetMappingMode, inMarkedRange: UnsafeMutablePointer<ObjCBool>) -> Int
-  func attributesForCharacterIndex(index: Int, lineHeightRectangle lineRect: UnsafeMutablePointer<NSRect>) -> [NSObject : AnyObject]!
+  func characterIndexFor(point: Point, tracking mappingMode: IMKLocationToOffsetMappingMode, inMarkedRange: UnsafeMutablePointer<ObjCBool>) -> Int
+  func attributesForCharacterIndex(index: Int, lineHeightRectangle lineRect: UnsafeMutablePointer<Rect>) -> [Object : AnyObject]!
   func validAttributesForMarkedText() -> [AnyObject]!
   func overrideKeyboardWithKeyboardNamed(keyboardUniqueName: String!)
   func selectInputMode(modeIdentifier: String!)
@@ -4587,8 +4587,8 @@ protocol IMKTextInput {
   func windowLevel() -> CGWindowLevel
   func supportsProperty(property: TSMDocumentPropertyTag) -> Bool
   func uniqueClientIdentifierString() -> String!
-  func stringFromRange(range: NSRange, actualRange: NSRangePointer) -> String!
-  func firstRectForCharacterRange(aRange: NSRange, actualRange: NSRangePointer) -> NSRect
+  func stringFrom(range: NSRange, actualRange: RangePointer) -> String!
+  func firstRectForCharacterRange(aRange: NSRange, actualRange: RangePointer) -> Rect
 }
 protocol IMKUnicodeTextInput {
   func insertText(string: AnyObject!)

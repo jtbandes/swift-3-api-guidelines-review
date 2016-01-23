@@ -88,23 +88,23 @@ var NSSQLiteError: Int { get }
 var NSInferredMappingModelError: Int { get }
 var NSExternalRecordImportError: Int { get }
 class NSAtomicStore : NSPersistentStore {
-  init(persistentStoreCoordinator coordinator: NSPersistentStoreCoordinator?, configurationName: String?, URL url: NSURL, options: [NSObject : AnyObject]?)
+  init(persistentStoreCoordinator coordinator: NSPersistentStoreCoordinator?, configurationName: String?, url: URL, options: [Object : AnyObject]? = [:])
   func load() throws
   func save() throws
-  func newCacheNodeForManagedObject(managedObject: NSManagedObject) -> NSAtomicStoreCacheNode
-  func updateCacheNode(node: NSAtomicStoreCacheNode, fromManagedObject managedObject: NSManagedObject)
+  func newCacheNodeFor(managedObject: NSManagedObject) -> NSAtomicStoreCacheNode
+  func updateCacheNode(node: NSAtomicStoreCacheNode, from managedObject: NSManagedObject)
   func cacheNodes() -> Set<NSAtomicStoreCacheNode>
   func addCacheNodes(cacheNodes: Set<NSAtomicStoreCacheNode>)
   func willRemoveCacheNodes(cacheNodes: Set<NSAtomicStoreCacheNode>)
-  func cacheNodeForObjectID(objectID: NSManagedObjectID) -> NSAtomicStoreCacheNode?
+  func cacheNodeFor(objectID: NSManagedObjectID) -> NSAtomicStoreCacheNode?
   func objectIDForEntity(entity: NSEntityDescription, referenceObject data: AnyObject) -> NSManagedObjectID
-  func newReferenceObjectForManagedObject(managedObject: NSManagedObject) -> AnyObject
-  func referenceObjectForObjectID(objectID: NSManagedObjectID) -> AnyObject
+  func newReferenceObjectFor(managedObject: NSManagedObject) -> AnyObject
+  func referenceObjectFor(objectID: NSManagedObjectID) -> AnyObject
 }
-class NSAtomicStoreCacheNode : NSObject {
+class NSAtomicStoreCacheNode : Object {
   init(objectID moid: NSManagedObjectID)
   var objectID: NSManagedObjectID { get }
-  var propertyCache: NSMutableDictionary?
+  var propertyCache: MutableDictionary?
   func valueForKey(key: String) -> AnyObject?
   func setValue(value: AnyObject?, forKey key: String)
   init()
@@ -130,11 +130,11 @@ class NSAttributeDescription : NSPropertyDescription {
   var attributeType: NSAttributeType
   var attributeValueClassName: String?
   var defaultValue: AnyObject?
-  @NSCopying var versionHash: NSData { get }
+  @NSCopying var versionHash: Data { get }
   var valueTransformerName: String?
   var allowsExternalBinaryDataStorage: Bool
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 struct __attributeDescriptionFlags {
   var _hasMaxValueInExtraIvars: UInt32
@@ -155,10 +155,10 @@ class NSBatchUpdateRequest : NSPersistentStoreRequest {
   init(entity: NSEntityDescription)
   var entityName: String { get }
   var entity: NSEntityDescription { get }
-  var predicate: NSPredicate?
+  var predicate: Predicate?
   var includesSubentities: Bool
   var resultType: NSBatchUpdateRequestResultType
-  var propertiesToUpdate: [NSObject : AnyObject]?
+  var propertiesToUpdate: [Object : AnyObject]?
   init()
 }
 struct _requestFlags {
@@ -169,33 +169,33 @@ struct _requestFlags {
   init()
   init(includesSubentities: UInt32, resultType: UInt32, entityIsName: UInt32, _RESERVED: UInt32)
 }
-class NSEntityDescription : NSObject, NSCoding, NSCopying, NSFastEnumeration {
-  class func entityForName(entityName: String, inManagedObjectContext context: NSManagedObjectContext) -> NSEntityDescription?
-  class func insertNewObjectForEntityForName(entityName: String, inManagedObjectContext context: NSManagedObjectContext) -> NSManagedObject
+class NSEntityDescription : Object, Coding, Copying, FastEnumeration {
+  class func entityForName(entityName: String, in context: NSManagedObjectContext) -> NSEntityDescription?
+  class func insertNewObjectForEntityForName(entityName: String, in context: NSManagedObjectContext) -> NSManagedObject
   unowned(unsafe) var managedObjectModel: @sil_unmanaged NSManagedObjectModel { get }
   var managedObjectClassName: String!
   var name: String?
-  var abstract: Bool
+  var isAbstract: Bool
   var subentitiesByName: [String : NSEntityDescription] { get }
   var subentities: [NSEntityDescription]
   unowned(unsafe) var superentity: @sil_unmanaged NSEntityDescription? { get }
   var propertiesByName: [String : NSPropertyDescription] { get }
   var properties: [NSPropertyDescription]
-  var userInfo: [NSObject : AnyObject]?
+  var userInfo: [Object : AnyObject]?
   var attributesByName: [String : NSAttributeDescription] { get }
   var relationshipsByName: [String : NSRelationshipDescription] { get }
   func relationshipsWithDestinationEntity(entity: NSEntityDescription) -> [NSRelationshipDescription]
   func isKindOfEntity(entity: NSEntityDescription) -> Bool
-  @NSCopying var versionHash: NSData { get }
+  @NSCopying var versionHash: Data { get }
   var versionHashModifier: String?
   var renamingIdentifier: String?
   var compoundIndexes: [[AnyObject]]
   var uniquenessConstraints: [[AnyObject]]
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func countByEnumeratingWithState(state: UnsafeMutablePointer<NSFastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func countByEnumeratingWith(state: UnsafeMutablePointer<FastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
 }
 struct __entityDescriptionFlags {
   var _isAbstract: UInt32
@@ -224,17 +224,17 @@ enum NSEntityMappingType : UInt {
   case CopyEntityMappingType
   case TransformEntityMappingType
 }
-class NSEntityMapping : NSObject {
+class NSEntityMapping : Object {
   var name: String!
   var mappingType: NSEntityMappingType
   var sourceEntityName: String?
-  @NSCopying var sourceEntityVersionHash: NSData?
+  @NSCopying var sourceEntityVersionHash: Data?
   var destinationEntityName: String?
-  @NSCopying var destinationEntityVersionHash: NSData?
+  @NSCopying var destinationEntityVersionHash: Data?
   var attributeMappings: [NSPropertyMapping]?
   var relationshipMappings: [NSPropertyMapping]?
-  var sourceExpression: NSExpression?
-  var userInfo: [NSObject : AnyObject]?
+  var sourceExpression: Expression?
+  var userInfo: [Object : AnyObject]?
   var entityMigrationPolicyClassName: String?
   init()
 }
@@ -250,21 +250,21 @@ let NSMigrationDestinationObjectKey: String
 let NSMigrationEntityMappingKey: String
 let NSMigrationPropertyMappingKey: String
 let NSMigrationEntityPolicyKey: String
-class NSEntityMigrationPolicy : NSObject {
-  func beginEntityMapping(mapping: NSEntityMapping, manager: NSMigrationManager) throws
+class NSEntityMigrationPolicy : Object {
+  func begin(mapping: NSEntityMapping, manager: NSMigrationManager) throws
   func createDestinationInstancesForSourceInstance(sInstance: NSManagedObject, entityMapping mapping: NSEntityMapping, manager: NSMigrationManager) throws
-  func endInstanceCreationForEntityMapping(mapping: NSEntityMapping, manager: NSMigrationManager) throws
+  func endInstanceCreationFor(mapping: NSEntityMapping, manager: NSMigrationManager) throws
   func createRelationshipsForDestinationInstance(dInstance: NSManagedObject, entityMapping mapping: NSEntityMapping, manager: NSMigrationManager) throws
-  func endRelationshipCreationForEntityMapping(mapping: NSEntityMapping, manager: NSMigrationManager) throws
-  func performCustomValidationForEntityMapping(mapping: NSEntityMapping, manager: NSMigrationManager) throws
-  func endEntityMapping(mapping: NSEntityMapping, manager: NSMigrationManager) throws
+  func endRelationshipCreationFor(mapping: NSEntityMapping, manager: NSMigrationManager) throws
+  func performCustomValidationFor(mapping: NSEntityMapping, manager: NSMigrationManager) throws
+  func end(mapping: NSEntityMapping, manager: NSMigrationManager) throws
   init()
 }
 class NSExpressionDescription : NSPropertyDescription {
-  var expression: NSExpression?
+  var expression: Expression?
   var expressionResultType: NSAttributeType
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 struct NSFetchRequestResultType : OptionSetType {
   init(rawValue: UInt)
@@ -274,13 +274,13 @@ struct NSFetchRequestResultType : OptionSetType {
   static var DictionaryResultType: NSFetchRequestResultType { get }
   static var CountResultType: NSFetchRequestResultType { get }
 }
-class NSFetchRequest : NSPersistentStoreRequest, NSCoding {
+class NSFetchRequest : NSPersistentStoreRequest, Coding {
   init()
   convenience init(entityName: String)
   var entity: NSEntityDescription?
   var entityName: String? { get }
-  var predicate: NSPredicate?
-  var sortDescriptors: [NSSortDescriptor]?
+  var predicate: Predicate?
+  var sortDescriptors: [SortDescriptor]?
   var fetchLimit: Int
   var affectedStores: [NSPersistentStore]?
   var resultType: NSFetchRequestResultType
@@ -295,9 +295,9 @@ class NSFetchRequest : NSPersistentStoreRequest, NSCoding {
   var fetchBatchSize: Int
   var shouldRefreshRefetchedObjects: Bool
   var propertiesToGroupBy: [AnyObject]?
-  var havingPredicate: NSPredicate?
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  var havingPredicate: Predicate?
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 struct _fetchRequestFlags {
   var distinctValuesOnly: UInt32
@@ -315,14 +315,14 @@ struct _fetchRequestFlags {
   init()
   init(distinctValuesOnly: UInt32, includesSubentities: UInt32, includesPropertyValues: UInt32, resultType: UInt32, returnsObjectsAsFaults: UInt32, excludePendingChanges: UInt32, isInUse: UInt32, entityIsName: UInt32, refreshesRefetched: UInt32, propertiesValidated: UInt32, disableCaching: UInt32, _RESERVED: UInt32)
 }
-let NSFetchRequestExpressionType: NSExpressionType
-class NSFetchRequestExpression : NSExpression {
-  class func expressionForFetch(fetch: NSExpression, context: NSExpression, countOnly countFlag: Bool) -> NSExpression
-  var requestExpression: NSExpression { get }
-  var contextExpression: NSExpression { get }
-  var countOnlyRequest: Bool { get }
-  init(expressionType type: NSExpressionType)
-  init?(coder: NSCoder)
+let NSFetchRequestExpressionType: ExpressionType
+class NSFetchRequestExpression : Expression {
+  class func expressionForFetch(fetch: Expression, context: Expression, countOnly countFlag: Bool) -> Expression
+  var requestExpression: Expression { get }
+  var contextExpression: Expression { get }
+  var isCountOnlyRequest: Bool { get }
+  init(expressionType type: ExpressionType)
+  init?(coder: Coder)
   convenience init()
 }
 struct _fetchExpressionFlags {
@@ -334,27 +334,27 @@ struct _fetchExpressionFlags {
 class NSFetchedPropertyDescription : NSPropertyDescription {
   var fetchRequest: NSFetchRequest?
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class NSIncrementalStore : NSPersistentStore {
   func loadMetadata() throws
-  func executeRequest(request: NSPersistentStoreRequest, withContext context: NSManagedObjectContext?) throws -> AnyObject
-  func newValuesForObjectWithID(objectID: NSManagedObjectID, withContext context: NSManagedObjectContext) throws -> NSIncrementalStoreNode
-  func newValueForRelationship(relationship: NSRelationshipDescription, forObjectWithID objectID: NSManagedObjectID, withContext context: NSManagedObjectContext?) throws -> AnyObject
-  class func identifierForNewStoreAtURL(storeURL: NSURL) -> AnyObject
-  func obtainPermanentIDsForObjects(array: [NSManagedObject]) throws -> [NSManagedObjectID]
+  func execute(request: NSPersistentStoreRequest, withContext context: NSManagedObjectContext?) throws -> AnyObject
+  func newValuesForObjectWith(objectID: NSManagedObjectID, withContext context: NSManagedObjectContext) throws -> NSIncrementalStoreNode
+  func newValueForRelationship(relationship: NSRelationshipDescription, forObjectWith objectID: NSManagedObjectID, withContext context: NSManagedObjectContext?) throws -> AnyObject
+  class func identifierForNewStoreAt(storeURL: URL) -> AnyObject
+  func obtainPermanentIDsFor(array: [NSManagedObject]) throws -> [NSManagedObjectID]
   func managedObjectContextDidRegisterObjectsWithIDs(objectIDs: [NSManagedObjectID])
   func managedObjectContextDidUnregisterObjectsWithIDs(objectIDs: [NSManagedObjectID])
   func newObjectIDForEntity(entity: NSEntityDescription, referenceObject data: AnyObject) -> NSManagedObjectID
-  func referenceObjectForObjectID(objectID: NSManagedObjectID) -> AnyObject
-  init(persistentStoreCoordinator root: NSPersistentStoreCoordinator?, configurationName name: String?, URL url: NSURL, options: [NSObject : AnyObject]?)
+  func referenceObjectFor(objectID: NSManagedObjectID) -> AnyObject
+  init(persistentStoreCoordinator root: NSPersistentStoreCoordinator?, configurationName name: String?, url: URL, options: [Object : AnyObject]? = [:])
 }
-class NSIncrementalStoreNode : NSObject {
+class NSIncrementalStoreNode : Object {
   init(objectID: NSManagedObjectID, withValues values: [String : AnyObject], version: UInt64)
   func updateWithValues(values: [String : AnyObject], version: UInt64)
   var objectID: NSManagedObjectID { get }
   var version: UInt64 { get }
-  func valueForPropertyDescription(prop: NSPropertyDescription) -> AnyObject?
+  func valueFor(prop: NSPropertyDescription) -> AnyObject?
   init()
 }
 struct NSSnapshotEventType : OptionSetType {
@@ -367,18 +367,18 @@ struct NSSnapshotEventType : OptionSetType {
   static var Refresh: NSSnapshotEventType { get }
   static var MergePolicy: NSSnapshotEventType { get }
 }
-class NSManagedObject : NSObject {
+class NSManagedObject : Object {
   class func contextShouldIgnoreUnmodeledPropertyChanges() -> Bool
-  init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?)
+  init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?)
   unowned(unsafe) var managedObjectContext: @sil_unmanaged NSManagedObjectContext? { get }
   var entity: NSEntityDescription { get }
   var objectID: NSManagedObjectID { get }
-  var inserted: Bool { get }
-  var updated: Bool { get }
-  var deleted: Bool { get }
+  var isInserted: Bool { get }
+  var isUpdated: Bool { get }
+  var isDeleted: Bool { get }
   var hasChanges: Bool { get }
   var hasPersistentChangedValues: Bool { get }
-  var fault: Bool { get }
+  var isFault: Bool { get }
   func hasFaultForRelationshipNamed(key: String) -> Bool
   func objectIDsForRelationshipNamed(key: String) -> [NSManagedObjectID]
   var faultingState: Int { get }
@@ -386,8 +386,8 @@ class NSManagedObject : NSObject {
   func didAccessValueForKey(key: String?)
   func willChangeValueForKey(key: String)
   func didChangeValueForKey(key: String)
-  func willChangeValueForKey(inKey: String, withSetMutation inMutationKind: NSKeyValueSetMutationKind, usingObjects inObjects: Set<NSObject>)
-  func didChangeValueForKey(inKey: String, withSetMutation inMutationKind: NSKeyValueSetMutationKind, usingObjects inObjects: Set<NSObject>)
+  func willChangeValueForKey(inKey: String, withSetMutation inMutationKind: KeyValueSetMutationKind, usingObjects inObjects: Set<Object>)
+  func didChangeValueForKey(inKey: String, withSetMutation inMutationKind: KeyValueSetMutationKind, usingObjects inObjects: Set<Object>)
   func awakeFromFetch()
   func awakeFromInsert()
   func awakeFromSnapshotEvents(flags: NSSnapshotEventType)
@@ -427,32 +427,32 @@ enum NSManagedObjectContextConcurrencyType : UInt {
   case PrivateQueueConcurrencyType
   case MainQueueConcurrencyType
 }
-class NSManagedObjectContext : NSObject, NSCoding, NSLocking {
+class NSManagedObjectContext : Object, Coding, Locking {
   class func new() -> Self
   convenience init()
   init(concurrencyType ct: NSManagedObjectContextConcurrencyType)
-  func performBlock(block: () -> Void)
+  func perform(block: () -> Void)
   func performBlockAndWait(block: () -> Void)
   var persistentStoreCoordinator: NSPersistentStoreCoordinator?
-  var parentContext: NSManagedObjectContext?
+  var parent: NSManagedObjectContext?
   var name: String?
-  var undoManager: NSUndoManager?
+  var undoManager: UndoManager?
   var hasChanges: Bool { get }
-  var userInfo: NSMutableDictionary { get }
+  var userInfo: MutableDictionary { get }
   var concurrencyType: NSManagedObjectContextConcurrencyType { get }
-  func objectRegisteredForID(objectID: NSManagedObjectID) -> NSManagedObject?
-  func objectWithID(objectID: NSManagedObjectID) -> NSManagedObject
-  func existingObjectWithID(objectID: NSManagedObjectID) throws -> NSManagedObject
-  func executeFetchRequest(request: NSFetchRequest) throws -> [AnyObject]
-  func countForFetchRequest(request: NSFetchRequest, error: NSErrorPointer) -> Int
-  func executeRequest(request: NSPersistentStoreRequest) throws -> NSPersistentStoreResult
-  func insertObject(object: NSManagedObject)
-  func deleteObject(object: NSManagedObject)
+  func objectRegisteredFor(objectID: NSManagedObjectID) -> NSManagedObject?
+  func objectWith(objectID: NSManagedObjectID) -> NSManagedObject
+  func existingObjectWith(objectID: NSManagedObjectID) throws -> NSManagedObject
+  func execute(request: NSFetchRequest) throws -> [AnyObject]
+  func countFor(request: NSFetchRequest, error: ErrorPointer) -> Int
+  func execute(request: NSPersistentStoreRequest) throws -> NSPersistentStoreResult
+  func insert(object: NSManagedObject)
+  func delete(object: NSManagedObject)
   func refreshObject(object: NSManagedObject, mergeChanges flag: Bool)
-  func detectConflictsForObject(object: NSManagedObject)
-  func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>)
+  func detectConflictsFor(object: NSManagedObject)
+  func observeValueForKeyPath(keyPath: String?, of object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>)
   func processPendingChanges()
-  func assignObject(object: AnyObject, toPersistentStore store: NSPersistentStore)
+  func assign(object: AnyObject, to store: NSPersistentStore)
   var insertedObjects: Set<NSManagedObject> { get }
   var updatedObjects: Set<NSManagedObject> { get }
   var deletedObjects: Set<NSManagedObject> { get }
@@ -470,13 +470,13 @@ class NSManagedObjectContext : NSObject, NSCoding, NSLocking {
   var retainsRegisteredObjects: Bool
   var shouldDeleteInaccessibleFaults: Bool
   func shouldHandleInaccessibleFault(fault: NSManagedObject, forObjectID oid: NSManagedObjectID, triggeredByProperty property: NSPropertyDescription?) -> Bool
-  var stalenessInterval: NSTimeInterval
+  var stalenessInterval: TimeInterval
   var mergePolicy: AnyObject
-  func obtainPermanentIDsForObjects(objects: [NSManagedObject]) throws
-  func mergeChangesFromContextDidSaveNotification(notification: NSNotification)
-  class func mergeChangesFromRemoteContextSave(changeNotificationData: [NSObject : AnyObject], intoContexts contexts: [NSManagedObjectContext])
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func obtainPermanentIDsFor(objects: [NSManagedObject]) throws
+  func mergeChangesFromContextDidSave(notification: Notification)
+  class func mergeChangesFromRemoteContextSave(changeNotificationData: [Object : AnyObject], into contexts: [NSManagedObjectContext])
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 struct _managedObjectContextFlags {
   var _registeredForCallback: UInt32
@@ -506,19 +506,19 @@ struct _managedObjectContextFlags {
   init()
   init(_registeredForCallback: UInt32, _propagatesDeletesAtEndOfEvent: UInt32, _exhaustiveValidation: UInt32, _processingChanges: UInt32, _useCommittedSnapshot: UInt32, _registeredUndoTransactionID: UInt32, _retainsAllRegisteredObjects: UInt32, _savingInProgress: UInt32, _wasDisposed: UInt32, _unprocessedChangesPending: UInt32, _isDirty: UInt32, _ignoreUndoCheckpoints: UInt32, _propagatingDeletes: UInt32, _isNSEditorEditing: UInt32, _isMainThreadBlessed: UInt32, _isImportContext: UInt32, _preflightSaveInProgress: UInt32, _disableDiscardEditing: UInt32, _isParentStoreContext: UInt32, _postSaveNotifications: UInt32, _isMerging: UInt32, _concurrencyType: UInt32, _deleteInaccessible: UInt32, _reservedFlags: UInt32)
 }
-class NSManagedObjectID : NSObject, NSCopying {
+class NSManagedObjectID : Object, Copying {
   var entity: NSEntityDescription { get }
   weak var persistentStore: @sil_weak NSPersistentStore? { get }
-  var temporaryID: Bool { get }
-  func URIRepresentation() -> NSURL
+  var isTemporaryID: Bool { get }
+  func uriRepresentation() -> URL
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class NSManagedObjectModel : NSObject, NSCoding, NSCopying, NSFastEnumeration {
-  class func mergedModelFromBundles(bundles: [NSBundle]?) -> NSManagedObjectModel?
-   init?(byMergingModels models: [NSManagedObjectModel]?)
+class NSManagedObjectModel : Object, Coding, Copying, FastEnumeration {
+  class func mergedModelFrom(bundles: [Bundle]?) -> NSManagedObjectModel?
+   init?(byMerging models: [NSManagedObjectModel]?)
   init()
-  convenience init?(contentsOfURL url: NSURL)
+  convenience init?(contentsOf url: URL)
   var entitiesByName: [String : NSEntityDescription] { get }
   var entities: [NSEntityDescription]
   var configurations: [String] { get }
@@ -528,16 +528,16 @@ class NSManagedObjectModel : NSObject, NSCoding, NSCopying, NSFastEnumeration {
   func fetchRequestTemplateForName(name: String) -> NSFetchRequest?
   func fetchRequestFromTemplateWithName(name: String, substitutionVariables variables: [String : AnyObject]) -> NSFetchRequest?
   var localizationDictionary: [String : String]?
-  class func mergedModelFromBundles(bundles: [NSBundle]?, forStoreMetadata metadata: [String : AnyObject]) -> NSManagedObjectModel?
-   init?(byMergingModels models: [NSManagedObjectModel], forStoreMetadata metadata: [String : AnyObject])
+  class func mergedModelFrom(bundles: [Bundle]?, forStoreMetadata metadata: [String : AnyObject]) -> NSManagedObjectModel?
+   init?(byMerging models: [NSManagedObjectModel], forStoreMetadata metadata: [String : AnyObject])
   var fetchRequestTemplatesByName: [String : NSFetchRequest] { get }
-  var versionIdentifiers: Set<NSObject>
+  var versionIdentifiers: Set<Object>
   func isConfiguration(configuration: String?, compatibleWithStoreMetadata metadata: [String : AnyObject]) -> Bool
-  var entityVersionHashesByName: [String : NSData] { get }
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
-  func countByEnumeratingWithState(state: UnsafeMutablePointer<NSFastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
+  var entityVersionHashesByName: [String : Data] { get }
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
+  func countByEnumeratingWith(state: UnsafeMutablePointer<FastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int
 }
 struct __managedObjectModelFlags {
   var _isInUse: UInt32
@@ -548,10 +548,10 @@ struct __managedObjectModelFlags {
   init()
   init(_isInUse: UInt32, _isImmutable: UInt32, _isOptimizedForEncoding: UInt32, _hasEntityWithConstraints: UInt32, _reservedEntityDescription: UInt32)
 }
-class NSMappingModel : NSObject {
-   init?(fromBundles bundles: [NSBundle]?, forSourceModel sourceModel: NSManagedObjectModel?, destinationModel: NSManagedObjectModel?)
+class NSMappingModel : Object {
+   init?(from bundles: [Bundle]?, forSourceModel sourceModel: NSManagedObjectModel?, destinationModel: NSManagedObjectModel?)
   class func inferredMappingModelForSourceModel(sourceModel: NSManagedObjectModel, destinationModel: NSManagedObjectModel) throws -> NSMappingModel
-  init?(contentsOfURL url: NSURL?)
+  init?(contentsOf url: URL?)
   var entityMappings: [NSEntityMapping]!
   var entityMappingsByName: [String : NSEntityMapping] { get }
   init()
@@ -576,7 +576,7 @@ enum NSMergePolicyType : UInt {
   case OverwriteMergePolicyType
   case RollbackMergePolicyType
 }
-class NSMergeConflict : NSObject {
+class NSMergeConflict : Object {
   var sourceObject: NSManagedObject { get }
   var objectSnapshot: [String : AnyObject]? { get }
   var cachedSnapshot: [String : AnyObject]? { get }
@@ -585,26 +585,26 @@ class NSMergeConflict : NSObject {
   var oldVersionNumber: Int { get }
   init(source srcObject: NSManagedObject, newVersion newvers: Int, oldVersion oldvers: Int, cachedSnapshot cachesnap: [String : AnyObject]?, persistedSnapshot persnap: [String : AnyObject]?)
 }
-class NSConstraintConflict : NSObject {
+class NSConstraintConflict : Object {
   var constraint: [String] { get }
   var constraintValues: [String : AnyObject] { get }
   var databaseObject: NSManagedObject? { get }
   var databaseSnapshot: [String : AnyObject]? { get }
   var conflictingObjects: [NSManagedObject] { get }
-  var conflictingSnapshots: [[NSObject : AnyObject]] { get }
-  init(constraint contraint: [String], databaseObject: NSManagedObject?, databaseSnapshot: [NSObject : AnyObject]?, conflictingObjects: [NSManagedObject], conflictingSnapshots: [AnyObject])
+  var conflictingSnapshots: [[Object : AnyObject]] { get }
+  init(constraint contraint: [String], databaseObject: NSManagedObject?, databaseSnapshot: [Object : AnyObject]?, conflictingObjects: [NSManagedObject], conflictingSnapshots: [AnyObject])
   convenience init()
 }
-class NSMergePolicy : NSObject {
+class NSMergePolicy : Object {
   var mergeType: NSMergePolicyType { get }
-  init(mergeType ty: NSMergePolicyType)
+  init(merge ty: NSMergePolicyType)
   func resolveConflicts(list: [AnyObject]) throws
   func resolveOptimisticLockingVersionConflicts(list: [NSMergeConflict]) throws
-  func resolveConstraintConflicts(list: [NSConstraintConflict]) throws
+  func resolve(list: [NSConstraintConflict]) throws
 }
-class NSMigrationManager : NSObject {
+class NSMigrationManager : Object {
   init(sourceModel: NSManagedObjectModel, destinationModel: NSManagedObjectModel)
-  func migrateStoreFromURL(sourceURL: NSURL, type sStoreType: String, options sOptions: [NSObject : AnyObject]?, withMappingModel mappings: NSMappingModel?, toDestinationURL dURL: NSURL, destinationType dStoreType: String, destinationOptions dOptions: [NSObject : AnyObject]?) throws
+  func migrateStoreFrom(sourceURL: URL, type sStoreType: String, options sOptions: [Object : AnyObject]? = [:], withMappingModel mappings: NSMappingModel?, toDestinationURL dURL: URL, destinationType dStoreType: String, destinationOptions dOptions: [Object : AnyObject]? = [:]) throws
   var usesStoreSpecificMigrationManager: Bool
   func reset()
   var mappingModel: NSMappingModel { get }
@@ -612,15 +612,15 @@ class NSMigrationManager : NSObject {
   var destinationModel: NSManagedObjectModel { get }
   var sourceContext: NSManagedObjectContext { get }
   var destinationContext: NSManagedObjectContext { get }
-  func sourceEntityForEntityMapping(mEntity: NSEntityMapping) -> NSEntityDescription?
-  func destinationEntityForEntityMapping(mEntity: NSEntityMapping) -> NSEntityDescription?
+  func sourceEntityFor(mEntity: NSEntityMapping) -> NSEntityDescription?
+  func destinationEntityFor(mEntity: NSEntityMapping) -> NSEntityDescription?
   func associateSourceInstance(sourceInstance: NSManagedObject, withDestinationInstance destinationInstance: NSManagedObject, forEntityMapping entityMapping: NSEntityMapping)
   func destinationInstancesForEntityMappingNamed(mappingName: String, sourceInstances: [NSManagedObject]?) -> [NSManagedObject]
   func sourceInstancesForEntityMappingNamed(mappingName: String, destinationInstances: [NSManagedObject]?) -> [NSManagedObject]
   var currentEntityMapping: NSEntityMapping { get }
   var migrationProgress: Float { get }
-  var userInfo: [NSObject : AnyObject]?
-  func cancelMigrationWithError(error: NSError)
+  var userInfo: [Object : AnyObject]?
+  func cancelMigrationWithError(error: Error)
   init()
 }
 struct _migrationManagerFlags {
@@ -630,22 +630,22 @@ struct _migrationManagerFlags {
   init()
   init(_migrationWasCancelled: UInt32, _usesStoreSpecificMigrationManager: UInt32, _reservedMigrationManager: UInt32)
 }
-class NSPersistentStore : NSObject {
-  class func metadataForPersistentStoreWithURL(url: NSURL) throws -> [String : AnyObject]
-  class func setMetadata(metadata: [String : AnyObject]?, forPersistentStoreWithURL url: NSURL) throws
+class NSPersistentStore : Object {
+  class func metadataForPersistentStoreWith(url: URL) throws -> [String : AnyObject]
+  class func setMetadata(metadata: [String : AnyObject]?, forPersistentStoreWith url: URL) throws
   class func migrationManagerClass() -> AnyClass
-  init(persistentStoreCoordinator root: NSPersistentStoreCoordinator?, configurationName name: String?, URL url: NSURL, options: [NSObject : AnyObject]?)
+  init(persistentStoreCoordinator root: NSPersistentStoreCoordinator?, configurationName name: String?, url: URL, options: [Object : AnyObject]? = [:])
   func loadMetadata() throws
   weak var persistentStoreCoordinator: @sil_weak NSPersistentStoreCoordinator? { get }
   var configurationName: String { get }
-  var options: [NSObject : AnyObject]? { get }
-  var URL: NSURL?
+  var options: [Object : AnyObject]? { get }
+  var url: URL?
   var identifier: String!
   var type: String { get }
-  var readOnly: Bool
+  var isReadOnly: Bool
   var metadata: [String : AnyObject]!
-  func didAddToPersistentStoreCoordinator(coordinator: NSPersistentStoreCoordinator)
-  func willRemoveFromPersistentStoreCoordinator(coordinator: NSPersistentStoreCoordinator?)
+  func didAddTo(coordinator: NSPersistentStoreCoordinator)
+  func willRemoveFrom(coordinator: NSPersistentStoreCoordinator?)
 }
 struct _objectStoreFlags {
   var isReadOnly: UInt32
@@ -706,33 +706,33 @@ let NSPersistentStoreRemoveUbiquitousMetadataOption: String
 let NSPersistentStoreUbiquitousContainerIdentifierKey: String
 let NSPersistentStoreRebuildFromUbiquitousContentOption: String
 let NSPersistentStoreForceDestroyOption: String
-class NSPersistentStoreCoordinator : NSObject, NSLocking {
+class NSPersistentStoreCoordinator : Object, Locking {
   init(managedObjectModel model: NSManagedObjectModel)
   var managedObjectModel: NSManagedObjectModel { get }
   var persistentStores: [NSPersistentStore] { get }
   var name: String?
-  func persistentStoreForURL(URL: NSURL) -> NSPersistentStore?
-  func URLForPersistentStore(store: NSPersistentStore) -> NSURL
-  func setURL(url: NSURL, forPersistentStore store: NSPersistentStore) -> Bool
-  func addPersistentStoreWithType(storeType: String, configuration: String?, URL storeURL: NSURL?, options: [NSObject : AnyObject]?) throws -> NSPersistentStore
+  func persistentStoreFor(URL: URL) -> NSPersistentStore?
+  func urlFor(store: NSPersistentStore) -> URL
+  func setURL(url: URL, forPersistentStore store: NSPersistentStore) -> Bool
+  func addPersistentStoreWithType(storeType: String, configuration: String?, url storeURL: URL?, options: [Object : AnyObject]? = [:]) throws -> NSPersistentStore
   func removePersistentStore(store: NSPersistentStore) throws
   func setMetadata(metadata: [String : AnyObject]?, forPersistentStore store: NSPersistentStore)
-  func metadataForPersistentStore(store: NSPersistentStore) -> [String : AnyObject]
-  func managedObjectIDForURIRepresentation(url: NSURL) -> NSManagedObjectID?
-  func executeRequest(request: NSPersistentStoreRequest, withContext context: NSManagedObjectContext) throws -> AnyObject
-  class func registeredStoreTypes() -> [String : NSValue]
+  func metadataFor(store: NSPersistentStore) -> [String : AnyObject]
+  func managedObjectIDForURIRepresentation(url: URL) -> NSManagedObjectID?
+  func execute(request: NSPersistentStoreRequest, withContext context: NSManagedObjectContext) throws -> AnyObject
+  class func registeredStoreTypes() -> [String : Value]
   class func registerStoreClass(storeClass: AnyClass, forStoreType storeType: String)
-  class func metadataForPersistentStoreOfType(storeType: String, URL url: NSURL, options: [NSObject : AnyObject]?) throws -> [String : AnyObject]
-  class func setMetadata(metadata: [String : AnyObject]?, forPersistentStoreOfType storeType: String, URL url: NSURL, options: [NSObject : AnyObject]?) throws
-  class func metadataForPersistentStoreOfType(storeType: String?, URL url: NSURL) throws -> [String : AnyObject]
-  class func setMetadata(metadata: [String : AnyObject]?, forPersistentStoreOfType storeType: String?, URL url: NSURL) throws
-  class func elementsDerivedFromExternalRecordURL(fileURL: NSURL) -> [NSObject : AnyObject]
-  class func removeUbiquitousContentAndPersistentStoreAtURL(storeURL: NSURL, options: [NSObject : AnyObject]?) throws
-  func importStoreWithIdentifier(storeIdentifier: String?, fromExternalRecordsDirectory externalRecordsURL: NSURL, toURL destinationURL: NSURL, options: [NSObject : AnyObject]?, withType storeType: String) throws -> NSPersistentStore
-  func migratePersistentStore(store: NSPersistentStore, toURL URL: NSURL, options: [NSObject : AnyObject]?, withType storeType: String) throws -> NSPersistentStore
-  func destroyPersistentStoreAtURL(url: NSURL, withType storeType: String, options: [NSObject : AnyObject]?) throws
-  func replacePersistentStoreAtURL(destinationURL: NSURL, destinationOptions: [NSObject : AnyObject]?, withPersistentStoreFromURL sourceURL: NSURL, sourceOptions: [NSObject : AnyObject]?, storeType: String) throws
-  func performBlock(block: () -> Void)
+  class func metadataForPersistentStoreOfType(storeType: String, url: URL, options: [Object : AnyObject]? = [:]) throws -> [String : AnyObject]
+  class func setMetadata(metadata: [String : AnyObject]?, forPersistentStoreOfType storeType: String, url: URL, options: [Object : AnyObject]? = [:]) throws
+  class func metadataForPersistentStoreOfType(storeType: String?, url: URL) throws -> [String : AnyObject]
+  class func setMetadata(metadata: [String : AnyObject]?, forPersistentStoreOfType storeType: String?, url: URL) throws
+  class func elementsDerivedFromExternalRecord(fileURL: URL) -> [Object : AnyObject]
+  class func removeUbiquitousContentAndPersistentStoreAt(storeURL: URL, options: [Object : AnyObject]? = [:]) throws
+  func importStoreWithIdentifier(storeIdentifier: String?, fromExternalRecordsDirectory externalRecordsURL: URL, to destinationURL: URL, options: [Object : AnyObject]? = [:], withType storeType: String) throws -> NSPersistentStore
+  func migratePersistentStore(store: NSPersistentStore, to URL: URL, options: [Object : AnyObject]? = [:], withType storeType: String) throws -> NSPersistentStore
+  func destroyPersistentStoreAt(url: URL, withType storeType: String, options: [Object : AnyObject]? = [:]) throws
+  func replacePersistentStoreAt(destinationURL: URL, destinationOptions: [Object : AnyObject]? = [:], withPersistentStoreFrom sourceURL: URL, sourceOptions: [Object : AnyObject]? = [:], storeType: String) throws
+  func perform(block: () -> Void)
   func performBlockAndWait(block: () -> Void)
   func lock()
   func unlock()
@@ -753,18 +753,18 @@ enum NSPersistentStoreRequestType : UInt {
   case BatchUpdateRequestType
   case BatchDeleteRequestType
 }
-class NSPersistentStoreRequest : NSObject, NSCopying {
+class NSPersistentStoreRequest : Object, Copying {
   var affectedStores: [NSPersistentStore]?
   var requestType: NSPersistentStoreRequestType { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 typealias NSPersistentStoreAsynchronousFetchResultCompletionBlock = (NSAsynchronousFetchResult) -> Void
 class NSAsynchronousFetchRequest : NSPersistentStoreRequest {
   var fetchRequest: NSFetchRequest { get }
   var completionBlock: NSPersistentStoreAsynchronousFetchResultCompletionBlock? { get }
   var estimatedResultCount: Int
-  init(fetchRequest request: NSFetchRequest, completionBlock blk: NSPersistentStoreAsynchronousFetchResultCompletionBlock?)
+  init(fetchRequest request: NSFetchRequest, completionBlock blk: NSPersistentStoreAsynchronousFetchResultCompletionBlock? = nil)
   init()
 }
 enum NSBatchUpdateRequestResultType : UInt {
@@ -781,13 +781,13 @@ enum NSBatchDeleteRequestResultType : UInt {
   case ResultTypeObjectIDs
   case ResultTypeCount
 }
-class NSPersistentStoreResult : NSObject {
+class NSPersistentStoreResult : Object {
   init()
 }
 class NSPersistentStoreAsynchronousResult : NSPersistentStoreResult {
   var managedObjectContext: NSManagedObjectContext { get }
-  var operationError: NSError? { get }
-  var progress: NSProgress? { get }
+  var operationError: Error? { get }
+  var progress: Progress? { get }
   func cancel()
   init()
 }
@@ -806,25 +806,25 @@ class NSBatchDeleteResult : NSPersistentStoreResult {
   var resultType: NSBatchDeleteRequestResultType { get }
   init()
 }
-class NSPropertyDescription : NSObject, NSCoding, NSCopying {
+class NSPropertyDescription : Object, Coding, Copying {
   unowned(unsafe) var entity: @sil_unmanaged NSEntityDescription { get }
   var name: String
-  var optional: Bool
-  var transient: Bool
-  var validationPredicates: [NSPredicate] { get }
+  var isOptional: Bool
+  var isTransient: Bool
+  var validationPredicates: [Predicate] { get }
   var validationWarnings: [AnyObject] { get }
-  func setValidationPredicates(validationPredicates: [NSPredicate]?, withValidationWarnings validationWarnings: [String]?)
-  var userInfo: [NSObject : AnyObject]?
-  var indexed: Bool
-  @NSCopying var versionHash: NSData { get }
+  func setValidationPredicates(validationPredicates: [Predicate]?, withValidationWarnings validationWarnings: [String]?)
+  var userInfo: [Object : AnyObject]?
+  var isIndexed: Bool
+  @NSCopying var versionHash: Data { get }
   var versionHashModifier: String?
-  var indexedBySpotlight: Bool
-  var storedInExternalRecord: Bool
+  var isIndexedBySpotlight: Bool
+  var isStoredInExternalRecord: Bool
   var renamingIdentifier: String?
   init()
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 struct __propertyDescriptionFlags {
   var _isReadOnly: UInt32
@@ -840,10 +840,10 @@ struct __propertyDescriptionFlags {
   init()
   init(_isReadOnly: UInt32, _isTransient: UInt32, _isOptional: UInt32, _isIndexed: UInt32, _skipValidation: UInt32, _isIndexedBySpotlight: UInt32, _isStoredInExternalRecord: UInt32, _extraIvarsAreInDataBlob: UInt32, _isOrdered: UInt32, _reservedPropertyDescription: UInt32)
 }
-class NSPropertyMapping : NSObject {
+class NSPropertyMapping : Object {
   var name: String?
-  var valueExpression: NSExpression?
-  var userInfo: [NSObject : AnyObject]?
+  var valueExpression: Expression?
+  var userInfo: [Object : AnyObject]?
   init()
 }
 struct __propertyMappingFlags {
@@ -866,11 +866,11 @@ class NSRelationshipDescription : NSPropertyDescription {
   var maxCount: Int
   var minCount: Int
   var deleteRule: NSDeleteRule
-  var toMany: Bool { get }
-  @NSCopying var versionHash: NSData { get }
-  var ordered: Bool
+  var isToMany: Bool { get }
+  @NSCopying var versionHash: Data { get }
+  var isOrdered: Bool
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class NSSaveChangesRequest : NSPersistentStoreRequest {
   init(insertedObjects: Set<NSManagedObject>?, updatedObjects: Set<NSManagedObject>?, deletedObjects: Set<NSManagedObject>?, lockedObjects: Set<NSManagedObject>?)

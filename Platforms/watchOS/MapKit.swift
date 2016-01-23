@@ -1,17 +1,17 @@
 
-protocol MKAnnotation : NSObjectProtocol {
+protocol MKAnnotation : ObjectProtocol {
   var coordinate: CLLocationCoordinate2D { get }
   optional var title: String? { get }
   optional var subtitle: String? { get }
 }
-class MKDistanceFormatter : NSFormatter {
+class MKDistanceFormatter : Formatter {
   func stringFromDistance(distance: CLLocationDistance) -> String
-  func distanceFromString(distance: String) -> CLLocationDistance
-  @NSCopying var locale: NSLocale!
+  func distanceFrom(distance: String) -> CLLocationDistance
+  @NSCopying var locale: Locale!
   var units: MKDistanceFormatterUnits
   var unitStyle: MKDistanceFormatterUnitStyle
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 enum MKDistanceFormatterUnits : UInt {
   init?(rawValue: UInt)
@@ -100,23 +100,23 @@ func MKMapRectIntersectsRect(rect1: MKMapRect, _ rect2: MKMapRect) -> Bool
 func MKCoordinateRegionForMapRect(rect: MKMapRect) -> MKCoordinateRegion
 func MKMapRectSpans180thMeridian(rect: MKMapRect) -> Bool
 func MKMapRectRemainder(rect: MKMapRect) -> MKMapRect
-extension NSValue {
-   init(MKCoordinate coordinate: CLLocationCoordinate2D)
-   init(MKCoordinateSpan span: MKCoordinateSpan)
-  var MKCoordinateValue: CLLocationCoordinate2D { get }
-  var MKCoordinateSpanValue: MKCoordinateSpan { get }
+extension Value {
+   init(mkCoordinate coordinate: CLLocationCoordinate2D)
+   init(mkCoordinateSpan span: MKCoordinateSpan)
+  var mkCoordinateValue: CLLocationCoordinate2D { get }
+  var mkCoordinateSpanValue: MKCoordinateSpan { get }
 }
-class MKMapItem : NSObject {
+class MKMapItem : Object {
   var placemark: MKPlacemark { get }
   var isCurrentLocation: Bool { get }
   var name: String?
   var phoneNumber: String?
-  var url: NSURL?
-  @NSCopying var timeZone: NSTimeZone?
-  class func mapItemForCurrentLocation() -> MKMapItem
+  var url: URL?
+  @NSCopying var timeZone: TimeZone?
+  class func forCurrentLocation() -> MKMapItem
   init(placemark: MKPlacemark)
-  func openInMapsWithLaunchOptions(launchOptions: [String : AnyObject]?) -> Bool
-  class func openMapsWithItems(mapItems: [MKMapItem], launchOptions: [String : AnyObject]?) -> Bool
+  func openInMapsWithLaunchOptions(launchOptions: [String : AnyObject]? = [:]) -> Bool
+  class func openMapsWith(mapItems: [MKMapItem], launchOptions: [String : AnyObject]? = [:]) -> Bool
   init()
 }
 let MKLaunchOptionsDirectionsModeKey: String
@@ -131,7 +131,7 @@ class MKPlacemark : CLPlacemark, MKAnnotation {
   var countryCode: String? { get }
   init(placemark: CLPlacemark)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
   var coordinate: CLLocationCoordinate2D { get }
   var title: String? { get }
   var subtitle: String? { get }

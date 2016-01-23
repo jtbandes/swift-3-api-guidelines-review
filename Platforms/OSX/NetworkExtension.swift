@@ -12,42 +12,42 @@ enum NEAppProxyFlowError : Int {
   case Internal
 }
 let NEAppProxyErrorDomain: String
-class NEAppProxyFlow : NSObject {
-  func openWithLocalEndpoint(localEndpoint: NWHostEndpoint?, completionHandler: (NSError?) -> Void)
-  func closeReadWithError(error: NSError?)
-  func closeWriteWithError(error: NSError?)
+class NEAppProxyFlow : Object {
+  func openWithLocalEndpoint(localEndpoint: NWHostEndpoint?, completionHandler: (Error?) -> Void)
+  func closeReadWithError(error: Error?)
+  func closeWriteWithError(error: Error?)
   var metaData: NEFlowMetaData { get }
   init()
 }
-class NEFlowMetaData : NSObject {
-  var sourceAppUniqueIdentifier: NSData { get }
+class NEFlowMetaData : Object {
+  var sourceAppUniqueIdentifier: Data { get }
   var sourceAppSigningIdentifier: String { get }
   init()
 }
 class NEAppProxyProvider : NETunnelProvider {
-  func startProxyWithOptions(options: [String : AnyObject]?, completionHandler: (NSError?) -> Void)
-  func stopProxyWithReason(reason: NEProviderStopReason, completionHandler: () -> Void)
-  func cancelProxyWithError(error: NSError?)
+  func startProxy(options options: [String : AnyObject]? = [:], completionHandler: (Error?) -> Void)
+  func stopProxyWith(reason: NEProviderStopReason, completionHandler: () -> Void)
+  func cancelProxyWithError(error: Error?)
   func handleNewFlow(flow: NEAppProxyFlow) -> Bool
   init()
 }
 class NEAppProxyProviderManager : NETunnelProviderManager {
-  class func loadAllFromPreferencesWithCompletionHandler(completionHandler: ([NEAppProxyProviderManager]?, NSError?) -> Void)
+  class func loadAllFromPreferencesWithCompletionHandler(completionHandler: ([NEAppProxyProviderManager]?, Error?) -> Void)
   init()
 }
 class NEAppProxyTCPFlow : NEAppProxyFlow {
-  func readDataWithCompletionHandler(completionHandler: (NSData?, NSError?) -> Void)
-  func writeData(data: NSData, withCompletionHandler completionHandler: (NSError?) -> Void)
+  func readDataWithCompletionHandler(completionHandler: (Data?, Error?) -> Void)
+  func write(data: Data, withCompletionHandler completionHandler: (Error?) -> Void)
   var remoteEndpoint: NWEndpoint { get }
   init()
 }
 class NEAppProxyUDPFlow : NEAppProxyFlow {
-  func readDatagramsWithCompletionHandler(completionHandler: ([NSData]?, [NWEndpoint]?, NSError?) -> Void)
-  func writeDatagrams(datagrams: [NSData], sentByEndpoints remoteEndpoints: [NWEndpoint], completionHandler: (NSError?) -> Void)
+  func readDatagramsWithCompletionHandler(completionHandler: ([Data]?, [NWEndpoint]?, Error?) -> Void)
+  func writeDatagrams(datagrams: [Data], sentBy remoteEndpoints: [NWEndpoint], completionHandler: (Error?) -> Void)
   var localEndpoint: NWEndpoint? { get }
   init()
 }
-class NEAppRule : NSObject, NSSecureCoding, NSCopying {
+class NEAppRule : Object, SecureCoding, Copying {
   init(signingIdentifier: String, designatedRequirement: String)
   var matchSigningIdentifier: String { get }
   var matchDesignatedRequirement: String { get }
@@ -55,11 +55,11 @@ class NEAppRule : NSObject, NSSecureCoding, NSCopying {
   var matchDomains: [AnyObject]?
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class NEDNSSettings : NSObject, NSSecureCoding, NSCopying {
+class NEDNSSettings : Object, SecureCoding, Copying {
   init(servers: [String])
   var servers: [String] { get }
   var searchDomains: [String]?
@@ -68,9 +68,9 @@ class NEDNSSettings : NSObject, NSSecureCoding, NSCopying {
   var matchDomainsNoSearch: Bool
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 var NEFilterFlowBytesMax: UInt64 { get }
 enum NEFilterManagerError : Int {
@@ -83,36 +83,36 @@ enum NEFilterManagerError : Int {
 }
 let NEFilterErrorDomain: String
 let NEFilterConfigurationDidChangeNotification: String
-class NEFilterManager : NSObject {
-  class func sharedManager() -> NEFilterManager
-  func loadFromPreferencesWithCompletionHandler(completionHandler: (NSError?) -> Void)
-  func removeFromPreferencesWithCompletionHandler(completionHandler: (NSError?) -> Void)
-  func saveToPreferencesWithCompletionHandler(completionHandler: (NSError?) -> Void)
+class NEFilterManager : Object {
+  class func shared() -> NEFilterManager
+  func loadFromPreferencesWithCompletionHandler(completionHandler: (Error?) -> Void)
+  func removeFromPreferencesWithCompletionHandler(completionHandler: (Error?) -> Void)
+  func saveToPreferencesWithCompletionHandler(completionHandler: (Error?) -> Void)
   var localizedDescription: String?
   var providerConfiguration: NEFilterProviderConfiguration?
-  var enabled: Bool
+  var isEnabled: Bool
   init()
 }
 var NEFilterProviderRemediationURLFlowURLHostname: String { get }
 var NEFilterProviderRemediationURLFlowURL: String { get }
 var NEFilterProviderRemediationURLOrganization: String { get }
 var NEFilterProviderRemediationURLUsername: String { get }
-class NEFilterProviderConfiguration : NSObject, NSSecureCoding, NSCopying {
+class NEFilterProviderConfiguration : Object, SecureCoding, Copying {
   var filterBrowsers: Bool
   var filterSockets: Bool
   var vendorConfiguration: [String : AnyObject]?
   var serverAddress: String?
   var username: String?
   var organization: String?
-  @NSCopying var passwordReference: NSData?
-  @NSCopying var identityReference: NSData?
+  @NSCopying var passwordReference: Data?
+  @NSCopying var identityReference: Data?
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class NEIPv4Settings : NSObject, NSSecureCoding, NSCopying {
+class NEIPv4Settings : Object, SecureCoding, Copying {
   init(addresses: [String], subnetMasks: [String])
   var addresses: [String] { get }
   var subnetMasks: [String] { get }
@@ -120,11 +120,11 @@ class NEIPv4Settings : NSObject, NSSecureCoding, NSCopying {
   var excludedRoutes: [NEIPv4Route]?
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class NEIPv4Route : NSObject, NSSecureCoding, NSCopying {
+class NEIPv4Route : Object, SecureCoding, Copying {
   init(destinationAddress address: String, subnetMask: String)
   var destinationAddress: String { get }
   var destinationSubnetMask: String { get }
@@ -132,33 +132,33 @@ class NEIPv4Route : NSObject, NSSecureCoding, NSCopying {
   class func defaultRoute() -> NEIPv4Route
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class NEIPv6Settings : NSObject, NSSecureCoding, NSCopying {
-  init(addresses: [String], networkPrefixLengths: [NSNumber])
+class NEIPv6Settings : Object, SecureCoding, Copying {
+  init(addresses: [String], networkPrefixLengths: [Number])
   var addresses: [String] { get }
-  var networkPrefixLengths: [NSNumber] { get }
+  var networkPrefixLengths: [Number] { get }
   var includedRoutes: [NEIPv6Route]?
   var excludedRoutes: [NEIPv6Route]?
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class NEIPv6Route : NSObject, NSSecureCoding, NSCopying {
-  init(destinationAddress address: String, networkPrefixLength: NSNumber)
+class NEIPv6Route : Object, SecureCoding, Copying {
+  init(destinationAddress address: String, networkPrefixLength: Number)
   var destinationAddress: String { get }
-  var destinationNetworkPrefixLength: NSNumber { get }
+  var destinationNetworkPrefixLength: Number { get }
   var gatewayAddress: String?
   class func defaultRoute() -> NEIPv6Route
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 enum NEOnDemandRuleAction : Int {
   init?(rawValue: Int)
@@ -175,35 +175,35 @@ enum NEOnDemandRuleInterfaceType : Int {
   case Ethernet
   case WiFi
 }
-class NEOnDemandRule : NSObject, NSSecureCoding, NSCopying {
+class NEOnDemandRule : Object, SecureCoding, Copying {
   var action: NEOnDemandRuleAction { get }
-  var DNSSearchDomainMatch: [String]?
-  var DNSServerAddressMatch: [String]?
+  var dnsSearchDomainMatch: [String]?
+  var dnsServerAddressMatch: [String]?
   var interfaceTypeMatch: NEOnDemandRuleInterfaceType
-  var SSIDMatch: [String]?
-  @NSCopying var probeURL: NSURL?
+  var ssidMatch: [String]?
+  @NSCopying var probeURL: URL?
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 class NEOnDemandRuleConnect : NEOnDemandRule {
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class NEOnDemandRuleDisconnect : NEOnDemandRule {
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class NEOnDemandRuleIgnore : NEOnDemandRule {
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class NEOnDemandRuleEvaluateConnection : NEOnDemandRule {
   var connectionRules: [NEEvaluateConnectionRule]?
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 enum NEEvaluateConnectionRuleAction : Int {
   init?(rawValue: Int)
@@ -211,39 +211,39 @@ enum NEEvaluateConnectionRuleAction : Int {
   case ConnectIfNeeded
   case NeverConnect
 }
-class NEEvaluateConnectionRule : NSObject, NSSecureCoding, NSCopying {
+class NEEvaluateConnectionRule : Object, SecureCoding, Copying {
   init(matchDomains domains: [String], andAction action: NEEvaluateConnectionRuleAction)
   var action: NEEvaluateConnectionRuleAction { get }
   var matchDomains: [String] { get }
   var useDNSServers: [String]?
-  @NSCopying var probeURL: NSURL?
+  @NSCopying var probeURL: URL?
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class NEPacketTunnelFlow : NSObject {
-  func readPacketsWithCompletionHandler(completionHandler: ([NSData], [NSNumber]) -> Void)
-  func writePackets(packets: [NSData], withProtocols protocols: [NSNumber]) -> Bool
+class NEPacketTunnelFlow : Object {
+  func readPacketsWithCompletionHandler(completionHandler: ([Data], [Number]) -> Void)
+  func writePackets(packets: [Data], withProtocols protocols: [Number]) -> Bool
   init()
 }
 class NEPacketTunnelNetworkSettings : NETunnelNetworkSettings {
-  @NSCopying var IPv4Settings: NEIPv4Settings?
-  @NSCopying var IPv6Settings: NEIPv6Settings?
-  @NSCopying var tunnelOverheadBytes: NSNumber?
-  @NSCopying var MTU: NSNumber?
+  @NSCopying var iPv4Settings: NEIPv4Settings?
+  @NSCopying var iPv6Settings: NEIPv6Settings?
+  @NSCopying var tunnelOverheadBytes: Number?
+  @NSCopying var mtu: Number?
   init(tunnelRemoteAddress address: String)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class NEPacketTunnelProvider : NETunnelProvider {
-  func startTunnelWithOptions(options: [String : NSObject]?, completionHandler: (NSError?) -> Void)
-  func stopTunnelWithReason(reason: NEProviderStopReason, completionHandler: () -> Void)
-  func cancelTunnelWithError(error: NSError?)
+  func startTunnel(options options: [String : Object]? = [:], completionHandler: (Error?) -> Void)
+  func stopTunnelWith(reason: NEProviderStopReason, completionHandler: () -> Void)
+  func cancelTunnelWithError(error: Error?)
   var packetFlow: NEPacketTunnelFlow { get }
-  func createTCPConnectionThroughTunnelToEndpoint(remoteEndpoint: NWEndpoint, enableTLS: Bool, TLSParameters: NWTLSParameters?, delegate: AnyObject?) -> NWTCPConnection
-  func createUDPSessionThroughTunnelToEndpoint(remoteEndpoint: NWEndpoint, fromEndpoint localEndpoint: NWHostEndpoint?) -> NWUDPSession
+  func createTCPConnectionThroughTunnelTo(remoteEndpoint: NWEndpoint, enableTLS: Bool, tlsParameters TLSParameters: NWTLSParameters?, delegate: AnyObject?) -> NWTCPConnection
+  func createUDPSessionThroughTunnelTo(remoteEndpoint: NWEndpoint, from localEndpoint: NWHostEndpoint?) -> NWUDPSession
   init()
 }
 enum NEProviderStopReason : Int {
@@ -265,15 +265,15 @@ enum NEProviderStopReason : Int {
   case UserSwitch
   case ConnectionFailed
 }
-class NEProvider : NSObject {
+class NEProvider : Object {
   func sleepWithCompletionHandler(completionHandler: () -> Void)
   func wake()
-  func createTCPConnectionToEndpoint(remoteEndpoint: NWEndpoint, enableTLS: Bool, TLSParameters: NWTLSParameters?, delegate: AnyObject?) -> NWTCPConnection
-  func createUDPSessionToEndpoint(remoteEndpoint: NWEndpoint, fromEndpoint localEndpoint: NWHostEndpoint?) -> NWUDPSession
+  func createTCPConnectionTo(remoteEndpoint: NWEndpoint, enableTLS: Bool, tlsParameters TLSParameters: NWTLSParameters?, delegate: AnyObject?) -> NWTCPConnection
+  func createUDPSessionTo(remoteEndpoint: NWEndpoint, from localEndpoint: NWHostEndpoint?) -> NWUDPSession
   var defaultPath: NWPath? { get }
   init()
 }
-class NEProxyServer : NSObject, NSSecureCoding, NSCopying {
+class NEProxyServer : Object, SecureCoding, Copying {
   init(address: String, port: Int)
   var address: String { get }
   var port: Int { get }
@@ -282,37 +282,37 @@ class NEProxyServer : NSObject, NSSecureCoding, NSCopying {
   var password: String?
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class NEProxySettings : NSObject, NSSecureCoding, NSCopying {
+class NEProxySettings : Object, SecureCoding, Copying {
   var autoProxyConfigurationEnabled: Bool
-  @NSCopying var proxyAutoConfigurationURL: NSURL?
+  @NSCopying var proxyAutoConfigurationURL: URL?
   var proxyAutoConfigurationJavaScript: String?
-  var HTTPEnabled: Bool
-  @NSCopying var HTTPServer: NEProxyServer?
-  var HTTPSEnabled: Bool
-  @NSCopying var HTTPSServer: NEProxyServer?
+  var httpEnabled: Bool
+  @NSCopying var httpServer: NEProxyServer?
+  var httpsEnabled: Bool
+  @NSCopying var httpsServer: NEProxyServer?
   var excludeSimpleHostnames: Bool
   var exceptionList: [String]?
   var matchDomains: [String]?
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class NETunnelNetworkSettings : NSObject, NSSecureCoding, NSCopying {
+class NETunnelNetworkSettings : Object, SecureCoding, Copying {
   init(tunnelRemoteAddress address: String)
   var tunnelRemoteAddress: String { get }
-  @NSCopying var DNSSettings: NEDNSSettings?
+  @NSCopying var dnsSettings: NEDNSSettings?
   @NSCopying var proxySettings: NEProxySettings?
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 enum NETunnelProviderError : Int {
   init?(rawValue: Int)
@@ -329,8 +329,8 @@ enum NETunnelProviderRoutingMethod : Int {
 }
 let NETunnelProviderErrorDomain: String
 class NETunnelProvider : NEProvider {
-  func handleAppMessage(messageData: NSData, completionHandler: ((NSData?) -> Void)?)
-  func setTunnelNetworkSettings(tunnelNetworkSettings: NETunnelNetworkSettings?, completionHandler: ((NSError?) -> Void)?)
+  func handleAppMessage(messageData: Data, completionHandler: ((Data?) -> Void)? = nil)
+  func setTunnelNetworkSettings(tunnelNetworkSettings: NETunnelNetworkSettings?, completionHandler: ((Error?) -> Void)? = nil)
   var protocolConfiguration: NEVPNProtocol { get }
   var appRules: [NEAppRule]? { get }
   var routingMethod: NETunnelProviderRoutingMethod { get }
@@ -338,7 +338,7 @@ class NETunnelProvider : NEProvider {
   init()
 }
 class NETunnelProviderManager : NEVPNManager {
-  class func loadAllFromPreferencesWithCompletionHandler(completionHandler: ([NETunnelProviderManager]?, NSError?) -> Void)
+  class func loadAllFromPreferencesWithCompletionHandler(completionHandler: ([NETunnelProviderManager]?, Error?) -> Void)
   func copyAppRules() -> [NEAppRule]?
   var routingMethod: NETunnelProviderRoutingMethod { get }
   init()
@@ -347,12 +347,12 @@ class NETunnelProviderProtocol : NEVPNProtocol {
   var providerConfiguration: [String : AnyObject]?
   var providerBundleIdentifier: String?
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class NETunnelProviderSession : NEVPNConnection {
-  func startTunnelWithOptions(options: [String : AnyObject]?) throws
+  func startTunnel(options options: [String : AnyObject]? = [:]) throws
   func stopTunnel()
-  func sendProviderMessage(messageData: NSData, responseHandler: ((NSData?) -> Void)?) throws
+  func sendProviderMessage(messageData: Data, responseHandler: ((Data?) -> Void)? = nil) throws
   init()
 }
 enum NEVPNStatus : Int {
@@ -368,12 +368,12 @@ enum NEVPNStatus : Int {
 let NEVPNStatusDidChangeNotification: String
 let NEVPNConnectionStartOptionUsername: String
 let NEVPNConnectionStartOptionPassword: String
-class NEVPNConnection : NSObject {
+class NEVPNConnection : Object {
   func startVPNTunnel() throws
-  func startVPNTunnelWithOptions(options: [String : NSObject]?) throws
+  func startVPNTunnel(options options: [String : Object]? = [:]) throws
   func stopVPNTunnel()
   var status: NEVPNStatus { get }
-  var connectedDate: NSDate? { get }
+  var connectedDate: Date? { get }
   init()
 }
 enum NEVPNError : Int {
@@ -388,35 +388,35 @@ enum NEVPNError : Int {
 }
 let NEVPNErrorDomain: String
 let NEVPNConfigurationChangeNotification: String
-class NEVPNManager : NSObject {
-  class func sharedManager() -> NEVPNManager
-  func loadFromPreferencesWithCompletionHandler(completionHandler: (NSError?) -> Void)
-  func removeFromPreferencesWithCompletionHandler(completionHandler: ((NSError?) -> Void)?)
-  func saveToPreferencesWithCompletionHandler(completionHandler: ((NSError?) -> Void)?)
+class NEVPNManager : Object {
+  class func shared() -> NEVPNManager
+  func loadFromPreferencesWithCompletionHandler(completionHandler: (Error?) -> Void)
+  func removeFromPreferences(completionHandler completionHandler: ((Error?) -> Void)? = nil)
+  func saveToPreferences(completionHandler completionHandler: ((Error?) -> Void)? = nil)
   func setAuthorization(authorization: AuthorizationRef)
   var onDemandRules: [NEOnDemandRule]?
-  var onDemandEnabled: Bool
+  var isOnDemandEnabled: Bool
   var localizedDescription: String?
   var `protocol`: NEVPNProtocol?
   var protocolConfiguration: NEVPNProtocol?
   var connection: NEVPNConnection { get }
-  var enabled: Bool
+  var isEnabled: Bool
   init()
 }
-class NEVPNProtocol : NSObject, NSCopying, NSSecureCoding {
+class NEVPNProtocol : Object, Copying, SecureCoding {
   var serverAddress: String?
   var username: String?
-  @NSCopying var passwordReference: NSData?
-  @NSCopying var identityReference: NSData?
-  @NSCopying var identityData: NSData?
+  @NSCopying var passwordReference: Data?
+  @NSCopying var identityReference: Data?
+  @NSCopying var identityData: Data?
   var identityDataPassword: String?
   var disconnectOnSleep: Bool
   @NSCopying var proxySettings: NEProxySettings?
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 enum NEVPNIKEv2EncryptionAlgorithm : Int {
   init?(rawValue: Int)
@@ -469,16 +469,16 @@ enum NEVPNIKEv2CertificateType : Int {
   case ECDSA384
   case ECDSA521
 }
-class NEVPNIKEv2SecurityAssociationParameters : NSObject, NSSecureCoding, NSCopying {
+class NEVPNIKEv2SecurityAssociationParameters : Object, SecureCoding, Copying {
   var encryptionAlgorithm: NEVPNIKEv2EncryptionAlgorithm
   var integrityAlgorithm: NEVPNIKEv2IntegrityAlgorithm
   var diffieHellmanGroup: NEVPNIKEv2DiffieHellmanGroup
   var lifetimeMinutes: Int32
   init()
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 class NEVPNProtocolIKEv2 : NEVPNProtocolIPSec {
   var deadPeerDetectionRate: NEVPNIKEv2DeadPeerDetectionRate
@@ -486,7 +486,7 @@ class NEVPNProtocolIKEv2 : NEVPNProtocolIPSec {
   var serverCertificateCommonName: String?
   var certificateType: NEVPNIKEv2CertificateType
   var useConfigurationAttributeInternalIPSubnet: Bool
-  var IKESecurityAssociationParameters: NEVPNIKEv2SecurityAssociationParameters { get }
+  var ikeSecurityAssociationParameters: NEVPNIKEv2SecurityAssociationParameters { get }
   var childSecurityAssociationParameters: NEVPNIKEv2SecurityAssociationParameters { get }
   var disableMOBIKE: Bool
   var disableRedirect: Bool
@@ -494,7 +494,7 @@ class NEVPNProtocolIKEv2 : NEVPNProtocolIPSec {
   var enableRevocationCheck: Bool
   var strictRevocationCheck: Bool
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 enum NEVPNIKEAuthenticationMethod : Int {
   init?(rawValue: Int)
@@ -506,11 +506,11 @@ enum NEVPNIKEAuthenticationMethod : Int {
 class NEVPNProtocolIPSec : NEVPNProtocol {
   var authenticationMethod: NEVPNIKEAuthenticationMethod
   var useExtendedAuthentication: Bool
-  @NSCopying var sharedSecretReference: NSData?
+  @NSCopying var sharedSecretReference: Data?
   var localIdentifier: String?
   var remoteIdentifier: String?
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 class NWBonjourServiceEndpoint : NWEndpoint {
   convenience init(name: String, type: String, domain: String)
@@ -519,7 +519,7 @@ class NWBonjourServiceEndpoint : NWEndpoint {
   var domain: String { get }
   init()
 }
-class NWEndpoint : NSObject {
+class NWEndpoint : Object {
   init()
 }
 class NWHostEndpoint : NWEndpoint {
@@ -536,10 +536,10 @@ enum NWPathStatus : Int {
   case Unsatisfied
   case Satisfiable
 }
-class NWPath : NSObject {
+class NWPath : Object {
   var status: NWPathStatus { get }
-  var expensive: Bool { get }
-  func isEqualToPath(path: NWPath) -> Bool
+  var isExpensive: Bool { get }
+  func isEqualTo(path: NWPath) -> Bool
   init()
 }
 enum NWTCPConnectionState : Int {
@@ -552,33 +552,33 @@ enum NWTCPConnectionState : Int {
   case Disconnected
   case Cancelled
 }
-class NWTCPConnection : NSObject {
-  init(upgradeForConnection connection: NWTCPConnection)
+class NWTCPConnection : Object {
+  init(upgradeFor connection: NWTCPConnection)
   var state: NWTCPConnectionState { get }
-  var viable: Bool { get }
+  var isViable: Bool { get }
   var hasBetterPath: Bool { get }
   var endpoint: NWEndpoint { get }
   var connectedPath: NWPath? { get }
   var localAddress: NWEndpoint? { get }
   var remoteAddress: NWEndpoint? { get }
-  var txtRecord: NSData? { get }
-  var error: NSError? { get }
+  var txtRecord: Data? { get }
+  var error: Error? { get }
   func cancel()
-  func readLength(length: Int, completionHandler completion: (NSData?, NSError?) -> Void)
-  func readMinimumLength(minimum: Int, maximumLength maximum: Int, completionHandler completion: (NSData?, NSError?) -> Void)
-  func write(data: NSData, completionHandler completion: (NSError?) -> Void)
+  func readLength(length: Int, completionHandler completion: (Data?, Error?) -> Void)
+  func readMinimumLength(minimum: Int, maximumLength maximum: Int, completionHandler completion: (Data?, Error?) -> Void)
+  func write(data: Data, completionHandler completion: (Error?) -> Void)
   func writeClose()
   init()
 }
-protocol NWTCPConnectionAuthenticationDelegate : NSObjectProtocol {
-  optional func shouldProvideIdentityForConnection(connection: NWTCPConnection) -> Bool
-  optional func provideIdentityForConnection(connection: NWTCPConnection, completionHandler completion: (SecIdentity, [AnyObject]) -> Void)
-  optional func shouldEvaluateTrustForConnection(connection: NWTCPConnection) -> Bool
-  optional func evaluateTrustForConnection(connection: NWTCPConnection, peerCertificateChain: [AnyObject], completionHandler completion: (SecTrust) -> Void)
+protocol NWTCPConnectionAuthenticationDelegate : ObjectProtocol {
+  optional func shouldProvideIdentityFor(connection: NWTCPConnection) -> Bool
+  optional func provideIdentityFor(connection: NWTCPConnection, completionHandler completion: (SecIdentity, [AnyObject]) -> Void)
+  optional func shouldEvaluateTrustFor(connection: NWTCPConnection) -> Bool
+  optional func evaluateTrustFor(connection: NWTCPConnection, peerCertificateChain: [AnyObject], completionHandler completion: (SecTrust) -> Void)
 }
-class NWTLSParameters : NSObject {
-  @NSCopying var TLSSessionID: NSData?
-  var SSLCipherSuites: Set<NSNumber>?
+class NWTLSParameters : Object {
+  @NSCopying var tlsSessionID: Data?
+  var sslCipherSuites: Set<Number>?
   var minimumSSLProtocolVersion: Int
   var maximumSSLProtocolVersion: Int
   init()
@@ -593,19 +593,19 @@ enum NWUDPSessionState : Int {
   case Failed
   case Cancelled
 }
-class NWUDPSession : NSObject {
-  init(upgradeForSession session: NWUDPSession)
+class NWUDPSession : Object {
+  init(upgradeFor session: NWUDPSession)
   var state: NWUDPSessionState { get }
   var endpoint: NWEndpoint { get }
   var resolvedEndpoint: NWEndpoint? { get }
-  var viable: Bool { get }
+  var isViable: Bool { get }
   var hasBetterPath: Bool { get }
   var currentPath: NWPath? { get }
   func tryNextResolvedEndpoint()
   var maximumDatagramLength: Int { get }
-  func setReadHandler(handler: ([NSData]?, NSError?) -> Void, maxDatagrams: Int)
-  func writeMultipleDatagrams(datagramArray: [NSData], completionHandler: (NSError?) -> Void)
-  func writeDatagram(datagram: NSData, completionHandler: (NSError?) -> Void)
+  func setReadHandler(handler: ([Data]?, Error?) -> Void, maxDatagrams: Int)
+  func writeMultipleDatagrams(datagramArray: [Data], completionHandler: (Error?) -> Void)
+  func writeDatagram(datagram: Data, completionHandler: (Error?) -> Void)
   func cancel()
   init()
 }

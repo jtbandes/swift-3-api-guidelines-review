@@ -1,24 +1,24 @@
 
-class TVApplicationControllerContext : NSObject, NSCopying {
-  @NSCopying var javaScriptApplicationURL: NSURL
+class TVApplicationControllerContext : Object, Copying {
+  @NSCopying var javaScriptApplicationURL: URL
   var storageIdentifier: String?
   var launchOptions: [String : AnyObject]
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-protocol TVApplicationControllerDelegate : NSObjectProtocol {
-  optional func appController(appController: TVApplicationController, evaluateAppJavaScriptInContext jsContext: JSContext)
-  optional func appController(appController: TVApplicationController, didFinishLaunchingWithOptions options: [String : AnyObject]?)
-  optional func appController(appController: TVApplicationController, didFailWithError error: NSError)
-  optional func appController(appController: TVApplicationController, didStopWithOptions options: [String : AnyObject]?)
+protocol TVApplicationControllerDelegate : ObjectProtocol {
+  optional func appController(appController: TVApplicationController, evaluateAppJavaScriptIn jsContext: JSContext)
+  optional func appController(appController: TVApplicationController, didFinishLaunchingWithOptions options: [String : AnyObject]? = [:])
+  optional func appController(appController: TVApplicationController, didFailWithError error: Error)
+  optional func appController(appController: TVApplicationController, didStopWithOptions options: [String : AnyObject]? = [:])
 }
-class TVApplicationController : NSObject {
+class TVApplicationController : Object {
   init(context: TVApplicationControllerContext, window: UIWindow?, delegate: TVApplicationControllerDelegate?)
   var window: UIWindow? { get }
   var context: TVApplicationControllerContext { get }
   weak var delegate: @sil_weak TVApplicationControllerDelegate? { get }
   var navigationController: UINavigationController { get }
-  func evaluateInJavaScriptContext(evaluation: (JSContext) -> Void, completion: ((Bool) -> Void)?)
+  func evaluateInJavaScriptContext(evaluation: (JSContext) -> Void, completion: ((Bool) -> Void)? = nil)
   func stop()
 }
 enum TVColorType : Int {
@@ -29,15 +29,15 @@ enum TVColorType : Int {
   case LinearGradientTopToBottom
   case LinearGradientLeftToRight
 }
-class TVColor : NSObject, NSCopying {
+class TVColor : Object, Copying {
   var colorType: TVColorType { get }
   var color: UIColor? { get }
   var gradientColors: [UIColor]? { get }
-  var gradientPoints: [NSNumber]? { get }
+  var gradientPoints: [Number]? { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class TVElementFactory : NSObject {
+class TVElementFactory : Object {
   class func registerViewElementClass(elementClass: AnyClass, forElementName elementName: String)
   init()
 }
@@ -50,23 +50,23 @@ enum TVImageType : Int {
   case Hero
 }
 class TVImageElement : TVViewElement {
-  var URL: NSURL? { get }
-  var srcset: [String : NSURL]? { get }
+  var url: URL? { get }
+  var srcset: [String : URL]? { get }
   var imageType: TVImageType { get }
   init()
 }
-protocol TVInterfaceCreating : NSObjectProtocol {
-  optional func viewForElement(element: TVViewElement, existingView: UIView?) -> UIView?
-  optional func viewControllerForElement(element: TVViewElement, existingViewController: UIViewController?) -> UIViewController?
-  optional func URLForResource(resourceName: String) -> NSURL?
+protocol TVInterfaceCreating : ObjectProtocol {
+  optional func viewFor(element: TVViewElement, existing existingView: UIView?) -> UIView?
+  optional func viewControllerFor(element: TVViewElement, existing existingViewController: UIViewController?) -> UIViewController?
+  optional func urlForResource(resourceName: String) -> URL?
 }
-class TVInterfaceFactory : NSObject, TVInterfaceCreating {
-  class func sharedInterfaceFactory() -> Self
+class TVInterfaceFactory : Object, TVInterfaceCreating {
+  class func shared() -> Self
   var extendedInterfaceCreator: TVInterfaceCreating?
   init()
-  func viewForElement(element: TVViewElement, existingView: UIView?) -> UIView?
-  func viewControllerForElement(element: TVViewElement, existingViewController: UIViewController?) -> UIViewController?
-  func URLForResource(resourceName: String) -> NSURL?
+  func viewFor(element: TVViewElement, existing existingView: UIView?) -> UIView?
+  func viewControllerFor(element: TVViewElement, existing existingViewController: UIViewController?) -> UIViewController?
+  func urlForResource(resourceName: String) -> URL?
 }
 let TVMLKitErrorDomain: String
 enum TVMLKitError : Int {
@@ -89,7 +89,7 @@ enum TVViewElementStyleType : Int {
   case Transform
   case EdgeInsets
 }
-class TVStyleFactory : NSObject {
+class TVStyleFactory : Object {
   class func registerStyle(styleName: String, withType type: TVViewElementStyleType, inherited: Bool)
   init()
 }
@@ -103,10 +103,10 @@ enum TVTextElementStyle : Int {
   case Decoration
 }
 class TVTextElement : TVViewElement {
-  var attributedText: NSAttributedString? { get }
+  var attributedText: AttributedString? { get }
   var textStyle: TVTextElementStyle { get }
-  func attributedStringWithFont(font: UIFont) -> NSAttributedString
-  func attributedStringWithFont(font: UIFont, foregroundColor: UIColor?, textAlignment alignment: NSTextAlignment) -> NSAttributedString
+  func attributedStringWith(font: UIFont) -> AttributedString
+  func attributedStringWith(font: UIFont, foregroundColor: UIColor?, textAlignment alignment: NSTextAlignment) -> AttributedString
   init()
 }
 enum TVElementEventType : Int {
@@ -132,21 +132,21 @@ enum TVElementResettableProperty : Int {
   case UpdateType
   case AutoHighlightIdentifier
 }
-class TVViewElement : NSObject, NSCopying {
+class TVViewElement : Object, Copying {
   var elementIdentifier: String { get }
   var elementName: String { get }
-  weak var parentViewElement: @sil_weak TVViewElement? { get }
+  weak var parent: @sil_weak TVViewElement? { get }
   var childViewElements: [TVViewElement]? { get }
   var attributes: [String : String]? { get }
   var style: TVViewElementStyle? { get }
   var autoHighlightIdentifier: String? { get }
-  var disabled: Bool
+  var isDisabled: Bool
   var updateType: TVElementUpdateType { get }
   func resetProperty(resettableProperty: TVElementResettableProperty)
-  func dispatchEventOfType(type: TVElementEventType, canBubble: Bool, cancellable isCancellable: Bool, extraInfo: [String : AnyObject]?, completion: ((Bool, Bool) -> Void)?)
-  func dispatchEventWithName(eventName: String, canBubble: Bool, cancellable isCancellable: Bool, extraInfo: [String : AnyObject]?, completion: ((Bool, Bool) -> Void)?)
+  func dispatchEventOf(type: TVElementEventType, canBubble: Bool, cancellable isCancellable: Bool, extraInfo: [String : AnyObject]?, completion: ((Bool, Bool) -> Void)? = nil)
+  func dispatchEventWithName(eventName: String, canBubble: Bool, cancellable isCancellable: Bool, extraInfo: [String : AnyObject]?, completion: ((Bool, Bool) -> Void)? = nil)
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 enum TVElementAlignment : Int {
   init?(rawValue: Int)
@@ -180,7 +180,7 @@ enum TVElementPosition : Int {
   case Header
   case Footer
 }
-class TVViewElementStyle : NSObject, NSCopying {
+class TVViewElementStyle : Object, Copying {
   func valueForStyleProperty(name: String) -> AnyObject?
   var backgroundColor: TVColor? { get }
   var color: TVColor? { get }
@@ -208,5 +208,5 @@ class TVViewElementStyle : NSObject, NSCopying {
   var textStyle: String? { get }
   var tintColor: TVColor? { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }

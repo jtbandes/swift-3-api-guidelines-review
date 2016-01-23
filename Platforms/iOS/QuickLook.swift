@@ -7,26 +7,26 @@ class QLPreviewController : UIViewController {
   var currentPreviewItemIndex: Int
   var currentPreviewItem: QLPreviewItem? { get }
   weak var delegate: @sil_weak QLPreviewControllerDelegate?
-  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder aDecoder: NSCoder)
+  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
 protocol QLPreviewControllerDataSource {
-  func numberOfPreviewItemsInPreviewController(controller: QLPreviewController) -> Int
-  func previewController(controller: QLPreviewController, previewItemAtIndex index: Int) -> QLPreviewItem
+  func numberOfPreviewItemsIn(controller: QLPreviewController) -> Int
+  func previewController(controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem
 }
-protocol QLPreviewControllerDelegate : NSObjectProtocol {
+protocol QLPreviewControllerDelegate : ObjectProtocol {
   optional func previewControllerWillDismiss(controller: QLPreviewController)
   optional func previewControllerDidDismiss(controller: QLPreviewController)
-  optional func previewController(controller: QLPreviewController, shouldOpenURL url: NSURL, forPreviewItem item: QLPreviewItem) -> Bool
-  optional func previewController(controller: QLPreviewController, frameForPreviewItem item: QLPreviewItem, inSourceView view: AutoreleasingUnsafeMutablePointer<UIView?>) -> CGRect
-  optional func previewController(controller: QLPreviewController, transitionImageForPreviewItem item: QLPreviewItem, contentRect: UnsafeMutablePointer<CGRect>) -> UIImage
+  optional func previewController(controller: QLPreviewController, shouldOpen url: URL, forPreviewItem item: QLPreviewItem) -> Bool
+  optional func previewController(controller: QLPreviewController, frameFor item: QLPreviewItem, inSourceView view: AutoreleasingUnsafeMutablePointer<UIView?>) -> CGRect
+  optional func previewController(controller: QLPreviewController, transitionImageFor item: QLPreviewItem, contentRect: UnsafeMutablePointer<CGRect>) -> UIImage
 }
-protocol QLPreviewItem : NSObjectProtocol {
-  var previewItemURL: NSURL { get }
+protocol QLPreviewItem : ObjectProtocol {
+  var previewItemURL: URL { get }
   optional var previewItemTitle: String? { get }
 }
-extension NSURL : QLPreviewItem {
-  var previewItemURL: NSURL { get }
+extension URL : QLPreviewItem {
+  var previewItemURL: URL { get }
   var previewItemTitle: String? { get }
 }

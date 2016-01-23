@@ -1,17 +1,17 @@
 
-class WKBackForwardList : NSObject {
+class WKBackForwardList : Object {
   var currentItem: WKBackForwardListItem? { get }
   var backItem: WKBackForwardListItem? { get }
   var forwardItem: WKBackForwardListItem? { get }
-  func itemAtIndex(index: Int) -> WKBackForwardListItem?
+  func itemAt(index: Int) -> WKBackForwardListItem?
   var backList: [WKBackForwardListItem] { get }
   var forwardList: [WKBackForwardListItem] { get }
   init()
 }
-class WKBackForwardListItem : NSObject {
-  @NSCopying var URL: NSURL { get }
+class WKBackForwardListItem : Object {
+  @NSCopying var url: URL { get }
   var title: String? { get }
-  @NSCopying var initialURL: NSURL { get }
+  @NSCopying var initialURL: URL { get }
   init()
 }
 let WKErrorDomain: String
@@ -29,14 +29,14 @@ extension WKErrorCode : _BridgedNSError {
   typealias RawValue = Int
 }
 var WK_API_ENABLED: Int32 { get }
-class WKFrameInfo : NSObject, NSCopying {
-  var mainFrame: Bool { get }
-  @NSCopying var request: NSURLRequest { get }
+class WKFrameInfo : Object, Copying {
+  var isMainFrame: Bool { get }
+  @NSCopying var request: URLRequest { get }
   var securityOrigin: WKSecurityOrigin { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class WKNavigation : NSObject {
+class WKNavigation : Object {
   init()
 }
 enum WKNavigationType : Int {
@@ -49,11 +49,11 @@ enum WKNavigationType : Int {
   case FormResubmitted
   case Other
 }
-class WKNavigationAction : NSObject {
+class WKNavigationAction : Object {
   @NSCopying var sourceFrame: WKFrameInfo { get }
   @NSCopying var targetFrame: WKFrameInfo? { get }
   var navigationType: WKNavigationType { get }
-  @NSCopying var request: NSURLRequest { get }
+  @NSCopying var request: URLRequest { get }
   init()
 }
 enum WKNavigationActionPolicy : Int {
@@ -68,60 +68,60 @@ enum WKNavigationResponsePolicy : Int {
   case Cancel
   case Allow
 }
-protocol WKNavigationDelegate : NSObjectProtocol {
-  optional func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void)
-  optional func webView(webView: WKWebView, decidePolicyForNavigationResponse navigationResponse: WKNavigationResponse, decisionHandler: (WKNavigationResponsePolicy) -> Void)
+protocol WKNavigationDelegate : ObjectProtocol {
+  optional func webView(webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void)
+  optional func webView(webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: (WKNavigationResponsePolicy) -> Void)
   optional func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!)
   optional func webView(webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!)
-  optional func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError)
-  optional func webView(webView: WKWebView, didCommitNavigation navigation: WKNavigation!)
+  optional func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error)
+  optional func webView(webView: WKWebView, didCommit navigation: WKNavigation!)
   optional func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!)
-  optional func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError)
-  optional func webView(webView: WKWebView, didReceiveAuthenticationChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void)
+  optional func webView(webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error)
+  optional func webView(webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: (URLSessionAuthChallengeDisposition, URLCredential?) -> Void)
   optional func webViewWebContentProcessDidTerminate(webView: WKWebView)
 }
-class WKNavigationResponse : NSObject {
-  var forMainFrame: Bool { get }
-  @NSCopying var response: NSURLResponse { get }
+class WKNavigationResponse : Object {
+  var isForMainFrame: Bool { get }
+  @NSCopying var response: URLResponse { get }
   var canShowMIMEType: Bool { get }
   init()
 }
-class WKPreferences : NSObject {
+class WKPreferences : Object {
   var minimumFontSize: CGFloat
   var javaScriptEnabled: Bool
   var javaScriptCanOpenWindowsAutomatically: Bool
   init()
 }
-class WKProcessPool : NSObject {
+class WKProcessPool : Object {
   init()
 }
-class WKScriptMessage : NSObject {
+class WKScriptMessage : Object {
   @NSCopying var body: AnyObject { get }
   weak var webView: @sil_weak WKWebView? { get }
   @NSCopying var frameInfo: WKFrameInfo { get }
   var name: String { get }
   init()
 }
-protocol WKScriptMessageHandler : NSObjectProtocol {
-  func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage)
+protocol WKScriptMessageHandler : ObjectProtocol {
+  func userContentController(userContentController: WKUserContentController, didReceive message: WKScriptMessage)
 }
-class WKSecurityOrigin : NSObject {
+class WKSecurityOrigin : Object {
   var `protocol`: String { get }
   var host: String { get }
   var port: Int { get }
 }
-protocol WKUIDelegate : NSObjectProtocol {
-  optional func webView(webView: WKWebView, createWebViewWithConfiguration configuration: WKWebViewConfiguration, forNavigationAction navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView?
+protocol WKUIDelegate : ObjectProtocol {
+  optional func webView(webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, forNavigationAction navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView?
   optional func webViewDidClose(webView: WKWebView)
   optional func webView(webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: () -> Void)
   optional func webView(webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: (Bool) -> Void)
   optional func webView(webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: (String?) -> Void)
 }
-class WKUserContentController : NSObject {
+class WKUserContentController : Object {
   var userScripts: [WKUserScript] { get }
   func addUserScript(userScript: WKUserScript)
   func removeAllUserScripts()
-  func addScriptMessageHandler(scriptMessageHandler: WKScriptMessageHandler, name: String)
+  func add(scriptMessageHandler: WKScriptMessageHandler, name: String)
   func removeScriptMessageHandlerForName(name: String)
   init()
 }
@@ -131,28 +131,28 @@ enum WKUserScriptInjectionTime : Int {
   case AtDocumentStart
   case AtDocumentEnd
 }
-class WKUserScript : NSObject, NSCopying {
+class WKUserScript : Object, Copying {
   var source: String { get }
   var injectionTime: WKUserScriptInjectionTime { get }
-  var forMainFrameOnly: Bool { get }
+  var isForMainFrameOnly: Bool { get }
   init(source: String, injectionTime: WKUserScriptInjectionTime, forMainFrameOnly: Bool)
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 class WKWebView : UIView {
   @NSCopying var configuration: WKWebViewConfiguration { get }
   weak var navigationDelegate: @sil_weak WKNavigationDelegate?
-  weak var UIDelegate: @sil_weak WKUIDelegate?
+  weak var uiDelegate: @sil_weak WKUIDelegate?
   var backForwardList: WKBackForwardList { get }
   init(frame: CGRect, configuration: WKWebViewConfiguration)
-  func loadRequest(request: NSURLRequest) -> WKNavigation?
-  func loadFileURL(URL: NSURL, allowingReadAccessToURL readAccessURL: NSURL) -> WKNavigation?
-  func loadHTMLString(string: String, baseURL: NSURL?) -> WKNavigation?
-  func loadData(data: NSData, MIMEType: String, characterEncodingName: String, baseURL: NSURL) -> WKNavigation?
-  func goToBackForwardListItem(item: WKBackForwardListItem) -> WKNavigation?
+  func load(request: URLRequest) -> WKNavigation?
+  func loadFileURL(URL: URL, allowingReadAccessTo readAccessURL: URL) -> WKNavigation?
+  func loadHTMLString(string: String, baseURL: URL?) -> WKNavigation?
+  func load(data: Data, mimeType MIMEType: String, characterEncodingName: String, baseURL: URL) -> WKNavigation?
+  func goTo(item: WKBackForwardListItem) -> WKNavigation?
   var title: String? { get }
-  @NSCopying var URL: NSURL? { get }
-  var loading: Bool { get }
+  @NSCopying var url: URL? { get }
+  var isLoading: Bool { get }
   var estimatedProgress: Double { get }
   var hasOnlySecureContent: Bool { get }
   var certificateChain: [AnyObject] { get }
@@ -163,7 +163,7 @@ class WKWebView : UIView {
   func reload() -> WKNavigation?
   func reloadFromOrigin() -> WKNavigation?
   func stopLoading()
-  func evaluateJavaScript(javaScriptString: String, completionHandler: ((AnyObject?, NSError?) -> Void)?)
+  func evaluateJavaScript(javaScriptString: String, completionHandler: ((AnyObject?, Error?) -> Void)? = nil)
   var allowsBackForwardNavigationGestures: Bool
   var customUserAgent: String?
   var allowsLinkPreview: Bool
@@ -177,7 +177,7 @@ enum WKSelectionGranularity : Int {
   case Dynamic
   case Character
 }
-class WKWebViewConfiguration : NSObject, NSCopying {
+class WKWebViewConfiguration : Object, Copying {
   var processPool: WKProcessPool
   var preferences: WKPreferences
   var userContentController: WKUserContentController
@@ -190,7 +190,7 @@ class WKWebViewConfiguration : NSObject, NSCopying {
   var selectionGranularity: WKSelectionGranularity
   var allowsPictureInPictureMediaPlayback: Bool
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 extension WKWebViewConfiguration {
   var mediaPlaybackRequiresUserAction: Bool
@@ -204,28 +204,28 @@ let WKWebsiteDataTypeSessionStorage: String
 let WKWebsiteDataTypeLocalStorage: String
 let WKWebsiteDataTypeWebSQLDatabases: String
 let WKWebsiteDataTypeIndexedDBDatabases: String
-class WKWebsiteDataRecord : NSObject {
+class WKWebsiteDataRecord : Object {
   var displayName: String { get }
   var dataTypes: Set<String> { get }
   init()
 }
-class WKWebsiteDataStore : NSObject {
+class WKWebsiteDataStore : Object {
   class func defaultDataStore() -> WKWebsiteDataStore
-  class func nonPersistentDataStore() -> WKWebsiteDataStore
-  var persistent: Bool { get }
+  class func nonPersistent() -> WKWebsiteDataStore
+  var isPersistent: Bool { get }
   class func allWebsiteDataTypes() -> Set<String>
   func fetchDataRecordsOfTypes(dataTypes: Set<String>, completionHandler: ([WKWebsiteDataRecord]) -> Void)
   func removeDataOfTypes(dataTypes: Set<String>, forDataRecords dataRecords: [WKWebsiteDataRecord], completionHandler: () -> Void)
-  func removeDataOfTypes(websiteDataTypes: Set<String>, modifiedSince date: NSDate, completionHandler: () -> Void)
+  func removeDataOfTypes(websiteDataTypes: Set<String>, modifiedSince date: Date, completionHandler: () -> Void)
 }
-class WKWindowFeatures : NSObject {
-  var menuBarVisibility: NSNumber? { get }
-  var statusBarVisibility: NSNumber? { get }
-  var toolbarsVisibility: NSNumber? { get }
-  var allowsResizing: NSNumber? { get }
-  var x: NSNumber? { get }
-  var y: NSNumber? { get }
-  var width: NSNumber? { get }
-  var height: NSNumber? { get }
+class WKWindowFeatures : Object {
+  var menuBarVisibility: Number? { get }
+  var statusBarVisibility: Number? { get }
+  var toolbarsVisibility: Number? { get }
+  var allowsResizing: Number? { get }
+  var x: Number? { get }
+  var y: Number? { get }
+  var width: Number? { get }
+  var height: Number? { get }
   init()
 }

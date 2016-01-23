@@ -33,13 +33,13 @@ enum LAPolicy : Int {
   case DeviceOwnerAuthentication
 }
 /// The maximum value for LAContext touchIDAuthenticationAllowableReuseDuration property.
-let LATouchIDAuthenticationMaximumAllowableReuseDuration: NSTimeInterval
+let LATouchIDAuthenticationMaximumAllowableReuseDuration: TimeInterval
 /// Class that represents an authentication context.
 ///
 /// @discussion This context can be used for evaluating policies.
 ///
 /// @see LAPolicy
-class LAContext : NSObject {
+class LAContext : Object {
   /// Determines if a particular policy can be evaluated.
   ///
   /// @discussion Policies can have certain requirements which, when not satisfied, would always cause
@@ -59,7 +59,7 @@ class LAContext : NSObject {
   ///              contains error information if policy evaluation is not possible.
   ///
   /// @return YES if the policy can be evaluated, NO otherwise.
-  func canEvaluatePolicy(policy: LAPolicy, error: NSErrorPointer) -> Bool
+  func canEvaluatePolicy(policy: LAPolicy, error: ErrorPointer) -> Bool
   /// Evaluates the specified policy.
   ///
   /// @discussion Policy evaluation may involve prompting user for various kinds of interaction
@@ -102,7 +102,7 @@ class LAContext : NSObject {
   /// @li          LAErrorUserFallback if user tapped the fallback button
   /// @li          LAErrorUserCancel if user has tapped the Cancel button
   /// @li          LAErrorSystemCancel if some system event interrupted the evaluation (e.g. Home button pressed).
-  func evaluatePolicy(policy: LAPolicy, localizedReason: String, reply: (Bool, NSError?) -> Void)
+  func evaluatePolicy(policy: LAPolicy, localizedReason: String, reply: (Bool, Error?) -> Void)
   /// Invalidates the context.
   ///
   /// @discussion The context is invalidated automatically when it is (auto)released. This method
@@ -126,7 +126,7 @@ class LAContext : NSObject {
   ///
   /// @return YES if the credential was set successfully, NO otherwise.
   ///
-  func setCredential(credential: NSData?, type: LACredentialType) -> Bool
+  func setCredential(credential: Data?, type: LACredentialType) -> Bool
   /// Reveals if credential was set with this context.
   ///
   /// @param type Type of credential we are asking for.
@@ -173,7 +173,7 @@ class LAContext : NSObject {
   ///
   /// @warning localizedReason parameter is mandatory and the call will throw NSInvalidArgumentException if
   ///          nil or empty string is specified.
-  func evaluateAccessControl(accessControl: SecAccessControl, operation: LAAccessControlOperation, localizedReason: String, reply: (Bool, NSError?) -> Void)
+  func evaluateAccessControl(accessControl: SecAccessControl, operation: LAAccessControlOperation, localizedReason: String, reply: (Bool, Error?) -> Void)
   /// Fallback button title.
   /// @discussion Allows fallback button title customization. A default title "Enter Password" is used when
   ///             this property is left nil. If set to empty string, the button will be hidden.
@@ -186,7 +186,7 @@ class LAContext : NSObject {
   ///
   /// @warning Please note that setting this property with high values does not prevent biometry lockout after 5
   ///          wrong attempts.
-  var maxBiometryFailures: NSNumber?
+  var maxBiometryFailures: Number?
   /// Contains policy domain state.
   ///
   /// @discussion  This property is set only when evaluatePolicy is called and succesful Touch ID authentication
@@ -196,7 +196,7 @@ class LAContext : NSObject {
   ///              data will change. Nature of such database changes cannot be determined
   ///              but comparing data of evaluatedPolicyDomainState after different evaluatePolicy
   ///              will reveal the fact database was changed between calls.
-  var evaluatedPolicyDomainState: NSData? { get }
+  var evaluatedPolicyDomainState: Data? { get }
   /// Time interval for accepting a successful Touch ID unlock from the past.
   ///
   /// @discussion This property can be set with a time interval in seconds. If the device was successfully unlocked by
@@ -209,7 +209,7 @@ class LAContext : NSObject {
   ///             the accepted interval.
   ///
   /// @see LATouchIDAuthenticationMaximumAllowableReuseDuration
-  var touchIDAuthenticationAllowableReuseDuration: NSTimeInterval
+  var touchIDAuthenticationAllowableReuseDuration: TimeInterval
   init()
 }
 enum LACredentialType : Int {

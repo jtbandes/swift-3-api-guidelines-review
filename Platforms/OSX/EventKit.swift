@@ -1,16 +1,16 @@
 
-class EKAlarm : EKObject, NSCopying {
-   init(absoluteDate date: NSDate)
-   init(relativeOffset offset: NSTimeInterval)
-  var relativeOffset: NSTimeInterval
-  @NSCopying var absoluteDate: NSDate?
+class EKAlarm : EKObject, Copying {
+   init(absoluteDate date: Date)
+   init(relativeOffset offset: TimeInterval)
+  var relativeOffset: TimeInterval
+  @NSCopying var absoluteDate: Date?
   @NSCopying var structuredLocation: EKStructuredLocation?
   var proximity: EKAlarmProximity
   var type: EKAlarmType { get }
   var emailAddress: String?
   var soundName: String?
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 class EKCalendar : EKObject {
    init(forEntityType entityType: EKEntityType, eventStore: EKEventStore)
@@ -19,8 +19,8 @@ class EKCalendar : EKObject {
   var title: String
   var type: EKCalendarType { get }
   var allowsContentModifications: Bool { get }
-  var subscribed: Bool { get }
-  var immutable: Bool { get }
+  var isSubscribed: Bool { get }
+  var isImmutable: Bool { get }
   @NSCopying var color: NSColor
   var supportedEventAvailabilities: EKCalendarEventAvailabilityMask { get }
   var allowedEntityTypes: EKEntityMask { get }
@@ -33,10 +33,10 @@ class EKCalendarItem : EKObject {
   var title: String
   var location: String?
   var notes: String?
-  @NSCopying var URL: NSURL?
-  var lastModifiedDate: NSDate? { get }
-  var creationDate: NSDate? { get }
-  @NSCopying var timeZone: NSTimeZone?
+  @NSCopying var url: URL?
+  var lastModifiedDate: Date? { get }
+  var creationDate: Date? { get }
+  @NSCopying var timeZone: TimeZone?
   var hasAlarms: Bool { get }
   var hasRecurrenceRules: Bool { get }
   var hasAttendees: Bool { get }
@@ -111,16 +111,16 @@ enum EKEventStatus : Int {
 class EKEvent : EKCalendarItem {
    init(eventStore: EKEventStore)
   var eventIdentifier: String { get }
-  var allDay: Bool
-  @NSCopying var startDate: NSDate
-  @NSCopying var endDate: NSDate
+  var isAllDay: Bool
+  @NSCopying var startDate: Date
+  @NSCopying var endDate: Date
   @NSCopying var structuredLocation: EKStructuredLocation?
-  func compareStartDateWithEvent(other: EKEvent) -> NSComparisonResult
+  func compareStartDateWith(other: EKEvent) -> ComparisonResult
   var organizer: EKParticipant? { get }
   var availability: EKEventAvailability
   var status: EKEventStatus { get }
   var isDetached: Bool { get }
-  var occurrenceDate: NSDate { get }
+  var occurrenceDate: Date { get }
   func refresh() -> Bool
   var birthdayContactIdentifier: String? { get }
   var birthdayPersonUniqueID: String? { get }
@@ -133,16 +133,16 @@ enum EKSpan : Int {
   case FutureEvents
 }
 typealias EKEventSearchCallback = (EKEvent, UnsafeMutablePointer<ObjCBool>) -> Void
-class EKEventStore : NSObject {
-  class func authorizationStatusForEntityType(entityType: EKEntityType) -> EKAuthorizationStatus
+class EKEventStore : Object {
+  class func authorizationStatusFor(entityType: EKEntityType) -> EKAuthorizationStatus
   init()
   init(sources: [EKSource])
-  func requestAccessToEntityType(entityType: EKEntityType, completion: EKEventStoreRequestAccessCompletionHandler)
+  func requestAccessTo(entityType: EKEntityType, completion: EKEventStoreRequestAccessCompletionHandler)
   var eventStoreIdentifier: String { get }
   var delegateSources: [EKSource] { get }
   var sources: [EKSource] { get }
   func sourceWithIdentifier(identifier: String) -> EKSource
-  func calendarsForEntityType(entityType: EKEntityType) -> [EKCalendar]
+  func calendarsFor(entityType: EKEntityType) -> [EKCalendar]
   var defaultCalendarForNewEvents: EKCalendar { get }
   func defaultCalendarForNewReminders() -> EKCalendar
   func calendarWithIdentifier(identifier: String) -> EKCalendar?
@@ -150,85 +150,85 @@ class EKEventStore : NSObject {
   func removeCalendar(calendar: EKCalendar, commit: Bool) throws
   func calendarItemWithIdentifier(identifier: String) -> EKCalendarItem
   func calendarItemsWithExternalIdentifier(externalIdentifier: String) -> [EKCalendarItem]
-  func saveEvent(event: EKEvent, span: EKSpan, commit: Bool) throws
-  func removeEvent(event: EKEvent, span: EKSpan, commit: Bool) throws
+  func save(event: EKEvent, span: EKSpan, commit: Bool) throws
+  func remove(event: EKEvent, span: EKSpan, commit: Bool) throws
   func eventWithIdentifier(identifier: String) -> EKEvent?
-  func eventsMatchingPredicate(predicate: NSPredicate) -> [EKEvent]
-  func enumerateEventsMatchingPredicate(predicate: NSPredicate, usingBlock block: EKEventSearchCallback)
-  func predicateForEventsWithStartDate(startDate: NSDate, endDate: NSDate, calendars: [EKCalendar]?) -> NSPredicate
-  func saveReminder(reminder: EKReminder, commit: Bool) throws
-  func removeReminder(reminder: EKReminder, commit: Bool) throws
-  func fetchRemindersMatchingPredicate(predicate: NSPredicate, completion: ([EKReminder]?) -> Void) -> AnyObject
+  func eventsMatching(predicate: Predicate) -> [EKEvent]
+  func enumerateEventsMatching(predicate: Predicate, usingBlock block: EKEventSearchCallback)
+  func predicateForEventsWithStart(startDate: Date, end endDate: Date, calendars: [EKCalendar]?) -> Predicate
+  func save(reminder: EKReminder, commit: Bool) throws
+  func remove(reminder: EKReminder, commit: Bool) throws
+  func fetchRemindersMatching(predicate: Predicate, completion: ([EKReminder]?) -> Void) -> AnyObject
   func cancelFetchRequest(fetchIdentifier: AnyObject)
-  func predicateForRemindersInCalendars(calendars: [EKCalendar]?) -> NSPredicate
-  func predicateForIncompleteRemindersWithDueDateStarting(startDate: NSDate?, ending endDate: NSDate?, calendars: [EKCalendar]?) -> NSPredicate
-  func predicateForCompletedRemindersWithCompletionDateStarting(startDate: NSDate?, ending endDate: NSDate?, calendars: [EKCalendar]?) -> NSPredicate
+  func predicateForRemindersIn(calendars: [EKCalendar]?) -> Predicate
+  func predicateForIncompleteRemindersWithDueDateStarting(startDate: Date?, ending endDate: Date?, calendars: [EKCalendar]?) -> Predicate
+  func predicateForCompletedRemindersWithCompletionDateStarting(startDate: Date?, ending endDate: Date?, calendars: [EKCalendar]?) -> Predicate
   func commit() throws
   func reset()
   func refreshSourcesIfNecessary()
 }
-typealias EKEventStoreRequestAccessCompletionHandler = (Bool, NSError?) -> Void
+typealias EKEventStoreRequestAccessCompletionHandler = (Bool, Error?) -> Void
 let EKEventStoreChangedNotification: String
-class EKObject : NSObject {
+class EKObject : Object {
   var hasChanges: Bool { get }
-  var new: Bool { get }
+  var isNew: Bool { get }
   func reset()
   func rollback()
   func refresh() -> Bool
   init()
 }
-class EKParticipant : EKObject, NSCopying {
-  var URL: NSURL { get }
+class EKParticipant : EKObject, Copying {
+  var url: URL { get }
   var name: String? { get }
   var participantStatus: EKParticipantStatus { get }
   var participantRole: EKParticipantRole { get }
   var participantType: EKParticipantType { get }
-  var currentUser: Bool { get }
-  var contactPredicate: NSPredicate { get }
-  func ABPersonInAddressBook(addressBook: ABAddressBook) -> ABPerson?
+  var isCurrentUser: Bool { get }
+  var contactPredicate: Predicate { get }
+  func abPersonIn(addressBook: ABAddressBook) -> ABPerson?
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class EKRecurrenceDayOfWeek : NSObject, NSCopying {
+class EKRecurrenceDayOfWeek : Object, Copying {
   convenience init(_ dayOfTheWeek: EKWeekday)
   convenience init(_ dayOfTheWeek: EKWeekday, weekNumber: Int)
   init(dayOfTheWeek: EKWeekday, weekNumber: Int)
   var dayOfTheWeek: EKWeekday { get }
   var weekNumber: Int { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class EKRecurrenceEnd : NSObject, NSCopying {
-  convenience init(endDate: NSDate)
+class EKRecurrenceEnd : Object, Copying {
+  convenience init(end endDate: Date)
   convenience init(occurrenceCount: Int)
-  var endDate: NSDate? { get }
+  var endDate: Date? { get }
   var occurrenceCount: Int { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
-class EKRecurrenceRule : EKObject, NSCopying {
-  init(recurrenceWithFrequency type: EKRecurrenceFrequency, interval: Int, end: EKRecurrenceEnd?)
-  init(recurrenceWithFrequency type: EKRecurrenceFrequency, interval: Int, daysOfTheWeek days: [EKRecurrenceDayOfWeek]?, daysOfTheMonth monthDays: [NSNumber]?, monthsOfTheYear months: [NSNumber]?, weeksOfTheYear: [NSNumber]?, daysOfTheYear: [NSNumber]?, setPositions: [NSNumber]?, end: EKRecurrenceEnd?)
+class EKRecurrenceRule : EKObject, Copying {
+  init(recurrenceWith type: EKRecurrenceFrequency, interval: Int, end: EKRecurrenceEnd?)
+  init(recurrenceWith type: EKRecurrenceFrequency, interval: Int, daysOfTheWeek days: [EKRecurrenceDayOfWeek]?, daysOfTheMonth monthDays: [Number]?, monthsOfTheYear months: [Number]?, weeksOfTheYear: [Number]?, daysOfTheYear: [Number]?, setPositions: [Number]?, end: EKRecurrenceEnd?)
   var calendarIdentifier: String { get }
   @NSCopying var recurrenceEnd: EKRecurrenceEnd?
   var frequency: EKRecurrenceFrequency { get }
   var interval: Int { get }
   var firstDayOfTheWeek: Int { get }
   var daysOfTheWeek: [EKRecurrenceDayOfWeek]? { get }
-  var daysOfTheMonth: [NSNumber]? { get }
-  var daysOfTheYear: [NSNumber]? { get }
-  var weeksOfTheYear: [NSNumber]? { get }
-  var monthsOfTheYear: [NSNumber]? { get }
-  var setPositions: [NSNumber]? { get }
+  var daysOfTheMonth: [Number]? { get }
+  var daysOfTheYear: [Number]? { get }
+  var weeksOfTheYear: [Number]? { get }
+  var monthsOfTheYear: [Number]? { get }
+  var setPositions: [Number]? { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 class EKReminder : EKCalendarItem {
    init(eventStore: EKEventStore)
-  @NSCopying var startDateComponents: NSDateComponents?
-  @NSCopying var dueDateComponents: NSDateComponents?
-  var completed: Bool
-  @NSCopying var completionDate: NSDate?
+  @NSCopying var startDateComponents: DateComponents?
+  @NSCopying var dueDateComponents: DateComponents?
+  var isCompleted: Bool
+  @NSCopying var completionDate: Date?
   var priority: Int
   init()
 }
@@ -236,16 +236,16 @@ class EKSource : EKObject {
   var sourceIdentifier: String { get }
   var sourceType: EKSourceType { get }
   var title: String { get }
-  func calendarsForEntityType(entityType: EKEntityType) -> Set<EKCalendar>
+  func calendarsFor(entityType: EKEntityType) -> Set<EKCalendar>
   init()
 }
-class EKStructuredLocation : EKObject, NSCopying {
+class EKStructuredLocation : EKObject, Copying {
   convenience init(title: String)
   var title: String
   var geoLocation: CLLocation?
   var radius: Double
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
 }
 enum EKAuthorizationStatus : Int {
   init?(rawValue: Int)

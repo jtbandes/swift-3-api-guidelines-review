@@ -5,10 +5,10 @@ class CLCircularRegion : CLRegion {
   init(center: CLLocationCoordinate2D, radius: CLLocationDistance, identifier: String)
   var center: CLLocationCoordinate2D { get }
   var radius: CLLocationDistance { get }
-  func containsCoordinate(coordinate: CLLocationCoordinate2D) -> Bool
+  func contains(coordinate: CLLocationCoordinate2D) -> Bool
   init(circularRegionWithCenter center: CLLocationCoordinate2D, radius: CLLocationDistance, identifier: String)
   init()
-  init?(coder aDecoder: NSCoder)
+  init?(coder aDecoder: Coder)
 }
 enum CLError : Int {
   init?(rawValue: Int)
@@ -37,13 +37,13 @@ extension CLError : _BridgedNSError {
   typealias RawValue = Int
 }
 let kCLErrorDomain: String
-typealias CLGeocodeCompletionHandler = ([CLPlacemark]?, NSError?) -> Void
-class CLGeocoder : NSObject {
-  var geocoding: Bool { get }
+typealias CLGeocodeCompletionHandler = ([CLPlacemark]?, Error?) -> Void
+class CLGeocoder : Object {
+  var isGeocoding: Bool { get }
   func reverseGeocodeLocation(location: CLLocation, completionHandler: CLGeocodeCompletionHandler)
-  func geocodeAddressDictionary(addressDictionary: [NSObject : AnyObject], completionHandler: CLGeocodeCompletionHandler)
+  func geocodeAddressDictionary(addressDictionary: [Object : AnyObject], completionHandler: CLGeocodeCompletionHandler)
   func geocodeAddressString(addressString: String, completionHandler: CLGeocodeCompletionHandler)
-  func geocodeAddressString(addressString: String, inRegion region: CLRegion?, completionHandler: CLGeocodeCompletionHandler)
+  func geocodeAddressString(addressString: String, in region: CLRegion?, completionHandler: CLGeocodeCompletionHandler)
   func cancelGeocode()
   init()
 }
@@ -68,35 +68,35 @@ let kCLLocationAccuracyHundredMeters: CLLocationAccuracy
 let kCLLocationAccuracyKilometer: CLLocationAccuracy
 let kCLLocationAccuracyThreeKilometers: CLLocationAccuracy
 let CLLocationDistanceMax: CLLocationDistance
-let CLTimeIntervalMax: NSTimeInterval
+let CLTimeIntervalMax: TimeInterval
 let kCLLocationCoordinate2DInvalid: CLLocationCoordinate2D
 func CLLocationCoordinate2DIsValid(coord: CLLocationCoordinate2D) -> Bool
 func CLLocationCoordinate2DMake(latitude: CLLocationDegrees, _ longitude: CLLocationDegrees) -> CLLocationCoordinate2D
-class CLFloor : NSObject, NSCopying, NSSecureCoding {
+class CLFloor : Object, Copying, SecureCoding {
   var level: Int { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class CLLocation : NSObject, NSCopying, NSSecureCoding {
+class CLLocation : Object, Copying, SecureCoding {
   init(latitude: CLLocationDegrees, longitude: CLLocationDegrees)
-  init(coordinate: CLLocationCoordinate2D, altitude: CLLocationDistance, horizontalAccuracy hAccuracy: CLLocationAccuracy, verticalAccuracy vAccuracy: CLLocationAccuracy, timestamp: NSDate)
-  init(coordinate: CLLocationCoordinate2D, altitude: CLLocationDistance, horizontalAccuracy hAccuracy: CLLocationAccuracy, verticalAccuracy vAccuracy: CLLocationAccuracy, course: CLLocationDirection, speed: CLLocationSpeed, timestamp: NSDate)
+  init(coordinate: CLLocationCoordinate2D, altitude: CLLocationDistance, horizontalAccuracy hAccuracy: CLLocationAccuracy, verticalAccuracy vAccuracy: CLLocationAccuracy, timestamp: Date)
+  init(coordinate: CLLocationCoordinate2D, altitude: CLLocationDistance, horizontalAccuracy hAccuracy: CLLocationAccuracy, verticalAccuracy vAccuracy: CLLocationAccuracy, course: CLLocationDirection, speed: CLLocationSpeed, timestamp: Date)
   var coordinate: CLLocationCoordinate2D { get }
   var altitude: CLLocationDistance { get }
   var horizontalAccuracy: CLLocationAccuracy { get }
   var verticalAccuracy: CLLocationAccuracy { get }
-  @NSCopying var timestamp: NSDate { get }
+  @NSCopying var timestamp: Date { get }
   @NSCopying var floor: CLFloor? { get }
   var description: String { get }
-  func distanceFromLocation(location: CLLocation) -> CLLocationDistance
+  func distanceFrom(location: CLLocation) -> CLLocationDistance
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
 enum CLDeviceOrientation : Int32 {
   init?(rawValue: Int32)
@@ -126,7 +126,7 @@ enum CLActivityType : Int {
   case Fitness
   case OtherNavigation
 }
-class CLLocationManager : NSObject {
+class CLLocationManager : Object {
   class func locationServicesEnabled() -> Bool
   class func authorizationStatus() -> CLAuthorizationStatus
   unowned(unsafe) var delegate: @sil_unmanaged CLLocationManagerDelegate?
@@ -139,19 +139,19 @@ class CLLocationManager : NSObject {
   func requestLocation()
   init()
 }
-protocol CLLocationManagerDelegate : NSObjectProtocol {
+protocol CLLocationManagerDelegate : ObjectProtocol {
   optional func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
-  optional func locationManager(manager: CLLocationManager, didFailWithError error: NSError)
-  optional func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus)
+  optional func locationManager(manager: CLLocationManager, didFailWithError error: Error)
+  optional func locationManager(manager: CLLocationManager, didChange status: CLAuthorizationStatus)
 }
 extension CLLocationManager {
 }
-class CLPlacemark : NSObject, NSCopying, NSSecureCoding {
+class CLPlacemark : Object, Copying, SecureCoding {
   init(placemark: CLPlacemark)
   @NSCopying var location: CLLocation? { get }
   @NSCopying var region: CLRegion? { get }
-  @NSCopying var timeZone: NSTimeZone? { get }
-  var addressDictionary: [NSObject : AnyObject]? { get }
+  @NSCopying var timeZone: TimeZone? { get }
+  var addressDictionary: [Object : AnyObject]? { get }
   var name: String? { get }
   var thoroughfare: String? { get }
   var subThoroughfare: String? { get }
@@ -160,28 +160,28 @@ class CLPlacemark : NSObject, NSCopying, NSSecureCoding {
   var administrativeArea: String? { get }
   var subAdministrativeArea: String? { get }
   var postalCode: String? { get }
-  var ISOcountryCode: String? { get }
+  var isOcountryCode: String? { get }
   var country: String? { get }
   var inlandWater: String? { get }
   var ocean: String? { get }
   var areasOfInterest: [String]? { get }
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }
-class CLRegion : NSObject, NSCopying, NSSecureCoding {
+class CLRegion : Object, Copying, SecureCoding {
   init(circularRegionWithCenter center: CLLocationCoordinate2D, radius: CLLocationDistance, identifier: String)
   var center: CLLocationCoordinate2D { get }
   var radius: CLLocationDistance { get }
   var identifier: String { get }
   var notifyOnEntry: Bool
   var notifyOnExit: Bool
-  func containsCoordinate(coordinate: CLLocationCoordinate2D) -> Bool
+  func contains(coordinate: CLLocationCoordinate2D) -> Bool
   init()
-  func copyWithZone(zone: NSZone) -> AnyObject
+  func copy(zone zone: Zone = nil) -> AnyObject
   class func supportsSecureCoding() -> Bool
-  func encodeWithCoder(aCoder: NSCoder)
-  init?(coder aDecoder: NSCoder)
+  func encodeWith(aCoder: Coder)
+  init?(coder aDecoder: Coder)
 }

@@ -24,15 +24,15 @@ class MFMailComposeViewController : UINavigationController {
   func setCcRecipients(ccRecipients: [String]?)
   func setBccRecipients(bccRecipients: [String]?)
   func setMessageBody(body: String, isHTML: Bool)
-  func addAttachmentData(attachment: NSData, mimeType: String, fileName filename: String)
+  func addAttachmentData(attachment: Data, mimeType: String, fileName filename: String)
   init(navigationBarClass: AnyClass?, toolbarClass: AnyClass?)
   init(rootViewController: UIViewController)
-  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder aDecoder: NSCoder)
+  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
-protocol MFMailComposeViewControllerDelegate : NSObjectProtocol {
-  optional func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?)
+protocol MFMailComposeViewControllerDelegate : ObjectProtocol {
+  optional func mailComposeController(controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?)
 }
 struct MessageComposeResult : RawRepresentable, Equatable {
   init(_ rawValue: UInt32)
@@ -56,15 +56,15 @@ class MFMessageComposeViewController : UINavigationController {
   var recipients: [String]?
   var body: String?
   var subject: String?
-  var attachments: [[NSObject : AnyObject]]? { get }
-  func addAttachmentURL(attachmentURL: NSURL, withAlternateFilename alternateFilename: String?) -> Bool
-  func addAttachmentData(attachmentData: NSData, typeIdentifier uti: String, filename: String) -> Bool
+  var attachments: [[Object : AnyObject]]? { get }
+  func addAttachmentURL(attachmentURL: URL, withAlternateFilename alternateFilename: String?) -> Bool
+  func addAttachmentData(attachmentData: Data, typeIdentifier uti: String, filename: String) -> Bool
   init(navigationBarClass: AnyClass?, toolbarClass: AnyClass?)
   init(rootViewController: UIViewController)
-  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-  init?(coder aDecoder: NSCoder)
+  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  init?(coder aDecoder: Coder)
   convenience init()
 }
-protocol MFMessageComposeViewControllerDelegate : NSObjectProtocol {
-  func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult)
+protocol MFMessageComposeViewControllerDelegate : ObjectProtocol {
+  func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult)
 }
