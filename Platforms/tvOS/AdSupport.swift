@@ -1,5 +1,4 @@
 
-@available(tvOS 6.0, *)
 class ASIdentifierManager : Object {
   class func shared() -> ASIdentifierManager!
   var advertisingIdentifier: UUID! { get }

@@ -1,5 +1,4 @@
 
-@available(OSX 10.5, *)
 class SBApplication : SBObject, Coding {
   init?(bundleIdentifier ident: String)
   init?(url: URL)
@@ -20,7 +19,6 @@ class SBApplication : SBObject, Coding {
 protocol SBApplicationDelegate {
   func eventDidFail(event: UnsafePointer<AppleEvent>, withError error: Error) -> AnyObject
 }
-@available(OSX 10.5, *)
 class SBElementArray : MutableArray {
   func objectWithName(name: String) -> AnyObject
   func objectWithID(identifier: AnyObject) -> AnyObject
@@ -38,15 +36,12 @@ class SBElementArray : MutableArray {
   convenience init?(contentsOfFile path: String)
   convenience init?(contentsOf url: URL)
 }
-@available(OSX 10.5, *)
 class SBObject : Object, Coding {
   init()
   init(properties: [Object : AnyObject])
   init(data: AnyObject)
   func get() -> AnyObject?
-  @available(OSX 10.6, *)
   func lastError() -> Error?
-  @available(OSX 10.5, *)
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
 }

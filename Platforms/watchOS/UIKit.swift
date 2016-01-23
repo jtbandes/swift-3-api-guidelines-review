@@ -1,153 +1,81 @@
 
-
-/************************ Attributes ************************/
-@available(watchOS 2.0, *)
 let NSFontAttributeName: String
-@available(watchOS 2.0, *)
 let NSParagraphStyleAttributeName: String
-@available(watchOS 2.0, *)
 let NSForegroundColorAttributeName: String
-@available(watchOS 2.0, *)
 let NSBackgroundColorAttributeName: String
-@available(watchOS 2.0, *)
 let NSLigatureAttributeName: String
-@available(watchOS 2.0, *)
 let NSKernAttributeName: String
-@available(watchOS 2.0, *)
 let NSStrikethroughStyleAttributeName: String
-@available(watchOS 2.0, *)
 let NSUnderlineStyleAttributeName: String
-@available(watchOS 2.0, *)
 let NSStrokeColorAttributeName: String
-@available(watchOS 2.0, *)
 let NSStrokeWidthAttributeName: String
-@available(watchOS 2.0, *)
 let NSShadowAttributeName: String
-@available(watchOS 2.0, *)
 let NSTextEffectAttributeName: String
-@available(watchOS 2.0, *)
 let NSAttachmentAttributeName: String
-@available(watchOS 2.0, *)
 let NSLinkAttributeName: String
-@available(watchOS 2.0, *)
 let NSBaselineOffsetAttributeName: String
-@available(watchOS 2.0, *)
 let NSUnderlineColorAttributeName: String
-@available(watchOS 2.0, *)
 let NSStrikethroughColorAttributeName: String
-@available(watchOS 2.0, *)
 let NSObliquenessAttributeName: String
-@available(watchOS 2.0, *)
 let NSExpansionAttributeName: String
-@available(watchOS 2.0, *)
 let NSWritingDirectionAttributeName: String
-@available(watchOS 2.0, *)
 let NSVerticalGlyphFormAttributeName: String
-
-/************************ Attribute values ************************/
-@available(watchOS 2.0, *)
 enum NSUnderlineStyle : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case StyleNone
   case StyleSingle
-  @available(watchOS 2.0, *)
   case StyleThick
-  @available(watchOS 2.0, *)
   case StyleDouble
-  @available(watchOS 2.0, *)
   static var PatternSolid: NSUnderlineStyle { get }
-  @available(watchOS 2.0, *)
   case PatternDot
-  @available(watchOS 2.0, *)
   case PatternDash
-  @available(watchOS 2.0, *)
   case PatternDashDot
-  @available(watchOS 2.0, *)
   case PatternDashDotDot
-  @available(watchOS 2.0, *)
   case ByWord
 }
-@available(watchOS 2.0, *)
 enum NSWritingDirectionFormatType : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case Embedding
   case Override
 }
-@available(watchOS 2.0, *)
 let NSTextEffectLetterpressStyle: String
-
-/************************ Attribute fixing ************************/
 extension MutableAttributedString {
-  @available(watchOS 2.0, *)
   func fixAttributesIn(range: NSRange)
 }
-
-/************************ Document formats ************************/
-@available(watchOS 2.0, *)
 let NSPlainTextDocumentType: String
-@available(watchOS 2.0, *)
 let NSRTFTextDocumentType: String
-@available(watchOS 2.0, *)
 let NSRTFDTextDocumentType: String
-@available(watchOS 2.0, *)
 let NSHTMLTextDocumentType: String
-@available(watchOS 2.0, *)
 let NSTextLayoutSectionOrientation: String
-@available(watchOS 2.0, *)
 let NSTextLayoutSectionRange: String
-@available(watchOS 2.0, *)
 let NSDocumentTypeDocumentAttribute: String
-@available(watchOS 2.0, *)
 let NSCharacterEncodingDocumentAttribute: String
-@available(watchOS 2.0, *)
 let NSDefaultAttributesDocumentAttribute: String
-@available(watchOS 2.0, *)
 let NSPaperSizeDocumentAttribute: String
-@available(watchOS 2.0, *)
 let NSPaperMarginDocumentAttribute: String
-@available(watchOS 2.0, *)
 let NSViewSizeDocumentAttribute: String
-@available(watchOS 2.0, *)
 let NSViewZoomDocumentAttribute: String
-@available(watchOS 2.0, *)
 let NSViewModeDocumentAttribute: String
-@available(watchOS 2.0, *)
 let NSReadOnlyDocumentAttribute: String
-@available(watchOS 2.0, *)
 let NSBackgroundColorDocumentAttribute: String
-@available(watchOS 2.0, *)
 let NSHyphenationFactorDocumentAttribute: String
-@available(watchOS 2.0, *)
 let NSDefaultTabIntervalDocumentAttribute: String
-@available(watchOS 2.0, *)
 let NSTextLayoutSectionsAttribute: String
 extension AttributedString {
-  @available(watchOS 2.0, *)
   init(url: URL, options: [String : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
-  @available(watchOS 2.0, *)
   init(data: Data, options: [String : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
-  @available(watchOS 2.0, *)
   func dataFrom(range: NSRange, documentAttributes dict: [String : AnyObject] = [:]) throws -> Data
-  @available(watchOS 2.0, *)
   func fileWrapperFrom(range: NSRange, documentAttributes dict: [String : AnyObject] = [:]) throws -> FileWrapper
 }
 extension MutableAttributedString {
-  @available(watchOS 2.0, *)
   func readFrom(url: URL, options opts: [String : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
-  @available(watchOS 2.0, *)
   func readFrom(data: Data, options opts: [String : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
 }
-
-/************************ Misc methods ************************/
 extension AttributedString {
-  @available(watchOS 2.0, *)
   func containsAttachmentsIn(range: NSRange) -> Bool
 }
-
-/************************ Deprecated ************************/
-@available(watchOS, introduced=2.0, deprecated=2.0, message="Use NSWritingDirectionFormatType instead")
 enum NSTextWritingDirection : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -155,31 +83,23 @@ enum NSTextWritingDirection : Int {
   case Override
 }
 extension AttributedString {
-  @available(watchOS, introduced=2.0, deprecated=2.0, message="Use -initWithURL:options:documentAttributes:error: instead")
   init(fileURL url: URL, options: [Object : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
 }
 extension MutableAttributedString {
-  @available(watchOS, introduced=2.0, deprecated=2.0, message="Use -readFromURL:options:documentAttributes:error: instead")
   func readFromFileURL(url: URL, options opts: [Object : AnyObject] = [:], documentAttributes dict: AutoreleasingUnsafeMutablePointer<NSDictionary?>) throws
 }
-@available(watchOS 2.0, *)
 let NSTabColumnTerminatorsAttributeName: String
-@available(watchOS 2.0, *)
 class NSTextTab : Object, Copying, Coding {
-  @available(watchOS 2.0, *)
   class func columnTerminatorsFor(aLocale: Locale?) -> CharacterSet
   init(textAlignment alignment: NSTextAlignment, location loc: CGFloat, options: [String : AnyObject] = [:])
   var alignment: NSTextAlignment { get }
   var location: CGFloat { get }
   var options: [String : AnyObject] { get }
   convenience init()
-  @available(watchOS 2.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
-  @available(watchOS 2.0, *)
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
 }
-@available(watchOS 2.0, *)
 enum NSLineBreakMode : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -190,7 +110,6 @@ enum NSLineBreakMode : Int {
   case ByTruncatingTail
   case ByTruncatingMiddle
 }
-@available(watchOS 2.0, *)
 class NSParagraphStyle : Object, Copying, MutableCopying, SecureCoding {
   class func defaultParagraphStyle() -> NSParagraphStyle
   class func defaultWritingDirectionForLanguage(languageName: String?) -> NSWritingDirection
@@ -207,24 +126,16 @@ class NSParagraphStyle : Object, Copying, MutableCopying, SecureCoding {
   var lineHeightMultiple: CGFloat { get }
   var paragraphSpacingBefore: CGFloat { get }
   var hyphenationFactor: Float { get }
-  @available(watchOS 2.0, *)
   var tabStops: [NSTextTab] { get }
-  @available(watchOS 2.0, *)
   var defaultTabInterval: CGFloat { get }
-  @available(watchOS 2.0, *)
   var allowsDefaultTighteningForTruncation: Bool { get }
   init()
-  @available(watchOS 2.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
-  @available(watchOS 2.0, *)
   func mutableCopy(zone zone: Zone = nil) -> AnyObject
-  @available(watchOS 2.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(watchOS 2.0, *)
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
 }
-@available(watchOS 2.0, *)
 class NSMutableParagraphStyle : NSParagraphStyle {
   var lineSpacing: CGFloat
   var paragraphSpacing: CGFloat
@@ -239,22 +150,15 @@ class NSMutableParagraphStyle : NSParagraphStyle {
   var lineHeightMultiple: CGFloat
   var paragraphSpacingBefore: CGFloat
   var hyphenationFactor: Float
-  @available(watchOS 2.0, *)
   var tabStops: [NSTextTab]!
-  @available(watchOS 2.0, *)
   var defaultTabInterval: CGFloat
-  @available(watchOS 2.0, *)
   var allowsDefaultTighteningForTruncation: Bool
-  @available(watchOS 2.0, *)
   func addTabStop(anObject: NSTextTab)
-  @available(watchOS 2.0, *)
   func removeTabStop(anObject: NSTextTab)
-  @available(watchOS 2.0, *)
   func setParagraphStyle(obj: NSParagraphStyle)
   init()
   init?(coder aDecoder: Coder)
 }
-@available(watchOS 2.0, *)
 class NSStringDrawingContext : Object {
   var minimumScaleFactor: CGFloat
   var actualScaleFactor: CGFloat { get }
@@ -262,52 +166,35 @@ class NSStringDrawingContext : Object {
   init()
 }
 extension NSString {
-  @available(watchOS 2.0, *)
   func size(attributes attrs: [String : AnyObject]? = [:]) -> CGSize
-  @available(watchOS 2.0, *)
   func drawAt(point: CGPoint, withAttributes attrs: [String : AnyObject]? = [:])
-  @available(watchOS 2.0, *)
   func drawIn(rect: CGRect, withAttributes attrs: [String : AnyObject]? = [:])
 }
 extension AttributedString {
-  @available(watchOS 2.0, *)
   func size() -> CGSize
-  @available(watchOS 2.0, *)
   func drawAt(point: CGPoint)
-  @available(watchOS 2.0, *)
   func drawIn(rect: CGRect)
 }
-@available(watchOS 2.0, *)
 struct NSStringDrawingOptions : OptionSetType {
   init(rawValue: Int)
   let rawValue: Int
   static var UsesLineFragmentOrigin: NSStringDrawingOptions { get }
   static var UsesFontLeading: NSStringDrawingOptions { get }
   static var UsesDeviceMetrics: NSStringDrawingOptions { get }
-  @available(watchOS 2.0, *)
   static var TruncatesLastVisibleLine: NSStringDrawingOptions { get }
 }
 extension NSString {
-  @available(watchOS 2.0, *)
   func drawWith(rect: CGRect, options: NSStringDrawingOptions = [], attributes: [String : AnyObject]? = [:], context: NSStringDrawingContext?)
-  @available(watchOS 2.0, *)
   func boundingRectWith(size: CGSize, options: NSStringDrawingOptions = [], attributes: [String : AnyObject]? = [:], context: NSStringDrawingContext?) -> CGRect
 }
 extension AttributedString {
-  @available(watchOS 2.0, *)
   func drawWith(rect: CGRect, options: NSStringDrawingOptions = [], context: NSStringDrawingContext?)
-  @available(watchOS 2.0, *)
   func boundingRectWith(size: CGSize, options: NSStringDrawingOptions = [], context: NSStringDrawingContext?) -> CGRect
 }
-
-/************************ Deprecated ************************/
 extension NSStringDrawingContext {
-  @available(watchOS, introduced=2.0, deprecated=2.0)
   var minimumTrackingAdjustment: CGFloat
-  @available(watchOS, introduced=2.0, deprecated=2.0)
   var actualTrackingAdjustment: CGFloat { get }
 }
-@available(watchOS 2.0, *)
 enum NSTextAlignment : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -317,7 +204,6 @@ enum NSTextAlignment : Int {
   case Justified
   case Natural
 }
-@available(watchOS 2.0, *)
 enum NSWritingDirection : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -329,7 +215,6 @@ typealias UIAccessibilityTraits = UInt64
 var UIAccessibilityTraitNone: UIAccessibilityTraits
 var UIAccessibilityTraitButton: UIAccessibilityTraits
 var UIAccessibilityTraitLink: UIAccessibilityTraits
-@available(watchOS 2.0, *)
 var UIAccessibilityTraitHeader: UIAccessibilityTraits
 var UIAccessibilityTraitSearchField: UIAccessibilityTraits
 var UIAccessibilityTraitImage: UIAccessibilityTraits
@@ -340,44 +225,26 @@ var UIAccessibilityTraitStaticText: UIAccessibilityTraits
 var UIAccessibilityTraitSummaryElement: UIAccessibilityTraits
 var UIAccessibilityTraitNotEnabled: UIAccessibilityTraits
 var UIAccessibilityTraitUpdatesFrequently: UIAccessibilityTraits
-@available(watchOS 2.0, *)
 var UIAccessibilityTraitStartsMediaSession: UIAccessibilityTraits
-@available(watchOS 2.0, *)
 var UIAccessibilityTraitAdjustable: UIAccessibilityTraits
-@available(watchOS 2.0, *)
 var UIAccessibilityTraitAllowsDirectInteraction: UIAccessibilityTraits
-@available(watchOS 2.0, *)
 var UIAccessibilityTraitCausesPageTurn: UIAccessibilityTraits
 typealias UIAccessibilityNotifications = UInt32
 var UIAccessibilityScreenChangedNotification: UIAccessibilityNotifications
 var UIAccessibilityLayoutChangedNotification: UIAccessibilityNotifications
-@available(watchOS 2.0, *)
 var UIAccessibilityAnnouncementNotification: UIAccessibilityNotifications
-@available(watchOS 2.0, *)
 let UIAccessibilityAnnouncementDidFinishNotification: String
-@available(watchOS 2.0, *)
 let UIAccessibilityAnnouncementKeyStringValue: String
-@available(watchOS 2.0, *)
 let UIAccessibilityAnnouncementKeyWasSuccessful: String
-@available(watchOS 2.0, *)
 let UIAccessibilityElementFocusedNotification: String
-@available(watchOS 2.0, *)
 let UIAccessibilityFocusedElementKey: String
-@available(watchOS 2.0, *)
 let UIAccessibilityUnfocusedElementKey: String
-@available(watchOS 2.0, *)
 let UIAccessibilityAssistiveTechnologyKey: String
-@available(watchOS 2.0, *)
 var UIAccessibilityPageScrolledNotification: UIAccessibilityNotifications
-@available(watchOS 2.0, *)
 var UIAccessibilityPauseAssistiveTechnologyNotification: UIAccessibilityNotifications
-@available(watchOS 2.0, *)
 var UIAccessibilityResumeAssistiveTechnologyNotification: UIAccessibilityNotifications
-@available(watchOS 2.0, *)
 let UIAccessibilityNotificationSwitchControlIdentifier: String
-@available(watchOS 2.0, *)
 let UIAccessibilityNotificationVoiceOverIdentifier: String
-@available(watchOS 2.0, *)
 enum UIAccessibilityNavigationStyle : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -385,11 +252,8 @@ enum UIAccessibilityNavigationStyle : Int {
   case Separate
   case Combined
 }
-@available(watchOS 2.0, *)
 let UIAccessibilitySpeechAttributePunctuation: String
-@available(watchOS 2.0, *)
 let UIAccessibilitySpeechAttributeLanguage: String
-@available(watchOS 2.0, *)
 let UIAccessibilitySpeechAttributePitch: String
 struct UIRectCorner : OptionSetType {
   init(rawValue: UInt)
@@ -400,7 +264,6 @@ struct UIRectCorner : OptionSetType {
   static var BottomRight: UIRectCorner { get }
   static var AllCorners: UIRectCorner { get }
 }
-@available(watchOS 2.0, *)
 class UIBezierPath : Object, Copying, Coding {
   convenience init(rect: CGRect)
   convenience init(ovalIn rect: CGRect)
@@ -415,12 +278,10 @@ class UIBezierPath : Object, Copying, Coding {
   func addLineTo(point: CGPoint)
   func addCurveTo(endPoint: CGPoint, controlPoint1: CGPoint, controlPoint2: CGPoint)
   func addQuadCurveTo(endPoint: CGPoint, controlPoint: CGPoint)
-  @available(watchOS 2.0, *)
   func addArcWithCenter(center: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool)
   func close()
   func removeAllPoints()
   func append(bezierPath: UIBezierPath)
-  @available(watchOS 2.0, *)
   func reversing() -> UIBezierPath
   func apply(transform: CGAffineTransform)
   var isEmpty: Bool { get }
@@ -440,12 +301,9 @@ class UIBezierPath : Object, Copying, Coding {
   func fillWith(blendMode: CGBlendMode, alpha: CGFloat)
   func strokeWith(blendMode: CGBlendMode, alpha: CGFloat)
   func addClip()
-  @available(watchOS 2.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
-  @available(watchOS 2.0, *)
   func encodeWith(aCoder: Coder)
 }
-@available(watchOS 2.0, *)
 class UIColor : Object, SecureCoding, Copying {
   init(white: CGFloat, alpha: CGFloat)
   init(hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat)
@@ -470,40 +328,29 @@ class UIColor : Object, SecureCoding, Copying {
   func set()
   func setFill()
   func setStroke()
-  @available(watchOS 2.0, *)
   func getWhite(white: UnsafeMutablePointer<CGFloat>, alpha: UnsafeMutablePointer<CGFloat>) -> Bool
-  @available(watchOS 2.0, *)
   func getHue(hue: UnsafeMutablePointer<CGFloat>, saturation: UnsafeMutablePointer<CGFloat>, brightness: UnsafeMutablePointer<CGFloat>, alpha: UnsafeMutablePointer<CGFloat>) -> Bool
-  @available(watchOS 2.0, *)
   func getRed(red: UnsafeMutablePointer<CGFloat>, green: UnsafeMutablePointer<CGFloat>, blue: UnsafeMutablePointer<CGFloat>, alpha: UnsafeMutablePointer<CGFloat>) -> Bool
   func withAlphaComponent(alpha: CGFloat) -> UIColor
   var cgColor: CGColor { get }
   init()
-  @available(watchOS 2.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(watchOS 2.0, *)
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
-  @available(watchOS 2.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
 }
-
 extension UIColor : _ColorLiteralConvertible {
   required convenience init(colorLiteralRed red: Float, green: Float, blue: Float, alpha: Float)
 }
-@available(watchOS 2.0, *)
 class UIFont : Object, Copying {
-  @available(watchOS 2.0, *)
   class func preferredFontForTextStyle(style: String) -> UIFont
-  /*not inherited*/ init?(name fontName: String, size fontSize: CGFloat)
+   init?(name fontName: String, size fontSize: CGFloat)
   class func familyNames() -> [String]
   class func fontNamesForFamilyName(familyName: String) -> [String]
   class func systemFontOfSize(fontSize: CGFloat) -> UIFont
   class func boldSystemFontOfSize(fontSize: CGFloat) -> UIFont
   class func italicSystemFontOfSize(fontSize: CGFloat) -> UIFont
-  @available(watchOS 2.0, *)
   class func systemFontOfSize(fontSize: CGFloat, weight: CGFloat) -> UIFont
-  @available(watchOS 2.0, *)
   class func monospacedDigitSystemFontOfSize(fontSize: CGFloat, weight: CGFloat) -> UIFont
   var familyName: String { get }
   var fontName: String { get }
@@ -512,19 +359,14 @@ class UIFont : Object, Copying {
   var descender: CGFloat { get }
   var capHeight: CGFloat { get }
   var xHeight: CGFloat { get }
-  @available(watchOS 2.0, *)
   var lineHeight: CGFloat { get }
   var leading: CGFloat { get }
   func withSize(fontSize: CGFloat) -> UIFont
-  @available(watchOS 2.0, *)
-  /*not inherited*/ init(descriptor: UIFontDescriptor, size pointSize: CGFloat)
-  @available(watchOS 2.0, *)
+   init(descriptor: UIFontDescriptor, size pointSize: CGFloat)
   func fontDescriptor() -> UIFontDescriptor
   init()
-  @available(watchOS 2.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
 }
-@available(watchOS 2.0, *)
 struct UIFontDescriptorSymbolicTraits : OptionSetType {
   init(rawValue: UInt32)
   let rawValue: UInt32
@@ -551,7 +393,6 @@ struct UIFontDescriptorSymbolicTraits : OptionSetType {
   static var ClassSymbolic: UIFontDescriptorSymbolicTraits { get }
 }
 typealias UIFontDescriptorClass = Int
-@available(watchOS 2.0, *)
 class UIFontDescriptor : Object, Copying, SecureCoding {
   convenience init()
   init?(coder aDecoder: Coder)
@@ -562,8 +403,8 @@ class UIFontDescriptor : Object, Copying, SecureCoding {
   func objectForKey(anAttribute: String) -> AnyObject?
   func fontAttributes() -> [String : AnyObject]
   func matchingFontDescriptorsWithMandatoryKeys(mandatoryKeys: Set<String>?) -> [UIFontDescriptor]
-  /*not inherited*/ init(name fontName: String, size: CGFloat)
-  /*not inherited*/ init(name fontName: String, matrix: CGAffineTransform)
+   init(name fontName: String, size: CGFloat)
+   init(name fontName: String, matrix: CGAffineTransform)
   class func preferredFontDescriptorWithTextStyle(style: String) -> UIFontDescriptor
   init(fontAttributes attributes: [String : AnyObject] = [:])
   func addingAttributes(attributes: [String : AnyObject] = [:]) -> UIFontDescriptor
@@ -572,86 +413,46 @@ class UIFontDescriptor : Object, Copying, SecureCoding {
   func withMatrix(matrix: CGAffineTransform) -> UIFontDescriptor
   func withFace(newFace: String) -> UIFontDescriptor
   func withFamily(newFamily: String) -> UIFontDescriptor
-  @available(watchOS 2.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
-  @available(watchOS 2.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(watchOS 2.0, *)
   func encodeWith(aCoder: Coder)
 }
-@available(watchOS 2.0, *)
 let UIFontDescriptorFamilyAttribute: String
-@available(watchOS 2.0, *)
 let UIFontDescriptorNameAttribute: String
-@available(watchOS 2.0, *)
 let UIFontDescriptorFaceAttribute: String
-@available(watchOS 2.0, *)
 let UIFontDescriptorSizeAttribute: String
-@available(watchOS 2.0, *)
 let UIFontDescriptorVisibleNameAttribute: String
-@available(watchOS 2.0, *)
 let UIFontDescriptorMatrixAttribute: String
-@available(watchOS 2.0, *)
 let UIFontDescriptorCharacterSetAttribute: String
-@available(watchOS 2.0, *)
 let UIFontDescriptorCascadeListAttribute: String
-@available(watchOS 2.0, *)
 let UIFontDescriptorTraitsAttribute: String
-@available(watchOS 2.0, *)
 let UIFontDescriptorFixedAdvanceAttribute: String
-@available(watchOS 2.0, *)
 let UIFontDescriptorFeatureSettingsAttribute: String
-@available(watchOS 2.0, *)
 let UIFontDescriptorTextStyleAttribute: String
-@available(watchOS 2.0, *)
 let UIFontSymbolicTrait: String
-@available(watchOS 2.0, *)
 let UIFontWeightTrait: String
-@available(watchOS 2.0, *)
 let UIFontWidthTrait: String
-@available(watchOS 2.0, *)
 let UIFontSlantTrait: String
-@available(watchOS 2.0, *)
 let UIFontWeightUltraLight: CGFloat
-@available(watchOS 2.0, *)
 let UIFontWeightThin: CGFloat
-@available(watchOS 2.0, *)
 let UIFontWeightLight: CGFloat
-@available(watchOS 2.0, *)
 let UIFontWeightRegular: CGFloat
-@available(watchOS 2.0, *)
 let UIFontWeightMedium: CGFloat
-@available(watchOS 2.0, *)
 let UIFontWeightSemibold: CGFloat
-@available(watchOS 2.0, *)
 let UIFontWeightBold: CGFloat
-@available(watchOS 2.0, *)
 let UIFontWeightHeavy: CGFloat
-@available(watchOS 2.0, *)
 let UIFontWeightBlack: CGFloat
-@available(watchOS 2.0, *)
 let UIFontFeatureTypeIdentifierKey: String
-@available(watchOS 2.0, *)
 let UIFontFeatureSelectorIdentifierKey: String
-@available(watchOS 2.0, *)
 let UIFontTextStyleTitle1: String
-@available(watchOS 2.0, *)
 let UIFontTextStyleTitle2: String
-@available(watchOS 2.0, *)
 let UIFontTextStyleTitle3: String
-@available(watchOS 2.0, *)
 let UIFontTextStyleHeadline: String
-@available(watchOS 2.0, *)
 let UIFontTextStyleSubheadline: String
-@available(watchOS 2.0, *)
 let UIFontTextStyleBody: String
-@available(watchOS 2.0, *)
 let UIFontTextStyleCallout: String
-@available(watchOS 2.0, *)
 let UIFontTextStyleFootnote: String
-@available(watchOS 2.0, *)
 let UIFontTextStyleCaption1: String
-@available(watchOS 2.0, *)
 let UIFontTextStyleCaption2: String
 struct UIEdgeInsets {
   var top: CGFloat
@@ -661,7 +462,6 @@ struct UIEdgeInsets {
   init()
   init(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat)
 }
-
 extension UIEdgeInsets : Equatable {
 }
 struct UIOffset {
@@ -670,10 +470,8 @@ struct UIOffset {
   init()
   init(horizontal: CGFloat, vertical: CGFloat)
 }
-
 extension UIOffset : Equatable {
 }
-@available(watchOS 2.0, *)
 struct UIRectEdge : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
@@ -706,21 +504,19 @@ func CGAffineTransformFromString(string: String) -> CGAffineTransform
 func UIEdgeInsetsFromString(string: String) -> UIEdgeInsets
 func UIOffsetFromString(string: String) -> UIOffset
 extension Value {
-  /*not inherited*/ init(cgPoint point: CGPoint)
-  /*not inherited*/ init(cgVector vector: CGVector)
-  /*not inherited*/ init(cgSize size: CGSize)
-  /*not inherited*/ init(cgRect rect: CGRect)
-  /*not inherited*/ init(cgAffineTransform transform: CGAffineTransform)
-  /*not inherited*/ init(uiEdgeInsets insets: UIEdgeInsets)
-  @available(watchOS 2.0, *)
-  /*not inherited*/ init(uiOffset insets: UIOffset)
+   init(cgPoint point: CGPoint)
+   init(cgVector vector: CGVector)
+   init(cgSize size: CGSize)
+   init(cgRect rect: CGRect)
+   init(cgAffineTransform transform: CGAffineTransform)
+   init(uiEdgeInsets insets: UIEdgeInsets)
+   init(uiOffset insets: UIOffset)
   func cgPointValue() -> CGPoint
   func cgVectorValue() -> CGVector
   func cgSizeValue() -> CGSize
   func cgRectValue() -> CGRect
   func cgAffineTransform() -> CGAffineTransform
   func uiEdgeInsetsValue() -> UIEdgeInsets
-  @available(watchOS 2.0, *)
   func uiOffsetValue() -> UIOffset
 }
 extension Coder {
@@ -730,7 +526,6 @@ extension Coder {
   func encode(rect: CGRect, forKey key: String)
   func encode(transform: CGAffineTransform, forKey key: String)
   func encode(insets: UIEdgeInsets, forKey key: String)
-  @available(watchOS 2.0, *)
   func encode(offset: UIOffset, forKey key: String)
   func decodeCGPointForKey(key: String) -> CGPoint
   func decodeCGVectorForKey(key: String) -> CGVector
@@ -738,7 +533,6 @@ extension Coder {
   func decodeCGRectForKey(key: String) -> CGRect
   func decodeCGAffineTransformForKey(key: String) -> CGAffineTransform
   func decodeUIEdgeInsetsForKey(key: String) -> UIEdgeInsets
-  @available(watchOS 2.0, *)
   func decodeUIOffsetForKey(key: String) -> UIOffset
 }
 func UIGraphicsGetCurrentContext() -> CGContext?
@@ -750,27 +544,17 @@ func UIRectFrameUsingBlendMode(rect: CGRect, _ blendMode: CGBlendMode)
 func UIRectFrame(rect: CGRect)
 func UIRectClip(rect: CGRect)
 func UIGraphicsBeginImageContext(size: CGSize)
-@available(watchOS 2.0, *)
 func UIGraphicsBeginImageContextWithOptions(size: CGSize, _ opaque: Bool, _ scale: CGFloat)
 func UIGraphicsGetImageFromCurrentImageContext() -> UIImage!
 func UIGraphicsEndImageContext()
-@available(watchOS 2.0, *)
 func UIGraphicsBeginPDFContextToFile(path: String, _ bounds: CGRect, _ documentInfo: [Object : AnyObject]?) -> Bool
-@available(watchOS 2.0, *)
 func UIGraphicsBeginPDFContextToData(data: MutableData, _ bounds: CGRect, _ documentInfo: [Object : AnyObject]?)
-@available(watchOS 2.0, *)
 func UIGraphicsEndPDFContext()
-@available(watchOS 2.0, *)
 func UIGraphicsBeginPDFPage()
-@available(watchOS 2.0, *)
 func UIGraphicsBeginPDFPageWithInfo(bounds: CGRect, _ pageInfo: [Object : AnyObject]?)
-@available(watchOS 2.0, *)
 func UIGraphicsGetPDFContextBounds() -> CGRect
-@available(watchOS 2.0, *)
 func UIGraphicsSetPDFContextURLForRect(url: URL, _ rect: CGRect)
-@available(watchOS 2.0, *)
 func UIGraphicsAddPDFContextDestinationAtPoint(name: String, _ point: CGPoint)
-@available(watchOS 2.0, *)
 func UIGraphicsSetPDFContextDestinationForRect(name: String, _ rect: CGRect)
 enum UIImageOrientation : Int {
   init?(rawValue: Int)
@@ -790,7 +574,6 @@ enum UIImageResizingMode : Int {
   case Tile
   case Stretch
 }
-@available(watchOS 2.0, *)
 enum UIImageRenderingMode : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -798,66 +581,43 @@ enum UIImageRenderingMode : Int {
   case AlwaysOriginal
   case AlwaysTemplate
 }
-@available(watchOS 2.0, *)
 class UIImage : Object, SecureCoding {
-  /*not inherited*/ init?(named name: String)
+   init?(named name: String)
   init?(contentsOfFile path: String)
   init?(data: Data)
-  @available(watchOS 2.0, *)
   init?(data: Data, scale: CGFloat)
   init(cgImage: CGImage)
-  @available(watchOS 2.0, *)
   init(cgImage: CGImage, scale: CGFloat, orientation: UIImageOrientation)
   var size: CGSize { get }
   var cgImage: CGImage? { get }
   var imageOrientation: UIImageOrientation { get }
-  @available(watchOS 2.0, *)
   var scale: CGFloat { get }
-  @available(watchOS 2.0, *)
   class func animatedImageNamed(name: String, duration: TimeInterval) -> UIImage?
-  @available(watchOS 2.0, *)
   class func animatedResizableImageNamed(name: String, capInsets: UIEdgeInsets, duration: TimeInterval) -> UIImage?
-  @available(watchOS 2.0, *)
   class func animatedResizableImageNamed(name: String, capInsets: UIEdgeInsets, resizingMode: UIImageResizingMode, duration: TimeInterval) -> UIImage?
-  @available(watchOS 2.0, *)
   class func animatedImageWith(images: [UIImage], duration: TimeInterval) -> UIImage?
-  @available(watchOS 2.0, *)
   var images: [UIImage]? { get }
-  @available(watchOS 2.0, *)
   var duration: TimeInterval { get }
   func drawAt(point: CGPoint)
   func drawAt(point: CGPoint, blendMode: CGBlendMode, alpha: CGFloat)
   func drawIn(rect: CGRect)
   func drawIn(rect: CGRect, blendMode: CGBlendMode, alpha: CGFloat)
   func drawAsPatternIn(rect: CGRect)
-  @available(watchOS 2.0, *)
   func resizableImageWithCapInsets(capInsets: UIEdgeInsets) -> UIImage
-  @available(watchOS 2.0, *)
   func resizableImageWithCapInsets(capInsets: UIEdgeInsets, resizingMode: UIImageResizingMode) -> UIImage
-  @available(watchOS 2.0, *)
   var capInsets: UIEdgeInsets { get }
-  @available(watchOS 2.0, *)
   var resizingMode: UIImageResizingMode { get }
-  @available(watchOS 2.0, *)
   func withAlignmentRectInsets(alignmentInsets: UIEdgeInsets) -> UIImage
-  @available(watchOS 2.0, *)
   var alignmentRectInsets: UIEdgeInsets { get }
-  @available(watchOS 2.0, *)
   func withRenderingMode(renderingMode: UIImageRenderingMode) -> UIImage
-  @available(watchOS 2.0, *)
   var renderingMode: UIImageRenderingMode { get }
-  @available(watchOS 2.0, *)
   func imageFlippedForRightToLeftLayoutDirection() -> UIImage
-  @available(watchOS 2.0, *)
   var flipsForRightToLeftLayoutDirection: Bool { get }
   init()
-  @available(watchOS 2.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(watchOS 2.0, *)
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
 }
-
 extension UIImage : _ImageLiteralConvertible {
   convenience init!(failableImageLiteral name: String)
   required convenience init(imageLiteral name: String)
@@ -869,7 +629,6 @@ extension UIImage {
 }
 func UIImagePNGRepresentation(image: UIImage) -> Data?
 func UIImageJPEGRepresentation(image: UIImage, _ compressionQuality: CGFloat) -> Data?
-@available(watchOS 2.0, *)
 class UILocalNotification : Object, Copying, Coding {
   init()
   init?(coder aDecoder: Coder)
@@ -877,23 +636,17 @@ class UILocalNotification : Object, Copying, Coding {
   @NSCopying var timeZone: TimeZone?
   var repeatInterval: CalendarUnit
   @NSCopying var repeatCalendar: Calendar?
-  @available(watchOS 2.0, *)
   var regionTriggersOnce: Bool
   var alertBody: String?
   var hasAction: Bool
   var alertAction: String?
   var alertLaunchImage: String?
-  @available(watchOS 2.0, *)
   var alertTitle: String?
   var soundName: String?
   var applicationIconBadgeNumber: Int
   var userInfo: [Object : AnyObject]?
-  @available(watchOS 2.0, *)
   var category: String?
-  @available(watchOS 2.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
-  @available(watchOS 2.0, *)
   func encodeWith(aCoder: Coder)
 }
-@available(watchOS 2.0, *)
 let UILocalNotificationDefaultSoundName: String

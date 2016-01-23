@@ -1,7 +1,6 @@
 
 typealias CLBeaconMajorValue = UInt16
 typealias CLBeaconMinorValue = UInt16
-@available(tvOS 7.0, *)
 class CLCircularRegion : CLRegion {
   init(center: CLLocationCoordinate2D, radius: CLLocationDistance, identifier: String)
   var center: CLLocationCoordinate2D { get }
@@ -32,14 +31,12 @@ enum CLError : Int {
   case RangingUnavailable
   case RangingFailure
 }
-
 extension CLError : _BridgedNSError {
   static var _NSErrorDomain: String { get }
   typealias RawValue = Int
 }
 let kCLErrorDomain: String
 typealias CLGeocodeCompletionHandler = ([CLPlacemark]?, Error?) -> Void
-@available(tvOS 5.0, *)
 class CLGeocoder : Object {
   var isGeocoding: Bool { get }
   func reverseGeocodeLocation(location: CLLocation, completionHandler: CLGeocodeCompletionHandler)
@@ -63,57 +60,40 @@ struct CLLocationCoordinate2D {
 }
 typealias CLLocationDistance = Double
 let kCLDistanceFilterNone: CLLocationDistance
-@available(tvOS 4.0, *)
 let kCLLocationAccuracyBestForNavigation: CLLocationAccuracy
 let kCLLocationAccuracyBest: CLLocationAccuracy
 let kCLLocationAccuracyNearestTenMeters: CLLocationAccuracy
 let kCLLocationAccuracyHundredMeters: CLLocationAccuracy
 let kCLLocationAccuracyKilometer: CLLocationAccuracy
 let kCLLocationAccuracyThreeKilometers: CLLocationAccuracy
-@available(tvOS 6.0, *)
 let CLLocationDistanceMax: CLLocationDistance
-@available(tvOS 6.0, *)
 let CLTimeIntervalMax: TimeInterval
-@available(tvOS 4.0, *)
 let kCLLocationCoordinate2DInvalid: CLLocationCoordinate2D
-@available(tvOS 4.0, *)
 func CLLocationCoordinate2DIsValid(coord: CLLocationCoordinate2D) -> Bool
-@available(tvOS 4.0, *)
 func CLLocationCoordinate2DMake(latitude: CLLocationDegrees, _ longitude: CLLocationDegrees) -> CLLocationCoordinate2D
-@available(tvOS 8.0, *)
 class CLFloor : Object, Copying, SecureCoding {
   var level: Int { get }
   init()
-  @available(tvOS 8.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
-  @available(tvOS 8.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(tvOS 8.0, *)
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
 }
-@available(tvOS 2.0, *)
 class CLLocation : Object, Copying, SecureCoding {
   init(latitude: CLLocationDegrees, longitude: CLLocationDegrees)
   init(coordinate: CLLocationCoordinate2D, altitude: CLLocationDistance, horizontalAccuracy hAccuracy: CLLocationAccuracy, verticalAccuracy vAccuracy: CLLocationAccuracy, timestamp: Date)
-  @available(tvOS 4.2, *)
   init(coordinate: CLLocationCoordinate2D, altitude: CLLocationDistance, horizontalAccuracy hAccuracy: CLLocationAccuracy, verticalAccuracy vAccuracy: CLLocationAccuracy, course: CLLocationDirection, speed: CLLocationSpeed, timestamp: Date)
   var coordinate: CLLocationCoordinate2D { get }
   var altitude: CLLocationDistance { get }
   var horizontalAccuracy: CLLocationAccuracy { get }
   var verticalAccuracy: CLLocationAccuracy { get }
   @NSCopying var timestamp: Date { get }
-  @available(tvOS 8.0, *)
   @NSCopying var floor: CLFloor? { get }
   var description: String { get }
-  @available(tvOS 3.2, *)
   func distanceFrom(location: CLLocation) -> CLLocationDistance
   init()
-  @available(tvOS 2.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
-  @available(tvOS 2.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(tvOS 2.0, *)
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
 }
@@ -134,9 +114,7 @@ enum CLAuthorizationStatus : Int32 {
   case NotDetermined
   case Restricted
   case Denied
-  @available(tvOS 8.0, *)
   case AuthorizedAlways
-  @available(tvOS 8.0, *)
   case AuthorizedWhenInUse
 }
 enum CLActivityType : Int {
@@ -147,39 +125,29 @@ enum CLActivityType : Int {
   case Fitness
   case OtherNavigation
 }
-@available(tvOS 2.0, *)
 class CLLocationManager : Object {
-  @available(tvOS 4.0, *)
   class func locationServicesEnabled() -> Bool
-  @available(tvOS 4.2, *)
   class func authorizationStatus() -> CLAuthorizationStatus
   unowned(unsafe) var delegate: @sil_unmanaged CLLocationManagerDelegate?
   var distanceFilter: CLLocationDistance
   var desiredAccuracy: CLLocationAccuracy
   @NSCopying var location: CLLocation? { get }
-  @available(tvOS 8.0, *)
   func requestWhenInUseAuthorization()
   func stopUpdatingLocation()
-  @available(tvOS 9.0, *)
   func requestLocation()
   init()
 }
 protocol CLLocationManagerDelegate : ObjectProtocol {
-  @available(tvOS 6.0, *)
   optional func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
-  @available(tvOS 2.0, *)
   optional func locationManager(manager: CLLocationManager, didFailWithError error: Error)
-  @available(tvOS 4.2, *)
   optional func locationManager(manager: CLLocationManager, didChange status: CLAuthorizationStatus)
 }
 extension CLLocationManager {
 }
-@available(tvOS 5.0, *)
 class CLPlacemark : Object, Copying, SecureCoding {
   init(placemark: CLPlacemark)
   @NSCopying var location: CLLocation? { get }
   @NSCopying var region: CLRegion? { get }
-  @available(tvOS 9.0, *)
   @NSCopying var timeZone: TimeZone? { get }
   var addressDictionary: [Object : AnyObject]? { get }
   var name: String? { get }
@@ -196,28 +164,18 @@ class CLPlacemark : Object, Copying, SecureCoding {
   var ocean: String? { get }
   var areasOfInterest: [String]? { get }
   init()
-  @available(tvOS 5.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
-  @available(tvOS 5.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(tvOS 5.0, *)
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
 }
-@available(tvOS 4.0, *)
 class CLRegion : Object, Copying, SecureCoding {
-  @available(tvOS 4.0, *)
   var identifier: String { get }
-  @available(tvOS 7.0, *)
   var notifyOnEntry: Bool
-  @available(tvOS 7.0, *)
   var notifyOnExit: Bool
   init()
-  @available(tvOS 4.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
-  @available(tvOS 4.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(tvOS 4.0, *)
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
 }

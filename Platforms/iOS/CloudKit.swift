@@ -1,15 +1,12 @@
 
-@available(iOS 8.0, *)
 class CKAsset : Object {
   init(fileURL: URL)
   @NSCopying var fileURL: URL { get }
 }
-@available(iOS 8.0, *)
 let CKOwnerDefaultName: String
-@available(iOS 8.0, *)
 class CKContainer : Object {
   class func defaultContainer() -> CKContainer
-  /*not inherited*/ init(identifier containerIdentifier: String)
+   init(identifier containerIdentifier: String)
   var containerIdentifier: String? { get }
   func add(operation: CKOperation)
 }
@@ -17,7 +14,6 @@ extension CKContainer {
   var privateCloudDatabase: CKDatabase { get }
   var publicCloudDatabase: CKDatabase { get }
 }
-@available(iOS 8.0, *)
 enum CKAccountStatus : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -26,18 +22,15 @@ enum CKAccountStatus : Int {
   case Restricted
   case NoAccount
 }
-@available(iOS 9.0, *)
 let CKAccountChangedNotification: String
 extension CKContainer {
   func accountStatusWithCompletionHandler(completionHandler: (CKAccountStatus, Error?) -> Void)
 }
-@available(iOS 8.0, *)
 struct CKApplicationPermissions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
   static var UserDiscoverability: CKApplicationPermissions { get }
 }
-@available(iOS 8.0, *)
 enum CKApplicationPermissionStatus : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -57,7 +50,6 @@ extension CKContainer {
   func discoverUserInfoWithEmailAddress(email: String, completionHandler: (CKDiscoveredUserInfo?, Error?) -> Void)
   func discoverUserInfoWithUserRecordID(userRecordID: CKRecordID, completionHandler: (CKDiscoveredUserInfo?, Error?) -> Void)
 }
-@available(iOS 8.0, *)
 class CKDatabase : Object {
   func add(operation: CKDatabaseOperation)
 }
@@ -75,17 +67,14 @@ extension CKDatabase {
   func save(subscription: CKSubscription, completionHandler: (CKSubscription?, Error?) -> Void)
   func deleteSubscriptionWithID(subscriptionID: String, completionHandler: (String?, Error?) -> Void)
 }
-@available(iOS 8.0, *)
 class CKDatabaseOperation : CKOperation {
   var database: CKDatabase?
   init()
 }
-@available(iOS 8.0, *)
 class CKDiscoverAllContactsOperation : CKOperation {
   init()
   var discoverAllContactsCompletionBlock: (([CKDiscoveredUserInfo]?, Error?) -> Void)?
 }
-@available(iOS 8.0, *)
 class CKDiscoverUserInfosOperation : CKOperation {
   init()
   convenience init(emailAddresses: [String]?, userRecordIDs: [CKRecordID]?)
@@ -93,29 +82,18 @@ class CKDiscoverUserInfosOperation : CKOperation {
   var userRecordIDs: [CKRecordID]?
   var discoverUserInfosCompletionBlock: (([String : CKDiscoveredUserInfo]?, [CKRecordID : CKDiscoveredUserInfo]?, Error?) -> Void)?
 }
-@available(iOS 8.0, *)
 class CKDiscoveredUserInfo : Object {
   @NSCopying var userRecordID: CKRecordID? { get }
-  @available(iOS, introduced=8.0, deprecated=9.0, message="Use -[[CKDiscoveredUserInfo displayContact] givenName]")
   var firstName: String? { get }
-  @available(iOS, introduced=8.0, deprecated=9.0, message="Use -[[CKDiscoveredUserInfo displayContact] familyName]")
   var lastName: String? { get }
-  @available(iOS 9.0, *)
   @NSCopying var displayContact: CNContact? { get }
 }
-@available(iOS 8.0, *)
 let CKErrorDomain: String
-@available(iOS 8.0, *)
 let CKPartialErrorsByItemIDKey: String
-@available(iOS 8.0, *)
 let CKRecordChangedErrorAncestorRecordKey: String
-@available(iOS 8.0, *)
 let CKRecordChangedErrorServerRecordKey: String
-@available(iOS 8.0, *)
 let CKRecordChangedErrorClientRecordKey: String
-@available(iOS 8.0, *)
 let CKErrorRetryAfterKey: String
-@available(iOS 8.0, *)
 enum CKErrorCode : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -148,13 +126,10 @@ enum CKErrorCode : Int {
   case LimitExceeded
   case UserDeletedZone
 }
-
-@available(OSX 10.10, iOS 8.0, *)
 extension CKErrorCode : _BridgedNSError {
   static var _NSErrorDomain: String { get }
   typealias RawValue = Int
 }
-@available(iOS 8.0, *)
 class CKFetchNotificationChangesOperation : CKOperation {
   init(previousServerChangeToken: CKServerChangeToken?)
   @NSCopying var previousServerChangeToken: CKServerChangeToken?
@@ -164,7 +139,6 @@ class CKFetchNotificationChangesOperation : CKOperation {
   var fetchNotificationChangesCompletionBlock: ((CKServerChangeToken?, Error?) -> Void)?
   init()
 }
-@available(iOS 8.0, *)
 class CKFetchRecordChangesOperation : CKDatabaseOperation {
   init(recordZoneID: CKRecordZoneID, previousServerChangeToken: CKServerChangeToken?)
   @NSCopying var recordZoneID: CKRecordZoneID
@@ -177,7 +151,6 @@ class CKFetchRecordChangesOperation : CKDatabaseOperation {
   var fetchRecordChangesCompletionBlock: ((CKServerChangeToken?, Data?, Error?) -> Void)?
   init()
 }
-@available(iOS 8.0, *)
 class CKFetchRecordZonesOperation : CKDatabaseOperation {
   class func fetchAll() -> Self
   init()
@@ -185,7 +158,6 @@ class CKFetchRecordZonesOperation : CKDatabaseOperation {
   var recordZoneIDs: [CKRecordZoneID]?
   var fetchRecordZonesCompletionBlock: (([CKRecordZoneID : CKRecordZone]?, Error?) -> Void)?
 }
-@available(iOS 8.0, *)
 class CKFetchRecordsOperation : CKDatabaseOperation {
   init()
   convenience init(recordIDs: [CKRecordID])
@@ -196,7 +168,6 @@ class CKFetchRecordsOperation : CKDatabaseOperation {
   var perRecordCompletionBlock: ((CKRecord?, CKRecordID?, Error?) -> Void)?
   var fetchRecordsCompletionBlock: (([CKRecordID : CKRecord]?, Error?) -> Void)?
 }
-@available(iOS 8.0, *)
 class CKFetchSubscriptionsOperation : CKDatabaseOperation {
   init()
   class func fetchAll() -> Self
@@ -204,30 +175,25 @@ class CKFetchSubscriptionsOperation : CKDatabaseOperation {
   var subscriptionIDs: [String]?
   var fetchSubscriptionCompletionBlock: (([String : CKSubscription]?, Error?) -> Void)?
 }
-@available(iOS 8.0, *)
 class CKLocationSortDescriptor : SortDescriptor, SecureCoding {
   init(key: String, relativeLocation: CLLocation)
   init(coder aDecoder: Coder)
   @NSCopying var relativeLocation: CLLocation { get }
   convenience init(key: String?, ascending: Bool)
   convenience init(key: String?, ascending: Bool, selector: Selector)
-  @available(iOS 4.0, *)
   convenience init(key: String?, ascending: Bool, comparator cmptr: Comparator)
 }
-@available(iOS 8.0, *)
 class CKMarkNotificationsReadOperation : CKOperation {
   init(notificationIDsToMarkRead notificationIDs: [CKNotificationID])
   var notificationIDs: [CKNotificationID]
   var markNotificationsReadCompletionBlock: (([CKNotificationID]?, Error?) -> Void)?
 }
-@available(iOS 8.0, *)
 class CKModifyBadgeOperation : CKOperation {
   init()
   convenience init(badgeValue: Int)
   var badgeValue: Int
   var modifyBadgeCompletionBlock: ((Error?) -> Void)?
 }
-@available(iOS 8.0, *)
 class CKModifyRecordZonesOperation : CKDatabaseOperation {
   init()
   convenience init(recordZonesToSave: [CKRecordZone]?, recordZoneIDsToDelete: [CKRecordZoneID]?)
@@ -235,7 +201,6 @@ class CKModifyRecordZonesOperation : CKDatabaseOperation {
   var recordZoneIDsToDelete: [CKRecordZoneID]?
   var modifyRecordZonesCompletionBlock: (([CKRecordZone]?, [CKRecordZoneID]?, Error?) -> Void)?
 }
-@available(iOS 8.0, *)
 enum CKRecordSavePolicy : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -243,7 +208,6 @@ enum CKRecordSavePolicy : Int {
   case ChangedKeys
   case AllKeys
 }
-@available(iOS 8.0, *)
 class CKModifyRecordsOperation : CKDatabaseOperation {
   init()
   convenience init(recordsToSave records: [CKRecord]?, recordIDsToDelete recordIDs: [CKRecordID]?)
@@ -256,7 +220,6 @@ class CKModifyRecordsOperation : CKDatabaseOperation {
   var perRecordCompletionBlock: ((CKRecord?, Error?) -> Void)?
   var modifyRecordsCompletionBlock: (([CKRecord]?, [CKRecordID]?, Error?) -> Void)?
 }
-@available(iOS 8.0, *)
 class CKModifySubscriptionsOperation : CKDatabaseOperation {
   init(subscriptionsToSave: [CKSubscription]?, subscriptionIDsToDelete: [String]?)
   var subscriptionsToSave: [CKSubscription]?
@@ -264,18 +227,13 @@ class CKModifySubscriptionsOperation : CKDatabaseOperation {
   var modifySubscriptionsCompletionBlock: (([CKSubscription]?, [String]?, Error?) -> Void)?
   convenience init()
 }
-@available(iOS 8.0, *)
 class CKNotificationID : Object, Copying, SecureCoding {
   init()
-  @available(iOS 8.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
-  @available(iOS 8.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(iOS 8.0, *)
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
 }
-@available(iOS 8.0, *)
 enum CKNotificationType : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -283,7 +241,6 @@ enum CKNotificationType : Int {
   case RecordZone
   case ReadNotification
 }
-@available(iOS 8.0, *)
 class CKNotification : Object {
   convenience init(fromRemoteNotificationDictionary notificationDictionary: [String : Object])
   var notificationType: CKNotificationType { get }
@@ -297,12 +254,9 @@ class CKNotification : Object {
   var alertLaunchImage: String? { get }
   @NSCopying var badge: Number? { get }
   var soundName: String? { get }
-  @available(iOS 9.0, *)
   var subscriptionID: String? { get }
-  @available(iOS 9.0, *)
   var category: String? { get }
 }
-@available(iOS 8.0, *)
 enum CKQueryNotificationReason : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -310,7 +264,6 @@ enum CKQueryNotificationReason : Int {
   case RecordUpdated
   case RecordDeleted
 }
-@available(iOS 8.0, *)
 class CKQueryNotification : CKNotification {
   var queryNotificationReason: CKQueryNotificationReason { get }
   var recordFields: [String : CKRecordValue]? { get }
@@ -318,47 +271,34 @@ class CKQueryNotification : CKNotification {
   var isPublicDatabase: Bool { get }
   convenience init(fromRemoteNotificationDictionary notificationDictionary: [String : Object])
 }
-@available(iOS 8.0, *)
 class CKRecordZoneNotification : CKNotification {
   @NSCopying var recordZoneID: CKRecordZoneID? { get }
   convenience init(fromRemoteNotificationDictionary notificationDictionary: [String : Object])
 }
-@available(iOS 8.0, *)
 class CKOperation : Operation {
   init()
   func activityStart() -> os_activity_t
   var container: CKContainer?
-  @available(iOS, introduced=8.0, deprecated=9.0, message="Set qualityOfService to NSQualityOfServiceUtility or NSQualityOfServiceBackground")
   var usesBackgroundSession: Bool
   var allowsCellularAccess: Bool
 }
-@available(iOS 8.0, *)
 class CKQuery : Object, SecureCoding, Copying {
   init(coder aDecoder: Coder)
   init(recordType: String, predicate: Predicate)
   var recordType: String { get }
   @NSCopying var predicate: Predicate { get }
   var sortDescriptors: [SortDescriptor]?
-  @available(iOS 8.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(iOS 8.0, *)
   func encodeWith(aCoder: Coder)
-  @available(iOS 8.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
 }
-@available(iOS 8.0, *)
 class CKQueryCursor : Object, Copying, SecureCoding {
-  @available(iOS 8.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
-  @available(iOS 8.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(iOS 8.0, *)
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
 }
-@available(iOS 8.0, *)
 let CKQueryOperationMaximumResults: Int
-@available(iOS 8.0, *)
 class CKQueryOperation : CKDatabaseOperation {
   init()
   convenience init(query: CKQuery)
@@ -371,11 +311,9 @@ class CKQueryOperation : CKDatabaseOperation {
   var recordFetchedBlock: ((CKRecord) -> Void)?
   var queryCompletionBlock: ((CKQueryCursor?, Error?) -> Void)?
 }
-@available(iOS 8.0, *)
 let CKRecordTypeUserRecord: String
 protocol CKRecordValue : ObjectProtocol {
 }
-@available(iOS 8.0, *)
 class CKRecord : Object, SecureCoding, Copying {
   init(recordType: String)
   init(recordType: String, recordID: CKRecordID)
@@ -394,12 +332,9 @@ class CKRecord : Object, SecureCoding, Copying {
   subscript (key: String) -> CKRecordValue?
   func changedKeys() -> [String]
   func encodeSystemFieldsWith(coder: Coder)
-  @available(iOS 8.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(iOS 8.0, *)
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
-  @available(iOS 8.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
 }
 extension NSString : CKRecordValue {
@@ -418,96 +353,71 @@ extension CKAsset : CKRecordValue {
 }
 extension CLLocation : CKRecordValue {
 }
-@available(iOS 8.0, *)
 class CKRecordID : Object, SecureCoding, Copying {
   convenience init(recordName: String)
   init(recordName: String, zoneID: CKRecordZoneID)
   var recordName: String { get }
   var zoneID: CKRecordZoneID { get }
-  @available(iOS 8.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(iOS 8.0, *)
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
-  @available(iOS 8.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
 }
-@available(iOS 8.0, *)
 struct CKRecordZoneCapabilities : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
   static var FetchChanges: CKRecordZoneCapabilities { get }
   static var Atomic: CKRecordZoneCapabilities { get }
 }
-@available(iOS 8.0, *)
 let CKRecordZoneDefaultName: String
-@available(iOS 8.0, *)
 class CKRecordZone : Object, SecureCoding, Copying {
   class func defaultRecordZone() -> CKRecordZone
   init(zoneName: String)
   init(zoneID: CKRecordZoneID)
   var zoneID: CKRecordZoneID { get }
   var capabilities: CKRecordZoneCapabilities { get }
-  @available(iOS 8.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(iOS 8.0, *)
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
-  @available(iOS 8.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
 }
-@available(iOS 8.0, *)
 class CKRecordZoneID : Object, SecureCoding, Copying {
   init(zoneName: String, ownerName: String)
   var zoneName: String { get }
   var ownerName: String { get }
-  @available(iOS 8.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(iOS 8.0, *)
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
-  @available(iOS 8.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
 }
-@available(iOS 8.0, *)
 enum CKReferenceAction : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case None
   case DeleteSelf
 }
-@available(iOS 8.0, *)
 class CKReference : Object, SecureCoding, Copying {
   init(recordID: CKRecordID, action: CKReferenceAction)
   convenience init(record: CKRecord, action: CKReferenceAction)
   var referenceAction: CKReferenceAction { get }
   @NSCopying var recordID: CKRecordID { get }
-  @available(iOS 8.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(iOS 8.0, *)
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
-  @available(iOS 8.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
 }
-@available(iOS 8.0, *)
 class CKServerChangeToken : Object, Copying, SecureCoding {
-  @available(iOS 8.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
-  @available(iOS 8.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(iOS 8.0, *)
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
 }
-@available(iOS 8.0, *)
 enum CKSubscriptionType : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case Query
   case RecordZone
 }
-@available(iOS 8.0, *)
 struct CKSubscriptionOptions : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
@@ -516,7 +426,6 @@ struct CKSubscriptionOptions : OptionSetType {
   static var FiresOnRecordDeletion: CKSubscriptionOptions { get }
   static var FiresOnce: CKSubscriptionOptions { get }
 }
-@available(iOS 8.0, *)
 class CKSubscription : Object, SecureCoding, Copying {
   init(coder aDecoder: Coder)
   convenience init(recordType: String, predicate: Predicate, options subscriptionOptions: CKSubscriptionOptions = [])
@@ -530,14 +439,10 @@ class CKSubscription : Object, SecureCoding, Copying {
   var subscriptionOptions: CKSubscriptionOptions { get }
   @NSCopying var notificationInfo: CKNotificationInfo?
   @NSCopying var zoneID: CKRecordZoneID?
-  @available(iOS 8.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(iOS 8.0, *)
   func encodeWith(aCoder: Coder)
-  @available(iOS 8.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
 }
-@available(iOS 8.0, *)
 class CKNotificationInfo : Object, SecureCoding, Copying {
   var alertBody: String?
   var alertLocalizationKey: String?
@@ -548,14 +453,10 @@ class CKNotificationInfo : Object, SecureCoding, Copying {
   var desiredKeys: [String]?
   var shouldBadge: Bool
   var shouldSendContentAvailable: Bool
-  @available(iOS 9.0, *)
   var category: String?
   init()
-  @available(iOS 8.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(iOS 8.0, *)
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
-  @available(iOS 8.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
 }

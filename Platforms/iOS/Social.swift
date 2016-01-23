@@ -1,5 +1,4 @@
 
-@available(iOS 8.0, *)
 class SLComposeServiceViewController : UIViewController, UITextViewDelegate {
   func presentationAnimationDidFinish()
   var textView: UITextView! { get }
@@ -20,53 +19,30 @@ class SLComposeServiceViewController : UIViewController, UITextViewDelegate {
   init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
   init?(coder aDecoder: Coder)
   convenience init()
-  @available(iOS 8.0, *)
   func textViewShouldBeginEditing(textView: UITextView) -> Bool
-  @available(iOS 8.0, *)
   func textViewShouldEndEditing(textView: UITextView) -> Bool
-  @available(iOS 8.0, *)
   func textViewDidBeginEditing(textView: UITextView)
-  @available(iOS 8.0, *)
   func textViewDidEndEditing(textView: UITextView)
-  @available(iOS 8.0, *)
   func textView(textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
-  @available(iOS 8.0, *)
   func textViewDidChange(textView: UITextView)
-  @available(iOS 8.0, *)
   func textViewDidChangeSelection(textView: UITextView)
-  @available(iOS 7.0, *)
   func textView(textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool
-  @available(iOS 7.0, *)
   func textView(textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange) -> Bool
-  @available(iOS 8.0, *)
   func scrollViewDidScroll(scrollView: UIScrollView)
-  @available(iOS 3.2, *)
   func scrollViewDidZoom(scrollView: UIScrollView)
-  @available(iOS 8.0, *)
   func scrollViewWillBeginDragging(scrollView: UIScrollView)
-  @available(iOS 5.0, *)
   func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>)
-  @available(iOS 8.0, *)
   func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool)
-  @available(iOS 8.0, *)
   func scrollViewWillBeginDecelerating(scrollView: UIScrollView)
-  @available(iOS 8.0, *)
   func scrollViewDidEndDecelerating(scrollView: UIScrollView)
-  @available(iOS 8.0, *)
   func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView)
-  @available(iOS 8.0, *)
   func viewForZoomingIn(scrollView: UIScrollView) -> UIView?
-  @available(iOS 3.2, *)
   func scrollViewWillBeginZooming(scrollView: UIScrollView, withView view: UIView?)
-  @available(iOS 8.0, *)
   func scrollViewDidEndZooming(scrollView: UIScrollView, withView view: UIView?, atScale scale: CGFloat)
-  @available(iOS 8.0, *)
   func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool
-  @available(iOS 8.0, *)
   func scrollViewDidScrollToTop(scrollView: UIScrollView)
 }
 typealias SLComposeSheetConfigurationItemTapHandler = () -> Void
-@available(iOS 8.0, *)
 class SLComposeSheetConfigurationItem : Object {
   init!()
   var title: String!
@@ -81,10 +57,9 @@ enum SLComposeViewControllerResult : Int {
   case Done
 }
 typealias SLComposeViewControllerCompletionHandler = (SLComposeViewControllerResult) -> Void
-@available(iOS 6.0, *)
 class SLComposeViewController : UIViewController {
   class func isAvailableForServiceType(serviceType: String!) -> Bool
-  /*not inherited*/ init!(forServiceType serviceType: String!)
+   init!(forServiceType serviceType: String!)
   var serviceType: String! { get }
   func setInitialText(text: String!) -> Bool
   func add(image: UIImage!) -> Bool
@@ -105,9 +80,8 @@ enum SLRequestMethod : Int {
   case PUT
 }
 typealias SLRequestHandler = (Data!, HTTPURLResponse!, Error!) -> Void
-@available(iOS 6.0, *)
 class SLRequest : Object {
-  /*not inherited*/ init!(forServiceType serviceType: String!, requestMethod: SLRequestMethod, url: URL!, parameters: [Object : AnyObject]!)
+   init!(forServiceType serviceType: String!, requestMethod: SLRequestMethod, url: URL!, parameters: [Object : AnyObject]!)
   var requestMethod: SLRequestMethod { get }
   var url: URL! { get }
   var parameters: [Object : AnyObject]! { get }
@@ -116,11 +90,7 @@ class SLRequest : Object {
   func performWithHandler(handler: SLRequestHandler!)
   init()
 }
-@available(iOS 6.0, *)
 let SLServiceTypeTwitter: String
-@available(iOS 6.0, *)
 let SLServiceTypeFacebook: String
-@available(iOS 6.0, *)
 let SLServiceTypeSinaWeibo: String
-@available(iOS 7.0, *)
 let SLServiceTypeTencentWeibo: String

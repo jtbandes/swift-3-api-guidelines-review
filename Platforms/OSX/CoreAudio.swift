@@ -1,262 +1,21 @@
 
 var kAudioObjectSystemObject: Int32 { get }
-
-/*!
-    @typedef        AudioObjectPropertyListenerProc
-    @abstract       Clients register an AudioObjectPropertyListenerProc with an AudioObject in order
-                    to receive notifications when the properties of the object change.
-    @discussion     Listeners will be called when possibly many properties have changed.
-                    Consequently, the implementation of a listener must go through the array of
-                    addresses to see what exactly has changed. Note that the array of addresses will
-                    always have at least one address in it for which the listener is signed up to
-                    receive notifications about but may contain addresses for properties for which
-                    the listener is not signed up to receive notifications.
-    @param          inObjectID
-                        The AudioObject whose properties have changed.
-    @param          inNumberAddresses
-                        The number of elements in the inAddresses array.
-    @param          inAddresses
-                        An array of AudioObjectPropertyAddresses indicating which properties
-                        changed.
-    @param          inClientData
-                        A pointer to client data established when the listener proc was registered
-                        with the AudioObject.
-    @result         The return value is currently unused and should always be 0.
-*/
 typealias AudioObjectPropertyListenerProc = @convention(c) (AudioObjectID, UInt32, UnsafePointer<AudioObjectPropertyAddress>, UnsafeMutablePointer<Void>) -> OSStatus
-
-/*!
-    @typedef        AudioObjectPropertyListenerBlock
-    @abstract       Clients register an AudioObjectPropertyListenerBlock with an AudioObject in
-                    order to receive notifications when the properties of the object change.
-    @discussion     Listeners will be called when possibly many properties have changed.
-                    Consequently, the implementation of a listener must go through the array of
-                    addresses to see what exactly has changed. Note that the array of addresses will
-                    always have at least one address in it for which the listener is signed up to
-                    receive notifications about but may contain addresses for properties for which
-                    the listener is not signed up to receive notifications.
-    @param          inNumberAddresses
-                        The number of elements in the inAddresses array.
-    @param          inAddresses
-                        An array of AudioObjectPropertyAddresses indicating which properties
-                        changed.
-*/
 typealias AudioObjectPropertyListenerBlock = (UInt32, UnsafePointer<AudioObjectPropertyAddress>) -> Void
 var kAudioObjectPropertyCreator: AudioObjectPropertySelector { get }
 var kAudioObjectPropertyListenerAdded: AudioObjectPropertySelector { get }
 var kAudioObjectPropertyListenerRemoved: AudioObjectPropertySelector { get }
-
-/*!
-    @function       AudioObjectShow
-    @abstract       Prints to standard out a textural description of the AudioObject.
-    @param          inObjectID
-                        The AudioObject to show.
-*/
-@available(OSX 10.4, *)
 func AudioObjectShow(inObjectID: AudioObjectID)
-
-/*!
-    @function       AudioObjectHasProperty
-    @abstract       Queries an AudioObject about whether or not it has the given property.
-    @param          inObjectID
-                        The AudioObject to query.
-    @param          inAddress
-                        An AudioObjectPropertyAddress indicating which property is being queried.
-    @result         A Boolean indicating whether or not the AudioObject has the given property.
-*/
-@available(OSX 10.4, *)
 func AudioObjectHasProperty(inObjectID: AudioObjectID, _ inAddress: UnsafePointer<AudioObjectPropertyAddress>) -> Bool
-
-/*!
-    @function       AudioObjectIsPropertySettable
-    @abstract       Queries an AudioObject about whether or not the given property can be set using
-                    AudioObjectSetPropertyData.
-    @param          inObjectID
-                        The AudioObject to query.
-    @param          inAddress
-                        An AudioObjectPropertyAddress indicating which property is being queried.
-    @param          outIsSettable
-                        A Boolean indicating whether or not the property can be set.
-    @result         An OSStatus indicating success or failure.
-*/
-@available(OSX 10.4, *)
 func AudioObjectIsPropertySettable(inObjectID: AudioObjectID, _ inAddress: UnsafePointer<AudioObjectPropertyAddress>, _ outIsSettable: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-
-/*!
-    @function       AudioObjectGetPropertyDataSize
-    @abstract       Queries an AudioObject to find the size of the data for the given property.
-    @param          inObjectID
-                        The AudioObject to query.
-    @param          inAddress
-                        An AudioObjectPropertyAddress indicating which property is being queried.
-    @param          inQualifierDataSize
-                        A UInt32 indicating the size of the buffer pointed to by inQualifierData.
-                        Note that not all properties require qualification, in which case this
-                        value will be 0.
-    @param          inQualifierData,
-                        A buffer of data to be used in determining the data of the property being
-                        queried. Note that not all properties require qualification, in which case
-                        this value will be NULL.
-    @param          outDataSize
-                        A UInt32 indicating how many bytes the data for the given property occupies.
-    @result         An OSStatus indicating success or failure.
-*/
-@available(OSX 10.4, *)
 func AudioObjectGetPropertyDataSize(inObjectID: AudioObjectID, _ inAddress: UnsafePointer<AudioObjectPropertyAddress>, _ inQualifierDataSize: UInt32, _ inQualifierData: UnsafePointer<Void>, _ outDataSize: UnsafeMutablePointer<UInt32>) -> OSStatus
-
-/*!
-    @function       AudioObjectGetPropertyData
-    @abstract       Queries an AudioObject to get the data of the given property and places it in
-                    the provided buffer.
-    @param          inObjectID
-                        The AudioObject to query.
-    @param          inAddress
-                        An AudioObjectPropertyAddress indicating which property is being queried.
-    @param          inQualifierDataSize
-                        A UInt32 indicating the size of the buffer pointed to by inQualifierData.
-                        Note that not all properties require qualification, in which case this
-                        value will be 0.
-    @param          inQualifierData,
-                        A buffer of data to be used in determining the data of the property being
-                        queried. Note that not all properties require qualification, in which case
-                        this value will be NULL.
-    @param          ioDataSize
-                        A UInt32 which on entry indicates the size of the buffer pointed to by
-                        outData and on exit indicates how much of the buffer was used.
-    @param          outData
-                        The buffer into which the AudioObject will put the data for the given
-                        property.
-    @result         An OSStatus indicating success or failure.
-*/
-@available(OSX 10.4, *)
 func AudioObjectGetPropertyData(inObjectID: AudioObjectID, _ inAddress: UnsafePointer<AudioObjectPropertyAddress>, _ inQualifierDataSize: UInt32, _ inQualifierData: UnsafePointer<Void>, _ ioDataSize: UnsafeMutablePointer<UInt32>, _ outData: UnsafeMutablePointer<Void>) -> OSStatus
-
-/*!
-    @function       AudioObjectSetPropertyData
-    @abstract       Tells an AudioObject to change the value of the given property using the
-                    provided data.
-    @discussion     Note that the value of the property should not be considered changed until the
-                    HAL has called the listeners as many properties values are changed
-                    asynchronously.
-    @param          inObjectID
-                        The AudioObject to change.
-    @param          inAddress
-                        An AudioObjectPropertyAddress indicating which property is being changed.
-    @param          inQualifierDataSize
-                        A UInt32 indicating the size of the buffer pointed to by inQualifierData.
-                        Note that not all properties require qualification, in which case this
-                        value will be 0.
-    @param          inQualifierData,
-                        A buffer of data to be used in determining the data of the property being
-                        queried. Note that not all properties require qualification, in which case
-                        this value will be NULL.
-    @param          inDataSize
-                        A UInt32 indicating the size of the buffer pointed to by inData.
-    @param          inData
-                        The buffer containing the data to be used to change the property's value.
-    @result         An OSStatus indicating success or failure.
-*/
-@available(OSX 10.4, *)
 func AudioObjectSetPropertyData(inObjectID: AudioObjectID, _ inAddress: UnsafePointer<AudioObjectPropertyAddress>, _ inQualifierDataSize: UInt32, _ inQualifierData: UnsafePointer<Void>, _ inDataSize: UInt32, _ inData: UnsafePointer<Void>) -> OSStatus
-
-/*!
-    @function       AudioObjectAddPropertyListener
-    @abstract       Registers the given AudioObjectPropertyListenerProc to receive notifications
-                    when the given properties change.
-    @param          inObjectID
-                        The AudioObject to register the listener with.
-    @param          inAddress
-                        The AudioObjectPropertyAddresses indicating which property the listener
-                        should be notified about.
-    @param          inListener
-                        The AudioObjectPropertyListenerProc to call.
-    @param          inClientData
-                        A pointer to client data that is passed to the listener when it is called.
-    @result         An OSStatus indicating success or failure.
-*/
-@available(OSX 10.4, *)
 func AudioObjectAddPropertyListener(inObjectID: AudioObjectID, _ inAddress: UnsafePointer<AudioObjectPropertyAddress>, _ inListener: AudioObjectPropertyListenerProc, _ inClientData: UnsafeMutablePointer<Void>) -> OSStatus
-
-/*!
-    @function       AudioObjectRemovePropertyListener
-    @abstract       Unregisters the given AudioObjectPropertyListenerProc from receiving
-                    notifications when the given properties change.
-    @param          inObjectID
-                        The AudioObject to unregister the listener from.
-    @param          inAddress
-                        The AudioObjectPropertyAddress indicating from which property the listener
-                        should be removed.
-    @param          inListener
-                        The AudioObjectPropertyListenerProc being removed.
-    @param          inClientData
-                        A pointer to client data that is passed to the listener when it is called.
-    @result         An OSStatus indicating success or failure.
-*/
-@available(OSX 10.4, *)
 func AudioObjectRemovePropertyListener(inObjectID: AudioObjectID, _ inAddress: UnsafePointer<AudioObjectPropertyAddress>, _ inListener: AudioObjectPropertyListenerProc, _ inClientData: UnsafeMutablePointer<Void>) -> OSStatus
-
-/*!
-    @function       AudioObjectAddPropertyListenerBlock
-    @abstract       Registers the given AudioObjectPropertyListenerBlock to receive notifications
-                    when the given properties change.
-    @param          inObjectID
-                        The AudioObject to register the listener with.
-    @param          inAddress
-                        The AudioObjectPropertyAddresses indicating which property the listener
-                        should be notified about.
-    @param          inDispatchQueue
-                        The dispatch queue on which the listener block will be dispatched. All
-                        listener blocks will be dispatched asynchronously save for those dispatched
-                        from the IO context (of which kAudioDevicePropertyDeviceIsRunning and
-                        kAudioDeviceProcessorOverload are the only examples) which will be
-                        dispatched synchronously. Note that this dispatch queue will be retained
-                        until a matching call to AudioObjectRemovePropertyListenerBlock is made. If
-                        this value is NULL, then the block will be directly invoked.
-    @param          inListener
-                        The AudioObjectPropertyListenerBlock to call. Note that this block will be
-                        Block_copy'd and the reference maintained until a matching call to
-                        AudioObjectRemovePropertyListenerBlock is made.
-    @result         An OSStatus indicating success or failure.
-*/
-@available(OSX 10.7, *)
 func AudioObjectAddPropertyListenerBlock(inObjectID: AudioObjectID, _ inAddress: UnsafePointer<AudioObjectPropertyAddress>, _ inDispatchQueue: dispatch_queue_t?, _ inListener: AudioObjectPropertyListenerBlock) -> OSStatus
-
-/*!
-    @function       AudioObjectRemovePropertyListenerBlock
-    @abstract       Unregisters the given AudioObjectPropertyListenerBlock from receiving
-                    notifications when the given properties change.
-    @param          inObjectID
-                        The AudioObject to unregister the listener from.
-    @param          inAddress
-                        The AudioObjectPropertyAddress indicating from which property the listener
-                        should be removed.
-    @param          inDispatchQueue
-                        The dispatch queue on which the listener block was being dispatched to. 
-    @param          inListener
-                        The AudioObjectPropertyListenerBlock being removed.
-    @result         An OSStatus indicating success or failure.
-*/
-@available(OSX 10.7, *)
 func AudioObjectRemovePropertyListenerBlock(inObjectID: AudioObjectID, _ inAddress: UnsafePointer<AudioObjectPropertyAddress>, _ inDispatchQueue: dispatch_queue_t?, _ inListener: AudioObjectPropertyListenerBlock) -> OSStatus
 var kAudioSystemObjectClassID: AudioClassID { get }
-
-/*!
-    @enum           Power Hints
-    @abstract       The values for kAudioHardwarePropertyPowerHint
-    @discussion     The system object property, kAudioHardwarePropertyPowerHint, allows a process to
-                    to indicate how aggressive the system can be with optimizations that save power.
-                    Note that the value of this property can be set in an application's info.plist
-                    using the key, "AudioHardwarePowerHint". The values for this key are the strings
-                    that correspond to the values in the enum.
-    @constant       kAudioHardwarePowerHintNone
-                        This is the default value and it indicates that the system will not make any
-                        power optimizations that compromise latency or quality in order to save
-                        power. The info.plist value is "None" or the "AudioHardwarePowerHint" entry
-                        can be omitted entirely.
-    @constant       kAudioHardwarePowerHintFavorSavingPower
-                        The system will choose to save power even at the expense of latency. The
-                        info.plist value is "Favor Saving Power"
-*/
 enum AudioHardwarePowerHint : UInt32 {
   init?(rawValue: UInt32)
   var rawValue: UInt32 { get }
@@ -285,151 +44,16 @@ var kAudioHardwarePropertyHogModeIsAllowed: AudioObjectPropertySelector { get }
 var kAudioHardwarePropertyUserSessionIsActiveOrHeadless: AudioObjectPropertySelector { get }
 var kAudioHardwarePropertyServiceRestarted: AudioObjectPropertySelector { get }
 var kAudioHardwarePropertyPowerHint: AudioObjectPropertySelector { get }
-
-/*!
-    @function       AudioHardwareUnload
-    @abstract       When this routine is called, all IO on all devices within a process will be
-                    terminated and all resources capable of being released will be released. This
-                    routine essentially returns the HAL to its uninitialized state.
-    @result         An OSStatus indicating success or failure.
-*/
-@available(OSX 10.1, *)
 func AudioHardwareUnload() -> OSStatus
-
-/*!
-    @function       AudioHardwareCreateAggregateDevice
-    @abstract       This routine creates a new AudioAggregateDevice using the provided description.
-    @param          inDescription
-                        The CFDictionary that specifies how to build the AudioAggregateDevice. The
-                        supported keys are described in the AudioAggregateDevice Constants section.
-    @param          outDeviceID
-                        The AudioObjectID of the newly created AudioAggregateDevice.
-    @result         An OSStatus indicating success or failure.
-*/
-@available(OSX 10.9, *)
 func AudioHardwareCreateAggregateDevice(inDescription: CFDictionary, _ outDeviceID: UnsafeMutablePointer<AudioObjectID>) -> OSStatus
-
-/*!
-    @function       AudioHardwareDestroyAggregateDevice
-    @abstract       This routine destroys the given AudioAggregateDevice.
-    @discussion     The actual destruction of the device is asynchronous and may take place after
-                    the call to this routine has returned.
-    @param          inDeviceID
-                        The AudioObjectID of the AudioAggregateDevice to destroy.
-    @result         An OSStatus indicating success or failure.
-*/
-@available(OSX 10.9, *)
 func AudioHardwareDestroyAggregateDevice(inDeviceID: AudioObjectID) -> OSStatus
 var kAudioPlugInCreateAggregateDevice: AudioObjectPropertySelector { get }
 var kAudioPlugInDestroyAggregateDevice: AudioObjectPropertySelector { get }
 var kAudioTransportManagerCreateEndPointDevice: AudioObjectPropertySelector { get }
 var kAudioTransportManagerDestroyEndPointDevice: AudioObjectPropertySelector { get }
-
-/*!
-    @typedef        AudioDeviceIOProc
-    @abstract       An AudioDeviceIOProc is called by an AudioDevice to provide input data read from
-                    the device and collect output data to be written to the device for the current
-                    IO cycle.
-    @param          inDevice
-                        The AudioDevice doing the IO.
-    @param          inNow
-                        An AudioTimeStamp that indicates the IO cycle started. Note that this time
-                        includes any scheduling latency that may have been incurred waking the
-                        thread on which IO is being done.
-    @param          inInputData
-                        An AudioBufferList containing the input data for the current IO cycle. For
-                        streams that are disabled, the AudioBuffer's mData field will be NULL but
-                        the mDataByteSize field will still say how much data would have been there
-                        if it was enabled. Note that the contents of this structure should never be
-                        modified.
-    @param          inInputTime
-                        An AudioTimeStamp that indicates the time at which the first frame in the
-                        data was acquired from the hardware. If the device has no input streams, the
-                        time stamp will be zeroed out.
-    @param          outOutputData
-                        An AudioBufferList in which the output data for the current IO cycle is to
-                        be placed. On entry, each AudioBuffer's mDataByteSize field indicates the
-                        maximum amount of data that can be placed in the buffer and the buffer's
-                        memory has been zeroed out. For formats where the number of bytes per packet
-                        can vary (as with AC-3, for example), the client has to fill out on exit
-                        each mDataByteSize field in each AudioBuffer with the amount of data that
-                        was put in the buffer. Otherwise, the mDataByteSize field should not be
-                        changed. For streams that are disabled, the AudioBuffer's mData field will
-                        be NULL but the mDataByteSize field will still say how much data would have
-                        been there if it was enabled. Except as noted above, the contents of this
-                        structure should not other wise be modified.
-    @param          inOutputTime
-                        An AudioTimeStamp that indicates the time at which the first frame in the
-                        data will be passed to the hardware. If the device has no output streams,
-                        the time stamp will be zeroed out.
-    @param          inClientData
-                        A pointer to client data established when the AudioDeviceIOProc was
-                        registered with the AudioDevice.
-    @result         The return value is currently unused and should always be 0.
-*/
 typealias AudioDeviceIOProc = @convention(c) (AudioObjectID, UnsafePointer<AudioTimeStamp>, UnsafePointer<AudioBufferList>, UnsafePointer<AudioTimeStamp>, UnsafeMutablePointer<AudioBufferList>, UnsafePointer<AudioTimeStamp>, UnsafeMutablePointer<Void>) -> OSStatus
-
-/*!
-    @typedef        AudioDeviceIOBlock
-    @abstract       An AudioDeviceIOBlock is called by an AudioDevice to provide input data read 
-                    from the device and collect output data to be written to the device for the
-                    current IO cycle.
-    @param          inNow
-                        An AudioTimeStamp that indicates the IO cycle started. Note that this time
-                        includes any scheduling latency that may have been incurred waking the
-                        thread on which IO is being done.
-    @param          inInputData
-                        An AudioBufferList containing the input data for the current IO cycle. For
-                        streams that are disabled, the AudioBuffer's mData field will be NULL but
-                        the mDataByteSize field will still say how much data would have been there
-                        if it was enabled. Note that the contents of this structure should never be
-                        modified.
-    @param          inInputTime
-                        An AudioTimeStamp that indicates the time at which the first frame in the
-                        data was acquired from the hardware. If the device has no input streams, the
-                        time stamp will be zeroed out.
-    @param          outOutputData
-                        An AudioBufferList in which the output data for the current IO cycle is to
-                        be placed. On entry, each AudioBuffer's mDataByteSize field indicates the
-                        maximum amount of data that can be placed in the buffer and the buffer's
-                        memory has been zeroed out. For formats where the number of bytes per packet
-                        can vary (as with AC-3, for example), the client has to fill out on exit
-                        each mDataByteSize field in each AudioBuffer with the amount of data that
-                        was put in the buffer. Otherwise, the mDataByteSize field should not be
-                        changed. For streams that are disabled, the AudioBuffer's mData field will
-                        be NULL but the mDataByteSize field will still say how much data would have
-                        been there if it was enabled. Except as noted above, the contents of this
-                        structure should not other wise be modified.
-    @param          inOutputTime
-                        An AudioTimeStamp that indicates the time at which the first frame in the
-                        data will be passed to the hardware. If the device has no output streams,
-                        the time stamp will be zeroed out.
-*/
 typealias AudioDeviceIOBlock = (UnsafePointer<AudioTimeStamp>, UnsafePointer<AudioBufferList>, UnsafePointer<AudioTimeStamp>, UnsafeMutablePointer<AudioBufferList>, UnsafePointer<AudioTimeStamp>) -> Void
-
-/*!
-    @typedef        AudioDeviceIOProcID
-    @abstract       An AudioDeviceIOProcID represents both an IOProc and the client data that goes
-                    with it. Once created, an AudioDeviceIOProcID can be used everywhere one would
-                    use a regular IOProc. The purpose for an AudioDeviceIOProcID is to allow a
-                    client to register the same function pointer as an IOProc with a device multiple
-                    times provided
-*/
 typealias AudioDeviceIOProcID = AudioDeviceIOProc
-
-/*!
-    @struct         AudioHardwareIOProcStreamUsage
-    @abstract       This structure describes which streams a given AudioDeviceIOProc will use. It is
-                    used in conjunction with kAudioDevicePropertyIOProcStreamUsage.
-    @field          mIOProc
-                        The IOProc whose stream usage is being specified.
-    @field          mNumberStreams
-                        The number of streams being specified.
-    @field          mStreamIsOn
-                        An array of UInt32's whose length is specified by mNumberStreams. Each
-                        element of the array corresponds to a stream. A value of 0 means the stream
-                        is not to be enabled. Any other value means the stream is to be used.
-*/
 struct AudioHardwareIOProcStreamUsage {
   var mIOProc: UnsafeMutablePointer<Void>
   var mNumberStreams: UInt32
@@ -498,174 +122,14 @@ var kAudioDevicePropertySubVolumeRangeDecibels: AudioObjectPropertySelector { ge
 var kAudioDevicePropertySubVolumeScalarToDecibels: AudioObjectPropertySelector { get }
 var kAudioDevicePropertySubVolumeDecibelsToScalar: AudioObjectPropertySelector { get }
 var kAudioDevicePropertySubMute: AudioObjectPropertySelector { get }
-
-/*!
-    @function       AudioDeviceCreateIOProcID
-    @abstract       Creates an AudioDeviceIOProcID from an AudioDeviceIOProc and a client data
-                    pointer.
-    @discussion     AudioDeviceIOProcIDs allow for the client to register the same function pointer
-                    with a device multiple times
-    @param          inDevice
-                        The AudioDevice to register the IOProc with.
-    @param          inProc
-                        The AudioDeviceIOProc to register.
-    @param          inClientData
-                        A pointer to client data that is passed back to the IOProc when it is
-                        called.
-    @param          outIOProcID
-                        The newly created AudioDeviceIOProcID.
-    @result         An OSStatus indicating success or failure.
-*/
-@available(OSX 10.5, *)
 func AudioDeviceCreateIOProcID(inDevice: AudioObjectID, _ inProc: AudioDeviceIOProc, _ inClientData: UnsafeMutablePointer<Void>, _ outIOProcID: UnsafeMutablePointer<AudioDeviceIOProcID?>) -> OSStatus
-
-/*!
-    @function       AudioDeviceCreateIOProcIDWithBlock
-    @abstract       Creates an AudioDeviceIOProcID from an AudioDeviceIOBlock
-    @param          outIOProcID
-                        The newly created AudioDeviceIOProcID.
-    @param          inDevice
-                        The AudioDevice to register the Block with.
-    @param          inDispatchQueue
-                        The dispatch queue on which the IOBlock will be dispatched. All
-                        IOBlocks are dispatched synchronously. Note that this dispatch queue will be
-                        retained until a matching call to AudioDeviceDestroyIOProcID is made. If
-                        this value is NULL, then the IOBlock will be directly invoked.
-    @param          inBlock
-                        The AudioDeviceIOBlock to register.  Note that this block will be
-                        Block_copy'd and the reference maintained until a matching call to
-                        AudioDeviceDestroyIOProcID is made.
-    @result         An OSStatus indicating success or failure.
-*/
-@available(OSX 10.7, *)
 func AudioDeviceCreateIOProcIDWithBlock(outIOProcID: UnsafeMutablePointer<AudioDeviceIOProcID?>, _ inDevice: AudioObjectID, _ inDispatchQueue: dispatch_queue_t?, _ inIOBlock: AudioDeviceIOBlock) -> OSStatus
-
-/*!
-    @function       AudioDeviceDestroyIOProcID
-    @abstract       Destroys an AudioDeviceIOProcID.
-    @discussion     AudioDeviceIOProcIDs allow for the client to register the same function pointer
-                    with a device multiple times
-    @param          inDevice
-                        The AudioDevice from which the ID came.
-    @param          inIOProcID
-                        The AudioDeviceIOProcID to get rid of.
-    @result         An OSStatus indicating success or failure.
-*/
-@available(OSX 10.5, *)
 func AudioDeviceDestroyIOProcID(inDevice: AudioObjectID, _ inIOProcID: AudioDeviceIOProcID) -> OSStatus
-
-/*!
-    @function       AudioDeviceStart
-    @abstract       Starts IO for the given AudioDeviceIOProcID.
-    @param          inDevice
-                        The AudioDevice to start the IOProc on.
-    @param          inProcID
-                        The AudioDeviceIOProcID to start. Note that this can be NULL, which starts
-                        the hardware regardless of whether or not there are any IOProcs registered.
-                        This is necessary if any of the AudioDevice's timing services are to be
-                        used. A balancing call to AudioDeviceStop with a NULL IOProc is required to
-                        stop the hardware.
-    @result         An OSStatus indicating success or failure.
-*/
-@available(OSX 10.0, *)
 func AudioDeviceStart(inDevice: AudioObjectID, _ inProcID: AudioDeviceIOProcID?) -> OSStatus
-
-/*!
-    @function       AudioDeviceStartAtTime
-    @abstract       Starts IO for the given AudioDeviceIOProcID and aligns the IO cycle of the
-                    AudioDevice with the given time.
-    @param          inDevice
-                        The AudioDevice to start the IOProc on.
-    @param          inProcID
-                        The AudioDeviceIOProcID to start. Note that this can be NULL, which starts
-                        the hardware regardless of whether or not there are any IOProcs registered.
-    @param          ioRequestedStartTime
-                        A pointer to an AudioTimeStamp that, on entry, is the requested time to
-                        start the IOProc. On exit, it will be the actual time the IOProc will start.
-    @param          inFlags
-                        A UInt32 containing flags that modify how this function behaves.
-    @result         An OSStatus indicating success or failure.
-                    kAudioHardwareUnsupportedOperationError will be returned if the AudioDevice does
-                    not support starting at a specific time and inProc and ioRequestedStartTime are
-                    not NULL.
-*/
-@available(OSX 10.3, *)
 func AudioDeviceStartAtTime(inDevice: AudioObjectID, _ inProcID: AudioDeviceIOProcID?, _ ioRequestedStartTime: UnsafeMutablePointer<AudioTimeStamp>, _ inFlags: UInt32) -> OSStatus
-
-/*!
-    @function       AudioDeviceStop
-    @abstract       Stops IO for the given AudioDeviceIOProcID.
-    @param          inDevice
-                        The AudioDevice to stop the IOProc on.
-    @param          inProcID
-                        The AudioDeviceIOProcID to stop.
-    @result         An OSStatus indicating success or failure.
-*/
-@available(OSX 10.0, *)
 func AudioDeviceStop(inDevice: AudioObjectID, _ inProcID: AudioDeviceIOProcID?) -> OSStatus
-
-/*!
-    @function       AudioDeviceGetCurrentTime
-    @abstract       Retrieves the current time from an AudioDevice. Note that the device has to be
-                    running.
-    @param          inDevice
-                        The AudioDevice to from which to get the time.
-    @param          outTime
-                        An AudioTimeStamp into which the current time is put. On entry, the
-                        mFlags field specifies which representations to provide. Because not every
-                        device supports all time representations, on exit, the mFlags field will
-                        indicate what values are actually valid.
-    @result         An OSStatus indicating success or failure. kAudioHardwareNotRunningError will be
-                    returned if the AudioDevice isn't running.
-*/
-@available(OSX 10.0, *)
 func AudioDeviceGetCurrentTime(inDevice: AudioObjectID, _ outTime: UnsafeMutablePointer<AudioTimeStamp>) -> OSStatus
-
-/*!
-    @function       AudioDeviceTranslateTime
-    @abstract       Translates the time in the AudioDevice's time base from one representation to
-                    another. Note that the device has to be running
-    @param          inDevice
-                        The AudioDevice whose time base governs the translation.
-    @param          inTime
-                        An AudioTimeStamp containing the time to be translated.
-    @param          outTime
-                        An AudioTimeStamp into which the translated time is put. On entry, the
-                        mFlags field specifies which representations to translate the input time
-                        into. Because not every device supports all time representations, on exit,
-                        the mFlags field will indicate which translations were actually done.
-    @result         An OSStatus indicating success or failure. kAudioHardwareNotRunningError will be
-                    returned if the AudioDevice isn't running.
-*/
-@available(OSX 10.0, *)
 func AudioDeviceTranslateTime(inDevice: AudioObjectID, _ inTime: UnsafePointer<AudioTimeStamp>, _ outTime: UnsafeMutablePointer<AudioTimeStamp>) -> OSStatus
-
-/*!
-    @function       AudioDeviceGetNearestStartTime
-    @abstract       Query an AudioDevice to get a time equal to or later than the given time that is
-                    the best time to start IO.
-    @discussion     The time that is returned is dictated by the constraints of the device and the
-                    system. For instance, the driver of a device that provides both audio and video
-                    data may only allow start times that coincide with the edge of a video frame.
-                    Also, if the device already has one or more active IOProcs, the start time will
-                    be shifted to the beginning of the next IO cycle so as not to cause
-                    discontinuities in the existing IOProcs. Another reason the start time may shift
-                    is to allow for aligning the buffer accesses in an optimal fashion. Note that
-                    the device must be running to use this function.
-    @param          inDevice
-                        The AudioDevice to query.
-    @param          ioRequestedStartTime
-                        A pointer to an AudioTimeStamp that, on entry, is the requested start time.
-                        On exit, it will have the a time equal to or later than the requested time,
-                        as dictated by the device's constraints.
-    @param          inFlags
-                        A UInt32 containing flags that modify how this function behaves.
-    @result         An OSStatus indicating success or failure. kAudioHardwareNotRunningError will be
-                    returned if the AudioDevice isn't running.
-                    kAudioHardwareUnsupportedOperationError will be returned if the AudioDevice does
-                    not support starting at a specific time.
-*/
-@available(OSX 10.3, *)
 func AudioDeviceGetNearestStartTime(inDevice: AudioObjectID, _ ioRequestedStartTime: UnsafeMutablePointer<AudioTimeStamp>, _ inFlags: UInt32) -> OSStatus
 var kAudioAggregateDeviceClassID: AudioClassID { get }
 var kAudioAggregateDeviceUIDKey: String { get }
@@ -695,66 +159,11 @@ var kAudioSubDeviceDriftCompensationQualityKey: String { get }
 var kAudioSubDevicePropertyExtraLatency: AudioObjectPropertySelector { get }
 var kAudioSubDevicePropertyDriftCompensation: AudioObjectPropertySelector { get }
 var kAudioSubDevicePropertyDriftCompensationQuality: AudioObjectPropertySelector { get }
-
-/*!
-    @typedef        AudioObjectID
-    @abstract       A UInt32 that provides a handle on a specific AudioObject.
-*/
 typealias AudioObjectID = UInt32
-
-/*!
-    @typedef        AudioClassID
-    @abstract       AudioClassIDs are used to identify the class of an AudioObject.
-*/
 typealias AudioClassID = UInt32
-
-/*!
-    @typedef        AudioObjectPropertySelector
-    @abstract       An AudioObjectPropertySelector is a four char code that identifies, along with
-                    the AudioObjectPropertyScope and AudioObjectPropertyElement, a specific piece of
-                    information about an AudioObject.
-    @discussion     The property selector specifies the general classification of the property such
-                    as volume, stream format, latency, etc. Note that each class has a different set
-                    of selectors. A subclass inherits its super class's set of selectors, although
-                    it may not implement them all.
-*/
 typealias AudioObjectPropertySelector = UInt32
-
-/*!
-    @typedef        AudioObjectPropertyScope
-    @abstract       An AudioObjectPropertyScope is a four char code that identifies, along with the
-                    AudioObjectPropertySelector and AudioObjectPropertyElement, a specific piece of
-                    information about an AudioObject.
-    @discussion     The scope specifies the section of the object in which to look for the property,
-                    such as input, output, global, etc. Note that each class has a different set of
-                    scopes. A subclass inherits its superclass's set of scopes.
-*/
 typealias AudioObjectPropertyScope = UInt32
-
-/*!
-    @typedef        AudioObjectPropertyElement
-    @abstract       An AudioObjectPropertyElement is an integer that identifies, along with the
-                    AudioObjectPropertySelector and AudioObjectPropertyScope, a specific piece of
-                    information about an AudioObject.
-    @discussion     The element selects one of possibly many items in the section of the object in
-                    which to look for the property. Elements are number sequentially where 0
-                    represents the master element. Elements are particular to an instance of a
-                    class, meaning that two instances can have different numbers of elements in the
-                    same scope. There is no inheritance of elements.
-*/
 typealias AudioObjectPropertyElement = UInt32
-
-/*!
-    @struct         AudioObjectPropertyAddress
-    @abstract       An AudioObjectPropertyAddress collects the three parts that identify a specific
-                    property together in a struct for easy transmission.
-    @field          mSelector
-                        The AudioObjectPropertySelector for the property.
-    @field          mScope
-                        The AudioObjectPropertyScope for the property.
-    @field          mElement
-                        The AudioObjectPropertyElement for the property.
-*/
 struct AudioObjectPropertyAddress {
   var mSelector: AudioObjectPropertySelector
   var mScope: AudioObjectPropertyScope
@@ -867,26 +276,6 @@ var kAudioEndPointUIDKey: String { get }
 var kAudioEndPointNameKey: String { get }
 var kAudioEndPointInputChannelsKey: String { get }
 var kAudioEndPointOutputChannelsKey: String { get }
-
-/*!
-    @struct         AudioStreamRangedDescription
-    @abstract       This structure allows a specific sample rate range to be associated with an
-                    AudioStreamBasicDescription that specifies its sample rate as
-                    kAudioStreamAnyRate.
-    @discussion     Note that this structure is only used to describe the the available formats
-                    for a stream. It is not used for the current format.
-    @field          mFormat
-                        The AudioStreamBasicDescription that describes the format of the stream.
-                        Note that the mSampleRate field of the structure will be the same as the
-                        the values in mSampleRateRange when only a single sample rate is supported.
-                        It will be kAudioStreamAnyRate when there is a range with more elements. 
-    @field          mSampleRateRange
-                        The AudioValueRange that describes the minimum and maximum sample rate for
-                        the stream. If the mSampleRate field of mFormat is kAudioStreamAnyRate the
-                        format supports the range of sample rates described by this structure.
-                        Otherwise, the minimum will be the same as the maximum which will be the
-                        same as the mSampleRate field of mFormat.
-*/
 struct AudioStreamRangedDescription {
   var mFormat: AudioStreamBasicDescription
   var mSampleRateRange: AudioValueRange
@@ -964,16 +353,6 @@ var kAudioPropertyWildcardSection: UInt8 { get }
 var kAudioPropertyWildcardChannel: AudioObjectPropertyElement { get }
 var kAudioISubOwnerControlClassID: AudioClassID { get }
 var kAudioLevelControlPropertyDecibelsToScalarTransferFunction: AudioObjectPropertySelector { get }
-
-/*!
-    @enum           Values for kAudioLevelControlPropertyDecibelsToScalarTransferFunction
-    @abstract       The following constants are the only supported values for a volume control's
-                    transfer function.
-    @discussion     The transfer function implemented in the volume control works by raising the
-                    scalar value to an exponent to map it into the decibel range. The constants
-                    in this enum express the exponent used in the name as a quotient. For example,
-                    kAudioLevelControlTranferFunction3Over4 represents the exponent 0.75.
-*/
 enum AudioLevelControlTransferFunction : UInt32 {
   init?(rawValue: UInt32)
   var rawValue: UInt32 { get }
@@ -994,26 +373,7 @@ enum AudioLevelControlTransferFunction : UInt32 {
   case TranferFunction11Over1
   case TranferFunction12Over1
 }
-
-/*!
-    @typedef        AudioHardwarePropertyID
-    @abstract       An AudioHardwarePropertyID is a integer that identifies a specific piece of
-                    information about the AudioSystemObject.
-*/
 typealias AudioHardwarePropertyID = AudioObjectPropertySelector
-
-/*!
-    @typedef        AudioHardwarePropertyListenerProc
-    @abstract       Clients register an AudioHardwarePropertyListenerProc with the AudioSystemObject
-                    in order to receive notifications when the properties of the object change.
-    @discussion     Note that the same functionality is provided by AudioObjectPropertyListenerProc.
-    @param          inPropertyID
-                        The AudioHardwarePropertyID of the property that changed.
-    @param          inClientData
-                        A pointer to client data established when the listener proc was registered
-                        with the AudioSystemObject.
-    @result         The return value is currently unused and should always be 0.
-*/
 typealias AudioHardwarePropertyListenerProc = @convention(c) (AudioHardwarePropertyID, UnsafeMutablePointer<Void>) -> OSStatus
 var kAudioHardwareRunLoopMode: String { get }
 var kAudioHardwarePropertyRunLoop: AudioObjectPropertySelector { get }
@@ -1025,41 +385,8 @@ var kAudioHardwarePropertyBootChimeVolumeRangeDecibels: AudioObjectPropertySelec
 var kAudioHardwarePropertyBootChimeVolumeScalarToDecibels: AudioObjectPropertySelector { get }
 var kAudioHardwarePropertyBootChimeVolumeDecibelsToScalar: AudioObjectPropertySelector { get }
 var kAudioHardwarePropertyBootChimeVolumeDecibelsToScalarTransferFunction: AudioObjectPropertySelector { get }
-
-/*!
-    @typedef        AudioDeviceID
-    @abstract       AudioDevice is the base class for all objects that represent an audio device.
-    @discussion     AudioDevice is a subclass of AudioObject. AudioDevices normally contain
-                    AudioStreams and AudioControls, but may contain other things depending on the
-                    kind of AudioDevice (e.g. aggregate devices contain other AudioDevices).
-*/
 typealias AudioDeviceID = AudioObjectID
-
-/*!
-    @typedef        AudioDevicePropertyID
-    @abstract       An AudioDevicePropertyID is an integer that identifies a specific piece of
-                    information about the object.
-*/
 typealias AudioDevicePropertyID = AudioObjectPropertySelector
-
-/*!
-    @typedef        AudioDevicePropertyListenerProc
-    @abstract       Clients register an AudioDevicePropertyListenerProc with the AudioDevice object
-                    in order to receive notifications when the properties of the object change.
-    @discussion     Note that the same functionality is provided by AudioObjectPropertyListenerProc.
-    @param          inDevice
-                        The AudioDevice whose property has changed.
-    @param          inChannel
-                        The channel of the property that changed where 0 is the master channel.
-    @param          isInput
-                        Which section of the AudioDevice changed.
-    @param          inPropertyID
-                        The AudioDevicePropertyID of the property that changed.
-    @param          inClientData
-                        A pointer to client data established when the listener proc was registered
-                        with the object.
-    @result         The return value is currently unused and should always be 0.
-*/
 typealias AudioDevicePropertyListenerProc = @convention(c) (AudioDeviceID, UInt32, DarwinBoolean, AudioDevicePropertyID, UnsafeMutablePointer<Void>) -> OSStatus
 var kAudioDeviceUnknown: AudioObjectID { get }
 var kAudioDeviceTransportTypeAutoAggregate: UInt32 { get }
@@ -1090,31 +417,7 @@ var kAudioDevicePropertyClockSourceNameForID: AudioObjectPropertySelector { get 
 var kAudioDevicePropertyPlayThruDestinationNameForID: AudioObjectPropertySelector { get }
 var kAudioDevicePropertyChannelNominalLineLevelNameForID: AudioObjectPropertySelector { get }
 var kAudioDevicePropertyHighPassFilterSettingNameForID: AudioObjectPropertySelector { get }
-
-/*!
-    @typedef        AudioStreamID
-    @abstract       AudioStream is the base class for all objects that represent a stream of data on
-                    an audio device.
-    @discussion     AudioStream is a subclass of AudioObject and can contain AudioControls.
-*/
 typealias AudioStreamID = AudioObjectID
-
-/*!
-    @typedef        AudioStreamPropertyListenerProc
-    @abstract       Clients register an AudioStreamPropertyListenerProc with the AudioStream object
-                    in order to receive notifications when the properties of the object change.
-    @discussion     Note that the same functionality is provided by AudioObjectPropertyListenerProc.
-    @param          inStream
-                        The AudioStream whose property has changed.
-    @param          inChannel
-                        The channel of the property that changed where 0 is the master channel.
-    @param          inPropertyID
-                        The AudioDevicePropertyID of the property that changed.
-    @param          inClientData
-                        A pointer to client data established when the listener proc was registered
-                        with the object.
-    @result         The return value is currently unused and should always be 0.
-*/
 typealias AudioStreamPropertyListenerProc = @convention(c) (AudioStreamID, UInt32, AudioDevicePropertyID, UnsafeMutablePointer<Void>) -> OSStatus
 var kAudioStreamUnknown: AudioObjectID { get }
 var kAudioStreamPropertyOwningDevice: AudioObjectPropertySelector { get }
@@ -1133,52 +436,18 @@ var kAudio_TooManyFilesOpenError: OSStatus { get }
 var kAudio_BadFilePathError: OSStatus { get }
 var kAudio_ParamError: OSStatus { get }
 var kAudio_MemFullError: OSStatus { get }
-
-/*!
-    @struct         AudioValueRange
-    @abstract       This structure holds a pair of numbers that represent a continuous range of
-                    values.
-    @field          mMinimum
-                        The minimum value.
-    @field          mMaximum
-                        The maximum value.
-*/
 struct AudioValueRange {
   var mMinimum: Float64
   var mMaximum: Float64
   init()
   init(mMinimum: Float64, mMaximum: Float64)
 }
-
-/*!
-    @struct         AudioValueTranslation
-    @abstract       This stucture holds the buffers necessary for translation operations.
-    @field          mInputData
-                        The buffer containing the data to be translated.
-    @field          mInputDataSize
-                        The number of bytes in the buffer pointed at by mInputData.
-    @field          mOutputData
-                        The buffer to hold the result of the translation.
-    @field          mOutputDataSize
-                        The number of bytes in the buffer pointed at by mOutputData.
-*/
 struct AudioValueTranslation {
   var mInputData: UnsafeMutablePointer<Void>
   var mInputDataSize: UInt32
   var mOutputData: UnsafeMutablePointer<Void>
   var mOutputDataSize: UInt32
 }
-
-/*!
-    @struct         AudioBuffer
-    @abstract       A structure to hold a buffer of audio data.
-    @field          mNumberChannels
-                        The number of interleaved channels in the buffer.
-    @field          mDataByteSize
-                        The number of bytes in the buffer pointed at by mData.
-    @field          mData
-                        A pointer to the buffer of audio data.
-*/
 struct AudioBuffer {
   var mNumberChannels: UInt32
   var mDataByteSize: UInt32
@@ -1186,28 +455,17 @@ struct AudioBuffer {
   init()
   init(mNumberChannels: UInt32, mDataByteSize: UInt32, mData: UnsafeMutablePointer<Void>)
 }
-
 extension AudioBuffer {
   /// Initialize an `AudioBuffer` from an
   /// `UnsafeMutableBufferPointer<Element>`.
   init<Element>(_ typedBuffer: UnsafeMutableBufferPointer<Element>, numberOfChannels: Int)
 }
-
-/*!
-    @struct         AudioBufferList
-    @abstract       A variable length array of AudioBuffer structures.
-    @field          mNumberBuffers
-                        The number of AudioBuffers in the mBuffers array.
-    @field          mBuffers
-                        A variable length array of AudioBuffers.
-*/
 struct AudioBufferList {
   var mNumberBuffers: UInt32
   var mBuffers: (AudioBuffer)
   init()
   init(mNumberBuffers: UInt32, mBuffers: (AudioBuffer))
 }
-
 extension AudioBufferList {
   /// - Returns: the size in bytes of an `AudioBufferList` that can hold up to
   ///   `maximumBuffers` `AudioBuffer`s.
@@ -1221,62 +479,10 @@ extension AudioBufferList {
   /// The memory should be freed with `free()`.
   static func allocate(maximumBuffers maximumBuffers: Int) -> UnsafeMutableAudioBufferListPointer
 }
-@available(*, deprecated, message="The concept of canonical formats is deprecated")
 typealias AudioSampleType = Float32
-@available(*, deprecated, message="The concept of canonical formats is deprecated")
 typealias AudioUnitSampleType = Float32
-
-/*!
-    @typedef        AudioFormatID
-    @abstract       A four char code indicating the general kind of data in the stream.
-*/
 typealias AudioFormatID = UInt32
-
-/*!
-    @typedef        AudioFormatFlags
-    @abstract       Flags that are specific to each format.
-*/
 typealias AudioFormatFlags = UInt32
-
-/*!
-    @struct         AudioStreamBasicDescription
-    @abstract       This structure encapsulates all the information for describing the basic
-                    format properties of a stream of audio data.
-    @discussion     This structure is sufficient to describe any constant bit rate format that  has
-                    channels that are the same size. Extensions are required for variable bit rate
-                    data and for constant bit rate data where the channels have unequal sizes.
-                    However, where applicable, the appropriate fields will be filled out correctly
-                    for these kinds of formats (the extra data is provided via separate properties).
-                    In all fields, a value of 0 indicates that the field is either unknown, not
-                    applicable or otherwise is inapproprate for the format and should be ignored.
-                    Note that 0 is still a valid value for most formats in the mFormatFlags field.
-
-                    In audio data a frame is one sample across all channels. In non-interleaved
-                    audio, the per frame fields identify one channel. In interleaved audio, the per
-                    frame fields identify the set of n channels. In uncompressed audio, a Packet is
-                    one frame, (mFramesPerPacket == 1). In compressed audio, a Packet is an
-                    indivisible chunk of compressed data, for example an AAC packet will contain
-                    1024 sample frames.
- 
-    @field          mSampleRate
-                        The number of sample frames per second of the data in the stream.
-    @field          mFormatID
-                        The AudioFormatID indicating the general kind of data in the stream.
-    @field          mFormatFlags
-                        The AudioFormatFlags for the format indicated by mFormatID.
-    @field          mBytesPerPacket
-                        The number of bytes in a packet of data.
-    @field          mFramesPerPacket
-                        The number of sample frames in each packet of data.
-    @field          mBytesPerFrame
-                        The number of bytes in a single sample frame of data.
-    @field          mChannelsPerFrame
-                        The number of channels in each frame of data.
-    @field          mBitsPerChannel
-                        The number of bits of sample data for each channel in a frame of data.
-    @field          mReserved
-                        Pads the structure out to force an even 8 byte alignment.
-*/
 struct AudioStreamBasicDescription {
   var mSampleRate: Float64
   var mFormatID: AudioFormatID
@@ -1290,13 +496,6 @@ struct AudioStreamBasicDescription {
   init()
   init(mSampleRate: Float64, mFormatID: AudioFormatID, mFormatFlags: AudioFormatFlags, mBytesPerPacket: UInt32, mFramesPerPacket: UInt32, mBytesPerFrame: UInt32, mChannelsPerFrame: UInt32, mBitsPerChannel: UInt32, mReserved: UInt32)
 }
-
-/*!
-    @enum           AudioStreamBasicDescription Constants
-    @constant       kAudioStreamAnyRate
-                        The format can use any sample rate. Note that this constant can only appear
-                        in listings of supported formats. It will never appear in a current format.
-*/
 let kAudioStreamAnyRate: Float64
 var kAudioFormatLinearPCM: AudioFormatID { get }
 var kAudioFormatAC3: AudioFormatID { get }
@@ -1358,26 +557,9 @@ var kAppleLosslessFormatFlag_20BitSourceData: AudioFormatFlags { get }
 var kAppleLosslessFormatFlag_24BitSourceData: AudioFormatFlags { get }
 var kAppleLosslessFormatFlag_32BitSourceData: AudioFormatFlags { get }
 var kAudioFormatFlagsNativeEndian: AudioFormatFlags { get }
-@available(*, deprecated, message="The concept of canonical formats is deprecated")
 var kAudioFormatFlagsCanonical: AudioFormatFlags { get }
-@available(*, deprecated, message="The concept of canonical formats is deprecated")
 var kAudioFormatFlagsAudioUnitCanonical: AudioFormatFlags { get }
 var kAudioFormatFlagsNativeFloatPacked: AudioFormatFlags { get }
-
-/*!
-    @struct         AudioStreamPacketDescription
-    @abstract       This structure describes the packet layout of a buffer of data where the size of
-                    each packet may not be the same or where there is extraneous data between
-                    packets.
-    @field          mStartOffset
-                        The number of bytes from the start of the buffer to the beginning of the
-                        packet.
-    @field          mVariableFramesInPacket
-                        The number of sample frames of data in the packet. For formats with a
-                        constant number of frames per packet, this field is set to 0.
-    @field          mDataByteSize
-                        The number of bytes in the packet.
-*/
 struct AudioStreamPacketDescription {
   var mStartOffset: Int64
   var mVariableFramesInPacket: UInt32
@@ -1385,35 +567,6 @@ struct AudioStreamPacketDescription {
   init()
   init(mStartOffset: Int64, mVariableFramesInPacket: UInt32, mDataByteSize: UInt32)
 }
-
-/*!
-    @enum           SMPTE Time Types
-    @abstract       Constants that describe the type of SMPTE time.
-    @constant       kSMPTETimeType24
-                        24 Frame
-    @constant       kSMPTETimeType25
-                        25 Frame
-    @constant       kSMPTETimeType30Drop
-                        30 Drop Frame
-    @constant       kSMPTETimeType30
-                        30 Frame
-    @constant       kSMPTETimeType2997
-                        29.97 Frame
-    @constant       kSMPTETimeType2997Drop
-                        29.97 Drop Frame
-    @constant       kSMPTETimeType60
-                        60 Frame
-    @constant       kSMPTETimeType5994
-                        59.94 Frame
-    @constant       kSMPTETimeType60Drop
-                        60 Drop Frame
-    @constant       kSMPTETimeType5994Drop
-                        59.94 Drop Frame
-    @constant       kSMPTETimeType50
-                        50 Frame
-    @constant       kSMPTETimeType2398
-                        23.98 Frame
-*/
 enum SMPTETimeType : UInt32 {
   init?(rawValue: UInt32)
   var rawValue: UInt32 { get }
@@ -1430,15 +583,6 @@ enum SMPTETimeType : UInt32 {
   case Type50
   case Type2398
 }
-
-/*!
-    @enum           SMPTE State Flags
-    @abstract       Flags that describe the SMPTE time state.
-    @constant       kSMPTETimeValid
-                        The full time is valid.
-    @constant       kSMPTETimeRunning
-                        Time is running.
-*/
 struct SMPTETimeFlags : OptionSetType {
   init(rawValue: UInt32)
   let rawValue: UInt32
@@ -1446,29 +590,6 @@ struct SMPTETimeFlags : OptionSetType {
   static var Valid: SMPTETimeFlags { get }
   static var Running: SMPTETimeFlags { get }
 }
-
-/*!
-    @struct         SMPTETime
-    @abstract       A structure for holding a SMPTE time.
-    @field          mSubframes
-                        The number of subframes in the full message.
-    @field          mSubframeDivisor
-                        The number of subframes per frame (typically 80).
-    @field          mCounter
-                        The total number of messages received.
-    @field          mType
-                        The kind of SMPTE time using the SMPTE time type constants.
-    @field          mFlags
-                        A set of flags that indicate the SMPTE state.
-    @field          mHours
-                        The number of hours in the full message.
-    @field          mMinutes
-                        The number of minutes in the full message.
-    @field          mSeconds
-                        The number of seconds in the full message.
-    @field          mFrames
-                        The number of frames in the full message.
-*/
 struct SMPTETime {
   var mSubframes: Int16
   var mSubframeDivisor: Int16
@@ -1482,23 +603,6 @@ struct SMPTETime {
   init()
   init(mSubframes: Int16, mSubframeDivisor: Int16, mCounter: UInt32, mType: SMPTETimeType, mFlags: SMPTETimeFlags, mHours: Int16, mMinutes: Int16, mSeconds: Int16, mFrames: Int16)
 }
-
-/*!
-    @enum           AudioTimeStamp Flags
-    @abstract       The flags that indicate which fields in an AudioTimeStamp structure are valid.
-    @constant       kAudioTimeStampSampleTimeValid
-                        The sample frame time is valid.
-    @constant       kAudioTimeStampHostTimeValid
-                        The host time is valid.
-    @constant       kAudioTimeStampRateScalarValid
-                        The rate scalar is valid.
-    @constant       kAudioTimeStampWordClockTimeValid
-                        The word clock time is valid.
-    @constant       kAudioTimeStampSMPTETimeValid
-                        The SMPTE time is valid.
-    @constant       kAudioTimeStampSampleHostTimeValid
-                        The sample frame time and the host time are valid.
-*/
 struct AudioTimeStampFlags : OptionSetType {
   init(rawValue: UInt32)
   let rawValue: UInt32
@@ -1510,26 +614,6 @@ struct AudioTimeStampFlags : OptionSetType {
   static var SMPTETimeValid: AudioTimeStampFlags { get }
   static var SampleHostTimeValid: AudioTimeStampFlags { get }
 }
-
-/*!
-    @struct         AudioTimeStamp
-    @abstract       A structure that holds different representations of the same point in time.
-    @field          mSampleTime
-                        The absolute sample frame time.
-    @field          mHostTime
-                        The host machine's time base, mach_absolute_time.
-    @field          mRateScalar
-                        The ratio of actual host ticks per sample frame to the nominal host ticks
-                        per sample frame.
-    @field          mWordClockTime
-                        The word clock time.
-    @field          mSMPTETime
-                        The SMPTE time.
-    @field          mFlags
-                        A set of flags indicating which representations of the time are valid.
-    @field          mReserved
-                        Pads the structure out to force an even 8 byte alignment.
-*/
 struct AudioTimeStamp {
   var mSampleTime: Float64
   var mHostTime: UInt64
@@ -1541,17 +625,6 @@ struct AudioTimeStamp {
   init()
   init(mSampleTime: Float64, mHostTime: UInt64, mRateScalar: Float64, mWordClockTime: UInt64, mSMPTETime: SMPTETime, mFlags: AudioTimeStampFlags, mReserved: UInt32)
 }
-
-/*!
-    @struct         AudioClassDescription
-    @abstract       This structure is used to describe codecs installed on the system.
-    @field          mType
-                        The four char code codec type.
-    @field          mSubType
-                        The four char code codec subtype.
-    @field          mManufacturer
-                        The four char code codec manufacturer.
-*/
 struct AudioClassDescription {
   var mType: OSType
   var mSubType: OSType
@@ -1559,17 +632,7 @@ struct AudioClassDescription {
   init()
   init(mType: OSType, mSubType: OSType, mManufacturer: OSType)
 }
-
-/*!
-    @typedef        AudioChannelLabel
-    @abstract       A tag identifying how the channel is to be used.
-*/
 typealias AudioChannelLabel = UInt32
-
-/*!
-    @typedef        AudioChannelLayoutTag
-    @abstract       A tag identifying a particular pre-defined channel layout.
-*/
 typealias AudioChannelLayoutTag = UInt32
 var kAudioChannelLabel_Unknown: AudioChannelLabel { get }
 var kAudioChannelLabel_Unused: AudioChannelLabel { get }
@@ -1635,12 +698,6 @@ var kAudioChannelLabel_Discrete_13: AudioChannelLabel { get }
 var kAudioChannelLabel_Discrete_14: AudioChannelLabel { get }
 var kAudioChannelLabel_Discrete_15: AudioChannelLabel { get }
 var kAudioChannelLabel_Discrete_65535: AudioChannelLabel { get }
-
-/*!
-    @enum           Channel Bitmap Constants
-    @abstract       These constants are for use in the mChannelBitmap field of an
-                    AudioChannelLayout structure.
-*/
 struct AudioChannelBitmap : OptionSetType {
   init(rawValue: UInt32)
   let rawValue: UInt32
@@ -1663,23 +720,6 @@ struct AudioChannelBitmap : OptionSetType {
   static var Bit_TopBackCenter: AudioChannelBitmap { get }
   static var Bit_TopBackRight: AudioChannelBitmap { get }
 }
-
-/*!
-    @enum           Channel Coordinate Flags
-    @abstract       These constants are used in the mChannelFlags field of an
-                    AudioChannelDescription structure.
-    @constant       kAudioChannelFlags_RectangularCoordinates
-                        The channel is specified by the cartesioan coordinates of the speaker
-                        position. This flag is mutally exclusive with
-                        kAudioChannelFlags_SphericalCoordinates.
-    @constant       kAudioChannelFlags_SphericalCoordinates
-                        The channel is specified by the spherical coordinates of the speaker
-                        position. This flag is mutally exclusive with
-                        kAudioChannelFlags_RectangularCoordinates.
-    @constant       kAudioChannelFlags_Meters
-                        Set to indicate the units are in meters, clear to indicate the units are
-                        relative to the unit cube or unit sphere.
-*/
 struct AudioChannelFlags : OptionSetType {
   init(rawValue: UInt32)
   let rawValue: UInt32
@@ -1688,27 +728,6 @@ struct AudioChannelFlags : OptionSetType {
   static var SphericalCoordinates: AudioChannelFlags { get }
   static var Meters: AudioChannelFlags { get }
 }
-
-/*!
-    @enum           Channel Coordinate Index Constants
-    @abstract       Constants for indexing the mCoordinates array in an AudioChannelDescription
-                    structure.
-    @constant       kAudioChannelCoordinates_LeftRight
-                        For rectangulare coordinates, negative is left and positive is right.
-    @constant       kAudioChannelCoordinates_BackFront
-                        For rectangulare coordinates, negative is back and positive is front.
-    @constant       kAudioChannelCoordinates_DownUp
-                        For rectangulare coordinates, negative is below ground level, 0 is ground
-                        level, and positive is above ground level.
-    @constant       kAudioChannelCoordinates_Azimuth
-                        For spherical coordinates, 0 is front center, positive is right, negative is
-                        left. This is measured in degrees.
-    @constant       kAudioChannelCoordinates_Elevation
-                        For spherical coordinates, +90 is zenith, 0 is horizontal, -90 is nadir.
-                        This is measured in degrees.
-    @constant       kAudioChannelCoordinates_Distance
-                        For spherical coordinates, the units are described by flags.
-*/
 enum AudioChannelCoordinateIndex : UInt32 {
   init?(rawValue: UInt32)
   var rawValue: UInt32 { get }
@@ -1846,17 +865,6 @@ var kAudioChannelLayoutTag_DTS_8_1_B: AudioChannelLayoutTag { get }
 var kAudioChannelLayoutTag_DTS_6_1_D: AudioChannelLayoutTag { get }
 var kAudioChannelLayoutTag_DiscreteInOrder: AudioChannelLayoutTag { get }
 var kAudioChannelLayoutTag_Unknown: AudioChannelLayoutTag { get }
-
-/*!
-    @struct         AudioChannelDescription
-    @abstract       This structure describes a single channel.
-    @field          mChannelLabel
-                        The AudioChannelLabel that describes the channel.
-    @field          mChannelFlags
-                        Flags that control the interpretation of mCoordinates.
-    @field          mCoordinates
-                        An ordered triple that specifies a precise speaker location.
-*/
 struct AudioChannelDescription {
   var mChannelLabel: AudioChannelLabel
   var mChannelFlags: AudioChannelFlags
@@ -1864,21 +872,6 @@ struct AudioChannelDescription {
   init()
   init(mChannelLabel: AudioChannelLabel, mChannelFlags: AudioChannelFlags, mCoordinates: (Float32, Float32, Float32))
 }
-
-/*!
-    @struct         AudioChannelLayout
-    @abstract       This structure is used to specify channel layouts in files and hardware.
-    @field          mChannelLayoutTag
-                        The AudioChannelLayoutTag that indicates the layout.
-    @field          mChannelBitmap
-                        If mChannelLayoutTag is set to kAudioChannelLayoutTag_UseChannelBitmap, this
-                        field is the channel usage bitmap.
-    @field          mNumberChannelDescriptions
-                        The number of items in the mChannelDescriptions array.
-    @field          mChannelDescriptions
-                        A variable length array of AudioChannelDescriptions that describe the
-                        layout.
-*/
 struct AudioChannelLayout {
   var mChannelLayoutTag: AudioChannelLayoutTag
   var mChannelBitmap: AudioChannelBitmap
@@ -1888,14 +881,6 @@ struct AudioChannelLayout {
   init(mChannelLayoutTag: AudioChannelLayoutTag, mChannelBitmap: AudioChannelBitmap, mNumberChannelDescriptions: UInt32, mChannelDescriptions: (AudioChannelDescription))
 }
 func AudioChannelLayoutTag_GetNumberOfChannels(inLayoutTag: AudioChannelLayoutTag) -> UInt32
-
-/*! @enum           MPEG-4 Audio Object IDs
-    @deprecated     in version 10.5
-
-    @abstract       Constants that describe the various kinds of MPEG-4 audio data.
-    @discussion     These constants are used in the flags field of an AudioStreamBasicDescription
-                    that describes an MPEG-4 audio stream.
-*/
 enum MPEG4ObjectID : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -1909,49 +894,8 @@ enum MPEG4ObjectID : Int {
   case CELP
   case HVXC
 }
-
-/*!
-    @function       AudioGetCurrentHostTime
-    @abstract       Gets the current host time.
-    @result         A UInt64 containing the current host time.
-*/
-@available(OSX 10.0, *)
 func AudioGetCurrentHostTime() -> UInt64
-
-/*!
-    @function       AudioGetHostClockFrequency
-    @abstract       Gets the number of ticks per second in the host time base.
-    @result         A Float64 containing the number of ticks per second in the host time base.
-*/
-@available(OSX 10.0, *)
 func AudioGetHostClockFrequency() -> Float64
-
-/*!
-    @function       AudioGetHostClockMinimumTimeDelta
-    @abstract       Gets the smallest number of ticks that two succeeding values will ever differ.
-                    by.
-    @result         A UInt32 containing the smallest number of ticks that two succeeding values will
-                    ever differ.
-*/
-@available(OSX 10.0, *)
 func AudioGetHostClockMinimumTimeDelta() -> UInt32
-
-/*!
-    @function       AudioConvertHostTimeToNanos
-    @abstract       Convert the given host time into a time in nanoseconds.
-    @param          inHostTime
-                        A UInt64 containing the host time to convert.
-    @result         A UInt64 containining the converted host time.
-*/
-@available(OSX 10.0, *)
 func AudioConvertHostTimeToNanos(inHostTime: UInt64) -> UInt64
-
-/*!
-    @function       AudioConvertNanosToHostTime
-    @abstract       Convert the given nanosecond time into a host time.
-    @param          inNanos
-                        A UInt64 containing the nanosecond time to convert.
-    @result         A UInt64 containining the converted nanosecond time.
-*/
-@available(OSX 10.0, *)
 func AudioConvertNanosToHostTime(inNanos: UInt64) -> UInt64

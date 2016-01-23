@@ -32,10 +32,6 @@ struct TW_FIX32 {
   init(Whole: TW_INT16, Frac: TW_UINT16)
 }
 typealias pTW_FIX32 = UnsafeMutablePointer<TW_FIX32>
-
-/****************************************************************************
- * Structure Definitions                                                    *
- ****************************************************************************/
 struct TW_CIEPOINT {
   var X: TW_FIX32
   var Y: TW_FIX32

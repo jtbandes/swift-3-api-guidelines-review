@@ -1,245 +1,23 @@
 
-
-/*!
- * @function   hv_vm_create
- * @abstract   Creates a VM instance for the current task
- * @param      flags  RESERVED
- * @result     0 on success or error code
- */
-@available(OSX 10.10, *)
 func hv_vm_create(flags: hv_vm_options_t) -> hv_return_t
-
-/*!
- * @function   hv_vm_destroy
- * @abstract   Destroys the VM instance associated with the current task
- * @result     0 on success or error code
- */
-@available(OSX 10.10, *)
 func hv_vm_destroy() -> hv_return_t
-
-/*!
- * @function   hv_vm_map
- * @abstract   Maps a region in the virtual address space of the current task
- *             into the guest physical address space of the VM
- * @param      uva    Page aligned virtual address in the current task
- * @param      gpa    Page aligned address in the guest physical address space
- * @param      size   Size in bytes of the region to be mapped
- * @param      flags  READ, WRITE and EXECUTE permissions of the region
- * @result     0 on success or error code
- */
-@available(OSX 10.10, *)
 func hv_vm_map(uva: hv_uvaddr_t, _ gpa: hv_gpaddr_t, _ size: Int, _ flags: hv_memory_flags_t) -> hv_return_t
-
-/*!
- * @function   hv_vm_unmap
- * @abstract   Unmaps a region in the guest physical address space of the VM
- * @param      gpa   Page aligned address in the guest physical address space
- * @param      size  Size in bytes of the region to be unmapped
- * @result     0 on success or error code
- */
-@available(OSX 10.10, *)
 func hv_vm_unmap(gpa: hv_gpaddr_t, _ size: Int) -> hv_return_t
-
-/*!
- * @function   hv_vm_protect
- * @abstract   Modifies the permissions of a region in the guest physical
- *             address space of the VM
- * @param      gpa   Page aligned address in the guest physical address space
- * @param      size  Size in bytes of the region to be modified
- * @param      flags New READ, WRITE and EXECUTE permissions of the region
- * @result     0 on success or error code
- */
-@available(OSX 10.10, *)
 func hv_vm_protect(gpa: hv_gpaddr_t, _ size: Int, _ flags: hv_memory_flags_t) -> hv_return_t
-
-/*!
- * @function   hv_vm_sync_tsc
- * @abstract   Synchronizes guest TSC across all vCPUs
- * @param      tsc  Guest TSC value
- * @result     0 on success or error code
- */
-@available(OSX 10.10, *)
 func hv_vm_sync_tsc(tsc: UInt64) -> hv_return_t
-
-/*!
- * @function   hv_vcpu_create
- * @abstract   Creates a vCPU instance for the current thread
- * @param      vcpu   Pointer to the vCPU ID (written on success)
- * @param      flags  RESERVED
- * @result     0 on success or error code
- */
-@available(OSX 10.10, *)
 func hv_vcpu_create(vcpu: UnsafeMutablePointer<hv_vcpuid_t>, _ flags: hv_vcpu_options_t) -> hv_return_t
-
-/*!
- * @function   hv_vcpu_destroy
- * @abstract   Destroys the vCPU instance associated with the current thread
- * @param      vcpu  vCPU ID
- * @result     0 on success or error code
- * @discussion
- *             Must be called by the owning thread
- */
-@available(OSX 10.10, *)
 func hv_vcpu_destroy(vcpu: hv_vcpuid_t) -> hv_return_t
-
-/*!
- * @function   hv_vcpu_read_register
- * @abstract   Returns the current value of an architectural x86 register
- *             of a vCPU
- * @param      vcpu   vCPU ID
- * @param      reg    ID of the register to be read
- * @param      value  Pointer to the register value (written on success)
- * @result     0 on success or error code
- * @discussion
- *             Must be called by the owning thread
- */
-@available(OSX 10.10, *)
 func hv_vcpu_read_register(vcpu: hv_vcpuid_t, _ reg: hv_x86_reg_t, _ value: UnsafeMutablePointer<UInt64>) -> hv_return_t
-
-/*!
- * @function   hv_vcpu_write_register
- * @abstract   Set the value of an architectural x86 register of a vCPU
- * @param      vcpu   vCPU ID
- * @param      reg    ID of the register to be written
- * @param      value  Value of the register to be written
- * @result     0 on success or error code
- * @discussion
- *             Must be called by the owning thread
- */
-@available(OSX 10.10, *)
 func hv_vcpu_write_register(vcpu: hv_vcpuid_t, _ reg: hv_x86_reg_t, _ value: UInt64) -> hv_return_t
-
-/*!
- * @function   hv_vcpu_read_fpstate
- * @abstract   Returns the current architectural x86 floating point and
- *             SIMD state of a vCPU
- * @param      vcpu    vCPU ID
- * @param      buffer  Pointer to a memory buffer (written on success)
- * @param      size    Size of the memory buffer in bytes
- * @result     0 on success or error code
- * @discussion
- *             Structure and size are defined by the XSAVE feature set of
- *             the host processor
- *
- *             Must be called by the owning thread
- */
-@available(OSX 10.10, *)
 func hv_vcpu_read_fpstate(vcpu: hv_vcpuid_t, _ buffer: UnsafeMutablePointer<Void>, _ size: Int) -> hv_return_t
-
-/*!
- * @function   hv_vcpu_write_fpstate
- * @abstract   Sets the architectural x86 floating point and SIMD state of
- *             a vCPU
- * @param      vcpu    vCPU ID
- * @param      buffer  Pointer to a memory buffer holding the state
- *                     to be written
- * @param      size    Size of the memory buffer in bytes
- * @result     0 on success or error code
- * @discussion
- *             Structure and size are defined by the XSAVE feature set of
- *             the host processor
- *
- *             Must be called by the owning thread
- */
-@available(OSX 10.10, *)
 func hv_vcpu_write_fpstate(vcpu: hv_vcpuid_t, _ buffer: UnsafeMutablePointer<Void>, _ size: Int) -> hv_return_t
-
-/*!
- * @function   hvvcpu_enable_native_msr
- * @abstract   Enables an MSR to be used natively by the VM
- * @param      vcpu    vCPU ID
- * @param      msr     ID of the MSR
- * @param      enable  Enable or disable the native use of the MSR
- * @result     0 on success or error code
- * @discussion
- *             See Documentation for a list of supported MSRs
- *
- *             Must be called by the owning thread
- */
-@available(OSX 10.10, *)
 func hv_vcpu_enable_native_msr(vcpu: hv_vcpuid_t, _ msr: UInt32, _ enable: Bool) -> hv_return_t
-
-/*!
- * @function   hv_vcpu_read_msr
- * @abstract   Returns the current value of an MSR of a vCPU
- * @param      vcpu   vCPU ID
- * @param      msr    ID of the MSR to be read
- * @param      value  Pointer to the MSR value (written on success)
- * @result     0 on success or error code
- * @discussion
- *             Must be called by the owning thread
- */
-@available(OSX 10.10, *)
 func hv_vcpu_read_msr(vcpu: hv_vcpuid_t, _ msr: UInt32, _ value: UnsafeMutablePointer<UInt64>) -> hv_return_t
-
-/*!
- * @function   hv_vcpu_write_msr
- * @abstract   Set the value of an MSR of a vCPU
- * @param      vcpu   vCPU ID
- * @param      msr    ID of the MSR to be written
- * @param      value  Value of the MSR to be written
- * @result     0 on success or error code
- * @discussion
- *             Must be called by the owning thread
- */
-@available(OSX 10.10, *)
 func hv_vcpu_write_msr(vcpu: hv_vcpuid_t, _ msr: UInt32, _ value: UInt64) -> hv_return_t
-
-/*!
- * @function   hv_vcpu_flush
- * @abstract   Forces flushing of cached vCPU state
- * @param      vcpu  vCPU ID
- * @result     0 on success or error code
- * @discussion
- *             Must be called by the owning thread
- */
-@available(OSX 10.10, *)
 func hv_vcpu_flush(vcpu: hv_vcpuid_t) -> hv_return_t
-
-/*!
- * @function   hv_vcpu_invalidate_tlb
- * @abstract   Invalidates the TLB of a vCPU
- * @param      vcpu  vCPU ID
- * @result     0 on success or error code
- * @discussion
- *             Must be called by the owning thread
- */
-@available(OSX 10.10, *)
 func hv_vcpu_invalidate_tlb(vcpu: hv_vcpuid_t) -> hv_return_t
-
-/*!
- * @function   hv_vcpu_run
- * @abstract   Executes a vCPU
- * @param      vcpu  vCPU ID
- * @result     0 on success or error code
- * @discussion
- *             Call blocks until the next VMEXIT of the vCPU
- *
- *             Must be called by the owning thread
- */
-@available(OSX 10.10, *)
 func hv_vcpu_run(vcpu: hv_vcpuid_t) -> hv_return_t
-
-/*!
- * @function   hv_vcpu_interrupt
- * @abstract   Forces an immediate VMEXIT of a set of vCPUs of the VM
- * @param      vcpus       Pointer to a list of vCPU IDs
- * @param      vcpu_count  Number of vCPUs in the list
- * @result     0 on success or error code
- */
-@available(OSX 10.10, *)
 func hv_vcpu_interrupt(vcpus: UnsafeMutablePointer<hv_vcpuid_t>, _ vcpu_count: UInt32) -> hv_return_t
-
-/*!
- * @function   hv_vcpu_get_exec_time
- * @abstract   Returns the cumulative execution time of a vCPU in nanoseconds
- * @param      vcpu  vCPU ID
- * @param      time  Pointer to execution time value (written on success)
- * @result     0 on success or error code
- * @discussion
- *             Must be called by the owning thread!
- */
-@available(OSX 10.10, *)
 func hv_vcpu_get_exec_time(vcpu: hv_vcpuid_t, _ time: UnsafeMutablePointer<UInt64>) -> hv_return_t
 var VMCS_VPID: Int { get }
 var VMCS_CTRL_POSTED_INT_N_VECTOR: Int { get }
@@ -523,11 +301,6 @@ var IRQ_INFO_PRIV_SOFT_EXC: UInt32 { get }
 var IRQ_INFO_SOFT_EXC: UInt32 { get }
 var IRQ_INFO_ERROR_VALID: UInt32 { get }
 var IRQ_INFO_VALID: UInt32 { get }
-
-/*!
- * @enum       hv_x86_reg_t
- * @abstract   x86 architectural register IDs
- */
 struct hv_x86_reg_t : RawRepresentable, Equatable {
   init(_ rawValue: UInt32)
   init(rawValue: UInt32)
@@ -601,59 +374,11 @@ var HV_MEMORY_READ: Int { get }
 var HV_MEMORY_WRITE: Int { get }
 var HV_MEMORY_EXEC: Int { get }
 typealias hv_memory_flags_t = UInt64
-
-/*!
- * @typedef    hv_vcpu_id_t
- * @abstract   Type of a vCPU ID
- */
 typealias hv_vcpuid_t = UInt32
-
-/*!
- * @typedef    hv_uvaddr_t
- * @abstract   Type of a user virtual address
- */
 typealias hv_uvaddr_t = UnsafePointer<Void>
-
-/*!
- * @typedef    hv_gpaddr_t
- * @abstract   Type of a guest physical address
- */
 typealias hv_gpaddr_t = UInt64
-
-/*!
- * @function   hv_vmx_vcpu_read_vmcs
- * @abstract   Returns the current value of a VMCS field of a vCPU
- * @param      vcpu   vCPU ID
- * @param      field  ID of the VMCS field to be read
- * @param      value  Pointer to the VMCS field value (written on success)
- * @result     0 on success or error code
- * @discussion
- *             See Documentation for a list of supported VMCS fields
- *
- *             Must be called by the owning thread
- */
-@available(OSX 10.10, *)
 func hv_vmx_vcpu_read_vmcs(vcpu: hv_vcpuid_t, _ field: UInt32, _ value: UnsafeMutablePointer<UInt64>) -> hv_return_t
-
-/*!
- * @function   hv_vmx_vcpu_write_vmcs
- * @abstract   Set the value of a VMCS field of a vCPU
- * @param      vcpu   vCPU ID
- * @param      field  ID of the VMCS field to be written
- * @param      value  Value of the VMCS field to be written
- * @result     0 on success or error code
- * @discussion
- *             See Documentation for a list of supported VMCS fields
- *
- *             Must be called by the owning thread
- */
-@available(OSX 10.10, *)
 func hv_vmx_vcpu_write_vmcs(vcpu: hv_vcpuid_t, _ field: UInt32, _ value: UInt64) -> hv_return_t
-
-/*!
- * @typedef    hv_vmx_capability_t
- * @abstract   Enum type of VMX cabability fields
- */
 struct hv_vmx_capability_t : RawRepresentable, Equatable {
   init(_ rawValue: UInt32)
   init(rawValue: UInt32)
@@ -665,29 +390,5 @@ var HV_VMX_CAP_PROCBASED2: hv_vmx_capability_t { get }
 var HV_VMX_CAP_ENTRY: hv_vmx_capability_t { get }
 var HV_VMX_CAP_EXIT: hv_vmx_capability_t { get }
 var HV_VMX_CAP_PREEMPTION_TIMER: hv_vmx_capability_t { get }
-
-/*!
- * @function   hv_vmx_vcpu_read_capability
- * @abstract   Returns the VMX capabilities of the host processor
- * @param      field  ID of the VMX capability field to be read
- * @param      value  Pointer to the capability field value (written on success)
- * @result     0 on success or error code
- * @discussion
- *             See Documentation for VMX capabilities that can be / must (not)
- *             be set
- */
-@available(OSX 10.10, *)
 func hv_vmx_read_capability(field: hv_vmx_capability_t, _ value: UnsafeMutablePointer<UInt64>) -> hv_return_t
-
-/*!
- * @function   hv_vmx_vcpu_set_apic_address
- * @abstract   Set the address of the guest APIC for a vCPU in the
- *             guest physical address space of the VM
- * @param      vcpu  vCPU ID
- * @param      gpa   Page aligned address in the guest physical address space
- * @result     0 on success or error code
- * @discussion
- *             Must be called by the owning thread
- */
-@available(OSX 10.10, *)
 func hv_vmx_vcpu_set_apic_address(vcpu: hv_vcpuid_t, _ gpa: hv_gpaddr_t) -> hv_return_t

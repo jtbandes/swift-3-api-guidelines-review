@@ -197,10 +197,6 @@ struct SampleDescription {
 }
 typealias SampleDescriptionPtr = UnsafeMutablePointer<SampleDescription>
 typealias SampleDescriptionHandle = UnsafeMutablePointer<SampleDescriptionPtr>
-
-/*************************
- * SoundDescription
- *************************/
 struct SoundDescription {
   var descSize: Int32
   var dataFormat: Int32
@@ -358,14 +354,6 @@ var mediaSampleDependsOnOthers: Int { get }
 var mediaSampleDoesNotDependOnOthers: Int { get }
 var mediaSampleEarlierDisplayTimesAllowed: Int { get }
 var kMovieVersion: Int { get }
-
-/****************************************
-*
-*   General Types -
-*       These types are used in more than one of the
-*       directory types.
-*
-****************************************/
 struct MoviesUserData {
   var size: Int32
   var udType: Int32
@@ -380,13 +368,6 @@ struct UserDataAtom {
   init()
   init(size: Int32, atomType: Int32, userData: (MoviesUserData))
 }
-
-/****************************************
-*
-*   MediaDirectory information -
-*       The MediaDirectory is tightly coupled to the data.
-*
-****************************************/
 struct SampleDescriptionAtom {
   var size: Int32
   var atomType: Int32
@@ -592,10 +573,6 @@ struct ClippingAtom {
   init()
   init(size: Int32, atomType: Int32, aRgnClip: RgnAtom)
 }
-
-/***********************
-* Media Info Example Structures
-***********************/
 struct VideoMediaInfoHeader {
   var flags: Int32
   var graphicsMode: Int16
@@ -652,10 +629,6 @@ struct MediaInfo {
   init()
   init(size: Int32, atomType: Int32)
 }
-
-/***********************
-* Media Directory Structures
-***********************/
 struct MediaHeader {
   var flags: Int32
   var creationTime: Int32
@@ -801,15 +774,6 @@ struct TrackDirectory {
   init()
   init(size: Int32, atomType: Int32, trackHeader: TrackHeaderAtom, trackClip: ClippingAtom, edits: EditsAtom, media: MediaDirectory, userData: UserDataAtom)
 }
-
-/****************************************
-*
-*   MovieDirectory -
-*       The MovieDirectory is the top level structure which
-*       holds the TrackInstance describing where the
-*       TrackDirectories are.
-*
-****************************************/
 struct MovieHeader {
   var flags: Int32
   var creationTime: Int32

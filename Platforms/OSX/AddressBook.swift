@@ -87,7 +87,6 @@ func ABSave(addressBook: ABAddressBook!) -> Bool
 func ABHasUnsavedChanges(addressBook: ABAddressBook!) -> Bool
 func ABGetMe(addressBook: ABAddressBook!) -> Unmanaged<ABPerson>!
 func ABSetMe(addressBook: ABAddressBook!, _ moi: ABPerson!)
-@available(OSX 10.3, *)
 func ABCopyRecordTypeFromUniqueId(addressBook: ABAddressBook!, _ uniqueId: CFString!) -> Unmanaged<CFString>!
 func ABAddPropertiesAndTypes(addressBook: ABAddressBook!, _ recordType: CFString!, _ propertiesAndTypes: CFDictionary!) -> CFIndex
 func ABRemoveProperties(addressBook: ABAddressBook!, _ recordType: CFString!, _ properties: CFArray!) -> CFIndex
@@ -98,13 +97,11 @@ func ABAddRecord(addressBook: ABAddressBook!, _ record: ABRecordRef) -> Bool
 func ABRemoveRecord(addressBook: ABAddressBook!, _ record: ABRecordRef) -> Bool
 func ABCopyArrayOfAllPeople(addressBook: ABAddressBook!) -> Unmanaged<CFArray>!
 func ABCopyArrayOfAllGroups(addressBook: ABAddressBook!) -> Unmanaged<CFArray>!
-@available(OSX 10.4, *)
 func ABRecordCreateCopy(record: ABRecordRef) -> ABRecordRef
 func ABRecordCopyRecordType(record: ABRecordRef) -> Unmanaged<CFString>!
 func ABRecordCopyValue(record: ABRecordRef, _ property: CFString!) -> Unmanaged<AnyObject>!
 func ABRecordSetValue(record: ABRecordRef, _ property: CFString!, _ value: AnyObject!) -> Bool
 func ABRecordRemoveValue(record: ABRecordRef, _ property: CFString!) -> Bool
-@available(OSX 10.4, *)
 func ABRecordIsReadOnly(record: ABRecordRef) -> Bool
 func ABRecordCopyUniqueId(record: ABRecordRef) -> Unmanaged<CFString>!
 func ABPersonCreate() -> Unmanaged<ABPerson>!
@@ -143,9 +140,7 @@ func ABMultiValueReplaceLabel(multiValue: ABMutableMultiValue!, _ label: CFStrin
 func ABMultiValueSetPrimaryIdentifier(multiValue: ABMutableMultiValue!, _ identifier: CFString!) -> Bool
 func ABMultiValueCreateMutableCopy(multiValue: ABMultiValue!) -> Unmanaged<ABMutableMultiValue>!
 func ABCopyLocalizedPropertyOrLabel(labelOrProperty: CFString!) -> Unmanaged<CFString>!
-@available(OSX 10.3, *)
 func ABCreateFormattedAddressFromDictionary(addressBook: ABAddressBook!, _ address: CFDictionary!) -> Unmanaged<CFString>!
-@available(OSX 10.3, *)
 func ABCopyDefaultCountryCode(addressBook: ABAddressBook!) -> Unmanaged<CFString>!
 func ABPersonSetImageData(person: ABPerson!, _ imageData: CFData!) -> Bool
 func ABPersonCopyImageData(person: ABPerson!) -> Unmanaged<CFData>!
@@ -157,35 +152,26 @@ var ABRemoveRecordsError: Int { get }
 var ABPropertyValueValidationError: Int { get }
 var ABPropertyUnsupportedBySourceError: Int { get }
 var ABPropertyReadOnlyError: Int { get }
-@available(OSX 10.7, *)
 let ABAddressBookErrorDomain: String
-@available(OSX 10.7, *)
 let ABMultiValueIdentifiersErrorKey: String
 class ABAddressBook : Object {
   class func shared() -> ABAddressBook!
   func recordsMatching(search: ABSearchElement!) -> [AnyObject]!
   func save() -> Bool
-  @available(OSX 10.5, *)
   func saveAndReturnError() throws
   func hasUnsavedChanges() -> Bool
   func me() -> ABPerson!
   func setMe(moi: ABPerson!)
   func recordForUniqueId(uniqueId: String!) -> ABRecord!
-  @available(OSX 10.7, *)
   func add(record: ABRecord!, error: ()) throws
   func add(record: ABRecord!) -> Bool
-  @available(OSX 10.7, *)
   func remove(record: ABRecord!, error: ()) throws
   func remove(record: ABRecord!) -> Bool
   func people() -> [AnyObject]!
   func groups() -> [AnyObject]!
-  @available(OSX 10.3, *)
   func recordClassFromUniqueId(uniqueId: String!) -> String!
-  @available(OSX 10.3, *)
   func formattedAddressFrom(address: [Object : AnyObject]!) -> AttributedString!
-  @available(OSX 10.3, *)
   func defaultCountryCode() -> String!
-  @available(OSX 10.3, *)
   func defaultNameOrdering() -> Int
   init()
 }
@@ -215,17 +201,13 @@ let kABLastNamePhoneticProperty: String
 let kABNicknameProperty: String
 let kABMaidenNameProperty: String
 let kABBirthdayProperty: String
-@available(OSX 10.7, *)
 let kABBirthdayComponentsProperty: String
 let kABAlternateBirthdayComponentsProperty: String
 let kABOrganizationProperty: String
 let kABJobTitleProperty: String
 let kABHomePageProperty: String
-@available(OSX 10.4, *)
 let kABURLsProperty: String
-@available(OSX 10.4, *)
 let kABHomePageLabel: String
-@available(OSX 10.5, *)
 let kABCalendarURIsProperty: String
 let kABEmailProperty: String
 let kABEmailWorkLabel: String
@@ -240,39 +222,22 @@ let kABAddressCountryKey: String
 let kABAddressCountryCodeKey: String
 let kABAddressHomeLabel: String
 let kABAddressWorkLabel: String
-@available(OSX 10.3, *)
 let kABOtherDatesProperty: String
-@available(OSX 10.7, *)
 let kABOtherDateComponentsProperty: String
-@available(OSX 10.3, *)
 let kABAnniversaryLabel: String
-@available(OSX 10.3, *)
 let kABRelatedNamesProperty: String
-@available(OSX 10.3, *)
 let kABFatherLabel: String
-@available(OSX 10.3, *)
 let kABMotherLabel: String
-@available(OSX 10.3, *)
 let kABParentLabel: String
-@available(OSX 10.3, *)
 let kABBrotherLabel: String
-@available(OSX 10.3, *)
 let kABSisterLabel: String
-@available(OSX 10.3, *)
 let kABChildLabel: String
-@available(OSX 10.3, *)
 let kABFriendLabel: String
-@available(OSX 10.3, *)
 let kABSpouseLabel: String
-@available(OSX 10.3, *)
 let kABPartnerLabel: String
-@available(OSX 10.3, *)
 let kABAssistantLabel: String
-@available(OSX 10.3, *)
 let kABManagerLabel: String
-@available(OSX 10.3, *)
 let kABDepartmentProperty: String
-@available(OSX 10.3, *)
 let kABPersonFlags: String
 var kABShowAsMask: Int32 { get }
 var kABShowAsPerson: Int32 { get }
@@ -292,57 +257,31 @@ let kABPhoneMainLabel: String
 let kABPhoneHomeFAXLabel: String
 let kABPhoneWorkFAXLabel: String
 let kABPhonePagerLabel: String
-@available(OSX 10.7, *)
 let kABInstantMessageProperty: String
-@available(OSX 10.7, *)
 let kABInstantMessageUsernameKey: String
-@available(OSX 10.7, *)
 let kABInstantMessageServiceKey: String
-@available(OSX 10.7, *)
 let kABInstantMessageServiceAIM: String
-@available(OSX 10.7, *)
 let kABInstantMessageServiceFacebook: String
-@available(OSX 10.7, *)
 let kABInstantMessageServiceGaduGadu: String
-@available(OSX 10.7, *)
 let kABInstantMessageServiceGoogleTalk: String
-@available(OSX 10.7, *)
 let kABInstantMessageServiceICQ: String
-@available(OSX 10.7, *)
 let kABInstantMessageServiceJabber: String
-@available(OSX 10.7, *)
 let kABInstantMessageServiceMSN: String
-@available(OSX 10.7, *)
 let kABInstantMessageServiceQQ: String
-@available(OSX 10.7, *)
 let kABInstantMessageServiceSkype: String
-@available(OSX 10.7, *)
 let kABInstantMessageServiceYahoo: String
-@available(OSX 10.7, *)
 let kABSocialProfileProperty: String
-@available(OSX 10.7, *)
 let kABSocialProfileURLKey: String
-@available(OSX 10.7, *)
 let kABSocialProfileUsernameKey: String
-@available(OSX 10.7, *)
 let kABSocialProfileUserIdentifierKey: String
-@available(OSX 10.7, *)
 let kABSocialProfileServiceKey: String
-@available(OSX 10.7, *)
 let kABSocialProfileServiceTwitter: String
-@available(OSX 10.7, *)
 let kABSocialProfileServiceFacebook: String
-@available(OSX 10.7, *)
 let kABSocialProfileServiceLinkedIn: String
-@available(OSX 10.7, *)
 let kABSocialProfileServiceFlickr: String
-@available(OSX 10.7, *)
 let kABSocialProfileServiceMySpace: String
-@available(OSX 10.8, *)
 let kABSocialProfileServiceSinaWeibo: String
-@available(OSX 10.9, *)
 let kABSocialProfileServiceTencentWeibo: String
-@available(OSX 10.9, *)
 let kABSocialProfileServiceYelp: String
 let kABNoteProperty: String
 let kABMiddleNameProperty: String
@@ -353,15 +292,11 @@ let kABGroupNameProperty: String
 let kABWorkLabel: String
 let kABHomeLabel: String
 let kABOtherLabel: String
-@available(OSX 10.7, *)
 let kABMobileMeLabel: String
 let kABDatabaseChangedNotification: String
 let kABDatabaseChangedExternallyNotification: String
-@available(OSX 10.3, *)
 let kABInsertedRecords: String
-@available(OSX 10.3, *)
 let kABUpdatedRecords: String
-@available(OSX 10.3, *)
 let kABDeletedRecords: String
 func ABLocalizedPropertyOrLabel(propertyOrLabel: String!) -> String!
 class ABGroup : ABRecord {
@@ -375,7 +310,6 @@ class ABGroup : ABRecord {
   func setDistributionIdentifier(identifier: String!, forProperty property: String!, person: ABPerson!) -> Bool
   func distributionIdentifierForProperty(property: String!, person: ABPerson!) -> String!
   init!()
-  @available(OSX 10.5, *)
   init!(addressBook: ABAddressBook!)
 }
 extension ABGroup {
@@ -422,10 +356,8 @@ class ABMutableMultiValue : ABMultiValue {
 }
 class ABPerson : ABRecord {
   func parentGroups() -> [AnyObject]!
-  @available(OSX 10.8, *)
   func linkedPeople() -> [AnyObject]!
   init!()
-  @available(OSX 10.5, *)
   init!(addressBook: ABAddressBook!)
 }
 extension ABPerson {
@@ -443,23 +375,19 @@ extension ABPerson {
 }
 class ABRecord : Object {
   init!()
-  @available(OSX 10.5, *)
   init!(addressBook: ABAddressBook!)
   func valueForProperty(property: String!) -> AnyObject!
-  @available(OSX 10.7, *)
   func setValue(value: AnyObject!, forProperty property: String!, error: ()) throws
   func setValue(value: AnyObject!, forProperty property: String!) -> Bool
   func removeValueForProperty(property: String!) -> Bool
-  @available(OSX 10.4, *)
   func isReadOnly() -> Bool
 }
 extension ABRecord {
   var uniqueId: String! { get }
-  @available(OSX 10.10, *)
   var displayName: String! { get }
 }
 class ABSearchElement : Object {
-  /*not inherited*/ init!(forConjunction conjuction: ABSearchConjunction, children: [AnyObject]!)
+   init!(forConjunction conjuction: ABSearchConjunction, children: [AnyObject]!)
   func matchesRecord(record: ABRecord!) -> Bool
   init()
 }

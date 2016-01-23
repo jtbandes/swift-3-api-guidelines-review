@@ -5,7 +5,6 @@ protocol MKAnnotation : ObjectProtocol {
   optional var subtitle: String? { get }
 }
 let MKAnnotationCalloutInfoDidChangeNotification: String
-@available(iOS 4.0, *)
 enum MKAnnotationViewDragState : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
@@ -15,7 +14,6 @@ enum MKAnnotationViewDragState : UInt {
   case Canceling
   case Ending
 }
-@available(iOS 3.0, *)
 class MKAnnotationView : UIView {
   init(annotation: MKAnnotation?, reuseIdentifier: String?)
   var reuseIdentifier: String? { get }
@@ -31,19 +29,14 @@ class MKAnnotationView : UIView {
   var canShowCallout: Bool
   var leftCalloutAccessoryView: UIView?
   var rightCalloutAccessoryView: UIView?
-  @available(iOS 9.0, *)
   var detailCalloutAccessoryView: UIView?
-  @available(iOS 4.0, *)
   var isDraggable: Bool
-  @available(iOS 4.0, *)
   var dragState: MKAnnotationViewDragState
-  @available(iOS 4.2, *)
   func setDragState(newDragState: MKAnnotationViewDragState, animated: Bool)
   init(frame: CGRect)
   init?(coder aDecoder: Coder)
   convenience init()
 }
-@available(iOS 4.0, *)
 class MKCircle : MKShape, MKOverlay {
   convenience init(center coord: CLLocationCoordinate2D, radius: CLLocationDistance)
   convenience init(mapRect: MKMapRect)
@@ -51,19 +44,15 @@ class MKCircle : MKShape, MKOverlay {
   var radius: CLLocationDistance { get }
   var boundingMapRect: MKMapRect { get }
   init()
-  @available(iOS 4.0, *)
   func intersectsMapRect(mapRect: MKMapRect) -> Bool
-  @available(iOS 7.0, *)
   func canReplaceMapContent() -> Bool
 }
-@available(iOS 7.0, *)
 class MKCircleRenderer : MKOverlayPathRenderer {
   init(circle: MKCircle)
   var circle: MKCircle { get }
   init(overlay: MKOverlay)
   convenience init()
 }
-@available(iOS 4.0, *)
 class MKCircleView : MKOverlayPathView {
   convenience init(frame: CGRect)
   init?(coder aDecoder: Coder)
@@ -71,7 +60,6 @@ class MKCircleView : MKOverlayPathView {
 }
 typealias MKDirectionsHandler = (MKDirectionsResponse?, Error?) -> Void
 typealias MKETAHandler = (MKETAResponse?, Error?) -> Void
-@available(iOS 7.0, *)
 class MKDirections : Object {
   init(request: MKDirectionsRequest)
   func calculateWithCompletionHandler(completionHandler: MKDirectionsHandler)
@@ -80,36 +68,27 @@ class MKDirections : Object {
   var isCalculating: Bool { get }
   convenience init()
 }
-@available(iOS 6.0, *)
 class MKDirectionsRequest : Object {
   var source: MKMapItem?
   var destination: MKMapItem?
   init()
 }
 extension MKDirectionsRequest {
-  @available(iOS 7.0, *)
   var transportType: MKDirectionsTransportType
-  @available(iOS 7.0, *)
   var requestsAlternateRoutes: Bool
-  @available(iOS 7.0, *)
   @NSCopying var departureDate: Date?
-  @available(iOS 7.0, *)
   @NSCopying var arrivalDate: Date?
 }
 extension MKDirectionsRequest {
-  @available(iOS 6.0, *)
   init(contentsOf url: URL)
-  @available(iOS 6.0, *)
   class func isDirectionsRequest(url: URL) -> Bool
 }
-@available(iOS 7.0, *)
 class MKDirectionsResponse : Object {
   var source: MKMapItem { get }
   var destination: MKMapItem { get }
   var routes: [MKRoute] { get }
   init()
 }
-@available(iOS 7.0, *)
 class MKRoute : Object {
   var name: String { get }
   var advisoryNotices: [String] { get }
@@ -120,7 +99,6 @@ class MKRoute : Object {
   var steps: [MKRouteStep] { get }
   init()
 }
-@available(iOS 7.0, *)
 class MKRouteStep : Object {
   var instructions: String { get }
   var notice: String? { get }
@@ -129,32 +107,24 @@ class MKRouteStep : Object {
   var transportType: MKDirectionsTransportType { get }
   init()
 }
-@available(iOS 7.0, *)
 class MKETAResponse : Object {
   var source: MKMapItem { get }
   var destination: MKMapItem { get }
   var expectedTravelTime: TimeInterval { get }
-  @available(iOS 9.0, *)
   var distance: CLLocationDistance { get }
-  @available(iOS 9.0, *)
   var expectedArrivalDate: Date { get }
-  @available(iOS 9.0, *)
   var expectedDepartureDate: Date { get }
-  @available(iOS 9.0, *)
   var transportType: MKDirectionsTransportType { get }
   init()
 }
-@available(iOS 7.0, *)
 struct MKDirectionsTransportType : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt
   static var Automobile: MKDirectionsTransportType { get }
   static var Walking: MKDirectionsTransportType { get }
-  @available(iOS 9.0, *)
   static var Transit: MKDirectionsTransportType { get }
   static var Any: MKDirectionsTransportType { get }
 }
-@available(iOS 7.0, *)
 class MKDistanceFormatter : Formatter {
   func stringFromDistance(distance: CLLocationDistance) -> String
   func distanceFrom(distance: String) -> CLLocationDistance
@@ -164,7 +134,6 @@ class MKDistanceFormatter : Formatter {
   init()
   init?(coder aDecoder: Coder)
 }
-@available(iOS 7.0, *)
 enum MKDistanceFormatterUnits : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
@@ -173,7 +142,6 @@ enum MKDistanceFormatterUnits : UInt {
   case Imperial
   case ImperialWithYards
 }
-@available(iOS 7.0, *)
 enum MKDistanceFormatterUnitStyle : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
@@ -215,21 +183,13 @@ struct MKMapRect {
   init(origin: MKMapPoint, size: MKMapSize)
 }
 typealias MKZoomScale = CGFloat
-@available(iOS 4.0, *)
 let MKMapSizeWorld: MKMapSize
-@available(iOS 4.0, *)
 let MKMapRectWorld: MKMapRect
-@available(iOS 4.0, *)
 func MKMapPointForCoordinate(coordinate: CLLocationCoordinate2D) -> MKMapPoint
-@available(iOS 4.0, *)
 func MKCoordinateForMapPoint(mapPoint: MKMapPoint) -> CLLocationCoordinate2D
-@available(iOS 4.0, *)
 func MKMetersPerMapPointAtLatitude(latitude: CLLocationDegrees) -> CLLocationDistance
-@available(iOS 4.0, *)
 func MKMapPointsPerMeterAtLatitude(latitude: CLLocationDegrees) -> Double
-@available(iOS 4.0, *)
 func MKMetersBetweenMapPoints(a: MKMapPoint, _ b: MKMapPoint) -> CLLocationDistance
-@available(iOS 4.0, *)
 let MKMapRectNull: MKMapRect
 func MKMapPointMake(x: Double, _ y: Double) -> MKMapPoint
 func MKMapSizeMake(width: Double, _ height: Double) -> MKMapSize
@@ -250,60 +210,42 @@ func MKMapRectIsEmpty(rect: MKMapRect) -> Bool
 func MKStringFromMapPoint(point: MKMapPoint) -> String
 func MKStringFromMapSize(size: MKMapSize) -> String
 func MKStringFromMapRect(rect: MKMapRect) -> String
-@available(iOS 4.0, *)
 func MKMapRectUnion(rect1: MKMapRect, _ rect2: MKMapRect) -> MKMapRect
-@available(iOS 4.0, *)
 func MKMapRectIntersection(rect1: MKMapRect, _ rect2: MKMapRect) -> MKMapRect
-@available(iOS 4.0, *)
 func MKMapRectInset(rect: MKMapRect, _ dx: Double, _ dy: Double) -> MKMapRect
-@available(iOS 4.0, *)
 func MKMapRectOffset(rect: MKMapRect, _ dx: Double, _ dy: Double) -> MKMapRect
-@available(iOS 4.0, *)
 func MKMapRectDivide(rect: MKMapRect, _ slice: UnsafeMutablePointer<MKMapRect>, _ remainder: UnsafeMutablePointer<MKMapRect>, _ amount: Double, _ edge: CGRectEdge)
-@available(iOS 4.0, *)
 func MKMapRectContainsPoint(rect: MKMapRect, _ point: MKMapPoint) -> Bool
-@available(iOS 4.0, *)
 func MKMapRectContainsRect(rect1: MKMapRect, _ rect2: MKMapRect) -> Bool
-@available(iOS 4.0, *)
 func MKMapRectIntersectsRect(rect1: MKMapRect, _ rect2: MKMapRect) -> Bool
-@available(iOS 4.0, *)
 func MKCoordinateRegionForMapRect(rect: MKMapRect) -> MKCoordinateRegion
-@available(iOS 4.0, *)
 func MKMapRectSpans180thMeridian(rect: MKMapRect) -> Bool
-@available(iOS 4.0, *)
 func MKMapRectRemainder(rect: MKMapRect) -> MKMapRect
 extension Value {
-  /*not inherited*/ init(mkCoordinate coordinate: CLLocationCoordinate2D)
-  /*not inherited*/ init(mkCoordinateSpan span: MKCoordinateSpan)
+   init(mkCoordinate coordinate: CLLocationCoordinate2D)
+   init(mkCoordinateSpan span: MKCoordinateSpan)
   var mkCoordinateValue: CLLocationCoordinate2D { get }
   var mkCoordinateSpanValue: MKCoordinateSpan { get }
 }
-@available(iOS 7.0, *)
 class MKMapCamera : Object, SecureCoding, Copying {
   var centerCoordinate: CLLocationCoordinate2D
   var heading: CLLocationDirection
   var pitch: CGFloat
   var altitude: CLLocationDistance
   convenience init(lookingAtCenter centerCoordinate: CLLocationCoordinate2D, fromEyeCoordinate eyeCoordinate: CLLocationCoordinate2D, eyeAltitude: CLLocationDistance)
-  @available(iOS 9.0, *)
   convenience init(lookingAtCenter centerCoordinate: CLLocationCoordinate2D, fromDistance distance: CLLocationDistance, pitch: CGFloat, heading: CLLocationDirection)
   init()
-  @available(iOS 7.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(iOS 7.0, *)
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
-  @available(iOS 7.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
 }
-@available(iOS 6.0, *)
 class MKMapItem : Object {
   var placemark: MKPlacemark { get }
   var isCurrentLocation: Bool { get }
   var name: String?
   var phoneNumber: String?
   var url: URL?
-  @available(iOS 9.0, *)
   @NSCopying var timeZone: TimeZone?
   class func forCurrentLocation() -> MKMapItem
   init(placemark: MKPlacemark)
@@ -311,31 +253,20 @@ class MKMapItem : Object {
   class func openMapsWith(mapItems: [MKMapItem], launchOptions: [String : AnyObject]? = [:]) -> Bool
   init()
 }
-@available(iOS 6.0, *)
 let MKLaunchOptionsDirectionsModeKey: String
-@available(iOS 6.0, *)
 let MKLaunchOptionsMapTypeKey: String
-@available(iOS 6.0, *)
 let MKLaunchOptionsShowsTrafficKey: String
-@available(iOS 6.0, *)
 let MKLaunchOptionsDirectionsModeDriving: String
-@available(iOS 6.0, *)
 let MKLaunchOptionsDirectionsModeWalking: String
-@available(iOS 9.0, *)
 let MKLaunchOptionsDirectionsModeTransit: String
-@available(iOS 6.0, *)
 let MKLaunchOptionsMapCenterKey: String
-@available(iOS 6.0, *)
 let MKLaunchOptionsMapSpanKey: String
-@available(iOS 7.1, *)
 let MKLaunchOptionsCameraKey: String
-@available(iOS 7.0, *)
 class MKMapSnapshot : Object {
   var image: UIImage { get }
   func pointFor(coordinate: CLLocationCoordinate2D) -> CGPoint
   init()
 }
-@available(iOS 7.0, *)
 class MKMapSnapshotOptions : Object, Copying {
   @NSCopying var camera: MKMapCamera
   var mapRect: MKMapRect
@@ -346,11 +277,9 @@ class MKMapSnapshotOptions : Object, Copying {
   var size: CGSize
   var scale: CGFloat
   init()
-  @available(iOS 7.0, *)
   func copy(zone zone: Zone = nil) -> AnyObject
 }
 typealias MKMapSnapshotCompletionHandler = (MKMapSnapshot?, Error?) -> Void
-@available(iOS 7.0, *)
 class MKMapSnapshotter : Object {
   init(options: MKMapSnapshotOptions)
   func startWithCompletionHandler(completionHandler: MKMapSnapshotCompletionHandler)
@@ -359,7 +288,6 @@ class MKMapSnapshotter : Object {
   var isLoading: Bool { get }
   convenience init()
 }
-@available(iOS 5.0, *)
 enum MKUserTrackingMode : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -367,7 +295,6 @@ enum MKUserTrackingMode : Int {
   case Follow
   case FollowWithHeading
 }
-@available(iOS 3.0, *)
 class MKMapView : UIView, Coding {
   weak var delegate: @sil_weak MKMapViewDelegate?
   var mapType: MKMapType
@@ -382,9 +309,7 @@ class MKMapView : UIView, Coding {
   func _handleSelectionAt(locationInView: CGPoint)
   func setVisibleMapRect(mapRect: MKMapRect, edgePadding insets: UIEdgeInsets, animated animate: Bool)
   func mapRectThatFits(mapRect: MKMapRect, edgePadding insets: UIEdgeInsets) -> MKMapRect
-  @available(iOS 7.0, *)
   @NSCopying var camera: MKMapCamera
-  @available(iOS 7.0, *)
   func setCamera(camera: MKMapCamera, animated: Bool)
   func convert(coordinate: CLLocationCoordinate2D, toPointTo view: UIView?) -> CGPoint
   func convert(point: CGPoint, toCoordinateFrom view: UIView?) -> CLLocationCoordinate2D
@@ -392,25 +317,16 @@ class MKMapView : UIView, Coding {
   func convert(rect: CGRect, toRegionFrom view: UIView?) -> MKCoordinateRegion
   var isZoomEnabled: Bool
   var isScrollEnabled: Bool
-  @available(iOS 7.0, *)
   var isRotateEnabled: Bool
-  @available(iOS 7.0, *)
   var isPitchEnabled: Bool
-  @available(iOS 9.0, *)
   var showsCompass: Bool
-  @available(iOS 9.0, *)
   var showsScale: Bool
-  @available(iOS 7.0, *)
   var showsPointsOfInterest: Bool
-  @available(iOS 7.0, *)
   var showsBuildings: Bool
-  @available(iOS 9.0, *)
   var showsTraffic: Bool
   var showsUserLocation: Bool
   var userLocation: MKUserLocation { get }
-  @available(iOS 5.0, *)
   var userTrackingMode: MKUserTrackingMode
-  @available(iOS 5.0, *)
   func setUserTrackingMode(mode: MKUserTrackingMode, animated: Bool)
   var isUserLocationVisible: Bool { get }
   func addAnnotation(annotation: MKAnnotation)
@@ -418,7 +334,6 @@ class MKMapView : UIView, Coding {
   func removeAnnotation(annotation: MKAnnotation)
   func removeAnnotations(annotations: [MKAnnotation])
   var annotations: [MKAnnotation] { get }
-  @available(iOS 4.2, *)
   func annotationsIn(mapRect: MKMapRect) -> Set<Object>
   func viewFor(annotation: MKAnnotation) -> MKAnnotationView?
   func dequeueReusableAnnotationViewWithIdentifier(identifier: String) -> MKAnnotationView?
@@ -426,13 +341,11 @@ class MKMapView : UIView, Coding {
   func deselectAnnotation(annotation: MKAnnotation?, animated: Bool)
   var selectedAnnotations: [MKAnnotation]
   var annotationVisibleRect: CGRect { get }
-  @available(iOS 7.0, *)
   func showAnnotations(annotations: [MKAnnotation], animated: Bool)
   init(frame: CGRect)
   init?(coder aDecoder: Coder)
   convenience init()
 }
-@available(iOS 7.0, *)
 enum MKOverlayLevel : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -440,80 +353,44 @@ enum MKOverlayLevel : Int {
   case AboveLabels
 }
 extension MKMapView {
-  @available(iOS 7.0, *)
   func add(overlay: MKOverlay, level: MKOverlayLevel)
-  @available(iOS 7.0, *)
   func addOverlays(overlays: [MKOverlay], level: MKOverlayLevel)
-  @available(iOS 4.0, *)
   func remove(overlay: MKOverlay)
-  @available(iOS 4.0, *)
   func removeOverlays(overlays: [MKOverlay])
-  @available(iOS 7.0, *)
   func insert(overlay: MKOverlay, at index: Int, level: MKOverlayLevel)
-  @available(iOS 4.0, *)
   func insert(overlay: MKOverlay, above sibling: MKOverlay)
-  @available(iOS 4.0, *)
   func insert(overlay: MKOverlay, below sibling: MKOverlay)
-  @available(iOS 7.0, *)
   func exchangeOverlay(overlay1: MKOverlay, withOverlay overlay2: MKOverlay)
-  @available(iOS 4.0, *)
   var overlays: [MKOverlay] { get }
-  @available(iOS 7.0, *)
   func overlaysIn(level: MKOverlayLevel) -> [MKOverlay]
-  @available(iOS 7.0, *)
   func rendererFor(overlay: MKOverlay) -> MKOverlayRenderer?
-  @available(iOS 4.0, *)
   func add(overlay: MKOverlay)
-  @available(iOS 4.0, *)
   func addOverlays(overlays: [MKOverlay])
-  @available(iOS 4.0, *)
   func insert(overlay: MKOverlay, at index: Int)
-  @available(iOS 4.0, *)
   func exchangeOverlayAt(index1: Int, withOverlayAt index2: Int)
 }
 protocol MKMapViewDelegate : ObjectProtocol {
-  @available(iOS 3.0, *)
   optional func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool)
-  @available(iOS 3.0, *)
   optional func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool)
-  @available(iOS 3.0, *)
   optional func mapViewWillStartLoadingMap(mapView: MKMapView)
-  @available(iOS 3.0, *)
   optional func mapViewDidFinishLoadingMap(mapView: MKMapView)
-  @available(iOS 3.0, *)
   optional func mapViewDidFailLoadingMap(mapView: MKMapView, withError error: Error)
-  @available(iOS 7.0, *)
   optional func mapViewWillStartRenderingMap(mapView: MKMapView)
-  @available(iOS 7.0, *)
   optional func mapViewDidFinishRenderingMap(mapView: MKMapView, fullyRendered: Bool)
-  @available(iOS 3.0, *)
   optional func mapView(mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
-  @available(iOS 3.0, *)
   optional func mapView(mapView: MKMapView, didAdd views: [MKAnnotationView])
-  @available(iOS 3.0, *)
   optional func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl)
-  @available(iOS 4.0, *)
   optional func mapView(mapView: MKMapView, didSelect view: MKAnnotationView)
-  @available(iOS 4.0, *)
   optional func mapView(mapView: MKMapView, didDeselect view: MKAnnotationView)
-  @available(iOS 4.0, *)
   optional func mapViewWillStartLocatingUser(mapView: MKMapView)
-  @available(iOS 4.0, *)
   optional func mapViewDidStopLocatingUser(mapView: MKMapView)
-  @available(iOS 4.0, *)
   optional func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation)
-  @available(iOS 4.0, *)
   optional func mapView(mapView: MKMapView, didFailToLocateUserWithError error: Error)
-  @available(iOS 4.0, *)
   optional func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState)
-  @available(iOS 5.0, *)
   optional func mapView(mapView: MKMapView, didChange mode: MKUserTrackingMode, animated: Bool)
-  @available(iOS 7.0, *)
   optional func mapView(mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer
-  @available(iOS 7.0, *)
   optional func mapView(mapView: MKMapView, didAdd renderers: [MKOverlayRenderer])
 }
-@available(iOS 4.0, *)
 class MKMultiPoint : MKShape {
   func points() -> UnsafeMutablePointer<MKMapPoint>
   var pointCount: Int { get }
@@ -524,10 +401,8 @@ protocol MKOverlay : MKAnnotation {
   var coordinate: CLLocationCoordinate2D { get }
   var boundingMapRect: MKMapRect { get }
   optional func intersectsMapRect(mapRect: MKMapRect) -> Bool
-  @available(iOS 7.0, *)
   optional func canReplaceMapContent() -> Bool
 }
-@available(iOS 7.0, *)
 class MKOverlayPathRenderer : MKOverlayRenderer {
   var fillColor: UIColor?
   var strokeColor: UIColor?
@@ -547,13 +422,11 @@ class MKOverlayPathRenderer : MKOverlayRenderer {
   init(overlay: MKOverlay)
   convenience init()
 }
-@available(iOS 4.0, *)
 class MKOverlayPathView : MKOverlayView {
   convenience init(frame: CGRect)
   init?(coder aDecoder: Coder)
   convenience init()
 }
-@available(iOS 7.0, *)
 class MKOverlayRenderer : Object {
   init(overlay: MKOverlay)
   var overlay: MKOverlay { get }
@@ -570,15 +443,12 @@ class MKOverlayRenderer : Object {
   var contentScaleFactor: CGFloat { get }
   convenience init()
 }
-@available(iOS 4.0, *)
 class MKOverlayView : UIView {
   convenience init(frame: CGRect)
   init?(coder aDecoder: Coder)
   convenience init()
 }
-@available(iOS 4.0, *)
 func MKRoadWidthAtZoomScale(zoomScale: MKZoomScale) -> CGFloat
-@available(iOS, introduced=3.0, deprecated=9.0, message="Use MKPinAnnotationView's pinTintColor instead")
 enum MKPinAnnotationColor : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
@@ -586,44 +456,32 @@ enum MKPinAnnotationColor : UInt {
   case Green
   case Purple
 }
-@available(iOS 3.0, *)
 class MKPinAnnotationView : MKAnnotationView {
-  @available(iOS 9.0, *)
   class func redPinColor() -> UIColor
-  @available(iOS 9.0, *)
   class func greenPinColor() -> UIColor
-  @available(iOS 9.0, *)
   class func purplePinColor() -> UIColor
-  @available(iOS 9.0, *)
   var pinTintColor: UIColor!
   var animatesDrop: Bool
-  @available(iOS, introduced=3.0, deprecated=9.0, message="Use pinTintColor instead")
   var pinColor: MKPinAnnotationColor
   init(annotation: MKAnnotation?, reuseIdentifier: String?)
   init(frame: CGRect)
   init?(coder aDecoder: Coder)
   convenience init()
 }
-@available(iOS 3.0, *)
 class MKPlacemark : CLPlacemark, MKAnnotation {
   init(coordinate: CLLocationCoordinate2D, addressDictionary: [String : AnyObject]?)
   var countryCode: String? { get }
   init(placemark: CLPlacemark)
   init()
   init?(coder aDecoder: Coder)
-  @available(iOS 3.0, *)
   var coordinate: CLLocationCoordinate2D { get }
-  @available(iOS 3.0, *)
   var title: String? { get }
-  @available(iOS 3.0, *)
   var subtitle: String? { get }
 }
-@available(iOS 4.0, *)
 class MKPointAnnotation : MKShape {
   var coordinate: CLLocationCoordinate2D
   init()
 }
-@available(iOS 4.0, *)
 class MKPolygon : MKMultiPoint, MKOverlay {
   convenience init(points: UnsafeMutablePointer<MKMapPoint>, count: Int)
   convenience init(points: UnsafeMutablePointer<MKMapPoint>, count: Int, interiorPolygons: [MKPolygon]?)
@@ -631,77 +489,58 @@ class MKPolygon : MKMultiPoint, MKOverlay {
   convenience init(coordinates coords: UnsafeMutablePointer<CLLocationCoordinate2D>, count: Int, interiorPolygons: [MKPolygon]?)
   var interiorPolygons: [MKPolygon]? { get }
   init()
-  @available(iOS 4.0, *)
   var coordinate: CLLocationCoordinate2D { get }
-  @available(iOS 4.0, *)
   var boundingMapRect: MKMapRect { get }
-  @available(iOS 4.0, *)
   func intersectsMapRect(mapRect: MKMapRect) -> Bool
-  @available(iOS 7.0, *)
   func canReplaceMapContent() -> Bool
 }
-@available(iOS 7.0, *)
 class MKPolygonRenderer : MKOverlayPathRenderer {
   init(polygon: MKPolygon)
   var polygon: MKPolygon { get }
   init(overlay: MKOverlay)
   convenience init()
 }
-@available(iOS 4.0, *)
 class MKPolygonView : MKOverlayPathView {
   convenience init(frame: CGRect)
   init?(coder aDecoder: Coder)
   convenience init()
 }
-@available(iOS 4.0, *)
 class MKPolyline : MKMultiPoint, MKOverlay {
   convenience init(points: UnsafeMutablePointer<MKMapPoint>, count: Int)
   convenience init(coordinates coords: UnsafeMutablePointer<CLLocationCoordinate2D>, count: Int)
   init()
-  @available(iOS 4.0, *)
   var coordinate: CLLocationCoordinate2D { get }
-  @available(iOS 4.0, *)
   var boundingMapRect: MKMapRect { get }
-  @available(iOS 4.0, *)
   func intersectsMapRect(mapRect: MKMapRect) -> Bool
-  @available(iOS 7.0, *)
   func canReplaceMapContent() -> Bool
 }
-@available(iOS 7.0, *)
 class MKPolylineRenderer : MKOverlayPathRenderer {
   init(polyline: MKPolyline)
   var polyline: MKPolyline { get }
   init(overlay: MKOverlay)
   convenience init()
 }
-@available(iOS 4.0, *)
 class MKPolylineView : MKOverlayPathView {
   convenience init(frame: CGRect)
   init?(coder aDecoder: Coder)
   convenience init()
 }
-@available(iOS 4.0, *)
 class MKShape : Object, MKAnnotation {
   var title: String?
   var subtitle: String?
   init()
-  @available(iOS 4.0, *)
   var coordinate: CLLocationCoordinate2D { get }
 }
-@available(iOS 3.0, *)
 enum MKMapType : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
   case Standard
   case Satellite
   case Hybrid
-  @available(iOS 9.0, *)
   case SatelliteFlyover
-  @available(iOS 9.0, *)
   case HybridFlyover
 }
 let MKErrorDomain: String
-@available(iOS 3.0, *)
 enum MKErrorCode : UInt {
   init?(rawValue: UInt)
   var rawValue: UInt { get }
@@ -709,29 +548,23 @@ enum MKErrorCode : UInt {
   case ServerFailure
   case LoadingThrottled
   case PlacemarkNotFound
-  @available(iOS 7.0, *)
   case DirectionsNotFound
 }
-@available(iOS 3.0, *)
 class MKUserLocation : Object, MKAnnotation {
   var isUpdating: Bool { get }
   var location: CLLocation? { get }
-  @available(iOS 5.0, *)
   var heading: CLHeading? { get }
   var title: String?
   var subtitle: String?
   init()
-  @available(iOS 3.0, *)
   var coordinate: CLLocationCoordinate2D { get }
 }
-@available(iOS 5.0, *)
 class MKUserTrackingBarButtonItem : UIBarButtonItem {
   init(mapView: MKMapView?)
   var mapView: MKMapView?
   convenience init()
   init?(coder aDecoder: Coder)
   convenience init(image: UIImage?, style: UIBarButtonItemStyle, target: AnyObject?, action: Selector)
-  @available(iOS 5.0, *)
   convenience init(image: UIImage?, landscapeImagePhone: UIImage?, style: UIBarButtonItemStyle, target: AnyObject?, action: Selector)
   convenience init(title: String?, style: UIBarButtonItemStyle, target: AnyObject?, action: Selector)
   convenience init(barButtonSystemItem systemItem: UIBarButtonSystemItem, target: AnyObject?, action: Selector)

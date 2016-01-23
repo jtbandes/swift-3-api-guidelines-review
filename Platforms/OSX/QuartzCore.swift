@@ -1,6 +1,4 @@
 
-
-/** The base animation class. **/
 class CAAnimation : Object, Coding, Copying, CAMediaTiming, CAAction {
   class func defaultValueForKey(key: String) -> AnyObject?
   func shouldArchiveValueForKey(key: String) -> Bool
@@ -19,7 +17,6 @@ class CAAnimation : Object, Coding, Copying, CAMediaTiming, CAAction {
   var repeatDuration: CFTimeInterval
   var autoreverses: Bool
   var fillMode: String
-  @available(OSX 10.0, *)
   func runActionForKey(event: String, object anObject: AnyObject, arguments dict: [Object : AnyObject]?)
 }
 extension Object {
@@ -28,8 +25,6 @@ extension Object {
   class func animationDidStop(anim: CAAnimation, finished flag: Bool)
   func animationDidStop(anim: CAAnimation, finished flag: Bool)
 }
-
-/** Subclass for property-based animations. **/
 class CAPropertyAnimation : CAAnimation {
   convenience init(keyPath path: String?)
   var keyPath: String?
@@ -39,8 +34,6 @@ class CAPropertyAnimation : CAAnimation {
   init()
   init?(coder aDecoder: Coder)
 }
-
-/** Subclass for basic (single-keyframe) animations. **/
 class CABasicAnimation : CAPropertyAnimation {
   var fromValue: AnyObject?
   var toValue: AnyObject?
@@ -49,8 +42,6 @@ class CABasicAnimation : CAPropertyAnimation {
   init()
   init?(coder aDecoder: Coder)
 }
-
-/** General keyframe animation class. **/
 class CAKeyframeAnimation : CAPropertyAnimation {
   var values: [AnyObject]?
   var path: CGPath?
@@ -65,22 +56,13 @@ class CAKeyframeAnimation : CAPropertyAnimation {
   init()
   init?(coder aDecoder: Coder)
 }
-@available(OSX 10.5, *)
 let kCAAnimationLinear: String
-@available(OSX 10.5, *)
 let kCAAnimationDiscrete: String
-@available(OSX 10.5, *)
 let kCAAnimationPaced: String
-@available(OSX 10.7, *)
 let kCAAnimationCubic: String
-@available(OSX 10.7, *)
 let kCAAnimationCubicPaced: String
-@available(OSX 10.5, *)
 let kCAAnimationRotateAuto: String
-@available(OSX 10.5, *)
 let kCAAnimationRotateAutoReverse: String
-
-/** Subclass for mass-spring animations. */
 class CASpringAnimation : CABasicAnimation {
   var mass: CGFloat
   var stiffness: CGFloat
@@ -91,8 +73,6 @@ class CASpringAnimation : CABasicAnimation {
   init()
   init?(coder aDecoder: Coder)
 }
-
-/** Transition animation subclass. **/
 class CATransition : CAAnimation {
   var type: String
   var subtype: String?
@@ -102,31 +82,20 @@ class CATransition : CAAnimation {
   init()
   init?(coder aDecoder: Coder)
 }
-@available(OSX 10.5, *)
 let kCATransitionFade: String
-@available(OSX 10.5, *)
 let kCATransitionMoveIn: String
-@available(OSX 10.5, *)
 let kCATransitionPush: String
-@available(OSX 10.5, *)
 let kCATransitionReveal: String
-@available(OSX 10.5, *)
 let kCATransitionFromRight: String
-@available(OSX 10.5, *)
 let kCATransitionFromLeft: String
-@available(OSX 10.5, *)
 let kCATransitionFromTop: String
-@available(OSX 10.5, *)
 let kCATransitionFromBottom: String
-
-/** Animation subclass for grouped animations. **/
 class CAAnimationGroup : CAAnimation {
   var animations: [CAAnimation]?
   init()
   init?(coder aDecoder: Coder)
 }
 var CA_WARN_DEPRECATED: Int32 { get }
-@available(OSX 10.5, *)
 func CACurrentMediaTime() -> CFTimeInterval
 enum CAConstraintAttribute : Int32 {
   init?(rawValue: Int32)
@@ -140,19 +109,13 @@ enum CAConstraintAttribute : Int32 {
   case MaxY
   case Height
 }
-
-/** The additions to CALayer for constraint layout. **/
 extension CALayer {
   var constraints: [CAConstraint]?
   func addConstraint(c: CAConstraint)
 }
-
-/** The constraint-based layout manager. **/
 class CAConstraintLayoutManager : Object {
   init()
 }
-
-/** The class representing a single layout constraint. **/
 class CAConstraint : Object, Coding {
   convenience init(attribute attr: CAConstraintAttribute, relativeTo srcId: String, attribute srcAttr: CAConstraintAttribute, offset c: CGFloat)
   convenience init(attribute attr: CAConstraintAttribute, relativeTo srcId: String, attribute srcAttr: CAConstraintAttribute)
@@ -179,8 +142,6 @@ class CAEmitterBehavior : Object, Coding {
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
 }
-
-/** Behavior types. **/
 let kCAEmitterBehaviorWave: String
 let kCAEmitterBehaviorDrag: String
 let kCAEmitterBehaviorAlignToMotion: String
@@ -258,41 +219,20 @@ class CAEmitterLayer : CALayer {
   init(layer: AnyObject)
   init?(coder aDecoder: Coder)
 }
-
-/** `emitterShape' values. **/
-@available(OSX 10.6, *)
 let kCAEmitterLayerPoint: String
-@available(OSX 10.6, *)
 let kCAEmitterLayerLine: String
-@available(OSX 10.6, *)
 let kCAEmitterLayerRectangle: String
-@available(OSX 10.6, *)
 let kCAEmitterLayerCuboid: String
-@available(OSX 10.6, *)
 let kCAEmitterLayerCircle: String
-@available(OSX 10.6, *)
 let kCAEmitterLayerSphere: String
-
-/** `emitterMode' values. **/
-@available(OSX 10.6, *)
 let kCAEmitterLayerPoints: String
-@available(OSX 10.6, *)
 let kCAEmitterLayerOutline: String
-@available(OSX 10.6, *)
 let kCAEmitterLayerSurface: String
-@available(OSX 10.6, *)
 let kCAEmitterLayerVolume: String
-
-/** `renderMode' values. **/
-@available(OSX 10.6, *)
 let kCAEmitterLayerUnordered: String
-@available(OSX 10.6, *)
 let kCAEmitterLayerOldestFirst: String
-@available(OSX 10.6, *)
 let kCAEmitterLayerOldestLast: String
-@available(OSX 10.6, *)
 let kCAEmitterLayerBackToFront: String
-@available(OSX 10.6, *)
 let kCAEmitterLayerAdditive: String
 class CAGradientLayer : CALayer {
   var colors: [AnyObject]?
@@ -304,9 +244,6 @@ class CAGradientLayer : CALayer {
   init(layer: AnyObject)
   init?(coder aDecoder: Coder)
 }
-
-/** `type' values. **/
-@available(OSX 10.6, *)
 let kCAGradientLayerAxial: String
 struct CAAutoresizingMask : OptionSetType {
   init(rawValue: UInt32)
@@ -327,20 +264,14 @@ struct CAEdgeAntialiasingMask : OptionSetType {
   static var LayerBottomEdge: CAEdgeAntialiasingMask { get }
   static var LayerTopEdge: CAEdgeAntialiasingMask { get }
 }
-
-/** The base layer class. **/
 class CALayer : Object, Coding, CAMediaTiming {
   init()
   init(layer: AnyObject)
   func presentationLayer() -> AnyObject?
   func modelLayer() -> AnyObject
-
-  /** Property methods. **/
   class func defaultValueForKey(key: String) -> AnyObject?
   class func needsDisplayForKey(key: String) -> Bool
   func shouldArchiveValueForKey(key: String) -> Bool
-
-  /** Geometry and layer hierarchy properties. **/
   var bounds: CGRect
   var position: CGPoint
   var zPosition: CGFloat
@@ -365,24 +296,17 @@ class CALayer : Object, Coding, CAMediaTiming {
   var sublayerTransform: CATransform3D
   var mask: CALayer?
   var masksToBounds: Bool
-
-  /** Mapping between layer coordinate and time spaces. **/
   func convert(p: CGPoint, from l: CALayer?) -> CGPoint
   func convert(p: CGPoint, to l: CALayer?) -> CGPoint
   func convert(r: CGRect, from l: CALayer?) -> CGRect
   func convert(r: CGRect, to l: CALayer?) -> CGRect
   func convertTime(t: CFTimeInterval, from l: CALayer?) -> CFTimeInterval
   func convertTime(t: CFTimeInterval, to l: CALayer?) -> CFTimeInterval
-
-  /** Hit testing methods. **/
   func hitTest(p: CGPoint) -> CALayer?
   func contains(p: CGPoint) -> Bool
-
-  /** Layer content properties and methods. **/
   var contents: AnyObject?
   var contentsRect: CGRect
   var contentsGravity: String
-  @available(OSX 10.7, *)
   var contentsScale: CGFloat
   var contentsCenter: CGRect
   var minificationFilter: String
@@ -395,11 +319,8 @@ class CALayer : Object, Coding, CAMediaTiming {
   func needsDisplay() -> Bool
   func displayIfNeeded()
   var needsDisplayOnBoundsChange: Bool
-  @available(OSX 10.8, *)
   var drawsAsynchronously: Bool
   func drawIn(ctx: CGContext)
-
-  /** Rendering properties and methods. **/
   func renderIn(ctx: CGContext)
   var edgeAntialiasingMask: CAEdgeAntialiasingMask
   var backgroundColor: CGColor?
@@ -412,15 +333,11 @@ class CALayer : Object, Coding, CAMediaTiming {
   var backgroundFilters: [AnyObject]?
   var shouldRasterize: Bool
   var rasterizationScale: CGFloat
-
-  /** Shadow properties. **/
   var shadowColor: CGColor?
   var shadowOpacity: Float
   var shadowOffset: CGSize
   var shadowRadius: CGFloat
   var shadowPath: CGPath?
-
-  /** Layout methods. **/
   var autoresizingMask: CAAutoresizingMask
   var layoutManager: AnyObject?
   func preferredFrameSize() -> CGSize
@@ -430,20 +347,14 @@ class CALayer : Object, Coding, CAMediaTiming {
   func layoutSublayers()
   func resizeSublayersWithOldSize(size: CGSize)
   func resizeWithOldSuperlayerSize(size: CGSize)
-
-  /** Action methods. **/
   class func defaultActionForKey(event: String) -> CAAction?
   func actionForKey(event: String) -> CAAction?
   var actions: [String : CAAction]?
-
-  /** Animation methods. **/
   func add(anim: CAAnimation, forKey key: String?)
   func removeAllAnimations()
   func removeAnimationForKey(key: String)
   func animationKeys() -> [String]?
   func animationForKey(key: String) -> CAAnimation?
-
-  /** Miscellaneous properties. **/
   var name: String?
   weak var delegate: @sil_weak AnyObject?
   var style: [Object : AnyObject]?
@@ -463,8 +374,6 @@ struct _CALayerIvars {
   var magic: UInt32
   var layer: UnsafeMutablePointer<Void>
 }
-
-/** Layout manager protocol. **/
 extension Object {
   class func preferredSizeOf(layer: CALayer) -> CGSize
   func preferredSizeOf(layer: CALayer) -> CGSize
@@ -473,20 +382,12 @@ extension Object {
   class func layoutSublayersOf(layer: CALayer)
   func layoutSublayersOf(layer: CALayer)
 }
-
-/** Action (event handler) protocol. **/
 protocol CAAction {
-  @available(OSX 10.0, *)
   func runActionForKey(event: String, object anObject: AnyObject, arguments dict: [Object : AnyObject]?)
 }
-
-/** NSNull protocol conformance. **/
 extension Null : CAAction {
-  @available(OSX 10.0, *)
   func runActionForKey(event: String, object anObject: AnyObject, arguments dict: [Object : AnyObject]?)
 }
-
-/** Delegate methods. **/
 extension Object {
   class func display(layer: CALayer)
   func display(layer: CALayer)
@@ -495,49 +396,23 @@ extension Object {
   class func actionFor(layer: CALayer, forKey event: String) -> CAAction?
   func actionFor(layer: CALayer, forKey event: String) -> CAAction?
 }
-
-/** Layer `contentsGravity' values. **/
-@available(OSX 10.5, *)
 let kCAGravityCenter: String
-@available(OSX 10.5, *)
 let kCAGravityTop: String
-@available(OSX 10.5, *)
 let kCAGravityBottom: String
-@available(OSX 10.5, *)
 let kCAGravityLeft: String
-@available(OSX 10.5, *)
 let kCAGravityRight: String
-@available(OSX 10.5, *)
 let kCAGravityTopLeft: String
-@available(OSX 10.5, *)
 let kCAGravityTopRight: String
-@available(OSX 10.5, *)
 let kCAGravityBottomLeft: String
-@available(OSX 10.5, *)
 let kCAGravityBottomRight: String
-@available(OSX 10.5, *)
 let kCAGravityResize: String
-@available(OSX 10.5, *)
 let kCAGravityResizeAspect: String
-@available(OSX 10.5, *)
 let kCAGravityResizeAspectFill: String
-
-/** Contents filter names. **/
-@available(OSX 10.5, *)
 let kCAFilterNearest: String
-@available(OSX 10.5, *)
 let kCAFilterLinear: String
-@available(OSX 10.6, *)
 let kCAFilterTrilinear: String
-
-/** Layer event names. **/
-@available(OSX 10.5, *)
 let kCAOnOrderIn: String
-@available(OSX 10.5, *)
 let kCAOnOrderOut: String
-
-/** The animation key used for transitions. **/
-@available(OSX 10.5, *)
 let kCATransition: String
 protocol CAMediaTiming {
   var beginTime: CFTimeInterval { get set }
@@ -549,13 +424,9 @@ protocol CAMediaTiming {
   var autoreverses: Bool { get set }
   var fillMode: String { get set }
 }
-@available(OSX 10.5, *)
 let kCAFillModeForwards: String
-@available(OSX 10.5, *)
 let kCAFillModeBackwards: String
-@available(OSX 10.5, *)
 let kCAFillModeBoth: String
-@available(OSX 10.5, *)
 let kCAFillModeRemoved: String
 class CAMediaTimingFunction : Object, Coding {
   convenience init(name: String)
@@ -565,25 +436,15 @@ class CAMediaTimingFunction : Object, Coding {
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
 }
-
-/** Timing function names. **/
-@available(OSX 10.5, *)
 let kCAMediaTimingFunctionLinear: String
-@available(OSX 10.5, *)
 let kCAMediaTimingFunctionEaseIn: String
-@available(OSX 10.5, *)
 let kCAMediaTimingFunctionEaseOut: String
-@available(OSX 10.5, *)
 let kCAMediaTimingFunctionEaseInEaseOut: String
-@available(OSX 10.6, *)
 let kCAMediaTimingFunctionDefault: String
 protocol CAMetalDrawable : MTLDrawable {
-  @available(OSX 10.11, *)
   var texture: MTLTexture { get }
-  @available(OSX 10.11, *)
   var layer: CAMetalLayer { get }
 }
-@available(OSX 10.11, *)
 class CAMetalLayer : CALayer {
   var device: MTLDevice?
   var pixelFormat: MTLPixelFormat
@@ -624,10 +485,10 @@ class CARemoteLayerServer : Object {
   init()
 }
 extension CALayer {
-  /*not inherited*/ init(remoteClientId client_id: UInt32)
+   init(remoteClientId client_id: UInt32)
 }
 class CARenderer : Object {
-  /*not inherited*/ init(cglContext ctx: UnsafeMutablePointer<Void>, options dict: [Object : AnyObject]? = [:])
+   init(cglContext ctx: UnsafeMutablePointer<Void>, options dict: [Object : AnyObject]? = [:])
   var layer: CALayer?
   var bounds: CGRect
   func beginFrameAtTime(t: CFTimeInterval, timeStamp ts: UnsafeMutablePointer<CVTimeStamp>)
@@ -665,13 +526,9 @@ extension CALayer {
   func scrollRectToVisible(r: CGRect)
   var visibleRect: CGRect { get }
 }
-@available(OSX 10.5, *)
 let kCAScrollNone: String
-@available(OSX 10.5, *)
 let kCAScrollVertically: String
-@available(OSX 10.5, *)
 let kCAScrollHorizontally: String
-@available(OSX 10.5, *)
 let kCAScrollBoth: String
 class CAShapeLayer : CALayer {
   var path: CGPath?
@@ -690,21 +547,13 @@ class CAShapeLayer : CALayer {
   init(layer: AnyObject)
   init?(coder aDecoder: Coder)
 }
-@available(OSX 10.6, *)
 let kCAFillRuleNonZero: String
-@available(OSX 10.6, *)
 let kCAFillRuleEvenOdd: String
-@available(OSX 10.6, *)
 let kCALineJoinMiter: String
-@available(OSX 10.6, *)
 let kCALineJoinRound: String
-@available(OSX 10.6, *)
 let kCALineJoinBevel: String
-@available(OSX 10.6, *)
 let kCALineCapButt: String
-@available(OSX 10.6, *)
 let kCALineCapRound: String
-@available(OSX 10.6, *)
 let kCALineCapSquare: String
 class CATextLayer : CALayer {
   @NSCopying var string: AnyObject?
@@ -719,23 +568,14 @@ class CATextLayer : CALayer {
   init(layer: AnyObject)
   init?(coder aDecoder: Coder)
 }
-@available(OSX 10.5, *)
 let kCATruncationNone: String
-@available(OSX 10.5, *)
 let kCATruncationStart: String
-@available(OSX 10.5, *)
 let kCATruncationEnd: String
-@available(OSX 10.5, *)
 let kCATruncationMiddle: String
-@available(OSX 10.5, *)
 let kCAAlignmentNatural: String
-@available(OSX 10.5, *)
 let kCAAlignmentLeft: String
-@available(OSX 10.5, *)
 let kCAAlignmentRight: String
-@available(OSX 10.5, *)
 let kCAAlignmentCenter: String
-@available(OSX 10.5, *)
 let kCAAlignmentJustified: String
 class CATiledLayer : CALayer {
   class func fadeDuration() -> CFTimeInterval
@@ -764,15 +604,9 @@ class CATransaction : Object {
   class func setValue(anObject: AnyObject?, forKey key: String)
   init()
 }
-
-/** Transaction property ids. **/
-@available(OSX 10.5, *)
 let kCATransactionAnimationDuration: String
-@available(OSX 10.5, *)
 let kCATransactionDisableActions: String
-@available(OSX 10.6, *)
 let kCATransactionAnimationTimingFunction: String
-@available(OSX 10.6, *)
 let kCATransactionCompletionBlock: String
 struct CATransform3D {
   var m11: CGFloat
@@ -794,36 +628,22 @@ struct CATransform3D {
   init()
   init(m11: CGFloat, m12: CGFloat, m13: CGFloat, m14: CGFloat, m21: CGFloat, m22: CGFloat, m23: CGFloat, m24: CGFloat, m31: CGFloat, m32: CGFloat, m33: CGFloat, m34: CGFloat, m41: CGFloat, m42: CGFloat, m43: CGFloat, m44: CGFloat)
 }
-@available(OSX 10.5, *)
 let CATransform3DIdentity: CATransform3D
-@available(OSX 10.5, *)
 func CATransform3DIsIdentity(t: CATransform3D) -> Bool
-@available(OSX 10.5, *)
 func CATransform3DEqualToTransform(a: CATransform3D, _ b: CATransform3D) -> Bool
-@available(OSX 10.5, *)
 func CATransform3DMakeTranslation(tx: CGFloat, _ ty: CGFloat, _ tz: CGFloat) -> CATransform3D
-@available(OSX 10.5, *)
 func CATransform3DMakeScale(sx: CGFloat, _ sy: CGFloat, _ sz: CGFloat) -> CATransform3D
-@available(OSX 10.5, *)
 func CATransform3DMakeRotation(angle: CGFloat, _ x: CGFloat, _ y: CGFloat, _ z: CGFloat) -> CATransform3D
-@available(OSX 10.5, *)
 func CATransform3DTranslate(t: CATransform3D, _ tx: CGFloat, _ ty: CGFloat, _ tz: CGFloat) -> CATransform3D
-@available(OSX 10.5, *)
 func CATransform3DScale(t: CATransform3D, _ sx: CGFloat, _ sy: CGFloat, _ sz: CGFloat) -> CATransform3D
-@available(OSX 10.5, *)
 func CATransform3DRotate(t: CATransform3D, _ angle: CGFloat, _ x: CGFloat, _ y: CGFloat, _ z: CGFloat) -> CATransform3D
-@available(OSX 10.5, *)
 func CATransform3DConcat(a: CATransform3D, _ b: CATransform3D) -> CATransform3D
-@available(OSX 10.5, *)
 func CATransform3DInvert(t: CATransform3D) -> CATransform3D
-@available(OSX 10.5, *)
 func CATransform3DMakeAffineTransform(m: CGAffineTransform) -> CATransform3D
-@available(OSX 10.5, *)
 func CATransform3DIsAffine(t: CATransform3D) -> Bool
-@available(OSX 10.5, *)
 func CATransform3DGetAffineTransform(t: CATransform3D) -> CGAffineTransform
 extension Value {
-  /*not inherited*/ init(caTransform3D t: CATransform3D)
+   init(caTransform3D t: CATransform3D)
   var caTransform3DValue: CATransform3D { get }
 }
 class CATransformLayer : CALayer {
@@ -838,27 +658,14 @@ class CAValueFunction : Object, Coding {
   func encodeWith(aCoder: Coder)
   init?(coder aDecoder: Coder)
 }
-
-/** Value function names. **/
-@available(OSX 10.6, *)
 let kCAValueFunctionRotateX: String
-@available(OSX 10.6, *)
 let kCAValueFunctionRotateY: String
-@available(OSX 10.6, *)
 let kCAValueFunctionRotateZ: String
-@available(OSX 10.6, *)
 let kCAValueFunctionScale: String
-@available(OSX 10.6, *)
 let kCAValueFunctionScaleX: String
-@available(OSX 10.6, *)
 let kCAValueFunctionScaleY: String
-@available(OSX 10.6, *)
 let kCAValueFunctionScaleZ: String
-@available(OSX 10.6, *)
 let kCAValueFunctionTranslate: String
-@available(OSX 10.6, *)
 let kCAValueFunctionTranslateX: String
-@available(OSX 10.6, *)
 let kCAValueFunctionTranslateY: String
-@available(OSX 10.6, *)
 let kCAValueFunctionTranslateZ: String
