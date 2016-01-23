@@ -1,23 +1,15 @@
 
 var CoreSpotlightAPIVersion: Int32 { get }
-
 //! Project version number for CoreSpotlight.
 var CoreSpotlightVersionNumber: Double
-@available(iOS 9.0, *)
 class CSIndexExtensionRequestHandler : NSObject, NSExtensionRequestHandling, CSSearchableIndexDelegate {
   init()
-  @available(iOS 9.0, *)
   func beginRequestWithExtensionContext(context: NSExtensionContext)
-  @available(iOS 9.0, *)
   func searchableIndex(searchableIndex: CSSearchableIndex, reindexAllSearchableItemsWithAcknowledgementHandler acknowledgementHandler: () -> Void)
-  @available(iOS 9.0, *)
   func searchableIndex(searchableIndex: CSSearchableIndex, reindexSearchableItemsWithIdentifiers identifiers: [String], acknowledgementHandler: () -> Void)
-  @available(iOS 9.0, *)
   func searchableIndexDidThrottle(searchableIndex: CSSearchableIndex)
-  @available(iOS 9.0, *)
   func searchableIndexDidFinishThrottle(searchableIndex: CSSearchableIndex)
 }
-@available(iOS 9.0, *)
 class CSPerson : NSObject, NSSecureCoding, NSCopying {
   init(displayName: String?, handles: [String], handleIdentifier: String)
   var displayName: String? { get }
@@ -25,17 +17,12 @@ class CSPerson : NSObject, NSSecureCoding, NSCopying {
   var handleIdentifier: String { get }
   var contactIdentifier: String?
   init()
-  @available(iOS 9.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(iOS 9.0, *)
   func encodeWithCoder(aCoder: NSCoder)
   init?(coder aDecoder: NSCoder)
-  @available(iOS 9.0, *)
   func copyWithZone(zone: NSZone) -> AnyObject
 }
-@available(iOS 9.0, *)
 let CSIndexErrorDomain: String
-@available(iOS 9.0, *)
 enum CSIndexErrorCode : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -47,7 +34,6 @@ enum CSIndexErrorCode : Int {
   case QuotaExceeded
   case IndexingUnsupported
 }
-@available(iOS 9.0, *)
 class CSSearchableIndex : NSObject {
   weak var indexDelegate: @sil_weak CSSearchableIndexDelegate?
   class func isIndexingAvailable() -> Bool
@@ -65,18 +51,14 @@ extension CSSearchableIndex {
   func endIndexBatchWithClientState(clientState: NSData, completionHandler: ((NSError?) -> Void)?)
   func fetchLastClientStateWithCompletionHandler(completionHandler: (NSData?, NSError?) -> Void)
 }
-@available(iOS 9.0, *)
 protocol CSSearchableIndexDelegate : NSObjectProtocol {
   func searchableIndex(searchableIndex: CSSearchableIndex, reindexAllSearchableItemsWithAcknowledgementHandler acknowledgementHandler: () -> Void)
   func searchableIndex(searchableIndex: CSSearchableIndex, reindexSearchableItemsWithIdentifiers identifiers: [String], acknowledgementHandler: () -> Void)
   optional func searchableIndexDidThrottle(searchableIndex: CSSearchableIndex)
   optional func searchableIndexDidFinishThrottle(searchableIndex: CSSearchableIndex)
 }
-@available(iOS 9.0, *)
 let CSSearchableItemActionType: String
-@available(iOS 9.0, *)
 let CSSearchableItemActivityIdentifier: String
-@available(iOS 9.0, *)
 class CSSearchableItem : NSObject, NSSecureCoding, NSCopying {
   init(uniqueIdentifier: String?, domainIdentifier: String?, attributeSet: CSSearchableItemAttributeSet)
   var uniqueIdentifier: String
@@ -84,23 +66,16 @@ class CSSearchableItem : NSObject, NSSecureCoding, NSCopying {
   @NSCopying var expirationDate: NSDate!
   var attributeSet: CSSearchableItemAttributeSet
   init()
-  @available(iOS 9.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(iOS 9.0, *)
   func encodeWithCoder(aCoder: NSCoder)
   init?(coder aDecoder: NSCoder)
-  @available(iOS 9.0, *)
   func copyWithZone(zone: NSZone) -> AnyObject
 }
-@available(iOS 9.0, *)
 class CSSearchableItemAttributeSet : NSObject, NSCopying, NSSecureCoding {
   init(itemContentType: String)
   init()
-  @available(iOS 9.0, *)
   func copyWithZone(zone: NSZone) -> AnyObject
-  @available(iOS 9.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(iOS 9.0, *)
   func encodeWithCoder(aCoder: NSCoder)
   init?(coder aDecoder: NSCoder)
 }
@@ -124,7 +99,6 @@ class CSLocalizedString : NSString {
   convenience init(contentsOfURL url: NSURL, usedEncoding enc: UnsafeMutablePointer<UInt>) throws
   convenience init(contentsOfFile path: String, usedEncoding enc: UnsafeMutablePointer<UInt>) throws
 }
-@available(iOS 9.0, *)
 class CSCustomAttributeKey : NSObject, NSCopying, NSSecureCoding {
   convenience init?(keyName: String)
   init?(keyName: String, searchable: Bool, searchableByDefault: Bool, unique: Bool, multiValued: Bool)
@@ -134,11 +108,8 @@ class CSCustomAttributeKey : NSObject, NSCopying, NSSecureCoding {
   var unique: Bool { get }
   var multiValued: Bool { get }
   convenience init()
-  @available(iOS 9.0, *)
   func copyWithZone(zone: NSZone) -> AnyObject
-  @available(iOS 9.0, *)
   class func supportsSecureCoding() -> Bool
-  @available(iOS 9.0, *)
   func encodeWithCoder(aCoder: NSCoder)
   init?(coder aDecoder: NSCoder)
 }
@@ -147,11 +118,9 @@ extension CSSearchableItemAttributeSet {
   func valueForCustomKey(key: CSCustomAttributeKey) -> NSSecureCoding?
 }
 extension NSUserActivity {
-  @available(iOS 9.0, *)
   @NSCopying var contentAttributeSet: CSSearchableItemAttributeSet?
 }
 extension CSSearchableItemAttributeSet {
-
   ///Subject of the this item.
   var subject: String?
   var theme: String?
@@ -294,17 +263,11 @@ extension CSSearchableItemAttributeSet {
   var musicalInstrumentCategory: String?
   var musicalInstrumentName: String?
 }
-@available(iOS 9.0, *)
 let CSMailboxInbox: String
-@available(iOS 9.0, *)
 let CSMailboxDrafts: String
-@available(iOS 9.0, *)
 let CSMailboxSent: String
-@available(iOS 9.0, *)
 let CSMailboxJunk: String
-@available(iOS 9.0, *)
 let CSMailboxTrash: String
-@available(iOS 9.0, *)
 let CSMailboxArchive: String
 extension CSSearchableItemAttributeSet {
   var accountIdentifier: String?

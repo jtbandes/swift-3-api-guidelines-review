@@ -10,7 +10,6 @@ var SKDownloadStatePaused: SKDownloadState { get }
 var SKDownloadStateFinished: SKDownloadState { get }
 var SKDownloadStateFailed: SKDownloadState { get }
 var SKDownloadStateCancelled: SKDownloadState { get }
-@available(OSX 10.8, *)
 class SKDownload : NSObject {
   var contentIdentifier: String { get }
   var state: SKDownloadState { get }
@@ -25,14 +24,12 @@ class SKDownload : NSObject {
   class func deleteContentForProductID(productID: String)
   init()
 }
-@available(OSX 10.7, *)
 let SKErrorDomain: String
 var SKErrorUnknown: Int { get }
 var SKErrorClientInvalid: Int { get }
 var SKErrorPaymentCancelled: Int { get }
 var SKErrorPaymentInvalid: Int { get }
 var SKErrorPaymentNotAllowed: Int { get }
-@available(OSX 10.7, *)
 class SKPayment : NSObject, NSCopying, NSMutableCopying {
   class func paymentWithProduct(product: SKProduct) -> AnyObject
   var productIdentifier: String { get }
@@ -40,12 +37,9 @@ class SKPayment : NSObject, NSCopying, NSMutableCopying {
   var quantity: Int { get }
   var applicationUsername: String? { get }
   init()
-  @available(OSX 10.7, *)
   func copyWithZone(zone: NSZone) -> AnyObject
-  @available(OSX 10.7, *)
   func mutableCopyWithZone(zone: NSZone) -> AnyObject
 }
-@available(OSX 10.7, *)
 class SKMutablePayment : SKPayment {
   var productIdentifier: String
   var quantity: Int
@@ -53,7 +47,6 @@ class SKMutablePayment : SKPayment {
   var applicationUsername: String?
   init()
 }
-@available(OSX 10.7, *)
 class SKPaymentQueue : NSObject {
   class func defaultQueue() -> SKPaymentQueue
   class func canMakePayments() -> Bool
@@ -71,15 +64,10 @@ class SKPaymentQueue : NSObject {
   init()
 }
 protocol SKPaymentTransactionObserver : NSObjectProtocol {
-  @available(OSX 10.7, *)
   func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction])
-  @available(OSX 10.7, *)
   optional func paymentQueue(queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction])
-  @available(OSX 10.7, *)
   optional func paymentQueue(queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: NSError)
-  @available(OSX 10.7, *)
   optional func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue)
-  @available(OSX 10.8, *)
   optional func paymentQueue(queue: SKPaymentQueue, updatedDownloads downloads: [SKDownload])
 }
 var SKPaymentTransactionStatePurchasing: Int { get }
@@ -88,7 +76,6 @@ var SKPaymentTransactionStateFailed: Int { get }
 var SKPaymentTransactionStateRestored: Int { get }
 var SKPaymentTransactionStateDeferred: Int { get }
 typealias SKPaymentTransactionState = Int
-@available(OSX 10.7, *)
 class SKPaymentTransaction : NSObject {
   var error: NSError? { get }
   var originalTransaction: SKPaymentTransaction? { get }
@@ -99,7 +86,6 @@ class SKPaymentTransaction : NSObject {
   var transactionState: SKPaymentTransactionState { get }
   init()
 }
-@available(OSX 10.7, *)
 class SKProduct : NSObject {
   var localizedDescription: String? { get }
   var localizedTitle: String? { get }
@@ -112,34 +98,26 @@ class SKProduct : NSObject {
   init()
 }
 protocol SKProductsRequestDelegate : SKRequestDelegate {
-  @available(OSX 10.7, *)
   func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse)
 }
-@available(OSX 10.7, *)
 class SKProductsRequest : SKRequest {
   init(productIdentifiers: Set<NSObject>)
   unowned(unsafe) var delegate: @sil_unmanaged SKProductsRequestDelegate?
   init()
 }
-@available(OSX 10.7, *)
 class SKProductsResponse : NSObject {
   var products: [SKProduct]? { get }
   var invalidProductIdentifiers: [String]? { get }
   init()
 }
-@available(OSX 10.9, *)
 class SKReceiptRefreshRequest : SKRequest {
   init?(receiptProperties properties: [String : AnyObject])
   var receiptProperties: [String : AnyObject]? { get }
   init()
 }
-@available(OSX 10.7, *)
 let SKReceiptPropertyIsExpired: String
-@available(OSX 10.7, *)
 let SKReceiptPropertyIsRevoked: String
-@available(OSX 10.7, *)
 let SKReceiptPropertyIsVolumePurchase: String
-@available(OSX 10.7, *)
 class SKRequest : NSObject {
   unowned(unsafe) var delegate: @sil_unmanaged SKRequestDelegate?
   func cancel()
@@ -147,8 +125,6 @@ class SKRequest : NSObject {
   init()
 }
 protocol SKRequestDelegate : NSObjectProtocol {
-  @available(OSX 10.7, *)
   optional func requestDidFinish(request: SKRequest)
-  @available(OSX 10.7, *)
   optional func request(request: SKRequest, didFailWithError error: NSError?)
 }

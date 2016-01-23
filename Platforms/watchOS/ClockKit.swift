@@ -207,11 +207,7 @@ enum CLKComplicationColumnAlignment : Int {
   var rawValue: Int { get }
   case Leading
   case Trailing
-  @available(watchOS 2.0, *)
-  @available(watchOS, deprecated=2.1, message="Use CLKComplicationColumnAlignmentLeading instead")
   static var Left: CLKComplicationColumnAlignment { get }
-  @available(watchOS 2.0, *)
-  @available(watchOS, deprecated=2.1, message="Use CLKComplicationColumnAlignmentTrailing instead")
   static var Right: CLKComplicationColumnAlignment { get }
 }
 enum CLKComplicationRingStyle : Int {
@@ -224,22 +220,17 @@ let CLKLaunchedTimelineEntryDateKey: String
 class CLKImageProvider : NSObject, NSCopying {
   convenience init(onePieceImage: UIImage)
   convenience init(onePieceImage: UIImage, twoPieceImageBackground: UIImage?, twoPieceImageForeground: UIImage?)
-
   /// Image to be used in single-color contexts, e.g. single color faces.
   var onePieceImage: UIImage
-
   /// Tint color, honored in multi-color contexts.
   var tintColor: UIColor?
-
   /// Background image to be used in two-color contexts, e.g. multicolor modular faces.
   /// If supplied, a twoPieceImageForeground will be required as well.
   var twoPieceImageBackground: UIImage?
-
   /// Foreground image to be used in two-color contexts, e.g. multicolor modular faces.
   /// Will be tinted white and overlayed on the twoPieceImageBackground.
   /// If supplied, a twoPieceImageBackground will be required as well.
   var twoPieceImageForeground: UIImage?
-
   /// Text for accessibility.
   var accessibilityLabel: String?
   init()

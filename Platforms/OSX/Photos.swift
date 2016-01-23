@@ -1,5 +1,4 @@
 
-@available(OSX 10.11, *)
 class PHAdjustmentData : NSObject {
   init(formatIdentifier: String, formatVersion: String, data: NSData)
   var formatIdentifier: String { get }
@@ -7,7 +6,6 @@ class PHAdjustmentData : NSObject {
   var data: NSData { get }
   init()
 }
-@available(OSX 10.11, *)
 class PHContentEditingInput : NSObject {
   var mediaType: PHAssetMediaType { get }
   var mediaSubtypes: PHAssetMediaSubtype { get }
@@ -18,14 +16,12 @@ class PHContentEditingInput : NSObject {
   var fullSizeImageOrientation: Int32 { get }
   init()
 }
-@available(OSX 10.11, *)
 class PHContentEditingOutput : NSObject {
   init(contentEditingInput: PHContentEditingInput)
   var adjustmentData: PHAdjustmentData
   @NSCopying var renderedContentURL: NSURL { get }
   init()
 }
-@available(OSX 10.11, *)
 enum PHAssetMediaType : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -34,7 +30,6 @@ enum PHAssetMediaType : Int {
   case Video
   case Audio
 }
-@available(OSX 10.11, *)
 struct PHAssetMediaSubtype : OptionSetType {
   init(rawValue: UInt)
   let rawValue: UInt

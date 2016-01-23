@@ -73,41 +73,17 @@ typealias alcOutputCapturerSamplesProcPtr = @convention(c) (UnsafeMutablePointer
 var AL_INVALID: Int32 { get }
 var AL_ILLEGAL_ENUM: Int32 { get }
 var AL_ILLEGAL_COMMAND: Int32 { get }
-
-/** 8-bit boolean */
 typealias ALboolean = Int8
-
-/** character */
 typealias ALchar = Int8
-
-/** signed 8-bit 2's complement integer */
 typealias ALbyte = Int8
-
-/** unsigned 8-bit integer */
 typealias ALubyte = UInt8
-
-/** signed 16-bit 2's complement integer */
 typealias ALshort = Int16
-
-/** unsigned 16-bit integer */
 typealias ALushort = UInt16
-
-/** signed 32-bit 2's complement integer */
 typealias ALint = Int32
-
-/** unsigned 32-bit integer */
 typealias ALuint = UInt32
-
-/** non-negative 32-bit binary integer size */
 typealias ALsizei = Int32
-
-/** enumerated 32-bit value */
 typealias ALenum = Int32
-
-/** 32-bit IEEE754 floating-point */
 typealias ALfloat = Float
-
-/** 64-bit IEEE754 floating-point */
 typealias ALdouble = Double
 var AL_NONE: Int32 { get }
 var AL_FALSE: Int32 { get }
@@ -202,39 +178,6 @@ func alGetListenerfv(param: ALenum, _ values: UnsafeMutablePointer<ALfloat>)
 func alGetListeneri(param: ALenum, _ value: UnsafeMutablePointer<ALint>)
 func alGetListener3i(param: ALenum, _ value1: UnsafeMutablePointer<ALint>, _ value2: UnsafeMutablePointer<ALint>, _ value3: UnsafeMutablePointer<ALint>)
 func alGetListeneriv(param: ALenum, _ values: UnsafeMutablePointer<ALint>)
-
-/**
- * SOURCE
- * Sources represent individual sound objects in 3D-space.
- * Sources take the PCM data provided in the specified Buffer,
- * apply Source-specific modifications, and then
- * submit them to be mixed according to spatial arrangement etc.
- * 
- * Properties include: -
- *
- * Gain                              AL_GAIN                 ALfloat
- * Min Gain                          AL_MIN_GAIN             ALfloat
- * Max Gain                          AL_MAX_GAIN             ALfloat
- * Position                          AL_POSITION             ALfloat[3]
- * Velocity                          AL_VELOCITY             ALfloat[3]
- * Direction                         AL_DIRECTION            ALfloat[3]
- * Head Relative Mode                AL_SOURCE_RELATIVE      ALint (AL_TRUE or AL_FALSE)
- * Reference Distance                AL_REFERENCE_DISTANCE   ALfloat
- * Max Distance                      AL_MAX_DISTANCE         ALfloat
- * RollOff Factor                    AL_ROLLOFF_FACTOR       ALfloat
- * Inner Angle                       AL_CONE_INNER_ANGLE     ALint or ALfloat
- * Outer Angle                       AL_CONE_OUTER_ANGLE     ALint or ALfloat
- * Cone Outer Gain                   AL_CONE_OUTER_GAIN      ALint or ALfloat
- * Pitch                             AL_PITCH                ALfloat
- * Looping                           AL_LOOPING              ALint (AL_TRUE or AL_FALSE)
- * MS Offset                         AL_MSEC_OFFSET          ALint or ALfloat
- * Byte Offset                       AL_BYTE_OFFSET          ALint or ALfloat
- * Sample Offset                     AL_SAMPLE_OFFSET        ALint or ALfloat
- * Attached Buffer                   AL_BUFFER               ALint
- * State (Query only)                AL_SOURCE_STATE         ALint
- * Buffers Queued (Query only)       AL_BUFFERS_QUEUED       ALint
- * Buffers Processed (Query only)    AL_BUFFERS_PROCESSED    ALint
- */
 func alGenSources(n: ALsizei, _ sources: UnsafeMutablePointer<ALuint>)
 func alDeleteSources(n: ALsizei, _ sources: UnsafePointer<ALuint>)
 func alIsSource(sid: ALuint) -> ALboolean
@@ -260,20 +203,6 @@ func alSourceRewind(sid: ALuint)
 func alSourcePause(sid: ALuint)
 func alSourceQueueBuffers(sid: ALuint, _ numEntries: ALsizei, _ bids: UnsafePointer<ALuint>)
 func alSourceUnqueueBuffers(sid: ALuint, _ numEntries: ALsizei, _ bids: UnsafeMutablePointer<ALuint>)
-
-/**
- * BUFFER
- * Buffer objects are storage space for sample data.
- * Buffers are referred to by Sources. One Buffer can be used
- * by multiple Sources.
- *
- * Properties include: -
- *
- * Frequency (Query only)    AL_FREQUENCY      ALint
- * Size (Query only)         AL_SIZE           ALint
- * Bits (Query only)         AL_BITS           ALint
- * Channels (Query only)     AL_CHANNELS       ALint
- */
 func alGenBuffers(n: ALsizei, _ buffers: UnsafeMutablePointer<ALuint>)
 func alDeleteBuffers(n: ALsizei, _ buffers: UnsafePointer<ALuint>)
 func alIsBuffer(bid: ALuint) -> ALboolean
@@ -369,41 +298,17 @@ typealias LPALSPEEDOFSOUND = @convention(c) (ALfloat) -> Void
 typealias LPALDISTANCEMODEL = @convention(c) (ALenum) -> Void
 var ALC_INVALID: Int32 { get }
 var ALC_VERSION_0_1: Int32 { get }
-
-/** 8-bit boolean */
 typealias ALCboolean = Int8
-
-/** character */
 typealias ALCchar = Int8
-
-/** signed 8-bit 2's complement integer */
 typealias ALCbyte = Int8
-
-/** unsigned 8-bit integer */
 typealias ALCubyte = UInt8
-
-/** signed 16-bit 2's complement integer */
 typealias ALCshort = Int16
-
-/** unsigned 16-bit integer */
 typealias ALCushort = UInt16
-
-/** signed 32-bit 2's complement integer */
 typealias ALCint = Int32
-
-/** unsigned 32-bit integer */
 typealias ALCuint = UInt32
-
-/** non-negative 32-bit binary integer size */
 typealias ALCsizei = Int32
-
-/** enumerated 32-bit value */
 typealias ALCenum = Int32
-
-/** 32-bit IEEE754 floating-point */
 typealias ALCfloat = Float
-
-/** 64-bit IEEE754 floating-point */
 typealias ALCdouble = Double
 var ALC_FALSE: Int32 { get }
 var ALC_TRUE: Int32 { get }

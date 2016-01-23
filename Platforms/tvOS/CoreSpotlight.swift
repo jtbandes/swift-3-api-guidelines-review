@@ -1,6 +1,5 @@
 
 var CoreSpotlightAPIVersion: Int32 { get }
-
 //! Project version number for CoreSpotlight.
 var CoreSpotlightVersionNumber: Double
 extension CSSearchableIndex {
@@ -15,7 +14,6 @@ extension CSSearchableItemAttributeSet {
 extension NSUserActivity {
 }
 extension CSSearchableItemAttributeSet {
-
   ///Subject of the this item.
   var subject: String?
   var theme: String?
@@ -158,17 +156,11 @@ extension CSSearchableItemAttributeSet {
   var musicalInstrumentCategory: String?
   var musicalInstrumentName: String?
 }
-@available(tvOS 9.0, *)
 let CSMailboxInbox: String
-@available(tvOS 9.0, *)
 let CSMailboxDrafts: String
-@available(tvOS 9.0, *)
 let CSMailboxSent: String
-@available(tvOS 9.0, *)
 let CSMailboxJunk: String
-@available(tvOS 9.0, *)
 let CSMailboxTrash: String
-@available(tvOS 9.0, *)
 let CSMailboxArchive: String
 extension CSSearchableItemAttributeSet {
   var accountIdentifier: String?

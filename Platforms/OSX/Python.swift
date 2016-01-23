@@ -821,9 +821,7 @@ typealias ternaryfunc = @convention(c) (UnsafeMutablePointer<PyObject>, UnsafeMu
 typealias inquiry = @convention(c) (UnsafeMutablePointer<PyObject>) -> Int32
 typealias lenfunc = @convention(c) (UnsafeMutablePointer<PyObject>) -> Py_ssize_t
 typealias coercion = @convention(c) (UnsafeMutablePointer<UnsafeMutablePointer<PyObject>>, UnsafeMutablePointer<UnsafeMutablePointer<PyObject>>) -> Int32
-@available(*, deprecated)
 typealias intargfunc = @convention(c) (UnsafeMutablePointer<PyObject>, Int32) -> UnsafeMutablePointer<PyObject>
-@available(*, deprecated)
 typealias intintargfunc = @convention(c) (UnsafeMutablePointer<PyObject>, Int32, Int32) -> UnsafeMutablePointer<PyObject>
 typealias ssizeargfunc = @convention(c) (UnsafeMutablePointer<PyObject>, Py_ssize_t) -> UnsafeMutablePointer<PyObject>
 typealias ssizessizeargfunc = @convention(c) (UnsafeMutablePointer<PyObject>, Py_ssize_t, Py_ssize_t) -> UnsafeMutablePointer<PyObject>

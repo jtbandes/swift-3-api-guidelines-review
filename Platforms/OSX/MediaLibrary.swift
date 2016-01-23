@@ -77,7 +77,6 @@ enum MLMediaType : UInt {
   case Image
   case Movie
 }
-
 ///////////// Media Group Type Identifiers
 let MLFolderRootGroupTypeIdentifier: String
 let MLFolderGroupTypeIdentifier: String
@@ -191,7 +190,6 @@ let MLFinalCutProjectGroupTypeIdentifier: String
 let MLFinalCutEventLibraryGroupTypeIdentifier: String
 let MLFinalCutEventCalendarGroupTypeIdentifier: String
 let MLFinalCutFolderGroupTypeIdentifier: String
-
 ////////////////////////////////////////////////////////////////
 let MLMediaObjectDurationKey: String
 let MLMediaObjectArtistKey: String

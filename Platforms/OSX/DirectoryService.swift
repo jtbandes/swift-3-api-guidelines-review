@@ -388,47 +388,6 @@ var kDSNAttrRecRefs: String { get }
 var kDSNAttrAttrListRefs: String { get }
 var kDSNAttrAttrListValueRefs: String { get }
 var __DS_MACTYPES__: Int32 { get }
-
-/*!
- *	@enum tDirStatus
- *	@discussion Error codes returned from the Directory Services API.
- *	@constant eDSSchemaError The write operation failed because the result would conflict
- *		with the server's schema. For example, trying to remove a required attribute would
- *		return this error.
- *	@constant eDSAttributeValueNotFound	When using dsSetAttributeValue, dsRemoveAttributeValue,
- *		or dsGetAttributeValueByID the value with the specified ID was not found.
- *	@constant eDSVersionMismatch A configuration file version is not compatible with this
- *		version of Directory Services or the plug-in that loaded it.
- *	@constant eDSAuthNewPasswordRequired The administrator set a flag to force a password
- *		reset on the next login.
- *	@constant eDSAuthPasswordExpired The password expiration date has passed so it must be
- *		reset.
- *	@constant eDSAuthPasswordQualityCheckFailed New password rejected because it did not meet
- *		the password server� quality requirements (for example, it was too short).
- *		This error only comes back when changing or setting the password, not when
- *		authenticating.
- *	@constant eDSAuthPasswordTooShort New password rejected because it did not meet
- *		the password server� minimum length requirements. This error only comes back 
- *		when changing or setting the password, not when authenticating.
- *	@constant eDSAuthPasswordTooLong New password rejected because it exceeded
- *		the password server� maximum length limit. This error only comes back 
- *		when changing or setting the password, not when authenticating.
- *	@constant eDSAuthPasswordNeedsLetter New password rejected because it did not meet
- *		the password server� quality requirements (did not contain a letter).
- *		This error only comes back when changing or setting the password, not when
- *		authenticating.
- *	@constant eDSAuthPasswordNeedsDigit New password rejected because it did not meet
- *		the password server� quality requirements (did not contain a digit).
- *		This error only comes back when changing or setting the password, not when
- *		authenticating.
- *	@constant eDSAuthAccountDisabled The administrator set a flag to disable the account.
- *	@constant eDSAuthAccountExpired The expiration date/time of the account passed so it is
- *		automatically disabled.
- *	@constant eDSAuthAccountInactive The account was unused for a preset amount of time so
- *		it was automatically disabled.
- *	@constant eDSAuthMasterUnreachable Unable to authenticate to make changes
- *		because the master server is unreachable.
- */
 struct tDirStatus : RawRepresentable, Equatable {
   init(_ rawValue: Int32)
   init(rawValue: Int32)
@@ -777,8 +736,4 @@ typealias fpCustomDeAllocate = @convention(c) (tDirReference, tClientData, tBuff
 typealias fpCustomThreadBlock = @convention(c) (tDirReference, tClientData) -> tDirStatus
 typealias fpCustomThreadUnBlock = @convention(c) (tDirReference, tClientData) -> tDirStatus
 typealias fpCustomThreadYield = @convention(c) (tDirReference, tClientData) -> tDirStatus
-
-/*!
- * @function dsGetDataLength
- */
 func dsGetDataLength(inDataList: UnsafePointer<tDataList>) -> UInt32

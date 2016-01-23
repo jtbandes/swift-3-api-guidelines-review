@@ -106,27 +106,16 @@ var kEventParamFMFontSize: Int { get }
 var kEventParamFontColor: Int { get }
 var kEventParamDictionary: Int { get }
 var kEventParamViewAttributesDictionary: Int { get }
-@available(OSX 10.3, *)
 let kFontPanelATSUFontIDKey: CFString!
-@available(OSX 10.3, *)
 let kFontPanelVariationAxesKey: CFString!
-@available(OSX 10.3, *)
 let kFontPanelVariationValuesKey: CFString!
-@available(OSX 10.3, *)
 let kFontPanelFeatureTypesKey: CFString!
-@available(OSX 10.3, *)
 let kFontPanelFeatureSelectorsKey: CFString!
-@available(OSX 10.3, *)
 let kFontPanelAttributesKey: CFString!
-@available(OSX 10.3, *)
 let kFontPanelAttributeTagsKey: CFString!
-@available(OSX 10.3, *)
 let kFontPanelAttributeSizesKey: CFString!
-@available(OSX 10.3, *)
 let kFontPanelAttributeValuesKey: CFString!
-@available(OSX 10.5, *)
 let kFontPanelMouseTrackingState: CFString!
-@available(OSX 10.5, *)
 let kFontPanelBackgroundColorAttributeName: CFString!
 var fontPanelShowErr: Int { get }
 var fontPanelSelectionStyleErr: Int { get }
@@ -146,66 +135,34 @@ struct FontSelectionQDStyle {
   init(version: UInt32, instance: FMFontFamilyInstance, size: FMFontSize, hasColor: DarwinBoolean, reserved: UInt8, color: RGBColor)
 }
 typealias FontSelectionQDStylePtr = UnsafeMutablePointer<FontSelectionQDStyle>
-@available(OSX 10.2, *)
 func FPIsFontPanelVisible() -> Bool
-@available(OSX 10.2, *)
 func FPShowHideFontPanel() -> OSStatus
-@available(OSX 10.2, *)
 func SetFontInfoForSelection(iStyleType: OSType, _ iNumStyles: UInt32, _ iStyles: UnsafeMutablePointer<Void>, _ iFPEventTarget: EventTargetRef) -> OSStatus
 typealias FCFontDescriptorRef = FCFontDescriptor
 class FCFontDescriptor {
 }
-@available(OSX 10.3, *)
 func FCCopyCollectionNames() -> Unmanaged<CFArray>!
-@available(OSX 10.3, *)
 func FCCopyFontDescriptorsInCollection(iCollection: CFString!) -> Unmanaged<CFArray>!
-@available(OSX 10.3, *)
 func FCAddCollection(iCollection: CFString!, _ iCollectionOptions: OptionBits) -> OSStatus
-@available(OSX 10.3, *)
 func FCRemoveCollection(iCollection: CFString!) -> OSStatus
-@available(OSX 10.3, *)
 func FCAddFontDescriptorToCollection(iDescriptor: FCFontDescriptor!, _ iCollection: CFString!) -> OSStatus
-@available(OSX 10.3, *)
 func FCRemoveFontDescriptorFromCollection(iDescriptor: FCFontDescriptor!, _ iCollection: CFString!) -> OSStatus
-@available(OSX 10.3, *)
 let kFCFontFamilyAttribute: CFString!
-@available(OSX 10.3, *)
 let kFCFontNameAttribute: CFString!
-@available(OSX 10.3, *)
 let kFCFontFaceAttribute: CFString!
-@available(OSX 10.3, *)
 let kFCFontSizeAttribute: CFString!
-@available(OSX 10.3, *)
 let kFCFontVisibleNameAttribute: CFString!
-@available(OSX 10.3, *)
 let kFCFontCGColorAttribute: CFString!
-@available(OSX 10.3, *)
 func FCFontDescriptorCreateWithFontAttributes(iAttributes: CFDictionary!) -> Unmanaged<FCFontDescriptor>!
-@available(OSX 10.3, *)
 func FCFontDescriptorCreateWithName(iFontName: CFString!, _ iSize: CGFloat) -> Unmanaged<FCFontDescriptor>!
-
-/**************************************************************************
-  AppleEvent callbacks. 
-**************************************************************************/
 typealias AEIdleProcPtr = @convention(c) (UnsafeMutablePointer<EventRecord>, UnsafeMutablePointer<Int32>, UnsafeMutablePointer<RgnHandle>) -> DarwinBoolean
 typealias AEFilterProcPtr = @convention(c) (UnsafeMutablePointer<EventRecord>, Int32, AETransactionID, UnsafePointer<AEAddressDesc>) -> DarwinBoolean
 typealias AEIdleUPP = AEIdleProcPtr
 typealias AEFilterUPP = AEFilterProcPtr
-
-/**************************************************************************
-  The next couple of calls are basic routines used to create, send,
-  and process AppleEvents. 
-**************************************************************************/
 func AESend(theAppleEvent: UnsafePointer<AppleEvent>, _ reply: UnsafeMutablePointer<AppleEvent>, _ sendMode: AESendMode, _ sendPriority: AESendPriority, _ timeOutInTicks: Int32, _ idleProc: AEIdleUPP!, _ filterProc: AEFilterUPP!) -> OSErr
 func AEProcessAppleEvent(theEventRecord: UnsafePointer<EventRecord>) -> OSErr
-@available(OSX 10.5, *)
 func AEProcessEvent(inEvent: EventRef) -> OSStatus
 func AEResetTimer(reply: UnsafePointer<AppleEvent>) -> OSErr
-
-/**************************************************************************
-  The following three calls are used to allow applications to behave
-  courteously when a user interaction such as a dialog box is needed. 
-**************************************************************************/
 typealias AEInteractAllowed = Int8
 var kAEInteractWithSelf: Int { get }
 var kAEInteractWithLocal: Int { get }
@@ -213,16 +170,6 @@ var kAEInteractWithAll: Int { get }
 func AEGetInteractionAllowed(level: UnsafeMutablePointer<AEInteractAllowed>) -> OSErr
 func AESetInteractionAllowed(level: AEInteractAllowed) -> OSErr
 func AEInteractWithUser(timeOutInTicks: Int32, _ nmReqPtr: NMRecPtr, _ idleProc: AEIdleUPP!) -> OSErr
-
-/**************************************************************************
- The following four calls are available for applications which need more
- sophisticated control over when and how events are processed. Applications
- which implement multi-session servers or which implement their own
- internal event queueing will probably be the major clients of these
- routines. They can be called from within a handler to prevent the AEM from
- disposing of the AppleEvent when the handler returns. They can be used to
- asynchronously process the event (as MacApp does).
-**************************************************************************/
 func AESuspendTheCurrentEvent(theAppleEvent: UnsafePointer<AppleEvent>) -> OSErr
 var kAEDoNotIgnoreHandler: Int { get }
 var kAEIgnoreAppPhacHandler: Int { get }
@@ -236,10 +183,6 @@ var kAEUseStandardDispatch: Int { get }
 func AEResumeTheCurrentEvent(theAppleEvent: UnsafePointer<AppleEvent>, _ reply: UnsafePointer<AppleEvent>, _ dispatcher: AEEventHandlerUPP!, _ handlerRefcon: SRefCon) -> OSErr
 func AEGetTheCurrentEvent(theAppleEvent: UnsafeMutablePointer<AppleEvent>) -> OSErr
 func AESetTheCurrentEvent(theAppleEvent: UnsafePointer<AppleEvent>) -> OSErr
-
-/**************************************************************************
-  AppleEvent callbacks. 
-**************************************************************************/
 func NewAEIdleUPP(userRoutine: AEIdleProcPtr!) -> AEIdleUPP!
 func NewAEFilterUPP(userRoutine: AEFilterProcPtr!) -> AEFilterUPP!
 func DisposeAEIdleUPP(userUPP: AEIdleUPP!)
@@ -1339,7 +1282,6 @@ var kMouseParamsSticky: Int { get }
 var kMouseParamsProxyIcon: Int { get }
 var kMouseParamsClickAndHold: Int { get }
 var kMouseParamsDragInitiation: Int { get }
-@available(OSX 10.3, *)
 func HIMouseTrackingGetParameters(inSelector: OSType, _ outTime: UnsafeMutablePointer<EventTime>, _ outDistance: UnsafeMutablePointer<HISize>) -> OSStatus
 var kEventClassMouse: Int { get }
 var kEventClassKeyboard: Int { get }
@@ -1774,7 +1716,6 @@ var kEventSystemUserSessionActivated: Int { get }
 var kEventSystemUserSessionDeactivated: Int { get }
 func GetApplicationEventTarget() -> EventTargetRef
 func GetEventDispatcherTarget() -> EventTargetRef
-@available(OSX 10.3, *)
 func GetEventMonitorTarget() -> EventTargetRef
 func ProcessHICommand(inCommand: UnsafePointer<HICommand>) -> OSStatus
 struct EventHotKeyID {
@@ -1791,16 +1732,12 @@ func UnregisterEventHotKey(inHotKey: EventHotKeyRef) -> OSStatus
 var kHISymbolicHotKeyCode: String { get }
 var kHISymbolicHotKeyModifiers: String { get }
 var kHISymbolicHotKeyEnabled: String { get }
-@available(OSX 10.3, *)
 func CopySymbolicHotKeys(outHotKeyArray: UnsafeMutablePointer<Unmanaged<CFArray>?>) -> OSStatus
 var kHIHotKeyModeAllEnabled: Int { get }
 var kHIHotKeyModeAllDisabled: Int { get }
 var kHIHotKeyModeAllDisabledExceptUniversalAccess: Int { get }
-@available(OSX 10.4, *)
 func PushSymbolicHotKeyMode(inOptions: OptionBits) -> UnsafeMutablePointer<Void>
-@available(OSX 10.4, *)
 func PopSymbolicHotKeyMode(inToken: UnsafeMutablePointer<Void>)
-@available(OSX 10.4, *)
 func GetSymbolicHotKeyMode() -> OptionBits
 var kEventParamInkTextRef: Int { get }
 var kEventParamInkKeyboardShortcut: Int { get }
@@ -1886,7 +1823,6 @@ func GetCurrentEventLoop() -> EventLoopRef
 func GetMainEventLoop() -> EventLoopRef
 func RunCurrentEventLoop(inTimeout: EventTimeout) -> OSStatus
 func QuitEventLoop(inEventLoop: EventLoopRef) -> OSStatus
-@available(OSX 10.1, *)
 func GetCFRunLoopFromEventLoop(inEventLoop: EventLoopRef) -> Unmanaged<AnyObject>!
 func ReceiveNextEvent(inNumTypes: Int, _ inList: UnsafePointer<EventTypeSpec>, _ inTimeout: EventTimeout, _ inPullEvent: Bool, _ outEvent: UnsafeMutablePointer<EventRef>) -> OSStatus
 typealias EventAttributes = UInt32
@@ -1895,22 +1831,18 @@ var kEventAttributeUserEvent: Int { get }
 var kEventAttributeMonitored: Int { get }
 func CreateEvent(inAllocator: CFAllocator!, _ inClassID: OSType, _ inKind: UInt32, _ inWhen: EventTime, _ inAttributes: EventAttributes, _ outEvent: UnsafeMutablePointer<EventRef>) -> OSStatus
 func CopyEvent(inOther: EventRef) -> EventRef
-@available(OSX 10.3, *)
 func CopyEventAs(inAllocator: CFAllocator!, _ inOther: EventRef, _ inEventClass: OSType, _ inEventKind: UInt32) -> EventRef
 func RetainEvent(inEvent: EventRef) -> EventRef
 func GetEventRetainCount(inEvent: EventRef) -> Int
 func ReleaseEvent(inEvent: EventRef)
 func SetEventParameter(inEvent: EventRef, _ inName: EventParamName, _ inType: EventParamType, _ inSize: Int, _ inDataPtr: UnsafePointer<Void>) -> OSStatus
 func GetEventParameter(inEvent: EventRef, _ inName: EventParamName, _ inDesiredType: EventParamType, _ outActualType: UnsafeMutablePointer<EventParamType>, _ inBufferSize: Int, _ outActualSize: UnsafeMutablePointer<Int>, _ outData: UnsafeMutablePointer<Void>) -> OSStatus
-@available(OSX 10.5, *)
 func RemoveEventParameter(inEvent: EventRef, _ inName: EventParamName) -> OSStatus
 func GetEventClass(inEvent: EventRef) -> OSType
 func GetEventKind(inEvent: EventRef) -> UInt32
 func GetEventTime(inEvent: EventRef) -> EventTime
 func SetEventTime(inEvent: EventRef, _ inTime: EventTime) -> OSStatus
-@available(OSX 10.5, *)
 func CreateEventWithCGEvent(inAllocator: CFAllocator!, _ inEvent: CGEvent!, _ inAttributes: EventAttributes, _ outEvent: UnsafeMutablePointer<EventRef>) -> OSStatus
-@available(OSX 10.5, *)
 func CopyEventCGEvent(inEvent: EventRef) -> Unmanaged<CGEvent>!
 typealias EventQueueRef = COpaquePointer
 func GetCurrentEventQueue() -> EventQueueRef
@@ -1929,17 +1861,11 @@ func GetNumEventsInQueue(inQueue: EventQueueRef) -> Int
 func RemoveEventFromQueue(inQueue: EventQueueRef, _ inEvent: EventRef) -> OSStatus
 func IsEventInQueue(inQueue: EventQueueRef, _ inEvent: EventRef) -> Bool
 var kEventQueueOptionsNone: Int { get }
-@available(OSX 10.3, *)
 func AcquireFirstMatchingEventInQueue(inQueue: EventQueueRef, _ inNumTypes: Int, _ inList: UnsafePointer<EventTypeSpec>, _ inOptions: OptionBits) -> EventRef
-@available(OSX 10.2, *)
 func GetCurrentEvent() -> EventRef
-@available(OSX 10.2, *)
 func GetCurrentEventButtonState() -> UInt32
-@available(OSX 10.2, *)
 func GetCurrentEventKeyModifiers() -> UInt32
-@available(OSX 10.5, *)
 func HIGetMousePosition(inSpace: HICoordinateSpace, _ inObject: UnsafeMutablePointer<Void>, _ outPoint: UnsafeMutablePointer<HIPoint>) -> UnsafeMutablePointer<HIPoint>
-@available(OSX 10.2, *)
 func GetCurrentButtonState() -> UInt32
 func GetCurrentKeyModifiers() -> UInt32
 func GetCurrentEventTime() -> EventTime
@@ -1955,13 +1881,10 @@ typealias EventLoopIdleTimerProcPtr = @convention(c) (EventLoopTimer!, EventLoop
 typealias EventLoopTimerUPP = EventLoopTimerProcPtr
 typealias EventLoopIdleTimerUPP = EventLoopIdleTimerProcPtr
 func NewEventLoopTimerUPP(userRoutine: EventLoopTimerProcPtr!) -> EventLoopTimerUPP!
-@available(OSX 10.2, *)
 func NewEventLoopIdleTimerUPP(userRoutine: EventLoopIdleTimerProcPtr!) -> EventLoopIdleTimerUPP!
 func DisposeEventLoopTimerUPP(userUPP: EventLoopTimerUPP!)
-@available(OSX 10.2, *)
 func DisposeEventLoopIdleTimerUPP(userUPP: EventLoopIdleTimerUPP!)
 func InvokeEventLoopTimerUPP(inTimer: EventLoopTimer!, _ inUserData: UnsafeMutablePointer<Void>, _ userUPP: EventLoopTimerUPP!)
-@available(OSX 10.2, *)
 func InvokeEventLoopIdleTimerUPP(inTimer: EventLoopTimer!, _ inState: EventLoopIdleTimerMessage, _ inUserData: UnsafeMutablePointer<Void>, _ userUPP: EventLoopIdleTimerUPP!)
 func InstallEventLoopTimer(inEventLoop: EventLoopRef, _ inFireDelay: EventTimerInterval, _ inInterval: EventTimerInterval, _ inTimerProc: EventLoopTimerUPP!, _ inTimerData: UnsafeMutablePointer<Void>, _ outTimer: UnsafeMutablePointer<Unmanaged<EventLoopTimer>?>) -> OSStatus
 func RemoveEventLoopTimer(inTimer: EventLoopTimer!) -> OSStatus
@@ -1982,13 +1905,9 @@ func CallNextEventHandler(inCallRef: EventHandlerCallRef, _ inEvent: EventRef) -
 var kEventTargetDontPropagate: Int { get }
 var kEventTargetSendToAllHandlers: Int { get }
 func SendEventToEventTarget(inEvent: EventRef, _ inTarget: EventTargetRef) -> OSStatus
-@available(OSX 10.2, *)
 func SendEventToEventTargetWithOptions(inEvent: EventRef, _ inTarget: EventTargetRef, _ inOptions: OptionBits) -> OSStatus
-@available(OSX 10.3, *)
 func EnableSecureEventInput() -> OSStatus
-@available(OSX 10.3, *)
 func DisableSecureEventInput() -> OSStatus
-@available(OSX 10.3, *)
 func IsSecureEventInputEnabled() -> Bool
 var pushButProc: Int { get }
 var checkBoxProc: Int { get }
@@ -3195,7 +3114,6 @@ typealias DataBrowserItemHelpContentProcPtr = @convention(c) (Control!, DataBrow
 typealias DataBrowserItemHelpContentUPP = DataBrowserItemHelpContentProcPtr
 func NewDataBrowserItemDataUPP(userRoutine: DataBrowserItemDataProcPtr!) -> DataBrowserItemDataUPP!
 func NewDataBrowserItemCompareUPP(userRoutine: DataBrowserItemCompareProcPtr!) -> DataBrowserItemCompareUPP!
-@available(OSX 10.1, *)
 func NewDataBrowserItemNotificationWithItemUPP(userRoutine: DataBrowserItemNotificationWithItemProcPtr!) -> DataBrowserItemNotificationWithItemUPP!
 func NewDataBrowserItemNotificationUPP(userRoutine: DataBrowserItemNotificationProcPtr!) -> DataBrowserItemNotificationUPP!
 func NewDataBrowserAddDragItemUPP(userRoutine: DataBrowserAddDragItemProcPtr!) -> DataBrowserAddDragItemUPP!
@@ -3207,7 +3125,6 @@ func NewDataBrowserSelectContextualMenuUPP(userRoutine: DataBrowserSelectContext
 func NewDataBrowserItemHelpContentUPP(userRoutine: DataBrowserItemHelpContentProcPtr!) -> DataBrowserItemHelpContentUPP!
 func DisposeDataBrowserItemDataUPP(userUPP: DataBrowserItemDataUPP!)
 func DisposeDataBrowserItemCompareUPP(userUPP: DataBrowserItemCompareUPP!)
-@available(OSX 10.1, *)
 func DisposeDataBrowserItemNotificationWithItemUPP(userUPP: DataBrowserItemNotificationWithItemUPP!)
 func DisposeDataBrowserItemNotificationUPP(userUPP: DataBrowserItemNotificationUPP!)
 func DisposeDataBrowserAddDragItemUPP(userUPP: DataBrowserAddDragItemUPP!)
@@ -3219,7 +3136,6 @@ func DisposeDataBrowserSelectContextualMenuUPP(userUPP: DataBrowserSelectContext
 func DisposeDataBrowserItemHelpContentUPP(userUPP: DataBrowserItemHelpContentUPP!)
 func InvokeDataBrowserItemDataUPP(browser: Control!, _ item: DataBrowserItemID, _ property: DataBrowserPropertyID, _ itemData: DataBrowserItemDataRef, _ setValue: Bool, _ userUPP: DataBrowserItemDataUPP!) -> OSStatus
 func InvokeDataBrowserItemCompareUPP(browser: Control!, _ itemOne: DataBrowserItemID, _ itemTwo: DataBrowserItemID, _ sortProperty: DataBrowserPropertyID, _ userUPP: DataBrowserItemCompareUPP!) -> Bool
-@available(OSX 10.1, *)
 func InvokeDataBrowserItemNotificationWithItemUPP(browser: Control!, _ item: DataBrowserItemID, _ message: DataBrowserItemNotification, _ itemData: DataBrowserItemDataRef, _ userUPP: DataBrowserItemNotificationWithItemUPP!)
 func InvokeDataBrowserItemNotificationUPP(browser: Control!, _ item: DataBrowserItemID, _ message: DataBrowserItemNotification, _ userUPP: DataBrowserItemNotificationUPP!)
 func InvokeDataBrowserAddDragItemUPP(browser: Control!, _ theDrag: DragReference, _ item: DataBrowserItemID, _ itemRef: UnsafeMutablePointer<ItemReference>, _ userUPP: DataBrowserAddDragItemUPP!) -> Bool
@@ -3279,47 +3195,26 @@ typealias DataBrowserTrackingUPP = DataBrowserTrackingProcPtr
 typealias DataBrowserItemDragRgnUPP = DataBrowserItemDragRgnProcPtr
 typealias DataBrowserItemAcceptDragUPP = DataBrowserItemAcceptDragProcPtr
 typealias DataBrowserItemReceiveDragUPP = DataBrowserItemReceiveDragProcPtr
-@available(OSX 10.1, *)
 func NewDataBrowserDrawItemUPP(userRoutine: DataBrowserDrawItemProcPtr!) -> DataBrowserDrawItemUPP!
-@available(OSX 10.1, *)
 func NewDataBrowserEditItemUPP(userRoutine: DataBrowserEditItemProcPtr!) -> DataBrowserEditItemUPP!
-@available(OSX 10.1, *)
 func NewDataBrowserHitTestUPP(userRoutine: DataBrowserHitTestProcPtr!) -> DataBrowserHitTestUPP!
-@available(OSX 10.1, *)
 func NewDataBrowserTrackingUPP(userRoutine: DataBrowserTrackingProcPtr!) -> DataBrowserTrackingUPP!
-@available(OSX 10.1, *)
 func NewDataBrowserItemDragRgnUPP(userRoutine: DataBrowserItemDragRgnProcPtr!) -> DataBrowserItemDragRgnUPP!
-@available(OSX 10.1, *)
 func NewDataBrowserItemAcceptDragUPP(userRoutine: DataBrowserItemAcceptDragProcPtr!) -> DataBrowserItemAcceptDragUPP!
-@available(OSX 10.1, *)
 func NewDataBrowserItemReceiveDragUPP(userRoutine: DataBrowserItemReceiveDragProcPtr!) -> DataBrowserItemReceiveDragUPP!
-@available(OSX 10.1, *)
 func DisposeDataBrowserDrawItemUPP(userUPP: DataBrowserDrawItemUPP!)
-@available(OSX 10.1, *)
 func DisposeDataBrowserEditItemUPP(userUPP: DataBrowserEditItemUPP!)
-@available(OSX 10.1, *)
 func DisposeDataBrowserHitTestUPP(userUPP: DataBrowserHitTestUPP!)
-@available(OSX 10.1, *)
 func DisposeDataBrowserTrackingUPP(userUPP: DataBrowserTrackingUPP!)
-@available(OSX 10.1, *)
 func DisposeDataBrowserItemDragRgnUPP(userUPP: DataBrowserItemDragRgnUPP!)
-@available(OSX 10.1, *)
 func DisposeDataBrowserItemAcceptDragUPP(userUPP: DataBrowserItemAcceptDragUPP!)
-@available(OSX 10.1, *)
 func DisposeDataBrowserItemReceiveDragUPP(userUPP: DataBrowserItemReceiveDragUPP!)
-@available(OSX 10.1, *)
 func InvokeDataBrowserDrawItemUPP(browser: Control!, _ item: DataBrowserItemID, _ property: DataBrowserPropertyID, _ itemState: DataBrowserItemState, _ theRect: UnsafePointer<Rect>, _ gdDepth: Int16, _ colorDevice: Bool, _ userUPP: DataBrowserDrawItemUPP!)
-@available(OSX 10.1, *)
 func InvokeDataBrowserEditItemUPP(browser: Control!, _ item: DataBrowserItemID, _ property: DataBrowserPropertyID, _ theString: CFString!, _ maxEditTextRect: UnsafeMutablePointer<Rect>, _ shrinkToFit: UnsafeMutablePointer<DarwinBoolean>, _ userUPP: DataBrowserEditItemUPP!) -> Bool
-@available(OSX 10.1, *)
 func InvokeDataBrowserHitTestUPP(browser: Control!, _ itemID: DataBrowserItemID, _ property: DataBrowserPropertyID, _ theRect: UnsafePointer<Rect>, _ mouseRect: UnsafePointer<Rect>, _ userUPP: DataBrowserHitTestUPP!) -> Bool
-@available(OSX 10.1, *)
 func InvokeDataBrowserTrackingUPP(browser: Control!, _ itemID: DataBrowserItemID, _ property: DataBrowserPropertyID, _ theRect: UnsafePointer<Rect>, _ startPt: Point, _ modifiers: EventModifiers, _ userUPP: DataBrowserTrackingUPP!) -> DataBrowserTrackingResult
-@available(OSX 10.1, *)
 func InvokeDataBrowserItemDragRgnUPP(browser: Control!, _ itemID: DataBrowserItemID, _ property: DataBrowserPropertyID, _ theRect: UnsafePointer<Rect>, _ dragRgn: RgnHandle, _ userUPP: DataBrowserItemDragRgnUPP!)
-@available(OSX 10.1, *)
 func InvokeDataBrowserItemAcceptDragUPP(browser: Control!, _ itemID: DataBrowserItemID, _ property: DataBrowserPropertyID, _ theRect: UnsafePointer<Rect>, _ theDrag: DragReference, _ userUPP: DataBrowserItemAcceptDragUPP!) -> DataBrowserDragFlags
-@available(OSX 10.1, *)
 func InvokeDataBrowserItemReceiveDragUPP(browser: Control!, _ itemID: DataBrowserItemID, _ property: DataBrowserPropertyID, _ dragFlags: DataBrowserDragFlags, _ theDrag: DragReference, _ userUPP: DataBrowserItemReceiveDragUPP!) -> Bool
 var kDataBrowserLatestCustomCallbacks: Int { get }
 struct DataBrowserCustomCallbacks {
@@ -3435,11 +3330,8 @@ var kHICoordSpace72DPIGlobal: Int { get }
 var kHICoordSpaceScreenPixel: Int { get }
 var kHICoordSpaceWindow: Int { get }
 var kHICoordSpaceView: Int { get }
-@available(OSX 10.4, *)
 func HIPointConvert(ioPoint: UnsafeMutablePointer<HIPoint>, _ inSourceSpace: HICoordinateSpace, _ inSourceObject: UnsafeMutablePointer<Void>, _ inDestinationSpace: HICoordinateSpace, _ inDestinationObject: UnsafeMutablePointer<Void>)
-@available(OSX 10.4, *)
 func HIRectConvert(ioRect: UnsafeMutablePointer<HIRect>, _ inSourceSpace: HICoordinateSpace, _ inSourceObject: UnsafeMutablePointer<Void>, _ inDestinationSpace: HICoordinateSpace, _ inDestinationObject: UnsafeMutablePointer<Void>)
-@available(OSX 10.4, *)
 func HISizeConvert(ioSize: UnsafeMutablePointer<HISize>, _ inSourceSpace: HICoordinateSpace, _ inSourceObject: UnsafeMutablePointer<Void>, _ inDestinationSpace: HICoordinateSpace, _ inDestinationObject: UnsafeMutablePointer<Void>)
 var kHIImageViewClassID: String { get }
 var kControlKindHIImageView: Int { get }
@@ -3474,7 +3366,6 @@ var kHIMenuViewClassID: String { get }
 var kHIStandardMenuViewClassID: String { get }
 var kControlKindHIMenuView: Int { get }
 var kControlKindHIStandardMenuView: Int { get }
-@available(OSX 10.4, *)
 let kHIViewMenuContentID: HIViewID
 class HIObjectClass {
 }
@@ -3498,13 +3389,9 @@ var kEventParamAfterDelegates: Int { get }
 var kEventParamDecodingForEditor: Int { get }
 var kEventParamInitParameters: Int { get }
 var typeHIObjectRef: Int { get }
-@available(OSX 10.5, *)
 let kHIObjectInitParamUserName: CFString!
-@available(OSX 10.5, *)
 let kHIObjectInitParamDescription: CFString!
-@available(OSX 10.5, *)
 let kHIObjectInitParamEventName: CFString!
-@available(OSX 10.5, *)
 let kHIObjectInitParamEventType: CFString!
 var kEventHIObjectConstruct: Int { get }
 var kEventHIObjectInitialize: Int { get }
@@ -3524,57 +3411,33 @@ var kEventDelegateRemoved: Int { get }
 var kEventDelegateGetTargetClasses: Int { get }
 var kEventDelegateIsGroup: Int { get }
 var kEventDelegateGetGroupClasses: Int { get }
-@available(OSX 10.2, *)
 func HIObjectRegisterSubclass(inClassID: CFString!, _ inBaseClassID: CFString!, _ inOptions: OptionBits, _ inConstructProc: EventHandlerUPP!, _ inNumEvents: Int, _ inEventList: UnsafePointer<EventTypeSpec>, _ inConstructData: UnsafeMutablePointer<Void>, _ outClassRef: UnsafeMutablePointer<Unmanaged<HIObjectClass>?>) -> OSStatus
-@available(OSX 10.2, *)
 func HIObjectUnregisterClass(inClassRef: HIObjectClass!) -> OSStatus
-@available(OSX 10.2, *)
 func HIObjectCreate(inClassID: CFString!, _ inConstructData: EventRef, _ outObject: UnsafeMutablePointer<Unmanaged<HIObject>?>) -> OSStatus
-@available(OSX 10.2, *)
 func HIObjectGetEventTarget(inObject: HIObject!) -> EventTargetRef
-@available(OSX 10.2, *)
 func HIObjectPrintDebugInfo(inObject: HIObject!)
-@available(OSX 10.2, *)
 func HIObjectCopyClassID(inObject: HIObject!) -> Unmanaged<CFString>!
-@available(OSX 10.2, *)
 func HIObjectIsOfClass(inObject: HIObject!, _ inObjectClassID: CFString!) -> Bool
-@available(OSX 10.2, *)
 func HIObjectDynamicCast(inObject: HIObject!, _ inClassID: CFString!) -> UnsafeMutablePointer<Void>
-@available(OSX 10.2, *)
 func HIObjectCreateFromBundle(inBundle: CFBundle!, _ outObject: UnsafeMutablePointer<Unmanaged<HIObject>?>) -> OSStatus
-@available(OSX 10.5, *)
 func HIObjectFromEventTarget(inTarget: EventTargetRef) -> Unmanaged<HIObject>!
-@available(OSX 10.4, *)
 func HIObjectIsArchivingIgnored(inObject: HIObject!) -> Bool
-@available(OSX 10.4, *)
 let kHIObjectCustomDataParameterNamesKey: CFString!
-@available(OSX 10.4, *)
 let kHIObjectCustomDataParameterTypesKey: CFString!
-@available(OSX 10.4, *)
 let kHIObjectCustomDataParameterValuesKey: CFString!
-@available(OSX 10.4, *)
 let kHIObjectCustomDataClassIDKey: CFString!
-@available(OSX 10.4, *)
 let kHIObjectCustomDataSuperClassIDKey: CFString!
-@available(OSX 10.4, *)
 let kHIObjectCustomDataCDEFProcIDKey: CFString!
-@available(OSX 10.5, *)
 let kHIObjectCustomDataDelegateGroupParametersKey: CFString!
 typealias HIDelegatePosition = UInt32
 var kHIDelegateAll: Int { get }
 var kHIDelegateBefore: Int { get }
 var kHIDelegateAfter: Int { get }
-@available(OSX 10.5, *)
 let kHIDelegateBeforeKey: CFString!
-@available(OSX 10.5, *)
 let kHIDelegateAfterKey: CFString!
-@available(OSX 10.5, *)
 func HIObjectAddDelegate(inObject: HIObject!, _ inDelegate: HIObject!, _ inPosition: HIDelegatePosition) -> OSStatus
-@available(OSX 10.5, *)
 func HIObjectRemoveDelegate(inObject: HIObject!, _ inDelegate: HIObject!, _ inPosition: HIDelegatePosition) -> OSStatus
-@available(OSX 10.5, *)
 func HIObjectCopyDelegates(inObject: HIObject!, _ outDelegates: UnsafeMutablePointer<Unmanaged<CFDictionary>?>) -> OSStatus
-@available(OSX 10.5, *)
 func HIObjectGetEventHandlerObject(inRef: EventHandlerCallRef) -> Unmanaged<HIObject>!
 class Control {
 }
@@ -3773,7 +3636,6 @@ var kEventParamUnconfirmedText: Int { get }
 var kEventTextAccepted: Int { get }
 var kEventTextShouldChangeInRange: Int { get }
 var kEventTextDidChange: Int { get }
-@available(OSX 10.3, *)
 let kHITextViewClassID: CFString!
 var kControlKindHITextView: Int { get }
 var kControlEditUnicodeTextProc: Int { get }
@@ -4134,29 +3996,17 @@ struct HIThemeBackgroundDrawInfo {
   init(version: UInt32, state: ThemeDrawState, kind: ThemeBackgroundKind)
 }
 typealias HIThemeBackgroundDrawInfoPtr = UnsafeMutablePointer<HIThemeBackgroundDrawInfo>
-@available(OSX 10.3, *)
 func HIThemeDrawButton(inBounds: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeButtonDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation, _ outLabelRect: UnsafeMutablePointer<HIRect>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeGetButtonShape(inBounds: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeButtonDrawInfo>, _ outShape: UnsafeMutablePointer<Unmanaged<HIShape>?>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeGetButtonContentBounds(inBounds: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeButtonDrawInfo>, _ outBounds: UnsafeMutablePointer<HIRect>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeGetButtonBackgroundBounds(inBounds: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeButtonDrawInfo>, _ outBounds: UnsafeMutablePointer<HIRect>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawChasingArrows(inBounds: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeChasingArrowsDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawPopupArrow(inBounds: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemePopupArrowDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawMenuBarBackground(inBounds: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeMenuBarDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawMenuTitle(inMenuBarRect: UnsafePointer<HIRect>, _ inTitleRect: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeMenuTitleDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation, _ outLabelRect: UnsafeMutablePointer<HIRect>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawMenuBackground(inMenuRect: UnsafePointer<HIRect>, _ inMenuDrawInfo: UnsafePointer<HIThemeMenuDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawMenuItem(inMenuRect: UnsafePointer<HIRect>, _ inItemRect: UnsafePointer<HIRect>, _ inItemDrawInfo: UnsafePointer<HIThemeMenuItemDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation, _ outContentRect: UnsafeMutablePointer<HIRect>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawMenuSeparator(inMenuRect: UnsafePointer<HIRect>, _ inItemRect: UnsafePointer<HIRect>, _ inItemDrawInfo: UnsafePointer<HIThemeMenuItemDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeGetMenuBackgroundShape(inMenuRect: UnsafePointer<HIRect>, _ inMenuDrawInfo: UnsafePointer<HIThemeMenuDrawInfo>, _ outShape: UnsafeMutablePointer<Unmanaged<HIShape>?>) -> OSStatus
 var kHIThemeSegmentPositionFirst: Int { get }
 var kHIThemeSegmentPositionMiddle: Int { get }
@@ -4188,19 +4038,12 @@ struct HIThemeSegmentDrawInfo {
   init(version: UInt32, state: ThemeDrawState, value: ThemeButtonValue, size: HIThemeSegmentSize, kind: HIThemeSegmentKind, position: HIThemeSegmentPosition, adornment: HIThemeSegmentAdornment)
 }
 typealias HIThemeSegmentDrawInfoPtr = UnsafeMutablePointer<HIThemeSegmentDrawInfo>
-@available(OSX 10.4, *)
 func HIThemeDrawSegment(inBounds: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeSegmentDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawTabPane(inRect: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeTabPaneDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawTab(inRect: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeTabDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation, _ outLabelRect: UnsafeMutablePointer<HIRect>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeGetTabPaneDrawShape(inRect: UnsafePointer<HIRect>, _ inDirection: ThemeTabDirection, _ inTabSize: HIThemeTabSize, _ outShape: UnsafeMutablePointer<Unmanaged<HIShape>?>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeGetTabPaneContentShape(inRect: UnsafePointer<HIRect>, _ inDirection: ThemeTabDirection, _ inTabSize: HIThemeTabSize, _ outShape: UnsafeMutablePointer<Unmanaged<HIShape>?>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeGetTabDrawShape(inRect: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeTabDrawInfo>, _ outShape: UnsafeMutablePointer<Unmanaged<HIShape>?>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeGetTabShape(inRect: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeTabDrawInfo>, _ outShape: UnsafeMutablePointer<Unmanaged<HIShape>?>) -> OSStatus
 var kHIThemeTextTruncationNone: Int { get }
 var kHIThemeTextTruncationMiddle: Int { get }
@@ -4239,93 +4082,51 @@ struct HIThemeTextInfo {
   init()
   init(version: UInt32, state: ThemeDrawState, fontID: ThemeFontID, horizontalFlushness: HIThemeTextHorizontalFlush, verticalFlushness: HIThemeTextVerticalFlush, options: HIThemeTextBoxOptions, truncationPosition: HIThemeTextTruncation, truncationMaxLines: UInt32, truncationHappened: DarwinBoolean, filler1: UInt8, font: Unmanaged<CTFont>!)
 }
-@available(OSX 10.3, *)
 func HIThemeGetTextDimensions(inString: AnyObject!, _ inWidth: CGFloat, _ inTextInfo: UnsafeMutablePointer<HIThemeTextInfo>, _ outWidth: UnsafeMutablePointer<CGFloat>, _ outHeight: UnsafeMutablePointer<CGFloat>, _ outBaseline: UnsafeMutablePointer<CGFloat>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawTextBox(inString: AnyObject!, _ inBounds: UnsafePointer<HIRect>, _ inTextInfo: UnsafeMutablePointer<HIThemeTextInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.5, *)
 func HIThemeGetUIFontType(inFontID: ThemeFontID) -> CTFontUIFontType
-@available(OSX 10.3, *)
 func HIThemeDrawTrack(inDrawInfo: UnsafePointer<HIThemeTrackDrawInfo>, _ inGhostRect: UnsafePointer<HIRect>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawTrackTickMarks(inDrawInfo: UnsafePointer<HIThemeTrackDrawInfo>, _ inNumTicks: Int, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawTickMark(inBounds: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeTickMarkDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeGetTrackThumbShape(inDrawInfo: UnsafePointer<HIThemeTrackDrawInfo>, _ outThumbShape: UnsafeMutablePointer<Unmanaged<HIShape>?>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeHitTestTrack(inDrawInfo: UnsafePointer<HIThemeTrackDrawInfo>, _ inMousePoint: UnsafePointer<HIPoint>, _ outPartHit: UnsafeMutablePointer<ControlPartCode>) -> Bool
-@available(OSX 10.3, *)
 func HIThemeGetTrackBounds(inDrawInfo: UnsafePointer<HIThemeTrackDrawInfo>, _ outBounds: UnsafeMutablePointer<HIRect>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeGetTrackPartBounds(inDrawInfo: UnsafePointer<HIThemeTrackDrawInfo>, _ inPartCode: ControlPartCode, _ outPartBounds: UnsafeMutablePointer<HIRect>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeGetTrackParts(inDrawInfo: UnsafePointer<HIThemeTrackDrawInfo>, _ outNumberOfParts: UnsafeMutablePointer<UInt32>, _ inMaxParts: UInt32, _ ioPartsBuffer: UnsafeMutablePointer<ControlPartCode>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeGetTrackDragRect(inDrawInfo: UnsafePointer<HIThemeTrackDrawInfo>, _ outDragRect: UnsafeMutablePointer<HIRect>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeGetTrackThumbPositionFromOffset(inDrawInfo: UnsafePointer<HIThemeTrackDrawInfo>, _ inThumbOffset: UnsafePointer<HIPoint>, _ outRelativePosition: UnsafeMutablePointer<CGFloat>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeGetTrackThumbPositionFromBounds(inDrawInfo: UnsafePointer<HIThemeTrackDrawInfo>, _ inThumbBounds: UnsafePointer<HIRect>, _ outRelativePosition: UnsafeMutablePointer<CGFloat>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeGetTrackLiveValue(inDrawInfo: UnsafePointer<HIThemeTrackDrawInfo>, _ inRelativePosition: CGFloat, _ outValue: UnsafeMutablePointer<Int32>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeGetScrollBarTrackRect(inBounds: UnsafePointer<HIRect>, _ inTrackInfo: UnsafePointer<HIScrollBarTrackInfo>, _ inIsHoriz: Bool, _ outTrackBounds: UnsafeMutablePointer<HIRect>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeHitTestScrollBarArrows(inScrollBarBounds: UnsafePointer<HIRect>, _ inTrackInfo: UnsafePointer<HIScrollBarTrackInfo>, _ inIsHoriz: Bool, _ inPtHit: UnsafePointer<HIPoint>, _ outTrackBounds: UnsafeMutablePointer<HIRect>, _ outPartCode: UnsafeMutablePointer<ControlPartCode>) -> Bool
-@available(OSX 10.3, *)
 func HIThemeDrawScrollBarDelimiters(inContRect: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeScrollBarDelimitersDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawWindowFrame(inContRect: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeWindowDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation, _ outTitleRect: UnsafeMutablePointer<HIRect>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawTitleBarWidget(inContRect: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeWindowWidgetDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawGrowBox(inOrigin: UnsafePointer<HIPoint>, _ inDrawInfo: UnsafePointer<HIThemeGrowBoxDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeGetGrowBoxBounds(inOrigin: UnsafePointer<HIPoint>, _ inDrawInfo: UnsafePointer<HIThemeGrowBoxDrawInfo>, _ outBounds: UnsafeMutablePointer<HIRect>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeGetWindowShape(inContRect: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeWindowDrawInfo>, _ inWinRegion: WindowRegionCode, _ outShape: UnsafeMutablePointer<Unmanaged<HIShape>?>) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeGetWindowRegionHit(inContRect: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeWindowDrawInfo>, _ inPoint: UnsafePointer<HIPoint>, _ outRegionHit: UnsafeMutablePointer<WindowRegionCode>) -> Bool
-@available(OSX 10.3, *)
 func HIThemeDrawFrame(inRect: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeFrameDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawGroupBox(inRect: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeGroupBoxDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawGenericWell(inRect: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeButtonDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawPaneSplitter(inRect: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeSplitterDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawGrabber(inRect: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeGrabberDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawPlacard(inRect: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemePlacardDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawHeader(inRect: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeHeaderDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawFocusRect(inRect: UnsafePointer<HIRect>, _ inHasFocus: Bool, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
 var kHIThemeFocusRingOnly: Int { get }
 var kHIThemeFocusRingAbove: Int { get }
 var kHIThemeFocusRingBelow: Int { get }
 typealias HIThemeFocusRing = UInt32
-@available(OSX 10.5, *)
 func HIThemeBeginFocus(inContext: CGContext!, _ inRing: HIThemeFocusRing, _ inReserved: UnsafeMutablePointer<Void>) -> OSStatus
-@available(OSX 10.5, *)
 func HIThemeEndFocus(inContext: CGContext!) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawSeparator(inRect: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeSeparatorDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.4, *)
 func HIThemeSetFill(inBrush: ThemeBrush, _ inInfo: UnsafeMutablePointer<Void>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.4, *)
 func HIThemeSetStroke(inBrush: ThemeBrush, _ inInfo: UnsafeMutablePointer<Void>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.4, *)
 func HIThemeSetTextFill(inColor: ThemeTextColor, _ inInfo: UnsafeMutablePointer<Void>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeApplyBackground(inBounds: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeBackgroundDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.3, *)
 func HIThemeDrawBackground(inBounds: UnsafePointer<HIRect>, _ inDrawInfo: UnsafePointer<HIThemeBackgroundDrawInfo>, _ inContext: CGContext!, _ inOrientation: HIThemeOrientation) -> OSStatus
-@available(OSX 10.4, *)
 func HIThemeBrushCreateCGColor(inBrush: ThemeBrush, _ outColor: UnsafeMutablePointer<Unmanaged<CGColor>?>) -> OSStatus
-@available(OSX 10.5, *)
 func HIThemeGetTextColorForThemeBrush(inBrush: ThemeBrush, _ inWindowIsActive: Bool, _ outColor: UnsafeMutablePointer<ThemeTextColor>) -> OSStatus
 func GetThemeMenuSeparatorHeight(outHeight: UnsafeMutablePointer<Int16>) -> OSStatus
 func GetThemeMenuItemExtra(inItemType: ThemeMenuItemType, _ outHeight: UnsafeMutablePointer<Int16>, _ outWidth: UnsafeMutablePointer<Int16>) -> OSStatus
@@ -4473,7 +4274,6 @@ var kThemeMetricTexturedPushButtonHeight: Int { get }
 var kThemeMetricTexturedSmallPushButtonHeight: Int { get }
 typealias ThemeMetric = UInt32
 func GetThemeMetric(inMetric: ThemeMetric, _ outMetric: UnsafeMutablePointer<Int32>) -> OSStatus
-@available(OSX 10.1, *)
 func CopyThemeIdentifier(outIdentifier: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
 var kThemeMetricCheckBoxGlyphHeight: Int { get }
 var kThemeMetricRadioButtonGlyphHeight: Int { get }
@@ -4563,9 +4363,7 @@ var kHIToolbarItemSelected: Int { get }
 var kHIToolbarItemValidAttrs: Int { get }
 var kHIToolbarItemMutableAttrs: Int { get }
 var kHIToolbarItemClassID: String { get }
-@available(OSX 10.5, *)
 func DebugPrintMainEventQueue()
-@available(OSX 10.5, *)
 func DebugPrintEvent(inEvent: EventRef)
 typealias HIViewID = ControlID
 var kHIViewZOrderAbove: Int { get }
@@ -4751,21 +4549,13 @@ var kHIViewOffscreenImageUseWindowBackingResolution: Int { get }
 var kHITransformNone: Int { get }
 var kHITransformDisabled: Int { get }
 var kHITransformSelected: Int { get }
-@available(OSX 10.2, *)
 let kHIViewWindowContentID: HIViewID
-@available(OSX 10.5, *)
 let kHIViewWindowCloseBoxID: HIViewID
-@available(OSX 10.5, *)
 let kHIViewWindowCollapseBoxID: HIViewID
-@available(OSX 10.5, *)
 let kHIViewWindowZoomBoxID: HIViewID
-@available(OSX 10.5, *)
 let kHIViewWindowToolbarButtonID: HIViewID
-@available(OSX 10.5, *)
 let kHIViewWindowTitleID: HIViewID
-@available(OSX 10.5, *)
 let kHIViewWindowToolbarID: HIViewID
-@available(OSX 10.2, *)
 let kHIViewWindowGrowBoxID: HIViewID
 var kHIWindowTitleBarPart: Int { get }
 var kHIWindowDragPart: Int { get }
@@ -4779,209 +4569,28 @@ typealias IBNibRef = COpaquePointer
 var kIMKMouseTrackingMode: Int { get }
 var kIMKNearestBoundaryMode: Int { get }
 typealias IMKLocationToOffsetMappingMode = Int
-
-/*!
-	@const		IMKTextOrientationName
-	@abstract	The key used to find client's text orientation value which is part of the dictionary returned by attributesForCharacterIndex.
-
-	@discussion The orientation is the orientation of the client's text.  Use this key to access the orientation value in the attributes dictionary returned by attributesForCharacterIndex. The value is an NSNumber which represents a BOOL value. A value of 1 means the client's text is laid out horizontally.  A value of 0 means that the client's text is laid out vertically.  
-	
-	
-*/
 let IMKTextOrientationName: String
-
-/*!
-    @protocol    IMKTextInput
-    @abstract   Used to send and obtain data from the client side session.
-    @discussion Input methods call one of the methods in this protocol to communicate with the client.  
-*/
 protocol IMKTextInput {
-
-  /*!
-      @method     
-      @abstract   Sends text that has been fully converted to an input session.
-      @discussion When an input method finishes a conversion it calls this method and passes the finished text as an NSString or NSAttributedString. The replacementRange parameter is there to allow input methods to insert text at a location other than the current selection.
-                 
-                 If used the replacementRange should be relative to the beginning of the client document.
-                 
-                 If the string should be inserted at the current selection specify a replacementRange with a location and length of NSNotFound.
-  
-                  If the client does not support the TSMDocumentAccess protocol the replacementRange string will be ignored.
-  */
   func insertText(string: AnyObject!, replacementRange: NSRange)
-
-  /*!
-      @method     
-      @abstract   Insert the text and mark it to indicate that it is part of an active input session. 
-      @discussion The string parameter must be an NSString or an NSAttributedString. Passing an NSString will produce default marking ( On a 72 dpi screen that is a 2 pixel black underline for the entire string).  SelectionRange indicates the area of the string that should be selected and therefore if possible the area that should be displayed. SelectionRange is relative to the string parameter.
-                  
-                 For example, if the string contains the these characters: "INPUT" and the range is (5,0) the selection will be set right after the "T."
-                  
-                 ReplacementRange specifies the location in the client document where the marked text should be placed.  If the marked text should be placed at the current cursor location replacementRange.location will equal NSNotFound.  If used (i.e. location is not NSNotFound) the replacementRange is relative to the client document (i.e. 0 is the beginning of the document) and NOT the string parameter.
-               
-                 Currently, the replacement range is sent to the client via the kEventParamTextInputSendReplaceRange Carbon Event parameter.  As noted in the comment for this parameter for this parameter to be used the client must support the TSMDocumentAccess protocol.  If a client does not support the TSMDocumentAccess protocol the replacementRange will be ignored.
-  */
   func setMarkedText(string: AnyObject!, selectionRange: NSRange, replacementRange: NSRange)
-
-  /*!
-      @method     
-      @abstract   Returns the current selection range.
-                  
-     @discussion If the client does not support the TSMDocumentAccess protocol the returned range will have a location value of NSNotFound and a length of NSNotFound.
-                
-                 If a valid range is returned it is relative to the client's document.
-  */
   func selectedRange() -> NSRange
-
-  /*!
-      @method    
-      @abstract   Returns the range in the document that is occupied by marked text, which in other terms is the current inline session.
-      @discussion While an input method is converting text input and sending it to the client the client will maintain a range of text that is marked.  That is to say that there will be a range of text that is underlined in certain ways to indicate to the user that their keystrokes are in the process of being converted by an input method and the conversion has not yet been finalized.  The input method uses this method to request that range.  The returned range is relative to the clients document.  
-      
-               If this range is not available the range location and length will be NSNotFound.
-  */
   func markedRange() -> NSRange
-
-  /*!
-      @method     
-      @abstract   Called to request a string along with its attributes such as font and glyph info.
-      @discussion Input methods call this method to obtain a range of text from the client document along with that text's font and glyphInfo.  The kind of attributes that can be included in the string are defined in CTStringAttributes.h.  The range should be document relative.
-                                  
-                 If the client does not support TSMDocumentAccess the returned string will be created from data obtained by sending the client application a kEventTextInputGetSelectedText Carbon event.
-  
-  				The returned NSAttributedString is an autoreleased object.  Do not release this object unless you retain it first.
-  				
-  				Note it is possible that the returned string will be longer or shorter than the specified range.  This can be caused when there surrogate unicodes in a document, and the range's location or length splits a surrogate pair.
-  				You can test for this by comparing the string's length against the range you included as the range parameter.
-  */
-  @available(OSX 10.0, *)
   func attributedSubstringFromRange(range: NSRange) -> NSAttributedString!
-
-  /*!
-      @method     
-      @abstract   Returns the length of the text document.
-   @discussion If the client does not support the TSMDocumentAccess protocol the returned value will be NSNotFound.
-     
-                 Please note that depending on how clients store text determing how long a text document is can  be a very expensive operation. Input methods should be aware of this problem and avoid frequently calling this method.
-  */
   func length() -> Int
-
-  /*!
-      @method     
-      @abstract   Map a global point to a location in the text document.
-      @discussion Given a global point (typically from a mousedown) map that to a location in a text document.  
-   
-                 MappingMode is set to kIMKMouseTrackingMode if the input method is tracking the mouse. If the input method is tracking the mouse the application should pin highlighting to the active inline area.  If the input method simply wants to map a screen postion to an offset than mappingMode should be set to kIMKNearestBoundaryMode.
-                  
-                 If the point is not inside the text body the returned value will be NSNotFound.  If the point is inside the text body and inside the marked range inMarkedRange will be set to YES.  If it is outside the markedRange it will be set to NO.
-  */
   func characterIndexForPoint(point: NSPoint, tracking mappingMode: IMKLocationToOffsetMappingMode, inMarkedRange: UnsafeMutablePointer<ObjCBool>) -> Int
-
-  /*!
-      @method     - (NSDictionary*)attributesForCharacterIndex:(NSUInteger)index lineHeightRectangle:(NSRect*)lineRect;
-      @abstract   Returns a dictionary of text attributes for the text at a given character index. The attributes include the CTFontRef for the text at that index and the text orientation.  The text orientation is indicated by an NSNumber whose value is 0 if the text is vertically oriented and 1 if the text is horizontally oriented. The key for this value is IMKTextOrientationKey. Additionally, a rectangle that would frame a one-pixel wide rectangle with the height of the line is returned in the frame parameter.  Note that rectangle will be oriented the same way the line is oriented.
-      @discussion Input methods will call this method to place a candidate window on the screen. The index is relative to the inline session.  Note that if there is no inline session the value of index should be 0, which indicates that the information should be taken from the current selection.
-  
-  				The returned NSDictionary is an autoreleased object.  Don't release it unless you have retained it.
-      
-  */
-  @available(OSX 10.0, *)
   func attributesForCharacterIndex(index: Int, lineHeightRectangle lineRect: UnsafeMutablePointer<NSRect>) -> [NSObject : AnyObject]!
-
-  /*!
-      @method     
-      @abstract   Returns an array of NSString names for the attributes supported by the receiver. 
-     @discussion Input methods should restrict the attributes used to create attributed strings to the attributes in this array.
-  
-  				This is not a copy function.  The returned NSArray should not be released unless it is first retained.
-  */
   func validAttributesForMarkedText() -> [AnyObject]!
-
-  /*!
-      @method     
-      @abstract   Override the current keyboard.
-      @discussion Pass a keyboard unique name.  The client will try to locate a keyboard layout with that name in the input method's bundle.  If a layout is found it is passed to the client who then tells the text service manager to use that layout for keyboard events.  Input methods should call the method each time they are activated.
-                 
-                 If an input method wishes to use a system keyboard to override the current keyboard they are responsible for determining the keyboard's unique name.  Typically this name a DNS type name such as: com.apple.<some name>.
-  */
   func overrideKeyboardWithKeyboardNamed(keyboardUniqueName: String!)
-
-  /*!
-      @method     
-      @abstract   Select a new  input mode.
-      @discussion The mode identifier is an NSString with a DNS format.  
-                 
-                 Typically the mode identifier is a DNS type name such as: com.<company name>.inputmethod.<some name>.  The identifier should match one of the keys in the  ComponentInputModeDict.  This method allows an input method to change its mode directly.
-  */
   func selectInputMode(modeIdentifier: String!)
-
-  /*!
-      @method     
-      @abstract   Test to see if the current input session supports Unicode text.
-      @discussion Input methods that restrict the character codes sent to a client if that client does not support Unicode text should call this method to learn if a given input session supports Unicode text.
-  */
   func supportsUnicode() -> Bool
-
-  /*!
-      @method     
-      @abstract   Returns the bundle identifier for the process that the input session is attached to.
-      @discussion Many input methods need to be able to identify the process that input sessions belong to.  This method provides that service.
-  
-  				The returned NSString is an autoreleased object.  Call retain to own it.
-  */
   func bundleIdentifier() -> String!
-
-  /*!
-      @method     
-      @abstract  Returns the window level for client window.
-      @discussion Call this to determine the client's window level.  
-      
-      Internally, IMKCandidates uses this method to determine the correct level for candidate display.  Therefore, input methods that use IMKCandidates have no reason to call this method.  
-      
-      However, many input method developers have built there own candidate display system, and this method is here for their use.  In order to display a candidate window at the correct level use this method to obtain the client window level, increment the returned level, and then apply that level to any candidate windows.
-  */
   func windowLevel() -> CGWindowLevel
-
-  /*!
-      @method     
-      @abstract   Check if the current client input session supports a given TSM property.
-      @discussion This method is available to provide compatibilty for input methods that need to check TSMDocument properties.
-  */
   func supportsProperty(property: TSMDocumentPropertyTag) -> Bool
-
-  /*!
-      @method     
-      @abstract   Return a unique ID for the client.
-      @discussion This method is a wrapper around the NSProcessInfo method globallyUniqueString.
-  */
-  @available(OSX 10.7, *)
   func uniqueClientIdentifierString() -> String!
-
-  /*!
-      @method     
-      @abstract   Called to request a string along.
-      @discussion Input methods call this method to obtain a range of text from the client document The range should be document relative.
-                                  
-                 If the client does not support TSMDocumentAccess the returned string will be created from data obtained by sending the client application a kEventTextInputGetSelectedText Carbon event.
-  			   Note that clients that do not support TSMDocumentAccess are extremely rare.  Certainly the text system for Cocoa does support this functionality.
-  
-  				The returned NSString is an autoreleased object.  Do not release this object unless you retain it first.
-  				
-  				Note it is possible that the returned string will be longer or shorter than the specified range.  This can be caused when there surrogate unicodes in a document, and the range's location or length splits a surrogate pair.
-  				The parameter actualRange will contain the real range of the string in this case.
-  */
-  @available(OSX 10.7, *)
   func stringFromRange(range: NSRange, actualRange: NSRangePointer) -> String!
-  @available(OSX 10.7, *)
   func firstRectForCharacterRange(aRange: NSRange, actualRange: NSRangePointer) -> NSRect
 }
 protocol IMKUnicodeTextInput {
-
-  /*!
-      @method     
-      @abstract   Sends unicode text to the client application.
-      @discussion Use this method to send text that was not generated by user keyboard input.  This method should be used by palette input methods that send text to a client.  Typically the text is generated in response to user activity in the palette window. The string parameter can be either an NSString or an NSAttributedString.  Use an NSAttributed string if you need to include NSGlyphInfo objects with the text in the string. 
-  */
   func insertText(string: AnyObject!)
 }
 typealias PhysicalKeyboardLayoutType = OSType
@@ -5109,7 +4718,6 @@ struct ListDefSpec {
   init(defType: ListDefType, u: ListDefSpec.__Unnamed_union_u)
 }
 typealias ListDefSpecPtr = UnsafeMutablePointer<ListDefSpec>
-@available(OSX 10.3, *)
 let kHIToolboxVersionNumber: Float
 var kHIToolboxVersionNumber10_3: Double { get }
 var kHIToolboxVersionNumber10_3_2: Double { get }
@@ -5150,9 +4758,7 @@ var kUIOptionDisableSessionTerminate: Int { get }
 var kUIOptionDisableHide: Int { get }
 var kUIOptionDisableMenuBarTransparency: Int { get }
 typealias SystemUIOptions = OptionBits
-@available(OSX 10.2, *)
 func SetSystemUIMode(inMode: SystemUIMode, _ inOptions: SystemUIOptions) -> OSStatus
-@available(OSX 10.2, *)
 func GetSystemUIMode(outMode: UnsafeMutablePointer<SystemUIMode>, _ outOptions: UnsafeMutablePointer<SystemUIOptions>)
 func GetApplicationTextEncoding() -> TextEncoding
 var kHIAboutBoxNameKey: String { get }
@@ -5160,9 +4766,7 @@ var kHIAboutBoxVersionKey: String { get }
 var kHIAboutBoxCopyrightKey: String { get }
 var kHIAboutBoxDescriptionKey: String { get }
 var kHIAboutBoxStringFileKey: String { get }
-@available(OSX 10.4, *)
 func HISearchWindowShow(inSearchString: CFString!, _ inFlags: OptionBits) -> OSStatus
-@available(OSX 10.5, *)
 func HIDictionaryWindowShow(dictionary: DCSDictionary!, _ textString: AnyObject!, _ selectionRange: CFRange, _ textFont: CTFont!, _ textOrigin: CGPoint, _ verticalText: Bool, _ viewTransform: UnsafePointer<CGAffineTransform>)
 var kMacHelpVersion: Int { get }
 var kHMHelpMenuID: Int { get }
@@ -5337,41 +4941,23 @@ typealias TXNDataType = OSType
 var kTXNTextData: Int { get }
 var kTXNUnicodeTextData: Int { get }
 var kTXNRichTextFormatData: Int { get }
-@available(OSX 10.4, *)
 let kTXNActionTyping: CFString!
-@available(OSX 10.4, *)
 let kTXNActionCut: CFString!
-@available(OSX 10.4, *)
 let kTXNActionPaste: CFString!
-@available(OSX 10.4, *)
 let kTXNActionClear: CFString!
-@available(OSX 10.4, *)
 let kTXNActionChangeFont: CFString!
-@available(OSX 10.4, *)
 let kTXNActionChangeColor: CFString!
-@available(OSX 10.4, *)
 let kTXNActionChangeSize: CFString!
-@available(OSX 10.4, *)
 let kTXNActionChangeStyle: CFString!
-@available(OSX 10.4, *)
 let kTXNActionAlignLeft: CFString!
-@available(OSX 10.4, *)
 let kTXNActionAlignCenter: CFString!
-@available(OSX 10.4, *)
 let kTXNActionAlignRight: CFString!
-@available(OSX 10.4, *)
 let kTXNActionDrop: CFString!
-@available(OSX 10.4, *)
 let kTXNActionMove: CFString!
-@available(OSX 10.4, *)
 let kTXNActionChangeFontFeature: CFString!
-@available(OSX 10.4, *)
 let kTXNActionChangeFontVariation: CFString!
-@available(OSX 10.4, *)
 let kTXNActionChangeGlyphVariation: CFString!
-@available(OSX 10.4, *)
 let kTXNActionChangeTextPosition: CFString!
-@available(OSX 10.4, *)
 let kTXNActionUndoLast: CFString!
 typealias TXNTabType = Int8
 var kTXNRightTab: Int { get }
@@ -5553,11 +5139,8 @@ struct TXNBackground {
   init()
   init(bgType: TXNBackgroundType, bg: TXNBackgroundData)
 }
-@available(OSX 10.4, *)
 let kTXNActionCountOfTextChanges: CFString!
-@available(OSX 10.4, *)
 let kTXNActionCountOfStyleChanges: CFString!
-@available(OSX 10.4, *)
 let kTXNActionCountOfAllChanges: CFString!
 typealias TXNScrollUnit = UInt32
 var kTXNScrollUnitsInPixels: Int { get }
@@ -5600,37 +5183,21 @@ struct TXNCarbonEventInfo {
   init()
   init(useCarbonEvents: DarwinBoolean, filler: UInt8, flags: UInt16, fDictionary: Unmanaged<CFDictionary>!)
 }
-@available(OSX 10.4, *)
 let kTXNDocumentAttributeTitleKey: CFString!
-@available(OSX 10.4, *)
 let kTXNDocumentAttributeCompanyNameKey: CFString!
-@available(OSX 10.4, *)
 let kTXNDocumentAttributeSubjectKey: CFString!
-@available(OSX 10.4, *)
 let kTXNDocumentAttributeAuthorKey: CFString!
-@available(OSX 10.4, *)
 let kTXNDocumentAttributeKeywordsKey: CFString!
-@available(OSX 10.4, *)
 let kTXNDocumentAttributeCommentKey: CFString!
-@available(OSX 10.4, *)
 let kTXNDocumentAttributeEditorKey: CFString!
-@available(OSX 10.4, *)
 let kTXNDocumentAttributeCreationTimeKey: CFString!
-@available(OSX 10.4, *)
 let kTXNDocumentAttributeModificationTimeKey: CFString!
-@available(OSX 10.4, *)
 let kTXNDocumentAttributeCopyrightKey: CFString!
-@available(OSX 10.4, *)
 let kTXNDataOptionDocumentTypeKey: CFString!
-@available(OSX 10.4, *)
 let kTXNDataOptionCharacterEncodingKey: CFString!
-@available(OSX 10.4, *)
 let kTXNPlainTextDocumentType: CFString!
-@available(OSX 10.4, *)
 let kTXNMLTEDocumentType: CFString!
-@available(OSX 10.4, *)
 let kTXNRTFDocumentType: CFString!
-@available(OSX 10.4, *)
 let kTXNQuickTimeDocumentType: CFString!
 typealias TXNFindProcPtr = @convention(c) (UnsafePointer<TXNMatchTextRecord>, TXNDataType, TXNMatchOptions, UnsafePointer<Void>, TextEncoding, TXNOffset, Int, UnsafeMutablePointer<TXNOffset>, UnsafeMutablePointer<TXNOffset>, UnsafeMutablePointer<DarwinBoolean>, URefCon) -> OSStatus
 typealias TXNActionNameMapperProcPtr = @convention(c) (CFString!, UInt32, UnsafeMutablePointer<Void>) -> Unmanaged<CFString>!
@@ -5641,25 +5208,16 @@ typealias TXNActionNameMapperUPP = TXNActionNameMapperProcPtr
 typealias TXNContextualMenuSetupUPP = TXNContextualMenuSetupProcPtr
 typealias TXNScrollInfoUPP = TXNScrollInfoProcPtr
 func NewTXNFindUPP(userRoutine: TXNFindProcPtr!) -> TXNFindUPP!
-@available(OSX 10.4, *)
 func NewTXNActionNameMapperUPP(userRoutine: TXNActionNameMapperProcPtr!) -> TXNActionNameMapperUPP!
-@available(OSX 10.4, *)
 func NewTXNContextualMenuSetupUPP(userRoutine: TXNContextualMenuSetupProcPtr!) -> TXNContextualMenuSetupUPP!
-@available(OSX 10.1, *)
 func NewTXNScrollInfoUPP(userRoutine: TXNScrollInfoProcPtr!) -> TXNScrollInfoUPP!
 func DisposeTXNFindUPP(userUPP: TXNFindUPP!)
-@available(OSX 10.4, *)
 func DisposeTXNActionNameMapperUPP(userUPP: TXNActionNameMapperUPP!)
-@available(OSX 10.4, *)
 func DisposeTXNContextualMenuSetupUPP(userUPP: TXNContextualMenuSetupUPP!)
-@available(OSX 10.1, *)
 func DisposeTXNScrollInfoUPP(userUPP: TXNScrollInfoUPP!)
 func InvokeTXNFindUPP(matchData: UnsafePointer<TXNMatchTextRecord>, _ iDataType: TXNDataType, _ iMatchOptions: TXNMatchOptions, _ iSearchTextPtr: UnsafePointer<Void>, _ encoding: TextEncoding, _ absStartOffset: TXNOffset, _ searchTextLength: Int, _ oStartMatch: UnsafeMutablePointer<TXNOffset>, _ oEndMatch: UnsafeMutablePointer<TXNOffset>, _ ofound: UnsafeMutablePointer<DarwinBoolean>, _ refCon: URefCon, _ userUPP: TXNFindUPP!) -> OSStatus
-@available(OSX 10.4, *)
 func InvokeTXNActionNameMapperUPP(actionName: CFString!, _ commandID: UInt32, _ inUserData: UnsafeMutablePointer<Void>, _ userUPP: TXNActionNameMapperUPP!) -> Unmanaged<CFString>!
-@available(OSX 10.4, *)
 func InvokeTXNContextualMenuSetupUPP(iContextualMenu: Menu!, _ object: TXNObject, _ inUserData: UnsafeMutablePointer<Void>, _ userUPP: TXNContextualMenuSetupUPP!)
-@available(OSX 10.1, *)
 func InvokeTXNScrollInfoUPP(iValue: Int32, _ iMaximumValue: Int32, _ iScrollBarOrientation: TXNScrollBarOrientation, _ iRefCon: SRefCon, _ userUPP: TXNScrollInfoUPP!)
 typealias TXNCommandEventSupportOptions = OptionBits
 var kTXNSupportEditCommandProcessing: Int { get }
@@ -6865,91 +6423,48 @@ var teFUseTextServices: Int { get }
 class TISInputSource {
 }
 typealias TISInputSourceRef = TISInputSource
-@available(OSX 10.5, *)
 func TISInputSourceGetTypeID() -> CFTypeID
-@available(OSX 10.5, *)
 let kTISPropertyInputSourceCategory: CFString!
-@available(OSX 10.5, *)
 let kTISPropertyInputSourceType: CFString!
-@available(OSX 10.5, *)
 let kTISPropertyInputSourceIsASCIICapable: CFString!
-@available(OSX 10.5, *)
 let kTISPropertyInputSourceIsEnableCapable: CFString!
-@available(OSX 10.5, *)
 let kTISPropertyInputSourceIsSelectCapable: CFString!
-@available(OSX 10.5, *)
 let kTISPropertyInputSourceIsEnabled: CFString!
-@available(OSX 10.5, *)
 let kTISPropertyInputSourceIsSelected: CFString!
-@available(OSX 10.5, *)
 let kTISPropertyInputSourceID: CFString!
-@available(OSX 10.5, *)
 let kTISPropertyBundleID: CFString!
-@available(OSX 10.5, *)
 let kTISPropertyInputModeID: CFString!
-@available(OSX 10.5, *)
 let kTISPropertyLocalizedName: CFString!
-@available(OSX 10.5, *)
 let kTISPropertyInputSourceLanguages: CFString!
-@available(OSX 10.5, *)
 let kTISPropertyUnicodeKeyLayoutData: CFString!
-@available(OSX 10.5, *)
 let kTISPropertyIconRef: CFString!
-@available(OSX 10.5, *)
 let kTISPropertyIconImageURL: CFString!
-@available(OSX 10.5, *)
 let kTISCategoryKeyboardInputSource: CFString!
-@available(OSX 10.5, *)
 let kTISCategoryPaletteInputSource: CFString!
-@available(OSX 10.5, *)
 let kTISCategoryInkInputSource: CFString!
-@available(OSX 10.5, *)
 let kTISTypeKeyboardLayout: CFString!
-@available(OSX 10.5, *)
 let kTISTypeKeyboardInputMethodWithoutModes: CFString!
-@available(OSX 10.5, *)
 let kTISTypeKeyboardInputMethodModeEnabled: CFString!
-@available(OSX 10.5, *)
 let kTISTypeKeyboardInputMode: CFString!
-@available(OSX 10.5, *)
 let kTISTypeCharacterPalette: CFString!
-@available(OSX 10.5, *)
 let kTISTypeKeyboardViewer: CFString!
-@available(OSX 10.5, *)
 let kTISTypeInk: CFString!
-@available(OSX 10.5, *)
 func TISGetInputSourceProperty(inputSource: TISInputSource!, _ propertyKey: CFString!) -> UnsafeMutablePointer<Void>
-@available(OSX 10.5, *)
 func TISCreateInputSourceList(properties: CFDictionary!, _ includeAllInstalled: Bool) -> Unmanaged<CFArray>!
-@available(OSX 10.5, *)
 func TISCopyCurrentKeyboardInputSource() -> Unmanaged<TISInputSource>!
-@available(OSX 10.5, *)
 func TISCopyCurrentKeyboardLayoutInputSource() -> Unmanaged<TISInputSource>!
-@available(OSX 10.5, *)
 func TISCopyCurrentASCIICapableKeyboardInputSource() -> Unmanaged<TISInputSource>!
-@available(OSX 10.5, *)
 func TISCopyCurrentASCIICapableKeyboardLayoutInputSource() -> Unmanaged<TISInputSource>!
-@available(OSX 10.5, *)
 func TISCopyInputSourceForLanguage(language: CFString!) -> Unmanaged<TISInputSource>!
-@available(OSX 10.5, *)
 func TISCreateASCIICapableInputSourceList() -> Unmanaged<CFArray>!
-@available(OSX 10.5, *)
 func TISSelectInputSource(inputSource: TISInputSource!) -> OSStatus
-@available(OSX 10.5, *)
 func TISDeselectInputSource(inputSource: TISInputSource!) -> OSStatus
-@available(OSX 10.5, *)
 func TISEnableInputSource(inputSource: TISInputSource!) -> OSStatus
-@available(OSX 10.5, *)
 func TISDisableInputSource(inputSource: TISInputSource!) -> OSStatus
-@available(OSX 10.5, *)
 let kTISNotifySelectedKeyboardInputSourceChanged: CFString!
-@available(OSX 10.5, *)
 let kTISNotifyEnabledKeyboardInputSourcesChanged: CFString!
-@available(OSX 10.5, *)
 func TISSetInputMethodKeyboardLayoutOverride(keyboardLayout: TISInputSource!) -> OSStatus
-@available(OSX 10.5, *)
 func TISCopyInputMethodKeyboardLayoutOverride() -> Unmanaged<TISInputSource>!
-@available(OSX 10.5, *)
 func TISRegisterInputSource(location: CFURL!) -> OSStatus
 var kTextService: Int { get }
 var kTSMVersion: Int { get }
@@ -6986,11 +6501,8 @@ var kTSMDocumentInputModePropertyTag: Int { get }
 var kTSMDocumentWindowLevelPropertyTag: Int { get }
 var kTSMDocumentInputSourceOverridePropertyTag: Int { get }
 var kTSMDocumentEnabledInputSourcesPropertyTag: Int { get }
-@available(OSX 10.2, *)
 func TSMSetDocumentProperty(docID: TSMDocumentID, _ propertyTag: TSMDocumentPropertyTag, _ propertySize: UInt32, _ propertyData: UnsafeMutablePointer<Void>) -> OSStatus
-@available(OSX 10.2, *)
 func TSMGetDocumentProperty(docID: TSMDocumentID, _ propertyTag: TSMDocumentPropertyTag, _ bufferSize: UInt32, _ actualSize: UnsafeMutablePointer<UInt32>, _ propertyBuffer: UnsafeMutablePointer<Void>) -> OSStatus
-@available(OSX 10.2, *)
 func TSMRemoveDocumentProperty(docID: TSMDocumentID, _ propertyTag: TSMDocumentPropertyTag) -> OSStatus
 var kUnknownLanguage: Int { get }
 var kUnknownScript: Int { get }
@@ -7134,17 +6646,11 @@ typealias GetScrapData = GetScrapDataUPP
 var kSupportsFileTranslation: Int { get }
 var kSupportsScrapTranslation: Int { get }
 var kTranslatorCanGenerateFilename: Int { get }
-
-/******************************************************************************************/
 typealias FileType = OSType
 typealias ScrapType = ResType
-
-/******************************************************************************************/
 typealias TranslationAttributes = UInt32
 var taDstDocNeedsResourceFork: Int { get }
 var taDstIsAppTranslation: Int { get }
-
-/******************************************************************************************/
 struct FileTypeSpec {
   var format: FileType
   var hint: Int
@@ -7162,8 +6668,6 @@ struct FileTranslationList {
 }
 typealias FileTranslationListPtr = UnsafeMutablePointer<FileTranslationList>
 typealias FileTranslationListHandle = UnsafeMutablePointer<FileTranslationListPtr>
-
-/******************************************************************************************/
 struct ScrapTypeSpec {
   var format: ScrapType
   var hint: Int
@@ -7178,12 +6682,6 @@ struct ScrapTranslationList {
 }
 typealias ScrapTranslationListPtr = UnsafeMutablePointer<ScrapTranslationList>
 typealias ScrapTranslationListHandle = UnsafeMutablePointer<ScrapTranslationListPtr>
-
-/*******************************************************************************************
-
-    definition of callbacks to update progress dialog
-
-*******************************************************************************************/
 typealias TranslationRefNum = Int
 var kTranslateGetFileTranslationList: Int { get }
 var kTranslateIdentifyFile: Int { get }
@@ -7193,12 +6691,6 @@ var kTranslateGetScrapTranslationList: Int { get }
 var kTranslateIdentifyScrap: Int { get }
 var kTranslateTranslateScrap: Int { get }
 var kTranslateGetScrapTranslationListConsideringData: Int { get }
-
-/*******************************************************************************************
-
-    routines which implement translation extensions
-
-*******************************************************************************************/
 typealias DoGetFileTranslationListProcPtr = @convention(c) (ComponentInstance, FileTranslationListHandle) -> ComponentResult
 typealias DoIdentifyFileProcPtr = @convention(c) (ComponentInstance, UnsafePointer<FSSpec>, UnsafeMutablePointer<FileType>) -> ComponentResult
 typealias DoTranslateFileProcPtr = @convention(c) (ComponentInstance, TranslationRefNum, UnsafePointer<FSSpec>, FileType, Int, UnsafePointer<FSSpec>, FileType, Int) -> ComponentResult
@@ -7226,15 +6718,7 @@ func AHSearch(bookname: CFString!, _ query: CFString!) -> OSStatus
 func AHGotoPage(bookname: CFString!, _ path: CFString!, _ anchor: CFString!) -> OSStatus
 func AHLookupAnchor(bookname: CFString!, _ anchor: CFString!) -> OSStatus
 func AHRegisterHelpBook(appBundleRef: UnsafePointer<FSRef>) -> OSStatus
-@available(OSX 10.6, *)
 func AHRegisterHelpBookWithURL(applicationURL: CFURL!) -> OSStatus
-
-/*!
-    @header
-        ICAApplication.h
-    @discussion
-      ICAApplication.h defines structures and functions that are used by clients of Image Capture framework. 
-*/
 typealias ICAError = OSErr
 var kICAPBVersion: Int { get }
 var kICACommunicationErr: Int { get }
@@ -7316,28 +6800,6 @@ var kICAButtonWeb: Int { get }
 var kICACameraPassThruSend: Int { get }
 var kICACameraPassThruReceive: Int { get }
 var kICACameraPassThruNotUsed: Int { get }
-
-/*!
-    @struct ICAPTPPassThroughPB
-    @field commandCode
-        PTP command code (including vendor specific) <--
-    @field resultCode
-        PTP response code -->
-    @field numOfInputParams
-        Number of valid parameters to be sent to device <--
-    @field numOfOutputParams
-        Number of valid parameters expected from device <--
-    @field params
-        PTP parameters (command specific / optional) <->
-    @field dataUsageMode
-        One of (kICACameraPassThruSend, kICACameraPassThruReceive, kICACameraPassThruNotUsed) <--
-    @field flags
-        Not used currently
-    @field dataSize
-        Size of data block <->
-    @field data
-        Data block <->
-*/
 struct ICAPTPPassThroughPB {
   var commandCode: UInt32
   var resultCode: UInt32
@@ -7351,20 +6813,6 @@ struct ICAPTPPassThroughPB {
   init()
   init(commandCode: UInt32, resultCode: UInt32, numOfInputParams: UInt32, numOfOutputParams: UInt32, params: (UInt32, UInt32, UInt32, UInt32), dataUsageMode: UInt32, flags: UInt32, dataSize: UInt32, data: (UInt8))
 }
-
-/*!
-    @struct ICAPTPEventDataset
-    @field dataLength
-        Data length in bytes
-    @field containerType
-        PTP container type
-    @field eventCode
-        PTP event code
-    @field transactionID
-        PTP transaction ID
-    @field params
-        PTP params. The number of params should be (dataLength - 12)/4
-*/
 struct ICAPTPEventDataset {
   var dataLength: UInt32
   var containerType: UInt16
@@ -7374,54 +6822,24 @@ struct ICAPTPEventDataset {
   init()
   init(dataLength: UInt32, containerType: UInt16, eventCode: UInt16, transactionID: UInt32, params: (UInt32, UInt32, UInt32))
 }
-@available(OSX 10.4, *)
 let kICAMediaHeightKey: CFString!
-@available(OSX 10.4, *)
 let kICAMediaWidthKey: CFString!
-@available(OSX 10.4, *)
 let kICAUSBTransportType: CFString!
-@available(OSX 10.4, *)
 let kICAFireWireTransportType: CFString!
-@available(OSX 10.4, *)
 let kICABluetoothTransportType: CFString!
-@available(OSX 10.4, *)
 let kICATCPIPTransportType: CFString!
-@available(OSX 10.4, *)
 let kICASCSITransportType: CFString!
-@available(OSX 10.4, *)
 let kICATWAINTransportType: CFString!
-@available(OSX 10.4, *)
 let kICADeviceModulePathKey: CFString!
-@available(OSX 10.4, *)
 let kICATransportTypeKey: CFString!
-@available(OSX 10.4, *)
 let kICABluetoothAddressKey: CFString!
-@available(OSX 10.4, *)
 let kICAUSBLocationIDKey: CFString!
-@available(OSX 10.4, *)
 let kICAFireWireGUIDKey: CFString!
-@available(OSX 10.4, *)
 let kICAIOServicePathKey: CFString!
-@available(OSX 10.4, *)
 let kICAIPAddressKey: CFString!
-@available(OSX 10.4, *)
 let kICAIPNameKey: CFString!
-@available(OSX 10.4, *)
 let kICAIPGUIDKey: CFString!
-@available(OSX 10.4, *)
 let kICATWAINDSPathKey: CFString!
-
-/*!
-    @struct ICAHeader
-    @discussion
-        This is the first field in all parameter blocks used by APIs defined in ICAApplication.h.
-        Type of parameter passed to a callback function used by APIs defined in ICAApplication.h.
-        The parameter for the completion proc should to be casted to an appropriate type such as ICAGetChildCountPB* for it to be useful.
-    @field err
-        Error returned by an API. -->
-    @field refcon
-        An arbitrary refcon value passed to the callback. <--
-*/
 struct ICAHeader {
   var err: ICAError
   var refcon: UInt
@@ -7437,14 +6855,6 @@ typealias ICAConnectionID = UInt32
 typealias ICASessionID = UInt32
 typealias ICAScannerSessionID = ICASessionID
 typealias ICAEventDataCookie = UInt32
-
-/*!
-    @struct ICAObjectInfo
-    @field objectType
-        An object type, e.g., kICAFile.
-    @field objectSubtype
-        An object subtype, e.g., kICAFileImage.
-*/
 struct ICAObjectInfo {
   var objectType: OSType
   var objectSubtype: OSType
@@ -7453,22 +6863,6 @@ struct ICAObjectInfo {
 }
 var kICAAllowMultipleImages: Int { get }
 var kICADownloadAndReturnPathArray: Int { get }
-
-/*!
-    @struct ICAImportImagePB
-    @field header
-        See description for ICAHeader.  <->
-    @field deviceObject
-        Object ID of a camera or scanner device. Set this to NULL to ge the default behavior: (a) if no device is connected, a panel saying that there� no device connected is displayed, (b) if a single device is connected, an appropriate user interface to access that device will be displayed, (c) if several devices are connected, a device selector panel will be displayed. <--
-    @field flags
-        One or more flags (combined with an OR operator) defined in ImportImage flags enum. <--
-    @field supportedFileTypes
-        An array of file extension strings such as "jpg", "tif", etc., that are of interest to the calling application. Set to NULL to display all files. <--
-    @field filterProc
-        Specify a filter proc to that will be called for each file before it is displayed in the user interface. <--
-    @field importedImages
-        Returns an array of CFDataRefs for the imported images if the kICADownloadAndReturnPathArray flag is not specified. Otherwise returns an array of CFStringRefs holding the paths of the images that are downloaded. The caller should provide a pointer to a CFArrayRef object initialized to NULL. The caller is responsible for released the array returned by this function. -->
-*/
 struct ICAImportImagePB {
   var header: ICAHeader
   var deviceObject: ICAObject
@@ -7480,31 +6874,10 @@ struct ICAImportImagePB {
   init(header: ICAHeader, deviceObject: ICAObject, flags: UInt32, supportedFileTypes: Unmanaged<CFArray>!, filterProc: ICAImportFilterProc!, importedImages: UnsafeMutablePointer<Unmanaged<CFArray>?>)
 }
 typealias ICANotification = @convention(c) (CFString!, CFDictionary!) -> Void
-@available(OSX 10.6, *)
 let kICANotificationTypeScannerOverviewOverlayAvailable: CFString!
-@available(OSX 10.6, *)
 let kICANotificationSubTypePerformOverviewScan: CFString!
-@available(OSX 10.6, *)
 let kICANotificationSubTypeDocumentLoaded: CFString!
-@available(OSX 10.6, *)
 let kICANotificationSubTypeDocumentNotLoaded: CFString!
-
-/*!
-    @struct ICARegisterForEventNotificationPB
-    @discussion
-        Use this parameter structure to specify a set of events associated with an object
-        about which notifications should be sent to the specified notification function.
-    @field header
-        See description for ICAHeader. <->
-    @field objectOfInterest
-        An object about which notifications are requested. <--
-    @field eventsOfInterest
-        An array of notification types of interest. <--
-    @field notificationProc
-        A callback function to receive the notifications. <--
-    @field options
-        Set options to NULL. This parameter is intended for future use. <--
-*/
 struct ICARegisterForEventNotificationPB {
   var header: ICAHeader
   var objectOfInterest: ICAObject
@@ -7521,30 +6894,12 @@ struct ICASendNotificationPB {
   init()
   init(header: ICAHeader, notificationDictionary: Unmanaged<CFMutableDictionary>!, replyCode: UInt32)
 }
-
-/*!
-    @struct ICAGetDeviceListPB
-    @field header
-        See description for ICAHeader. <-->
-    @field object
-        The device list object, if ICAGetDeviceList returns successfully. -->
-*/
 struct ICAGetDeviceListPB {
   var header: ICAHeader
   var object: ICAObject
   init()
   init(header: ICAHeader, object: ICAObject)
 }
-
-/*!
-    @struct ICACopyObjectPropertyDictionaryPB
-    @field header
-        See description for ICAHeader. <->
-    @field object
-        An object whose properties are being requested. <--
-    @field theDict
-        A dictionary to hold the properties. This must be released by the caller. -->
-*/
 struct ICACopyObjectPropertyDictionaryPB {
   var header: ICAHeader
   var object: ICAObject
@@ -7555,18 +6910,6 @@ struct ICACopyObjectPropertyDictionaryPB {
 var kICAThumbnailFormatJPEG: Int { get }
 var kICAThumbnailFormatTIFF: Int { get }
 var kICAThumbnailFormatPNG: Int { get }
-
-/*!
-    @struct ICACopyObjectThumbnailPB
-    @field header
-        See description for ICAHeader. <->
-    @field object
-        An object whose thumbail is being requested. <--
-    @field thumbnailFormat
-        One of the format values defined above. <--
-    @field thumbnailData
-        A pointer to a CFDataRef holding the thumbnail data. The returned CFDataRef must be released by the caller. -->
-*/
 struct ICACopyObjectThumbnailPB {
   var header: ICAHeader
   var object: ICAObject
@@ -7575,21 +6918,6 @@ struct ICACopyObjectThumbnailPB {
   init()
   init(header: ICAHeader, object: ICAObject, thumbnailFormat: OSType, thumbnailData: UnsafeMutablePointer<Unmanaged<CFData>?>)
 }
-
-/*!
-    @struct ICACopyObjectDataPB
-    @field header
-        See description for ICAHeader.  <->
-    @field object
-        A file object.  <--
-    @field startByte
-        Starting byte offset of the data in the file object.  <--
-    @field requestedSize
-        Requested data size in bytes. <--
-    @field data
-        A pointer to CFDataRef in which the data will be returned. -->
-        It is the responsibility fo the caller to release this object. 
-*/
 struct ICACopyObjectDataPB {
   var header: ICAHeader
   var object: ICAObject
@@ -7599,20 +6927,6 @@ struct ICACopyObjectDataPB {
   init()
   init(header: ICAHeader, object: ICAObject, startByte: Int, requestedSize: Int, data: UnsafeMutablePointer<Unmanaged<CFData>?>)
 }
-
-/*!
-    @struct ICAMessage
-    @field messageType
-        A message type. e.g., kICAMessageCameraCaptureNewImage. <--
-    @field startByte
-        Offset in dataPtr from where data access for read/write should occur. <--
-    @field dataPtr
-        A pointer to a data buffer. <--
-    @field dataSize
-        Size of data. <--
-    @field dataType
-        Type of data. <--
-*/
 struct ICAMessage {
   var messageType: OSType
   var startByte: UInt32
@@ -7632,18 +6946,6 @@ var kICAMessageGetEventData: Int { get }
 var kICAMessageDeviceYield: Int { get }
 var kICAMessageCameraPassThrough: Int { get }
 var kICAMessageScannerOverviewSelectionChanged: Int { get }
-
-/*!
-    @struct ICAObjectSendMessagePB
-    @field header
-        See description for ICAHeader. <-->
-    @field object
-        A target object for the message sent by ICAObjectSendMessage. <--
-    @field message
-        One of the messages define above. <--
-    @field result
-        A message specific result is returned here. -->
-*/
 struct ICAObjectSendMessagePB {
   var header: ICAHeader
   var object: ICAObject
@@ -7659,26 +6961,6 @@ var kAdjustCreationDate: Int { get }
 var kSetFileTypeAndCreator: Int { get }
 var kRotateImage: Int { get }
 var kDontEmbedColorSyncProfile: Int { get }
-
-/*!
-    @struct ICADownloadFilePB
-    @field header
-        See description for ICAHeader. <->
-    @field object
-        The file object. <--
-    @field dirFSRef
-        FSRef of destination directiory. <--
-    @field flags 
-        Any combination of flag values defined above. <--
-    @field fileType
-        Four-char code indicating the type of file. <--
-    @field fileCreator
-        Four-char code indicating with the creator of the file. <--
-    @field rotationAngle
-        Rotation angle in steps of 90 degress. <--
-    @field fileFSRef
-        A pointer to FSRef struct to hold the FSRef of downloaded file. Set this to NULL if the FSRef of downloaded file is not of interest. --> 
-*/
 struct ICADownloadFilePB {
   var header: ICAHeader
   var object: ICAObject
@@ -7693,18 +6975,6 @@ struct ICADownloadFilePB {
 }
 var kICAUploadFileAsIs: Int { get }
 var kICAUploadFileScaleToFit: Int { get }
-
-/*!
-    @struct ICAUploadFilePB
-    @field header
-        See description for ICAHeader. <->
-    @field parentObject <->
-        An ICAObject corresponding to a folder on the device. The device will store the uploaded file inside this folder if possible.
-    @field fileFSRef <--
-        An FSRef for the file to be uploaded to the device.
-    @field flags <--
-        One of the flags defined above.
-*/
 struct ICAUploadFilePB {
   var header: ICAHeader
   var parentObject: ICAObject
@@ -7713,44 +6983,18 @@ struct ICAUploadFilePB {
   init()
   init(header: ICAHeader, parentObject: ICAObject, fileFSRef: UnsafeMutablePointer<FSRef>, flags: UInt32)
 }
-
-/*!
-    @struct ICALoadDeviceModulePB
-    @field header
-        See description for ICAHeader. <->
-    @field paramDictionary <--
-        A parameter dictionary with sufficient key-value pairs to load a device module. This dictionary itself or the information provided in this dictionary will be sent to the device module.
-*/
 struct ICALoadDeviceModulePB {
   var header: ICAHeader
   var paramDictionary: Unmanaged<CFDictionary>!
   init()
   init(header: ICAHeader, paramDictionary: Unmanaged<CFDictionary>!)
 }
-
-/*!
-    @struct ICAUnloadDeviceModulePB
-    @field header
-        See description for ICAHeader. <->
-    @field deviceObject <--
-        A device ICAObject.
-*/
 struct ICAUnloadDeviceModulePB {
   var header: ICAHeader
   var deviceObject: ICAObject
   init()
   init(header: ICAHeader, deviceObject: ICAObject)
 }
-
-/*!
-    @struct ICAOpenSessionPB
-    @field header
-        See description for ICAHeader. <->
-    @field deviceObject
-        A camera object. <--
-    @field sessionID
-        A session ID of the opened session. -->
-*/
 struct ICAOpenSessionPB {
   var header: ICAHeader
   var deviceObject: ICAObject
@@ -7758,30 +7002,12 @@ struct ICAOpenSessionPB {
   init()
   init(header: ICAHeader, deviceObject: ICAObject, sessionID: ICASessionID)
 }
-
-/*!
-    @struct ICACloseSessionPB
-    @field header
-        See description for ICAHeader. <->
-    @field sessionID
-        A session ID of the session to be closed. <--
-*/
 struct ICACloseSessionPB {
   var header: ICAHeader
   var sessionID: ICASessionID
   init()
   init(header: ICAHeader, sessionID: ICASessionID)
 }
-
-/*!
-    @struct ICAScannerOpenSessionPB
-    @field header
-        See description for ICAHeader. <->
-    @field object
-        A scanner object. <--
-    @field sessionID
-        A session ID of the opened session. -->
-*/
 struct ICAScannerOpenSessionPB {
   var header: ICAHeader
   var object: ICAObject
@@ -7789,44 +7015,18 @@ struct ICAScannerOpenSessionPB {
   init()
   init(header: ICAHeader, object: ICAObject, sessionID: ICAScannerSessionID)
 }
-
-/*!
-    @struct ICAScannerCloseSessionPB
-    @field header
-        See description for ICAHeader. <->
-    @field sessionID
-        A session ID of the session to be closed. <--
-*/
 struct ICAScannerCloseSessionPB {
   var header: ICAHeader
   var sessionID: ICAScannerSessionID
   init()
   init(header: ICAHeader, sessionID: ICAScannerSessionID)
 }
-
-/*!
-    @struct ICAScannerInitializePB
-    @field header
-        See description for ICAHeader. <->
-    @field sessionID
-        A session ID of the scanner to be initialized. <--
-*/
 struct ICAScannerInitializePB {
   var header: ICAHeader
   var sessionID: ICAScannerSessionID
   init()
   init(header: ICAHeader, sessionID: ICAScannerSessionID)
 }
-
-/*!
-    @struct ICAScannerGetParametersPB
-    @field header
-        See description for ICAHeader. <->
-    @field sessionID
-        A session ID of the scanner whose parameters are being fetched. <--
-    @field theDict
-        A dictionary containing the parameters. -->
-*/
 struct ICAScannerGetParametersPB {
   var header: ICAHeader
   var sessionID: ICAScannerSessionID
@@ -7834,16 +7034,6 @@ struct ICAScannerGetParametersPB {
   init()
   init(header: ICAHeader, sessionID: ICAScannerSessionID, theDict: Unmanaged<CFMutableDictionary>!)
 }
-
-/*!
-    @struct ICAScannerSetParametersPB
-    @field header
-        See description for ICAHeader. <->
-    @field sessionID
-        A session ID of the scanner whose parameters are being set. <--
-    @field theDict
-        A dictionary containing the parameters. <--
-*/
 struct ICAScannerSetParametersPB {
   var header: ICAHeader
   var sessionID: ICAScannerSessionID
@@ -7851,16 +7041,6 @@ struct ICAScannerSetParametersPB {
   init()
   init(header: ICAHeader, sessionID: ICAScannerSessionID, theDict: Unmanaged<CFMutableDictionary>!)
 }
-
-/*!
-    @struct ICAScannerStatusPB
-    @field header
-        See description for ICAHeader. <->
-    @field sessionID
-        A session ID of the scanner whose status is being fetched. <--
-    @field status
-        A status value. -->
-*/
 struct ICAScannerStatusPB {
   var header: ICAHeader
   var sessionID: ICAScannerSessionID
@@ -7868,14 +7048,6 @@ struct ICAScannerStatusPB {
   init()
   init(header: ICAHeader, sessionID: ICAScannerSessionID, status: UInt32)
 }
-
-/*!
-    @struct ICAScannerStartPB
-    @field header
-        See description for ICAHeader. <->
-    @field sessionID
-        A session ID of the scanner that should start scanning. <--
-*/
 struct ICAScannerStartPB {
   var header: ICAHeader
   var sessionID: ICAScannerSessionID
@@ -7946,48 +7118,13 @@ var kICACapabilityCanCameraDeleteAll: Int { get }
 var kICACapabilityCanCameraSyncClock: Int { get }
 var kICACapabilityCanCameraUploadData: Int { get }
 var kICACapabilityMayStoreNewImagesInTempStore: Int { get }
-
-/*!
-    @struct ICDHeader
-    @discussion
-        This is the first field in all parameter blocks used by APIs defined in ICADevices.h.
-        Type of parameter passed to a callback function used by APIs defined in ICADevices.h.
-        The parameter for the completion proc should to be casted to an appropriate type such as ICD_NewObjectPB* for it to be useful.
-    @field err
-        Error returned by an API. -->
-    @field refcon
-        An arbitrary refcon value passed to the callback. <--
-*/
 struct ICDHeader {
   var err: ICAError
   var refcon: UInt
   init()
   init(err: ICAError, refcon: UInt)
 }
-
-/*!
-    @typedef ICDCompletion
-    @discussion
-        Type of callback function used by APIs defined in ICADevices.h.
-    @param pb
-        The parameter pb is a pointer to the parameter block passed to the API.
-*/
 typealias ICDCompletion = @convention(c) (UnsafeMutablePointer<ICDHeader>) -> Void
-
-/*!
-    @struct ICD_NewObjectPB
-    @discussion
-        Parameter block passed to function <code>ICDNewObject</code>.
-    @field header
-        The function returns error code in the <code>err</code> field of this structure. 
-        The <code>refcon</code> field of this structure is used to pass a pointer to the callback function if <code>ICDNewObject</code> is called asynchronously.
-    @field  parentObject
-        Parent object of the new object.
-    @field  objectInfo
-        <code>ICAObjectInfo</code> struct filled with information about the new object.
-    @field  object
-        New object.
-*/
 struct ICD_NewObjectPB {
   var header: ICDHeader
   var parentObject: ICAObject
@@ -7996,17 +7133,6 @@ struct ICD_NewObjectPB {
   init()
   init(header: ICDHeader, parentObject: ICAObject, objectInfo: ICAObjectInfo, object: ICAObject)
 }
-
-/*!
-    @struct ICD_DisposeObjectPB
-    @discussion
-        Parameter block passed to function <code>ICDDisposeObject</code>.
-    @field header
-        The function returns error code in the <code>err</code> field of this structure. 
-        The <code>refcon</code> field of this structure is used to pass a pointer to the callback function if <code>ICDDisposeObject</code> is called asynchronously.
-    @field object
-        Object to be disposed.
-*/
 struct ICD_DisposeObjectPB {
   var header: ICDHeader
   var object: ICAObject
@@ -8085,49 +7211,27 @@ var kInkTabletPointerEraser: Int { get }
 var kInkPenTipButtonMask: Int { get }
 var kInkPenLowerSideButtonMask: Int { get }
 var kInkPenUpperSideButtonMask: Int { get }
-@available(OSX 10.3, *)
 func InkUserWritingMode() -> InkUserWritingModeType
-@available(OSX 10.3, *)
 func InkSetApplicationWritingMode(iWriteWhere: InkApplicationWritingModeType)
-@available(OSX 10.3, *)
 func InkSetApplicationRecognitionMode(iRecognitionType: InkRecognitionType)
-@available(OSX 10.3, *)
 func InkSetPhraseTerminationMode(iSource: InkSourceType, _ iAllowedTerminationTypes: InkTerminationType)
-@available(OSX 10.3, *)
 func InkIsPhraseInProgress() -> Bool
-@available(OSX 10.3, *)
 func InkSetDrawingMode(iDrawingMode: InkDrawingModeType)
-@available(OSX 10.3, *)
 func InkAddStrokeToCurrentPhrase(iPointCount: UInt, _ iPointArray: UnsafeMutablePointer<InkPoint>)
-@available(OSX 10.3, *)
 func InkTerminateCurrentPhrase(iSource: InkSourceType)
-@available(OSX 10.3, *)
 func InkTextAlternatesCount(iTextRef: InkText!) -> CFIndex
-@available(OSX 10.3, *)
 func InkTextCreateCFString(iTextRef: InkText!, _ iAlternateIndex: CFIndex) -> Unmanaged<CFString>!
-@available(OSX 10.3, *)
 func InkTextKeyModifiers(iTextRef: InkText!) -> UInt32
-@available(OSX 10.3, *)
 func InkTextCopy(iTextRef: InkText!) -> Unmanaged<InkText>!
-@available(OSX 10.3, *)
 func InkTextBounds(iTextRef: InkText!) -> HIRect
-@available(OSX 10.3, *)
 func InkTextDraw(iTextRef: InkText!, _ iContext: CGContext!, _ iBounds: UnsafePointer<CGRect>, _ iFlags: InkTextDrawFlagsType)
-@available(OSX 10.3, *)
 func InkTextFlatten(iTextRef: InkText!, _ ioDataRef: CFMutableData!, _ iIndex: CFIndex) -> CFIndex
-@available(OSX 10.3, *)
 func InkTextCreateFromCFData(iFlattenedInkText: CFData!, _ iIndex: CFIndex) -> Unmanaged<InkText>!
-@available(OSX 10.4, *)
 func InkTextGetTypeID() -> CFTypeID
-@available(OSX 10.4, *)
 func InkTextGetStrokeCount(iTextRef: InkText!) -> CFIndex
-@available(OSX 10.4, *)
 func InkTextGetStroke(iTextRef: InkText!, _ iStrokeIndex: CFIndex) -> Unmanaged<InkStroke>!
-@available(OSX 10.4, *)
 func InkStrokeGetPointCount(iStrokeRef: InkStroke!) -> CFIndex
-@available(OSX 10.4, *)
 func InkStrokeGetPoints(iStrokeRef: InkStroke!, _ oPointBuffer: UnsafeMutablePointer<InkPoint>) -> UnsafeMutablePointer<InkPoint>
-@available(OSX 10.4, *)
 func InkStrokeGetTypeID() -> CFTypeID
 typealias NavAskSaveChangesAction = UInt32
 var kNavSaveChangesClosingDocument: Int { get }
@@ -8429,27 +7533,14 @@ var kASSelectGetAppTerminology: Int { get }
 var kASSelectGetSysTerminology: Int { get }
 var kASSelectGetPropertyNames: Int { get }
 var kASSelectGetHandlerNames: Int { get }
-
-/**************************************************************************
-    Context Accessors
-**************************************************************************/
-@available(OSX 10.0, *)
 func OSASetProperty(scriptingComponent: ComponentInstance, _ modeFlags: Int32, _ contextID: OSAID, _ variableName: UnsafePointer<AEDesc>, _ scriptValueID: OSAID) -> OSAError
-@available(OSX 10.0, *)
 func OSAGetProperty(scriptingComponent: ComponentInstance, _ modeFlags: Int32, _ contextID: OSAID, _ variableName: UnsafePointer<AEDesc>, _ resultingScriptValueID: UnsafeMutablePointer<OSAID>) -> OSAError
-@available(OSX 10.0, *)
 func OSAGetPropertyNames(scriptingComponent: ComponentInstance, _ modeFlags: Int32, _ contextID: OSAID, _ resultingPropertyNames: UnsafeMutablePointer<AEDescList>) -> OSAError
-@available(OSX 10.0, *)
 func OSASetHandler(scriptingComponent: ComponentInstance, _ modeFlags: Int32, _ contextID: OSAID, _ handlerName: UnsafePointer<AEDesc>, _ compiledScriptID: OSAID) -> OSAError
-@available(OSX 10.0, *)
 func OSAGetHandler(scriptingComponent: ComponentInstance, _ modeFlags: Int32, _ contextID: OSAID, _ handlerName: UnsafePointer<AEDesc>, _ resultingCompiledScriptID: UnsafeMutablePointer<OSAID>) -> OSAError
-@available(OSX 10.0, *)
 func OSAGetHandlerNames(scriptingComponent: ComponentInstance, _ modeFlags: Int32, _ contextID: OSAID, _ resultingHandlerNames: UnsafeMutablePointer<AEDescList>) -> OSAError
-@available(OSX 10.0, *)
 func OSAGetSysTerminology(scriptingComponent: ComponentInstance, _ modeFlags: Int32, _ terminologyID: Int16, _ terminologyList: UnsafeMutablePointer<AEDesc>) -> OSAError
-@available(OSX 10.4, *)
 func OSACopyScriptingDefinition(ref: UnsafePointer<FSRef>, _ modeFlags: Int32, _ sdef: UnsafeMutablePointer<Unmanaged<CFData>?>) -> OSAError
-@available(OSX 10.5, *)
 func OSACopyScriptingDefinitionFromURL(url: CFURL!, _ modeFlags: Int32, _ sdef: UnsafeMutablePointer<Unmanaged<CFData>?>) -> OSAError
 var keyAETarget: Int { get }
 var keySubjectAttr: Int { get }
@@ -8698,11 +7789,6 @@ var kASSelectGetSourceStyleNames: Int { get }
 var kASSelectCopySourceAttributes: Int { get }
 var kASSelectSetSourceAttributes: Int { get }
 var kASHasOpenHandler: Int { get }
-
-/**************************************************************************
-    Initialization
-**************************************************************************/
-@available(OSX 10.0, *)
 func ASInit(scriptingComponent: ComponentInstance, _ modeFlags: Int32, _ minStackSize: UInt32, _ preferredStackSize: UInt32, _ maxStackSize: UInt32, _ minHeapSize: UInt32, _ preferredHeapSize: UInt32, _ maxHeapSize: UInt32) -> OSAError
 var kASDefaultMinStackSize: Int { get }
 var kASDefaultPreferredStackSize: Int { get }
@@ -8710,11 +7796,8 @@ var kASDefaultMaxStackSize: Int { get }
 var kASDefaultMinHeapSize: Int { get }
 var kASDefaultPreferredHeapSize: Int { get }
 var kASDefaultMaxHeapSize: Int { get }
-@available(OSX 10.5, *)
 func ASCopySourceAttributes(scriptingComponent: ComponentInstance, _ resultingSourceAttributes: UnsafeMutablePointer<Unmanaged<CFArray>?>) -> OSAError
-@available(OSX 10.5, *)
 func ASSetSourceAttributes(scriptingComponent: ComponentInstance, _ sourceAttributes: CFArray!) -> OSAError
-@available(OSX 10.0, *)
 func ASGetSourceStyleNames(scriptingComponent: ComponentInstance, _ modeFlags: Int32, _ resultingSourceStyleNamesList: UnsafeMutablePointer<AEDescList>) -> OSAError
 var kASSourceStyleUncompiledText: Int { get }
 var kASSourceStyleNormalText: Int { get }
@@ -9093,17 +8176,11 @@ typealias OSACreateAppleEventProcPtr = @convention(c) (AEEventClass, AEEventID, 
 typealias OSASendProcPtr = @convention(c) (UnsafePointer<AppleEvent>, UnsafeMutablePointer<AppleEvent>, AESendMode, AESendPriority, Int32, AEIdleUPP!, AEFilterUPP!, SRefCon) -> OSErr
 typealias OSACreateAppleEventUPP = OSACreateAppleEventProcPtr
 typealias OSASendUPP = OSASendProcPtr
-@available(OSX 10.0, *)
 func NewOSACreateAppleEventUPP(userRoutine: OSACreateAppleEventProcPtr!) -> OSACreateAppleEventUPP!
-@available(OSX 10.0, *)
 func NewOSASendUPP(userRoutine: OSASendProcPtr!) -> OSASendUPP!
-@available(OSX 10.0, *)
 func DisposeOSACreateAppleEventUPP(userUPP: OSACreateAppleEventUPP!)
-@available(OSX 10.0, *)
 func DisposeOSASendUPP(userUPP: OSASendUPP!)
-@available(OSX 10.0, *)
 func InvokeOSACreateAppleEventUPP(theAEEventClass: AEEventClass, _ theAEEventID: AEEventID, _ target: UnsafePointer<AEAddressDesc>, _ returnID: Int16, _ transactionID: Int32, _ result: UnsafeMutablePointer<AppleEvent>, _ refCon: SRefCon, _ userUPP: OSACreateAppleEventUPP!) -> OSErr
-@available(OSX 10.0, *)
 func InvokeOSASendUPP(theAppleEvent: UnsafePointer<AppleEvent>, _ reply: UnsafeMutablePointer<AppleEvent>, _ sendMode: AESendMode, _ sendPriority: AESendPriority, _ timeOutInTicks: Int32, _ idleProc: AEIdleUPP!, _ filterProc: AEFilterUPP!, _ refCon: SRefCon, _ userUPP: OSASendUPP!) -> OSErr
 var kOSASupportsCompiling: Int { get }
 var kOSASupportsGetSource: Int { get }
@@ -9169,17 +8246,11 @@ var kOSAModeDontGetDataForArguments: Int { get }
 var kOSAModeFullyQualifyDescriptors: Int { get }
 var kOSAScriptResourceType: Int { get }
 var typeOSAGenericStorage: Int { get }
-@available(OSX 10.0, *)
 func OSALoad(scriptingComponent: ComponentInstance, _ scriptData: UnsafePointer<AEDesc>, _ modeFlags: Int32, _ resultingScriptID: UnsafeMutablePointer<OSAID>) -> OSAError
-@available(OSX 10.0, *)
 func OSAStore(scriptingComponent: ComponentInstance, _ scriptID: OSAID, _ desiredType: DescType, _ modeFlags: Int32, _ resultingScriptData: UnsafeMutablePointer<AEDesc>) -> OSAError
-@available(OSX 10.0, *)
 func OSAExecute(scriptingComponent: ComponentInstance, _ compiledScriptID: OSAID, _ contextID: OSAID, _ modeFlags: Int32, _ resultingScriptValueID: UnsafeMutablePointer<OSAID>) -> OSAError
-@available(OSX 10.0, *)
 func OSADisplay(scriptingComponent: ComponentInstance, _ scriptValueID: OSAID, _ desiredType: DescType, _ modeFlags: Int32, _ resultingText: UnsafeMutablePointer<AEDesc>) -> OSAError
-@available(OSX 10.5, *)
 func OSACopyDisplayString(scriptingComponent: ComponentInstance, _ scriptID: OSAID, _ modeFlags: Int32, _ result: UnsafeMutablePointer<Unmanaged<CFAttributedString>?>) -> OSAError
-@available(OSX 10.0, *)
 func OSAScriptError(scriptingComponent: ComponentInstance, _ selector: OSType, _ desiredType: DescType, _ resultingErrorDescription: UnsafeMutablePointer<AEDesc>) -> OSAError
 var kOSAErrorNumber: Int { get }
 var kOSAErrorMessage: Int { get }
@@ -9192,167 +8263,55 @@ var kOSAErrorRange: Int { get }
 var typeOSAErrorRange: Int { get }
 var keyOSASourceStart: Int { get }
 var keyOSASourceEnd: Int { get }
-@available(OSX 10.0, *)
 func OSADispose(scriptingComponent: ComponentInstance, _ scriptID: OSAID) -> OSAError
-@available(OSX 10.0, *)
 func OSASetScriptInfo(scriptingComponent: ComponentInstance, _ scriptID: OSAID, _ selector: OSType, _ value: Int) -> OSAError
-@available(OSX 10.0, *)
 func OSAGetScriptInfo(scriptingComponent: ComponentInstance, _ scriptID: OSAID, _ selector: OSType, _ result: UnsafeMutablePointer<Int>) -> OSAError
 typealias OSAActiveProcPtr = @convention(c) (SRefCon) -> OSErr
 typealias OSAActiveUPP = OSAActiveProcPtr
-@available(OSX 10.0, *)
 func NewOSAActiveUPP(userRoutine: OSAActiveProcPtr!) -> OSAActiveUPP!
-@available(OSX 10.0, *)
 func DisposeOSAActiveUPP(userUPP: OSAActiveUPP!)
-@available(OSX 10.0, *)
 func InvokeOSAActiveUPP(refCon: SRefCon, _ userUPP: OSAActiveUPP!) -> OSErr
-@available(OSX 10.0, *)
 func OSASetActiveProc(scriptingComponent: ComponentInstance, _ activeProc: OSAActiveUPP!, _ refCon: SRefCon) -> OSAError
-@available(OSX 10.0, *)
 func OSAGetActiveProc(scriptingComponent: ComponentInstance, _ activeProc: UnsafeMutablePointer<OSAActiveUPP?>, _ refCon: UnsafeMutablePointer<SRefCon>) -> OSAError
-
-/**************************************************************************
-    OSA Optional Compiling Interface
-**************************************************************************
-    Scripting components that support the Compiling interface have the 
-    kOSASupportsCompiling bit set in it's ComponentDescription.
-**************************************************************************/
-@available(OSX 10.0, *)
 func OSAScriptingComponentName(scriptingComponent: ComponentInstance, _ resultingScriptingComponentName: UnsafeMutablePointer<AEDesc>) -> OSAError
-@available(OSX 10.0, *)
 func OSACompile(scriptingComponent: ComponentInstance, _ sourceData: UnsafePointer<AEDesc>, _ modeFlags: Int32, _ previousAndResultingScriptID: UnsafeMutablePointer<OSAID>) -> OSAError
-@available(OSX 10.0, *)
 func OSACopyID(scriptingComponent: ComponentInstance, _ fromID: OSAID, _ toID: UnsafeMutablePointer<OSAID>) -> OSAError
-@available(OSX 10.6, *)
 func OSACopyScript(scriptingComponent: ComponentInstance, _ fromID: OSAID, _ toID: UnsafeMutablePointer<OSAID>) -> OSAError
-
-/**************************************************************************
-    OSA Optional GetSource Interface
-**************************************************************************
-    Scripting components that support the GetSource interface have the 
-    kOSASupportsGetSource bit set in their ComponentDescription.
-**************************************************************************/
-@available(OSX 10.0, *)
 func OSAGetSource(scriptingComponent: ComponentInstance, _ scriptID: OSAID, _ desiredType: DescType, _ resultingSourceData: UnsafeMutablePointer<AEDesc>) -> OSAError
-@available(OSX 10.5, *)
 func OSACopySourceString(scriptingComponent: ComponentInstance, _ scriptID: OSAID, _ modeFlags: Int32, _ result: UnsafeMutablePointer<Unmanaged<CFAttributedString>?>) -> OSAError
-
-/**************************************************************************
-    OSA Optional AECoercion Interface
-**************************************************************************
-    Scripting components that support the AECoercion interface have the 
-    kOSASupportsAECoercion bit set in their ComponentDescription.
-**************************************************************************/
-@available(OSX 10.0, *)
 func OSACoerceFromDesc(scriptingComponent: ComponentInstance, _ scriptData: UnsafePointer<AEDesc>, _ modeFlags: Int32, _ resultingScriptID: UnsafeMutablePointer<OSAID>) -> OSAError
-@available(OSX 10.0, *)
 func OSACoerceToDesc(scriptingComponent: ComponentInstance, _ scriptID: OSAID, _ desiredType: DescType, _ modeFlags: Int32, _ result: UnsafeMutablePointer<AEDesc>) -> OSAError
-
-/**************************************************************************
-    OSA Optional AESending Interface
-**************************************************************************
-    Scripting components that support the AESending interface have the 
-    kOSASupportsAESending bit set in their ComponentDescription.
-**************************************************************************/
-@available(OSX 10.0, *)
 func OSASetSendProc(scriptingComponent: ComponentInstance, _ sendProc: OSASendUPP!, _ refCon: SRefCon) -> OSAError
-@available(OSX 10.0, *)
 func OSAGetSendProc(scriptingComponent: ComponentInstance, _ sendProc: UnsafeMutablePointer<OSASendUPP?>, _ refCon: UnsafeMutablePointer<SRefCon>) -> OSAError
-@available(OSX 10.0, *)
 func OSASetCreateProc(scriptingComponent: ComponentInstance, _ createProc: OSACreateAppleEventUPP!, _ refCon: SRefCon) -> OSAError
-@available(OSX 10.0, *)
 func OSAGetCreateProc(scriptingComponent: ComponentInstance, _ createProc: UnsafeMutablePointer<OSACreateAppleEventUPP?>, _ refCon: UnsafeMutablePointer<SRefCon>) -> OSAError
-@available(OSX 10.0, *)
 func OSASetDefaultTarget(scriptingComponent: ComponentInstance, _ target: UnsafePointer<AEAddressDesc>) -> OSAError
-
-/**************************************************************************
-    OSA Optional Recording Interface
-**************************************************************************
-    Scripting components that support the Recording interface have the 
-    kOSASupportsRecording bit set in their ComponentDescription.
-**************************************************************************/
-@available(OSX 10.0, *)
 func OSAStartRecording(scriptingComponent: ComponentInstance, _ compiledScriptToModifyID: UnsafeMutablePointer<OSAID>) -> OSAError
-@available(OSX 10.0, *)
 func OSAStopRecording(scriptingComponent: ComponentInstance, _ compiledScriptID: OSAID) -> OSAError
-
-/**************************************************************************
-    OSA Optional Convenience Interface
-**************************************************************************
-    Scripting components that support the Convenience interface have the 
-    kOSASupportsConvenience bit set in their ComponentDescription.
-**************************************************************************/
-@available(OSX 10.0, *)
 func OSALoadExecute(scriptingComponent: ComponentInstance, _ scriptData: UnsafePointer<AEDesc>, _ contextID: OSAID, _ modeFlags: Int32, _ resultingScriptValueID: UnsafeMutablePointer<OSAID>) -> OSAError
-@available(OSX 10.0, *)
 func OSACompileExecute(scriptingComponent: ComponentInstance, _ sourceData: UnsafePointer<AEDesc>, _ contextID: OSAID, _ modeFlags: Int32, _ resultingScriptValueID: UnsafeMutablePointer<OSAID>) -> OSAError
-@available(OSX 10.0, *)
 func OSADoScript(scriptingComponent: ComponentInstance, _ sourceData: UnsafePointer<AEDesc>, _ contextID: OSAID, _ desiredType: DescType, _ modeFlags: Int32, _ resultingText: UnsafeMutablePointer<AEDesc>) -> OSAError
-
-/**************************************************************************
-    OSA Optional Dialects Interface
-**************************************************************************
-    Scripting components that support the Dialects interface have the 
-    kOSASupportsDialects bit set in their ComponentDescription.
-**************************************************************************/
-@available(OSX 10.0, *)
 func OSASetCurrentDialect(scriptingComponent: ComponentInstance, _ dialectCode: Int16) -> OSAError
-@available(OSX 10.0, *)
 func OSAGetCurrentDialect(scriptingComponent: ComponentInstance, _ resultingDialectCode: UnsafeMutablePointer<Int16>) -> OSAError
-@available(OSX 10.0, *)
 func OSAAvailableDialects(scriptingComponent: ComponentInstance, _ resultingDialectInfoList: UnsafeMutablePointer<AEDesc>) -> OSAError
-@available(OSX 10.0, *)
 func OSAGetDialectInfo(scriptingComponent: ComponentInstance, _ dialectCode: Int16, _ selector: OSType, _ resultingDialectInfo: UnsafeMutablePointer<AEDesc>) -> OSAError
-@available(OSX 10.0, *)
 func OSAAvailableDialectCodeList(scriptingComponent: ComponentInstance, _ resultingDialectCodeList: UnsafeMutablePointer<AEDesc>) -> OSAError
-
-/**************************************************************************
-    OSA Optional Event Handling Interface
-**************************************************************************
-    Scripting components that support the Event Handling interface have the 
-    kOSASupportsEventHandling bit set in their ComponentDescription.
-**************************************************************************/
-@available(OSX 10.0, *)
 func OSASetResumeDispatchProc(scriptingComponent: ComponentInstance, _ resumeDispatchProc: AEEventHandlerUPP!, _ refCon: SRefCon) -> OSAError
 var kOSAUseStandardDispatch: Int { get }
 var kOSANoDispatch: Int { get }
 var kOSADontUsePhac: Int { get }
-@available(OSX 10.0, *)
 func OSAGetResumeDispatchProc(scriptingComponent: ComponentInstance, _ resumeDispatchProc: UnsafeMutablePointer<AEEventHandlerUPP?>, _ refCon: UnsafeMutablePointer<SRefCon>) -> OSAError
-@available(OSX 10.0, *)
 func OSAExecuteEvent(scriptingComponent: ComponentInstance, _ theAppleEvent: UnsafePointer<AppleEvent>, _ contextID: OSAID, _ modeFlags: Int32, _ resultingScriptValueID: UnsafeMutablePointer<OSAID>) -> OSAError
-@available(OSX 10.0, *)
 func OSADoEvent(scriptingComponent: ComponentInstance, _ theAppleEvent: UnsafePointer<AppleEvent>, _ contextID: OSAID, _ modeFlags: Int32, _ reply: UnsafeMutablePointer<AppleEvent>) -> OSAError
-@available(OSX 10.0, *)
 func OSAMakeContext(scriptingComponent: ComponentInstance, _ contextName: UnsafePointer<AEDesc>, _ parentContext: OSAID, _ resultingContextID: UnsafeMutablePointer<OSAID>) -> OSAError
-
-/**************************************************************************
-    OSA Script File Interface
-**************************************************************************/
-@available(OSX 10.6, *)
 func OSAGetScriptDataFromURL(scriptURL: CFURL!, _ storable: UnsafeMutablePointer<DarwinBoolean>, _ modeFlags: Int32, _ resultingScriptData: UnsafeMutablePointer<AEDesc>) -> OSAError
-@available(OSX 10.6, *)
 func OSALoadScriptData(scriptingComponent: ComponentInstance, _ scriptData: UnsafePointer<AEDesc>, _ fromURL: CFURL!, _ modeFlags: Int32, _ resultingScriptID: UnsafeMutablePointer<OSAID>) -> OSAError
-@available(OSX 10.3, *)
 func OSALoadFile(scriptingComponent: ComponentInstance, _ scriptFile: UnsafePointer<FSRef>, _ storable: UnsafeMutablePointer<DarwinBoolean>, _ modeFlags: Int32, _ resultingScriptID: UnsafeMutablePointer<OSAID>) -> OSAError
-@available(OSX 10.3, *)
 func OSAStoreFile(scriptingComponent: ComponentInstance, _ scriptID: OSAID, _ desiredType: DescType, _ modeFlags: Int32, _ scriptFile: UnsafePointer<FSRef>) -> OSAError
-@available(OSX 10.3, *)
 func OSALoadExecuteFile(scriptingComponent: ComponentInstance, _ scriptFile: UnsafePointer<FSRef>, _ contextID: OSAID, _ modeFlags: Int32, _ resultingScriptValueID: UnsafeMutablePointer<OSAID>) -> OSAError
-@available(OSX 10.3, *)
 func OSADoScriptFile(scriptingComponent: ComponentInstance, _ scriptFile: UnsafePointer<FSRef>, _ contextID: OSAID, _ desiredType: DescType, _ modeFlags: Int32, _ resultingText: UnsafeMutablePointer<AEDesc>) -> OSAError
-
-/**************************************************************************
-    Types and Constants
-**************************************************************************/
-/**************************************************************************
-    Routines for Associating a Storage Type with a Script Data Handle 
-**************************************************************************/
-@available(OSX 10.0, *)
 func OSAGetStorageType(scriptData: AEDataStorage, _ dscType: UnsafeMutablePointer<DescType>) -> OSErr
-@available(OSX 10.0, *)
 func OSAAddStorageType(scriptData: AEDataStorage, _ dscType: DescType) -> OSErr
-@available(OSX 10.0, *)
 func OSARemoveStorageType(scriptData: AEDataStorage) -> OSErr
 var kGenericComponentVersion: Int { get }
 var kGSSSelectGetDefaultScriptingComponent: Int { get }
@@ -9364,17 +8323,11 @@ var kGSSSelectRealToGenericID: Int { get }
 var kGSSSelectOutOfRange: Int { get }
 typealias ScriptingComponentSelector = OSType
 typealias GenericID = OSAID
-@available(OSX 10.0, *)
 func OSAGetDefaultScriptingComponent(genericScriptingComponent: ComponentInstance, _ scriptingSubType: UnsafeMutablePointer<ScriptingComponentSelector>) -> OSAError
-@available(OSX 10.0, *)
 func OSASetDefaultScriptingComponent(genericScriptingComponent: ComponentInstance, _ scriptingSubType: ScriptingComponentSelector) -> OSAError
-@available(OSX 10.0, *)
 func OSAGetScriptingComponent(genericScriptingComponent: ComponentInstance, _ scriptingSubType: ScriptingComponentSelector, _ scriptingInstance: UnsafeMutablePointer<ComponentInstance>) -> OSAError
-@available(OSX 10.0, *)
 func OSAGetScriptingComponentFromStored(genericScriptingComponent: ComponentInstance, _ scriptData: UnsafePointer<AEDesc>, _ scriptingSubType: UnsafeMutablePointer<ScriptingComponentSelector>) -> OSAError
-@available(OSX 10.0, *)
 func OSAGenericToRealID(genericScriptingComponent: ComponentInstance, _ theScriptID: UnsafeMutablePointer<OSAID>, _ theExactComponent: UnsafeMutablePointer<ComponentInstance>) -> OSAError
-@available(OSX 10.0, *)
 func OSARealToGenericID(genericScriptingComponent: ComponentInstance, _ theScriptID: UnsafeMutablePointer<OSAID>, _ theExactComponent: ComponentInstance) -> OSAError
 var typeSecIdentityRef: Int { get }
 typealias URLReference = COpaquePointer
@@ -9607,8 +8560,6 @@ var kSRPathType: Int { get }
 var kSRPhraseType: Int { get }
 var kSRWordType: Int { get }
 var kSRDefaultRejectionLevel: Int { get }
-
-/********************************************************************************/
 func SROpenRecognitionSystem(system: UnsafeMutablePointer<SRRecognitionSystem>, _ systemID: OSType) -> OSErr
 func SRCloseRecognitionSystem(system: SRRecognitionSystem) -> OSErr
 func SRSetProperty(srObject: SRSpeechObject, _ selector: OSType, _ property: UnsafePointer<Void>, _ propertyLen: Size) -> OSErr

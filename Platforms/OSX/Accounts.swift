@@ -1,5 +1,4 @@
 
-@available(OSX 10.8, *)
 class ACAccount : NSObject {
   init!(accountType type: ACAccountType!)
   var identifier: String! { get }
@@ -9,7 +8,6 @@ class ACAccount : NSObject {
   var credential: ACAccountCredential!
   convenience init()
 }
-@available(OSX 10.8, *)
 class ACAccountCredential : NSObject {
   init!(OAuthToken token: String!, tokenSecret secret: String!)
   init!(OAuth2Token token: String!, refreshToken: String!, expiryDate: NSDate!)
@@ -27,7 +25,6 @@ typealias ACAccountStoreSaveCompletionHandler = (Bool, NSError!) -> Void
 typealias ACAccountStoreRemoveCompletionHandler = (Bool, NSError!) -> Void
 typealias ACAccountStoreRequestAccessCompletionHandler = (Bool, NSError!) -> Void
 typealias ACAccountStoreCredentialRenewalHandler = (ACAccountCredentialRenewResult, NSError!) -> Void
-@available(OSX 10.8, *)
 class ACAccountStore : NSObject {
   var accounts: [AnyObject]! { get }
   func accountWithIdentifier(identifier: String!) -> ACAccount!
@@ -39,44 +36,27 @@ class ACAccountStore : NSObject {
   func removeAccount(account: ACAccount!, withCompletionHandler completionHandler: ACAccountStoreRemoveCompletionHandler!)
   init()
 }
-@available(OSX 10.8, *)
 let ACAccountStoreDidChangeNotification: String
-@available(OSX 10.8, *)
 let ACAccountTypeIdentifierTwitter: String
-@available(OSX 10.8, *)
 let ACAccountTypeIdentifierFacebook: String
-@available(OSX 10.8, *)
 let ACAccountTypeIdentifierSinaWeibo: String
-@available(OSX 10.9, *)
 let ACAccountTypeIdentifierTencentWeibo: String
-@available(OSX 10.9, *)
 let ACAccountTypeIdentifierLinkedIn: String
-@available(OSX 10.8, *)
 let ACFacebookAppIdKey: String
-@available(OSX 10.8, *)
 let ACFacebookPermissionsKey: String
-@available(OSX 10.8, *)
 let ACFacebookAudienceKey: String
-@available(OSX 10.8, *)
 let ACFacebookAudienceEveryone: String
-@available(OSX 10.8, *)
 let ACFacebookAudienceFriends: String
-@available(OSX 10.8, *)
 let ACFacebookAudienceOnlyMe: String
-@available(OSX 10.9, *)
 let ACLinkedInAppIdKey: String
-@available(OSX 10.9, *)
 let ACLinkedInPermissionsKey: String
-@available(OSX 10.9, *)
 let ACTencentWeiboAppIdKey: String
-@available(OSX 10.8, *)
 class ACAccountType : NSObject {
   var accountTypeDescription: String! { get }
   var identifier: String! { get }
   var accessGranted: Bool { get }
   init()
 }
-@available(OSX 10.8, *)
 let ACErrorDomain: String
 struct ACErrorCode : RawRepresentable, Equatable {
   init(_ rawValue: UInt32)

@@ -13,13 +13,11 @@ struct OSALanguageFeatures : OptionSetType {
 }
 class OSALanguage : NSObject {
   class func availableLanguages() -> [OSALanguage]
-  /*not inherited*/ init?(forName name: String)
-  @available(OSX 10.6, *)
-  /*not inherited*/ init?(forScriptDataDescriptor descriptor: NSAppleEventDescriptor)
+   init?(forName name: String)
+   init?(forScriptDataDescriptor descriptor: NSAppleEventDescriptor)
   class func defaultLanguage() -> OSALanguage?
   class func setDefaultLanguage(defaultLanguage: OSALanguage)
   init(component: Component)
-  @available(OSX 10.6, *)
   func sharedLanguageInstance() -> OSALanguageInstance
   var componentInstance: ComponentInstance { get }
   var name: String? { get }
@@ -29,7 +27,6 @@ class OSALanguage : NSObject {
   var subType: OSType { get }
   var manufacturer: OSType { get }
   var features: OSALanguageFeatures { get }
-  @available(OSX 10.6, *)
   var threadSafe: Bool { get }
   init()
 }
@@ -37,9 +34,7 @@ class OSALanguageInstance : NSObject {
   init(language: OSALanguage)
   var language: OSALanguage { get }
   var componentInstance: ComponentInstance { get }
-  @available(OSX 10.10, *)
   var defaultTarget: NSAppleEventDescriptor?
-  @available(OSX 10.10, *)
   func richTextFromDescriptor(descriptor: NSAppleEventDescriptor) -> NSAttributedString?
   init()
 }
@@ -73,23 +68,17 @@ struct OSAStorageOptions : OptionSetType {
   static var ShowStartupScreen: OSAStorageOptions { get }
 }
 class OSAScript : NSObject, NSCopying {
-  @available(OSX 10.6, *)
   class func scriptDataDescriptorWithContentsOfURL(url: NSURL) -> NSAppleEventDescriptor?
   init(source: String)
   init(source: String, language: OSALanguage?)
-  @available(OSX 10.6, *)
   init(source: String, fromURL url: NSURL?, languageInstance instance: OSALanguageInstance?, usingStorageOptions storageOptions: OSAStorageOptions)
   init?(contentsOfURL url: NSURL, error errorInfo: AutoreleasingUnsafeMutablePointer<NSDictionary?>)
-  @available(OSX 10.6, *)
   init(contentsOfURL url: NSURL, languageInstance instance: OSALanguageInstance?, usingStorageOptions storageOptions: OSAStorageOptions) throws
-  @available(OSX 10.6, *)
   init(compiledData data: NSData, fromURL url: NSURL?, usingStorageOptions storageOptions: OSAStorageOptions) throws
-  @available(OSX 10.6, *)
   init(scriptDataDescriptor data: NSAppleEventDescriptor, fromURL url: NSURL?, languageInstance instance: OSALanguageInstance?, usingStorageOptions storageOptions: OSAStorageOptions) throws
   var source: String { get }
   @NSCopying var url: NSURL? { get }
   var language: OSALanguage
-  @available(OSX 10.6, *)
   var languageInstance: OSALanguageInstance
   var compiled: Bool { get }
   func compileAndReturnError(errorInfo: AutoreleasingUnsafeMutablePointer<NSDictionary?>) -> Bool
@@ -134,8 +123,6 @@ class OSAScriptView : NSTextView {
   var wrapsLines: Bool
   var indentsWrappedLines: Bool
   var indentWidth: Int
-
-  /**************************** Initializing ****************************/
   init(frame frameRect: NSRect, textContainer container: NSTextContainer?)
   init?(coder: NSCoder)
   convenience init(frame frameRect: NSRect)

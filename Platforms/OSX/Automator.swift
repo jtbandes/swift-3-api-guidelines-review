@@ -7,53 +7,37 @@ enum AMLogLevel : UInt {
   case Warn
   case Error
 }
-@available(OSX 10.4, *)
 class AMAction : NSObject {
   init?(definition dict: [String : AnyObject], fromArchive archived: Bool)
-  @available(OSX 10.5, *)
   init(contentsOfURL fileURL: NSURL) throws
-  @available(OSX 10.5, *)
   var name: String { get }
-  @available(OSX 10.5, *)
   var ignoresInput: Bool { get }
-  @available(OSX 10.6, *)
   var selectedInputType: String?
-  @available(OSX 10.6, *)
   var selectedOutputType: String?
-  @available(OSX 10.6, *)
   var progressValue: CGFloat
-  @available(OSX 10.7, *)
   func runWithInput(input: AnyObject?) throws -> AnyObject
-  @available(OSX 10.5, *)
   func runAsynchronouslyWithInput(input: AnyObject?)
-  @available(OSX 10.5, *)
   func willFinishRunning()
-  @available(OSX 10.7, *)
   func finishRunningWithError(error: NSError?)
-  @available(OSX 10.5, *)
   var output: AnyObject?
   func stop()
   func reset()
   func writeToDictionary(dictionary: NSMutableDictionary)
   func opened()
   func activated()
-  @available(OSX 10.5, *)
   func closed()
   func updateParameters()
   func parametersUpdated()
   var stopped: Bool { get }
   init()
 }
-@available(OSX 10.4, *)
 class AMAppleScriptAction : AMBundleAction {
   var script: OSAScript
   init?(definition dict: [String : AnyObject], fromArchive archived: Bool)
-  @available(OSX 10.5, *)
   init(contentsOfURL fileURL: NSURL) throws
   init()
   init?(coder aDecoder: NSCoder)
 }
-@available(OSX 10.4, *)
 class AMBundleAction : AMAction, NSCoding, NSCopying {
   func awakeFromBundle()
   var hasView: Bool { get }
@@ -61,22 +45,17 @@ class AMBundleAction : AMAction, NSCoding, NSCopying {
   var bundle: NSBundle { get }
   var parameters: NSMutableDictionary?
   init?(definition dict: [String : AnyObject], fromArchive archived: Bool)
-  @available(OSX 10.5, *)
   init(contentsOfURL fileURL: NSURL) throws
   init()
-  @available(OSX 10.4, *)
   func encodeWithCoder(aCoder: NSCoder)
   init?(coder aDecoder: NSCoder)
-  @available(OSX 10.4, *)
   func copyWithZone(zone: NSZone) -> AnyObject
 }
-@available(OSX 10.4, *)
 class AMShellScriptAction : AMBundleAction {
   var remapLineEndings: Bool { get }
   var inputFieldSeparator: String { get }
   var outputFieldSeparator: String { get }
   init?(definition dict: [String : AnyObject], fromArchive archived: Bool)
-  @available(OSX 10.5, *)
   init(contentsOfURL fileURL: NSURL) throws
   init()
   init?(coder aDecoder: NSCoder)
@@ -95,7 +74,6 @@ class AMWorkflow : NSObject, NSCopying {
   @NSCopying var fileURL: NSURL? { get }
   var actions: [AMAction] { get }
   var input: AnyObject?
-  @available(OSX 10.6, *)
   var output: AnyObject? { get }
   func copyWithZone(zone: NSZone) -> AnyObject
 }

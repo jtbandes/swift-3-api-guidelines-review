@@ -1,5 +1,4 @@
 
-@available(tvOS 6.0, *)
 class ASIdentifierManager : NSObject {
   class func sharedManager() -> ASIdentifierManager!
   var advertisingIdentifier: NSUUID! { get }

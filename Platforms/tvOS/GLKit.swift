@@ -1,5 +1,4 @@
 
-@available(tvOS 5.0, *)
 class GLKBaseEffect : NSObject, GLKNamedEffect {
   func prepareToDraw()
   var colorMaterialEnabled: GLboolean
@@ -21,11 +20,9 @@ class GLKBaseEffect : NSObject, GLKNamedEffect {
   init()
 }
 typealias GLKEffectPropertyPrvPtr = COpaquePointer
-@available(tvOS 5.0, *)
 class GLKEffectProperty : NSObject {
   init()
 }
-@available(tvOS 5.0, *)
 enum GLKFogMode : GLint {
   init?(rawValue: GLint)
   var rawValue: GLint { get }
@@ -33,7 +30,6 @@ enum GLKFogMode : GLint {
   case Exp2
   case Linear
 }
-@available(tvOS 5.0, *)
 class GLKEffectPropertyFog : GLKEffectProperty {
   var enabled: GLboolean
   var mode: GLint
@@ -43,14 +39,12 @@ class GLKEffectPropertyFog : GLKEffectProperty {
   var end: GLfloat
   init()
 }
-@available(tvOS 5.0, *)
 enum GLKLightingType : GLint {
   init?(rawValue: GLint)
   var rawValue: GLint { get }
   case PerVertex
   case PerPixel
 }
-@available(tvOS 5.0, *)
 class GLKEffectPropertyLight : GLKEffectProperty {
   var enabled: GLboolean
   var position: GLKVector4
@@ -66,7 +60,6 @@ class GLKEffectPropertyLight : GLKEffectProperty {
   var transform: GLKEffectPropertyTransform
   init()
 }
-@available(tvOS 5.0, *)
 class GLKEffectPropertyMaterial : GLKEffectProperty {
   var ambientColor: GLKVector4
   var diffuseColor: GLKVector4
@@ -75,7 +68,6 @@ class GLKEffectPropertyMaterial : GLKEffectProperty {
   var shininess: GLfloat
   init()
 }
-@available(tvOS 5.0, *)
 enum GLKTextureTarget : GLenum {
   init?(rawValue: GLenum)
   var rawValue: GLenum { get }
@@ -83,7 +75,6 @@ enum GLKTextureTarget : GLenum {
   case TargetCubeMap
   case TargetCt
 }
-@available(tvOS 5.0, *)
 enum GLKTextureEnvMode : GLint {
   init?(rawValue: GLint)
   var rawValue: GLint { get }
@@ -91,7 +82,6 @@ enum GLKTextureEnvMode : GLint {
   case Modulate
   case Decal
 }
-@available(tvOS 5.0, *)
 class GLKEffectPropertyTexture : GLKEffectProperty {
   var enabled: GLboolean
   var name: GLuint
@@ -99,14 +89,12 @@ class GLKEffectPropertyTexture : GLKEffectProperty {
   var envMode: GLKTextureEnvMode
   init()
 }
-@available(tvOS 5.0, *)
 class GLKEffectPropertyTransform : GLKEffectProperty {
   var modelviewMatrix: GLKMatrix4
   var projectionMatrix: GLKMatrix4
   var normalMatrix: GLKMatrix3 { get }
   init()
 }
-@available(tvOS 5.0, *)
 enum GLKVertexAttrib : GLint {
   init?(rawValue: GLint)
   var rawValue: GLint { get }
@@ -123,7 +111,6 @@ struct _GLKMatrix2 {
   init(m: (Float, Float, Float, Float))
   init()
 }
-
 extension _GLKMatrix2 {
   typealias _Tuple = (Float, Float, Float, Float)
   var _tuple: _Tuple { get }
@@ -139,7 +126,6 @@ struct _GLKMatrix3 {
   init(m: (Float, Float, Float, Float, Float, Float, Float, Float, Float))
   init()
 }
-
 extension _GLKMatrix3 {
   typealias _Tuple = (Float, Float, Float, Float, Float, Float, Float, Float, Float)
   var _tuple: _Tuple { get }
@@ -160,7 +146,6 @@ struct _GLKMatrix4 {
   init(m: (Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float))
   init()
 }
-
 extension _GLKMatrix4 {
   typealias _Tuple = (Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float, Float)
   var _tuple: _Tuple { get }
@@ -188,7 +173,6 @@ struct _GLKVector2 {
   init(v: (Float, Float))
   init()
 }
-
 extension _GLKVector2 {
   typealias _Tuple = (Float, Float)
   var _tuple: _Tuple { get }
@@ -204,7 +188,6 @@ struct _GLKVector3 {
   init(v: (Float, Float, Float))
   init()
 }
-
 extension _GLKVector3 {
   typealias _Tuple = (Float, Float, Float)
   var _tuple: _Tuple { get }
@@ -225,7 +208,6 @@ struct _GLKVector4 {
   init(v: (Float, Float, Float, Float))
   init()
 }
-
 extension _GLKVector4 {
   typealias _Tuple = (Float, Float, Float, Float)
   var _tuple: _Tuple { get }
@@ -249,7 +231,6 @@ struct _GLKQuaternion {
   init(q: (Float, Float, Float, Float))
   init()
 }
-
 extension _GLKQuaternion {
   typealias _Tuple = (Float, Float, Float, Float)
   var _tuple: _Tuple { get }
@@ -391,279 +372,46 @@ func GLKMatrixStackRotateWithVector4(stack: GLKMatrixStack, _ radians: Float, _ 
 func GLKMatrixStackRotateX(stack: GLKMatrixStack, _ radians: Float)
 func GLKMatrixStackRotateY(stack: GLKMatrixStack, _ radians: Float)
 func GLKMatrixStackRotateZ(stack: GLKMatrixStack, _ radians: Float)
-
-/*!
- @constant kGLKModelErrorDomain
- */
-@available(tvOS 9.0, *)
 let kGLKModelErrorDomain: String
-
-/*!
- @constant kGLKModelErrorKey
- */
-@available(tvOS 9.0, *)
 let kGLKModelErrorKey: String
-
-/*!
- @class GLKMeshBufferAllocator
- @abstract Allocator passed to MDLAsset init method to load vertex and index data directly into OpenGL buffer object
- */
-@available(tvOS 9.0, *)
 class GLKMeshBufferAllocator : NSObject, MDLMeshBufferAllocator {
   init()
-
-  /*!
-   @method newZone:
-   @abstract Create a zone which can be used to allocate MDLMeshBuffer objects
-   @param capacity Total size in bytes of all buffers which can be created from 
-          this zone
-   */
-  @available(tvOS 9.0, *)
   func newZone(capacity: Int) -> MDLMeshBufferZone
-
-  /*!
-   @method newZoneForBuffersWithSize:andType:
-   @abstract Create a zone which can be used to allocate MDLMeshBuffer objects
-   @param sizes Sizes of each buffer to be created in this zone
-   @param types Type of each buffer to be created in this zone. Values to be of
-                MDLMeshBufferType
-   @discussion Will create a zone from which MDLMeshBuffer objects can be 
-               allocated.  This will allocate a zone with enough capacity
-               for each of the buffers with sizes and types specified even taking
-               into any alignment restrictions necessary to use these buffers.
-   */
-  @available(tvOS 9.0, *)
   func newZoneForBuffersWithSize(sizes: [NSNumber], andType types: [NSNumber]) -> MDLMeshBufferZone
-
-  /*!
-   @method newBuffer:type:
-   @abstract Create a buffer in a default zone
-   @param length Size of buffer to be created in bytes
-   @param type Type of data to be stored in this buffer
-   */
-  @available(tvOS 9.0, *)
   func newBuffer(length: Int, type: MDLMeshBufferType) -> MDLMeshBuffer
-
-  /*!
-   @method newBufferWithData:type:
-   @abstract Create a buffer in a default zone and fill with data in the supplied 
-             NSData object
-   @param data Memory to fill the buffer with
-   @param type Type of data to be stored in this buffer
-   */
-  @available(tvOS 9.0, *)
   func newBufferWithData(data: NSData, type: MDLMeshBufferType) -> MDLMeshBuffer
-
-  /*!
-   @method newBufferFromZone:length:type:
-   @abstract Create a buffer from a given zone with the given length
-   @return An object conforming to the MDLMeshBuffer protocol.  Returns nil the 
-           buffer could not be allocated in the zone given.
-   @param zone Zone from which to allocate the memory
-   @param data Values with which to fill the buffer
-   @param type Type of data to be stored in this buffer
-   @discussion An implementing MDLMeshBufferAllocator object may increase the size 
-               of the zone if the buffer could not be allocated with the current 
-               zone size.  Alternatively the implementation may return nil if the 
-               buffer could not be allocated.
-  
-   */
-  @available(tvOS 9.0, *)
   func newBufferFromZone(zone: MDLMeshBufferZone?, length: Int, type: MDLMeshBufferType) -> MDLMeshBuffer?
-
-  /*!
-   @method newBufferFromZone:data:type:
-   @abstract Create a buffer from a given zone and fill with data in the supplied 
-             NSData object
-   @return An object conforming to the MDLMeshBuffer protocol.  Returns nil the 
-           buffer could not be allocated in the given zone
-   @param zone Zone from which to allocate the memory
-   @param data Values with which to fill the buffer
-   @param type Type of data to be stored in this buffer
-   @discussion An implementing MDLMeshBufferAllocator object may increase the size 
-               of the zone if the buffer could not be allocated with the current 
-               zone size. Alternatively the implementation may return nil if the 
-               buffer could not be allocated.
-   */
-  @available(tvOS 9.0, *)
   func newBufferFromZone(zone: MDLMeshBufferZone?, data: NSData, type: MDLMeshBufferType) -> MDLMeshBuffer?
 }
-
-/*!
- @class GLKMeshBuffer
- @abstract Mesh buffers created when  needs to allocate memory to back vertex or index data
- @discussion Memory backing these buffer are OpenGL buffers. Model I/O will load index and vertex data from from a model asset directly in to the OpenGL buffer object.
- */
-@available(tvOS 9.0, *)
 class GLKMeshBuffer : NSObject, MDLMeshBuffer {
-
-  /*!
-   @method length
-   @abstract Size in bytes of the buffer allocation
-   */
   var length: Int { get }
-
-  /*!
-   @property allocator
-   @abstract Allocator object used to create this buffer.
-   @discussion This allcoator used for copy and relayout operations (such as when a new vertex descriptor is applied to a vertex buffer)
-   */
   var allocator: GLKMeshBufferAllocator { get }
-
-  /*!
-   @property glBufferName
-   @abstract glBufferName for buffer object backing vertex/index data
-   @discussion Many GLKMeshBuffers may reference the same OpenGL buffer object, but each with its own offset.  (i.e. Many GLKMeshBuffers may be suballocated from a single OpenGL buffer object)
-   */
   var glBufferName: GLuint { get }
-
-  /*!
-   @property offset
-   @abstract Byte offset of the data within the OpenGL buffer
-   */
   var offset: Int { get }
-
-  /*!
-   @property type
-   @abstract the intended type of the buffer
-   */
   var type: MDLMeshBufferType { get }
   func zone() -> MDLMeshBufferZone?
   init()
-
-  /*!
-   @method fillData:offset:
-   @abstract Fills buffer with data at offset
-   @param data Data to fill buffer with
-   @param offset Byte offset in buffer to begin filling data
-   @discussion Fills data.length bytes of data.  Will not write beyond length of 
-               this buffer.
-   */
-  @available(tvOS 9.0, *)
   func fillData(data: NSData, offset: Int)
-
-  /*!
-   @method map
-   @abstract CPU access to buffer's memory
-   @return An MDLMeshBufferMap object to read or modify a buffer's memory
-   @discussion The buffer will remain mapped as long as the returned MDLMeshBufferMap
-               object exists. Mapping a buffer may impose restrictions on a system.
-               For instance,  if the implementing class maps an OpenGL buffer, that
-               buffer may be  unavailable for rendering while mapped, and cause a
-               draw failure.  Precautions must be taken in such cases.
-   */
-  @available(tvOS 9.0, *)
   func map() -> MDLMeshBufferMap
-  @available(tvOS 9.0, *)
   func copyWithZone(zone: NSZone) -> AnyObject
 }
-@available(tvOS 9.0, *)
 class GLKSubmesh : NSObject {
-
-  /*!
-   @property type
-   @abstract Type of data in the elementBuffer (aka indexBuffer)
-   @discussion This value should be used for the type parameter of glDrawElements
-   */
   var type: GLenum { get }
-
-  /*!
-   @property mode
-   @abstract Primitive type mode value of data in the elementBuffer (aka indexBuffer)
-   @discussion This value should be used for the mode parameter in glDrawElements
-   */
   var mode: GLenum { get }
-
-  /*!
-   @property elementCount
-   @abstract Number of elements (aka indicies) in the elementBuffer (aka indexBuffer)
-   @discussion This value should be used for the count parameter in glDrawElements
-  */
   var elementCount: GLsizei { get }
-
-  /*!
-   @property elementBuffer
-   @abstract Name of buffer object with index data
-   @discussion The buffer name to be used with DrawElements
-   */
   var elementBuffer: GLKMeshBuffer { get }
-
-  /*!
-   @property mesh
-   @abstract Parent GLKit mesh containing vertex data of this object
-   @discussion Buffer of this parent mesh should be set in the encoder before a drawIndexedPrimitives call is made
-   */
   weak var mesh: @sil_weak GLKMesh? { get }
-
-  /*!
-   @property name
-   @abstract Name from the original MDLSubmesh object.
-   @discussion Although not directly used by this object, the application may use this to identify the submesh in it renderer/scene/world.
-   */
   var name: String { get }
 }
-@available(tvOS 9.0, *)
 class GLKMesh : NSObject {
-
-  /*!
-   @method initWithMesh:error:
-   @abstract Initialize the mesh and the mesh's submeshes
-   @discussion This does NOT initialize any meshes that are children of the Model I/O mesh
-   @error Pointer to an NSError object which will be set if an error occurred
-   @param mesh Model I/O Mesh from which to create this GLKit mesh
-   */
   init(mesh: MDLMesh) throws
-
-  /*!
-   @method newMeshesFromAsset:sourceMeshes:error:
-   @abstract Initialize all meshes in a Model I/O asset.
-   @result An array of GLKit meshes built an asset
-   @param asset Model I/O asset from which to create GLKit meshes
-   @param sourceMeshes Model I/O meshes corresponding the newly created GLKMeshes
-   @param error Pointer to an NSError object set if an error occurred
-   @param return GLKit meshes created from the Model I/O asset
-   @dicussion A convenience method to create GLKit meshes from each mesh in a Model/IO asset.  Resulting meshes are returned while Model I/O meshes from which they were generated will appear in the sourceMeshes array.
-   */
   class func newMeshesFromAsset(asset: MDLAsset, sourceMeshes: AutoreleasingUnsafeMutablePointer<NSArray?>) throws -> [GLKMesh]
-
-  /*!
-   @property vertexCount
-   @abstract Number of verticies in the vertexBuffers
-   */
   var vertexCount: Int { get }
-
-  /*!
-   @property vertexBuffers
-   @abstract Array of buffers in which mesh vertex data resides
-   */
   var vertexBuffers: [GLKMeshBuffer] { get }
-
-  /*!
-   @property vertexDescriptor
-   @abstract Model I/O vertex descriptor specifying the layout of data in vertexBuffers
-   @discussion This is not directly used by this object, but the application can use this information to determine rendering state or setup a vertex attribute object.
-   */
   var vertexDescriptor: MDLVertexDescriptor { get }
-
-  /*!
-   @property submeshes
-   @abstract Submeshes containing index buffers to rendering mesh verticies.
-   @discussion Submeshes may also contain texture materials to apply when rendering this object
-   */
   var submeshes: [GLKSubmesh] { get }
-
-  /*!
-   @property name
-   @abstract Name of the mesh copies from the originating Model I/O mesh
-   @discussion Can be used by the app to identiry the mesh in it's scene/world/renderer etc.
-   */
   var name: String { get }
 }
-
-/*!
- @struct GLKVertexAttributeParameters
- @abstract Structure for parameters to use in glVertexAttribPointer given a MDLVertexForamt
- */
 struct _GLKVertexAttributeParameters {
   var type: GLenum
   var size: GLint
@@ -672,11 +420,6 @@ struct _GLKVertexAttributeParameters {
   init(type: GLenum, size: GLint, normalized: GLboolean)
 }
 typealias GLKVertexAttributeParameters = _GLKVertexAttributeParameters
-
-/*!
- @struct GLKVertexAttributeParametersFromModelIO
- @abstract Returns parameters to use in a call to glVertexAttribPointer given a MDLVertexFormat
- */
 func GLKVertexAttributeParametersFromModelIO(vertexFormat: MDLVertexFormat) -> GLKVertexAttributeParameters
 protocol GLKNamedEffect {
   func prepareToDraw()
@@ -704,14 +447,12 @@ func GLKQuaternionInvert(quaternion: GLKQuaternion) -> GLKQuaternion
 func GLKQuaternionNormalize(quaternion: GLKQuaternion) -> GLKQuaternion
 func GLKQuaternionRotateVector3(quaternion: GLKQuaternion, _ vector: GLKVector3) -> GLKVector3
 func GLKQuaternionRotateVector4(quaternion: GLKQuaternion, _ vector: GLKVector4) -> GLKVector4
-@available(tvOS 5.0, *)
 class GLKReflectionMapEffect : GLKBaseEffect, GLKNamedEffect {
   func prepareToDraw()
   var textureCubeMap: GLKEffectPropertyTexture { get }
   var matrix: GLKMatrix3
   init()
 }
-@available(tvOS 5.0, *)
 class GLKSkyboxEffect : NSObject, GLKNamedEffect {
   func prepareToDraw()
   func draw()
@@ -724,23 +465,14 @@ class GLKSkyboxEffect : NSObject, GLKNamedEffect {
   var label: String?
   init()
 }
-@available(tvOS 5.0, *)
 let GLKTextureLoaderApplyPremultiplication: String
-@available(tvOS 5.0, *)
 let GLKTextureLoaderGenerateMipmaps: String
-@available(tvOS 5.0, *)
 let GLKTextureLoaderOriginBottomLeft: String
-@available(tvOS 5.0, *)
 let GLKTextureLoaderGrayscaleAsAlpha: String
-@available(tvOS 7.0, *)
 let GLKTextureLoaderSRGB: String
-@available(tvOS 5.0, *)
 let GLKTextureLoaderErrorDomain: String
-@available(tvOS 5.0, *)
 let GLKTextureLoaderErrorKey: String
-@available(tvOS 5.0, *)
 let GLKTextureLoaderGLErrorKey: String
-@available(tvOS 5.0, *)
 enum GLKTextureLoaderError : GLuint {
   init?(rawValue: GLuint)
   var rawValue: GLuint { get }
@@ -764,7 +496,6 @@ enum GLKTextureLoaderError : GLuint {
   case InvalidEAGLContext
   case IncompatibleFormatSRGB
 }
-@available(tvOS 5.0, *)
 enum GLKTextureInfoAlphaState : GLint {
   init?(rawValue: GLint)
   var rawValue: GLint { get }
@@ -772,7 +503,6 @@ enum GLKTextureInfoAlphaState : GLint {
   case NonPremultiplied
   case Premultiplied
 }
-@available(tvOS 5.0, *)
 enum GLKTextureInfoOrigin : GLint {
   init?(rawValue: GLint)
   var rawValue: GLint { get }
@@ -780,7 +510,6 @@ enum GLKTextureInfoOrigin : GLint {
   case TopLeft
   case BottomLeft
 }
-@available(tvOS 5.0, *)
 class GLKTextureInfo : NSObject, NSCopying {
   var name: GLuint { get }
   var target: GLenum { get }
@@ -790,11 +519,9 @@ class GLKTextureInfo : NSObject, NSCopying {
   var textureOrigin: GLKTextureInfoOrigin { get }
   var containsMipmaps: Bool { get }
   init()
-  @available(tvOS 5.0, *)
   func copyWithZone(zone: NSZone) -> AnyObject
 }
 typealias GLKTextureLoaderCallback = (GLKTextureInfo?, NSError?) -> Void
-@available(tvOS 5.0, *)
 class GLKTextureLoader : NSObject {
   class func textureWithContentsOfFile(path: String, options: [String : NSNumber]?) throws -> GLKTextureInfo
   class func textureWithContentsOfURL(url: NSURL, options: [String : NSNumber]?) throws -> GLKTextureInfo
@@ -892,7 +619,6 @@ func GLKVector4Distance(vectorStart: GLKVector4, _ vectorEnd: GLKVector4) -> Flo
 func GLKVector4Lerp(vectorStart: GLKVector4, _ vectorEnd: GLKVector4, _ t: Float) -> GLKVector4
 func GLKVector4CrossProduct(vectorLeft: GLKVector4, _ vectorRight: GLKVector4) -> GLKVector4
 func GLKVector4Project(vectorToProject: GLKVector4, _ projectionVector: GLKVector4) -> GLKVector4
-@available(tvOS 5.0, *)
 enum GLKViewDrawableColorFormat : GLint {
   init?(rawValue: GLint)
   var rawValue: GLint { get }
@@ -900,7 +626,6 @@ enum GLKViewDrawableColorFormat : GLint {
   case RGB565
   case SRGBA8888
 }
-@available(tvOS 5.0, *)
 enum GLKViewDrawableDepthFormat : GLint {
   init?(rawValue: GLint)
   var rawValue: GLint { get }
@@ -908,21 +633,18 @@ enum GLKViewDrawableDepthFormat : GLint {
   case Format16
   case Format24
 }
-@available(tvOS 5.0, *)
 enum GLKViewDrawableStencilFormat : GLint {
   init?(rawValue: GLint)
   var rawValue: GLint { get }
   case FormatNone
   case Format8
 }
-@available(tvOS 5.0, *)
 enum GLKViewDrawableMultisample : GLint {
   init?(rawValue: GLint)
   var rawValue: GLint { get }
   case MultisampleNone
   case Multisample4X
 }
-@available(tvOS 5.0, *)
 class GLKView : UIView, NSCoding {
   init(frame: CGRect, context: EAGLContext)
   @IBOutlet unowned(unsafe) var delegate: @sil_unmanaged GLKViewDelegate?
@@ -943,10 +665,8 @@ class GLKView : UIView, NSCoding {
   convenience init()
 }
 protocol GLKViewDelegate : NSObjectProtocol {
-  @available(tvOS 5.0, *)
   func glkView(view: GLKView, drawInRect rect: CGRect)
 }
-@available(tvOS 5.0, *)
 class GLKViewController : UIViewController, NSCoding, GLKViewDelegate {
   @IBOutlet unowned(unsafe) var delegate: @sil_unmanaged GLKViewControllerDelegate?
   var preferredFramesPerSecond: Int
@@ -962,12 +682,9 @@ class GLKViewController : UIViewController, NSCoding, GLKViewDelegate {
   init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
   init?(coder aDecoder: NSCoder)
   convenience init()
-  @available(tvOS 5.0, *)
   func glkView(view: GLKView, drawInRect rect: CGRect)
 }
 protocol GLKViewControllerDelegate : NSObjectProtocol {
-  @available(tvOS 5.0, *)
   func glkViewControllerUpdate(controller: GLKViewController)
-  @available(tvOS 5.0, *)
   optional func glkViewController(controller: GLKViewController, willPause pause: Bool)
 }

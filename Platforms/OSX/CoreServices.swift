@@ -172,11 +172,6 @@ struct AEArrayData {
   init()
 }
 typealias AEArrayDataPointer = UnsafeMutablePointer<AEArrayData>
-
-/**************************************************************************
-  These constants are used by AEMach and AEInteraction APIs.  They are not
-  strictly part of the data format, but are declared here due to layering.
-**************************************************************************/
 typealias AESendPriority = Int16
 var kAENormalPriority: Int { get }
 var kAEHighPriority: Int { get }
@@ -196,187 +191,67 @@ var kAEProcessNonReplyEvents: Int { get }
 var kAEDoNotAutomaticallyAddAnnotationsToEvent: Int { get }
 var kAEDefaultTimeout: Int { get }
 var kNoTimeOut: Int { get }
-
-/**************************************************************************
-  These calls are used to set up and modify the coercion dispatch table.
-**************************************************************************/
 typealias AECoerceDescProcPtr = @convention(c) (UnsafePointer<AEDesc>, DescType, SRefCon, UnsafeMutablePointer<AEDesc>) -> OSErr
 typealias AECoercePtrProcPtr = @convention(c) (DescType, UnsafePointer<Void>, Size, DescType, SRefCon, UnsafeMutablePointer<AEDesc>) -> OSErr
 typealias AECoerceDescUPP = AECoerceDescProcPtr
 typealias AECoercePtrUPP = AECoercePtrProcPtr
-@available(OSX 10.0, *)
 func NewAECoerceDescUPP(userRoutine: AECoerceDescProcPtr!) -> AECoerceDescUPP!
-@available(OSX 10.0, *)
 func NewAECoercePtrUPP(userRoutine: AECoercePtrProcPtr!) -> AECoercePtrUPP!
-@available(OSX 10.0, *)
 func DisposeAECoerceDescUPP(userUPP: AECoerceDescUPP!)
-@available(OSX 10.0, *)
 func DisposeAECoercePtrUPP(userUPP: AECoercePtrUPP!)
-@available(OSX 10.0, *)
 func InvokeAECoerceDescUPP(fromDesc: UnsafePointer<AEDesc>, _ toType: DescType, _ handlerRefcon: SRefCon, _ toDesc: UnsafeMutablePointer<AEDesc>, _ userUPP: AECoerceDescUPP!) -> OSErr
-@available(OSX 10.0, *)
 func InvokeAECoercePtrUPP(typeCode: DescType, _ dataPtr: UnsafePointer<Void>, _ dataSize: Size, _ toType: DescType, _ handlerRefcon: SRefCon, _ result: UnsafeMutablePointer<AEDesc>, _ userUPP: AECoercePtrUPP!) -> OSErr
 typealias AECoercionHandlerUPP = AECoerceDescUPP
-@available(OSX 10.0, *)
 func AEInstallCoercionHandler(fromType: DescType, _ toType: DescType, _ handler: AECoercionHandlerUPP!, _ handlerRefcon: SRefCon, _ fromTypeIsDesc: Bool, _ isSysHandler: Bool) -> OSErr
-@available(OSX 10.0, *)
 func AERemoveCoercionHandler(fromType: DescType, _ toType: DescType, _ handler: AECoercionHandlerUPP!, _ isSysHandler: Bool) -> OSErr
-@available(OSX 10.0, *)
 func AEGetCoercionHandler(fromType: DescType, _ toType: DescType, _ handler: UnsafeMutablePointer<AECoercionHandlerUPP?>, _ handlerRefcon: UnsafeMutablePointer<SRefCon>, _ fromTypeIsDesc: UnsafeMutablePointer<DarwinBoolean>, _ isSysHandler: Bool) -> OSErr
-
-/**************************************************************************
-  The following calls provide for a coercion interface.
-**************************************************************************/
-@available(OSX 10.0, *)
 func AECoercePtr(typeCode: DescType, _ dataPtr: UnsafePointer<Void>, _ dataSize: Size, _ toType: DescType, _ result: UnsafeMutablePointer<AEDesc>) -> OSErr
-@available(OSX 10.0, *)
 func AECoerceDesc(theAEDesc: UnsafePointer<AEDesc>, _ toType: DescType, _ result: UnsafeMutablePointer<AEDesc>) -> OSErr
-
-/**************************************************************************
- The following calls apply to any AEDesc. Every 'result' descriptor is
- created for you, so you will be responsible for memory management
- (including disposing) of the descriptors so created.  
-**************************************************************************/
-@available(OSX 10.0, *)
 func AEInitializeDesc(desc: UnsafeMutablePointer<AEDesc>)
-@available(OSX 10.0, *)
 func AECreateDesc(typeCode: DescType, _ dataPtr: UnsafePointer<Void>, _ dataSize: Size, _ result: UnsafeMutablePointer<AEDesc>) -> OSErr
-@available(OSX 10.0, *)
 func AEDisposeDesc(theAEDesc: UnsafeMutablePointer<AEDesc>) -> OSErr
-@available(OSX 10.0, *)
 func AEDuplicateDesc(theAEDesc: UnsafePointer<AEDesc>, _ result: UnsafeMutablePointer<AEDesc>) -> OSErr
 typealias AEDisposeExternalProcPtr = @convention(c) (UnsafePointer<Void>, Size, SRefCon) -> Void
 typealias AEDisposeExternalUPP = AEDisposeExternalProcPtr
-@available(OSX 10.2, *)
 func AECreateDescFromExternalPtr(descriptorType: OSType, _ dataPtr: UnsafePointer<Void>, _ dataLength: Size, _ disposeCallback: AEDisposeExternalUPP!, _ disposeRefcon: SRefCon, _ theDesc: UnsafeMutablePointer<AEDesc>) -> OSStatus
-@available(OSX 10.8, *)
 func AECompareDesc(desc1: UnsafePointer<AEDesc>, _ desc2: UnsafePointer<AEDesc>, _ resultP: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-
-/**************************************************************************
-  The following calls apply to AEDescList. Since AEDescList is a subtype of
-  AEDesc, the calls in the previous section can also be used for AEDescList.
-  All list and array indices are 1-based. If the data was greater than
-  maximumSize in the routines below, then actualSize will be greater than
-  maximumSize, but only maximumSize bytes will actually be retrieved.
-**************************************************************************/
-@available(OSX 10.0, *)
 func AECreateList(factoringPtr: UnsafePointer<Void>, _ factoredSize: Size, _ isRecord: Bool, _ resultList: UnsafeMutablePointer<AEDescList>) -> OSErr
-@available(OSX 10.0, *)
 func AECountItems(theAEDescList: UnsafePointer<AEDescList>, _ theCount: UnsafeMutablePointer<Int>) -> OSErr
-@available(OSX 10.0, *)
 func AEPutPtr(theAEDescList: UnsafeMutablePointer<AEDescList>, _ index: Int, _ typeCode: DescType, _ dataPtr: UnsafePointer<Void>, _ dataSize: Size) -> OSErr
-@available(OSX 10.0, *)
 func AEPutDesc(theAEDescList: UnsafeMutablePointer<AEDescList>, _ index: Int, _ theAEDesc: UnsafePointer<AEDesc>) -> OSErr
-@available(OSX 10.0, *)
 func AEGetNthPtr(theAEDescList: UnsafePointer<AEDescList>, _ index: Int, _ desiredType: DescType, _ theAEKeyword: UnsafeMutablePointer<AEKeyword>, _ typeCode: UnsafeMutablePointer<DescType>, _ dataPtr: UnsafeMutablePointer<Void>, _ maximumSize: Size, _ actualSize: UnsafeMutablePointer<Size>) -> OSErr
-@available(OSX 10.0, *)
 func AEGetNthDesc(theAEDescList: UnsafePointer<AEDescList>, _ index: Int, _ desiredType: DescType, _ theAEKeyword: UnsafeMutablePointer<AEKeyword>, _ result: UnsafeMutablePointer<AEDesc>) -> OSErr
-@available(OSX 10.0, *)
 func AESizeOfNthItem(theAEDescList: UnsafePointer<AEDescList>, _ index: Int, _ typeCode: UnsafeMutablePointer<DescType>, _ dataSize: UnsafeMutablePointer<Size>) -> OSErr
-@available(OSX 10.0, *)
 func AEGetArray(theAEDescList: UnsafePointer<AEDescList>, _ arrayType: AEArrayType, _ arrayPtr: AEArrayDataPointer, _ maximumSize: Size, _ itemType: UnsafeMutablePointer<DescType>, _ itemSize: UnsafeMutablePointer<Size>, _ itemCount: UnsafeMutablePointer<Int>) -> OSErr
-@available(OSX 10.0, *)
 func AEPutArray(theAEDescList: UnsafeMutablePointer<AEDescList>, _ arrayType: AEArrayType, _ arrayPtr: UnsafePointer<AEArrayData>, _ itemType: DescType, _ itemSize: Size, _ itemCount: Int) -> OSErr
-@available(OSX 10.0, *)
 func AEDeleteItem(theAEDescList: UnsafeMutablePointer<AEDescList>, _ index: Int) -> OSErr
-
-/**************************************************************************
- The following calls apply to AERecord. Since AERecord is a subtype of
- AEDescList, the calls in the previous sections can also be used for
- AERecord an AERecord can be created by using AECreateList with isRecord
- set to true. 
-**************************************************************************/
-/*************************************************************************
- AERecords can have an abitrary descriptorType.  This allows you to
- check if desc is truly an AERecord
-************************************************************************/
-@available(OSX 10.0, *)
 func AECheckIsRecord(theDesc: UnsafePointer<AEDesc>) -> Bool
-
-/**************************************************************************
-  The following calls create and manipulate the AppleEvent data type.
-**************************************************************************/
-@available(OSX 10.0, *)
 func AECreateAppleEvent(theAEEventClass: AEEventClass, _ theAEEventID: AEEventID, _ target: UnsafePointer<AEAddressDesc>, _ returnID: AEReturnID, _ transactionID: AETransactionID, _ result: UnsafeMutablePointer<AppleEvent>) -> OSErr
-
-/**************************************************************************
-  The following calls are used to pack and unpack parameters from records
-  of type AppleEvent. Since AppleEvent is a subtype of AERecord, the calls
-  in the previous sections can also be used for variables of type
-  AppleEvent. The next six calls are in fact identical to the six calls
-  for AERecord.
-**************************************************************************/
-@available(OSX 10.0, *)
 func AEPutParamPtr(theAppleEvent: UnsafeMutablePointer<AppleEvent>, _ theAEKeyword: AEKeyword, _ typeCode: DescType, _ dataPtr: UnsafePointer<Void>, _ dataSize: Size) -> OSErr
-@available(OSX 10.0, *)
 func AEPutParamDesc(theAppleEvent: UnsafeMutablePointer<AppleEvent>, _ theAEKeyword: AEKeyword, _ theAEDesc: UnsafePointer<AEDesc>) -> OSErr
-@available(OSX 10.0, *)
 func AEGetParamPtr(theAppleEvent: UnsafePointer<AppleEvent>, _ theAEKeyword: AEKeyword, _ desiredType: DescType, _ actualType: UnsafeMutablePointer<DescType>, _ dataPtr: UnsafeMutablePointer<Void>, _ maximumSize: Size, _ actualSize: UnsafeMutablePointer<Size>) -> OSErr
-@available(OSX 10.0, *)
 func AEGetParamDesc(theAppleEvent: UnsafePointer<AppleEvent>, _ theAEKeyword: AEKeyword, _ desiredType: DescType, _ result: UnsafeMutablePointer<AEDesc>) -> OSErr
-@available(OSX 10.0, *)
 func AESizeOfParam(theAppleEvent: UnsafePointer<AppleEvent>, _ theAEKeyword: AEKeyword, _ typeCode: UnsafeMutablePointer<DescType>, _ dataSize: UnsafeMutablePointer<Size>) -> OSErr
-@available(OSX 10.0, *)
 func AEDeleteParam(theAppleEvent: UnsafeMutablePointer<AppleEvent>, _ theAEKeyword: AEKeyword) -> OSErr
-@available(OSX 10.0, *)
 func AEGetAttributePtr(theAppleEvent: UnsafePointer<AppleEvent>, _ theAEKeyword: AEKeyword, _ desiredType: DescType, _ typeCode: UnsafeMutablePointer<DescType>, _ dataPtr: UnsafeMutablePointer<Void>, _ maximumSize: Size, _ actualSize: UnsafeMutablePointer<Size>) -> OSErr
-@available(OSX 10.0, *)
 func AEGetAttributeDesc(theAppleEvent: UnsafePointer<AppleEvent>, _ theAEKeyword: AEKeyword, _ desiredType: DescType, _ result: UnsafeMutablePointer<AEDesc>) -> OSErr
-@available(OSX 10.0, *)
 func AESizeOfAttribute(theAppleEvent: UnsafePointer<AppleEvent>, _ theAEKeyword: AEKeyword, _ typeCode: UnsafeMutablePointer<DescType>, _ dataSize: UnsafeMutablePointer<Size>) -> OSErr
-@available(OSX 10.0, *)
 func AEPutAttributePtr(theAppleEvent: UnsafeMutablePointer<AppleEvent>, _ theAEKeyword: AEKeyword, _ typeCode: DescType, _ dataPtr: UnsafePointer<Void>, _ dataSize: Size) -> OSErr
-@available(OSX 10.0, *)
 func AEPutAttributeDesc(theAppleEvent: UnsafeMutablePointer<AppleEvent>, _ theAEKeyword: AEKeyword, _ theAEDesc: UnsafePointer<AEDesc>) -> OSErr
-
-/**************************************************************************
- AppleEvent Serialization Support
-
-    AESizeOfFlattenedDesc, AEFlattenDesc, AEUnflattenDesc
-    
-    These calls will work for all AppleEvent data types and between different
-    versions of the OS (including between Mac OS 9 and X)
-    
-    Basic types, AEDesc, AEList and AERecord are OK, but AppleEvent records
-    themselves may not be reliably flattened for storage.
-**************************************************************************/
-@available(OSX 10.0, *)
 func AESizeOfFlattenedDesc(theAEDesc: UnsafePointer<AEDesc>) -> Size
-@available(OSX 10.0, *)
 func AEFlattenDesc(theAEDesc: UnsafePointer<AEDesc>, _ buffer: Ptr, _ bufferSize: Size, _ actualSize: UnsafeMutablePointer<Size>) -> OSStatus
-@available(OSX 10.0, *)
 func AEUnflattenDesc(buffer: UnsafePointer<Void>, _ result: UnsafeMutablePointer<AEDesc>) -> OSStatus
-
-/**************************************************************************
- The following calls are necessary to deal with opaque data in AEDescs, because the
- traditional way of dealing with a basic AEDesc has been to dereference the dataHandle
- directly.  This is not supported under Carbon.
-**************************************************************************/
-@available(OSX 10.0, *)
 func AEGetDescData(theAEDesc: UnsafePointer<AEDesc>, _ dataPtr: UnsafeMutablePointer<Void>, _ maximumSize: Size) -> OSErr
-@available(OSX 10.0, *)
 func AEGetDescDataSize(theAEDesc: UnsafePointer<AEDesc>) -> Size
-@available(OSX 10.0, *)
 func AEReplaceDescData(typeCode: DescType, _ dataPtr: UnsafePointer<Void>, _ dataSize: Size, _ theAEDesc: UnsafeMutablePointer<AEDesc>) -> OSErr
-@available(OSX 10.2, *)
 func AEGetDescDataRange(dataDesc: UnsafePointer<AEDesc>, _ buffer: UnsafeMutablePointer<Void>, _ offset: Size, _ length: Size) -> OSStatus
-
-/**************************************************************************
-  A AEEventHandler is installed to process an AppleEvent 
-**************************************************************************/
 typealias AEEventHandlerProcPtr = @convention(c) (UnsafePointer<AppleEvent>, UnsafeMutablePointer<AppleEvent>, SRefCon) -> OSErr
 typealias AEEventHandlerUPP = AEEventHandlerProcPtr
-@available(OSX 10.2, *)
 func NewAEDisposeExternalUPP(userRoutine: AEDisposeExternalProcPtr!) -> AEDisposeExternalUPP!
-@available(OSX 10.0, *)
 func NewAEEventHandlerUPP(userRoutine: AEEventHandlerProcPtr!) -> AEEventHandlerUPP!
-@available(OSX 10.2, *)
 func DisposeAEDisposeExternalUPP(userUPP: AEDisposeExternalUPP!)
-@available(OSX 10.0, *)
 func DisposeAEEventHandlerUPP(userUPP: AEEventHandlerUPP!)
-@available(OSX 10.2, *)
 func InvokeAEDisposeExternalUPP(dataPtr: UnsafePointer<Void>, _ dataLength: Size, _ refcon: SRefCon, _ userUPP: AEDisposeExternalUPP!)
-@available(OSX 10.0, *)
 func InvokeAEEventHandlerUPP(theAppleEvent: UnsafePointer<AppleEvent>, _ reply: UnsafeMutablePointer<AppleEvent>, _ handlerRefcon: SRefCon, _ userUPP: AEEventHandlerUPP!) -> OSErr
 typealias AEBuildErrorCode = UInt32
 var aeBuildSyntaxNoErr: Int { get }
@@ -405,117 +280,53 @@ struct AEBuildError {
   init()
   init(fError: AEBuildErrorCode, fErrorPos: UInt32)
 }
-@available(OSX 10.0, *)
 func vAEBuildDesc(dst: UnsafeMutablePointer<AEDesc>, _ error: UnsafeMutablePointer<AEBuildError>, _ src: UnsafePointer<Int8>, _ args: CVaListPointer) -> OSStatus
-@available(OSX 10.0, *)
 func vAEBuildParameters(event: UnsafeMutablePointer<AppleEvent>, _ error: UnsafeMutablePointer<AEBuildError>, _ format: UnsafePointer<Int8>, _ args: CVaListPointer) -> OSStatus
-@available(OSX 10.0, *)
 func vAEBuildAppleEvent(theClass: AEEventClass, _ theID: AEEventID, _ addressType: DescType, _ addressData: UnsafePointer<Void>, _ addressLength: Size, _ returnID: Int16, _ transactionID: Int32, _ resultEvt: UnsafeMutablePointer<AppleEvent>, _ error: UnsafeMutablePointer<AEBuildError>, _ paramsFmt: UnsafePointer<Int8>, _ args: CVaListPointer) -> OSStatus
-@available(OSX 10.0, *)
 func AEPrintDescToHandle(desc: UnsafePointer<AEDesc>, _ result: UnsafeMutablePointer<Handle>) -> OSStatus
 typealias AEStreamRef = COpaquePointer
-@available(OSX 10.0, *)
 func AEStreamOpen() -> AEStreamRef
-@available(OSX 10.0, *)
 func AEStreamClose(ref: AEStreamRef, _ desc: UnsafeMutablePointer<AEDesc>) -> OSStatus
-@available(OSX 10.0, *)
 func AEStreamOpenDesc(ref: AEStreamRef, _ newType: DescType) -> OSStatus
-@available(OSX 10.0, *)
 func AEStreamWriteData(ref: AEStreamRef, _ data: UnsafePointer<Void>, _ length: Size) -> OSStatus
-@available(OSX 10.0, *)
 func AEStreamCloseDesc(ref: AEStreamRef) -> OSStatus
-@available(OSX 10.0, *)
 func AEStreamWriteDesc(ref: AEStreamRef, _ newType: DescType, _ data: UnsafePointer<Void>, _ length: Size) -> OSStatus
-@available(OSX 10.0, *)
 func AEStreamWriteAEDesc(ref: AEStreamRef, _ desc: UnsafePointer<AEDesc>) -> OSStatus
-@available(OSX 10.0, *)
 func AEStreamOpenList(ref: AEStreamRef) -> OSStatus
-@available(OSX 10.0, *)
 func AEStreamCloseList(ref: AEStreamRef) -> OSStatus
-@available(OSX 10.0, *)
 func AEStreamOpenRecord(ref: AEStreamRef, _ newType: DescType) -> OSStatus
-@available(OSX 10.0, *)
 func AEStreamSetRecordType(ref: AEStreamRef, _ newType: DescType) -> OSStatus
-@available(OSX 10.0, *)
 func AEStreamCloseRecord(ref: AEStreamRef) -> OSStatus
-@available(OSX 10.0, *)
 func AEStreamWriteKeyDesc(ref: AEStreamRef, _ key: AEKeyword, _ newType: DescType, _ data: UnsafePointer<Void>, _ length: Size) -> OSStatus
-@available(OSX 10.0, *)
 func AEStreamOpenKeyDesc(ref: AEStreamRef, _ key: AEKeyword, _ newType: DescType) -> OSStatus
-@available(OSX 10.0, *)
 func AEStreamWriteKey(ref: AEStreamRef, _ key: AEKeyword) -> OSStatus
-@available(OSX 10.0, *)
 func AEStreamCreateEvent(clazz: AEEventClass, _ id: AEEventID, _ targetType: DescType, _ targetData: UnsafePointer<Void>, _ targetLength: Size, _ returnID: Int16, _ transactionID: Int32) -> AEStreamRef
-@available(OSX 10.0, *)
 func AEStreamOpenEvent(event: UnsafeMutablePointer<AppleEvent>) -> AEStreamRef
-@available(OSX 10.0, *)
 func AEStreamOptionalParam(ref: AEStreamRef, _ key: AEKeyword) -> OSStatus
 var keyReplyPortAttr: Int { get }
 var typeReplyPortAttr: Int { get }
-@available(OSX 10.0, *)
 func AEGetRegisteredMachPort() -> mach_port_t
-@available(OSX 10.0, *)
 func AEDecodeMessage(header: UnsafeMutablePointer<mach_msg_header_t>, _ event: UnsafeMutablePointer<AppleEvent>, _ reply: UnsafeMutablePointer<AppleEvent>) -> OSStatus
-@available(OSX 10.0, *)
 func AEProcessMessage(header: UnsafeMutablePointer<mach_msg_header_t>) -> OSStatus
-@available(OSX 10.0, *)
 func AESendMessage(event: UnsafePointer<AppleEvent>, _ reply: UnsafeMutablePointer<AppleEvent>, _ sendMode: AESendMode, _ timeOutInTicks: Int) -> OSStatus
-
-/**** LOGICAL OPERATOR CONSTANTS  ****/
 var kAEAND: Int { get }
-
-/**** LOGICAL OPERATOR CONSTANTS  ****/
 var kAEOR: Int { get }
-
-/**** LOGICAL OPERATOR CONSTANTS  ****/
 var kAENOT: Int { get }
-
-/**** ABSOLUTE ORDINAL CONSTANTS  ****/
 var kAEFirst: Int { get }
-
-/**** ABSOLUTE ORDINAL CONSTANTS  ****/
 var kAELast: Int { get }
-
-/**** ABSOLUTE ORDINAL CONSTANTS  ****/
 var kAEMiddle: Int { get }
-
-/**** ABSOLUTE ORDINAL CONSTANTS  ****/
 var kAEAny: Int { get }
-
-/**** ABSOLUTE ORDINAL CONSTANTS  ****/
 var kAEAll: Int { get }
-
-/**** RELATIVE ORDINAL CONSTANTS  ****/
 var kAENext: Int { get }
-
-/**** RELATIVE ORDINAL CONSTANTS  ****/
 var kAEPrevious: Int { get }
-
-/**** KEYWORD CONSTANT    ****/
 var keyAECompOperator: Int { get }
-
-/**** KEYWORD CONSTANT    ****/
 var keyAELogicalTerms: Int { get }
-
-/**** KEYWORD CONSTANT    ****/
 var keyAELogicalOperator: Int { get }
-
-/**** KEYWORD CONSTANT    ****/
 var keyAEObject1: Int { get }
-
-/**** KEYWORD CONSTANT    ****/
 var keyAEObject2: Int { get }
-
-/**** KEYWORD CONSTANT    ****/
 var keyAEDesiredClass: Int { get }
-
-/**** KEYWORD CONSTANT    ****/
 var keyAEContainer: Int { get }
-
-/**** KEYWORD CONSTANT    ****/
 var keyAEKeyForm: Int { get }
-
-/**** KEYWORD CONSTANT    ****/
 var keyAEKeyData: Int { get }
 var keyAERangeStart: Int { get }
 var keyAERangeStop: Int { get }
@@ -582,79 +393,42 @@ typealias OSLGetMarkTokenUPP = OSLGetMarkTokenProcPtr
 typealias OSLGetErrDescUPP = OSLGetErrDescProcPtr
 typealias OSLMarkUPP = OSLMarkProcPtr
 typealias OSLAdjustMarksUPP = OSLAdjustMarksProcPtr
-@available(OSX 10.0, *)
 func NewOSLAccessorUPP(userRoutine: OSLAccessorProcPtr!) -> OSLAccessorUPP!
-@available(OSX 10.0, *)
 func NewOSLCompareUPP(userRoutine: OSLCompareProcPtr!) -> OSLCompareUPP!
-@available(OSX 10.0, *)
 func NewOSLCountUPP(userRoutine: OSLCountProcPtr!) -> OSLCountUPP!
-@available(OSX 10.0, *)
 func NewOSLDisposeTokenUPP(userRoutine: OSLDisposeTokenProcPtr!) -> OSLDisposeTokenUPP!
-@available(OSX 10.0, *)
 func NewOSLGetMarkTokenUPP(userRoutine: OSLGetMarkTokenProcPtr!) -> OSLGetMarkTokenUPP!
-@available(OSX 10.0, *)
 func NewOSLGetErrDescUPP(userRoutine: OSLGetErrDescProcPtr!) -> OSLGetErrDescUPP!
-@available(OSX 10.0, *)
 func NewOSLMarkUPP(userRoutine: OSLMarkProcPtr!) -> OSLMarkUPP!
-@available(OSX 10.0, *)
 func NewOSLAdjustMarksUPP(userRoutine: OSLAdjustMarksProcPtr!) -> OSLAdjustMarksUPP!
-@available(OSX 10.0, *)
 func DisposeOSLAccessorUPP(userUPP: OSLAccessorUPP!)
-@available(OSX 10.0, *)
 func DisposeOSLCompareUPP(userUPP: OSLCompareUPP!)
-@available(OSX 10.0, *)
 func DisposeOSLCountUPP(userUPP: OSLCountUPP!)
-@available(OSX 10.0, *)
 func DisposeOSLDisposeTokenUPP(userUPP: OSLDisposeTokenUPP!)
-@available(OSX 10.0, *)
 func DisposeOSLGetMarkTokenUPP(userUPP: OSLGetMarkTokenUPP!)
-@available(OSX 10.0, *)
 func DisposeOSLGetErrDescUPP(userUPP: OSLGetErrDescUPP!)
-@available(OSX 10.0, *)
 func DisposeOSLMarkUPP(userUPP: OSLMarkUPP!)
-@available(OSX 10.0, *)
 func DisposeOSLAdjustMarksUPP(userUPP: OSLAdjustMarksUPP!)
-@available(OSX 10.0, *)
 func InvokeOSLAccessorUPP(desiredClass: DescType, _ container: UnsafePointer<AEDesc>, _ containerClass: DescType, _ form: DescType, _ selectionData: UnsafePointer<AEDesc>, _ value: UnsafeMutablePointer<AEDesc>, _ accessorRefcon: SRefCon, _ userUPP: OSLAccessorUPP!) -> OSErr
-@available(OSX 10.0, *)
 func InvokeOSLCompareUPP(oper: DescType, _ obj1: UnsafePointer<AEDesc>, _ obj2: UnsafePointer<AEDesc>, _ result: UnsafeMutablePointer<DarwinBoolean>, _ userUPP: OSLCompareUPP!) -> OSErr
-@available(OSX 10.0, *)
 func InvokeOSLCountUPP(desiredType: DescType, _ containerClass: DescType, _ container: UnsafePointer<AEDesc>, _ result: UnsafeMutablePointer<Int>, _ userUPP: OSLCountUPP!) -> OSErr
-@available(OSX 10.0, *)
 func InvokeOSLDisposeTokenUPP(unneededToken: UnsafeMutablePointer<AEDesc>, _ userUPP: OSLDisposeTokenUPP!) -> OSErr
-@available(OSX 10.0, *)
 func InvokeOSLGetMarkTokenUPP(dContainerToken: UnsafePointer<AEDesc>, _ containerClass: DescType, _ result: UnsafeMutablePointer<AEDesc>, _ userUPP: OSLGetMarkTokenUPP!) -> OSErr
-@available(OSX 10.0, *)
 func InvokeOSLGetErrDescUPP(appDescPtr: UnsafeMutablePointer<UnsafeMutablePointer<AEDesc>>, _ userUPP: OSLGetErrDescUPP!) -> OSErr
-@available(OSX 10.0, *)
 func InvokeOSLMarkUPP(dToken: UnsafePointer<AEDesc>, _ markToken: UnsafePointer<AEDesc>, _ index: Int, _ userUPP: OSLMarkUPP!) -> OSErr
-@available(OSX 10.0, *)
 func InvokeOSLAdjustMarksUPP(newStart: Int, _ newStop: Int, _ markToken: UnsafePointer<AEDesc>, _ userUPP: OSLAdjustMarksUPP!) -> OSErr
-@available(OSX 10.0, *)
 func AEObjectInit() -> OSErr
-@available(OSX 10.0, *)
 func AESetObjectCallbacks(myCompareProc: OSLCompareUPP!, _ myCountProc: OSLCountUPP!, _ myDisposeTokenProc: OSLDisposeTokenUPP!, _ myGetMarkTokenProc: OSLGetMarkTokenUPP!, _ myMarkProc: OSLMarkUPP!, _ myAdjustMarksProc: OSLAdjustMarksUPP!, _ myGetErrDescProcPtr: OSLGetErrDescUPP!) -> OSErr
-@available(OSX 10.0, *)
 func AEResolve(objectSpecifier: UnsafePointer<AEDesc>, _ callbackFlags: Int16, _ theToken: UnsafeMutablePointer<AEDesc>) -> OSErr
-@available(OSX 10.0, *)
 func AEInstallObjectAccessor(desiredClass: DescType, _ containerType: DescType, _ theAccessor: OSLAccessorUPP!, _ accessorRefcon: SRefCon, _ isSysHandler: Bool) -> OSErr
-@available(OSX 10.0, *)
 func AERemoveObjectAccessor(desiredClass: DescType, _ containerType: DescType, _ theAccessor: OSLAccessorUPP!, _ isSysHandler: Bool) -> OSErr
-@available(OSX 10.0, *)
 func AEGetObjectAccessor(desiredClass: DescType, _ containerType: DescType, _ accessor: UnsafeMutablePointer<OSLAccessorUPP?>, _ accessorRefcon: UnsafeMutablePointer<SRefCon>, _ isSysHandler: Bool) -> OSErr
-@available(OSX 10.0, *)
 func AEDisposeToken(theToken: UnsafeMutablePointer<AEDesc>) -> OSErr
-@available(OSX 10.0, *)
 func AECallObjectAccessor(desiredClass: DescType, _ containerToken: UnsafePointer<AEDesc>, _ containerClass: DescType, _ keyForm: DescType, _ keyData: UnsafePointer<AEDesc>, _ token: UnsafeMutablePointer<AEDesc>) -> OSErr
-@available(OSX 10.0, *)
 func CreateOffsetDescriptor(theOffset: Int, _ theDescriptor: UnsafeMutablePointer<AEDesc>) -> OSErr
-@available(OSX 10.0, *)
 func CreateCompDescriptor(comparisonOperator: DescType, _ operand1: UnsafeMutablePointer<AEDesc>, _ operand2: UnsafeMutablePointer<AEDesc>, _ disposeInputs: Bool, _ theDescriptor: UnsafeMutablePointer<AEDesc>) -> OSErr
-@available(OSX 10.0, *)
 func CreateLogicalDescriptor(theLogicalTerms: UnsafeMutablePointer<AEDescList>, _ theLogicOperator: DescType, _ disposeInputs: Bool, _ theDescriptor: UnsafeMutablePointer<AEDesc>) -> OSErr
-@available(OSX 10.0, *)
 func CreateObjSpecifier(desiredClass: DescType, _ theContainer: UnsafeMutablePointer<AEDesc>, _ keyForm: DescType, _ keyData: UnsafeMutablePointer<AEDesc>, _ disposeInputs: Bool, _ objSpecifier: UnsafeMutablePointer<AEDesc>) -> OSErr
-@available(OSX 10.0, *)
 func CreateRangeDescriptor(rangeStart: UnsafeMutablePointer<AEDesc>, _ rangeStop: UnsafeMutablePointer<AEDesc>, _ disposeInputs: Bool, _ theDescriptor: UnsafeMutablePointer<AEDesc>) -> OSErr
 var cAEList: Int { get }
 var cApplication: Int { get }
@@ -1550,43 +1324,16 @@ var kAELocalProcess: Int { get }
 var kAERemoteProcess: Int { get }
 var errAETargetAddressNotPermitted: Int { get }
 var errAEEventNotPermitted: Int { get }
-
-/**************************************************************************
-  These calls are used to set up and modify the event dispatch table.D
-**************************************************************************/
-@available(OSX 10.0, *)
 func AEInstallEventHandler(theAEEventClass: AEEventClass, _ theAEEventID: AEEventID, _ handler: AEEventHandlerUPP!, _ handlerRefcon: SRefCon, _ isSysHandler: Bool) -> OSErr
-@available(OSX 10.0, *)
 func AERemoveEventHandler(theAEEventClass: AEEventClass, _ theAEEventID: AEEventID, _ handler: AEEventHandlerUPP!, _ isSysHandler: Bool) -> OSErr
-@available(OSX 10.0, *)
 func AEGetEventHandler(theAEEventClass: AEEventClass, _ theAEEventID: AEEventID, _ handler: UnsafeMutablePointer<AEEventHandlerUPP?>, _ handlerRefcon: UnsafeMutablePointer<SRefCon>, _ isSysHandler: Bool) -> OSErr
-
-/**************************************************************************
-  These calls are used to set up and modify special hooks into the
-  AppleEvent manager.
-**************************************************************************/
-@available(OSX 10.0, *)
 func AEInstallSpecialHandler(functionClass: AEKeyword, _ handler: AEEventHandlerUPP!, _ isSysHandler: Bool) -> OSErr
-@available(OSX 10.0, *)
 func AERemoveSpecialHandler(functionClass: AEKeyword, _ handler: AEEventHandlerUPP!, _ isSysHandler: Bool) -> OSErr
-@available(OSX 10.0, *)
 func AEGetSpecialHandler(functionClass: AEKeyword, _ handler: UnsafeMutablePointer<AEEventHandlerUPP?>, _ isSysHandler: Bool) -> OSErr
-
-/**************************************************************************
-  This call was added in version 1.0.1. If called with the keyword
-  keyAERecorderCount ('recr'), the number of recorders that are
-  currently active is returned in 'result'
-  (available only in vers 1.0.1 and greater).
-**************************************************************************/
-@available(OSX 10.0, *)
 func AEManagerInfo(keyWord: AEKeyword, _ result: UnsafeMutablePointer<Int>) -> OSErr
-@available(OSX 10.3, *)
 let kAERemoteProcessURLKey: CFString!
-@available(OSX 10.3, *)
 let kAERemoteProcessNameKey: CFString!
-@available(OSX 10.3, *)
 let kAERemoteProcessUserIDKey: CFString!
-@available(OSX 10.3, *)
 let kAERemoteProcessProcessIDKey: CFString!
 struct AERemoteProcessResolverContext {
   var version: CFIndex
@@ -1598,27 +1345,18 @@ struct AERemoteProcessResolverContext {
   init(version: CFIndex, info: UnsafeMutablePointer<Void>, retain: CFAllocatorRetainCallBack!, release: CFAllocatorReleaseCallBack!, copyDescription: CFAllocatorCopyDescriptionCallBack!)
 }
 typealias AERemoteProcessResolverRef = COpaquePointer
-@available(OSX 10.3, *)
 func AECreateRemoteProcessResolver(allocator: CFAllocator!, _ url: CFURL!) -> AERemoteProcessResolverRef
-@available(OSX 10.3, *)
 func AEDisposeRemoteProcessResolver(ref: AERemoteProcessResolverRef)
-@available(OSX 10.3, *)
 func AERemoteProcessResolverGetProcesses(ref: AERemoteProcessResolverRef, _ outError: UnsafeMutablePointer<CFStreamError>) -> Unmanaged<CFArray>!
 typealias AERemoteProcessResolverCallback = @convention(c) (AERemoteProcessResolverRef, UnsafeMutablePointer<Void>) -> Void
-@available(OSX 10.3, *)
 func AERemoteProcessResolverScheduleWithRunLoop(ref: AERemoteProcessResolverRef, _ runLoop: CFRunLoop!, _ runLoopMode: CFString!, _ callback: AERemoteProcessResolverCallback!, _ ctx: UnsafePointer<AERemoteProcessResolverContext>)
-@available(OSX 10.5, *)
 func CSBackupSetItemExcluded(item: CFURL!, _ exclude: Bool, _ excludeByPath: Bool) -> OSStatus
-@available(OSX 10.5, *)
 func CSBackupIsItemExcluded(item: CFURL!, _ excludeByPath: UnsafeMutablePointer<DarwinBoolean>) -> Bool
 var kCSDiskSpaceRecoveryOptionNoUI: Int { get }
 typealias CSDiskSpaceRecoveryOptions = Int32
 typealias CSDiskSpaceRecoveryCallback = (Bool, UInt64, CFError!) -> Void
-@available(OSX 10.7, *)
 func CSDiskSpaceStartRecovery(volumeURL: CFURL!, _ bytesNeeded: UInt64, _ options: CSDiskSpaceRecoveryOptions, _ outOperationUUID: UnsafeMutablePointer<Unmanaged<CFUUID>?>, _ callbackQueue: dispatch_queue_t!, _ callback: CSDiskSpaceRecoveryCallback!)
-@available(OSX 10.7, *)
 func CSDiskSpaceCancelRecovery(operationUUID: CFUUID!)
-@available(OSX 10.7, *)
 func CSDiskSpaceGetRecoveryEstimate(volumeURL: CFURL!) -> UInt64
 var paramErr: Int { get }
 var noHardwareErr: Int { get }
@@ -3955,11 +3693,8 @@ var kUCTSOptionsReleaseStringMask: Int { get }
 var kUCTSOptionsDataIsOrderedMask: Int { get }
 typealias IndexToUCStringProcPtr = @convention(c) (UInt32, UnsafeMutablePointer<Void>, UnsafeMutablePointer<Void>, UnsafeMutablePointer<Unmanaged<CFString>?>, UnsafeMutablePointer<UCTypeSelectOptions>) -> DarwinBoolean
 typealias IndexToUCStringUPP = IndexToUCStringProcPtr
-@available(OSX 10.4, *)
 func NewIndexToUCStringUPP(userRoutine: IndexToUCStringProcPtr!) -> IndexToUCStringUPP!
-@available(OSX 10.4, *)
 func DisposeIndexToUCStringUPP(userUPP: IndexToUCStringUPP!)
-@available(OSX 10.4, *)
 func InvokeIndexToUCStringUPP(index: UInt32, _ listDataPtr: UnsafeMutablePointer<Void>, _ refcon: UnsafeMutablePointer<Void>, _ outString: UnsafeMutablePointer<Unmanaged<CFString>?>, _ tsOptions: UnsafeMutablePointer<UCTypeSelectOptions>, _ userUPP: IndexToUCStringUPP!) -> Bool
 var kUCTypeSelectMaxListSize: UInt32 { get }
 var kUnicodeTextBreakClass: Int { get }
@@ -3974,93 +3709,34 @@ typealias UCTextBreakOptions = UInt32
 var kUCTextBreakLeadingEdgeMask: Int { get }
 var kUCTextBreakGoBackwardsMask: Int { get }
 var kUCTextBreakIterateMask: Int { get }
-@available(OSX 10.0, *)
 func UCKeyTranslate(keyLayoutPtr: UnsafePointer<UCKeyboardLayout>, _ virtualKeyCode: UInt16, _ keyAction: UInt16, _ modifierKeyState: UInt32, _ keyboardType: UInt32, _ keyTranslateOptions: OptionBits, _ deadKeyState: UnsafeMutablePointer<UInt32>, _ maxStringLength: Int, _ actualStringLength: UnsafeMutablePointer<Int>, _ unicodeString: UnsafeMutablePointer<UniChar>) -> OSStatus
-@available(OSX 10.0, *)
 func UCCreateCollator(locale: LocaleRef, _ opVariant: LocaleOperationVariant, _ options: UCCollateOptions, _ collatorRef: UnsafeMutablePointer<CollatorRef>) -> OSStatus
-@available(OSX 10.0, *)
 func UCGetCollationKey(collatorRef: CollatorRef, _ textPtr: UnsafePointer<UniChar>, _ textLength: Int, _ maxKeySize: Int, _ actualKeySize: UnsafeMutablePointer<Int>, _ collationKey: UnsafeMutablePointer<UCCollationValue>) -> OSStatus
-@available(OSX 10.0, *)
 func UCCompareCollationKeys(key1Ptr: UnsafePointer<UCCollationValue>, _ key1Length: Int, _ key2Ptr: UnsafePointer<UCCollationValue>, _ key2Length: Int, _ equivalent: UnsafeMutablePointer<DarwinBoolean>, _ order: UnsafeMutablePointer<Int32>) -> OSStatus
-@available(OSX 10.0, *)
 func UCCompareText(collatorRef: CollatorRef, _ text1Ptr: UnsafePointer<UniChar>, _ text1Length: Int, _ text2Ptr: UnsafePointer<UniChar>, _ text2Length: Int, _ equivalent: UnsafeMutablePointer<DarwinBoolean>, _ order: UnsafeMutablePointer<Int32>) -> OSStatus
-@available(OSX 10.0, *)
 func UCDisposeCollator(collatorRef: UnsafeMutablePointer<CollatorRef>) -> OSStatus
-@available(OSX 10.0, *)
 func UCCompareTextDefault(options: UCCollateOptions, _ text1Ptr: UnsafePointer<UniChar>, _ text1Length: Int, _ text2Ptr: UnsafePointer<UniChar>, _ text2Length: Int, _ equivalent: UnsafeMutablePointer<DarwinBoolean>, _ order: UnsafeMutablePointer<Int32>) -> OSStatus
-@available(OSX 10.0, *)
 func UCCompareTextNoLocale(options: UCCollateOptions, _ text1Ptr: UnsafePointer<UniChar>, _ text1Length: Int, _ text2Ptr: UnsafePointer<UniChar>, _ text2Length: Int, _ equivalent: UnsafeMutablePointer<DarwinBoolean>, _ order: UnsafeMutablePointer<Int32>) -> OSStatus
-@available(OSX 10.4, *)
 func UCTypeSelectCreateSelector(locale: LocaleRef, _ opVariant: LocaleOperationVariant, _ options: UCCollateOptions, _ newSelector: UnsafeMutablePointer<UCTypeSelectRef>) -> OSStatus
-@available(OSX 10.4, *)
 func UCTypeSelectFlushSelectorData(ref: UCTypeSelectRef) -> OSStatus
-@available(OSX 10.4, *)
 func UCTypeSelectReleaseSelector(ref: UnsafeMutablePointer<UCTypeSelectRef>) -> OSStatus
-@available(OSX 10.4, *)
 func UCTypeSelectWouldResetBuffer(inRef: UCTypeSelectRef, _ inText: CFString!, _ inEventTime: Double) -> Bool
-@available(OSX 10.4, *)
 func UCTypeSelectAddKeyToSelector(inRef: UCTypeSelectRef, _ inText: CFString!, _ inEventTime: Double, _ updateFlag: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-@available(OSX 10.4, *)
 func UCTypeSelectCompare(ref: UCTypeSelectRef, _ inText: CFString!, _ result: UnsafeMutablePointer<UCTypeSelectCompareResult>) -> OSStatus
-@available(OSX 10.4, *)
 func UCTypeSelectFindItem(ref: UCTypeSelectRef, _ listSize: UInt32, _ listDataPtr: UnsafeMutablePointer<Void>, _ refcon: UnsafeMutablePointer<Void>, _ userUPP: IndexToUCStringUPP!, _ closestItem: UnsafeMutablePointer<UInt32>) -> OSStatus
-@available(OSX 10.4, *)
 func UCTypeSelectWalkList(ref: UCTypeSelectRef, _ currSelect: CFString!, _ direction: UCTSWalkDirection, _ listSize: UInt32, _ listDataPtr: UnsafeMutablePointer<Void>, _ refcon: UnsafeMutablePointer<Void>, _ userUPP: IndexToUCStringUPP!, _ closestItem: UnsafeMutablePointer<UInt32>) -> OSStatus
-
-/*!
-	@typedef	DCSDictionaryRef
-	@abstract	Opaque CF object that represents a dictionary file
-*/
 class DCSDictionary {
 }
-
-/*!
-	@typedef	DCSDictionaryRef
-	@abstract	Opaque CF object that represents a dictionary file
-*/
 typealias DCSDictionaryRef = DCSDictionary
-
-/*!
-	@function	DCSGetTermRangeInString
-	@abstract	Look for a word or a phrase that contains the specified offset in dictionaries
-				activated in Dictionary.app preference
-	@param		dictionary
-				This parameter is not supported for Leopard. You should always pass NULL.
-	@param		textString
-				Text that contains the word or phrase to look up
-	@param		offset
-				Specifies a character offset in textString
-	@result		Returns a detected range of word or phrase around the specified offset,
-				or (kCFNotFound, 0) is returned if any term is not found in active dictionaries.
-				The result range can be used as an input parameter of DCSCopyTextDefinition()
-				and HIDictionaryWindowShow() in Carbon framework.
-*/
-@available(OSX 10.5, *)
 func DCSGetTermRangeInString(dictionary: DCSDictionary?, _ textString: CFString, _ offset: CFIndex) -> CFRange
-
-/*!
-	@function	DCSCopyTextDefinition
-	@abstract	Copies definition for a specified range of text
-	@param		dictionary
-				This parameter is not supported for Leopard. You should always pass NULL.
-	@param		textString
-				Text that contains the word or phrase to look up
-	@param		range
-				Range of the target word or phrase in textString
-	@result		Returns a definition of the specified term in range in plain text
-*/
-@available(OSX 10.5, *)
 func DCSCopyTextDefinition(dictionary: DCSDictionary?, _ textString: CFString, _ range: CFRange) -> Unmanaged<CFString>?
 typealias FSEventStreamCreateFlags = UInt32
 var kFSEventStreamCreateFlagNone: Int { get }
 var kFSEventStreamCreateFlagUseCFTypes: Int { get }
 var kFSEventStreamCreateFlagNoDefer: Int { get }
 var kFSEventStreamCreateFlagWatchRoot: Int { get }
-@available(OSX 10.6, *)
 var kFSEventStreamCreateFlagIgnoreSelf: Int { get }
-@available(OSX 10.7, *)
 var kFSEventStreamCreateFlagFileEvents: Int { get }
-@available(OSX 10.9, *)
 var kFSEventStreamCreateFlagMarkSelf: Int { get }
 typealias FSEventStreamEventFlags = UInt32
 var kFSEventStreamEventFlagNone: Int { get }
@@ -4072,33 +3748,19 @@ var kFSEventStreamEventFlagHistoryDone: Int { get }
 var kFSEventStreamEventFlagRootChanged: Int { get }
 var kFSEventStreamEventFlagMount: Int { get }
 var kFSEventStreamEventFlagUnmount: Int { get }
-@available(OSX 10.7, *)
 var kFSEventStreamEventFlagItemCreated: Int { get }
-@available(OSX 10.7, *)
 var kFSEventStreamEventFlagItemRemoved: Int { get }
-@available(OSX 10.7, *)
 var kFSEventStreamEventFlagItemInodeMetaMod: Int { get }
-@available(OSX 10.7, *)
 var kFSEventStreamEventFlagItemRenamed: Int { get }
-@available(OSX 10.7, *)
 var kFSEventStreamEventFlagItemModified: Int { get }
-@available(OSX 10.7, *)
 var kFSEventStreamEventFlagItemFinderInfoMod: Int { get }
-@available(OSX 10.7, *)
 var kFSEventStreamEventFlagItemChangeOwner: Int { get }
-@available(OSX 10.7, *)
 var kFSEventStreamEventFlagItemXattrMod: Int { get }
-@available(OSX 10.7, *)
 var kFSEventStreamEventFlagItemIsFile: Int { get }
-@available(OSX 10.7, *)
 var kFSEventStreamEventFlagItemIsDir: Int { get }
-@available(OSX 10.7, *)
 var kFSEventStreamEventFlagItemIsSymlink: Int { get }
-@available(OSX 10.9, *)
 var kFSEventStreamEventFlagOwnEvent: Int { get }
-@available(OSX 10.10, *)
 var kFSEventStreamEventFlagItemIsHardlink: Int { get }
-@available(OSX 10.10, *)
 var kFSEventStreamEventFlagItemIsLastHardlink: Int { get }
 typealias FSEventStreamEventId = UInt64
 var kFSEventStreamEventIdSinceNow: UInt { get }
@@ -4114,49 +3776,27 @@ struct FSEventStreamContext {
   init(version: CFIndex, info: UnsafeMutablePointer<Void>, retain: CFAllocatorRetainCallBack?, release: CFAllocatorReleaseCallBack?, copyDescription: CFAllocatorCopyDescriptionCallBack?)
 }
 typealias FSEventStreamCallback = @convention(c) (ConstFSEventStreamRef, UnsafeMutablePointer<Void>, Int, UnsafeMutablePointer<Void>, UnsafePointer<FSEventStreamEventFlags>, UnsafePointer<FSEventStreamEventId>) -> Void
-@available(OSX 10.5, *)
 func FSEventStreamCreate(allocator: CFAllocator?, _ callback: FSEventStreamCallback, _ context: UnsafeMutablePointer<FSEventStreamContext>, _ pathsToWatch: CFArray, _ sinceWhen: FSEventStreamEventId, _ latency: CFTimeInterval, _ flags: FSEventStreamCreateFlags) -> FSEventStreamRef
-@available(OSX 10.5, *)
 func FSEventStreamCreateRelativeToDevice(allocator: CFAllocator?, _ callback: FSEventStreamCallback, _ context: UnsafeMutablePointer<FSEventStreamContext>, _ deviceToWatch: dev_t, _ pathsToWatchRelativeToDevice: CFArray, _ sinceWhen: FSEventStreamEventId, _ latency: CFTimeInterval, _ flags: FSEventStreamCreateFlags) -> FSEventStreamRef
-@available(OSX 10.5, *)
 func FSEventStreamGetLatestEventId(streamRef: ConstFSEventStreamRef) -> FSEventStreamEventId
-@available(OSX 10.5, *)
 func FSEventStreamGetDeviceBeingWatched(streamRef: ConstFSEventStreamRef) -> dev_t
-@available(OSX 10.5, *)
 func FSEventStreamCopyPathsBeingWatched(streamRef: ConstFSEventStreamRef) -> CFArray
-@available(OSX 10.5, *)
 func FSEventsGetCurrentEventId() -> FSEventStreamEventId
-@available(OSX 10.5, *)
 func FSEventsCopyUUIDForDevice(dev: dev_t) -> CFUUID?
-@available(OSX 10.5, *)
 func FSEventsGetLastEventIdForDeviceBeforeTime(dev: dev_t, _ time: CFAbsoluteTime) -> FSEventStreamEventId
-@available(OSX 10.5, *)
 func FSEventsPurgeEventsForDeviceUpToEventId(dev: dev_t, _ eventId: FSEventStreamEventId) -> Bool
-@available(OSX 10.5, *)
 func FSEventStreamRetain(streamRef: FSEventStreamRef)
-@available(OSX 10.5, *)
 func FSEventStreamRelease(streamRef: FSEventStreamRef)
-@available(OSX 10.5, *)
 func FSEventStreamScheduleWithRunLoop(streamRef: FSEventStreamRef, _ runLoop: CFRunLoop, _ runLoopMode: CFString)
-@available(OSX 10.5, *)
 func FSEventStreamUnscheduleFromRunLoop(streamRef: FSEventStreamRef, _ runLoop: CFRunLoop, _ runLoopMode: CFString)
-@available(OSX 10.6, *)
 func FSEventStreamSetDispatchQueue(streamRef: FSEventStreamRef, _ q: dispatch_queue_t?)
-@available(OSX 10.5, *)
 func FSEventStreamInvalidate(streamRef: FSEventStreamRef)
-@available(OSX 10.5, *)
 func FSEventStreamStart(streamRef: FSEventStreamRef) -> Bool
-@available(OSX 10.5, *)
 func FSEventStreamFlushAsync(streamRef: FSEventStreamRef) -> FSEventStreamEventId
-@available(OSX 10.5, *)
 func FSEventStreamFlushSync(streamRef: FSEventStreamRef)
-@available(OSX 10.5, *)
 func FSEventStreamStop(streamRef: FSEventStreamRef)
-@available(OSX 10.5, *)
 func FSEventStreamShow(streamRef: ConstFSEventStreamRef)
-@available(OSX 10.5, *)
 func FSEventStreamCopyDescription(streamRef: ConstFSEventStreamRef) -> CFString
-@available(OSX 10.9, *)
 func FSEventStreamSetExclusionPaths(streamRef: FSEventStreamRef, _ pathsToExclude: CFArray) -> Bool
 var kGenericDocumentIconResource: Int { get }
 var kGenericStationeryIconResource: Int { get }
@@ -4410,49 +4050,27 @@ var kIconServicesNormalUsageFlag: Int { get }
 var kIconServicesNoBadgeFlag: Int { get }
 var kIconServicesUpdateIfNeededFlag: Int { get }
 var kIconServicesCatalogInfoMask: Int { get }
-@available(OSX 10.0, *)
 func GetIconRefOwners(theIconRef: IconRef, _ owners: UnsafeMutablePointer<UInt16>) -> OSErr
-@available(OSX 10.0, *)
 func AcquireIconRef(theIconRef: IconRef) -> OSErr
-@available(OSX 10.0, *)
 func ReleaseIconRef(theIconRef: IconRef) -> OSErr
-@available(OSX 10.0, *)
 func GetIconRef(vRefNum: Int16, _ creator: OSType, _ iconType: OSType, _ theIconRef: UnsafeMutablePointer<IconRef>) -> OSErr
-@available(OSX 10.0, *)
 func GetIconRefFromFolder(vRefNum: Int16, _ parentFolderID: Int32, _ folderID: Int32, _ attributes: Int8, _ accessPrivileges: Int8, _ theIconRef: UnsafeMutablePointer<IconRef>) -> OSErr
-@available(OSX 10.1, *)
 func GetIconRefFromFileInfo(inRef: UnsafePointer<FSRef>, _ inFileNameLength: Int, _ inFileName: UnsafePointer<UniChar>, _ inWhichInfo: FSCatalogInfoBitmap, _ inCatalogInfo: UnsafePointer<FSCatalogInfo>, _ inUsageFlags: IconServicesUsageFlags, _ outIconRef: UnsafeMutablePointer<IconRef>, _ outLabel: UnsafeMutablePointer<Int16>) -> OSStatus
-@available(OSX 10.3, *)
 func GetIconRefFromTypeInfo(inCreator: OSType, _ inType: OSType, _ inExtension: CFString!, _ inMIMEType: CFString!, _ inUsageFlags: IconServicesUsageFlags, _ outIconRef: UnsafeMutablePointer<IconRef>) -> OSErr
-@available(OSX 10.3, *)
 func GetIconRefFromIconFamilyPtr(inIconFamilyPtr: UnsafePointer<IconFamilyResource>, _ inSize: Size, _ outIconRef: UnsafeMutablePointer<IconRef>) -> OSStatus
-@available(OSX 10.5, *)
 func GetIconRefFromComponent(inComponent: Component, _ outIconRef: UnsafeMutablePointer<IconRef>) -> OSStatus
-@available(OSX 10.0, *)
 func RegisterIconRefFromIconFamily(creator: OSType, _ iconType: OSType, _ iconFamily: IconFamilyHandle, _ theIconRef: UnsafeMutablePointer<IconRef>) -> OSErr
-@available(OSX 10.1, *)
 func RegisterIconRefFromFSRef(creator: OSType, _ iconType: OSType, _ iconFile: UnsafePointer<FSRef>, _ theIconRef: UnsafeMutablePointer<IconRef>) -> OSStatus
-@available(OSX 10.0, *)
 func UnregisterIconRef(creator: OSType, _ iconType: OSType) -> OSErr
-@available(OSX 10.0, *)
 func UpdateIconRef(theIconRef: IconRef) -> OSErr
-@available(OSX 10.0, *)
 func OverrideIconRef(oldIconRef: IconRef, _ newIconRef: IconRef) -> OSErr
-@available(OSX 10.0, *)
 func RemoveIconRefOverride(theIconRef: IconRef) -> OSErr
-@available(OSX 10.0, *)
 func CompositeIconRef(backgroundIconRef: IconRef, _ foregroundIconRef: IconRef, _ compositeIconRef: UnsafeMutablePointer<IconRef>) -> OSErr
-@available(OSX 10.0, *)
 func IsIconRefComposite(compositeIconRef: IconRef, _ backgroundIconRef: UnsafeMutablePointer<IconRef>, _ foregroundIconRef: UnsafeMutablePointer<IconRef>) -> OSErr
-@available(OSX 10.0, *)
 func IsValidIconRef(theIconRef: IconRef) -> Bool
-@available(OSX 10.3, *)
 func IsDataAvailableInIconRef(inIconKind: OSType, _ inIconRef: IconRef) -> Bool
-@available(OSX 10.0, *)
 func SetCustomIconsEnabled(vRefNum: Int16, _ enableCustomIcons: Bool) -> OSErr
-@available(OSX 10.0, *)
 func GetCustomIconsEnabled(vRefNum: Int16, _ customIconsEnabled: UnsafeMutablePointer<DarwinBoolean>) -> OSErr
-@available(OSX 10.1, *)
 func ReadIconFromFSRef(ref: UnsafePointer<FSRef>, _ iconFamily: UnsafeMutablePointer<IconFamilyHandle>) -> OSStatus
 var kLSAppInTrashErr: OSStatus { get }
 var kLSExecutableIncorrectFormat: OSStatus { get }
@@ -4497,83 +4115,48 @@ struct LSAcceptanceFlags : OptionSetType {
   static var AcceptDefault: LSAcceptanceFlags { get }
   static var AcceptAllowLoginUI: LSAcceptanceFlags { get }
 }
-@available(OSX 10.10, *)
 func LSCopyDefaultApplicationURLForURL(inURL: CFURL, _ inRoleMask: LSRolesMask, _ outError: UnsafeMutablePointer<Unmanaged<CFError>?>) -> Unmanaged<CFURL>?
-@available(OSX 10.10, *)
 func LSCopyDefaultApplicationURLForContentType(inContentType: CFString, _ inRoleMask: LSRolesMask, _ outError: UnsafeMutablePointer<Unmanaged<CFError>?>) -> Unmanaged<CFURL>?
-@available(OSX 10.10, *)
 func LSCopyApplicationURLsForBundleIdentifier(inBundleIdentifier: CFString, _ outError: UnsafeMutablePointer<Unmanaged<CFError>?>) -> Unmanaged<CFArray>?
-@available(OSX 10.3, *)
 func LSCopyApplicationURLsForURL(inURL: CFURL, _ inRoleMask: LSRolesMask) -> Unmanaged<CFArray>?
-@available(OSX 10.0, *)
 func LSCanURLAcceptURL(inItemURL: CFURL, _ inTargetURL: CFURL, _ inRoleMask: LSRolesMask, _ inFlags: LSAcceptanceFlags, _ outAcceptsItem: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-@available(OSX 10.3, *)
 func LSRegisterURL(inURL: CFURL, _ inUpdate: Bool) -> OSStatus
-@available(OSX 10.4, *)
 func LSCopyDefaultRoleHandlerForContentType(inContentType: CFString, _ inRole: LSRolesMask) -> Unmanaged<CFString>?
-@available(OSX 10.4, *)
 func LSCopyAllRoleHandlersForContentType(inContentType: CFString, _ inRole: LSRolesMask) -> Unmanaged<CFArray>?
-@available(OSX 10.4, *)
 func LSSetDefaultRoleHandlerForContentType(inContentType: CFString, _ inRole: LSRolesMask, _ inHandlerBundleID: CFString) -> OSStatus
-@available(OSX 10.4, *)
 func LSCopyDefaultHandlerForURLScheme(inURLScheme: CFString) -> Unmanaged<CFString>?
-@available(OSX 10.4, *)
 func LSCopyAllHandlersForURLScheme(inURLScheme: CFString) -> Unmanaged<CFArray>?
-@available(OSX 10.4, *)
 func LSSetDefaultHandlerForURLScheme(inURLScheme: CFString, _ inHandlerBundleID: CFString) -> OSStatus
 struct LSRequestedInfo : OptionSetType {
   init(rawValue: OptionBits)
   let rawValue: OptionBits
-  @available(OSX, deprecated=10.11, message="Use CFURLCopyPathExtension(), -[NSURL pathExtension], or -[NSString pathExtension] instead.")
   static var RequestExtension: LSRequestedInfo { get }
-  @available(OSX, deprecated=10.11, message="Creator codes are deprecated on OS X.")
   static var RequestTypeCreator: LSRequestedInfo { get }
-  @available(OSX, deprecated=10.11, message="Use CFURLCopyResourcePropertiesForKeys or -[NSURL resourceValuesForKeys:error:] instead.")
   static var RequestBasicFlagsOnly: LSRequestedInfo { get }
-  @available(OSX, deprecated=10.11, message="Use CFURLCopyResourcePropertiesForKeys or -[NSURL resourceValuesForKeys:error:] instead.")
   static var RequestAppTypeFlags: LSRequestedInfo { get }
-  @available(OSX, deprecated=10.11, message="Use CFURLCopyResourcePropertiesForKeys or -[NSURL resourceValuesForKeys:error:] instead.")
   static var RequestAllFlags: LSRequestedInfo { get }
-  @available(OSX, deprecated=10.11, message="Use CFURLCopyResourcePropertiesForKeys or -[NSURL resourceValuesForKeys:error:] instead.")
   static var RequestIconAndKind: LSRequestedInfo { get }
-  @available(OSX, deprecated=10.11, message="Use CFURLCopyResourcePropertiesForKeys or -[NSURL resourceValuesForKeys:error:] instead.")
   static var RequestExtensionFlagsOnly: LSRequestedInfo { get }
-  @available(OSX, deprecated=10.11, message="Use CFURLCopyResourcePropertiesForKeys or -[NSURL resourceValuesForKeys:error:] instead.")
   static var RequestAllInfo: LSRequestedInfo { get }
 }
 struct LSItemInfoFlags : OptionSetType {
   init(rawValue: OptionBits)
   let rawValue: OptionBits
-  @available(OSX, deprecated=10.11, message="Use the URL resource property kCFURLIsRegularFileKey or NSURLIsRegularFileKey instead.")
   static var IsPlainFile: LSItemInfoFlags { get }
-  @available(OSX, deprecated=10.11, message="Use the URL resource property kCFURLIsPackageKey or NSURLIsPackageKey instead.")
   static var IsPackage: LSItemInfoFlags { get }
-  @available(OSX, deprecated=10.11, message="Use the URL resource property kCFURLIsApplicationKey or NSURLIsApplicationKey instead.")
   static var IsApplication: LSItemInfoFlags { get }
-  @available(OSX, deprecated=10.11, message="Use the URL resource property kCFURLIsDirectoryKey or NSURLIsDirectoryKey instead.")
   static var IsContainer: LSItemInfoFlags { get }
-  @available(OSX, deprecated=10.11, message="Use the URL resource property kCFURLIsAliasFileKey or NSURLIsAliasFileKey instead.")
   static var IsAliasFile: LSItemInfoFlags { get }
-  @available(OSX, deprecated=10.11, message="Use the URL resource property kCFURLIsSymbolicLinkKey or NSURLIsSymbolicLinkKey.")
   static var IsSymlink: LSItemInfoFlags { get }
-  @available(OSX, deprecated=10.11, message="Use the URL resource property kCFURLIsHiddenKey or NSURLIsHiddenKey instead.")
   static var IsInvisible: LSItemInfoFlags { get }
-  @available(OSX, deprecated=10.11, message="The Classic environment is no longer supported.")
   static var IsNativeApp: LSItemInfoFlags { get }
-  @available(OSX, deprecated=10.11, message="The Classic environment is no longer supported.")
   static var IsClassicApp: LSItemInfoFlags { get }
-  @available(OSX, deprecated=10.11, message="The Classic environment is no longer supported.")
   static var AppPrefersNative: LSItemInfoFlags { get }
-  @available(OSX, deprecated=10.11, message="The Classic environment is no longer supported.")
   static var AppPrefersClassic: LSItemInfoFlags { get }
-  @available(OSX, deprecated=10.11, message="Use the URL resource property kCFURLApplicationIsScriptableKey or NSURLApplicationIsScriptableKey instead.")
   static var AppIsScriptable: LSItemInfoFlags { get }
-  @available(OSX, deprecated=10.11, message="Use the URL resource property kCFURLIsVolumeKey or NSURLIsVolumeKey instead.")
   static var IsVolume: LSItemInfoFlags { get }
-  @available(OSX, deprecated=10.11, message="Use the URL resource property kCFURLHasHiddenExtensionKey or NSURLHasHiddenExtensionKey instead.")
   static var ExtensionIsHidden: LSItemInfoFlags { get }
 }
-@available(OSX, deprecated=10.11, message="Use CFURLCopyResourcePropertiesForKeys or -[NSURL resourceValuesForKeys:error:] instead.")
 struct LSItemInfoRecord {
   var flags: LSItemInfoFlags
   var filetype: OSType
@@ -4582,79 +4165,44 @@ struct LSItemInfoRecord {
   init()
   init(flags: LSItemInfoFlags, filetype: OSType, creator: OSType, extension: Unmanaged<CFString>!)
 }
-@available(OSX, introduced=10.0, deprecated=10.11, message="Use URL resource properties instead.")
 func LSCopyItemInfoForURL(inURL: CFURL!, _ inWhichInfo: LSRequestedInfo, _ outItemInfo: UnsafeMutablePointer<LSItemInfoRecord>) -> OSStatus
-@available(OSX, introduced=10.0, deprecated=10.10, message="Use URL resource properties instead.")
 func LSCopyItemInfoForRef(inItemRef: UnsafePointer<FSRef>, _ inWhichInfo: LSRequestedInfo, _ outItemInfo: UnsafeMutablePointer<LSItemInfoRecord>) -> OSStatus
-@available(OSX, introduced=10.1, deprecated=10.11, message="Use CFURLCopyPathExtension(), -[NSURL pathExtension], or -[NSString pathExtension] instead.")
 func LSGetExtensionInfo(inNameLen: Int, _ inNameBuffer: UnsafePointer<UniChar>, _ outExtStartIndex: UnsafeMutablePointer<Int>) -> OSStatus
-@available(OSX, introduced=10.1, deprecated=10.10, message="Use the URL resource property kCFURLLocalizedNameKey or NSURLLocalizedNameKey instead.")
 func LSCopyDisplayNameForRef(inRef: UnsafePointer<FSRef>, _ outDisplayName: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX, introduced=10.1, deprecated=10.11, message="Use the URL resource property kCFURLLocalizedNameKey or NSURLLocalizedNameKey instead.")
 func LSCopyDisplayNameForURL(inURL: CFURL!, _ outDisplayName: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX, introduced=10.1, deprecated=10.10, message="Use the URL resource property kCFURLHasHiddenExtensionKey or NSURLHasHiddenExtensionKey instead.")
 func LSSetExtensionHiddenForRef(inRef: UnsafePointer<FSRef>, _ inHide: Bool) -> OSStatus
-@available(OSX, introduced=10.1, deprecated=10.11, message="Use the URL resource property kCFURLHasHiddenExtensionKey or NSURLHasHiddenExtensionKey instead.")
 func LSSetExtensionHiddenForURL(inURL: CFURL!, _ inHide: Bool) -> OSStatus
-@available(OSX, introduced=10.0, deprecated=10.10, message="Use the URL resource property kCFURLLocalizedTypeDescriptionKey or NSURLLocalizedTypeDescriptionKey instead.")
 func LSCopyKindStringForRef(inFSRef: UnsafePointer<FSRef>, _ outKindString: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX, introduced=10.0, deprecated=10.11, message="Use the URL resource property kCFURLLocalizedTypeDescriptionKey or NSURLLocalizedTypeDescriptionKey instead.")
 func LSCopyKindStringForURL(inURL: CFURL!, _ outKindString: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX, introduced=10.2, deprecated=10.10, message="Use UTTypeCopyDescription instead.")
 func LSCopyKindStringForTypeInfo(inType: OSType, _ inCreator: OSType, _ inExtension: CFString!, _ outKindString: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX, introduced=10.2, deprecated=10.10, message="Use UTTypeCopyDescription instead.")
 func LSCopyKindStringForMIMEType(inMIMEType: CFString!, _ outKindString: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX, introduced=10.0, deprecated=10.10, message="Use LSCopyDefaultApplicationURLForURL instead.")
 func LSGetApplicationForItem(inItemRef: UnsafePointer<FSRef>, _ inRoleMask: LSRolesMask, _ outAppRef: UnsafeMutablePointer<FSRef>, _ outAppURL: UnsafeMutablePointer<Unmanaged<CFURL>?>) -> OSStatus
-@available(OSX, introduced=10.0, deprecated=10.10, message="Use LSCopyDefaultApplicationURLForContentType instead.")
 func LSGetApplicationForInfo(inType: OSType, _ inCreator: OSType, _ inExtension: CFString!, _ inRoleMask: LSRolesMask, _ outAppRef: UnsafeMutablePointer<FSRef>, _ outAppURL: UnsafeMutablePointer<Unmanaged<CFURL>?>) -> OSStatus
-@available(OSX, introduced=10.2, deprecated=10.10, message="Use LSCopyDefaultApplicationURLForContentType instead.")
 func LSCopyApplicationForMIMEType(inMIMEType: CFString!, _ inRoleMask: LSRolesMask, _ outAppURL: UnsafeMutablePointer<Unmanaged<CFURL>?>) -> OSStatus
-@available(OSX, introduced=10.0, deprecated=10.10, message="Use LSCopyDefaultApplicationURLForURL instead.")
 func LSGetApplicationForURL(inURL: CFURL!, _ inRoleMask: LSRolesMask, _ outAppRef: UnsafeMutablePointer<FSRef>, _ outAppURL: UnsafeMutablePointer<Unmanaged<CFURL>?>) -> OSStatus
-@available(OSX, introduced=10.0, deprecated=10.10, message="Use LSCopyApplicationURLsForBundleIdentifier instead.")
 func LSFindApplicationForInfo(inCreator: OSType, _ inBundleID: CFString!, _ inName: CFString!, _ outAppRef: UnsafeMutablePointer<FSRef>, _ outAppURL: UnsafeMutablePointer<Unmanaged<CFURL>?>) -> OSStatus
-@available(OSX, introduced=10.0, deprecated=10.10, message="Use LSCanURLAcceptURL instead.")
 func LSCanRefAcceptItem(inItemFSRef: UnsafePointer<FSRef>, _ inTargetRef: UnsafePointer<FSRef>, _ inRoleMask: LSRolesMask, _ inFlags: LSAcceptanceFlags, _ outAcceptsItem: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-@available(OSX, introduced=10.3, deprecated=10.10, message="Use LSRegisterURL instead.")
 func LSRegisterFSRef(inRef: UnsafePointer<FSRef>, _ inUpdate: Bool) -> OSStatus
-@available(OSX, introduced=10.4, deprecated=10.10, message="Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey instead.")
 let kLSItemContentType: CFString!
-@available(OSX, introduced=10.4, deprecated=10.10, message="Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey to get the file's UTI instead.")
 let kLSItemFileType: CFString!
-@available(OSX, introduced=10.4, deprecated=10.10, message="Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey to get the file's UTI instead.")
 let kLSItemFileCreator: CFString!
-@available(OSX, introduced=10.4, deprecated=10.10, message="Use CFURLCopyPathExtension or -[NSURL pathExtension] instead.")
 let kLSItemExtension: CFString!
-@available(OSX, introduced=10.4, deprecated=10.10, message="Use the URL resource property kCFURLLocalizedNameKey or NSURLLocalizedNameKey instead.")
 let kLSItemDisplayName: CFString!
-@available(OSX, introduced=10.4, deprecated=10.10, message="Use the URL resource property kCFURLLocalizedTypeDescriptionKey or NSURLLocalizedTypeDescriptionKey instead.")
 let kLSItemDisplayKind: CFString!
-@available(OSX, introduced=10.4, deprecated=10.10, message="Instead, resolve the desired role handler for the file, then use the URL resource property kCFURLLocalizedNameKey or NSURLLocalizedNameKey on the role handler's URL.")
 let kLSItemRoleHandlerDisplayName: CFString!
-@available(OSX, introduced=10.4, deprecated=10.10, message="Use the URL resource property kCFURLIsHiddenKey or NSURLIsHiddenKey instead.")
 let kLSItemIsInvisible: CFString!
-@available(OSX, introduced=10.4, deprecated=10.10, message="Use the URL resource property kCFURLHasHiddenExtensionKey or NSURLHasHiddenExtensionKey instead.")
 let kLSItemExtensionIsHidden: CFString!
-@available(OSX, introduced=10.5, deprecated=10.10, message="Use the URL resource property kCFURLQuarantinePropertiesKey or NSURLQuarantinePropertiesKey instead.")
 let kLSItemQuarantineProperties: CFString!
-@available(OSX, introduced=10.4, deprecated=10.10, message="Use CFURLCopyResourcePropertyForKey or -[NSURL getResourceValue:forKey:error:] instead.")
 func LSCopyItemAttribute(inItem: UnsafePointer<FSRef>, _ inRoles: LSRolesMask, _ inAttributeName: CFString!, _ outValue: UnsafeMutablePointer<Unmanaged<AnyObject>?>) -> OSStatus
-@available(OSX, introduced=10.4, deprecated=10.10, message="Use CFURLCopyResourcePropertiesForKeys or -[NSURL resourceValuesForKeys:error:] instead.")
 func LSCopyItemAttributes(inItem: UnsafePointer<FSRef>, _ inRoles: LSRolesMask, _ inAttributeNames: CFArray!, _ outValues: UnsafeMutablePointer<Unmanaged<CFDictionary>?>) -> OSStatus
-@available(OSX, introduced=10.5, deprecated=10.10, message="Use CFURLSetResourcePropertyForKey or -[NSURL setResourceValue:forKey:error:] instead.")
 func LSSetItemAttribute(inItem: UnsafePointer<FSRef>, _ inRoles: LSRolesMask, _ inAttributeName: CFString!, _ inValue: AnyObject!) -> OSStatus
 struct LSHandlerOptions : OptionSetType {
   init(rawValue: OptionBits)
   let rawValue: OptionBits
-  @available(OSX, introduced=10.4, deprecated=10.11, message="Creator codes are deprecated on OS X.")
   static var Default: LSHandlerOptions { get }
-  @available(OSX, introduced=10.4, deprecated=10.11, message="Creator codes are deprecated on OS X.")
   static var IgnoreCreator: LSHandlerOptions { get }
 }
-@available(OSX, introduced=10.4, deprecated=10.11, message="Creator codes are deprecated on OS X.")
 func LSGetHandlerOptionsForContentType(inContentType: CFString!) -> LSHandlerOptions
-@available(OSX, introduced=10.4, deprecated=10.11, message="Creator codes are deprecated on OS X.")
 func LSSetHandlerOptionsForContentType(inContentType: CFString!, _ inOptions: LSHandlerOptions) -> OSStatus
 struct LSLaunchFlags : OptionSetType {
   init(rawValue: OptionBits)
@@ -4676,7 +4224,6 @@ struct LSLaunchFlags : OptionSetType {
   static var AndHideOthers: LSLaunchFlags { get }
   static var HasUntrustedContents: LSLaunchFlags { get }
 }
-@available(OSX 10.0, *)
 struct LSLaunchURLSpec {
   var appURL: Unmanaged<CFURL>?
   var itemURLs: Unmanaged<CFArray>?
@@ -4686,15 +4233,10 @@ struct LSLaunchURLSpec {
   init()
   init(appURL: Unmanaged<CFURL>?, itemURLs: Unmanaged<CFArray>?, passThruParams: UnsafePointer<AEDesc>, launchFlags: LSLaunchFlags, asyncRefCon: UnsafeMutablePointer<Void>)
 }
-@available(OSX 10.0, *)
 func LSOpenCFURLRef(inURL: CFURL, _ outLaunchedURL: UnsafeMutablePointer<Unmanaged<CFURL>?>) -> OSStatus
-@available(OSX 10.0, *)
 func LSOpenFromURLSpec(inLaunchSpec: UnsafePointer<LSLaunchURLSpec>, _ outLaunchedURL: UnsafeMutablePointer<Unmanaged<CFURL>?>) -> OSStatus
-@available(OSX, introduced=10.0, deprecated=10.11, message="The Classic environment is no longer supported.")
 var kLSLaunchStartClassic: Int { get }
-@available(OSX, introduced=10.0, deprecated=10.11, message="The Classic environment is no longer supported.")
 var kLSLaunchInClassic: Int { get }
-@available(OSX, introduced=10.0, deprecated=10.10, message="Use LSLaunchURLSpec instead.")
 struct LSLaunchFSRefSpec {
   var appRef: UnsafePointer<FSRef>
   var numDocs: Int
@@ -4705,11 +4247,8 @@ struct LSLaunchFSRefSpec {
   init()
   init(appRef: UnsafePointer<FSRef>, numDocs: Int, itemRefs: UnsafePointer<FSRef>, passThruParams: UnsafePointer<AEDesc>, launchFlags: LSLaunchFlags, asyncRefCon: UnsafeMutablePointer<Void>)
 }
-@available(OSX, introduced=10.0, deprecated=10.10, message="Use LSOpenCFURLRef or -[NSWorkspace openURL:] instead.")
 func LSOpenFSRef(inRef: UnsafePointer<FSRef>, _ outLaunchedRef: UnsafeMutablePointer<FSRef>) -> OSStatus
-@available(OSX, introduced=10.0, deprecated=10.10, message="Use LSOpenFromURLSpec or NSWorkspace instead.")
 func LSOpenFromRefSpec(inLaunchSpec: UnsafePointer<LSLaunchFSRefSpec>, _ outLaunchedRef: UnsafeMutablePointer<FSRef>) -> OSStatus
-@available(OSX, introduced=10.4, deprecated=10.10, message="Use NSWorkspace instead.")
 struct LSApplicationParameters {
   var version: CFIndex
   var flags: LSLaunchFlags
@@ -4721,341 +4260,173 @@ struct LSApplicationParameters {
   init()
   init(version: CFIndex, flags: LSLaunchFlags, application: UnsafePointer<FSRef>, asyncLaunchRefCon: UnsafeMutablePointer<Void>, environment: Unmanaged<CFDictionary>!, argv: Unmanaged<CFArray>!, initialEvent: UnsafeMutablePointer<AppleEvent>)
 }
-@available(OSX, introduced=10.4, deprecated=10.10, message="Use -[NSWorkspace launchApplicationAtURL:options:configuration:error:] instead.")
 func LSOpenApplication(appParams: UnsafePointer<LSApplicationParameters>, _ outPSN: UnsafeMutablePointer<ProcessSerialNumber>) -> OSStatus
-@available(OSX, introduced=10.4, deprecated=10.10, message="Use NSWorkspace instead.")
 func LSOpenItemsWithRole(inItems: UnsafePointer<FSRef>, _ inItemCount: CFIndex, _ inRole: LSRolesMask, _ inAEParam: UnsafePointer<AEKeyDesc>, _ inAppParams: UnsafePointer<LSApplicationParameters>, _ outPSNs: UnsafeMutablePointer<ProcessSerialNumber>, _ inMaxPSNCount: CFIndex) -> OSStatus
-@available(OSX, introduced=10.4, deprecated=10.10, message="Use NSWorkspace instead.")
 func LSOpenURLsWithRole(inURLs: CFArray!, _ inRole: LSRolesMask, _ inAEParam: UnsafePointer<AEKeyDesc>, _ inAppParams: UnsafePointer<LSApplicationParameters>, _ outPSNs: UnsafeMutablePointer<ProcessSerialNumber>, _ inMaxPSNCount: CFIndex) -> OSStatus
-@available(OSX 10.5, *)
 let kLSQuarantineAgentNameKey: CFString
-@available(OSX 10.5, *)
 let kLSQuarantineAgentBundleIdentifierKey: CFString
-@available(OSX 10.5, *)
 let kLSQuarantineTimeStampKey: CFString
-@available(OSX 10.5, *)
 let kLSQuarantineTypeKey: CFString
-@available(OSX 10.5, *)
 let kLSQuarantineTypeWebDownload: CFString
-@available(OSX 10.5, *)
 let kLSQuarantineTypeOtherDownload: CFString
-@available(OSX 10.5, *)
 let kLSQuarantineTypeEmailAttachment: CFString
-@available(OSX 10.5, *)
 let kLSQuarantineTypeInstantMessageAttachment: CFString
-@available(OSX 10.5, *)
 let kLSQuarantineTypeCalendarEventAttachment: CFString
-@available(OSX 10.5, *)
 let kLSQuarantineTypeOtherAttachment: CFString
-@available(OSX 10.5, *)
 let kLSQuarantineOriginURLKey: CFString
-@available(OSX 10.5, *)
 let kLSQuarantineDataURLKey: CFString
-@available(OSX 10.4, *)
 let kUTTypeItem: CFString
-@available(OSX 10.4, *)
 let kUTTypeContent: CFString
-@available(OSX 10.4, *)
 let kUTTypeCompositeContent: CFString
-@available(OSX 10.4, *)
 let kUTTypeMessage: CFString
-@available(OSX 10.4, *)
 let kUTTypeContact: CFString
-@available(OSX 10.4, *)
 let kUTTypeArchive: CFString
-@available(OSX 10.4, *)
 let kUTTypeDiskImage: CFString
-@available(OSX 10.4, *)
 let kUTTypeData: CFString
-@available(OSX 10.4, *)
 let kUTTypeDirectory: CFString
-@available(OSX 10.4, *)
 let kUTTypeResolvable: CFString
-@available(OSX 10.4, *)
 let kUTTypeSymLink: CFString
-@available(OSX 10.5, *)
 let kUTTypeExecutable: CFString
-@available(OSX 10.4, *)
 let kUTTypeMountPoint: CFString
-@available(OSX 10.4, *)
 let kUTTypeAliasFile: CFString
-@available(OSX 10.4, *)
 let kUTTypeAliasRecord: CFString
-@available(OSX 10.10, *)
 let kUTTypeURLBookmarkData: CFString
-@available(OSX 10.4, *)
 let kUTTypeURL: CFString
-@available(OSX 10.4, *)
 let kUTTypeFileURL: CFString
-@available(OSX 10.4, *)
 let kUTTypeText: CFString
-@available(OSX 10.4, *)
 let kUTTypePlainText: CFString
-@available(OSX 10.4, *)
 let kUTTypeUTF8PlainText: CFString
-@available(OSX 10.4, *)
 let kUTTypeUTF16ExternalPlainText: CFString
-@available(OSX 10.4, *)
 let kUTTypeUTF16PlainText: CFString
-@available(OSX 10.10, *)
 let kUTTypeDelimitedText: CFString
-@available(OSX 10.10, *)
 let kUTTypeCommaSeparatedText: CFString
-@available(OSX 10.10, *)
 let kUTTypeTabSeparatedText: CFString
-@available(OSX 10.10, *)
 let kUTTypeUTF8TabSeparatedText: CFString
-@available(OSX 10.4, *)
 let kUTTypeRTF: CFString
-@available(OSX 10.4, *)
 let kUTTypeHTML: CFString
-@available(OSX 10.4, *)
 let kUTTypeXML: CFString
-@available(OSX 10.4, *)
 let kUTTypeSourceCode: CFString
-@available(OSX 10.10, *)
 let kUTTypeAssemblyLanguageSource: CFString
-@available(OSX 10.4, *)
 let kUTTypeCSource: CFString
-@available(OSX 10.4, *)
 let kUTTypeObjectiveCSource: CFString
-@available(OSX 10.11, *)
 let kUTTypeSwiftSource: CFString
-@available(OSX 10.4, *)
 let kUTTypeCPlusPlusSource: CFString
-@available(OSX 10.4, *)
 let kUTTypeObjectiveCPlusPlusSource: CFString
-@available(OSX 10.4, *)
 let kUTTypeCHeader: CFString
-@available(OSX 10.4, *)
 let kUTTypeCPlusPlusHeader: CFString
-@available(OSX 10.4, *)
 let kUTTypeJavaSource: CFString
-@available(OSX 10.10, *)
 let kUTTypeScript: CFString
-@available(OSX 10.10, *)
 let kUTTypeAppleScript: CFString
-@available(OSX 10.10, *)
 let kUTTypeOSAScript: CFString
-@available(OSX 10.10, *)
 let kUTTypeOSAScriptBundle: CFString
-@available(OSX 10.10, *)
 let kUTTypeJavaScript: CFString
-@available(OSX 10.10, *)
 let kUTTypeShellScript: CFString
-@available(OSX 10.10, *)
 let kUTTypePerlScript: CFString
-@available(OSX 10.10, *)
 let kUTTypePythonScript: CFString
-@available(OSX 10.10, *)
 let kUTTypeRubyScript: CFString
-@available(OSX 10.10, *)
 let kUTTypePHPScript: CFString
-@available(OSX 10.10, *)
 let kUTTypeJSON: CFString
-@available(OSX 10.10, *)
 let kUTTypePropertyList: CFString
-@available(OSX 10.10, *)
 let kUTTypeXMLPropertyList: CFString
-@available(OSX 10.10, *)
 let kUTTypeBinaryPropertyList: CFString
-@available(OSX 10.4, *)
 let kUTTypePDF: CFString
-@available(OSX 10.4, *)
 let kUTTypeRTFD: CFString
-@available(OSX 10.4, *)
 let kUTTypeFlatRTFD: CFString
-@available(OSX 10.4, *)
 let kUTTypeTXNTextAndMultimediaData: CFString
-@available(OSX 10.4, *)
 let kUTTypeWebArchive: CFString
-@available(OSX 10.4, *)
 let kUTTypeImage: CFString
-@available(OSX 10.4, *)
 let kUTTypeJPEG: CFString
-@available(OSX 10.4, *)
 let kUTTypeJPEG2000: CFString
-@available(OSX 10.4, *)
 let kUTTypeTIFF: CFString
-@available(OSX 10.4, *)
 let kUTTypePICT: CFString
-@available(OSX 10.4, *)
 let kUTTypeGIF: CFString
-@available(OSX 10.4, *)
 let kUTTypePNG: CFString
-@available(OSX 10.4, *)
 let kUTTypeQuickTimeImage: CFString
-@available(OSX 10.4, *)
 let kUTTypeAppleICNS: CFString
-@available(OSX 10.4, *)
 let kUTTypeBMP: CFString
-@available(OSX 10.4, *)
 let kUTTypeICO: CFString
-@available(OSX 10.10, *)
 let kUTTypeRawImage: CFString
-@available(OSX 10.10, *)
 let kUTTypeScalableVectorGraphics: CFString
-@available(OSX 10.4, *)
 let kUTTypeAudiovisualContent: CFString
-@available(OSX 10.4, *)
 let kUTTypeMovie: CFString
-@available(OSX 10.4, *)
 let kUTTypeVideo: CFString
-@available(OSX 10.4, *)
 let kUTTypeAudio: CFString
-@available(OSX 10.4, *)
 let kUTTypeQuickTimeMovie: CFString
-@available(OSX 10.4, *)
 let kUTTypeMPEG: CFString
-@available(OSX 10.10, *)
 let kUTTypeMPEG2Video: CFString
-@available(OSX 10.10, *)
 let kUTTypeMPEG2TransportStream: CFString
-@available(OSX 10.4, *)
 let kUTTypeMP3: CFString
-@available(OSX 10.4, *)
 let kUTTypeMPEG4: CFString
-@available(OSX 10.4, *)
 let kUTTypeMPEG4Audio: CFString
-@available(OSX 10.4, *)
 let kUTTypeAppleProtectedMPEG4Audio: CFString
-@available(OSX 10.10, *)
 let kUTTypeAppleProtectedMPEG4Video: CFString
-@available(OSX 10.10, *)
 let kUTTypeAVIMovie: CFString
-@available(OSX 10.10, *)
 let kUTTypeAudioInterchangeFileFormat: CFString
-@available(OSX 10.10, *)
 let kUTTypeWaveformAudio: CFString
-@available(OSX 10.10, *)
 let kUTTypeMIDIAudio: CFString
-@available(OSX 10.10, *)
 let kUTTypePlaylist: CFString
-@available(OSX 10.10, *)
 let kUTTypeM3UPlaylist: CFString
-@available(OSX 10.4, *)
 let kUTTypeFolder: CFString
-@available(OSX 10.4, *)
 let kUTTypeVolume: CFString
-@available(OSX 10.4, *)
 let kUTTypePackage: CFString
-@available(OSX 10.4, *)
 let kUTTypeBundle: CFString
-@available(OSX 10.10, *)
 let kUTTypePluginBundle: CFString
-@available(OSX 10.10, *)
 let kUTTypeSpotlightImporter: CFString
-@available(OSX 10.10, *)
 let kUTTypeQuickLookGenerator: CFString
-@available(OSX 10.10, *)
 let kUTTypeXPCService: CFString
-@available(OSX 10.4, *)
 let kUTTypeFramework: CFString
-@available(OSX 10.4, *)
 let kUTTypeApplication: CFString
-@available(OSX 10.4, *)
 let kUTTypeApplicationBundle: CFString
-@available(OSX 10.4, *)
 let kUTTypeApplicationFile: CFString
-@available(OSX 10.10, *)
 let kUTTypeUnixExecutable: CFString
-@available(OSX 10.10, *)
 let kUTTypeWindowsExecutable: CFString
-@available(OSX 10.10, *)
 let kUTTypeJavaClass: CFString
-@available(OSX 10.10, *)
 let kUTTypeJavaArchive: CFString
-@available(OSX 10.10, *)
 let kUTTypeSystemPreferencesPane: CFString
-@available(OSX 10.10, *)
 let kUTTypeGNUZipArchive: CFString
-@available(OSX 10.10, *)
 let kUTTypeBzip2Archive: CFString
-@available(OSX 10.10, *)
 let kUTTypeZipArchive: CFString
-@available(OSX 10.10, *)
 let kUTTypeSpreadsheet: CFString
-@available(OSX 10.10, *)
 let kUTTypePresentation: CFString
-@available(OSX 10.4, *)
 let kUTTypeDatabase: CFString
-@available(OSX 10.4, *)
 let kUTTypeVCard: CFString
-@available(OSX 10.10, *)
 let kUTTypeToDoItem: CFString
-@available(OSX 10.10, *)
 let kUTTypeCalendarEvent: CFString
-@available(OSX 10.10, *)
 let kUTTypeEmailMessage: CFString
-@available(OSX 10.10, *)
 let kUTTypeInternetLocation: CFString
-@available(OSX 10.4, *)
 let kUTTypeInkText: CFString
-@available(OSX 10.10, *)
 let kUTTypeFont: CFString
-@available(OSX 10.10, *)
 let kUTTypeBookmark: CFString
-@available(OSX 10.10, *)
 let kUTType3DContent: CFString
-@available(OSX 10.10, *)
 let kUTTypePKCS12: CFString
-@available(OSX 10.10, *)
 let kUTTypeX509Certificate: CFString
-@available(OSX 10.10, *)
 let kUTTypeElectronicPublication: CFString
-@available(OSX 10.10, *)
 let kUTTypeLog: CFString
-@available(OSX 10.3, *)
 let kUTExportedTypeDeclarationsKey: CFString
-@available(OSX 10.3, *)
 let kUTImportedTypeDeclarationsKey: CFString
-@available(OSX 10.3, *)
 let kUTTypeIdentifierKey: CFString
-@available(OSX 10.3, *)
 let kUTTypeTagSpecificationKey: CFString
-@available(OSX 10.3, *)
 let kUTTypeConformsToKey: CFString
-@available(OSX 10.3, *)
 let kUTTypeDescriptionKey: CFString
-@available(OSX 10.3, *)
 let kUTTypeIconFileKey: CFString
-@available(OSX 10.3, *)
 let kUTTypeReferenceURLKey: CFString
-@available(OSX 10.3, *)
 let kUTTypeVersionKey: CFString
-@available(OSX 10.3, *)
 let kUTTagClassFilenameExtension: CFString
-@available(OSX 10.3, *)
 let kUTTagClassMIMEType: CFString
-@available(OSX 10.3, *)
 let kUTTagClassNSPboardType: CFString
-@available(OSX 10.3, *)
 let kUTTagClassOSType: CFString
-@available(OSX 10.3, *)
 func UTTypeCreatePreferredIdentifierForTag(inTagClass: CFString, _ inTag: CFString, _ inConformingToUTI: CFString?) -> Unmanaged<CFString>?
-@available(OSX 10.3, *)
 func UTTypeCreateAllIdentifiersForTag(inTagClass: CFString, _ inTag: CFString, _ inConformingToUTI: CFString?) -> Unmanaged<CFArray>?
-@available(OSX 10.3, *)
 func UTTypeCopyPreferredTagWithClass(inUTI: CFString, _ inTagClass: CFString) -> Unmanaged<CFString>?
-@available(OSX 10.10, *)
 func UTTypeCopyAllTagsWithClass(inUTI: CFString, _ inTagClass: CFString) -> Unmanaged<CFArray>?
-@available(OSX 10.3, *)
 func UTTypeEqual(inUTI1: CFString, _ inUTI2: CFString) -> Bool
-@available(OSX 10.3, *)
 func UTTypeConformsTo(inUTI: CFString, _ inConformsToUTI: CFString) -> Bool
-@available(OSX 10.3, *)
 func UTTypeCopyDescription(inUTI: CFString) -> Unmanaged<CFString>?
-@available(OSX 10.10, *)
 func UTTypeIsDeclared(inUTI: CFString) -> Bool
-@available(OSX 10.10, *)
 func UTTypeIsDynamic(inUTI: CFString) -> Bool
-@available(OSX 10.3, *)
 func UTTypeCopyDeclaration(inUTI: CFString) -> Unmanaged<CFDictionary>?
-@available(OSX 10.3, *)
 func UTTypeCopyDeclaringBundleURL(inUTI: CFString) -> Unmanaged<CFURL>?
-@available(OSX 10.3, *)
 func UTCreateStringForOSType(inOSType: OSType) -> Unmanaged<CFString>
-@available(OSX 10.3, *)
 func UTGetOSTypeFromString(inString: CFString) -> OSType
 struct MDImporterInterfaceStruct {
   var _reserved: UnsafeMutablePointer<Void>
@@ -5093,1130 +4464,187 @@ struct MDImporterBundleWrapperURLInterfaceStruct {
   init()
   init(_reserved: UnsafeMutablePointer<Void>, QueryInterface: (@convention(c) (UnsafeMutablePointer<Void>, REFIID, UnsafeMutablePointer<LPVOID>) -> HRESULT)!, AddRef: (@convention(c) (UnsafeMutablePointer<Void>) -> ULONG)!, Release: (@convention(c) (UnsafeMutablePointer<Void>) -> ULONG)!, ImporterImportBundleWrapperURLData: (@convention(c) (UnsafeMutablePointer<Void>, CFMutableDictionary!, CFString!, CFURL!) -> DarwinBoolean)!)
 }
-
-/*!
-        @typedef MDItemRef
-        This is the type of a reference to MDItems.
-*/
 class MDItem {
 }
-
-/*!
-        @typedef MDItemRef
-        This is the type of a reference to MDItems.
-*/
 typealias MDItemRef = MDItem
-
-/*!
-        @function MDItemGetTypeID
-        Returns the type identifier of all MDItem instances.
-*/
-@available(OSX 10.4, *)
 func MDItemGetTypeID() -> CFTypeID
-
-/*!
-        @function MDItemCreate
-        Returns an metadata item for the given path.
-        @param allocator The CFAllocator which should be used to allocate
-                memory for the query and its sub-storage. This
-                parameter may be NULL in which case the current default
-                CFAllocator is used.
-        @param path A path to the file for which to create the MDItem.
-                [[Currently, the path must exist. MDItemRefs may or
-                may not be uniqued. Use CFEqual() to compare them.]]
-        @result An MDItemRef, or NULL on failure.
-*/
-@available(OSX 10.4, *)
 func MDItemCreate(allocator: CFAllocator!, _ path: CFString!) -> MDItem!
-
-/*!
- @function MDItemCreateWithURL
- Returns an metadata item for the given path.
- @param allocator The CFAllocator which should be used to allocate
- memory for the query and its sub-storage. This
- parameter may be NULL in which case the current default
- CFAllocator is used.
- @param url A url to the file for which to create the MDItem.
- [[Currently, the file must exist. MDItemRefs may or
- may not be uniqued. Use CFEqual() to compare them.]]
- @result An MDItemRef, or NULL on failure.
- */
-@available(OSX 10.6, *)
 func MDItemCreateWithURL(allocator: CFAllocator!, _ url: CFURL!) -> MDItem!
-
-/*!
- @function MDItemsCreateWithURLs
- Returns metadata items for the given urls.
- @param allocator The CFAllocator which should be used to allocate
- memory for the array. This parameter may be NULL in which case the current default
- CFAllocator is used.
- @param urls A CFArray of urls to the file for which to create the MDItem.
- @result A CFArrayRef of MDItemRefs, or NULL on failure. Missing items will have kCFNull entries in the result array.
- */
-@available(OSX 10.7, *)
 func MDItemsCreateWithURLs(allocator: CFAllocator!, _ urls: CFArray!) -> CFArray!
-
-/*!
-        @function MDItemCopyAttribute
-        Returns the value of the given attribute for the item.
-        @param item The item to be interrogated.
-        @param name The name of the desired attribute.
-        @result A CFTypeRef, or NULL on failure, or if the attribute
-                does not exist, of if the attribute is not readable.
-*/
-@available(OSX 10.4, *)
 func MDItemCopyAttribute(item: MDItem!, _ name: CFString!) -> AnyObject!
-
-/*!
-        @function MDItemCopyAttributes
-        Returns the values of the given attributes for the item.
-        @param item The item to be interrogated.
-        @param names A CFArray of the names of the desired attributes.
-        @result A CFDictionary where the keys are the attribute names,
-                and the values are the attribute values, or NULL on
-                failure. If an attribute does not exist, or is
-                unreadable, there will be no key-value pair for it
-                in the dictionary.
-*/
-@available(OSX 10.4, *)
 func MDItemCopyAttributes(item: MDItem!, _ names: CFArray!) -> CFDictionary!
-
-/*!
-        @function MDItemCopyAttributeNames
-        Returns an array of the attribute names existing in the item.
-        @param item The item to be interrogated.
-        @result A CFArray of CFString attribute names, or NULL on
-                failure.
-*/
-@available(OSX 10.4, *)
 func MDItemCopyAttributeNames(item: MDItem!) -> CFArray!
-
-/*!
- @function MDItemsCopyAttributes
- Returns metadata for the given items.
- @param items A CFArray of MDItemRefs to items for which to fetch data
- @param names A CFArray of attribute names for which to fetch data. 
-				The attribute names are CFStrings
- @result A CFArrayRef, or NULL on failure. Each entry in the array is either kCFNull, 
-  if the item is not accessible, or a CFArray of attribute values. 
-  If an attribute is not available, there will be a kCFNull in its slot in the nested array.
- */
-@available(OSX 10.7, *)
 func MDItemsCopyAttributes(items: CFArray!, _ names: CFArray!) -> CFArray!
-
-/*!
-   @constant kMDItemAttributeChangeDate
-   This is the date that the last metadata attribute was changed.
-
-   @constant kMDItemContentType
-   UTI Type pedigree for a file for example a jpeg file will have the
-   following ItemContentType public.jpeg/public.image/public.data
-   the kMDItemContentType is set by the sniffer, any changes to this
-   value will get over written by the sniffer when the contents of
-   this MDItemRef changes. Type is a CFStringRef
-
-   @constant kMDItemKeywords
-   Represents keywords associated with this particular
-   MDItemRef. Example Keywords might be Birthday,Important etc. Type
-   is a CFArray of CFStrings
-
-   @constant kMDItemTitle
-   The title of this particular MDItemRef. Title of the document, or
-   it could be the title of this mp3 or a subject of a mail
-   message. Type is a CFString
-
-   @constant kMDItemAuthors
-   The list of author/authors that has worked on this file. There
-   could be 0 or more authors of a particular file. The order of the
-   authors in the array is preserved, but is not intended to represent
-   the main author or relative importance of the authors. Type is a
-   CFArray of CFStrings.
- 
-   @constant kMDItemEditors
-   The list of editor/editors that has worked on this file. There
-   could be 0 or more editors of a particular file. The order of the
-   editors in the array is preserved, but is not intended to represent
-   the main editor or relative importance of the editors. Type is a
-   CFArray of CFStrings.
- 
-   @constant kMDItemParticipants
-   The list of people who are visible in an image or movie or
-   written about in a document. Type is CFArray of CFStrings.
-
-   @constant kMDItemProjects
-   The list of projects etc that this file is part of. For example if
-   you were working on a movie, all of the movie files could be marked
-   as belonging to the project "My movie" then a query could be done
-   kMDItemProjects = "My movie" and all of the related files would
-   show up. Type is a CFArray of CFStrings
-
-   @constant kMDItemComment
-   This is a comment related to a file, and can be any random
-   string. Type is a CFString
-
-   @constant kMDItemCopyright
-   This is the copyright of the content. Type is a CFString
-   
-   @constant kMDItemDownloadedDate
-   This is the date that the file was last downloaded / received.
-
-   @constant kMDItemWhereFroms
-   This attribute indicates where the item was obtained from.
-   Examples:
-   - downloaded file may refer to the site they were downloaded from,
-    the refering URL, etc
-  - files reveived by email may indicate who sent the file, the
-    message subject, etc
-   Type is a CFArray of CFStrings
-
-   @constant kMDItemLastUsedDate
-   This is the date that the file was last used, this field is updated
-   by LaunchServices everytime a file is opend by double clicking or
-   by asking LaunchServices to open a file. Type is a CFDate
-
-   @constant kMDItemContentCreationDate
-   This is the date that the contents of the file were created,
-   has an application specific semantic.
-   Type is a CFDate.
-
-   @constant kMDItemContentModificationDate
-   This is the date that the contents of the file were last
-   modified, has an application specific semantic. For example an
-   application can use this field to mark when the file was last
-   modified, this date is not related to the file system modification
-   date, but can be independent of that. This allows tracking of the
-   last time the content was modified irrespective of the last time the
-   file was modified. Type is a CFDate.
-   
-   @constant kMDItemDateAdded
-   This is the date that the file was moved into the current location.
-   Not all files will have this attribute.  Not all file systems support
-   this attribute.
-
-   @constant kMDItemDurationSeconds
-   This is the duration, in seconds, of the content of the file (if
-   appropriate).  A value of 10.5 represents media whose content is
-   10 and 1/2 seconds long.  Type is a CFNumber.
-
-   @constant kMDItemContactKeywords
-   A list of contacts that are somehow associated with this document,
-   beyond what is captured as Author.
-
-   @constant kMDItemVersion
-   A version number for this item. Type is a CFString
-
-   @constant kMDItemPixelHeight
-   The height of the document in pixels (ie Image height or Video frame height)
-
-   @constant kMDItemPixelWidth
-   The width of the document in pixels (ie Image width or Video frame width)
-
-   @constant kMDItemPixelCount
-   The total number of pixels in the document.  Type is a CFNumber.
-
-   @constant kMDItemColorSpace
-   What color space model is this document following
-   (For example, are examples "RGB", "CMYK", "YUV", "YCbCr")
-
-   @constant kMDItemBitsPerSample
-   Number of bits per sample
-   For example bit depth of an image (8-bit, 16-bit etc..) or bit
-   depth per audio sample of uncompressed audio data (8, 16, 24, 32,
-   64, etc..)
-
-   @constant kMDItemFlashOnOff
-   Indicates if the flash was used to take the picture. 0 means flash did not fire
-
-   @constant kMDItemFocalLength
-   The actual focal length of the lens in mm.
-
-   @constant kMDItemAcquisitionMake
-   Device make that was used to acquire this document
-
-   @constant kMDItemAcquisitionModel
-   Device model that was used to acquire this document
-
-   @const kMDItemISOSpeed
-   The ISO Speed the camera was set to when the image was
-   taken. Examples are 100, 200, 400, etc.
-
-   @const kMDItemOrientation
-   The orientation of the data. Values are 0 is "Landscape" or 1 is "Portrait"
-
-   @const kMDItemLayerNames
-   The names of the various layers in the file
-
-   @const kMDItemWhiteBalance
-   The white balance setting of the camera when the image was
-   acquired. 0 is auto white balance and 1 is manual
-
-   @const kMDItemAperture
-   The size of the lens aperture as a log-scale APEX value
-   when the image was acquired.
-
-   @const kMDItemProfileName
-   Name of the color profile used for the image
-
-   @const kMDItemResolutionWidthDPI
-   Resolution width of this image in DPI
-
-   @const kMDItemResolutionHeightDPI
-   Resolution height of this image in DPI
-
-   @const kMDItemExposureMode
-   Mode that was used for the exposure. 0 is auto exposure, 1 is
-   manual, and 2 is auto bracket.
-
-   @const kMDItemExposureTimeSeconds
-   Time that the lens was open during exposure
-
-   @const kMDItemEXIFVersion
-   The verion of the EXIF header that was used to generate the metadata
-
-   @const kMDItemEXIFGPSVersion
-   The version of GPSInfoIFD header that was used to generate the metadata
- 
-   @const kMDItemCodecs
-   The codecs used to encode/decode the media
-
-   @const kMDItemMediaTypes
-   Media types present in the content
-
-   @const kMDItemStreamable
-   Whether the content is prepared for streaming
-
-   @const kMDItemTotalBitRate
-   The total byte rate (audio & video combined) of the media
-
-   @const kMDItemVideoBitRate
-   The video byte rate
-
-   @const kMDItemAudioBitRate
-   The audio byte rate
-
-   @const kMDItemDeliveryType
-   Delivery type Fast start or RTSP
-
-   @constant kMDItemAlbum
-   The title for a collection of media. This is analagous to a record album,
-   or photo album whichs are collections of audio or images. Type is a CFString.
-
-   @constant kMDItemHasAlphaChannel
-   Boolean indicating if this image file has an alpha channel. Type is
-   a CFBoolean.
-
-   @constant kMDItemRedEyeOnOff
-   Indicates if the flash was used to take the picture. 0 means no
-   red-eye reduction mode or unknown. 1 means red-eye reduction
-   supported.
-
-   @const kMDItemMeteringMode
-   The metering mode (Unknown, Average, CenterWeightedAverage, Spot,
-   MultiSpot, Pattern, Partial)
-
-   @const kMDItemMaxAperture
-   The smallest F number of the lens. The unit is the APEX
-   value. Ordinarily it is given in the range of 00.00 to 99.99.
-
-   @const kMDItemFNumber
-   The focal length of the lens divided by the diameter of the aperture
-   when the image was acquired.
-
-   @const kMDItemExposureProgram
-   The class of the program used by the camera to set exposure when
-   the picture is taken (Manual, Normal, Aperture priority, ...)
-
-   @const kMDItemExposureTimeString
-   The time  of the exposure.
-
-   @const kMDItemHeadline
-   A publishable entry providing a synopsis of the contents of the
-   objectdata.
-
-   @const kMDItemInstructions
-   Other editorial instructions concerning the use of the objectdata,
-   such as embargoes and warnings.
-
-   @const kMDItemCity
-   Identifies city of objectdata origin according to guidelines
-   established by the provider.
-
-   @const kMDItemStateOrProvince
-   Identifies Province/State of origin according to guidelines
-   established by the provider.
-
-   @const kMDItemCountry
-   Provides full, publishable, name of the country/primary location
-   where the intellectual property of the objectdata was created,
-   according to guidelines of the provider.
- 
- @const kMDItemEXIFGPSVersion
- The version of GPSInfoIFD in EXIF used to generate the metadata.
- 
- @const kMDItemAltitude
- The altitude of the item in meters above sea level, expressed 
- using the WGS84 datum.  Negative values lie below sea level.
- 
- @const kMDItemLatitude
- The latitude of the item in degrees north of the equator, expressed
- using the WGS84 datum.  Negative values lie south of the equator.
- 
- @const kMDItemLongitude
- The longitude of the item in degrees east of the prime meridian,
- expressed using the WGS84 datum.  Negative values lie west of the prime meridian.
- 
- @const kMDItemTimestamp
- The timestamp on the item.  This generally is used to indicate the time at
- which the event captured by the item took place.
- 
- @const kMDItemSpeed
- The speed of the item, in kilometers per hour.
- 
- @const kMDItemGPSTrack
- The direction of travel of the item, in degrees from true north.
- 
- @const kMDItemImageDirection
- The direction of the item's image, in degrees from true north.
- 
- @const kMDItemNamedLocation
- The name of the location or point of interest associated with the item.
- The name may be user provided.
-*/
-@available(OSX 10.4, *)
 let kMDItemAttributeChangeDate: CFString!
-@available(OSX 10.4, *)
 let kMDItemContentType: CFString!
-@available(OSX 10.5, *)
 let kMDItemContentTypeTree: CFString!
-@available(OSX 10.4, *)
 let kMDItemKeywords: CFString!
-@available(OSX 10.4, *)
 let kMDItemTitle: CFString!
-@available(OSX 10.4, *)
 let kMDItemAuthors: CFString!
-@available(OSX 10.5, *)
 let kMDItemEditors: CFString!
-@available(OSX 10.6, *)
 let kMDItemParticipants: CFString!
-@available(OSX 10.4, *)
 let kMDItemProjects: CFString!
-@available(OSX 10.7, *)
 let kMDItemDownloadedDate: CFString!
-@available(OSX 10.4, *)
 let kMDItemWhereFroms: CFString!
-@available(OSX 10.4, *)
 let kMDItemComment: CFString!
-@available(OSX 10.4, *)
 let kMDItemCopyright: CFString!
-@available(OSX 10.4, *)
 let kMDItemLastUsedDate: CFString!
-@available(OSX 10.4, *)
 let kMDItemContentCreationDate: CFString!
-@available(OSX 10.4, *)
 let kMDItemContentModificationDate: CFString!
-@available(OSX 10.7, *)
 let kMDItemDateAdded: CFString!
-@available(OSX 10.4, *)
 let kMDItemDurationSeconds: CFString!
-@available(OSX 10.4, *)
 let kMDItemContactKeywords: CFString!
-@available(OSX 10.4, *)
 let kMDItemVersion: CFString!
-@available(OSX 10.4, *)
 let kMDItemPixelHeight: CFString!
-@available(OSX 10.4, *)
 let kMDItemPixelWidth: CFString!
-@available(OSX 10.6, *)
 let kMDItemPixelCount: CFString!
-@available(OSX 10.4, *)
 let kMDItemColorSpace: CFString!
-@available(OSX 10.4, *)
 let kMDItemBitsPerSample: CFString!
-@available(OSX 10.4, *)
 let kMDItemFlashOnOff: CFString!
-@available(OSX 10.4, *)
 let kMDItemFocalLength: CFString!
-@available(OSX 10.4, *)
 let kMDItemAcquisitionMake: CFString!
-@available(OSX 10.4, *)
 let kMDItemAcquisitionModel: CFString!
-@available(OSX 10.4, *)
 let kMDItemISOSpeed: CFString!
-@available(OSX 10.4, *)
 let kMDItemOrientation: CFString!
-@available(OSX 10.4, *)
 let kMDItemLayerNames: CFString!
-@available(OSX 10.4, *)
 let kMDItemWhiteBalance: CFString!
-@available(OSX 10.4, *)
 let kMDItemAperture: CFString!
-@available(OSX 10.4, *)
 let kMDItemProfileName: CFString!
-@available(OSX 10.4, *)
 let kMDItemResolutionWidthDPI: CFString!
-@available(OSX 10.4, *)
 let kMDItemResolutionHeightDPI: CFString!
-@available(OSX 10.4, *)
 let kMDItemExposureMode: CFString!
-@available(OSX 10.4, *)
 let kMDItemExposureTimeSeconds: CFString!
-@available(OSX 10.4, *)
 let kMDItemEXIFVersion: CFString!
-@available(OSX 10.7, *)
 let kMDItemCameraOwner: CFString!
-@available(OSX 10.7, *)
 let kMDItemFocalLength35mm: CFString!
-@available(OSX 10.7, *)
 let kMDItemLensModel: CFString!
-@available(OSX 10.5, *)
 let kMDItemEXIFGPSVersion: CFString!
-@available(OSX 10.5, *)
 let kMDItemAltitude: CFString!
-@available(OSX 10.5, *)
 let kMDItemLatitude: CFString!
-@available(OSX 10.5, *)
 let kMDItemLongitude: CFString!
-@available(OSX 10.5, *)
 let kMDItemSpeed: CFString!
-@available(OSX 10.5, *)
 let kMDItemTimestamp: CFString!
-@available(OSX 10.5, *)
 let kMDItemGPSTrack: CFString!
-@available(OSX 10.5, *)
 let kMDItemImageDirection: CFString!
-@available(OSX 10.6, *)
 let kMDItemNamedLocation: CFString!
-@available(OSX 10.7, *)
 let kMDItemGPSStatus: CFString!
-@available(OSX 10.7, *)
 let kMDItemGPSMeasureMode: CFString!
-@available(OSX 10.7, *)
 let kMDItemGPSDOP: CFString!
-@available(OSX 10.7, *)
 let kMDItemGPSMapDatum: CFString!
-@available(OSX 10.7, *)
 let kMDItemGPSDestLatitude: CFString!
-@available(OSX 10.7, *)
 let kMDItemGPSDestLongitude: CFString!
-@available(OSX 10.7, *)
 let kMDItemGPSDestBearing: CFString!
-@available(OSX 10.7, *)
 let kMDItemGPSDestDistance: CFString!
-@available(OSX 10.7, *)
 let kMDItemGPSProcessingMethod: CFString!
-@available(OSX 10.7, *)
 let kMDItemGPSAreaInformation: CFString!
-@available(OSX 10.7, *)
 let kMDItemGPSDateStamp: CFString!
-@available(OSX 10.7, *)
 let kMDItemGPSDifferental: CFString!
-@available(OSX 10.4, *)
 let kMDItemCodecs: CFString!
-@available(OSX 10.4, *)
 let kMDItemMediaTypes: CFString!
-@available(OSX 10.4, *)
 let kMDItemStreamable: CFString!
-@available(OSX 10.4, *)
 let kMDItemTotalBitRate: CFString!
-@available(OSX 10.4, *)
 let kMDItemVideoBitRate: CFString!
-@available(OSX 10.4, *)
 let kMDItemAudioBitRate: CFString!
-@available(OSX 10.4, *)
 let kMDItemDeliveryType: CFString!
-@available(OSX 10.4, *)
 let kMDItemAlbum: CFString!
-@available(OSX 10.4, *)
 let kMDItemHasAlphaChannel: CFString!
-@available(OSX 10.4, *)
 let kMDItemRedEyeOnOff: CFString!
-@available(OSX 10.4, *)
 let kMDItemMeteringMode: CFString!
-@available(OSX 10.4, *)
 let kMDItemMaxAperture: CFString!
-@available(OSX 10.4, *)
 let kMDItemFNumber: CFString!
-@available(OSX 10.4, *)
 let kMDItemExposureProgram: CFString!
-@available(OSX 10.4, *)
 let kMDItemExposureTimeString: CFString!
-@available(OSX 10.4, *)
 let kMDItemHeadline: CFString!
-@available(OSX 10.4, *)
 let kMDItemInstructions: CFString!
-@available(OSX 10.4, *)
 let kMDItemCity: CFString!
-@available(OSX 10.4, *)
 let kMDItemStateOrProvince: CFString!
-@available(OSX 10.4, *)
 let kMDItemCountry: CFString!
-
-/*!
-   @constant kMDItemHTMLContent
-   Contains the HTML content of the document. Type is a CFString.
-   This field is only used by Spotlight importers to return HTML contents of a file.  Except in special cases,
-   this field is not a replacement for kMDItemTextContent which should still be returned.
-   This field does not particpate in Spotlight queries.
-
-   @constant kMDItemTextContent
-   Contains the text content of the document. Type is a CFString.
-
-   @constant kMDItemDisplayName
-   This is the localized version of the LaunchServices call
-   LSCopyDisplayNameForURL()/LSCopyDisplayNameForRef().
- 
-   @constant kMDItemFSName
-   This is the file name of the MDItemRef. Type is a CFString
-
-   @constant kMDItemPath
-   This is the complete path to the MDItemRef. Type is a CFString.
-
-   @constant kMDItemFSSize
-   The total logical size of the file (data and resources) on disk in bytes. Type is a CFNumber.
-
-   @constant kMDItemFSCreationDate
-   This is the date that the file was created. Type is a CFDate.
-
-   @constant  kMDItemFSContentChangeDate
-   This is the date the the file content last changed. This is a CFDate.
-
-   @constant kMDItemFSOwnerUserID
-   User-id of owner of the file. Type is a CFNumber.
-
-   @constant kMDItemFSOwnerGroupID
-   Group-id of owner of the file. Type is a CFNumber.
-
-   @constant kMDItemFSExists *** DEPRECATED ***
-   Boolean indicating if this MDItem references a file that still
-   exists. The file that the MDItem references might have been
-   deleted. Type is a CFBoolean.
-
-   @constant kMDItemFSIsReadable *** DEPRECATED ***
-   Boolean indicating if this file is readable. Type is a CFBoolean.
-
-   @constant kMDItemFSIsWriteable *** DEPRECATED ***
-   Boolean indicating if this file is writable. Type is a CFBoolean.
-
-   @constant kMDItemFSNodeCount
-   Number of files in directory. Type is a CFNumber.
-
-   @constant kMDItemFSHasCustomIcon
-   Boolean indicating if this file has a custom icon. Type is a CFBoolean.
-
-   @constant kMDItemFSIsExtensionHidden
-   Boolean indicating if this file has its extension hidden. Type is a CFBoolean.
-
-   @constant kMDItemFSIsStationery
-   Boolean indicating if this file is stationery. Type is a CFBoolean.
-
-   @constant kMDItemFSInvisible
-   Boolean indicating if this file is visible. Type is a CFBoolean.
-
-   @constant kMDItemFSLabel
-   Number indicating which finder label is in use (0-7). Type is a CFNumber.
-
-*/
-@available(OSX 10.4, *)
 let kMDItemFSName: CFString!
-@available(OSX 10.4, *)
 let kMDItemDisplayName: CFString!
-@available(OSX 10.4, *)
 let kMDItemPath: CFString!
-@available(OSX 10.4, *)
 let kMDItemFSSize: CFString!
-@available(OSX 10.4, *)
 let kMDItemFSCreationDate: CFString!
-@available(OSX 10.4, *)
 let kMDItemFSContentChangeDate: CFString!
-@available(OSX 10.4, *)
 let kMDItemFSOwnerUserID: CFString!
-@available(OSX 10.4, *)
 let kMDItemFSOwnerGroupID: CFString!
-@available(OSX 10.4, *)
 let kMDItemFSHasCustomIcon: CFString!
-@available(OSX 10.4, *)
 let kMDItemFSIsExtensionHidden: CFString!
-@available(OSX 10.4, *)
 let kMDItemFSIsStationery: CFString!
-@available(OSX 10.4, *)
 let kMDItemFSInvisible: CFString!
-@available(OSX 10.4, *)
 let kMDItemFSLabel: CFString!
-@available(OSX 10.4, *)
 let kMDItemFSNodeCount: CFString!
-@available(OSX 10.11, *)
 let kMDItemHTMLContent: CFString!
-@available(OSX 10.4, *)
 let kMDItemTextContent: CFString!
-
-/*!
-   @constant kMDItemAudioSampleRate
-   The sample rate of the audio data contained in the file. The sample rate is a
-   float value representing hz (audio_frames/second). For example: 44100.0, 22254.54.
-   Type is a CFNumber (float).
-
-   @constant kMDItemAudioChannelCount
-   The number of channels in the audio data contained in the file. This item only represents
-   the number of discreet channels of audio data found in the file. It does not indicate
-   any configuration of the data in regards to a user's speaker setup.
-   Type is a CFNumber (integer).
-
-   @constant kMDItemTempo
-   The tempo of the music contained in the audio file in Beats Per Minute.
-   Type is a CFNumber (float).
-
-   @constant kMDItemKeySignature
-   The musical key of the song/composition contained in an audio file.
-   For example: C, Dm, F#m, Bb. Type is a CFString.
-
-   @constant kMDItemTimeSignature
-   The time signature of the musical composition contained in the audio/MIDI file.
-   For example: "4/4", "7/8". Type is a CFString.
-
-   @constant kMDItemAudioEncodingApplication
-   The name of the application that encoded the data contained in the audio file.
-   Type is a CFString.
-
-   @constant kMDItemComposer
-   The composer of the song/composition contained in the audio file.
-   Type is a CFString.
-
-   @constant kMDItemLyricist
-   The lyricist/text writer for song/composition contained in the audio file.
-   Type is a CFString.
-
-   @constant kMDItemAudioTrackNumber
-   The track number of a song/composition when it is part of an album (kMDItemAlbum).
-   Type is a CFNumber (integer).
-
-   @constant kMDItemRecordingDate
-   The recording date of the song/composition. This information differs from
-   the kMDItemContentCreationDate attribute as it indicates the date that the
-   'art' was created, in contrast to ContentCreationDate which for example, could indicate
-   the creation date of an edited or 'mastered' version of the original art.
-   Type is a CFDate.
-
-   @constant kMDItemMusicalGenre
-   The musical genre of the song/composition contained in the audio file.
-   For example: Jazz, Pop, Rock, Classical. Type is a CFString.
-
-   @constant kMDItemIsGeneralMIDISequence
-   This attribute indicates whether the MIDI sequence contained in the file
-   is setup for use with a General MIDI device. Type is a CFBoolean.
-
-   @const kMDItemRecordingYear
-   This attribute indicates what year the item was recorded on.
-   Type is a CFNumber
-*/
-@available(OSX 10.4, *)
 let kMDItemAudioSampleRate: CFString!
-@available(OSX 10.4, *)
 let kMDItemAudioChannelCount: CFString!
-@available(OSX 10.4, *)
 let kMDItemTempo: CFString!
-@available(OSX 10.4, *)
 let kMDItemKeySignature: CFString!
-@available(OSX 10.4, *)
 let kMDItemTimeSignature: CFString!
-@available(OSX 10.4, *)
 let kMDItemAudioEncodingApplication: CFString!
-@available(OSX 10.4, *)
 let kMDItemComposer: CFString!
-@available(OSX 10.4, *)
 let kMDItemLyricist: CFString!
-@available(OSX 10.4, *)
 let kMDItemAudioTrackNumber: CFString!
-@available(OSX 10.4, *)
 let kMDItemRecordingDate: CFString!
-@available(OSX 10.4, *)
 let kMDItemMusicalGenre: CFString!
-@available(OSX 10.4, *)
 let kMDItemIsGeneralMIDISequence: CFString!
-@available(OSX 10.4, *)
 let kMDItemRecordingYear: CFString!
-
-/*!
-        @const kMDItemOrganizations
-        Used to indicate company/Organization that created the document.
-        Type is a CFArray of CFStrings.
-
-        @const kMDItemLanguages
-        Used to designate the languages of the intellectual content of the
-        resource. Recommended best practice for the values of the Language
-        element is defined by RFC 3066.
-        Type is a CFArray of CFStrings.
-
-        @const kMDItemRights
-        Used to provide a link to information about rights held in and
-        over the resource. Typically a Rights element will contain a
-        rights management statement for the resource, or reference a
-        service providing such information. Rights information often
-        encompasses Intellectual Property Rights (IPR), Copyright, and
-        various Property Rights. If the rights element is absent, no
-        assumptions can be made about the status of these and other rights
-        with respect to the resource. Type is a CFString type.
-
-        @const kMDItemPublishers
-        Used to designate the entity responsible for making the resource
-        available. Examples of a Publisher include a person, an
-        organization, or a service. Typically, the name of a Publisher
-        should be used to indicate the entity. Type is a CFArray of CFStrings.
-
-        @const kMDItemContributors
-        Used to designate the entity responsible for making contributions
-        to the content of the resource. Examples of a Contributor include
-        a person, an organization or a service. Typically, the name of a
-        Contributor should be used to indicate the entity. Type is a
-        CFArray of CFStrings.
-
-        @const kMDItemCoverage
-        Used to designate the extent or scope of the content of the
-        resource. Coverage will typically include spatial location (a
-        place name or geographic co-ordinates), temporal period (a period
-        label, date, or date range) or jurisdiction (such as a named
-        administrative entity). Recommended best practice is to select a
-        value from a controlled vocabulary, and that, where appropriate,
-        named places or time periods be used in preference to numeric
-        identifiers such as sets of co-ordinates or date ranges. Type is a
-        CFString.
-
-        @const kMDItemSubject
-        Subject of the this item. Type is a CFString.
-
-        @const kMDItemTheme
-        Theme of the this item. Type is a CFString.
- 
-        @const kMDItemDescription
-        An account of the content of the resource. Description may include
-        but is not limited to: an abstract, table of contents, reference
-        to a graphical representation of content or a free-text account of
-        the content. Type is a CFString.
-
-        @const kMDItemIdentifier
-        Used  to reference to the resource within a given
-        context. Recommended best practice is to identify the resource by
-        means of a string or number conforming to a formal identification
-        system. Type is a CFString.
-
-        @const kMDItemAudiences
-        A class of entity for whom the resource is intended or useful. A
-        class of entity may be determined by the creator or the publisher
-        or by a third party. Type is a  CFArray of CFString.
-*/
-@available(OSX 10.4, *)
 let kMDItemOrganizations: CFString!
-@available(OSX 10.4, *)
 let kMDItemLanguages: CFString!
-@available(OSX 10.4, *)
 let kMDItemRights: CFString!
-@available(OSX 10.4, *)
 let kMDItemPublishers: CFString!
-@available(OSX 10.4, *)
 let kMDItemContributors: CFString!
-@available(OSX 10.4, *)
 let kMDItemCoverage: CFString!
-@available(OSX 10.4, *)
 let kMDItemSubject: CFString!
-@available(OSX 10.4, *)
 let kMDItemTheme: CFString!
-@available(OSX 10.4, *)
 let kMDItemDescription: CFString!
-@available(OSX 10.4, *)
 let kMDItemIdentifier: CFString!
-@available(OSX 10.4, *)
 let kMDItemAudiences: CFString!
-
-/*!
-        @const kMDItemNumberOfPages
-        Number of pages in the item. Type is a CFNumberRef
-
-        @const kMDItemPageWidth
-        Width in points (72 points per inch) of the document page
-        (first page only for PDF's - other pages within the PDF may
-        not be the same width). Type is a CFNumber.
-
-        @const kMDItemPageHeight
-        Height in points (72 points per inch) of the document page
-        (first page only for PDF's - other pages within the PDF may
-        not be the same height). Type is a CFNumber.
-
-        @const kMDItemSecurityMethod
-        Security (encryption) method used in the file, for a PDF will be one of:
-        "Password Encrypted" or "None". Type is a CFStrings.
-
-        @const kMDItemCreator
-        Application used to create the document content (e.g. "Word",
-        "Framemaker", etc.). Type is a CFStrings.
-
-        @const kMDItemEncodingApplications
-        Software used to convert the original content into a PDF stream
-        (e.g. "Distiller", etc.). Type is a Array of CFStrings.
-
-        @const kMDItemDueDate
-        Date this item is due. Type is a CFDate.
-
-        @const kMDItemStarRating
-        User rate of this item like iTunes. Type is a CFNumber
-
-        @const kMDItemPhoneNumbers
-        Phone numbers for this item. Type is an Array of CFStrings.
-
-        @const kMDItemEmailAddresses
-        Email addresses for this item. Type is an Array of CFStrings.
-
-        @const  kMDItemInstantMessageAddresses
-        Instant message addresses for this item. Type is an Array of CFStrings.
-
-        @const kMDItemKind
-        Kind that this item represents. Type is a CFString.
-
-        @const kMDItemRecipients
-        This attribute indicates the recipients of this item. Type is a Array of CFStrings
-
-        @const  kMDItemFinderComment
-        These are the finder comments for this item. Type is a CFString.
-
-        @const kMDItemFonts
-        Array of font names used in the item. Attribute would store the Fonts
-        full name, the postscript name or the font family name based on whats available.
-        Type is an Array of CFStrings.
-*/
-@available(OSX 10.4, *)
 let kMDItemNumberOfPages: CFString!
-@available(OSX 10.4, *)
 let kMDItemPageWidth: CFString!
-@available(OSX 10.4, *)
 let kMDItemPageHeight: CFString!
-@available(OSX 10.4, *)
 let kMDItemSecurityMethod: CFString!
-@available(OSX 10.4, *)
 let kMDItemCreator: CFString!
-@available(OSX 10.4, *)
 let kMDItemEncodingApplications: CFString!
-@available(OSX 10.4, *)
 let kMDItemDueDate: CFString!
-@available(OSX 10.4, *)
 let kMDItemStarRating: CFString!
-@available(OSX 10.4, *)
 let kMDItemPhoneNumbers: CFString!
-@available(OSX 10.4, *)
 let kMDItemEmailAddresses: CFString!
-@available(OSX 10.4, *)
 let kMDItemInstantMessageAddresses: CFString!
-@available(OSX 10.4, *)
 let kMDItemKind: CFString!
-@available(OSX 10.4, *)
 let kMDItemRecipients: CFString!
-@available(OSX 10.4, *)
 let kMDItemFinderComment: CFString!
-@available(OSX 10.4, *)
 let kMDItemFonts: CFString!
-
-/*!
-        @const kMDItemAppleLoopsRootKey
-        Meta data attribute that stores the root note or tonic for the
-        loop, and does not include the scale type. The root key is
-        represented as follows: "C" "C#/Db" "D" "D#/Eb" "E" "F"
-        "F#/Gb" "G" "G#/Ab" "A" "A#/Bb" "B" "NoKey"
-
-        @const kMDItemAppleLoopsKeyFilterType
-        Meta data attribute that stores key filtering information
-        about a loop. Loops are matched against projects that often in
-        a major or minor key. To assist users in identifying loops
-        that will "fit" with their compositions, loops can be tagged
-        with one of the following key filters: "AnyKey" "Minor"
-        "Major" "NeitherKey" "BothKeys". AnyKey means that it fits
-        with anything (whether in a major key, minor key or
-        neither). Minor fits with compositions in a minor
-        key. NeitherKey doesn't work well with compositions that are
-        in major or minor key. BothKeys means it fits with major or
-        minor key.
-
-        @const kMDItemAppleLoopsLoopMode
-        Meta data attribute that stores how a file should be
-        played. Tagged files can either be loops or non-loops (e.g., a
-        cymbal crash). "Looping" indicates if the file should be
-        treated as a loop. "Non-looping" indicates the file should not
-        be treated as a loop.
-
-        @const kMDItemAppleLoopDescriptors
-        Meta data attribute that stores multiple pieces of descriptive
-        information about a loop. Besides genre and instrument, files
-        can contain descriptive information that help users in
-        refining searches. A file can have multiple descriptors
-        associated with them, though they come in pairs of antonyms
-        (e.g., "Acoustic" and "Electric"). A file can have zero or
-        more descriptors.
-
-
-        @const kMDItemMusicalInstrumentCategory
-        Meta data attribute that stores the category of
-        instrument. Files should have an instrument associated with
-        them ("Other Instrument" is provided as a catch-all). For some
-        categories, like "Keyboards" there are instrument names which
-        provide a more detailed instrument definition (e.g., Piano,
-        Organ, etc.)
-
-        @const kMDItemMusicalInstrumentName
-        Meta data attribute that stores the name of instrument
-        (relative to the instrument category) Files can have an
-        instrument name associated with them if they have certain
-        instrument categories (e.g., the category Percussion has
-        multiple instruments, including Conga and Bongo).
-
-        @const kMDItemCFBundleIdentifier
-        If this item is a bundle, then this is the CFBundleIdentifier
-*/
-@available(OSX 10.4, *)
 let kMDItemAppleLoopsRootKey: CFString!
-@available(OSX 10.4, *)
 let kMDItemAppleLoopsKeyFilterType: CFString!
-@available(OSX 10.4, *)
 let kMDItemAppleLoopsLoopMode: CFString!
-@available(OSX 10.4, *)
 let kMDItemAppleLoopDescriptors: CFString!
-@available(OSX 10.4, *)
 let kMDItemMusicalInstrumentCategory: CFString!
-@available(OSX 10.4, *)
 let kMDItemMusicalInstrumentName: CFString!
-@available(OSX 10.5, *)
 let kMDItemCFBundleIdentifier: CFString!
-
-/*!
-        @const kMDItemInformation
-        Information about the item
-
-        @const kMDItemDirector
-        Director of the movie
-
-        @const kMDItemProducer
-        Producer of the content
-
-        @const kMDItemGenre
-        Genre of the movie
-
-        @const kMDItemPerformers
-        Performers in the movie
-
-        @const kMDItemOriginalFormat
-        Original format of the movie
-
-        @const kMDItemOriginalSource
-        Original source of the movie
-
-        @const kMDItemAuthorEmailAddresses
-        This attribute indicates the author of the emails message addresses. (This is always
-        the email address, and not the human readable version)
-
-        @const kMDItemRecipientEmailAddresses
-        This attribute indicates the reciepients email addresses. (This is always the email
-        address,  and not the human readable version).
-
-        @const kMDItemAuthorAddresses
-        This attribute indicates the author addresses of the document.
- 
-        @const kMDItemRecipientAddresses
-        This attribute indicates the recipient addresses of the document. 
- 
-        @const kMDItemURL
-        Url of the item
-        
-        @const kMDItemIsLikelyJunk
-        This attribute indicates if the document is likely to be considered junk.
-        
-        @const kMDItemExecutableArchitectures
-        Array of executables architectures the item contains.
- 
-        @const kMDItemExecutablePlatform
-        Indicates platform required to execute this application.
-
-        @const kMDItemApplicationCategories
-        Array of categories the item application is a member of.
-
-*/
-@available(OSX 10.5, *)
 let kMDItemInformation: CFString!
-@available(OSX 10.5, *)
 let kMDItemDirector: CFString!
-@available(OSX 10.5, *)
 let kMDItemProducer: CFString!
-@available(OSX 10.5, *)
 let kMDItemGenre: CFString!
-@available(OSX 10.5, *)
 let kMDItemPerformers: CFString!
-@available(OSX 10.5, *)
 let kMDItemOriginalFormat: CFString!
-@available(OSX 10.5, *)
 let kMDItemOriginalSource: CFString!
-@available(OSX 10.5, *)
 let kMDItemAuthorEmailAddresses: CFString!
-@available(OSX 10.5, *)
 let kMDItemRecipientEmailAddresses: CFString!
-@available(OSX 10.6, *)
 let kMDItemAuthorAddresses: CFString!
-@available(OSX 10.6, *)
 let kMDItemRecipientAddresses: CFString!
-@available(OSX 10.5, *)
 let kMDItemURL: CFString!
-@available(OSX 10.7, *)
 let kMDItemIsLikelyJunk: CFString!
-@available(OSX 10.7, *)
 let kMDItemExecutableArchitectures: CFString!
-@available(OSX 10.7, *)
 let kMDItemExecutablePlatform: CFString!
-@available(OSX 10.7, *)
 let kMDItemApplicationCategories: CFString!
-@available(OSX 10.7, *)
 let kMDItemIsApplicationManaged: CFString!
-
-/*!
- @typedef MDLabelRef
- @abstract This is the type of a reference to an MDLabel.
- */
 class MDLabel {
 }
-
-/*!
- @typedef MDLabelRef
- @abstract This is the type of a reference to an MDLabel.
- */
 typealias MDLabelRef = MDLabel
-@available(OSX 10.7, *)
 func MDLabelGetTypeID() -> CFTypeID
-
-/*!
- @function MDItemCopyLabels
- @abstract Returns an array of the labels set on the specified item.
- @param item The item to be interrogated.
- @result A CFArrayRef containing MDLabelRefs for the labels set on the item, or NULL on failure.
- */
-@available(OSX 10.7, *)
 func MDItemCopyLabels(item: MDItem!) -> CFArray!
-
-/*!
- @function MDItemSetLabel
- @abstract Sets a label on the specified item.
- @param item The item to be updated.
- @param label The label.
- @result True if the label was successfully set on the item, false otherwise.
- */
-@available(OSX 10.7, *)
 func MDItemSetLabel(item: MDItem!, _ label: MDLabel!) -> Bool
-
-/*!
- @function MDItemRemoveLabel
- @abstract Removes a label from the specified item.
- @param item The item to be updated.
- @param label The label.
- @result True if the label was successfully removed from the item, false otherwise.
- */
-@available(OSX 10.7, *)
 func MDItemRemoveLabel(item: MDItem!, _ label: MDLabel!) -> Bool
-
-/*!
- @typedef MDLabelDomain
- @abstract These constants are used to specify a domain to MDLabelCreate().
- */
 struct MDLabelDomain : RawRepresentable, Equatable {
   init(_ rawValue: UInt32)
   init(rawValue: UInt32)
@@ -6224,204 +4652,34 @@ struct MDLabelDomain : RawRepresentable, Equatable {
 }
 var kMDLabelUserDomain: MDLabelDomain { get }
 var kMDLabelLocalDomain: MDLabelDomain { get }
-
-/*!
- @function MDLabelCreate
- @abstract Returns a label with the specified parameters. If there is already a label that exactly matches the parameters, a reference to the existing label will be returned; otherwise this will attempt to create a new label.  A successful creation of a new private label definition will generate a kMDLabelAddedNotification. Note that this function can only create labels with "Private" visibility. Creating "Public" labels requires creating and installing a label bundle.
- @param allocator The CFAllocator which should be used to allocate memory for the label. This parameter may be NULL in which case the current default CFAllocator is used. Use kCFAllocatorNull to request a reference to an existing label only.
- @param displayName The label's display name.
- @param kind The label's kind string.
- @param domain The domain of the label (normally kMDLabelUserDomain).
- @result An MDLabelRef, or NULL on failure.
- */
-@available(OSX 10.7, *)
 func MDLabelCreate(allocator: CFAllocator!, _ displayName: CFString!, _ kind: CFString!, _ domain: MDLabelDomain) -> MDLabel!
-
-/*!
- @function MDLabelCopyAttribute
- @abstract Copy the value of the named attribute of a label.
- @param label The label.
- @param name The name of the desired attribute.
- @result A CFTypeRef, or NULL on failure, or if the attribute does not exist, or if the attribute is not readable.
- */
-@available(OSX 10.7, *)
 func MDLabelCopyAttribute(label: MDLabel!, _ name: CFString!) -> AnyObject!
-
-/*!
- @function MDLabelCopyAttributeName
- @abstract Copy the MDItem attribute name of a label. The attribute name can be used in an MDQuery string to search for MDItems that have the label set. The value of the MDItem attribute is a CFDate corresponding to the time the label was set on the item.
- @param label The label.
- @result A CFStringRef, or NULL on failure.
- */
-@available(OSX 10.7, *)
 func MDLabelCopyAttributeName(label: MDLabel!) -> CFString!
-
-/*!
- @function MDLabelDelete
- @abstract Deletes the user's definition or override of the specified label from ~/Library/Metadata. Labels defined in bundles elsewhere in the filesystem cannot be deleted using this API. Deleting an override of a label merely makes the original definition of the label visible again and thus will generate a kMDLabelChangedNotification. A successful deletion of a private label definition will generate a kMDLabelRemovedNotification.
- @param label The label.
- @result True if a label definition or override was successfully deleted.
- */
-@available(OSX 10.7, *)
 func MDLabelDelete(label: MDLabel!) -> Bool
-
-/*!
- @function MDLabelSetAttributes
- @abstract Updates the attributes of the specified label. Labels defined in ~/Library/Metadata are modified directly. Labels defined in bundles elsewhere in the filesystem are overridden by creating a private copy of the label definition in ~/Library/Metadata. The updated attributes are then stored in the private copy. A successful call to MDLabelSetAttributes() will generate a kMDLabelChangedNotification.
- @param label The label.
- @param attrs A dictionary containing the attributes to be modified. To remove an attribute, include it in the dictionary with kCFNull as its value.
- @result True if the label definition or override was successfully updated.
- */
-@available(OSX 10.7, *)
 func MDLabelSetAttributes(label: MDLabel!, _ attrs: CFDictionary!) -> Bool
-
-/*!
- @function MDCopyLabelKinds
- @abstract Copy the list of label kind strings.
- @result A CFArrayRef containing all of the label kind strings, or NULL on failure.
- */
-@available(OSX 10.7, *)
 func MDCopyLabelKinds() -> CFArray!
-
-/*!
- @function MDCopyLabelsMatchingExpression
- @abstract Copy the list of labels matching the specified query expression.
- @param simpleQueryString The query expression string.
- @result A CFArrayRef containing all of the matching labels, or NULL on failure.
- */
-@available(OSX 10.7, *)
 func MDCopyLabelsMatchingExpression(simpleQueryString: CFString!) -> CFArray!
-
-/*!
- @function MDCopyLabelsWithKind
- @abstract Copy the list of labels with the specified kind string.
- @param kind The kind string, or NULL to copy all labels.
- @result A CFArrayRef containing all of the labels with the specified kind string, or NULL on failure.
- */
-@available(OSX 10.7, *)
 func MDCopyLabelsWithKind(kind: CFString!) -> CFArray!
-
-/*!
- @function MDCopyLabelWithUUID
- @abstract Copy the label with the specified UUID.
- @param labelUUID The label UUID.
- @result An MDLabelRef, or NULL on failure.
- */
-@available(OSX 10.7, *)
 func MDCopyLabelWithUUID(labelUUID: CFUUID!) -> MDLabel!
-
-/*!
- @constant kMDLabelBundleURL
- @abstract This is the bundle URL for the label.
- Type is a CFURL. This attribute is read-only.
- 
- @constant kMDLabelContentChangeDate
- @abstract This is the date the the label content last changed.
- Type is a CFDate. This attribute is read-only, but its value will be altered by setting any of the writable attributes described below.
- 
- @constant kMDLabelDisplayName
- @abstract This is the localized name of the label.
- Type is a CFString.
- 
- @constant kMDLabelIconData
- @abstract This is the data that should be used to create an icon image source for the label. Pass this data to the ImageIO framework to create a CGImageSourceRef. To reset a label's icon to its default image, set kMDLabelIconData to kCFNull.
- Type is a CFData.
- 
- @constant kMDLabelIconUUID
- @abstract This is the UUID of the icon image source for the label. Labels that share the same icon image source will have the same icon UUID.
- Type is a CFUUID. This attribute is read-only, but its value may be altered by setting the kMDLabelIconData attribute described above.
- 
- @constant kMDLabelIsMutuallyExclusiveSetMember
- @abstract This attribute is true if the label kind specifies a mutually-exclusive set of labels.
- Type is a CFBoolean. This attribute is read-only.
-
- @constant kMDLabelKind
- @abstract This is the kind string for the label. The label kind is the name of the bundle the label is defined in.
- Type is a CFString. This attribute is read-only.
- 
- @constant kMDLabelSetsFinderColor
- @abstract This attribute is optional and applicable only to labels with "Public" visibility. If it is present, then when the label is set on a file the file's Finder color will be set to the specified value (0 - 7). If the label is later removed, the file's Finder color will be reverted either to the color specified by the most-recently-set label with this attribute that remains set on the file, or to 0 (none).
- Type is a CFNumber. This attribute is ignored for unless the label's visibility is "Public".
- 
- @constant kMDLabelUUID
- @abstract This is the UUID of the label.
- Type is a CFUUID. This attribute is read-only.
- 
- @constant kMDLabelVisibility
- @abstract This is a constant describing the label's visibility, either "Public" (kMDPublicVisibility) or "Private" (kMDPrivateVisibility).
- Type is a CFString. This attribute is read-only.
- */
-@available(OSX 10.7, *)
 var kMDLabelBundleURL: Unmanaged<CFString>!
-@available(OSX 10.7, *)
 var kMDLabelContentChangeDate: Unmanaged<CFString>!
-@available(OSX 10.7, *)
 var kMDLabelDisplayName: Unmanaged<CFString>!
-@available(OSX 10.7, *)
 var kMDLabelIconData: Unmanaged<CFString>!
-@available(OSX 10.7, *)
 var kMDLabelIconUUID: Unmanaged<CFString>!
-@available(OSX 10.7, *)
 var kMDLabelIsMutuallyExclusiveSetMember: Unmanaged<CFString>!
-@available(OSX 10.7, *)
 var kMDLabelKind: Unmanaged<CFString>!
-@available(OSX 10.7, *)
 var kMDLabelSetsFinderColor: Unmanaged<CFString>!
-@available(OSX 10.7, *)
 var kMDLabelUUID: Unmanaged<CFString>!
-@available(OSX 10.7, *)
 var kMDLabelVisibility: Unmanaged<CFString>!
-
-/*!
- @constant kMDLabelKindIsMutuallyExclusiveSetKey
- @abstract This key is used in the Info.plist file of a label bundle to specify that the label kind constitutes a mutually exclusive set.
- The value is a CFBoolean.
- 
- @constant kMDLabelKindVisibilityKey
- @abstract This key is used in the Info.plist file of a label bundle to specify the visibility of the labels defined by the bundle.
- The value is a CFString constant, either "Public" (kMDPublicVisibility) or "Private" (kMDPrivateVisibility).
- */
-@available(OSX 10.7, *)
 var kMDLabelKindIsMutuallyExclusiveSetKey: Unmanaged<CFString>!
-@available(OSX 10.7, *)
 var kMDLabelKindVisibilityKey: Unmanaged<CFString>!
-@available(OSX 10.7, *)
 var kMDPrivateVisibility: Unmanaged<CFString>!
-@available(OSX 10.7, *)
 var kMDPublicVisibility: Unmanaged<CFString>!
-
-/*!
- @constant kMDLabelAddedNotification
- @abstract The name of the notification sent when a label has been added. The notification object is the subject MDLabelRef. All label notifications are distributed to processes owned by the same uid that have initialized the Metadata framework label APIs.
- */
-@available(OSX 10.7, *)
 let kMDLabelAddedNotification: CFString!
-
-/*!
- @constant kMDLabelChangedNotification
- @abstract The name of the notification sent when a label has been changed. The notification object is the subject MDLabelRef. The label's new attributes can be retrieved using MDLabelCopyAttribute().
- */
-@available(OSX 10.7, *)
 let kMDLabelChangedNotification: CFString!
-
-/*!
- @constant kMDLabelRemovedNotification
- @abstract The name of the notification sent when a label has been deleted. The notification object is the subject MDLabelRef. The label's kMDLabelIconUUID, kMDLabelKind, kMDLabelKindBundleURL and kMDLabelUUID attributes can still be retrieved using MDLabelCopyAttribute(), and the label may still be passed to MDLabelCopyAttributeName().
- */
-@available(OSX 10.7, *)
 let kMDLabelRemovedNotification: CFString!
-
-/*!
-        @typedef MDQueryRef
-        This is the type of a reference to MDQuerys.
-*/
 class MDQuery {
 }
-
-/*!
-        @typedef MDQueryRef
-        This is the type of a reference to MDQuerys.
-*/
 typealias MDQueryRef = MDQuery
 struct MDQueryOptionFlags : RawRepresentable, Equatable {
   init(_ rawValue: UInt32)
@@ -6431,203 +4689,13 @@ struct MDQueryOptionFlags : RawRepresentable, Equatable {
 var kMDQuerySynchronous: MDQueryOptionFlags { get }
 var kMDQueryWantsUpdates: MDQueryOptionFlags { get }
 var kMDQueryAllowFSTranslation: MDQueryOptionFlags { get }
-
-/*!
-        @function MDQueryGetTypeID
-        Returns the type identifier of all MDQuery instances.
-*/
-@available(OSX 10.4, *)
 func MDQueryGetTypeID() -> CFTypeID
-
-/*!
-        @function MDQueryCreate
-        Creates a new query with the given query expression.
-        @param allocator The CFAllocator which should be used to allocate
-                memory for the query and its sub-storage. This
-                parameter may be NULL in which case the current default
-                CFAllocator is used.
-        @param queryString The query expression string for this query. The
-                syntax for query expressions is explained above in the
-                header overview documentation.
-        @param valueListAttrs An optional array of attribute names. The
-                query will collect the values of these attributes into
-                uniqued lists, which can be used or displayed to summarize
-                the results of the query, or allow a user to further
-                qualify the items for which they are searching. This
-                parameter may be NULL if no value lists are desired. Value
-                list collection increases CPU usage and significantly
-                increases the memory usage of an MDQuery. The attribute
-                names are CFStrings.
-        @param sortingAttrs An optional array of attribute names. The
-                query will results of the query based on the values of
-                these attributes. The first name in the array is used as
-                the primary sort key, the second as the secondary key, and
-                so on. The comparison of like-typed values is a simple,
-                literal comparison. This parameter may be NULL if no
-                sorting is desired. Sorting increases memory usage and
-                significantly increases the CPU usage of an MDQuery.
-                However, when possible, it is almost always cheaper to have
-                the MDQuery do the sorting, rather than you fetching all
-                the results and attributes from each of them and doing the
-                sorting yourself. The attribute names are CFStrings.
-        @result An MDQueryRef, or NULL on failure. If the query string
-                is empty or malformed (invalid syntax), returns NULL.
-*/
-@available(OSX 10.4, *)
 func MDQueryCreate(allocator: CFAllocator!, _ queryString: CFString!, _ valueListAttrs: CFArray!, _ sortingAttrs: CFArray!) -> MDQuery!
-
-/*!
-        @function MDQueryCreateSubset
-        Creates a new query, which is a subset of the given query. Only
-                results matched by the given query can be matched by the
-                query expression of this query.
-        @param allocator The CFAllocator which should be used to allocate
-                memory for the query and its sub-storage. This
-                parameter may be NULL in which case the current default
-                CFAllocator is used.
-        @param query The parent query of the new query.
-        @param queryString The query expression string for this query.
-                This expression in effect may further restrict the matches
-                found by the parent query. If the string is empty the
-                behavior is undefined.
-        @param valueListAttrs An optional array of attribute names. The
-                query will collect the values of these attributes into
-                uniqued lists, which can be used or displayed to summarize
-                the results of the query, or allow a user to further
-                qualify the items for which they are searching. This
-                parameter may be NULL if no value lists are desired. Value
-                list collection increases CPU usage and significantly
-                increases the memory usage of an MDQuery. The attribute
-                names are CFStrings.
-        @param sortingAttrs An optional array of attribute names. The
-                query will results of the query based on the values of
-                these attributes. The first name in the array is used as
-                the primary sort key, the second as the secondary key, and
-                so on. The comparison of like-typed values is a simple,
-                literal comparison. This parameter may be NULL if no
-                sorting is desired. Sorting increases memory usage and
-                significantly increases the CPU usage of an MDQuery.
-                However, when possible, it is almost always cheaper to have
-                the MDQuery do the sorting, rather than you fetching all
-                the results and attributes from each of them and doing the
-                sorting yourself. The attribute names are CFStrings.
-        @result An MDQueryRef, or NULL on failure. If the query string
-                is empty or malformed (invalid syntax), returns NULL.
-*/
-@available(OSX 10.4, *)
 func MDQueryCreateSubset(allocator: CFAllocator!, _ query: MDQuery!, _ queryString: CFString!, _ valueListAttrs: CFArray!, _ sortingAttrs: CFArray!) -> MDQuery!
-
-/*!
- @function MDQueryCreateForItems
- Creates a new query with the given query expression.
- @param allocator The CFAllocator which should be used to allocate
- memory for the query and its sub-storage. This
- parameter may be NULL in which case the current default
- CFAllocator is used.
- @param queryString The query expression string for this query. The
- syntax for query expressions is explained above in the
- header overview documentation.
- @param valueListAttrs An optional array of attribute names. The
- query will collect the values of these attributes into
- uniqued lists, which can be used or displayed to summarize
- the results of the query, or allow a user to further
- qualify the items for which they are searching. This
- parameter may be NULL if no value lists are desired. Value
- list collection increases CPU usage and significantly
- increases the memory usage of an MDQuery. The attribute
- names are CFStrings.
- @param sortingAttrs An optional array of attribute names. The
- query will results of the query based on the values of
- these attributes. The first name in the array is used as
- the primary sort key, the second as the secondary key, and
- so on. The comparison of like-typed values is a simple,
- literal comparison. This parameter may be NULL if no
- sorting is desired. Sorting increases memory usage and
- significantly increases the CPU usage of an MDQuery.
- However, when possible, it is almost always cheaper to have
- the MDQuery do the sorting, rather than you fetching all
- the results and attributes from each of them and doing the
- sorting yourself. The attribute names are CFStrings.
- @param items An array of items. The query will only return results
- in this set.
- @result An MDQueryRef, or NULL on failure. If the query string
- is empty or malformed (invalid syntax), returns NULL.
- */
-@available(OSX 10.7, *)
 func MDQueryCreateForItems(allocator: CFAllocator!, _ queryString: CFString!, _ valueListAttrs: CFArray!, _ sortingAttrs: CFArray!, _ items: CFArray!) -> MDQuery!
-
-/*!
-        @function MDQueryCopyQueryString
-        Returns the query string of the query.
-        @param query The query to be interrogated.
-        @result The query string of the query.
-*/
-@available(OSX 10.4, *)
 func MDQueryCopyQueryString(query: MDQuery!) -> CFString!
-
-/*!
-        @function MDQueryCopyValueListAttributes
-        Returns the list of attribute names for which the query is
-                collecting the lists of values.
-        @param query The query to be interrogated.
-        @result The list of value list attribute names of the query.
-*/
-@available(OSX 10.4, *)
 func MDQueryCopyValueListAttributes(query: MDQuery!) -> CFArray!
-
-/*!
-        @function MDQueryCopySortingAttributes
-        Returns the list of attribute names the query is using to sort
-                the results.
-        @param query The query to be interrogated.
-        @result The list of sorting attribute names of the query.
-*/
-@available(OSX 10.4, *)
 func MDQueryCopySortingAttributes(query: MDQuery!) -> CFArray!
-
-/*!
-        @typedef MDQueryBatchingParams
-        Structure containing the progress notification batching
-                parameters of an MDQuery. The first notification can be
-                triggered by the either first_max_num or first_max_ms limit
-                being exceeded. Subsequent notifications are triggered by
-                either the progress_max_num or progress_max_ms limit. The
-                default batching parameters are undefined and subject to
-                change.
-        @field first_max_num The maximum number of results that can
-                accumulate before a progress notification is sent out
-                by the MDQuery, for the first notification.
-        @field first_max_ms The maximum number of milliseconds that can
-                pass before a progress notification is sent out. This
-                value is advisory, in that the notification will be
-                triggered "at some point after first_max_ms milliseconds
-                have passed since the query began accumulating results",
-                but generally not very long after, for the first
-                progress notification.
-        @field progress_max_num The maximum number of results that can
-                accumulate before a progress notification is sent out
-                by the MDQuery, for notifications after the first,
-                during the initial gathering phase of the query.
-        @field progress_max_ms The maximum number of milliseconds that can
-                pass before a progress notification is sent out. This
-                value is advisory, in that the notification will be
-                triggered "at some point after first_max_ms milliseconds
-                have passed since the query began accumulating results",
-                but generally not very long after, for progress
-                notifications after the first, during the initial
-                gathering phase of the query.
-        @field update_max_num The maximum number of results that can
-                accumulate before an update notification is sent out
-                by the MDQuery, for notifications after the gathering
-                phase of the query has finished.
-        @field update_max_ms The maximum number of milliseconds that can
-                pass before a progress notification is sent out. This
-                value is advisory, in that the notification will be
-                triggered "at some point after first_max_ms milliseconds
-                have passed since the query began accumulating results",
-                but generally not very long after, for update notifications
-                after the gathering phase of the query has finished.
-*/
 struct MDQueryBatchingParams {
   var first_max_num: Int
   var first_max_ms: Int
@@ -6638,819 +4706,62 @@ struct MDQueryBatchingParams {
   init()
   init(first_max_num: Int, first_max_ms: Int, progress_max_num: Int, progress_max_ms: Int, update_max_num: Int, update_max_ms: Int)
 }
-
-/*!
-        @function MDQueryGetBatchingParameters
-        Returns the current parameters that control batching of progress
-                notifications.
-        @param query The query to be interrogated.
-        @result An MDQueryBatchingParams structure with the current
-                batching parameters.
-*/
-@available(OSX 10.4, *)
 func MDQueryGetBatchingParameters(query: MDQuery!) -> MDQueryBatchingParams
-
-/*!
-        @function MDQuerySetBatchingParameters
-        @param query The query whose batching parameters are to be set.
-        @param params An MDQueryBatchingParams structure with the batching
-                parameters to set.
-*/
-@available(OSX 10.4, *)
 func MDQuerySetBatchingParameters(query: MDQuery!, _ params: MDQueryBatchingParams)
-
-/*!
-        @typedef MDQueryCreateResultFunction
-        Type of the callback function used to create the result objects
-                stored and returned by an MDQuery. The function may
-                hold onto the given MDItemRef in some other data
-                structure, but must retain it for it to remain valid.
-                The create-result function is called lazily as results
-                are requested from a query, so it will not generally
-                be called on all results, if in fact any. This avoids
-                the cost of creating potentially hundreds of thousands
-                of what might be temporary objects.
-        @param query The MDQuery instance.
-        @param item The default MDItemRef for the result.
-        @param context The user-defined context parameter given to
-                MDQuerySetCreateResultFunction().
-        @result The function must return a pointer-sized value that can
-                be managed with the callbacks which were set at the same
-                time the create function was given to the query. The
-                value must be returned with a reference (such as if the
-                retain callback had been called on it), as implied by the
-                Create name. If this function doesn't wish to create a
-                new object, it can return the given MDItemRef, but must
-                also return it with a new retain, and the callbacks must
-                be able to handle an MDItemRef as an input value. If
-                this function returns NULL, NULL will be stored for the
-                moment in the query, MDQueryGetResultAtIndex() may return
-                NULL for that result, and the next time the query wants
-                the result, it will call this function again.
-*/
 typealias MDQueryCreateResultFunction = @convention(c) (MDQuery!, MDItem!, UnsafeMutablePointer<Void>) -> UnsafePointer<Void>
-
-/*!
-        @function MDQuerySetCreateResultFunction
-        Sets the function used to create the result objects of the
-                MDQuery. If no create function is set on an MDQuery,
-                the default result objects are MDItemRefs. Results
-                created after a create function is set will be created
-                through the given create function, but values created
-                before the function was set (or after it is unset) are
-                not modified. Therefore it is not advisable to change
-                this function after MDQueryExecute() has been called
-                with the query. The create-result function is called
-                lazily as results are requested from a query, so it will
-                not generally be called on all results, if in fact any.
-                This avoids the cost of creating potentially hundreds
-                of thousands of what might be temporary objects.
-        @param query The query to whose result create function is to be set.
-        @param func The callback function the MDQuery will use to
-                create its results, such as those returned from
-                MDQueryGetResultAtIndex(). This parameter
-                may be NULL, in which case any previous result creation
-                settings are cancelled, and the MDQuery will subsequently
-                produce MDItemRefs. If the function (when the parameter is
-                not NULL) is not of type MDQueryCreateResultFunction or
-                does not behave as a MDQueryCreateResultFunction must,
-                the behavior is undefined.
-        @param context A pointer-sized user-defined value, which is
-                passed as the third parameter to the create function,
-                but is otherwise unused by MDQuery. The MDQuery does
-                not retain the context in any way, so it must remain
-                valid for at least the lifetime of the query. If the
-                context is not what is expected by the create function,
-                the behavior is undefined.
-        @param cb A pointer to a CFArrayCallBacks structure
-                initialized with the callbacks for the query to use to
-                manage the created result objects. A copy of the
-                contents of the callbacks structure is made, so that a
-                pointer to a structure on the stack can be passed in, or
-                can be reused for multiple query creations. Only version
-                0 of the CFArrayCallBacks is supported. The retain field
-                may be NULL, in which case the MDQuery will do nothing to
-                add a retain to the created results for the query. The
-                release field may be NULL, in which case the MDQuery will
-                do nothing to remove the query's retain (such as the one
-                it gets from the create function) on the result objects
-                when the query is destroyed. If the copyDescription field
-                is NULL, the query will create a simple description for
-                the result objects. If the equal field is NULL, the query
-                will use pointer equality to test for equality of results.
-                This callbacks parameter itself may be NULL, which is
-                treated as if a valid structure of version 0 with all
-                fields NULL had been passed in. Otherwise, if any of the
-                fields are not valid pointers to functions of the correct
-                type, or this parameter is not a valid pointer to a
-                CFArrayCallBacks callbacks structure, the behavior is
-                undefined. If any of the value values returned from the
-                create function is not one understood by one or more of
-                the callback functions, the behavior when those callback
-                functions are used is undefined. For example, if the create
-                function can return NULL, then NULL must be understood by
-                the callback functions as a possible parameter. The retain
-                and release callbacks must be a matched set -- do not
-                assume that the retain function will be unused or that
-                additional reference counts will not be taken on the
-                created results.
-*/
-@available(OSX 10.4, *)
 func MDQuerySetCreateResultFunction(query: MDQuery!, _ func: MDQueryCreateResultFunction!, _ context: UnsafeMutablePointer<Void>, _ cb: UnsafePointer<CFArrayCallBacks>)
-
-/*!
-        @typedef MDQueryCreateValueFunction
-        Type of the callback function used to create the value objects
-                stored and returned by an MDQuery. The function may
-                hold onto the given attribute name and/or value in some
-                other data structure, but must retain them for them to
-                remain valid.
-        @param query The MDQuery instance.
-        @param attrName The attribute name of the value.
-        @param attrValue The default value of the value.
-        @param context The user-defined context parameter given to
-                MDQuerySetCreateValueFunction().
-        @result The function must return a pointer-sized value that can
-                be managed with the callbacks which were set at the same
-                time the create function was given to the query. The
-                value must be returned with a reference (such as if the
-                retain callback had been called on it), as implied by the
-                Create name. If this function doesn't wish to create a
-                new object, it can return the given CFTypeRef, but must
-                also return it with a new retain, and the callbacks must
-                be able to handle a CFTypeRef as an input value.
-*/
 typealias MDQueryCreateValueFunction = @convention(c) (MDQuery!, CFString!, AnyObject!, UnsafeMutablePointer<Void>) -> UnsafePointer<Void>
-
-/*!
-        @function MDQuerySetCreateValueFunction
-        Sets the function used to create the value objects of the
-                MDQuery. These are the values of the value lists that
-                were requested when the query was created. If no create
-                function is set on an MDQuery, the default value objects
-                are the CFTypeRef values of the attributes. Values
-                created after a create function is set will be created
-                through the given create function, but values created
-                before the function was set (or after it is unset)
-                are not modified. Therefore it is not advisable to
-                change this function after MDQueryExecute() has been
-                called with the query.
-        @param query The query to whose value create function is to be set.
-        @param func The callback function the MDQuery will use to
-                create the value list values, such as those returned from
-                MDQueryCopyValuesOfAttribute(). This parameter
-                may be NULL, in which case any previous value creation
-                settings are cancelled, and the MDQuery will subsequently
-                produce the default CFTypeRefs. If the function (when the
-                parameter is not NULL) is not of type
-                MDQueryCreateValueFunction or does not behave as a
-                MDQueryCreateValueFunction must, the behavior is undefined.
-        @param context A pointer-sized user-defined value, which is
-                passed as the fourth parameter to the create function,
-                but is otherwise unused by MDQuery. The MDQuery does
-                not retain the context in any way, so it must remain
-                valid for at least the lifetime of the query. If the
-                context is not what is expected by the create function,
-                the behavior is undefined.
-        @param cb A pointer to a CFArrayCallBacks structure
-                initialized with the callbacks for the query to use to
-                manage the created value objects. A copy of the
-                contents of the callbacks structure is made, so that a
-                pointer to a structure on the stack can be passed in, or
-                can be reused for multiple query creations. Only version
-                0 of the CFArrayCallBacks is supported. The retain field
-                may be NULL, in which case the MDQuery will do nothing to
-                add a retain to the created values for the query. The
-                release field may be NULL, in which case the MDQuery will
-                do nothing to remove the query's retain (such as the one
-                it gets from the create function) on the value objects
-                when the query is destroyed. If the copyDescription field
-                is NULL, the query will create a simple description for
-                the value objects. If the equal field is NULL, the query
-                will use pointer equality to test for equality of values.
-                This callbacks parameter itself may be NULL, which is
-                treated as if a valid structure of version 0 with all
-                fields NULL had been passed in. Otherwise, if any of the
-                fields are not valid pointers to functions of the correct
-                type, or this parameter is not a valid pointer to a
-                CFArrayCallBacks callbacks structure, the behavior is
-                undefined. If any of the value values returned from the
-                create function is not one understood by one or more of
-                the callback functions, the behavior when those callback
-                functions are used is undefined. For example, if the
-                create function can return NULL, then NULL must be
-                understood by the callback functions as a possible
-                parameter. The retain and release callbacks must be a
-                matched set -- do not assume that the retain function will
-                be unused or that additional reference counts will not be
-                taken on the created values.
-*/
-@available(OSX 10.4, *)
 func MDQuerySetCreateValueFunction(query: MDQuery!, _ func: MDQueryCreateValueFunction!, _ context: UnsafeMutablePointer<Void>, _ cb: UnsafePointer<CFArrayCallBacks>)
-
-/*!
-	@function MDQuerySetDispatchQueue
-	Set the dispatch queue on which query results will be delivered
-				by MDQueryExecute. It is not advisable to change set 
-				dispatch queue after MDQueryExecute() has been called with
-				the query. Setting the dispatch queue for a synchronous 
-				query (kMDQuerySynchronous) has no effect.
-	@param query The query for which the dispatch queue should be set.
-	@param queue The dispatch queue on which results should be delivered.
- */
-@available(OSX 10.6, *)
 func MDQuerySetDispatchQueue(query: MDQuery!, _ queue: dispatch_queue_t!)
-
-/*!
-        @function MDQueryExecute
-        Run the query, and populate the query with the results. Queries
-                only gather results or process updates while the current
-                thread's run loop is running. Queries normally operate
-                asynchronously, and send out progress and update
-                notifications to report changes to the list of results
-                that has been collected. Queries have two phases: the
-                initial gathering of all currently matching results, and
-                a second live-update phase where queries monitor the
-                state of the system and update themselves to external
-                changes in files or the operating environment (for example,
-                as time advances, files which did not match the query
-                when it was started may later match the query). Query
-                notifications are posted within the context of the same
-                thread which executes the query.
-                [[There are three operational modes: (1) synchronous static
-                queries, which collect the list of current results and then
-                do not watch for updates to the results, (2) asynchronous
-                static queries, which collect the results asychronously
-                after this function returns, and then do not watch for
-                updates to the results, and (3) asynchronous live queries
-                which collect the initial results asychronously after this
-                function returns, and then do watch for updates to the
-                results, until the query is destroyed. There is little
-                reason not to allow the fourth case, synchronous collection
-                of initial results, followed by asynchronous monitoring
-                for updates, so this may change in the future.]]
-        @param query The query to execute.
-        @param optionFlags Bitwise or of MDQueryOptionFlags
-        @result Returns true if the query was started (executed in the case
-                of a synchronous query), false otherwise. Queries cannot be
-                executed more than once.
-*/
-@available(OSX 10.4, *)
 func MDQueryExecute(query: MDQuery!, _ optionFlags: CFOptionFlags) -> Bool
-
-/*!
-        @function MDQueryStop
-        Stops the query from ever generating more results. Queries may be
-                executed only once, so a stopped query cannot be
-                restarted. The query will also not generate any result
-                updates. The query is static after this function returns.
-                The query will do final processing of results that have
-                come in but not yet been processed (because, say, the
-                batching parameters hasn't triggered that yet). That may
-                trigger a progress notification, so be aware of that if
-                you are stopping a query from within your progress note
-                handler; that is, during this function, a recursive
-                progress and/or finished notification might occur, which
-                might recursively call your notification handler. It is
-                safe to call this function recursively. You would call
-                this function to stop a query that is generating way too
-                many results to be useful, but still want to access the
-                results that have come in so far. If a query is stopped
-                before the gathering phase finishes, it will not report
-                itself as finished, nor will it send out a finished
-                notification.
-        @param query The query to stop.
-*/
-@available(OSX 10.4, *)
 func MDQueryStop(query: MDQuery!)
-
-/*!
-        @function MDQueryDisableUpdates
-        Disables updates to the query result list. This should be called
-                before iterating through the list of results to prevent
-                the result list from changing during the iteration. The
-                disabled state is a counter, and disabling can be done
-                recursively and from different threads.
-        @param query The query for which updates are to be disabled.
-		@result The generation number of the query. This changes each time the query's 
-				result set has changed.
-*/
-@available(OSX 10.4, *)
 func MDQueryDisableUpdates(query: MDQuery!)
-
-/*!
-        @function MDQueryEnableUpdates
-        Re-enables updates to the query result list. This should be called
-                when finished iterating through the list of results, to
-                allow changes to the result list to occur. Changes will
-                be allowed when all the disables have been matched by a
-                corresponding enable.
-        @param query The query for which updates are to be enabled.
-*/
-@available(OSX 10.4, *)
 func MDQueryEnableUpdates(query: MDQuery!)
-
-/*!
-        @function MDQueryIsGatheringComplete
-        Returns true if the first phase of a query, the initial result
-                gathering, has finished.
-        @param query The query to be interrogated.
-        @result A boolean indicating whether or not the first phase
-                of a query has completed.
- */
-@available(OSX 10.4, *)
 func MDQueryIsGatheringComplete(query: MDQuery!) -> Bool
-
-/*!
-        @function MDQueryGetResultCount
-        Returns the number of results currently collected by the query.
-                Note that the number of results in a query will change
-                over time as the query's result list is updated.
-        @param query The query to be interrogated.
-        @result The number of results in the query.
-*/
-@available(OSX 10.4, *)
 func MDQueryGetResultCount(query: MDQuery!) -> CFIndex
-
-/*!
-        @function MDQueryGetResultAtIndex
-        Returns the current result at the given index. This function
-                causes the result object to be created if it hasn't
-                been created already. For performance reasons, it is
-                not advisable to ask for results that you don't need,
-                to avoid the cost of creating them. If possible, call
-                this function to fetch only the results you need to
-                display or otherwise process. Note that the index of
-                a particular result will change over time, as the
-                query's result list is updated.
-        @param query The query to be interrogated.
-        @param idx The index into the query's result list. If the index is
-                negative, or is equal to or larger than the current
-                number of results in the query, the behavior is undefined.
-        @result Returns the MDItemRef currently at the given index, or
-                if a result-create function has been set, returns the
-                result returned by that function.
-*/
-@available(OSX 10.4, *)
 func MDQueryGetResultAtIndex(query: MDQuery!, _ idx: CFIndex) -> UnsafePointer<Void>
-
-/*!
-        @function MDQueryGetIndexOfResult
-        Returns the current index of the given result. If a result-create
-                function has been set, and the equal callback is non-NULL,
-                it will be used to test the query's results against the
-                candidate result. Note that the index of a result will
-                change over time, as the query's result list is updated.
-        @param query The query to be interrogated.
-        @param result The candidate result object for which to search.
-                If a custom create-result function has been set, and this
-                parameter is not a valid result object that the provided
-                callbacks can handle, the behavior is undefined. If a custom
-                create-result function has not been set, this parameter
-                must be a valid MDItemRef.
-        @result The index of the given result, or kCFNotFound if the
-                value is not one of the query's existing results. If
-                you provided a custom result creation function, 
-                as well as a custom object comparator function,
-                result will be objects created by that function.
-*/
-@available(OSX 10.4, *)
 func MDQueryGetIndexOfResult(query: MDQuery!, _ result: UnsafePointer<Void>) -> CFIndex
-
-/*!
-        @function MDQueryGetAttributeValueOfResultAtIndex
-        Returns the value of the named attribute for the result at
-                the given index.
-        @param query The query to be interrogated.
-        @param name The attribute name for which to return the values.
-                If the attribute is not one of those requested in the
-                valueListAttrs or sortingAttrs parameters to one of
-                the query creation functions, the result will be NULL.
-        @param idx The index into the query's result list. If the index is
-                negative, or is equal to or larger than the current
-                number of results in the query, the behavior is undefined.
-        @result The value of the attribute, or NULL if the attribute
-                doesn't exist in the query on that result.
-*/
-@available(OSX 10.4, *)
 func MDQueryGetAttributeValueOfResultAtIndex(query: MDQuery!, _ name: CFString!, _ idx: CFIndex) -> UnsafeMutablePointer<Void>
-
-/*!
-        @function MDQueryCopyValuesOfAttribute
-        Returns the list of values, from the results of the query, of the
-                named attribute. The list is not ordered in any way. The
-                list contains only one occurrence of each value. Note that
-                this list may change over time, as the query's result list
-                is updated.
-        @param query The query to be interrogated.
-        @param name The attribute name for which to return the values.
-                If the attribute is not one of those requested in the
-                valueListAttrs parameter to one of the query creation
-                functions, the behavior is undefined.
-        @result A CFArray holding the value objects for that attribute.
-*/
-@available(OSX 10.4, *)
 func MDQueryCopyValuesOfAttribute(query: MDQuery!, _ name: CFString!) -> CFArray!
-
-/*!
-        @function MDQueryGetCountOfResultsWithAttributeValue
-        Returns the number of results which have the given attribute and
-                attribute value. Note that this count may change over time,
-                as the query's result list is updated.
-        @param query The query to be interrogated.
-        @param name The attribute name for which to return the number
-                of results with the given value. If the attribute is not
-                one of those requested in the valueListAttrs parameter to
-                one of the query creation functions, the behavior is
-                undefined.
-        @param value The attribute value for which to return the number
-                of results with that value. This parameter may be NULL,
-                in which case the number of results that do not contain
-                the named attribute is returned.
-        @result The number of results with that attribute and value.
-*/
-@available(OSX 10.4, *)
 func MDQueryGetCountOfResultsWithAttributeValue(query: MDQuery!, _ name: CFString!, _ value: AnyObject!) -> CFIndex
-
-/*!
- @function MDQuerySetSortOrder
- Sets the sort order for a query.
- @param query The query for which the sort order is to be set.
- @param sortingAttrs An array of attribute names, as in MDQueryCreate. 
-  The query's result set will be sorted according to the order of
-  these attributes. All names in the array have to have been passed
-  as sortingAttrs when the query was created. The attribute names 
-  are CFStrings
- @result A boolean, true on success, false on failure.
- */
-@available(OSX 10.7, *)
 func MDQuerySetSortOrder(query: MDQuery!, _ sortingAttrs: CFArray!) -> Bool
-
-/*!   
- @enum MDQuerySortOptionFlags
- @constant kMDQueryReverseSortOrderFlag Sort the attribute in reverse order.
- */
 struct MDQuerySortOptionFlags : RawRepresentable, Equatable {
   init(_ rawValue: UInt32)
   init(rawValue: UInt32)
   var rawValue: UInt32
 }
 var kMDQueryReverseSortOrderFlag: MDQuerySortOptionFlags { get }
-
-/*!
- @function MDQuerySetSortOptionFlagsForAttribute
- Sets the sort flags for a query.
- @param query The query for which the sort flags is to be set.
- @param fieldName The attribute name for which sort option flags are to be set.  
-  The attribute name must have been part of the sortingFlags when the query was created.
- @param flags A uint32_t containing MDQuerySortOptionFlags to be applied to the attibute
- @result A boolean, true on success, false on failure.
- */
-@available(OSX 10.7, *)
 func MDQuerySetSortOptionFlagsForAttribute(query: MDQuery!, _ fieldName: CFString!, _ flags: UInt32) -> Bool
-
-/*!
- @function MDQueryGetSortOptionFlagsForAttribute
- Gets the sort option flags for a sorting attribute.
- @param query The query for which fetch sort option flags.
- @param fieldName The attribute name for which sort option flags are to be fetched.  
- @result A uint32_t, with MDQuerySortOptionFlags set for the attribute.
- */
-@available(OSX 10.7, *)
 func MDQueryGetSortOptionFlagsForAttribute(query: MDQuery!, _ fieldName: CFString!) -> UInt32
-
-/*!
-        @typedef MDQuerySortComparatorFunction
-        Type of the callback function used to sort the results of an
-                MDQuery.
-        @param query The MDQuery instance.
-        @param attrs1 A C array of attribute values for a result. The
-                values occur in the array in the same order and position
-                that the attribute names were passed in the sortingAttrs
-                array when the query was created. The values of the
-                attributes might be NULL, if the attribute doesn't exist
-                on a result or if read access to that attribute is not
-                allowed.
-        @param attrs2 A C array of attribute values for a result. The
-                values occur in the array in the same order and position
-                that the attribute names were passed in the sortingAttrs
-                array when the query was created. The values of the
-                attributes might be NULL, if the attribute doesn't exist
-                on a result or if read access to that attribute is not
-                allowed.
-        @param context The user-defined context parameter given to
-                MDQuerySetSortComparator().
-        @result The function must return one of the CFComparisonResults
-                kCFCompareLessThan, kCFCompareEqualTo, or
-                kCFCompareGreaterThan. There is no provision for unordered
-                results. The comparison must be a total order relation,
-                and additionally produce temporally identical results (that
-                is, produce the same results for the same inputs in the
-                future as now), for the sort results to be predictable.
-*/
 typealias MDQuerySortComparatorFunction = @convention(c) (UnsafePointer<Unmanaged<AnyObject>?>, UnsafePointer<Unmanaged<AnyObject>?>, UnsafeMutablePointer<Void>) -> CFComparisonResult
-
-/*!
-        @function MDQuerySetSortComparator
-        Sets the function used to sort the results of an MDQuery. You
-                may set the comparator function as many times as you
-                like, even while the query is executing. Whenever the
-                comparator function is set, all results are re-sorted
-                using the new comparator function before the function
-                returns. The function pointer can be NULL to cancel
-                custom sorting and revert to the default sorting.
-                The default sort provided by MDQueryCreate()
-                is a assending sort strings are compared using
-                CFStringCompare() with the options kCFCompareNonliteral |
-                kCFCompareLocalized | kCFCompareNumerically. CFDataRefs are
-                compared by using memcmp() of the data pointers.
-        @param query The query to whose result sort function is to be set.
-        @param func The callback function the MDQuery will use to
-                sort its results. If the function (when the parameter is
-                not NULL) is not of type MDQuerySortComparatorFunction or
-                does not behave as a MDQuerySortComparatorFunction must,
-                the behavior is undefined. The function pointer may
-                be NULL to cancel any custom comparator.
-        @param context A pointer-sized user-defined value, which is
-                passed as the third parameter to the sort function,
-                but is otherwise unused by MDQuery. The MDQuery does
-                not retain the context in any way, so it must remain
-                valid for the lifetime of the query or until the sort
-                function is set again. If the context is not what is
-                expected by the comparator, the behavior is undefined.
-*/
-@available(OSX 10.4, *)
 func MDQuerySetSortComparator(query: MDQuery!, _ comparator: MDQuerySortComparatorFunction!, _ context: UnsafeMutablePointer<Void>)
-@available(OSX 10.6, *)
 func MDQuerySetSortComparatorBlock(query: MDQuery!, _ comparator: ((UnsafePointer<Unmanaged<AnyObject>?>, UnsafePointer<Unmanaged<AnyObject>?>) -> CFComparisonResult)!)
-
-/*!
-        @constant kMDQueryProgressNotification
-        The name of the notification sent to indicate changes to the
-                query's results list during the initial gathering phase
-                of a query's execution. Mostly adds will occur during
-                this phase, but removals and changes can also occur, as
-                in any update. This info dictionary parameter of the
-                notification can carry the kMDQueryUpdateChangedItems
-                and kMDQueryUpdateRemovedItems keys. Note that these
-                keys may be have empty arrays for values, or be missing,
-                if there are no changes of that particular type. For
-                performance reasons, added results are not indicated in
-                progress notifications (to avoid the cost of creating
-                the result objects). These notifications are sent out
-                by a query before the kMDQueryDidFinishNotification.
-*/
-@available(OSX 10.4, *)
 let kMDQueryProgressNotification: CFString!
-
-/*!
-        @constant kMDQueryDidFinishNotification
-        The name of the notification sent to indicate that the query has
-                finished with the initial result-gathering phase, and may
-                now proceed into the live-update phase (if that option
-                was chosen when the query was executed). This notification
-                often shortly follows after the last progress notification.
-                It is usually not necessary to update any displayed UI in
-                response to this notification, since it doesn't indicate
-                any change in the result list of a query.
-*/
-@available(OSX 10.4, *)
 let kMDQueryDidFinishNotification: CFString!
-
-/*!
-        @constant kMDQueryDidUpdateNotification
-        The name of the notification sent to indicate changes to the
-                query's results list during the second, live-update, phase
-                of a query's execution. This notification can carry the
-                kMDQueryUpdateAddedItems, kMDQueryUpdateChangedItems,
-                and kMDQueryUpdateRemovedItems keys in the info
-                dictionary parameter of the notification. Note that these
-                keys may be have empty arrays for values, or be missing,
-                if there are no changes of that particular type. These
-                notifications are sent out by a query after the
-                kMDQueryDidUpdateNotification.
-*/
-@available(OSX 10.4, *)
 let kMDQueryDidUpdateNotification: CFString!
-
-/*!
-        @constant kMDQueryUpdateAddedItems
-        The name of the key in a query notification's info dictionary
-                which identifies the list of added results. A result is
-                added if the file contents or some metadata attribute
-                of it is changed, and it now matches the query. Result
-                objects are created for the newly added results, to be
-                put in the list.
-*/
-@available(OSX 10.4, *)
 let kMDQueryUpdateAddedItems: CFString!
-
-/*!
-        @constant kMDQueryUpdateChangedItems
-        The name of the key in a query notification's info dictionary
-                which identifies the list of changed results. A result
-                is changed if the file contents or some metadata
-                attribute of it is changed, but it still matches the
-                query. The list only contains result objects which have
-                previously been created, and does not indicate results
-                which have been changed for which result objects have
-                not been created.
-                [[This is for performance reasons, to avoid creating
-                result objects just to represent a change of a result
-                which has not been looked at, but this semantic may
-                change.]]
-*/
-@available(OSX 10.4, *)
 let kMDQueryUpdateChangedItems: CFString!
-
-/*!
-        @constant kMDQueryUpdateRemovedItems
-        The name of the key in a query notification's info dictionary
-                which identifies the list of removed results. A result
-                can be removed if it no longer matches the query. The
-                list only contains result objects which have previously
-                been created, and does not indicate results which have
-                been removed for which result objects have not been
-                created.
-                [[This is for performance reasons, to avoid creating
-                temporary result objects just to represent the deletion
-                of the result, but this semantic may change.]]
-*/
-@available(OSX 10.4, *)
 let kMDQueryUpdateRemovedItems: CFString!
-
-/*!
-        @constant kMDQueryResultContentRelevance
-        The name of a query-specific attribute for use in sorting.
-                The relevance of an item is a CFNumberRef with a
-                floating point value. This is the relevance for
-                content searches.
-                The maximum and minimum values for a particular
-                search cannot be determined until all of the results
-                have been returned.  If there are multiple
-                kMDItemTextContent predicates in the query, no
-                relevance is returned.
-                This is an attribute of a result item that is
-                specific to the item in the context of the query.
-                Also, the relevance does not compare the result
-                relative to the other results of a query, but is
-                computed just on the result item itself. Finally,
-                this is only the relevance value for content,
-                not a relevance for the item as a whole. The
-                relevance attribute may not even be computed for
-                an item if the item is found to match the query
-                through evaluation of other attributes of the
-                item than its contents. If the value is not
-                computed, it is treated as an attribute on the
-                item which does not exist (for sorting purposes,
-                for example).
-*/
-@available(OSX 10.4, *)
 let kMDQueryResultContentRelevance: CFString!
-
-/*!
-    @function MDQuerySetSearchScope
-    @discussion Use MDQuerySetSearchScope to limit the results
-             returned by the query engine to those MDItemRefs that
-             appear  within the specified directories.  This may be
-             used to limit searching to particular volumes. Tilde
-			 paths, or environment variables are not expanded.
-			 Calling this multiple times will replace the previous
-			 options. This must be called before the query is executed.
-    @param query The query object to modify.
-    @param scopeDirectories a CFArray of CFStringRef or CFURLRef objects which
-           specify where to search.  For conveinience, the kMDQueryScopeHome,
-			kMDQueryScopeComputer and kMDQueryScopeNetwork constants may also
-			be present in this array.
-    @param scopeOptions additional options for modifying the search.
-           Currently, pass 0 (zero).
- */
-@available(OSX 10.4, *)
 func MDQuerySetSearchScope(query: MDQuery!, _ scopeDirectories: CFArray!, _ scopeOptions: OptionBits)
-
-/*!
-@constant kMDQueryScopeHome
-	A constant, which can be passed in the scopeDirectories array, to specify
-	that the search should be restricted to the volume and directory that contains
-	the current user's home directory
- */
-@available(OSX 10.4, *)
 let kMDQueryScopeHome: CFString!
-
-/*!
-@constant kMDQueryScopeComputer
-	A constant, which can be passed in the scopeDirectories array, to specify
-	that the search should be restricted to all locally mounted volumes, plus the user's
-	home directory (which may be on a remote volume).
- */
-@available(OSX 10.4, *)
 let kMDQueryScopeComputer: CFString!
-
-/*!
-@constant kMDQueryScopeNetwork
-	A constant, which can be passed in the scopeDirectories array, to specify
-	that the search should include all user mounted remote volumes.
- */
-@available(OSX 10.4, *)
 let kMDQueryScopeNetwork: CFString!
-
-/*!
- @constant kMDQueryScopeAllIndexed
- A constant, which can be passed in the scopeDirectories array, to specify
- that the search should be restricted to indexed, locally mounted volumes and
- indexed user mounted remote volumes, plus the user's home directory.
- */
-@available(OSX 10.6, *)
 let kMDQueryScopeAllIndexed: CFString!
-
-/*!
- @constant kMDQueryScopeComputerIndexed
- A constant, which can be passed in the scopeDirectories array, to specify
- that the search should be restricted to indexed, locally mounted volumes, plus the user's
- home directory (which may be on a remote volume).
- */
-@available(OSX 10.6, *)
 let kMDQueryScopeComputerIndexed: CFString!
-
-/*!
- @constant kMDQueryScopeNetworkIndexed
- A constant, which can be passed in the scopeDirectories array, to specify
- that the search should include indexed user mounted remote volumes.
- */
-@available(OSX 10.6, *)
 let kMDQueryScopeNetworkIndexed: CFString!
-
-/*!
- @function MDQuerySetMaxCount
- @discussion Use MDQuerySetMaxCount to limit the number of results
- returned by the query engine.  This must be called before the query is executed.
- @param query The query object to modify.
- @param size The maximum number of results desired.
- */
-@available(OSX 10.5, *)
 func MDQuerySetMaxCount(query: MDQuery!, _ size: CFIndex)
-
-/*!
-	@function MDSchemaCopyAttributesForContentType
-        Returns an dictionary attributes to display or show the
-                user for a given UTI type. This function does not walk up the
-                UTI hiearchy and perform a union of the information.
-        @param utiType the UTI type to be interrogated.
-        @result A CFDictionaryRef with keys ==  to kMDAttributeDisplayValues etc..
-
-*/
-@available(OSX 10.4, *)
 func MDSchemaCopyAttributesForContentType(contentTypeUTI: CFString!) -> CFDictionary!
-
-/*!
-        @function MDSchemaCopyMetaAttributesForAttribute
-        Returns an dictionary of the meta attributes of attribute
-        @param name the attribute whose schema you are interested in.
-        @result A CFDictionary of the description of the attribute.
-*/
-@available(OSX 10.4, *)
 func MDSchemaCopyMetaAttributesForAttribute(name: CFString!) -> CFDictionary!
-
-/*!
-        @function MDSchemaCopyAllAttributes
-        Returns an array of all of the attributes defined in the schema
-        @result A CFArray of the attribute names.
-*/
-@available(OSX 10.4, *)
 func MDSchemaCopyAllAttributes() -> CFArray!
-
-/*!
-        @function MDSchemaCopyDisplayNameForAttribute
-        Returns the localized name of an attribute
-        @param name the attribute whose localization you are interested in
-        @result the localized name of the passed in attribute, or NULL if there is
-                 no localized name is avaliable.
-*/
-@available(OSX 10.4, *)
 func MDSchemaCopyDisplayNameForAttribute(name: CFString!) -> CFString!
-
-/*!
-        @function MDSchemaCopyDisplayDescriptionForAttribute
-        Returns the localized description of an attribute.
-        @param name the attribute whose localization you are interested in
-        @result the localized description of the passed in attribute, or NULL if there is
-                 no localized description is avaliable.
-*/
-@available(OSX 10.4, *)
 func MDSchemaCopyDisplayDescriptionForAttribute(name: CFString!) -> CFString!
-@available(OSX 10.4, *)
 let kMDAttributeDisplayValues: CFString!
-@available(OSX 10.4, *)
 let kMDAttributeAllValues: CFString!
-@available(OSX 10.5, *)
 let kMDAttributeReadOnlyValues: CFString!
-@available(OSX 10.5, *)
 let kMDExporterAvaliable: CFString!
-@available(OSX 10.4, *)
 let kMDAttributeName: CFString!
-@available(OSX 10.4, *)
 let kMDAttributeType: CFString!
-@available(OSX 10.4, *)
 let kMDAttributeMultiValued: CFString!
 class CSIdentity {
 }
@@ -7458,7 +4769,6 @@ typealias CSIdentityRef = CSIdentity
 typealias CSIdentityQueryRef = CSIdentityQuery
 class CSIdentityQuery {
 }
-@available(OSX 10.5, *)
 let kCSIdentityGeneratePosixName: CFString!
 var kCSIdentityClassUser: Int { get }
 var kCSIdentityClassGroup: Int { get }
@@ -7466,73 +4776,39 @@ typealias CSIdentityClass = CFIndex
 var kCSIdentityFlagNone: Int { get }
 var kCSIdentityFlagHidden: Int { get }
 typealias CSIdentityFlags = CFOptionFlags
-@available(OSX 10.5, *)
 func CSIdentityGetTypeID() -> CFTypeID
-@available(OSX 10.5, *)
 func CSIdentityCreate(allocator: CFAllocator!, _ identityClass: CSIdentityClass, _ fullName: CFString!, _ posixName: CFString!, _ flags: CSIdentityFlags, _ authority: CSIdentityAuthority!) -> Unmanaged<CSIdentity>!
-@available(OSX 10.5, *)
 func CSIdentityCreateCopy(allocator: CFAllocator!, _ identity: CSIdentity!) -> Unmanaged<CSIdentity>!
-@available(OSX 10.5, *)
 func CSIdentityGetClass(identity: CSIdentity!) -> CSIdentityClass
-@available(OSX 10.5, *)
 func CSIdentityGetAuthority(identity: CSIdentity!) -> Unmanaged<CSIdentityAuthority>!
-@available(OSX 10.5, *)
 func CSIdentityGetUUID(identity: CSIdentity!) -> Unmanaged<CFUUID>!
-@available(OSX 10.5, *)
 func CSIdentityGetFullName(identity: CSIdentity!) -> Unmanaged<CFString>!
-@available(OSX 10.5, *)
 func CSIdentityGetPosixID(identity: CSIdentity!) -> id_t
-@available(OSX 10.5, *)
 func CSIdentityGetPosixName(identity: CSIdentity!) -> Unmanaged<CFString>!
-@available(OSX 10.5, *)
 func CSIdentityGetEmailAddress(identity: CSIdentity!) -> Unmanaged<CFString>!
-@available(OSX 10.5, *)
 func CSIdentityGetImageURL(identity: CSIdentity!) -> Unmanaged<CFURL>!
-@available(OSX 10.5, *)
 func CSIdentityGetImageData(identity: CSIdentity!) -> Unmanaged<CFData>!
-@available(OSX 10.5, *)
 func CSIdentityGetImageDataType(identity: CSIdentity!) -> Unmanaged<CFString>!
-@available(OSX 10.5, *)
 func CSIdentityGetAliases(identity: CSIdentity!) -> Unmanaged<CFArray>!
-@available(OSX 10.5, *)
 func CSIdentityIsMemberOfGroup(identity: CSIdentity!, _ group: CSIdentity!) -> Bool
-@available(OSX 10.5, *)
 func CSIdentityIsHidden(identity: CSIdentity!) -> Bool
-@available(OSX 10.5, *)
 func CSIdentityCreatePersistentReference(allocator: CFAllocator!, _ identity: CSIdentity!) -> Unmanaged<CFData>!
-@available(OSX 10.5, *)
 func CSIdentityIsEnabled(user: CSIdentity!) -> Bool
-@available(OSX 10.5, *)
 func CSIdentityAuthenticateUsingPassword(user: CSIdentity!, _ password: CFString!) -> Bool
-@available(OSX 10.5, *)
 func CSIdentityGetCertificate(user: CSIdentity!) -> Unmanaged<SecCertificate>!
-@available(OSX 10.5, *)
 func CSIdentityCreateGroupMembershipQuery(allocator: CFAllocator!, _ group: CSIdentity!) -> Unmanaged<CSIdentityQuery>!
-@available(OSX 10.5, *)
 func CSIdentitySetFullName(identity: CSIdentity!, _ fullName: CFString!)
-@available(OSX 10.5, *)
 func CSIdentitySetEmailAddress(identity: CSIdentity!, _ emailAddress: CFString!)
-@available(OSX 10.5, *)
 func CSIdentitySetImageURL(identity: CSIdentity!, _ url: CFURL!)
-@available(OSX 10.5, *)
 func CSIdentitySetImageData(identity: CSIdentity!, _ imageData: CFData!, _ imageDataType: CFString!)
-@available(OSX 10.5, *)
 func CSIdentityAddAlias(identity: CSIdentity!, _ alias: CFString!)
-@available(OSX 10.5, *)
 func CSIdentityRemoveAlias(identity: CSIdentity!, _ alias: CFString!)
-@available(OSX 10.5, *)
 func CSIdentityAddMember(group: CSIdentity!, _ member: CSIdentity!)
-@available(OSX 10.5, *)
 func CSIdentityRemoveMember(group: CSIdentity!, _ member: CSIdentity!)
-@available(OSX 10.5, *)
 func CSIdentitySetIsEnabled(user: CSIdentity!, _ isEnabled: Bool)
-@available(OSX 10.5, *)
 func CSIdentitySetPassword(user: CSIdentity!, _ password: CFString!)
-@available(OSX 10.5, *)
 func CSIdentitySetCertificate(user: CSIdentity!, _ certificate: SecCertificate!)
-@available(OSX 10.5, *)
 func CSIdentityDelete(identity: CSIdentity!)
-@available(OSX 10.5, *)
 func CSIdentityCommit(identity: CSIdentity!, _ authorization: AuthorizationRef, _ error: UnsafeMutablePointer<Unmanaged<CFError>?>) -> Bool
 var kCSIdentityCommitCompleted: Int { get }
 typealias CSIdentityStatusUpdatedCallback = @convention(c) (CSIdentity!, CFIndex, CFError!, UnsafeMutablePointer<Void>) -> Void
@@ -7546,26 +4822,17 @@ struct CSIdentityClientContext {
   init()
   init(version: CFIndex, info: UnsafeMutablePointer<Void>, retain: CFAllocatorRetainCallBack!, release: CFAllocatorReleaseCallBack!, copyDescription: CFAllocatorCopyDescriptionCallBack!, statusUpdated: CSIdentityStatusUpdatedCallback!)
 }
-@available(OSX 10.5, *)
 func CSIdentityCommitAsynchronously(identity: CSIdentity!, _ clientContext: UnsafePointer<CSIdentityClientContext>, _ runLoop: CFRunLoop!, _ runLoopMode: CFString!, _ authorization: AuthorizationRef) -> Bool
-@available(OSX 10.5, *)
 func CSIdentityIsCommitting(identity: CSIdentity!) -> Bool
-@available(OSX 10.5, *)
 func CSIdentityRemoveClient(identity: CSIdentity!)
 class CSIdentityAuthority {
 }
 typealias CSIdentityAuthorityRef = CSIdentityAuthority
-@available(OSX 10.5, *)
 func CSIdentityAuthorityGetTypeID() -> CFTypeID
-@available(OSX 10.5, *)
 func CSGetDefaultIdentityAuthority() -> Unmanaged<CSIdentityAuthority>!
-@available(OSX 10.5, *)
 func CSGetLocalIdentityAuthority() -> Unmanaged<CSIdentityAuthority>!
-@available(OSX 10.5, *)
 func CSGetManagedIdentityAuthority() -> Unmanaged<CSIdentityAuthority>!
-@available(OSX 10.5, *)
 func CSIdentityAuthorityCopyLocalizedName(authority: CSIdentityAuthority!) -> Unmanaged<CFString>!
-@available(OSX 10.5, *)
 let kCSIdentityErrorDomain: CFString!
 var kCSIdentityUnknownAuthorityErr: Int { get }
 var kCSIdentityAuthorityNotAccessibleErr: Int { get }
@@ -7575,7 +4842,6 @@ var kCSIdentityInvalidFullNameErr: Int { get }
 var kCSIdentityDuplicateFullNameErr: Int { get }
 var kCSIdentityInvalidPosixNameErr: Int { get }
 var kCSIdentityDuplicatePosixNameErr: Int { get }
-@available(OSX 10.5, *)
 func CSIdentityQueryGetTypeID() -> CFTypeID
 var kCSIdentityQueryGenerateUpdateEvents: Int { get }
 var kCSIdentityQueryIncludeHiddenIdentities: Int { get }
@@ -7583,21 +4849,13 @@ typealias CSIdentityQueryFlags = CFOptionFlags
 var kCSIdentityQueryStringEquals: Int { get }
 var kCSIdentityQueryStringBeginsWith: Int { get }
 typealias CSIdentityQueryStringComparisonMethod = CFIndex
-@available(OSX 10.5, *)
 func CSIdentityQueryCreate(allocator: CFAllocator!, _ identityClass: CSIdentityClass, _ authority: CSIdentityAuthority!) -> Unmanaged<CSIdentityQuery>!
-@available(OSX 10.5, *)
 func CSIdentityQueryCreateForName(allocator: CFAllocator!, _ name: CFString!, _ comparisonMethod: CSIdentityQueryStringComparisonMethod, _ identityClass: CSIdentityClass, _ authority: CSIdentityAuthority!) -> Unmanaged<CSIdentityQuery>!
-@available(OSX 10.5, *)
 func CSIdentityQueryCreateForUUID(allocator: CFAllocator!, _ uuid: CFUUID!, _ authority: CSIdentityAuthority!) -> Unmanaged<CSIdentityQuery>!
-@available(OSX 10.5, *)
 func CSIdentityQueryCreateForPosixID(allocator: CFAllocator!, _ posixID: id_t, _ identityClass: CSIdentityClass, _ authority: CSIdentityAuthority!) -> Unmanaged<CSIdentityQuery>!
-@available(OSX 10.5, *)
 func CSIdentityQueryCreateForPersistentReference(allocator: CFAllocator!, _ referenceData: CFData!) -> Unmanaged<CSIdentityQuery>!
-@available(OSX 10.5, *)
 func CSIdentityQueryCreateForCurrentUser(allocator: CFAllocator!) -> Unmanaged<CSIdentityQuery>!
-@available(OSX 10.5, *)
 func CSIdentityQueryCopyResults(query: CSIdentityQuery!) -> Unmanaged<CFArray>!
-@available(OSX 10.5, *)
 func CSIdentityQueryExecute(query: CSIdentityQuery!, _ flags: CSIdentityQueryFlags, _ error: UnsafeMutablePointer<Unmanaged<CFError>?>) -> Bool
 var kCSIdentityQueryEventSearchPhaseFinished: Int { get }
 var kCSIdentityQueryEventResultsAdded: Int { get }
@@ -7616,51 +4874,32 @@ struct CSIdentityQueryClientContext {
   init()
   init(version: CFIndex, info: UnsafeMutablePointer<Void>, retainInfo: CFAllocatorRetainCallBack!, releaseInfo: CFAllocatorReleaseCallBack!, copyInfoDescription: CFAllocatorCopyDescriptionCallBack!, receiveEvent: CSIdentityQueryReceiveEventCallback!)
 }
-@available(OSX 10.5, *)
 func CSIdentityQueryExecuteAsynchronously(query: CSIdentityQuery!, _ flags: CSIdentityQueryFlags, _ clientContext: UnsafePointer<CSIdentityQueryClientContext>, _ runLoop: CFRunLoop!, _ runLoopMode: CFString!) -> Bool
-@available(OSX 10.5, *)
 func CSIdentityQueryStop(query: CSIdentityQuery!)
-@available(OSX 10.3, *)
 let kSKMinTermLength: CFString!
-@available(OSX 10.3, *)
 let kSKSubstitutions: CFString!
-@available(OSX 10.3, *)
 let kSKStopWords: CFString!
-@available(OSX 10.4, *)
 let kSKProximityIndexing: CFString!
-@available(OSX 10.4, *)
 let kSKMaximumTerms: CFString!
-@available(OSX 10.4, *)
 let kSKTermChars: CFString!
-@available(OSX 10.4, *)
 let kSKStartTermChars: CFString!
-@available(OSX 10.4, *)
 let kSKEndTermChars: CFString!
 typealias SKDocument = CFTypeRef
 typealias SKDocumentRef = SKDocument
-@available(OSX 10.3, *)
 func SKDocumentGetTypeID() -> CFTypeID
-@available(OSX 10.3, *)
 func SKDocumentCreateWithURL(inURL: CFURL!) -> Unmanaged<SKDocument>!
-@available(OSX 10.3, *)
 func SKDocumentCopyURL(inDocument: SKDocument!) -> Unmanaged<CFURL>!
-@available(OSX 10.3, *)
 func SKDocumentCreate(inScheme: CFString!, _ inParent: SKDocument!, _ inName: CFString!) -> Unmanaged<SKDocument>!
-@available(OSX 10.3, *)
 func SKDocumentGetSchemeName(inDocument: SKDocument!) -> Unmanaged<CFString>!
-@available(OSX 10.3, *)
 func SKDocumentGetName(inDocument: SKDocument!) -> Unmanaged<CFString>!
-@available(OSX 10.3, *)
 func SKDocumentGetParent(inDocument: SKDocument!) -> Unmanaged<SKDocument>!
 typealias SKIndexRef = SKIndex
 class SKIndex {
 }
-@available(OSX 10.3, *)
 func SKIndexGetTypeID() -> CFTypeID
 typealias SKIndexDocumentIteratorRef = SKIndexDocumentIterator
 class SKIndexDocumentIterator {
 }
-@available(OSX 10.3, *)
 func SKIndexDocumentIteratorGetTypeID() -> CFTypeID
 struct SKIndexType : RawRepresentable, Equatable {
   init(_ rawValue: UInt32)
@@ -7680,98 +4919,56 @@ var kSKDocumentStateNotIndexed: SKDocumentIndexState { get }
 var kSKDocumentStateIndexed: SKDocumentIndexState { get }
 var kSKDocumentStateAddPending: SKDocumentIndexState { get }
 var kSKDocumentStateDeletePending: SKDocumentIndexState { get }
-@available(OSX 10.3, *)
 func SKIndexCreateWithURL(inURL: CFURL!, _ inIndexName: CFString!, _ inIndexType: SKIndexType, _ inAnalysisProperties: CFDictionary!) -> Unmanaged<SKIndex>!
-@available(OSX 10.3, *)
 func SKIndexOpenWithURL(inURL: CFURL!, _ inIndexName: CFString!, _ inWriteAccess: Bool) -> Unmanaged<SKIndex>!
-@available(OSX 10.3, *)
 func SKIndexCreateWithMutableData(inData: CFMutableData!, _ inIndexName: CFString!, _ inIndexType: SKIndexType, _ inAnalysisProperties: CFDictionary!) -> Unmanaged<SKIndex>!
-@available(OSX 10.3, *)
 func SKIndexOpenWithData(inData: CFData!, _ inIndexName: CFString!) -> Unmanaged<SKIndex>!
-@available(OSX 10.3, *)
 func SKIndexOpenWithMutableData(inData: CFMutableData!, _ inIndexName: CFString!) -> Unmanaged<SKIndex>!
-@available(OSX 10.3, *)
 func SKIndexFlush(inIndex: SKIndex!) -> Bool
-@available(OSX 10.3, *)
 func SKIndexSetMaximumBytesBeforeFlush(inIndex: SKIndex!, _ inBytesForUpdate: CFIndex)
-@available(OSX 10.3, *)
 func SKIndexGetMaximumBytesBeforeFlush(inIndex: SKIndex!) -> CFIndex
-@available(OSX 10.3, *)
 func SKIndexCompact(inIndex: SKIndex!) -> Bool
-@available(OSX 10.3, *)
 func SKIndexGetIndexType(inIndex: SKIndex!) -> SKIndexType
-@available(OSX 10.3, *)
 func SKIndexGetAnalysisProperties(inIndex: SKIndex!) -> Unmanaged<CFDictionary>!
-@available(OSX 10.3, *)
 func SKIndexGetDocumentCount(inIndex: SKIndex!) -> CFIndex
-@available(OSX 10.4, *)
 func SKIndexClose(inIndex: SKIndex!)
 typealias SKDocumentID = CFIndex
-@available(OSX 10.3, *)
 func SKIndexAddDocumentWithText(inIndex: SKIndex!, _ inDocument: SKDocument!, _ inDocumentText: CFString!, _ inCanReplace: Bool) -> Bool
-@available(OSX 10.3, *)
 func SKIndexAddDocument(inIndex: SKIndex!, _ inDocument: SKDocument!, _ inMIMETypeHint: CFString!, _ inCanReplace: Bool) -> Bool
-@available(OSX 10.3, *)
 func SKIndexRemoveDocument(inIndex: SKIndex!, _ inDocument: SKDocument!) -> Bool
-@available(OSX 10.3, *)
 func SKIndexCopyDocumentProperties(inIndex: SKIndex!, _ inDocument: SKDocument!) -> Unmanaged<CFDictionary>!
-@available(OSX 10.3, *)
 func SKIndexSetDocumentProperties(inIndex: SKIndex!, _ inDocument: SKDocument!, _ inProperties: CFDictionary!)
-@available(OSX 10.3, *)
 func SKIndexGetDocumentState(inIndex: SKIndex!, _ inDocument: SKDocument!) -> SKDocumentIndexState
-@available(OSX 10.3, *)
 func SKIndexGetDocumentID(inIndex: SKIndex!, _ inDocument: SKDocument!) -> SKDocumentID
-@available(OSX 10.3, *)
 func SKIndexCopyDocumentForDocumentID(inIndex: SKIndex!, _ inDocumentID: SKDocumentID) -> Unmanaged<SKDocument>!
-@available(OSX 10.3, *)
 func SKIndexRenameDocument(inIndex: SKIndex!, _ inDocument: SKDocument!, _ inNewName: CFString!) -> Bool
-@available(OSX 10.3, *)
 func SKIndexMoveDocument(inIndex: SKIndex!, _ inDocument: SKDocument!, _ inNewParent: SKDocument!) -> Bool
-@available(OSX 10.3, *)
 func SKIndexDocumentIteratorCreate(inIndex: SKIndex!, _ inParentDocument: SKDocument!) -> Unmanaged<SKIndexDocumentIterator>!
-@available(OSX 10.3, *)
 func SKIndexDocumentIteratorCopyNext(inIterator: SKIndexDocumentIterator!) -> Unmanaged<SKDocument>!
-@available(OSX 10.3, *)
 func SKIndexGetMaximumDocumentID(inIndex: SKIndex!) -> SKDocumentID
-@available(OSX 10.3, *)
 func SKIndexGetDocumentTermCount(inIndex: SKIndex!, _ inDocumentID: SKDocumentID) -> CFIndex
-@available(OSX 10.3, *)
 func SKIndexCopyTermIDArrayForDocumentID(inIndex: SKIndex!, _ inDocumentID: SKDocumentID) -> Unmanaged<CFArray>!
-@available(OSX 10.3, *)
 func SKIndexGetDocumentTermFrequency(inIndex: SKIndex!, _ inDocumentID: SKDocumentID, _ inTermID: CFIndex) -> CFIndex
-@available(OSX 10.3, *)
 func SKIndexGetMaximumTermID(inIndex: SKIndex!) -> CFIndex
-@available(OSX 10.3, *)
 func SKIndexGetTermDocumentCount(inIndex: SKIndex!, _ inTermID: CFIndex) -> CFIndex
-@available(OSX 10.3, *)
 func SKIndexCopyDocumentIDArrayForTermID(inIndex: SKIndex!, _ inTermID: CFIndex) -> Unmanaged<CFArray>!
-@available(OSX 10.3, *)
 func SKIndexCopyTermStringForTermID(inIndex: SKIndex!, _ inTermID: CFIndex) -> Unmanaged<CFString>!
-@available(OSX 10.3, *)
 func SKIndexGetTermIDForTermString(inIndex: SKIndex!, _ inTermString: CFString!) -> CFIndex
-@available(OSX 10.3, *)
 func SKLoadDefaultExtractorPlugIns()
 class SKSearch {
 }
 typealias SKSearchRef = SKSearch
-@available(OSX 10.4, *)
 func SKSearchGetTypeID() -> CFTypeID
 typealias SKSearchOptions = UInt32
 var kSKSearchOptionDefault: Int { get }
 var kSKSearchOptionNoRelevanceScores: Int { get }
 var kSKSearchOptionSpaceMeansOR: Int { get }
 var kSKSearchOptionFindSimilar: Int { get }
-@available(OSX 10.4, *)
 func SKSearchCreate(inIndex: SKIndex!, _ inQuery: CFString!, _ inSearchOptions: SKSearchOptions) -> Unmanaged<SKSearch>!
-@available(OSX 10.4, *)
 func SKSearchCancel(inSearch: SKSearch!)
-@available(OSX 10.4, *)
 func SKSearchFindMatches(inSearch: SKSearch!, _ inMaximumCount: CFIndex, _ outDocumentIDsArray: UnsafeMutablePointer<SKDocumentID>, _ outScoresArray: UnsafeMutablePointer<Float>, _ maximumTime: CFTimeInterval, _ outFoundCount: UnsafeMutablePointer<CFIndex>) -> Bool
-@available(OSX 10.4, *)
 func SKIndexCopyInfoForDocumentIDs(inIndex: SKIndex!, _ inCount: CFIndex, _ inDocumentIDsArray: UnsafeMutablePointer<SKDocumentID>, _ outNamesArray: UnsafeMutablePointer<Unmanaged<CFString>?>, _ outParentIDsArray: UnsafeMutablePointer<SKDocumentID>)
-@available(OSX 10.4, *)
 func SKIndexCopyDocumentRefsForDocumentIDs(inIndex: SKIndex!, _ inCount: CFIndex, _ inDocumentIDsArray: UnsafeMutablePointer<SKDocumentID>, _ outDocumentRefsArray: UnsafeMutablePointer<Unmanaged<SKDocument>?>)
-@available(OSX 10.4, *)
 func SKIndexCopyDocumentURLsForDocumentIDs(inIndex: SKIndex!, _ inCount: CFIndex, _ inDocumentIDsArray: UnsafeMutablePointer<SKDocumentID>, _ outDocumentURLsArray: UnsafeMutablePointer<Unmanaged<CFURL>?>)
 typealias SKSearchGroupRef = SKSearchGroup
 class SKSearchGroup {
@@ -7792,25 +4989,15 @@ typealias SKSearchResultsFilterCallBack = @convention(c) (SKIndex!, SKDocument!,
 class SKSummary {
 }
 typealias SKSummaryRef = SKSummary
-@available(OSX 10.4, *)
 func SKSummaryGetTypeID() -> CFTypeID
-@available(OSX 10.4, *)
 func SKSummaryCreateWithString(inString: CFString!) -> Unmanaged<SKSummary>!
-@available(OSX 10.4, *)
 func SKSummaryGetSentenceCount(summary: SKSummary!) -> CFIndex
-@available(OSX 10.4, *)
 func SKSummaryGetParagraphCount(summary: SKSummary!) -> CFIndex
-@available(OSX 10.4, *)
 func SKSummaryCopySentenceAtIndex(summary: SKSummary!, _ i: CFIndex) -> Unmanaged<CFString>!
-@available(OSX 10.4, *)
 func SKSummaryCopyParagraphAtIndex(summary: SKSummary!, _ i: CFIndex) -> Unmanaged<CFString>!
-@available(OSX 10.4, *)
 func SKSummaryCopySentenceSummaryString(summary: SKSummary!, _ numSentences: CFIndex) -> Unmanaged<CFString>!
-@available(OSX 10.4, *)
 func SKSummaryCopyParagraphSummaryString(summary: SKSummary!, _ numParagraphs: CFIndex) -> Unmanaged<CFString>!
-@available(OSX 10.4, *)
 func SKSummaryGetSentenceSummaryInfo(summary: SKSummary!, _ numSentencesInSummary: CFIndex, _ outRankOrderOfSentences: UnsafeMutablePointer<CFIndex>, _ outSentenceIndexOfSentences: UnsafeMutablePointer<CFIndex>, _ outParagraphIndexOfSentences: UnsafeMutablePointer<CFIndex>) -> CFIndex
-@available(OSX 10.4, *)
 func SKSummaryGetParagraphSummaryInfo(summary: SKSummary!, _ numParagraphsInSummary: CFIndex, _ outRankOrderOfParagraphs: UnsafeMutablePointer<CFIndex>, _ outParagraphIndexOfParagraphs: UnsafeMutablePointer<CFIndex>) -> CFIndex
 class LSSharedFileList {
 }
@@ -7818,77 +5005,42 @@ typealias LSSharedFileListRef = LSSharedFileList
 class LSSharedFileListItem {
 }
 typealias LSSharedFileListItemRef = LSSharedFileListItem
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 var kLSSharedFileListFavoriteVolumes: Unmanaged<CFString>!
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 var kLSSharedFileListFavoriteItems: Unmanaged<CFString>!
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 var kLSSharedFileListRecentApplicationItems: Unmanaged<CFString>!
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 var kLSSharedFileListRecentDocumentItems: Unmanaged<CFString>!
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 var kLSSharedFileListRecentServerItems: Unmanaged<CFString>!
-@available(OSX, introduced=10.5, deprecated=10.11, message="Use a LaunchAgent, XPCService or the ServiceManagement APIs instead.")
 var kLSSharedFileListSessionLoginItems: Unmanaged<CFString>!
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 var kLSSharedFileListRecentItemsMaxAmount: Unmanaged<CFString>!
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 var kLSSharedFileListVolumesComputerVisible: Unmanaged<CFString>!
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 var kLSSharedFileListVolumesNetworkVisible: Unmanaged<CFString>!
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 var kLSSharedFileListItemBeforeFirst: Unmanaged<LSSharedFileListItem>!
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 var kLSSharedFileListItemLast: Unmanaged<LSSharedFileListItem>!
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 var kLSSharedFileListItemHidden: Unmanaged<CFString>!
-@available(OSX, introduced=10.6, deprecated=10.11)
 var kLSSharedFileListLoginItemHidden: Unmanaged<CFString>!
 typealias LSSharedFileListResolutionFlags = UInt32
 var kLSSharedFileListNoUserInteraction: Int { get }
 var kLSSharedFileListDoNotMountVolumes: Int { get }
 typealias LSSharedFileListChangedProcPtr = @convention(c) (LSSharedFileList!, UnsafeMutablePointer<Void>) -> Void
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 func LSSharedFileListGetTypeID() -> CFTypeID
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 func LSSharedFileListItemGetTypeID() -> CFTypeID
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 func LSSharedFileListCreate(inAllocator: CFAllocator!, _ inListType: CFString!, _ listOptions: AnyObject!) -> Unmanaged<LSSharedFileList>!
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 func LSSharedFileListSetAuthorization(inList: LSSharedFileList!, _ inAuthorization: AuthorizationRef) -> OSStatus
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 func LSSharedFileListAddObserver(inList: LSSharedFileList!, _ inRunloop: CFRunLoop!, _ inRunloopMode: CFString!, _ callback: LSSharedFileListChangedProcPtr!, _ context: UnsafeMutablePointer<Void>)
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 func LSSharedFileListRemoveObserver(inList: LSSharedFileList!, _ inRunloop: CFRunLoop!, _ inRunloopMode: CFString!, _ callback: LSSharedFileListChangedProcPtr!, _ context: UnsafeMutablePointer<Void>)
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 func LSSharedFileListGetSeedValue(inList: LSSharedFileList!) -> UInt32
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 func LSSharedFileListCopyProperty(inList: LSSharedFileList!, _ inPropertyName: CFString!) -> Unmanaged<AnyObject>!
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 func LSSharedFileListSetProperty(inList: LSSharedFileList!, _ inPropertyName: CFString!, _ inPropertyData: AnyObject!) -> OSStatus
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 func LSSharedFileListCopySnapshot(inList: LSSharedFileList!, _ outSnapshotSeed: UnsafeMutablePointer<UInt32>) -> Unmanaged<CFArray>!
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 func LSSharedFileListInsertItemURL(inList: LSSharedFileList!, _ insertAfterThisItem: LSSharedFileListItem!, _ inDisplayName: CFString!, _ inIconRef: IconRef, _ inURL: CFURL!, _ inPropertiesToSet: CFDictionary!, _ inPropertiesToClear: CFArray!) -> Unmanaged<LSSharedFileListItem>!
-@available(OSX, introduced=10.5, deprecated=10.10, message="Use LSSharedFileListInsertItemURL instead.")
 func LSSharedFileListInsertItemFSRef(inList: LSSharedFileList!, _ insertAfterThisItem: LSSharedFileListItem!, _ inDisplayName: CFString!, _ inIconRef: IconRef, _ inFSRef: UnsafePointer<FSRef>, _ inPropertiesToSet: CFDictionary!, _ inPropertiesToClear: CFArray!) -> Unmanaged<LSSharedFileListItem>!
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 func LSSharedFileListItemMove(inList: LSSharedFileList!, _ inItem: LSSharedFileListItem!, _ inMoveAfterItem: LSSharedFileListItem!) -> OSStatus
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 func LSSharedFileListItemRemove(inList: LSSharedFileList!, _ inItem: LSSharedFileListItem!) -> OSStatus
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 func LSSharedFileListRemoveAllItems(inList: LSSharedFileList!) -> OSStatus
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 func LSSharedFileListItemGetID(inItem: LSSharedFileListItem!) -> UInt32
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 func LSSharedFileListItemCopyIconRef(inItem: LSSharedFileListItem!) -> IconRef
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 func LSSharedFileListItemCopyDisplayName(inItem: LSSharedFileListItem!) -> Unmanaged<CFString>!
-@available(OSX, introduced=10.5, deprecated=10.10, message="Use LSSharedFileListItemCopyResolvedURL instead.")
 func LSSharedFileListItemResolve(inItem: LSSharedFileListItem!, _ inFlags: LSSharedFileListResolutionFlags, _ outURL: UnsafeMutablePointer<Unmanaged<CFURL>?>, _ outRef: UnsafeMutablePointer<FSRef>) -> OSStatus
-@available(OSX, introduced=10.10, deprecated=10.11)
 func LSSharedFileListItemCopyResolvedURL(inItem: LSSharedFileListItem!, _ inFlags: LSSharedFileListResolutionFlags, _ outError: UnsafeMutablePointer<Unmanaged<CFError>?>) -> Unmanaged<CFURL>!
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 func LSSharedFileListItemCopyProperty(inItem: LSSharedFileListItem!, _ inPropertyName: CFString!) -> Unmanaged<AnyObject>!
-@available(OSX, introduced=10.5, deprecated=10.11, message="This functionality is no longer supported on OS X.")
 func LSSharedFileListItemSetProperty(inItem: LSSharedFileListItem!, _ inPropertyName: CFString!, _ inPropertyData: AnyObject!) -> OSStatus

@@ -668,10 +668,6 @@ var kAXMenuItemCmdGlyphAttribute: String { get }
 var kAXMenuItemCmdModifiersAttribute: String { get }
 var kAXMenuItemMarkCharAttribute: String { get }
 var kAXMenuItemPrimaryUIElementAttribute: String { get }
-
-/*! @typedef AXMenuItemModifiers
-      @abstract Values that indicate the keyboard shortcut modifiers for a menu item (used with the {@link kAXMenuItemCmdModifiersAttribute} attribute).
- */
 struct AXMenuItemModifiers : OptionSetType {
   init(rawValue: UInt32)
   let rawValue: UInt32
@@ -781,63 +777,24 @@ var kAXLayoutPointForScreenPointParameterizedAttribute: String { get }
 var kAXLayoutSizeForScreenSizeParameterizedAttribute: String { get }
 var kAXScreenPointForLayoutPointParameterizedAttribute: String { get }
 var kAXScreenSizeForLayoutSizeParameterizedAttribute: String { get }
-
-/*!
-	@enum Accessibility Error Codes
-	@abstract Error codes returned by accessibility functions.
-	@discussion
-    
-*/
 enum AXError : Int32 {
   init?(rawValue: Int32)
   var rawValue: Int32 { get }
-
-  /*! No error occurred. */
   case Success
-
-  /*! A system error occurred, such as the failure to allocate an object. */
   case Failure
-
-  /*! An illegal argument was passed to the function. */
   case IllegalArgument
-
-  /*! The AXUIElementRef passed to the function is invalid. */
   case InvalidUIElement
-
-  /*! The AXObserverRef passed to the function is not a valid observer. */
   case InvalidUIElementObserver
-
-  /*! The function cannot complete because messaging failed in some way or because the application with which the function is communicating is busy or unresponsive. */
   case CannotComplete
-
-  /*! The attribute is not supported by the AXUIElementRef. */
   case AttributeUnsupported
-
-  /*! The action is not supported by the AXUIElementRef. */
   case ActionUnsupported
-
-  /*! The notification is not supported by the AXUIElementRef. */
   case NotificationUnsupported
-
-  /*! Indicates that the function or method is not implemented (this can be returned if a process does not support the accessibility API). */
   case NotImplemented
-
-  /*! This notification has already been registered for. */
   case NotificationAlreadyRegistered
-
-  /*! Indicates that a notification is not registered yet. */
   case NotificationNotRegistered
-
-  /*! The accessibility API is disabled (as when, for example, the user deselects "Enable access for assistive devices" in Universal Access Preferences). */
   case APIDisabled
-
-  /*! The requested value or AXUIElementRef does not exist. */
   case NoValue
-
-  /*! The parameterized attribute is not supported by the AXUIElementRef. */
   case ParameterizedAttributeUnsupported
-
-  /*! Not enough precision. */
   case NotEnoughPrecision
 }
 var kAXMainWindowChangedNotification: String { get }
@@ -880,10 +837,6 @@ var kAXAnnouncementRequestedNotification: String { get }
 var kAXUIElementsKey: String { get }
 var kAXPriorityKey: String { get }
 var kAXAnnouncementKey: String { get }
-
-/*! @abstract Priority values used for kAXPriorityKey
- */
-@available(OSX 10.9, *)
 enum AXPriority : CFIndex {
   init?(rawValue: CFIndex)
   var rawValue: CFIndex { get }
@@ -984,152 +937,29 @@ var kAXDockExtraDockItemSubrole: String { get }
 var kAXTrashDockItemSubrole: String { get }
 var kAXSeparatorDockItemSubrole: String { get }
 var kAXProcessSwitcherListSubrole: String { get }
-
-/*! @constant kAXFontTextAttribute
-      @abstract A dictionary (a <code>CFDictionaryRef</code>) of two or more font keys.
-      @discussion The dictionary associated with this attribute must contain the {@link kAXFontNameKey} and
-      {@link kAXFontSizeKey} font keys. It may also contain the {@link kAXFontFamilyKey} and
-      {@link kAXVisibleNameKey} font keys.
- */
-@available(OSX 10.4, *)
 var kAXFontTextAttribute: Unmanaged<CFString>
-
-/*! @constant kAXForegroundColorTextAttribute
-      @abstract A <code>CGColorRef</code> value that describes the foreground color.
- */
-@available(OSX 10.4, *)
 var kAXForegroundColorTextAttribute: Unmanaged<CFString>
-
-/*! @constant kAXBackgroundColorTextAttribute
-      @abstract A <code>CGColorRef</code> value that describes the background color.
- */
-@available(OSX 10.4, *)
 var kAXBackgroundColorTextAttribute: Unmanaged<CFString>
-
-/*! @constant kAXUnderlineColorTextAttribute
-      @abstract A <code>CGColorRef</code> value that describes the color of the underlining.
- */
-@available(OSX 10.4, *)
 var kAXUnderlineColorTextAttribute: Unmanaged<CFString>
-
-/*! @constant kAXStrikethroughColorTextAttribute
-      @abstract A <code>CGColorRef</code> value that describes the color of the strikethrough.
- */
-@available(OSX 10.4, *)
 var kAXStrikethroughColorTextAttribute: Unmanaged<CFString>
-
-/*! @constant kAXUnderlineTextAttribute
-      @abstract A <code>CFNumberRef</code> value that describes the underline style (see {@link //apple_ref/c/tdef/AXUnderlineStyle AXUnderlineStyle} for possible values).
- */
-@available(OSX 10.4, *)
 var kAXUnderlineTextAttribute: Unmanaged<CFString>
-
-/*! @constant kAXSuperscriptTextAttribute
-      @abstract A <code>CFNumberRef</code> value that indicates whether the text is superscript (value > 0) or subscript (value < 0).
- */
-@available(OSX 10.4, *)
 var kAXSuperscriptTextAttribute: Unmanaged<CFString>
-
-/*! @constant kAXStrikethroughTextAttribute
-      @abstract A <code>CFBooleanRef</code> value that indicates whether the text displays strikethrough.
- */
-@available(OSX 10.4, *)
 var kAXStrikethroughTextAttribute: Unmanaged<CFString>
-
-/*! @constant kAXShadowTextAttribute
-      @abstract A <code>CFBooleanRef</code> value that indicates whether the text displays shadow.
- */
-@available(OSX 10.4, *)
 var kAXShadowTextAttribute: Unmanaged<CFString>
-
-/*! @constant kAXAttachmentTextAttribute
-      @abstract An <code>AXUIElementRef</code> value for the accessibility object representing the text attachment.
- */
-@available(OSX 10.4, *)
 var kAXAttachmentTextAttribute: Unmanaged<CFString>
-
-/*! @constant kAXLinkTextAttribute
-      @abstract An <code>AXUIElementRef</code> value used to access the object to which the specified range of text links.
- */
-@available(OSX 10.4, *)
 var kAXLinkTextAttribute: Unmanaged<CFString>
-
-/*! @constant kAXNaturalLanguageTextAttribute
-      @abstract A <code>CFStringRef</code> value that indicates the language in which the text will be spoken aloud by the system.
- */
-@available(OSX 10.4, *)
 var kAXNaturalLanguageTextAttribute: Unmanaged<CFString>
-
-/*! @constant kAXReplacementStringTextAttribute
-      @abstract A <code>CFStringRef</code> value that indicates the string that will replace the text.
- */
-@available(OSX 10.4, *)
 var kAXReplacementStringTextAttribute: Unmanaged<CFString>
-
-/*! @constant kAXMisspelledTextAttribute
-      @abstract A <code>CFBooleanRef</code> value that indicates whether the text is misspelled.
- */
-@available(OSX 10.4, *)
 var kAXMisspelledTextAttribute: Unmanaged<CFString>
-
-/*! @constant kAXMarkedMisspelledTextAttribute
-	  @abstract A <code>CFBooleanRef</code> value that indicates whether the text is visibly shown as misspelled
-		(for example, with a squiggle underneath the text).
- */
-@available(OSX 10.9, *)
 var kAXMarkedMisspelledTextAttribute: Unmanaged<CFString>
-
-/*! @constant kAXAutocorrectedTextAttribute
-      @abstract A <code>CFBooleanRef</code> value that indicates whether the text was autocorrected.
- */
-@available(OSX 10.7, *)
 var kAXAutocorrectedTextAttribute: Unmanaged<CFString>
-
-/*! @constant kAXListItemPrefixTextAttribute
-      @abstract A <code>CFAttributedStringRef</code> value that indicates the prepended string of the list item. If the string is a common unicode character (e.g. a bullet �), return that unicode character. For lists with images before the text, return a reasonable label of the image.
- */
-@available(OSX 10.11, *)
 var kAXListItemPrefixTextAttribute: Unmanaged<CFString>
-
-/*! @constant kAXListItemIndexTextAttribute
-      @abstract A <code>CFNumberRef</code> value that indicates the line index. Each list item increments the index, even for unordered lists. The first item should have index 0.
- */
-@available(OSX 10.11, *)
 var kAXListItemIndexTextAttribute: Unmanaged<CFString>
-
-/*! @constant kAXListItemLevelTextAttribute
-      @abstract A <code>CFNumberRef</code> value that indicates the indent level. Each sublist increments the level. The first item should have level 0.
- */
-@available(OSX 10.11, *)
 var kAXListItemLevelTextAttribute: Unmanaged<CFString>
-
-/*! @constant kAXFontNameKey
-      @abstract Required key of the {@link kAXFontTextAttribute} dictionary for the font name in a <code>CFStringRef</code>.
- */
-@available(OSX 10.4, *)
 var kAXFontNameKey: Unmanaged<CFString>
-
-/*! @constant kAXFontFamilyKey
-      @abstract Optional key of the {@link kAXFontTextAttribute} dictionary for the font family name in a <code>CFStringRef</code>.
- */
-@available(OSX 10.4, *)
 var kAXFontFamilyKey: Unmanaged<CFString>
-
-/*! @constant kAXVisibleNameKey
-      @abstract Optional key of the {@link kAXFontTextAttribute} dictionary for the font display name in a <code>CFStringRef</code>.
- */
-@available(OSX 10.4, *)
 var kAXVisibleNameKey: Unmanaged<CFString>
-
-/*! @constant kAXFontSizeKey
-      @abstract Required key of the {@link kAXFontTextAttribute} dictionary for the font size in a <code>CFNumberRef</code>.
- */
-@available(OSX 10.4, *)
 var kAXFontSizeKey: Unmanaged<CFString>
-
-/*! @typedef AXUnderlineStyle
-      @abstract Values that describe the style of underlining (used with the {@link kAXUnderlineTextAttribute} attribute).
- */
 enum AXUnderlineStyle : UInt32 {
   init?(rawValue: UInt32)
   var rawValue: UInt32 { get }
@@ -1138,526 +968,55 @@ enum AXUnderlineStyle : UInt32 {
   case Thick
   case Double
 }
-@available(OSX 10.4, *)
 var kAXForegoundColorTextAttribute: Unmanaged<CFString>
-
-/*!
- @function AXIsProcessTrustedWithOptions
- @abstract Returns whether the current process is a trusted accessibility client.
- @param options A dictionary of options, or NULL to specify no options. The following options are available:
-     
- KEY: kAXTrustedCheckOptionPrompt
- VALUE: ACFBooleanRef indicating whether the user will be informed if the current process is untrusted. This could be used, for example, on application startup to always warn a user if accessibility is not enabled for the current process. Prompting occurs asynchronously and does not affect the return value.
-     
- @result Returns TRUE if the current process is a trusted accessibility client, FALSE if it is not.
- */
-@available(OSX 10.9, *)
 func AXIsProcessTrustedWithOptions(options: CFDictionary?) -> Bool
-@available(OSX 10.9, *)
 var kAXTrustedCheckOptionPrompt: Unmanaged<CFString>
-
-/*!
- @function AXIsProcessTrusted
- @abstract Returns whether the current process is a trusted accessibility client.
- 
- @result Returns TRUE if the current process is a trusted accessibility client, FALSE if it is not.
- */
-@available(OSX 10.4, *)
 func AXIsProcessTrusted() -> Bool
-
-/*!
- @typedef AXUIElementRef
- @abstract A structure used to refer to an accessibility object.
- 
- @discussion An accessibility object provides information about the user interface object it represents. This information includes the object's
- position in the accessibility hierarchy, its position on the display, details about what it is, and what actions it can perform. Accessibility objects
- respond to messages sent by assistive applications and send notifications that describe state changes.
- */
 typealias AXUIElementRef = AXUIElement
-
-/*!
- @typedef AXUIElementRef
- @abstract A structure used to refer to an accessibility object.
- 
- @discussion An accessibility object provides information about the user interface object it represents. This information includes the object's
- position in the accessibility hierarchy, its position on the display, details about what it is, and what actions it can perform. Accessibility objects
- respond to messages sent by assistive applications and send notifications that describe state changes.
- */
 class AXUIElement {
 }
-
-/*!
- @enum kAXCopyMultipleAttributeOptionStopOnError
- @discussion Pass this option to @link AXUIElementCopyMultipleAttributeValues AXUIElementCopyMultipleAttributeValues@/link to force the function
- to stop when it gets an error.
- */
 struct AXCopyMultipleAttributeOptions : OptionSetType {
   init(rawValue: UInt32)
   let rawValue: UInt32
   static var StopOnError: AXCopyMultipleAttributeOptions { get }
 }
-
-/*!
- @function AXUIElementGetTypeID
- @abstract Returns the unique type identifier for the AXUIElementRef type.
- 
- @result Returns a CFTypeID representing the AXUIElementRef type.
- */
 func AXUIElementGetTypeID() -> CFTypeID
-
-/*!
- @function AXUIElementCopyAttributeNames
- @abstract Returns a list of all the attributes supported by the specified accessibility object.
- 
- @param element The AXUIElementRef representing the accessibility object.
- @param names On return, an array containing the accessibility object's attribute names.
- 
- @result If unsuccessful, <code>AXUIElementCopyAttributeNames</code> may return one of the following error codes, among others:
- <dl><dt><code>kAXErrorAttributeUnsupported</code></dt><dd>The specified AXUIElementRef does not support the specified attribute.</dd>
- <dt><code>kAXErrorIllegalArgument</code></dt><dd>One or both of the arguments is an illegal value.</dd>
- <dt><code>kAXErrorInvalidUIElement</code></dt><dd>The AXUIElementRef is invalid.</dd>
- <dt><code>kAXErrorFailure</code></dt><dd>There was a system memory failure.</dd>
- <dt><code>kAXErrorCannotComplete</code></dt><dd>The function cannot complete because messaging has failed in some way.</dd>
- <dt><code>kAXErrorNotImplemented</code></dt><dd>The process does not fully support the accessibility API.</dd></dl>
- */
 func AXUIElementCopyAttributeNames(element: AXUIElement, _ names: UnsafeMutablePointer<CFArray?>) -> AXError
-
-/*!
- @function AXUIElementCopyAttributeValue
- @abstract Returns the value of an accessibility object's attribute.
- 
- @param element The AXUIElementRef representing the accessibility object.
- @param attribute The attribute name.
- @param value On return, the value associated with the specified attribute.
- 
- @result If unsuccessful, <code>AXUIElementCopyAttributeValue</code> may return one of the following error codes, among others:
- <dl><dt><code>kAXErrorAttributeUnsupported</code></dt><dd>The specified AXUIElementRef does not support the specified attribute.</dd>
- <dt><code>kAXErrorNoValue</code></dt><dd>The specified attribute does not have a value.</dd>
- <dt><code>kAXErrorIllegalArgument</code></dt><dd>One or more of the arguments is an illegal value.</dd>
- <dt><code>kAXErrorInvalidUIElement</code></dt><dd>The AXUIElementRef is invalid.</dd>
- <dt><code>kAXErrorCannotComplete</code></dt><dd>The function cannot complete because messaging has failed in some way.</dd>
- <dt><code>kAXErrorNotImplemented</code></dt><dd>The process does not fully support the accessibility API.</dd></dl>
- */
 func AXUIElementCopyAttributeValue(element: AXUIElement, _ attribute: CFString, _ value: UnsafeMutablePointer<AnyObject?>) -> AXError
-
-/*!
- @function AXUIElementGetAttributeValueCount
- @abstract Returns the count of the array of an accessibility object's attribute value.
- 
- @param element The AXUIElementRef representing the accessibility object.
- @param attribute The attribute name.
- @param count On return, the size of the array that is the attribute's value.
- 
- @result If unsuccessful, <code>AXUIElementGetAttributeValueCount</code> may return one of the following error codes, among others:
- <dl><dt><code>kAXErrorIllegalArgument</code></dt><dd>The attribute's value is not an array or one of the other arguments is an illegal value.</dd>
- <dt><code>kAXErrorAttributeUnsupported</code></dt><dd>The specified AXUIElementRef does not support the specified attribute.</dd>
- <dt><code>kAXErrorInvalidUIElement</code></dt><dd>The AXUIElementRef is invalid.</dd>
- <dt><code>kAXErrorCannotComplete</code></dt><dd>The function cannot complete because messaging has failed in some way.</dd>
- <dt><code>kAXErrorNotImplemented</code></dt><dd>The process does not fully support the accessibility API.</dd></dl>
- */
 func AXUIElementGetAttributeValueCount(element: AXUIElement, _ attribute: CFString, _ count: UnsafeMutablePointer<CFIndex>) -> AXError
-
-/*!
- @function AXUIElementCopyAttributeValues
- @abstract Returns an array of attribute values for the accessibility object's attribute, starting at the specified index.
- @discussion This function is useful for dealing with large arrays, for example, a table view with a large number of children.
- 
- @param element The AXUIElementRef representing the accessibility object.
- @param attribute The attribute name.
- @param index The index into the array.
- @param maxValues The maximum number of values you want (this may be more or less than the number of values associated with the attribute).
- @param values On return, the attribute values you requested. If <code>maxValues</code> is greater than the number of values associated with the attribute, the <code>values</code> array will contain values found between <code>index</code> and the end of the attribute's array, inclusive.
- 
- @result If unsuccessful, <code>AXUIElementCopyAttributeValues</code> may return one of the following error codes, among others:
- <dl><dt><code>kAXErrorIllegalArgument</code></dt><dd>The attribute's value is not array, the <code>index</code> or <code>maxValues</code> arguments are outside the array's range, or one of the other arguments is an illegal value.</dd>
- <dt><code>kAXErrorNoValue</code></dt><dd>The specified attribute does not have a value.</dd>
- <dt><code>kAXErrorInvalidUIElement</code></dt><dd>The AXUIElementRef is invalid.</dd>
- <dt><code>kAXErrorCannotComplete</code></dt><dd>The function cannot complete because messaging has failed in some way.</dd>
- <dt><code>kAXErrorNotImplemented</code></dt><dd>The process does not fully support the accessibility API.</dd></dl>
- */
 func AXUIElementCopyAttributeValues(element: AXUIElement, _ attribute: CFString, _ index: CFIndex, _ maxValues: CFIndex, _ values: UnsafeMutablePointer<CFArray?>) -> AXError
-
-/*!
- @function AXUIElementIsAttributeSettable
- @abstract Returns whether the specified accessibility object's attribute can be modified.
- @discussion If you receive a <code>kAXErrorCannotComplete</code> error from this function, you might want to repeat the request or change the timeout value.
- 
- @param element The AXUIElementRef representing the accessibility object.
- @param attribute The attribute name.
- @param settable On return, a Boolean value indicating whether the attribute is settable.
- 
- @result If unsuccessful, <code>AXUIElementIsAttributeSettable</code> may return one of the following error codes, among others:
- <dl><dt><code>kAXErrorCannotComplete</code></dt><dd>The function cannot complete because messaging has failed in some way (often due to a timeout).</dd>
- <dt><code>kAXErrorIllegalArgument</code></dt><dd>One or more of the arguments is an illegal value.</dd>
- <dt><code>kAXErrorAttributeUnsupported</code></dt><dd>The specified AXUIElementRef does not support the specified attribute.</dd>
- <dt><code>kAXErrorNoValue</code></dt><dd>The specified attribute does not have a value.</dd>
- <dt><code>kAXErrorInvalidUIElement</code></dt><dd>The AXUIElementRef is invalid.</dd>
- <dt><code>kAXErrorNotImplemented</code></dt><dd>The process does not fully support the accessibility API.</dd></dl>
- */
 func AXUIElementIsAttributeSettable(element: AXUIElement, _ attribute: CFString, _ settable: UnsafeMutablePointer<DarwinBoolean>) -> AXError
-
-/*!
- @function AXUIElementSetAttributeValue
- @abstract Sets the accessibility object's attribute to the specified value.
- @discussion You can send and receive many different CFTypeRefs using the accessibility API.
- These include all CFPropertyListRef types, AXUIElementRef, AXValueRef, AXTextMarkerRef, AXTextMarkerRangeRef,
- CFNullRef, CFAttributedStringRef, and CRURLRef.
- @param element The AXUIElementRef representing the accessibility object.
- @param attribute The attribute name.
- @param value The new value for the attribute.
- 
- @result If unsuccessful, <code>AXUIElementSetAttributeValue</code> may return one of the following error codes, among others:
- <dl><dt><code>kAXErrorIllegalArgument</code></dt><dd>The value is not recognized by the accessible application or one of the other arguments is an illegal value.</dd>
- <dt><code>kAXErrorAttributeUnsupported</code></dt><dd>The specified AXUIElementRef does not support the specified attribute.</dd>
- <dt><code>kAXErrorInvalidUIElement</code></dt><dd>The AXUIElementRef is invalid.</dd>
- <dt><code>kAXErrorCannotComplete</code></dt><dd>The function cannot complete because messaging has failed in some way.</dd>
- <dt><code>kAXErrorNotImplemented</code></dt><dd>The process does not fully support the accessibility API.</dd></dl>
- */
 func AXUIElementSetAttributeValue(element: AXUIElement, _ attribute: CFString, _ value: AnyObject) -> AXError
-
-/*!
- @function AXUIElementCopyMultipleAttributeValues
- @abstract Returns the values of multiple attributes in the accessibility object.
- @discussion If the specified AXUIElementRef does not support an attribute passed in the <code>attributes</code> array, the returned array
- can contain an error or CFNull at the corresponding position.
- @param element The AXUIElementRef representing the accessibility object.
- @param attributes An array of attribute names.
- @param options A value that tells <code>AXUIElementCopyMultipleAttributeValues</code> how to handle errors.
- @param values On return, an array in which each position contains the value of the
- attribute that is in the corresponding position in the passed-in <code>attributes</code> array (or CFNull). If <code>options</code> = 0,
- the <code>values</code> array can contain an AXValueRef of type <code>kAXValueAXErrorType</code> in the corresponding position. If <code>options</code> = <code>kAXCopyMultipleAttributeOptionStopOnError</code>,
- this function will return immediately when it gets an error.
- 
- @result If unsuccessful, <code>AXUIElementCopyMultipleAttributeValues</code> may return one of the following error codes, among others:
- <dl><dt><code>kAXErrorIllegalArgument</code></dt><dd>One of the arguments is an illegal value.</dd>
- <dt><code>kAXErrorInvalidUIElement</code></dt><dd>The AXUIElementRef is invalid.</dd>
- <dt><code>kAXErrorCannotComplete</code></dt><dd>The function cannot complete because messaging has failed in some way.</dd>
- <dt><code>kAXErrorNotImplemented</code></dt><dd>The process does not fully support the accessibility API.</dd></dl>
- */
-@available(OSX 10.4, *)
 func AXUIElementCopyMultipleAttributeValues(element: AXUIElement, _ attributes: CFArray, _ options: AXCopyMultipleAttributeOptions, _ values: UnsafeMutablePointer<CFArray?>) -> AXError
-
-/*!
- @function AXUIElementCopyParameterizedAttributeNames
- @abstract Returns a list of all the parameterized attributes supported by the specified accessibility object.
- 
- @param element The AXUIElementRef representing the accessibility object.
- @param names On return, an array containing the accessibility object's parameterized attribute names.
- 
- @result If unsuccessful, <code>AXUIElementCopyParameterizedAttributeNames</code> may return one of the following error codes, among others:
- <dl><dt><code>kAXErrorAttributeUnsupported</code> or <code>kAXErrorParameterizedAttributeUnsupported</code></dt><dd>The specified AXUIElementRef does not support the specified parameterized attribute.</dd>
- <dt><code>kAXErrorIllegalArgument</code></dt><dd>One or both of the arguments is an illegal value.</dd>
- <dt><code>kAXErrorInvalidUIElement</code></dt><dd>The AXUIElementRef is invalid.</dd>
- <dt><code>kAXErrorFailure</code></dt><dd>There was some sort of system memory failure.</dd>
- <dt><code>kAXErrorCannotComplete</code></dt><dd>The function cannot complete because messaging has failed in some way.</dd>
- <dt><code>kAXErrorNotImplemented</code></dt><dd>The process does not fully support the accessibility API.</dd></dl>
- */
-@available(OSX 10.3, *)
 func AXUIElementCopyParameterizedAttributeNames(element: AXUIElement, _ names: UnsafeMutablePointer<CFArray?>) -> AXError
-
-/*!
- @function AXUIElementCopyParameterizedAttributeValue
- @abstract Returns the value of an accessibility object's parameterized attribute.
- 
- @param element The AXUIElementRef representing the accessibility object.
- @param parameterizedAttribute The parameterized attribute.
- @param parameter The parameter.
- @param result On return, the value of the parameterized attribute.
- 
- @result If unsuccessful, <code>AXUIElementCopyParameterizedAttributeValue</code> may return one of the following error codes, among others:
- <dl><dt><code>kAXErrorAttributeUnsupported</code> or <code>kAXErrorParameterizedAttributeUnsupported</code></dt><dd>The specified AXUIElementRef does not support the specified parameterized attribute.</dd>
- <dt><code>kAXErrorNoValue</code></dt><dd>The specified parameterized attribute does not have a value.</dd>
- <dt><code>kAXErrorIllegalArgument</code></dt><dd>One or more of the arguments is an illegal value.</dd>
- <dt><code>kAXErrorInvalidUIElement</code></dt><dd>The AXUIElementRef is invalid.</dd>
- <dt><code>kAXErrorCannotComplete</code></dt><dd>The function cannot complete because messaging has failed in some way.</dd>
- <dt><code>kAXErrorNotImplemented</code></dt><dd>The process does not fully support the accessibility API.</dd></dl>
- */
-@available(OSX 10.3, *)
 func AXUIElementCopyParameterizedAttributeValue(element: AXUIElement, _ parameterizedAttribute: CFString, _ parameter: AnyObject, _ result: UnsafeMutablePointer<AnyObject?>) -> AXError
-
-/*!
- @function AXUIElementCopyActionNames
- @abstract Returns a list of all the actions the specified accessibility object can perform.
- @param element The AXUIElementRef representing the accessibility object.
- @param names On return, an array of actions the accessibility object can perform (empty if the accessibility object supports no actions).
- 
- @result If unsuccessful, <code>AXUIElementCopyActionNames</code> may return one of the following error codes, among others:
- <dl><dt><code>kAXErrorIllegalArgument</code></dt><dd>One or both of the arguments is an illegal value.</dd>
- <dt><code>kAXErrorInvalidUIElement</code></dt><dd>The AXUIElementRef is invalid.</dd>
- <dt><code>kAXErrorFailure</code></dt><dd>There was some sort of system memory failure.</dd>
- <dt><code>kAXErrorCannotComplete</code></dt><dd>The function cannot complete because messaging has failed in some way.</dd>
- <dt><code>kAXErrorNotImplemented</code></dt><dd>The process does not fully support the accessibility API.</dd></dl>
- */
 func AXUIElementCopyActionNames(element: AXUIElement, _ names: UnsafeMutablePointer<CFArray?>) -> AXError
-
-/*!
- @function AXUIElementCopyActionDescription
- @abstract Returns a localized description of the specified accessibility object's action.
- 
- @param element The AXUIElementRef representing the accessibility object.
- @param action The action to be described.
- @param description On return, a string containing the description of the action.
- 
- @result If unsuccessful, <code>AXUIElementCopyActionDescription</code> may return one of the following error codes, among others:
- <dl><dt><code>kAXErrorActionUnsupported</code></dt><dd>The specified AXUIElementRef does not support the specified action (you will also receive this error if you pass in the system-wide accessibility object).</dd>
- <dt><code>kAXErrorIllegalArgument</code></dt><dd>One or more of the arguments is an illegal value.</dd>
- <dt><code>kAXErrorInvalidUIElement</code></dt><dd>The AXUIElementRef is invalid.</dd>
- <dt><code>kAXErrorCannotComplete</code></dt><dd>The function cannot complete because messaging has failed in some way.</dd>
- <dt><code>kAXErrorNotImplemented</code></dt><dd>The process does not fully support the accessibility API.</dd></dl>
- */
 func AXUIElementCopyActionDescription(element: AXUIElement, _ action: CFString, _ description: UnsafeMutablePointer<CFString?>) -> AXError
-
-/*!
- @function AXUIElementPerformAction
- @abstract Requests that the specified accessibility object perform the specified action.
- @discussion It is possible to receive the <code>kAXErrorCannotComplete</code> error code from this function because accessible applications often need to
- perform some sort of modal processing inside their action callbacks and they may not return within the timeout value set by the accessibility API.
- This does not necessarily mean that the function has failed, however. If appropriate, your assistive application
- can try to call this function again. Also, you may be able to increase the timeout value (see @link AXUIElementSetMessagingTimeout AXUIElementSetMessagingTimeout@/link).
- @param element The AXUIElementRef representing the accessibility object.
- @param action The action to be performed.
- 
- @result If unsuccessful, <code>AXUIElementPerformAction</code> may return one of the following error codes, among others:
- <dl><dt><code>kAXErrorActionUnsupported</code></dt><dd>The specified AXUIElementRef does not support the specified action (you will also receive this error if you pass in the system-wide accessibility object).</dd>
- <dt><code>kAXErrorIllegalArgument</code></dt><dd>One or more of the arguments is an illegal value.</dd>
- <dt><code>kAXErrorInvalidUIElement</code></dt><dd>The AXUIElementRef is invalid.</dd>
- <dt><code>kAXErrorCannotComplete</code></dt><dd>The function cannot complete because messaging has failed in some way or the application has not yet responded.</dd>
- <dt><code>kAXErrorNotImplemented</code></dt><dd>The process does not fully support the accessibility API.</dd></dl>
- */
 func AXUIElementPerformAction(element: AXUIElement, _ action: CFString) -> AXError
-
-/*!
- @function AXUIElementCopyElementAtPosition
- @abstract Returns the accessibility object at the specified position in top-left relative screen coordinates.
- 
- @discussion This function does hit-testing based on window z-order (that is, layering). If one window is on top of another window, the returned accessibility object comes from whichever window is topmost at the specified
- location. Note that if the system-wide accessibility object is passed in the <code>application</code> parameter, the position test is not restricted to a
- particular application.
- 
- @param application The AXUIElementRef representing the application that contains the screen coordinates (or the system-wide accessibility object).
- @param x The horizontal position.
- @param y The vertical position.
- @param element On return, the accessibility object at the position specified by x and y.
- 
- @result If unsuccessful, <code>AXUIElementCopyElementAtPosition</code> may return one of the following error codes, among others:
- <dl><dt><code>kAXErrorNoValue</code></dt><dd>There is no accessibility object at the specified position.</dd>
- <dt><code>kAXErrorIllegalArgument</code></dt><dd>One or more of the arguments is an illegal value.</dd>
- <dt><code>kAXErrorInvalidUIElement</code></dt><dd>The AXUIElementRef is invalid.</dd>
- <dt><code>kAXErrorCannotComplete</code></dt><dd>The function cannot complete because messaging has failed in some way.</dd>
- <dt><code>kAXErrorNotImplemented</code></dt><dd>The process does not fully support the accessibility API.</dd></dl>
- */
 func AXUIElementCopyElementAtPosition(application: AXUIElement, _ x: Float, _ y: Float, _ element: UnsafeMutablePointer<AXUIElement?>) -> AXError
-
-/*!
- @function AXUIElementCreateApplication
- @abstract Creates and returns the top-level accessibility object for the application with the specified process ID.
- 
- @param pid The process ID of an application.
- @result The AXUIElementRef representing the top-level accessibility object for the application with the specified process ID.
- */
 func AXUIElementCreateApplication(pid: pid_t) -> Unmanaged<AXUIElement>
-
-/*!
- @function AXUIElementCreateSystemWide
- @abstract Returns an accessibility object that provides access to system attributes.
- @discussion This is useful for things like finding the focused accessibility object regardless of which application is currently active.
- 
- @result The AXUIElementRef representing the system-wide accessibility object.
- */
 func AXUIElementCreateSystemWide() -> Unmanaged<AXUIElement>
-
-/*!
- @function AXUIElementGetPid
- @abstract Returns the process ID associated with the specified accessibility object.
- 
- @param element The AXUIElementRef representing an accessibility object.
- @param pid On return, the process ID associated with the specified accessibility object.
- 
- @result If unsuccessful, <code>AXUIElementGetPid</code> may return one of the following error codes, among others:
- <dl><dt><code>kAXErrorIllegalArgument</code></dt><dd>One or more of the arguments is an illegal value.</dd>
- <dt><code>kAXErrorInvalidUIElement</code></dt><dd>The AXUIElementRef is invalid.</dd></dl>
- */
 func AXUIElementGetPid(element: AXUIElement, _ pid: UnsafeMutablePointer<pid_t>) -> AXError
-
-/*!
- @function AXUIElementSetMessagingTimeout
- @abstract Sets the timeout value used in the accessibility API.
- @discussion Pass the system-wide accessibility object (see @link AXUIElementCreateSystemWide AXUIElementCreateSystemWide@/link) if you want to set the timeout globally for this process.
- Setting the timeout on another accessibility object sets it only for that object, not for other accessibility objects that are equal to it.
- 
- Setting <code>timeoutInSeconds</code> to 0 for the system-wide accessibility object resets the global timeout to its default value. Setting <code>timeoutInSeconds</code>
- to 0 for any other accessibility object makes that element use the current global timeout value.
- 
- @param element The AXUIElementRef representing an accessibility object.
- @param timeoutInSeconds The number of seconds for the new timeout value.
- 
- @result If unsuccessful, <code>AXUIElementSetMessagingTimeout</code> may return one of the following error codes, among others:
- <dl><dt><code>kAXErrorIllegalArgument</code></dt><dd>One or more of the arguments is an illegal value (timeout values must be positive).</dd>
- <dt><code>kAXErrorInvalidUIElement</code></dt><dd>The AXUIElementRef is invalid.</dd></dl>
- */
-@available(OSX 10.4, *)
 func AXUIElementSetMessagingTimeout(element: AXUIElement, _ timeoutInSeconds: Float) -> AXError
-
-/*!
- @typedef AXObserverRef
- 
- @discussion
- An AXObserverRef is a CFType. Like all CFTypes, they are reference counted (@link //apple_ref/c/func/CFRetain CFRetain@/link, @link //apple_ref/c/func/CFRelease CFRelease@/link).
- */
 typealias AXObserverRef = AXObserver
-
-/*!
- @typedef AXObserverRef
- 
- @discussion
- An AXObserverRef is a CFType. Like all CFTypes, they are reference counted (@link //apple_ref/c/func/CFRetain CFRetain@/link, @link //apple_ref/c/func/CFRelease CFRelease@/link).
- */
 class AXObserver {
 }
-
-/*!
- @typedef AXObserverCallback
- @abstract
- 
- @param observer An AXObserverRef object to observe the notifications.
- @param element The accessibility object.
- @param notification The name of the notification to observe.
- @param refcon Application-defined data specified when registering the observer for notification
- */
 typealias AXObserverCallback = @convention(c) (AXObserver, AXUIElement, CFString, UnsafeMutablePointer<Void>) -> Void
-
-/*!
- @typedef AXObserverCallbackWithInfo
- @abstract
-     
- @param observer An AXObserverRef object to observe the notifications.
- @param element The accessibility object.
- @param notification The name of the notification to observe.
- @param info The coresponding notification information.
- @param refcon Application-defined data specified when registering the observer for notification
- */
 typealias AXObserverCallbackWithInfo = @convention(c) (AXObserver, AXUIElement, CFString, CFDictionary, UnsafeMutablePointer<Void>) -> Void
-
-/*!
- @function AXObserverGetTypeID
- @abstract Returns the unique type identifier for the AXObserverRef type.
- 
- @result Returns the CFTypeID of the AXObserverRef type.
- */
 func AXObserverGetTypeID() -> CFTypeID
-
-/*!
- @function AXObserverCreate
- @abstract Creates a new observer that can receive notifications from the specified application.
- @discussion When an observed notification is received, it is passed to @link AXObserverCallback AXObserverCallback@/link.
- 
- @param application The process ID of the application.
- @param callback The callback function.
- @param outObserver On return, an AXObserverRef representing the observer object.
- 
- @result If unsuccessful, <code>AXObserverCreate</code> may return one of the following error codes, among others:
- <dl><dt><code>kAXErrorIllegalArgument</code></dt><dd>One or more of the arguments is an illegal value.</dd>
- <dt><code>kAXErrorFailure</code></dt><dd>There is some sort of system memory failure.</dd></dl>
- */
 func AXObserverCreate(application: pid_t, _ callback: AXObserverCallback, _ outObserver: UnsafeMutablePointer<AXObserver?>) -> AXError
-
-/*!
- @function AXObserverCreateWithInfoCallback
- @abstract Creates a new observer that can receive notifications with an information dictionary from the specified application.
- @discussion When an observed notification is received, it is passed to @link AXObserverCallbackWithInfo AXObserverCallbackWithInfo@/link.
-     
- @param application The process ID of the application.
- @param callback The callback function.
- @param outObserver On return, an AXObserverRef representing the observer object.
-     
- @result If unsuccessful, <code>AXObserverCreateWithInfoCallback</code> may return one of the following error codes, among others:
-     <dl><dt><code>kAXErrorIllegalArgument</code></dt><dd>One or more of the arguments is an illegal value.</dd>
-     <dt><code>kAXErrorFailure</code></dt><dd>There is some sort of system memory failure.</dd></dl>
-*/
 func AXObserverCreateWithInfoCallback(application: pid_t, _ callback: AXObserverCallbackWithInfo, _ outObserver: UnsafeMutablePointer<AXObserver?>) -> AXError
-
-/*!
- @function AXObserverAddNotification
- @abstract Registers the specified observer to receive notifications from the specified accessibility object.
- 
- @param observer The observer object created from a call to @link AXObserverCreate AXObserverCreate@/link.
- @param element The accessibility object for which to observe notifications.
- @param notification The name of the notification to observe.
- @param refcon Application-defined data passed to the callback when it is called.
- 
- @result If unsuccessful, <code>AXObserverAddNotification</code> may return one of the following error codes, among others:
- <dl><dt><code>kAXErrorInvalidUIElementObserver</code></dt><dd>The observer is not a valid AXObserverRef type.</dd>
- <dt><code>kAXErrorIllegalArgument</code></dt><dd>One or more of the arguments is an illegal value or the length of the notification name is greater than 1024.</dd>
- <dt><code>kAXErrorNotificationUnsupported</code></dt><dd>The accessibility object does not support notifications (note that the system-wide accessibility object does not support notifications).</dd>
- <dt><code>kAXErrorNotificationAlreadyRegistered</code></dt><dd>The notification has already been registered.</dd>
- <dt><code>kAXErrorCannotComplete</code></dt><dd>The function cannot complete because messaging has failed in some way.</dd>
- <dt><code>kAXErrorFailure</code></dt><dd>There is some sort of system memory failure.</dd></dl>
- */
 func AXObserverAddNotification(observer: AXObserver, _ element: AXUIElement, _ notification: CFString, _ refcon: UnsafeMutablePointer<Void>) -> AXError
-
-/*!
- @function AXObserverRemoveNotification
- @abstract Removes the specified notification from the list of notifications the observer wants to receive from the accessibility object.
- 
- @param observer The observer object created from a call to @link AXObserverCreate AXObserverCreate@/link.
- @param element The accessibility object for which this observer observes notifications.
- @param notification The name of the notification to remove from the list of observed notifications.
- 
- @result If unsuccessful, <code>AXObserverRemoveNotification</code> may return one of the following error codes, among others:
- <dl><dt><code>kAXErrorInvalidUIElementObserver</code></dt><dd>The observer is not a valid AXObserverRef type.</dd>
- <dt><code>kAXErrorIllegalArgument</code></dt><dd>One or more of the arguments is an illegal value or the length of the notification name is greater than 1024.</dd>
- <dt><code>kAXErrorNotificationUnsupported</code></dt><dd>The accessibility object does not support notifications (note that the system-wide accessibility object does not support notifications).</dd>
- <dt><code>kAXErrorNotificationNotRegistered</code></dt><dd>This observer has not registered for any notifications.</dd>
- <dt><code>kAXErrorCannotComplete</code></dt><dd>The function cannot complete because messaging has failed in some way.</dd>
- <dt><code>kAXErrorFailure</code></dt><dd>There is some sort of system memory failure.</dd></dl>
- */
 func AXObserverRemoveNotification(observer: AXObserver, _ element: AXUIElement, _ notification: CFString) -> AXError
-
-/*!
- @function AXObserverGetRunLoopSource
- @abstract Returns the observer's run loop source.
- @discussion The observer must be added to a run loop before it can receive notifications. Note that releasing the AXObserverRef automatically
- removes the run loop source from the run loop (you can also do this explicitly by calling @link //apple_ref/c/func/CFRunLoopRemoveSource CFRunLoopRemoveSource@/link).
- 
- <code>AXObserverGetRunLoopSource</code> might be used in code in this way:
- 
- <pre>
- CFRunLoopAddSource(CFRunLoopGetCurrent(), AXObserverGetRunLoopSource(observer), kCFRunLoopDefaultMode);
- </pre>
- 
- @param observer The observer object (created from a call to @link AXObserverCreate AXObserverCreate@/link) for which to get the run loop source.
- @result Returns the CFRunLoopSourceRef of the observer; NIL if you pass NIL in <code>observer</code>.
- */
 func AXObserverGetRunLoopSource(observer: AXObserver) -> Unmanaged<CFRunLoopSource>
-
-/*!
-  @enum AXValueType Wrappers
-  
-  @discussion
-  These are AXValueType wrappers for other structures. You must use the AXValueCreate
-  and AXValueGetValue functions to convert between the wrapped structure and the native structure.
-  
-  @constant kAXValueTypeCGPoint a wrapper for CGPoint; see CoreGraphics.h
-  @constant kAXValueTypeCGSize a wrapper for CGSize; see CoreGraphics.h
-  @constant kAXValueTypeCGRect a wrapper for CGRect; see CoreGraphics.h
-  @constant kAXValueTypeCFRange a wrapper for CFRange; see CFBase.h
-  @constant kAXValueTypeAXError See AXError.h
-  @constant kAXValueTypeIllegal a wrapper for unsupported structures
-*/
 enum AXValueType : UInt32 {
   init?(rawValue: UInt32)
   var rawValue: UInt32 { get }
-  @available(OSX 10.11, *)
   case CGPoint
-  @available(OSX 10.11, *)
   case CGSize
-  @available(OSX 10.11, *)
   case CGRect
-  @available(OSX 10.11, *)
   case CFRange
-  @available(OSX 10.11, *)
   case AXError
-  @available(OSX 10.11, *)
   case Illegal
 }
 let kAXValueCGPointType: UInt32
@@ -1666,66 +1025,12 @@ let kAXValueCGRectType: UInt32
 let kAXValueCFRangeType: UInt32
 let kAXValueAXErrorType: UInt32
 let kAXValueIllegalType: UInt32
-
-/*!
-    @typedef AXValueRef
-    
-*/
 typealias AXValueRef = AXValue
-
-/*!
-    @typedef AXValueRef
-    
-*/
 class AXValue {
 }
-
-/*!
-	@function AXValueGetTypeID
-		
-	@result
-	
-	@availability Mac OS X version 10.3 or later
-*/
-@available(OSX 10.3, *)
 func AXValueGetTypeID() -> CFTypeID
-
-/*!
-	@function AXValueCreate
-	
-	@discussion
-	Encodes a structure pointed to by valuePtr into a CFTypeRef.
-	
-	@param theType
-	@param valuePtr
-	
-	@result
-*/
 func AXValueCreate(theType: AXValueType, _ valuePtr: UnsafePointer<Void>) -> Unmanaged<AXValue>?
-
-/*!
-	@function AXValueGetType
-	
-	@discussion
-	Returns the structure type encoded in value. If the type is not recognized, it returns kAXValueIllegalType.
-	
-	@param value
-		
-	@result
-*/
 func AXValueGetType(value: AXValue) -> AXValueType
-
-/*!
-	@function AXValueGetValue
-	
-	@discussion
-	Decodes the structure stored in value and copies it into valuePtr. If the structure stored in value is not
-	the same as requested by theType, the function returns false.
-	
-	@param value
-		
-	@result
-*/
 func AXValueGetValue(value: AXValue, _ theType: AXValueType, _ valuePtr: UnsafeMutablePointer<Void>) -> Bool
 var kAXHorizontalOrientationValue: String { get }
 var kAXVerticalOrientationValue: String { get }
@@ -1750,63 +1055,34 @@ var kHIShapeParseFromRight: Int { get }
 var kHIShapeParseFromTopLeft: Int { get }
 var kHIShapeParseFromBottomRight: Int { get }
 typealias HIShapeEnumerateProcPtr = @convention(c) (Int32, HIShape!, UnsafePointer<CGRect>, UnsafeMutablePointer<Void>) -> OSStatus
-@available(OSX 10.2, *)
 func HIShapeGetTypeID() -> CFTypeID
-@available(OSX 10.4, *)
 func HIShapeCreateEmpty() -> Unmanaged<HIShape>!
-@available(OSX 10.2, *)
 func HIShapeCreateWithQDRgn(inRgn: RgnHandle) -> Unmanaged<HIShape>!
-@available(OSX 10.2, *)
 func HIShapeCreateWithRect(inRect: UnsafePointer<CGRect>) -> Unmanaged<HIShape>!
-@available(OSX 10.2, *)
 func HIShapeCreateCopy(inShape: HIShape!) -> Unmanaged<HIShape>!
-@available(OSX 10.2, *)
 func HIShapeCreateIntersection(inShape1: HIShape!, _ inShape2: HIShape!) -> Unmanaged<HIShape>!
-@available(OSX 10.2, *)
 func HIShapeCreateDifference(inShape1: HIShape!, _ inShape2: HIShape!) -> Unmanaged<HIShape>!
-@available(OSX 10.2, *)
 func HIShapeCreateUnion(inShape1: HIShape!, _ inShape2: HIShape!) -> Unmanaged<HIShape>!
-@available(OSX 10.5, *)
 func HIShapeCreateXor(inShape1: HIShape!, _ inShape2: HIShape!) -> Unmanaged<HIShape>!
-@available(OSX 10.2, *)
 func HIShapeIsEmpty(inShape: HIShape!) -> Bool
-@available(OSX 10.2, *)
 func HIShapeIsRectangular(inShape: HIShape!) -> Bool
-@available(OSX 10.2, *)
 func HIShapeContainsPoint(inShape: HIShape!, _ inPoint: UnsafePointer<CGPoint>) -> Bool
-@available(OSX 10.4, *)
 func HIShapeIntersectsRect(inShape: HIShape!, _ inRect: UnsafePointer<CGRect>) -> Bool
-@available(OSX 10.2, *)
 func HIShapeGetBounds(inShape: HIShape!, _ outRect: UnsafeMutablePointer<CGRect>) -> UnsafeMutablePointer<CGRect>
-@available(OSX 10.2, *)
 func HIShapeGetAsQDRgn(inShape: HIShape!, _ outRgn: RgnHandle) -> OSStatus
-@available(OSX 10.2, *)
 func HIShapeReplacePathInCGContext(inShape: HIShape!, _ inContext: CGContext!) -> OSStatus
-@available(OSX 10.5, *)
 func HIShapeEnumerate(inShape: HIShape!, _ inOptions: OptionBits, _ inProc: HIShapeEnumerateProcPtr!, _ inRefcon: UnsafeMutablePointer<Void>) -> OSStatus
-@available(OSX 10.2, *)
 func HIShapeCreateMutable() -> Unmanaged<HIMutableShape>!
-@available(OSX 10.2, *)
 func HIShapeCreateMutableCopy(inOrig: HIShape!) -> Unmanaged<HIMutableShape>!
-@available(OSX 10.5, *)
 func HIShapeCreateMutableWithRect(inRect: UnsafePointer<CGRect>) -> Unmanaged<HIMutableShape>!
-@available(OSX 10.2, *)
 func HIShapeSetEmpty(inShape: HIMutableShape!) -> OSStatus
-@available(OSX 10.5, *)
 func HIShapeSetWithShape(inDestShape: HIMutableShape!, _ inSrcShape: HIShape!) -> OSStatus
-@available(OSX 10.2, *)
 func HIShapeIntersect(inShape1: HIShape!, _ inShape2: HIShape!, _ outResult: HIMutableShape!) -> OSStatus
-@available(OSX 10.2, *)
 func HIShapeDifference(inShape1: HIShape!, _ inShape2: HIShape!, _ outResult: HIMutableShape!) -> OSStatus
-@available(OSX 10.2, *)
 func HIShapeUnion(inShape1: HIShape!, _ inShape2: HIShape!, _ outResult: HIMutableShape!) -> OSStatus
-@available(OSX 10.5, *)
 func HIShapeXor(inShape1: HIShape!, _ inShape2: HIShape!, _ outResult: HIMutableShape!) -> OSStatus
-@available(OSX 10.2, *)
 func HIShapeOffset(inShape: HIMutableShape!, _ inDX: CGFloat, _ inDY: CGFloat) -> OSStatus
-@available(OSX 10.5, *)
 func HIShapeInset(inShape: HIMutableShape!, _ inDX: CGFloat, _ inDY: CGFloat) -> OSStatus
-@available(OSX 10.5, *)
 func HIShapeUnionWithRect(inShape: HIMutableShape!, _ inRect: UnsafePointer<CGRect>) -> OSStatus
 var kAlignNone: Int { get }
 var kAlignVerticalCenter: Int { get }
@@ -1933,13 +1209,9 @@ var kPlotIconRefNoMask: Int { get }
 func IconRefToIconFamily(theIconRef: IconRef, _ whichIcons: IconSelectorValue, _ iconFamily: UnsafeMutablePointer<IconFamilyHandle>) -> OSErr
 func SetIconFamilyData(iconFamily: IconFamilyHandle, _ iconType: OSType, _ h: Handle) -> OSErr
 func GetIconFamilyData(iconFamily: IconFamilyHandle, _ iconType: OSType, _ h: Handle) -> OSErr
-@available(OSX 10.1, *)
 func PlotIconRefInContext(inContext: CGContext!, _ inRect: UnsafePointer<CGRect>, _ inAlign: IconAlignmentType, _ inTransform: IconTransformType, _ inLabelColor: UnsafePointer<RGBColor>, _ inFlags: PlotIconRefFlags, _ inIconRef: IconRef) -> OSStatus
-@available(OSX 10.5, *)
 func IconRefContainsCGPoint(testPt: UnsafePointer<CGPoint>, _ iconRect: UnsafePointer<CGRect>, _ align: IconAlignmentType, _ iconServicesUsageFlags: IconServicesUsageFlags, _ theIconRef: IconRef) -> Bool
-@available(OSX 10.5, *)
 func IconRefIntersectsCGRect(testRect: UnsafePointer<CGRect>, _ iconRect: UnsafePointer<CGRect>, _ align: IconAlignmentType, _ iconServicesUsageFlags: IconServicesUsageFlags, _ theIconRef: IconRef) -> Bool
-@available(OSX 10.5, *)
 func IconRefToHIShape(iconRect: UnsafePointer<CGRect>, _ align: IconAlignmentType, _ iconServicesUsageFlags: IconServicesUsageFlags, _ theIconRef: IconRef) -> Unmanaged<HIShape>!
 func IsIconRefMaskEmpty(iconRef: IconRef) -> Bool
 func GetIconRefVariant(inIconRef: IconRef, _ inVariant: OSType, _ outTransform: UnsafeMutablePointer<IconTransformType>) -> IconRef
@@ -1961,33 +1233,17 @@ var kICComponentInterfaceVersion2: Int { get }
 var kICComponentInterfaceVersion3: Int { get }
 var kICComponentInterfaceVersion4: Int { get }
 var kICComponentInterfaceVersion: Int { get }
-
-/************************************************************************************************
-  opaque type for preference reference
- ************************************************************************************************/
 typealias ICInstance = COpaquePointer
-
-/************************************************************************************************
-  preference attributes type, bit number constants, and mask constants
- ************************************************************************************************/
 typealias ICAttr = UInt32
 var kICAttrLockedBit: Int { get }
 var kICAttrVolatileBit: Int { get }
 var kICAttrNoChange: UInt32 { get }
 var kICAttrLockedMask: UInt32 { get }
 var kICAttrVolatileMask: UInt32 { get }
-
-/************************************************************************************************
-  permissions for use with ICBegin
- ************************************************************************************************/
 typealias ICPerm = UInt8
 var icNoPerm: Int { get }
 var icReadOnlyPerm: Int { get }
 var icReadWritePerm: Int { get }
-
-/************************************************************************************************
-  profile IDs
- ************************************************************************************************/
 typealias ICProfileID = Int32
 typealias ICProfileIDPtr = UnsafeMutablePointer<ICProfileID>
 var kICNilProfileID: Int { get }
@@ -2004,10 +1260,6 @@ var kICEditPreferenceEvent: Int { get }
 var keyICEditPreferenceDestination: Int { get }
 var kICComponentVersion: Int { get }
 var kICNumVersion: Int { get }
-
-/************************************************************************************************
-  types and constants for use with kICDocumentFont, et. al.
- ************************************************************************************************/
 struct ICFontRecord {
   var size: Int16
   var face: Style
@@ -2018,10 +1270,6 @@ struct ICFontRecord {
 }
 typealias ICFontRecordPtr = UnsafeMutablePointer<ICFontRecord>
 typealias ICFontRecordHandle = UnsafeMutablePointer<ICFontRecordPtr>
-
-/************************************************************************************************
-  types and constants for use with kICCharacterSet, et. al.
- ************************************************************************************************/
 struct ICCharTable {
   var netToMac: (UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8)
   var macToNet: (UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8)
@@ -2030,10 +1278,6 @@ struct ICCharTable {
 }
 typealias ICCharTablePtr = UnsafeMutablePointer<ICCharTable>
 typealias ICCharTableHandle = UnsafeMutablePointer<ICCharTablePtr>
-
-/************************************************************************************************
-  types and constants for use with kICHelper, et. al.
- ************************************************************************************************/
 struct ICAppSpec {
   var fCreator: OSType
   var name: Str63
@@ -2050,10 +1294,6 @@ struct ICAppSpecList {
 }
 typealias ICAppSpecListPtr = UnsafeMutablePointer<ICAppSpecList>
 typealias ICAppSpecListHandle = UnsafeMutablePointer<ICAppSpecListPtr>
-
-/************************************************************************************************
-  types and constants for use with kICDownloadFolder, et. al.
- ************************************************************************************************/
 struct ICFileSpec {
   var volName: Str31
   var volCreationDate: Int32
@@ -2065,10 +1305,6 @@ struct ICFileSpec {
 typealias ICFileSpecPtr = UnsafeMutablePointer<ICFileSpec>
 typealias ICFileSpecHandle = UnsafeMutablePointer<ICFileSpecPtr>
 var kICFileSpecHeaderSize: Int { get }
-
-/************************************************************************************************
-  types and constants for use with ICMapFilename, et. al.
- ************************************************************************************************/
 typealias ICMapEntryFlags = Int32
 typealias ICFixedLength = Int16
 struct ICMapEntry {
@@ -2102,10 +1338,6 @@ var kICMapDataForkMask: Int { get }
 var kICMapPostMask: Int { get }
 var kICMapNotIncomingMask: Int { get }
 var kICMapNotOutgoingMask: Int { get }
-
-/************************************************************************************************
-  types and constants for use with kICServices, et. al.
- ************************************************************************************************/
 typealias ICServiceEntryFlags = Int16
 struct ICServiceEntry {
   var name: Str255
@@ -2226,38 +1458,23 @@ var kPasteboardFlavorPromised: Int { get }
 typealias PasteboardStandardLocation = OSType
 var kPasteboardStandardLocationTrash: Int { get }
 var kPasteboardStandardLocationUnknown: Int { get }
-@available(OSX 10.3, *)
 func PasteboardGetTypeID() -> CFTypeID
 var kPasteboardClipboard: String { get }
 var kPasteboardFind: String { get }
-@available(OSX 10.3, *)
 func PasteboardCreate(inName: CFString!, _ outPasteboard: UnsafeMutablePointer<Unmanaged<Pasteboard>?>) -> OSStatus
-@available(OSX 10.3, *)
 func PasteboardSynchronize(inPasteboard: Pasteboard!) -> PasteboardSyncFlags
-@available(OSX 10.3, *)
 func PasteboardClear(inPasteboard: Pasteboard!) -> OSStatus
-@available(OSX 10.4, *)
 func PasteboardCopyName(inPasteboard: Pasteboard!, _ outName: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX 10.3, *)
 func PasteboardGetItemCount(inPasteboard: Pasteboard!, _ outItemCount: UnsafeMutablePointer<Int>) -> OSStatus
-@available(OSX 10.3, *)
 func PasteboardGetItemIdentifier(inPasteboard: Pasteboard!, _ inIndex: CFIndex, _ outItem: UnsafeMutablePointer<PasteboardItemID>) -> OSStatus
-@available(OSX 10.3, *)
 func PasteboardCopyItemFlavors(inPasteboard: Pasteboard!, _ inItem: PasteboardItemID, _ outFlavorTypes: UnsafeMutablePointer<Unmanaged<CFArray>?>) -> OSStatus
-@available(OSX 10.3, *)
 func PasteboardGetItemFlavorFlags(inPasteboard: Pasteboard!, _ inItem: PasteboardItemID, _ inFlavorType: CFString!, _ outFlags: UnsafeMutablePointer<PasteboardFlavorFlags>) -> OSStatus
-@available(OSX 10.3, *)
 func PasteboardCopyItemFlavorData(inPasteboard: Pasteboard!, _ inItem: PasteboardItemID, _ inFlavorType: CFString!, _ outData: UnsafeMutablePointer<Unmanaged<CFData>?>) -> OSStatus
-@available(OSX 10.3, *)
 func PasteboardPutItemFlavor(inPasteboard: Pasteboard!, _ inItem: PasteboardItemID, _ inFlavorType: CFString!, _ inData: CFData!, _ inFlags: PasteboardFlavorFlags) -> OSStatus
-@available(OSX 10.3, *)
 func PasteboardCopyPasteLocation(inPasteboard: Pasteboard!, _ outPasteLocation: UnsafeMutablePointer<Unmanaged<CFURL>?>) -> OSStatus
-@available(OSX 10.3, *)
 func PasteboardSetPasteLocation(inPasteboard: Pasteboard!, _ inPasteLocation: CFURL!) -> OSStatus
 typealias PasteboardPromiseKeeperProcPtr = @convention(c) (Pasteboard!, PasteboardItemID, CFString!, UnsafeMutablePointer<Void>) -> OSStatus
-@available(OSX 10.3, *)
 func PasteboardSetPromiseKeeper(inPasteboard: Pasteboard!, _ inPromiseKeeper: PasteboardPromiseKeeperProcPtr!, _ inContext: UnsafeMutablePointer<Void>) -> OSStatus
-@available(OSX 10.3, *)
 func PasteboardResolvePromises(inPasteboard: Pasteboard!) -> OSStatus
 var kNoProcess: Int { get }
 var kSystemProcess: Int { get }
@@ -2385,7 +1602,6 @@ var kQuitNotQuitDuringInstallMask: Int { get }
 var kQuitNotQuitDuringLogoutMask: Int { get }
 var kSetFrontProcessFrontWindowOnly: Int { get }
 var kSetFrontProcessCausedByUser: Int { get }
-@available(OSX 10.3, *)
 func TransformProcessType(psn: UnsafePointer<ProcessSerialNumber>, _ transformState: ProcessApplicationTransformState) -> OSStatus
 var initDev: Int { get }
 var hitDev: Int { get }
@@ -2413,65 +1629,19 @@ var badTranslationRefErr: Int { get }
 typealias TranslationFlags = OptionBits
 var kTranslationDataTranslation: Int { get }
 var kTranslationFileTranslation: Int { get }
-@available(OSX 10.3, *)
 func TranslationGetTypeID() -> CFTypeID
-@available(OSX 10.3, *)
 func TranslationCreate(inSourceType: CFString!, _ inDestinationType: CFString!, _ inTranslationFlags: TranslationFlags, _ outTranslation: UnsafeMutablePointer<Unmanaged<Translation>?>) -> OSStatus
-@available(OSX 10.3, *)
 func TranslationCreateWithSourceArray(inSourceTypes: CFArray!, _ inTranslationFlags: TranslationFlags, _ outDestinationTypes: UnsafeMutablePointer<Unmanaged<CFArray>?>, _ outTranslations: UnsafeMutablePointer<Unmanaged<CFDictionary>?>) -> OSStatus
-@available(OSX 10.3, *)
 func TranslationPerformForData(inTranslation: Translation!, _ inSourceData: CFData!, _ outDestinationData: UnsafeMutablePointer<Unmanaged<CFData>?>) -> OSStatus
-@available(OSX 10.3, *)
 func TranslationPerformForFile(inTranslation: Translation!, _ inSourceFile: UnsafePointer<FSRef>, _ inDestinationDirectory: UnsafePointer<FSRef>, _ inDestinationName: CFString!, _ outTranslatedFile: UnsafeMutablePointer<FSRef>) -> OSStatus
-@available(OSX 10.3, *)
 func TranslationPerformForURL(inTranslation: Translation!, _ inSourceURL: CFURL!, _ inDestinationURL: CFURL!, _ outTranslatedURL: UnsafeMutablePointer<Unmanaged<CFURL>?>) -> OSStatus
-@available(OSX 10.3, *)
 func TranslationCopySourceType(inTranslation: Translation!, _ outSourceType: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX 10.3, *)
 func TranslationCopyDestinationType(inTranslation: Translation!, _ outDestinationType: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX 10.3, *)
 func TranslationGetTranslationFlags(inTranslation: Translation!, _ outTranslationFlags: UnsafeMutablePointer<TranslationFlags>) -> OSStatus
-
-/*!
-	@typedef UAZoomChangeFocusType
-	@abstract Defines the Universal Access zoom change focus type.
-*/
 typealias UAZoomChangeFocusType = UInt32
-
-/*!
- * An event is requesting focus.
- */
 var kUAZoomFocusTypeOther: Int { get }
-
-/*!
- * The text insertion point has moved.
- */
 var kUAZoomFocusTypeInsertionPoint: Int { get }
-
-/*!
-	@function UAZoomEnabled
-	@abstract Determines if the Universal Access zoom feature is enabled.
-	@result Returns <code>true</code> if the Universal Access zoom feature is on, <code>false</code> if the zoom feature is off or if the user
-	has zoomed all the way out.
-	@availability Available in Mac OS X v10.4 and later (not available in CarbonLib 1.x and not available for nonCarbon CFM).
-*/
-@available(OSX 10.4, *)
 func UAZoomEnabled() -> Bool
-
-/*!
-	@function UAZoomChangeFocus
-	@abstract Tells the Universal Access zoom feature where it should focus.
-	@discussion This function tells Universal Access the frame of the element in focus and the
-	part of the element that should be in focus.
-	@param inRect The frame of the element in focus, in global 72-dot-per-inch (dpi) coordinates.
-	@param inHighlightRect The frame of the highlighted part of the element in focus, in global 72 dpi coordinates.  If the whole element is in focus,
-	and not just a smaller part of it, pass the <code>inRect</code> parameter and pass <code>NULL</code> for <code>inHighlightRect</code>.
-	@param inType A value of type @link UAZoomChangeFocusType UAZoomChangeFocusType@/link.
-	@result Returns <code>noErr</code> if there were no problems, if Universal Access Zoom is zoomed all the way out, or if the feature is off;
-	 returns <code>paramErr</code> if <code>inRect</code> is <code>NULL</code> or if <code>inType</code> is out of range. 
-	@availability Available in Mac OS X v10.4 and later (not available in CarbonLib 1.x and not available for nonCarbon CFM).
-*/
-@available(OSX 10.4, *)
 func UAZoomChangeFocus(inRect: UnsafePointer<CGRect>, _ inHighlightRect: UnsafePointer<CGRect>, _ inType: UAZoomChangeFocusType) -> OSStatus
 var kDictionaryFileType: Int { get }
 var kDCMDictionaryHeaderSignature: Int { get }
@@ -2701,29 +1871,19 @@ func PMRelease(object: PMObject) -> OSStatus
 func PMCreateSession(printSession: UnsafeMutablePointer<PMPrintSession>) -> OSStatus
 func PMSessionError(printSession: PMPrintSession) -> OSStatus
 func PMSessionSetError(printSession: PMPrintSession, _ printError: OSStatus) -> OSStatus
-@available(OSX 10.4, *)
 func PMSessionBeginCGDocumentNoDialog(printSession: PMPrintSession, _ printSettings: PMPrintSettings, _ pageFormat: PMPageFormat) -> OSStatus
 func PMSessionEndDocumentNoDialog(printSession: PMPrintSession) -> OSStatus
 func PMSessionBeginPageNoDialog(printSession: PMPrintSession, _ pageFormat: PMPageFormat, _ pageFrame: UnsafePointer<PMRect>) -> OSStatus
 func PMSessionEndPageNoDialog(printSession: PMPrintSession) -> OSStatus
-@available(OSX 10.4, *)
 func PMSessionGetCGGraphicsContext(printSession: PMPrintSession, _ context: UnsafeMutablePointer<Unmanaged<CGContext>?>) -> OSStatus
-@available(OSX 10.1, *)
 func PMSessionGetDestinationType(printSession: PMPrintSession, _ printSettings: PMPrintSettings, _ destTypeP: UnsafeMutablePointer<PMDestinationType>) -> OSStatus
-@available(OSX 10.1, *)
 func PMSessionCopyDestinationFormat(printSession: PMPrintSession, _ printSettings: PMPrintSettings, _ destFormatP: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX 10.1, *)
 func PMSessionCopyDestinationLocation(printSession: PMPrintSession, _ printSettings: PMPrintSettings, _ destLocationP: UnsafeMutablePointer<Unmanaged<CFURL>?>) -> OSStatus
-@available(OSX 10.1, *)
 func PMSessionSetDestination(printSession: PMPrintSession, _ printSettings: PMPrintSettings, _ destType: PMDestinationType, _ destFormat: CFString?, _ destLocation: CFURL?) -> OSStatus
-@available(OSX 10.1, *)
 func PMSessionCopyOutputFormatList(printSession: PMPrintSession, _ destType: PMDestinationType, _ documentFormatP: UnsafeMutablePointer<Unmanaged<CFArray>?>) -> OSStatus
-@available(OSX 10.1, *)
 func PMSessionCreatePageFormatList(printSession: PMPrintSession, _ printer: PMPrinter, _ pageFormatList: UnsafeMutablePointer<Unmanaged<CFArray>?>) -> OSStatus
-@available(OSX 10.1, *)
 func PMSessionCreatePrinterList(printSession: PMPrintSession, _ printerList: UnsafeMutablePointer<Unmanaged<CFArray>?>, _ currentIndex: UnsafeMutablePointer<CFIndex>, _ currentPrinter: UnsafeMutablePointer<PMPrinter>) -> OSStatus
 func PMSessionGetCurrentPrinter(printSession: PMPrintSession, _ currentPrinter: UnsafeMutablePointer<PMPrinter>) -> OSStatus
-@available(OSX 10.3, *)
 func PMSessionSetCurrentPMPrinter(session: PMPrintSession, _ printer: PMPrinter) -> OSStatus
 func PMSessionGetDataFromSession(printSession: PMPrintSession, _ key: CFString, _ data: UnsafeMutablePointer<Unmanaged<AnyObject>?>) -> OSStatus
 func PMSessionSetDataInSession(printSession: PMPrintSession, _ key: CFString, _ data: AnyObject) -> OSStatus
@@ -2731,23 +1891,17 @@ func PMCreatePageFormat(pageFormat: UnsafeMutablePointer<PMPageFormat>) -> OSSta
 func PMSessionDefaultPageFormat(printSession: PMPrintSession, _ pageFormat: PMPageFormat) -> OSStatus
 func PMSessionValidatePageFormat(printSession: PMPrintSession, _ pageFormat: PMPageFormat, _ changed: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
 func PMCopyPageFormat(formatSrc: PMPageFormat, _ formatDest: PMPageFormat) -> OSStatus
-@available(OSX 10.3, *)
 func PMCreatePageFormatWithPMPaper(pageFormat: UnsafeMutablePointer<PMPageFormat>, _ paper: PMPaper) -> OSStatus
-@available(OSX 10.5, *)
 func PMPageFormatCreateDataRepresentation(pageFormat: PMPageFormat, _ data: UnsafeMutablePointer<Unmanaged<CFData>?>, _ format: PMDataFormat) -> OSStatus
-@available(OSX 10.5, *)
 func PMPageFormatCreateWithDataRepresentation(data: CFData, _ pageFormat: UnsafeMutablePointer<PMPageFormat>) -> OSStatus
 func PMGetAdjustedPageRect(pageFormat: PMPageFormat, _ pageRect: UnsafeMutablePointer<PMRect>) -> OSStatus
 func PMGetAdjustedPaperRect(pageFormat: PMPageFormat, _ paperRect: UnsafeMutablePointer<PMRect>) -> OSStatus
 func PMGetOrientation(pageFormat: PMPageFormat, _ orientation: UnsafeMutablePointer<PMOrientation>) -> OSStatus
 func PMGetPageFormatExtendedData(pageFormat: PMPageFormat, _ dataID: OSType, _ size: UnsafeMutablePointer<UInt32>, _ extendedData: UnsafeMutablePointer<Void>) -> OSStatus
-@available(OSX 10.5, *)
 func PMPageFormatGetPrinterID(pageFormat: PMPageFormat, _ printerID: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
 func PMGetScale(pageFormat: PMPageFormat, _ scale: UnsafeMutablePointer<Double>) -> OSStatus
 func PMGetUnadjustedPageRect(pageFormat: PMPageFormat, _ pageRect: UnsafeMutablePointer<PMRect>) -> OSStatus
 func PMGetUnadjustedPaperRect(pageFormat: PMPageFormat, _ paperRect: UnsafeMutablePointer<PMRect>) -> OSStatus
-
-/************************/
 func PMSetOrientation(pageFormat: PMPageFormat, _ orientation: PMOrientation, _ lock: Bool) -> OSStatus
 func PMSetPageFormatExtendedData(pageFormat: PMPageFormat, _ dataID: OSType, _ size: UInt32, _ extendedData: UnsafeMutablePointer<Void>) -> OSStatus
 func PMSetScale(pageFormat: PMPageFormat, _ scale: Double) -> OSStatus
@@ -2755,180 +1909,81 @@ func PMCreatePrintSettings(printSettings: UnsafeMutablePointer<PMPrintSettings>)
 func PMSessionDefaultPrintSettings(printSession: PMPrintSession, _ printSettings: PMPrintSettings) -> OSStatus
 func PMSessionValidatePrintSettings(printSession: PMPrintSession, _ printSettings: PMPrintSettings, _ changed: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
 func PMCopyPrintSettings(settingSrc: PMPrintSettings, _ settingDest: PMPrintSettings) -> OSStatus
-@available(OSX 10.5, *)
 func PMPrintSettingsCreateDataRepresentation(printSettings: PMPrintSettings, _ data: UnsafeMutablePointer<Unmanaged<CFData>?>, _ format: PMDataFormat) -> OSStatus
-@available(OSX 10.5, *)
 func PMPrintSettingsCreateWithDataRepresentation(data: CFData, _ printSettings: UnsafeMutablePointer<PMPrintSettings>) -> OSStatus
-@available(OSX 10.2, *)
 func PMGetCollate(printSettings: PMPrintSettings, _ collate: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
 func PMGetCopies(printSettings: PMPrintSettings, _ copies: UnsafeMutablePointer<UInt32>) -> OSStatus
-@available(OSX 10.4, *)
 func PMGetDuplex(printSettings: PMPrintSettings, _ duplexSetting: UnsafeMutablePointer<PMDuplexMode>) -> OSStatus
 func PMGetFirstPage(printSettings: PMPrintSettings, _ first: UnsafeMutablePointer<UInt32>) -> OSStatus
 func PMGetLastPage(printSettings: PMPrintSettings, _ last: UnsafeMutablePointer<UInt32>) -> OSStatus
 func PMGetPageRange(printSettings: PMPrintSettings, _ minPage: UnsafeMutablePointer<UInt32>, _ maxPage: UnsafeMutablePointer<UInt32>) -> OSStatus
-@available(OSX 10.4, *)
 func PMPrintSettingsGetJobName(printSettings: PMPrintSettings, _ name: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX 10.4, *)
 func PMPrintSettingsGetValue(printSettings: PMPrintSettings, _ key: CFString, _ value: UnsafeMutablePointer<Unmanaged<AnyObject>?>) -> OSStatus
-@available(OSX 10.2, *)
 func PMSetCollate(printSettings: PMPrintSettings, _ collate: Bool) -> OSStatus
 func PMSetCopies(printSettings: PMPrintSettings, _ copies: UInt32, _ lock: Bool) -> OSStatus
-@available(OSX 10.4, *)
 func PMSetDuplex(printSettings: PMPrintSettings, _ duplexSetting: PMDuplexMode) -> OSStatus
 func PMSetFirstPage(printSettings: PMPrintSettings, _ first: UInt32, _ lock: Bool) -> OSStatus
 func PMSetLastPage(printSettings: PMPrintSettings, _ last: UInt32, _ lock: Bool) -> OSStatus
 func PMSetPageRange(printSettings: PMPrintSettings, _ minPage: UInt32, _ maxPage: UInt32) -> OSStatus
-@available(OSX 10.4, *)
 func PMPrintSettingsSetJobName(printSettings: PMPrintSettings, _ name: CFString) -> OSStatus
-@available(OSX 10.4, *)
 func PMPrintSettingsSetValue(printSettings: PMPrintSettings, _ key: CFString, _ value: AnyObject?, _ locked: Bool) -> OSStatus
-@available(OSX 10.5, *)
 func PMPrintSettingsCopyAsDictionary(printSettings: PMPrintSettings, _ settingsDictionary: UnsafeMutablePointer<Unmanaged<CFDictionary>?>) -> OSStatus
-@available(OSX 10.5, *)
 func PMPrintSettingsCopyKeys(printSettings: PMPrintSettings, _ settingsKeys: UnsafeMutablePointer<Unmanaged<CFArray>?>) -> OSStatus
-
-/*!
- *
- * PMCreateGenericPrinter
- *  Summary:
- *	Creates a generic PMPrinter
- *
- *  Parameters:
- *		printer:
- *		On return *printer contains the generic priner
- *
- *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- *  
- *  Compatibility:
- *  	Not appropriate for CUPS filters, drivers, and backends.
- *  
- */
-@available(OSX 10.5, *)
 func PMCreateGenericPrinter(printer: UnsafeMutablePointer<PMPrinter>) -> OSStatus
-@available(OSX 10.2, *)
 func PMServerCreatePrinterList(server: PMServer, _ printerList: UnsafeMutablePointer<Unmanaged<CFArray>?>) -> OSStatus
-@available(OSX 10.5, *)
 func PMServerLaunchPrinterBrowser(server: PMServer, _ options: CFDictionary?) -> OSStatus
-@available(OSX 10.4, *)
 func PMPrinterCreateFromPrinterID(printerID: CFString) -> PMPrinter
-@available(OSX 10.4, *)
 func PMPrinterCopyDescriptionURL(printer: PMPrinter, _ descriptionType: CFString, _ fileURL: UnsafeMutablePointer<Unmanaged<CFURL>?>) -> OSStatus
-@available(OSX 10.4, *)
 func PMPrinterCopyDeviceURI(printer: PMPrinter, _ deviceURI: UnsafeMutablePointer<Unmanaged<CFURL>?>) -> OSStatus
-@available(OSX 10.3, *)
 func PMPrinterCopyHostName(printer: PMPrinter, _ hostNameP: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX 10.3, *)
 func PMPrinterCopyPresets(printer: PMPrinter, _ presetList: UnsafeMutablePointer<Unmanaged<CFArray>?>) -> OSStatus
-@available(OSX 10.3, *)
 func PMPrinterGetCommInfo(printer: PMPrinter, _ supportsControlCharRangeP: UnsafeMutablePointer<DarwinBoolean>, _ supportsEightBitP: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-@available(OSX 10.2, *)
 func PMPrinterGetID(printer: PMPrinter) -> Unmanaged<CFString>?
-@available(OSX 10.2, *)
 func PMPrinterGetLocation(printer: PMPrinter) -> Unmanaged<CFString>?
 func PMPrinterGetDriverCreator(printer: PMPrinter, _ creator: UnsafeMutablePointer<OSType>) -> OSStatus
 func PMPrinterGetDriverReleaseInfo(printer: PMPrinter, _ release: UnsafeMutablePointer<VersRec>) -> OSStatus
 func PMPrinterGetPrinterResolutionCount(printer: PMPrinter, _ countP: UnsafeMutablePointer<UInt32>) -> OSStatus
 func PMPrinterGetIndexedPrinterResolution(printer: PMPrinter, _ index: UInt32, _ resolutionP: UnsafeMutablePointer<PMResolution>) -> OSStatus
-@available(OSX 10.5, *)
 func PMPrinterGetOutputResolution(printer: PMPrinter, _ printSettings: PMPrintSettings, _ resolutionP: UnsafeMutablePointer<PMResolution>) -> OSStatus
-@available(OSX 10.5, *)
 func PMPrinterSetOutputResolution(printer: PMPrinter, _ printSettings: PMPrintSettings, _ resolutionP: UnsafePointer<PMResolution>) -> OSStatus
 func PMPrinterGetLanguageInfo(printer: PMPrinter, _ info: UnsafeMutablePointer<PMLanguageInfo>) -> OSStatus
-@available(OSX 10.2, *)
 func PMPrinterGetMakeAndModelName(printer: PMPrinter, _ makeAndModel: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX 10.3, *)
 func PMPrinterGetMimeTypes(printer: PMPrinter, _ settings: PMPrintSettings, _ mimeTypes: UnsafeMutablePointer<Unmanaged<CFArray>?>) -> OSStatus
-@available(OSX 10.2, *)
 func PMPrinterGetName(printer: PMPrinter) -> Unmanaged<CFString>?
-@available(OSX 10.3, *)
 func PMPrinterGetPaperList(printer: PMPrinter, _ paperList: UnsafeMutablePointer<Unmanaged<CFArray>?>) -> OSStatus
-@available(OSX 10.2, *)
 func PMPrinterGetState(printer: PMPrinter, _ state: UnsafeMutablePointer<PMPrinterState>) -> OSStatus
-@available(OSX 10.2, *)
 func PMPrinterIsDefault(printer: PMPrinter) -> Bool
-@available(OSX 10.2, *)
 func PMPrinterIsFavorite(printer: PMPrinter) -> Bool
-@available(OSX 10.2, *)
 func PMPrinterIsPostScriptCapable(printer: PMPrinter) -> Bool
-
-/*!
- * @function	PMPrinterIsPostScriptPrinter
- * @abstract	Set *isPSPrinter true if the printer is a PostScript printer.
- *
- * @discussion	A PostScript printer is one whose driver takes PostScript directly.
- *
- *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- *  
- *  Compatibility:
- *  	Not appropriate for CUPS filters, drivers, and backends.
- *  
- */
-@available(OSX 10.5, *)
 func PMPrinterIsPostScriptPrinter(printer: PMPrinter, _ isPSPrinter: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-@available(OSX 10.3, *)
 func PMPrinterIsRemote(printer: PMPrinter, _ isRemoteP: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-@available(OSX 10.5, *)
 func PMPrinterSetDefault(printer: PMPrinter) -> OSStatus
-@available(OSX 10.3, *)
 func PMPresetCopyName(preset: PMPreset, _ name: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX 10.3, *)
 func PMPresetCreatePrintSettings(preset: PMPreset, _ session: PMPrintSession, _ printSettings: UnsafeMutablePointer<PMPrintSettings>) -> OSStatus
-@available(OSX 10.3, *)
 func PMPresetGetAttributes(preset: PMPreset, _ attributes: UnsafeMutablePointer<Unmanaged<CFDictionary>?>) -> OSStatus
-@available(OSX 10.3, *)
 func PMGetPageFormatPaper(format: PMPageFormat, _ paper: UnsafeMutablePointer<PMPaper>) -> OSStatus
-@available(OSX 10.5, *)
 func PMPaperCreateCustom(printer: PMPrinter, _ id: CFString?, _ name: CFString?, _ width: Double, _ height: Double, _ margins: UnsafePointer<PMPaperMargins>, _ paperP: UnsafeMutablePointer<PMPaper>) -> OSStatus
-@available(OSX 10.3, *)
 func PMPaperGetWidth(paper: PMPaper, _ paperWidth: UnsafeMutablePointer<Double>) -> OSStatus
-@available(OSX 10.3, *)
 func PMPaperGetHeight(paper: PMPaper, _ paperHeight: UnsafeMutablePointer<Double>) -> OSStatus
-@available(OSX 10.3, *)
 func PMPaperGetMargins(paper: PMPaper, _ paperMargins: UnsafeMutablePointer<PMPaperMargins>) -> OSStatus
-@available(OSX 10.3, *)
 func PMPaperGetID(paper: PMPaper, _ paperID: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX 10.5, *)
 func PMPaperGetPPDPaperName(paper: PMPaper, _ paperName: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX 10.5, *)
 func PMPaperCreateLocalizedName(paper: PMPaper, _ printer: PMPrinter, _ paperName: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX 10.5, *)
 func PMPaperGetPrinterID(paper: PMPaper, _ printerID: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX 10.5, *)
 func PMPaperIsCustom(paper: PMPaper) -> Bool
-@available(OSX 10.3, *)
 func PMWorkflowCopyItems(workflowItems: UnsafeMutablePointer<Unmanaged<CFArray>?>) -> OSStatus
-@available(OSX 10.3, *)
 func PMWorkflowSubmitPDFWithOptions(workflowItem: CFURL, _ title: CFString?, _ options: UnsafePointer<Int8>, _ pdfFile: CFURL) -> OSStatus
-@available(OSX 10.3, *)
 func PMWorkflowSubmitPDFWithSettings(workflowItem: CFURL, _ settings: PMPrintSettings, _ pdfFile: CFURL) -> OSStatus
-@available(OSX 10.3, *)
 func PMPrinterPrintWithProvider(printer: PMPrinter, _ settings: PMPrintSettings, _ format: PMPageFormat, _ mimeType: CFString, _ provider: CGDataProvider) -> OSStatus
-@available(OSX 10.3, *)
 func PMPrinterPrintWithFile(printer: PMPrinter, _ settings: PMPrintSettings, _ format: PMPageFormat, _ mimeType: CFString?, _ fileURL: CFURL) -> OSStatus
-@available(OSX 10.5, *)
 func PMPrinterWritePostScriptToURL(printer: PMPrinter, _ settings: PMPrintSettings, _ format: PMPageFormat, _ mimeType: CFString?, _ sourceFileURL: CFURL, _ destinationFileURL: CFURL) -> OSStatus
-@available(OSX 10.3, *)
 func PMPrintSettingsToOptions(settings: PMPrintSettings, _ options: UnsafeMutablePointer<UnsafeMutablePointer<Int8>>) -> OSStatus
-@available(OSX 10.5, *)
 func PMPrintSettingsToOptionsWithPrinterAndPageFormat(settings: PMPrintSettings, _ printer: PMPrinter, _ pageFormat: PMPageFormat, _ options: UnsafeMutablePointer<UnsafeMutablePointer<Int8>>) -> OSStatus
-@available(OSX 10.6, *)
 func PMPrinterSendCommand(printer: PMPrinter, _ commandString: CFString, _ jobTitle: CFString?, _ options: CFDictionary?) -> OSStatus
-@available(OSX 10.6, *)
 func PMPrinterCopyState(printer: PMPrinter, _ stateDict: UnsafeMutablePointer<Unmanaged<CFDictionary>?>) -> OSStatus
-@available(OSX 10.3, *)
 func PMCopyAvailablePPDs(domain: PMPPDDomain, _ ppds: UnsafeMutablePointer<Unmanaged<CFArray>?>) -> OSStatus
-@available(OSX 10.3, *)
 func PMCopyLocalizedPPD(ppd: CFURL, _ localizedPPD: UnsafeMutablePointer<Unmanaged<CFURL>?>) -> OSStatus
-@available(OSX 10.3, *)
 func PMCopyPPDData(ppd: CFURL, _ data: UnsafeMutablePointer<Unmanaged<CFData>?>) -> OSStatus
-@available(OSX 10.1, *)
 func PMCGImageCreateWithEPSDataProvider(epsDataProvider: CGDataProvider?, _ epsPreview: CGImage) -> Unmanaged<CGImage>?
 typealias PMObject = UnsafePointer<Void>
 typealias PMPrintSettings = COpaquePointer
@@ -3566,8 +2621,6 @@ struct ATSUGlyphInfoArray {
   init()
   init(layout: ATSUTextLayout, numGlyphs: Int, glyphs: (ATSUGlyphInfo))
 }
-
-/*********************************************************************************/
 typealias ATSUHighlightMethod = UInt32
 var kInvertHighlighting: Int { get }
 var kRedrawHighlighting: Int { get }
@@ -4569,143 +3622,74 @@ struct DelimiterInfo {
   init()
   init(startDelimiter: (UInt8, UInt8), endDelimiter: (UInt8, UInt8))
 }
-@available(OSX 10.5, *)
 let kSpeechStatusProperty: CFString
-@available(OSX 10.5, *)
 let kSpeechErrorsProperty: CFString
-@available(OSX 10.5, *)
 let kSpeechInputModeProperty: CFString
-@available(OSX 10.5, *)
 let kSpeechCharacterModeProperty: CFString
-@available(OSX 10.5, *)
 let kSpeechNumberModeProperty: CFString
-@available(OSX 10.5, *)
 let kSpeechRateProperty: CFString
-@available(OSX 10.5, *)
 let kSpeechPitchBaseProperty: CFString
-@available(OSX 10.5, *)
 let kSpeechPitchModProperty: CFString
-@available(OSX 10.5, *)
 let kSpeechVolumeProperty: CFString
-@available(OSX 10.5, *)
 let kSpeechSynthesizerInfoProperty: CFString
-@available(OSX 10.5, *)
 let kSpeechRecentSyncProperty: CFString
-@available(OSX 10.5, *)
 let kSpeechPhonemeSymbolsProperty: CFString
-@available(OSX 10.5, *)
 let kSpeechCurrentVoiceProperty: CFString
-@available(OSX 10.5, *)
 let kSpeechCommandDelimiterProperty: CFString
-@available(OSX 10.5, *)
 let kSpeechResetProperty: CFString
-@available(OSX 10.5, *)
 let kSpeechOutputToFileURLProperty: CFString
-@available(OSX 10.6, *)
 let kSpeechOutputToExtAudioFileProperty: CFString
-@available(OSX 10.6, *)
 let kSpeechOutputToAudioDeviceProperty: CFString
-@available(OSX 10.9, *)
 let kSpeechOutputToFileDescriptorProperty: CFString
-@available(OSX 10.9, *)
 let kSpeechAudioOutputFormatProperty: CFString
-@available(OSX 10.9, *)
 let kSpeechOutputChannelMapProperty: CFString
-@available(OSX 10.5, *)
 let kSpeechRefConProperty: CFString
-@available(OSX 10.5, *)
 let kSpeechTextDoneCallBack: CFString
-@available(OSX 10.5, *)
 let kSpeechSpeechDoneCallBack: CFString
-@available(OSX 10.5, *)
 let kSpeechSyncCallBack: CFString
-@available(OSX 10.5, *)
 let kSpeechPhonemeCallBack: CFString
-@available(OSX 10.5, *)
 let kSpeechErrorCFCallBack: CFString
-@available(OSX 10.5, *)
 let kSpeechWordCFCallBack: CFString
-@available(OSX 10.6, *)
 let kSpeechPhonemeOptionsProperty: CFString
-@available(OSX 10.6, *)
 let kSpeechAudioUnitProperty: CFString
-@available(OSX 10.6, *)
 let kSpeechAudioGraphProperty: CFString
-@available(OSX 10.9, *)
 let kSpeechSynthExtensionProperty: CFString
-@available(OSX 10.5, *)
 let kSpeechModeText: CFString
-@available(OSX 10.5, *)
 let kSpeechModePhoneme: CFString
-@available(OSX 10.6, *)
 let kSpeechModeTune: CFString
-@available(OSX 10.5, *)
 let kSpeechModeNormal: CFString
-@available(OSX 10.5, *)
 let kSpeechModeLiteral: CFString
-@available(OSX 10.5, *)
 let kSpeechNoEndingProsody: CFString
-@available(OSX 10.5, *)
 let kSpeechNoSpeechInterrupt: CFString
-@available(OSX 10.5, *)
 let kSpeechPreflightThenPause: CFString
-@available(OSX 10.5, *)
 let kSpeechStatusOutputBusy: CFString
-@available(OSX 10.5, *)
 let kSpeechStatusOutputPaused: CFString
-@available(OSX 10.5, *)
 let kSpeechStatusNumberOfCharactersLeft: CFString
-@available(OSX 10.5, *)
 let kSpeechStatusPhonemeCode: CFString
-@available(OSX 10.5, *)
 let kSpeechErrorCount: CFString
-@available(OSX 10.5, *)
 let kSpeechErrorOldest: CFString
-@available(OSX 10.5, *)
 let kSpeechErrorOldestCharacterOffset: CFString
-@available(OSX 10.5, *)
 let kSpeechErrorNewest: CFString
-@available(OSX 10.5, *)
 let kSpeechErrorNewestCharacterOffset: CFString
-@available(OSX 10.5, *)
 let kSpeechSynthesizerInfoIdentifier: CFString
-@available(OSX 10.5, *)
 let kSpeechSynthesizerInfoManufacturer: CFString
-@available(OSX 10.5, *)
 let kSpeechSynthesizerInfoVersion: CFString
-@available(OSX 10.5, *)
 let kSpeechPhonemeInfoOpcode: CFString
-@available(OSX 10.5, *)
 let kSpeechPhonemeInfoSymbol: CFString
-@available(OSX 10.5, *)
 let kSpeechPhonemeInfoExample: CFString
-@available(OSX 10.5, *)
 let kSpeechPhonemeInfoHiliteStart: CFString
-@available(OSX 10.5, *)
 let kSpeechPhonemeInfoHiliteEnd: CFString
-@available(OSX 10.5, *)
 let kSpeechVoiceCreator: CFString
-@available(OSX 10.5, *)
 let kSpeechVoiceID: CFString
-@available(OSX 10.5, *)
 let kSpeechCommandPrefix: CFString
-@available(OSX 10.5, *)
 let kSpeechCommandSuffix: CFString
-@available(OSX 10.5, *)
 let kSpeechDictionaryLocaleIdentifier: CFString
-@available(OSX 10.5, *)
 let kSpeechDictionaryModificationDate: CFString
-@available(OSX 10.5, *)
 let kSpeechDictionaryPronunciations: CFString
-@available(OSX 10.5, *)
 let kSpeechDictionaryAbbreviations: CFString
-@available(OSX 10.5, *)
 let kSpeechDictionaryEntrySpelling: CFString
-@available(OSX 10.5, *)
 let kSpeechDictionaryEntryPhonemes: CFString
-@available(OSX 10.5, *)
 let kSpeechErrorCallbackSpokenString: CFString
-@available(OSX 10.5, *)
 let kSpeechErrorCallbackCharacterOffset: CFString
 typealias SpeechTextDoneProcPtr = @convention(c) (SpeechChannel, SRefCon, UnsafeMutablePointer<UnsafePointer<Void>>, UnsafeMutablePointer<UInt>, UnsafeMutablePointer<Int32>) -> Void
 typealias SpeechDoneProcPtr = @convention(c) (SpeechChannel, SRefCon) -> Void
@@ -4739,17 +3723,10 @@ func SetSpeechRate(chan: SpeechChannel, _ rate: Fixed) -> OSErr
 func GetSpeechRate(chan: SpeechChannel, _ rate: UnsafeMutablePointer<Fixed>) -> OSErr
 func SetSpeechPitch(chan: SpeechChannel, _ pitch: Fixed) -> OSErr
 func GetSpeechPitch(chan: SpeechChannel, _ pitch: UnsafeMutablePointer<Fixed>) -> OSErr
-@available(OSX 10.5, *)
 func SpeakCFString(chan: SpeechChannel, _ aString: CFString, _ options: CFDictionary?) -> OSErr
-@available(OSX 10.5, *)
 func UseSpeechDictionary(chan: SpeechChannel, _ speechDictionary: CFDictionary) -> OSErr
-@available(OSX 10.5, *)
 func CopyPhonemesFromText(chan: SpeechChannel, _ text: CFString, _ phonemes: UnsafeMutablePointer<CFString?>) -> OSErr
-@available(OSX 10.5, *)
 func CopySpeechProperty(chan: SpeechChannel, _ property: CFString, _ object: UnsafeMutablePointer<AnyObject?>) -> OSErr
-@available(OSX 10.5, *)
 func SetSpeechProperty(chan: SpeechChannel, _ property: CFString, _ object: AnyObject?) -> OSErr
-@available(OSX 10.6, *)
 func SpeechSynthesisRegisterModuleURL(url: CFURL) -> OSErr
-@available(OSX 10.6, *)
 func SpeechSynthesisUnregisterModuleURL(url: CFURL) -> OSErr

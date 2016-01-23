@@ -1,5 +1,4 @@
 
-@available(OSX 10.6, *)
 let kICUTTypeRaw: CFString!
 struct ICARawFileHeader {
   var imageDataOffset: UInt32
@@ -30,13 +29,6 @@ let ICLoggingLevelWarning: Int32
 let ICLoggingLevelBasicInfo: Int32
 let ICLoggingLevelVerboseInfo: Int32
 let ICLoggingLevelTimingInfo: Int32
-
-/*!
-    @header
-        ICAApplication.h
-    @discussion
-      ICAApplication.h defines structures and functions that are used by clients of Image Capture framework. 
-*/
 typealias ICAError = OSErr
 var kICAPBVersion: Int { get }
 var kICACommunicationErr: Int { get }
@@ -118,28 +110,6 @@ var kICAButtonWeb: Int { get }
 var kICACameraPassThruSend: Int { get }
 var kICACameraPassThruReceive: Int { get }
 var kICACameraPassThruNotUsed: Int { get }
-
-/*!
-    @struct ICAPTPPassThroughPB
-    @field commandCode
-        PTP command code (including vendor specific) <--
-    @field resultCode
-        PTP response code -->
-    @field numOfInputParams
-        Number of valid parameters to be sent to device <--
-    @field numOfOutputParams
-        Number of valid parameters expected from device <--
-    @field params
-        PTP parameters (command specific / optional) <->
-    @field dataUsageMode
-        One of (kICACameraPassThruSend, kICACameraPassThruReceive, kICACameraPassThruNotUsed) <--
-    @field flags
-        Not used currently
-    @field dataSize
-        Size of data block <->
-    @field data
-        Data block <->
-*/
 struct ICAPTPPassThroughPB {
   var commandCode: UInt32
   var resultCode: UInt32
@@ -153,20 +123,6 @@ struct ICAPTPPassThroughPB {
   init()
   init(commandCode: UInt32, resultCode: UInt32, numOfInputParams: UInt32, numOfOutputParams: UInt32, params: (UInt32, UInt32, UInt32, UInt32), dataUsageMode: UInt32, flags: UInt32, dataSize: UInt32, data: (UInt8))
 }
-
-/*!
-    @struct ICAPTPEventDataset
-    @field dataLength
-        Data length in bytes
-    @field containerType
-        PTP container type
-    @field eventCode
-        PTP event code
-    @field transactionID
-        PTP transaction ID
-    @field params
-        PTP params. The number of params should be (dataLength - 12)/4
-*/
 struct ICAPTPEventDataset {
   var dataLength: UInt32
   var containerType: UInt16
@@ -176,127 +132,56 @@ struct ICAPTPEventDataset {
   init()
   init(dataLength: UInt32, containerType: UInt16, eventCode: UInt16, transactionID: UInt32, params: (UInt32, UInt32, UInt32))
 }
-@available(OSX 10.5, *)
 let kICADevicesArrayKey: CFString!
-@available(OSX 10.5, *)
 let kICAObjectKey: CFString!
-@available(OSX 10.5, *)
 let kICAObjectNameKey: CFString!
-@available(OSX 10.5, *)
 let kICAUSBVendorIDKey: CFString!
-@available(OSX 10.5, *)
 let kICAUSBProductIDKey: CFString!
-@available(OSX 10.5, *)
 let kICADeviceTypeKey: CFString!
-@available(OSX 10.5, *)
 let kICAExecutableArchitectureKey: CFString!
-@available(OSX 10.5, *)
 let kICARemoteDeviceKey: CFString!
-@available(OSX 10.5, *)
 let kICADeviceSharedKey: CFString!
-@available(OSX 10.5, *)
 let kICADeviceWebSharedKey: CFString!
-@available(OSX 10.5, *)
 let kICADeviceUsedKey: CFString!
-@available(OSX 10.5, *)
 let kICABonjourServiceTypeKey: CFString!
-@available(OSX 10.5, *)
 let kICABonjourServiceNameKey: CFString!
-@available(OSX 10.5, *)
 let kICABonjourTXTRecordKey: CFString!
-@available(OSX 10.5, *)
 let kICADeviceCapabilitiesKey: CFString!
-@available(OSX 10.5, *)
 let kICALockStatusKey: CFString!
-@available(OSX 10.5, *)
 let kICADataPropertyKey: CFString!
-@available(OSX 10.5, *)
 let kICADataTypeKey: CFString!
-@available(OSX 10.5, *)
 let kICADataSizeKey: CFString!
-@available(OSX 10.5, *)
 let kICAThumbnailPropertyKey: CFString!
-@available(OSX 10.5, *)
 let kICAThumbnailSizeKey: CFString!
-@available(OSX 10.5, *)
 let kICARawKey: CFString!
-@available(OSX 10.4, *)
 let kICAMediaHeightKey: CFString!
-@available(OSX 10.4, *)
 let kICAMediaWidthKey: CFString!
-@available(OSX 10.5, *)
 let kICACreationDateStringKey: CFString!
-@available(OSX 10.5, *)
 let kICAModificationDateStringKey: CFString!
-@available(OSX 10.5, *)
 let kMetaDataDictionaryKey: CFString!
-@available(OSX 10.5, *)
 let kICAMediaDurationInSecondsKey: CFString!
-@available(OSX 10.5, *)
 let kICADeviceTypeCamera: CFString!
-@available(OSX 10.5, *)
 let kICADeviceTypeScanner: CFString!
-@available(OSX 10.4, *)
 let kICAUSBTransportType: CFString!
-@available(OSX 10.4, *)
 let kICAFireWireTransportType: CFString!
-@available(OSX 10.4, *)
 let kICABluetoothTransportType: CFString!
-@available(OSX 10.4, *)
 let kICATCPIPTransportType: CFString!
-@available(OSX 10.4, *)
 let kICASCSITransportType: CFString!
-@available(OSX 10.4, *)
 let kICATWAINTransportType: CFString!
-@available(OSX 10.5, *)
 let kICADeviceBrowserDeviceRefKey: CFString!
-@available(OSX 10.4, *)
 let kICADeviceModulePathKey: CFString!
-@available(OSX 10.5, *)
 let kICADeviceIconPathKey: CFString!
-@available(OSX 10.4, *)
 let kICATransportTypeKey: CFString!
-@available(OSX 10.4, *)
 let kICABluetoothAddressKey: CFString!
-@available(OSX 10.4, *)
 let kICAUSBLocationIDKey: CFString!
-@available(OSX 10.4, *)
 let kICAFireWireGUIDKey: CFString!
-@available(OSX 10.4, *)
 let kICAIOServicePathKey: CFString!
-@available(OSX 10.4, *)
 let kICAIPAddressKey: CFString!
-@available(OSX 10.4, *)
 let kICAIPPortKey: CFString!
-@available(OSX 10.4, *)
 let kICAIPNameKey: CFString!
-@available(OSX 10.4, *)
 let kICAIPGUIDKey: CFString!
-@available(OSX 10.4, *)
 let kICATWAINDSPathKey: CFString!
-
-/*!
-    @const
-        kICAUserAssignedDeviceNameKey
-    @abstract 
-        This key may be present in the property dictionary of a device if the device has a user-assigned name.
-    @discussion
-        Value is of type CFStringRef.
-*/
-@available(OSX 10.5, *)
 let kICAUserAssignedDeviceNameKey: CFString!
-
-/*!
-    @struct ICAHeader
-    @discussion
-        This is the first field in all parameter blocks used by APIs defined in ICAApplication.h.
-        Type of parameter passed to a callback function used by APIs defined in ICAApplication.h.
-        The parameter for the completion proc should to be casted to an appropriate type such as ICAGetChildCountPB* for it to be useful.
-    @field err
-        Error returned by an API. -->
-    @field refcon
-        An arbitrary refcon value passed to the callback. <--
-*/
 struct ICAHeader {
   var err: ICAError
   var refcon: UInt
@@ -312,14 +197,6 @@ typealias ICAConnectionID = UInt32
 typealias ICASessionID = UInt32
 typealias ICAScannerSessionID = ICASessionID
 typealias ICAEventDataCookie = UInt32
-
-/*!
-    @struct ICAObjectInfo
-    @field objectType
-        An object type, e.g., kICAFile.
-    @field objectSubtype
-        An object subtype, e.g., kICAFileImage.
-*/
 struct ICAObjectInfo {
   var objectType: OSType
   var objectSubtype: OSType
@@ -328,22 +205,6 @@ struct ICAObjectInfo {
 }
 var kICAAllowMultipleImages: Int { get }
 var kICADownloadAndReturnPathArray: Int { get }
-
-/*!
-    @struct ICAImportImagePB
-    @field header
-        See description for ICAHeader.  <->
-    @field deviceObject
-        Object ID of a camera or scanner device. Set this to NULL to ge the default behavior: (a) if no device is connected, a panel saying that there� no device connected is displayed, (b) if a single device is connected, an appropriate user interface to access that device will be displayed, (c) if several devices are connected, a device selector panel will be displayed. <--
-    @field flags
-        One or more flags (combined with an OR operator) defined in ImportImage flags enum. <--
-    @field supportedFileTypes
-        An array of file extension strings such as "jpg", "tif", etc., that are of interest to the calling application. Set to NULL to display all files. <--
-    @field filterProc
-        Specify a filter proc to that will be called for each file before it is displayed in the user interface. <--
-    @field importedImages
-        Returns an array of CFDataRefs for the imported images if the kICADownloadAndReturnPathArray flag is not specified. Otherwise returns an array of CFStringRefs holding the paths of the images that are downloaded. The caller should provide a pointer to a CFArrayRef object initialized to NULL. The caller is responsible for released the array returned by this function. -->
-*/
 struct ICAImportImagePB {
   var header: ICAHeader
   var deviceObject: ICAObject
@@ -355,209 +216,99 @@ struct ICAImportImagePB {
   init(header: ICAHeader, deviceObject: ICAObject, flags: UInt32, supportedFileTypes: Unmanaged<CFArray>!, filterProc: ICAImportFilterProc!, importedImages: UnsafeMutablePointer<Unmanaged<CFArray>?>)
 }
 typealias ICANotification = @convention(c) (CFString!, CFDictionary!) -> Void
-@available(OSX 10.5, *)
 let kICANotificationTypeObjectAdded: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeObjectRemoved: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeObjectInfoChanged: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeStoreAdded: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeStoreRemoved: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeStoreFull: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeStoreInfoChanged: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeDeviceAdded: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeDeviceRemoved: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeDeviceInfoChanged: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeDevicePropertyChanged: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeDeviceWasReset: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeDeviceStatusInfo: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeDeviceStatusError: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeCaptureComplete: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeRequestObjectTransfer: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeTransactionCanceled: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeUnreportedStatus: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeProprietary: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeDeviceConnectionProgress: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeDownloadProgressStatus: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeScanProgressStatus: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeScannerSessionClosed: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeScannerScanDone: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeScannerPageDone: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeScannerButtonPressed: CFString!
-@available(OSX 10.6, *)
 let kICANotificationTypeScannerOverviewOverlayAvailable: CFString!
-@available(OSX 10.5, *)
 let kICAErrorKey: CFString!
-@available(OSX 10.5, *)
 let kICARefconKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationICAObjectKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationDeviceICAObjectKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationDeviceListICAObjectKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationClassKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationTypeKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationRawEventKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationDataKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationDataSizeKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationDataCookieKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationImageKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationImageWidthKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationImageHeightKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationImageBytesPerRowKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationImageStartRowKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationImageNumberOfRowsKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationImageDataKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationImageDataSizeKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationDataIsBigEndianKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationScannerDocumentNameKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationScannerButtonTypeKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationNumerOfImagesRemainingKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationPercentDownloadedKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationSubTypeKey: CFString!
-@available(OSX 10.5, *)
 let kICANotificationSubTypeWarmUpStarted: CFString!
-@available(OSX 10.5, *)
 let kICANotificationSubTypeWarmUpDone: CFString!
-@available(OSX 10.5, *)
 let kICANotificationVendorErrorCodeKey: CFString!
-@available(OSX 10.6, *)
 let kICANotificationSubTypePerformOverviewScan: CFString!
-@available(OSX 10.6, *)
 let kICANotificationSubTypeDocumentLoaded: CFString!
-@available(OSX 10.6, *)
 let kICANotificationSubTypeDocumentNotLoaded: CFString!
-@available(OSX 10.5, *)
 let kICANotificationClassPTPStandard: CFString!
-@available(OSX 10.5, *)
 let kICANotificationClassPTPVendor: CFString!
-@available(OSX 10.5, *)
 let kICANotificationClassProprietary: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropUndefined: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropBatteryLevel: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropFunctionalMode: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropImageSize: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropCompressionSetting: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropWhiteBalance: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropRGBGain: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropFNumber: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropFocalLength: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropFocusDistance: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropFocusMode: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropExposureMeteringMode: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropFlashMode: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropExposureTime: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropExposureProgramMode: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropExposureIndex: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropExposureBiasCompensation: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropDateTime: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropCaptureDelay: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropStillCaptureMode: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropContrast: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropSharpness: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropDigitalZoom: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropEffectMode: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropBurstNumber: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropBurstInterval: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropTimelapseNumber: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropTimelapseInterval: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropFocusMeteringMode: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropUploadURL: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropArtist: CFString!
-@available(OSX 10.5, *)
 let kICADevicePropCopyrightInfo: CFString!
-
-/*!
-    @struct ICARegisterForEventNotificationPB
-    @discussion
-        Use this parameter structure to specify a set of events associated with an object
-        about which notifications should be sent to the specified notification function.
-    @field header
-        See description for ICAHeader. <->
-    @field objectOfInterest
-        An object about which notifications are requested. <--
-    @field eventsOfInterest
-        An array of notification types of interest. <--
-    @field notificationProc
-        A callback function to receive the notifications. <--
-    @field options
-        Set options to NULL. This parameter is intended for future use. <--
-*/
 struct ICARegisterForEventNotificationPB {
   var header: ICAHeader
   var objectOfInterest: ICAObject
@@ -574,30 +325,12 @@ struct ICASendNotificationPB {
   init()
   init(header: ICAHeader, notificationDictionary: Unmanaged<CFMutableDictionary>!, replyCode: UInt32)
 }
-
-/*!
-    @struct ICAGetDeviceListPB
-    @field header
-        See description for ICAHeader. <-->
-    @field object
-        The device list object, if ICAGetDeviceList returns successfully. -->
-*/
 struct ICAGetDeviceListPB {
   var header: ICAHeader
   var object: ICAObject
   init()
   init(header: ICAHeader, object: ICAObject)
 }
-
-/*!
-    @struct ICACopyObjectPropertyDictionaryPB
-    @field header
-        See description for ICAHeader. <->
-    @field object
-        An object whose properties are being requested. <--
-    @field theDict
-        A dictionary to hold the properties. This must be released by the caller. -->
-*/
 struct ICACopyObjectPropertyDictionaryPB {
   var header: ICAHeader
   var object: ICAObject
@@ -608,18 +341,6 @@ struct ICACopyObjectPropertyDictionaryPB {
 var kICAThumbnailFormatJPEG: Int { get }
 var kICAThumbnailFormatTIFF: Int { get }
 var kICAThumbnailFormatPNG: Int { get }
-
-/*!
-    @struct ICACopyObjectThumbnailPB
-    @field header
-        See description for ICAHeader. <->
-    @field object
-        An object whose thumbail is being requested. <--
-    @field thumbnailFormat
-        One of the format values defined above. <--
-    @field thumbnailData
-        A pointer to a CFDataRef holding the thumbnail data. The returned CFDataRef must be released by the caller. -->
-*/
 struct ICACopyObjectThumbnailPB {
   var header: ICAHeader
   var object: ICAObject
@@ -628,21 +349,6 @@ struct ICACopyObjectThumbnailPB {
   init()
   init(header: ICAHeader, object: ICAObject, thumbnailFormat: OSType, thumbnailData: UnsafeMutablePointer<Unmanaged<CFData>?>)
 }
-
-/*!
-    @struct ICACopyObjectDataPB
-    @field header
-        See description for ICAHeader.  <->
-    @field object
-        A file object.  <--
-    @field startByte
-        Starting byte offset of the data in the file object.  <--
-    @field requestedSize
-        Requested data size in bytes. <--
-    @field data
-        A pointer to CFDataRef in which the data will be returned. -->
-        It is the responsibility fo the caller to release this object. 
-*/
 struct ICACopyObjectDataPB {
   var header: ICAHeader
   var object: ICAObject
@@ -652,20 +358,6 @@ struct ICACopyObjectDataPB {
   init()
   init(header: ICAHeader, object: ICAObject, startByte: Int, requestedSize: Int, data: UnsafeMutablePointer<Unmanaged<CFData>?>)
 }
-
-/*!
-    @struct ICAMessage
-    @field messageType
-        A message type. e.g., kICAMessageCameraCaptureNewImage. <--
-    @field startByte
-        Offset in dataPtr from where data access for read/write should occur. <--
-    @field dataPtr
-        A pointer to a data buffer. <--
-    @field dataSize
-        Size of data. <--
-    @field dataType
-        Type of data. <--
-*/
 struct ICAMessage {
   var messageType: OSType
   var startByte: UInt32
@@ -685,18 +377,6 @@ var kICAMessageGetEventData: Int { get }
 var kICAMessageDeviceYield: Int { get }
 var kICAMessageCameraPassThrough: Int { get }
 var kICAMessageScannerOverviewSelectionChanged: Int { get }
-
-/*!
-    @struct ICAObjectSendMessagePB
-    @field header
-        See description for ICAHeader. <-->
-    @field object
-        A target object for the message sent by ICAObjectSendMessage. <--
-    @field message
-        One of the messages define above. <--
-    @field result
-        A message specific result is returned here. -->
-*/
 struct ICAObjectSendMessagePB {
   var header: ICAHeader
   var object: ICAObject
@@ -712,26 +392,6 @@ var kAdjustCreationDate: Int { get }
 var kSetFileTypeAndCreator: Int { get }
 var kRotateImage: Int { get }
 var kDontEmbedColorSyncProfile: Int { get }
-
-/*!
-    @struct ICADownloadFilePB
-    @field header
-        See description for ICAHeader. <->
-    @field object
-        The file object. <--
-    @field dirFSRef
-        FSRef of destination directiory. <--
-    @field flags 
-        Any combination of flag values defined above. <--
-    @field fileType
-        Four-char code indicating the type of file. <--
-    @field fileCreator
-        Four-char code indicating with the creator of the file. <--
-    @field rotationAngle
-        Rotation angle in steps of 90 degress. <--
-    @field fileFSRef
-        A pointer to FSRef struct to hold the FSRef of downloaded file. Set this to NULL if the FSRef of downloaded file is not of interest. --> 
-*/
 struct ICADownloadFilePB {
   var header: ICAHeader
   var object: ICAObject
@@ -746,18 +406,6 @@ struct ICADownloadFilePB {
 }
 var kICAUploadFileAsIs: Int { get }
 var kICAUploadFileScaleToFit: Int { get }
-
-/*!
-    @struct ICAUploadFilePB
-    @field header
-        See description for ICAHeader. <->
-    @field parentObject <->
-        An ICAObject corresponding to a folder on the device. The device will store the uploaded file inside this folder if possible.
-    @field fileFSRef <--
-        An FSRef for the file to be uploaded to the device.
-    @field flags <--
-        One of the flags defined above.
-*/
 struct ICAUploadFilePB {
   var header: ICAHeader
   var parentObject: ICAObject
@@ -766,44 +414,18 @@ struct ICAUploadFilePB {
   init()
   init(header: ICAHeader, parentObject: ICAObject, fileFSRef: UnsafeMutablePointer<FSRef>, flags: UInt32)
 }
-
-/*!
-    @struct ICALoadDeviceModulePB
-    @field header
-        See description for ICAHeader. <->
-    @field paramDictionary <--
-        A parameter dictionary with sufficient key-value pairs to load a device module. This dictionary itself or the information provided in this dictionary will be sent to the device module.
-*/
 struct ICALoadDeviceModulePB {
   var header: ICAHeader
   var paramDictionary: Unmanaged<CFDictionary>!
   init()
   init(header: ICAHeader, paramDictionary: Unmanaged<CFDictionary>!)
 }
-
-/*!
-    @struct ICAUnloadDeviceModulePB
-    @field header
-        See description for ICAHeader. <->
-    @field deviceObject <--
-        A device ICAObject.
-*/
 struct ICAUnloadDeviceModulePB {
   var header: ICAHeader
   var deviceObject: ICAObject
   init()
   init(header: ICAHeader, deviceObject: ICAObject)
 }
-
-/*!
-    @struct ICAOpenSessionPB
-    @field header
-        See description for ICAHeader. <->
-    @field deviceObject
-        A camera object. <--
-    @field sessionID
-        A session ID of the opened session. -->
-*/
 struct ICAOpenSessionPB {
   var header: ICAHeader
   var deviceObject: ICAObject
@@ -811,30 +433,12 @@ struct ICAOpenSessionPB {
   init()
   init(header: ICAHeader, deviceObject: ICAObject, sessionID: ICASessionID)
 }
-
-/*!
-    @struct ICACloseSessionPB
-    @field header
-        See description for ICAHeader. <->
-    @field sessionID
-        A session ID of the session to be closed. <--
-*/
 struct ICACloseSessionPB {
   var header: ICAHeader
   var sessionID: ICASessionID
   init()
   init(header: ICAHeader, sessionID: ICASessionID)
 }
-
-/*!
-    @struct ICAScannerOpenSessionPB
-    @field header
-        See description for ICAHeader. <->
-    @field object
-        A scanner object. <--
-    @field sessionID
-        A session ID of the opened session. -->
-*/
 struct ICAScannerOpenSessionPB {
   var header: ICAHeader
   var object: ICAObject
@@ -842,44 +446,18 @@ struct ICAScannerOpenSessionPB {
   init()
   init(header: ICAHeader, object: ICAObject, sessionID: ICAScannerSessionID)
 }
-
-/*!
-    @struct ICAScannerCloseSessionPB
-    @field header
-        See description for ICAHeader. <->
-    @field sessionID
-        A session ID of the session to be closed. <--
-*/
 struct ICAScannerCloseSessionPB {
   var header: ICAHeader
   var sessionID: ICAScannerSessionID
   init()
   init(header: ICAHeader, sessionID: ICAScannerSessionID)
 }
-
-/*!
-    @struct ICAScannerInitializePB
-    @field header
-        See description for ICAHeader. <->
-    @field sessionID
-        A session ID of the scanner to be initialized. <--
-*/
 struct ICAScannerInitializePB {
   var header: ICAHeader
   var sessionID: ICAScannerSessionID
   init()
   init(header: ICAHeader, sessionID: ICAScannerSessionID)
 }
-
-/*!
-    @struct ICAScannerGetParametersPB
-    @field header
-        See description for ICAHeader. <->
-    @field sessionID
-        A session ID of the scanner whose parameters are being fetched. <--
-    @field theDict
-        A dictionary containing the parameters. -->
-*/
 struct ICAScannerGetParametersPB {
   var header: ICAHeader
   var sessionID: ICAScannerSessionID
@@ -887,16 +465,6 @@ struct ICAScannerGetParametersPB {
   init()
   init(header: ICAHeader, sessionID: ICAScannerSessionID, theDict: Unmanaged<CFMutableDictionary>!)
 }
-
-/*!
-    @struct ICAScannerSetParametersPB
-    @field header
-        See description for ICAHeader. <->
-    @field sessionID
-        A session ID of the scanner whose parameters are being set. <--
-    @field theDict
-        A dictionary containing the parameters. <--
-*/
 struct ICAScannerSetParametersPB {
   var header: ICAHeader
   var sessionID: ICAScannerSessionID
@@ -904,16 +472,6 @@ struct ICAScannerSetParametersPB {
   init()
   init(header: ICAHeader, sessionID: ICAScannerSessionID, theDict: Unmanaged<CFMutableDictionary>!)
 }
-
-/*!
-    @struct ICAScannerStatusPB
-    @field header
-        See description for ICAHeader. <->
-    @field sessionID
-        A session ID of the scanner whose status is being fetched. <--
-    @field status
-        A status value. -->
-*/
 struct ICAScannerStatusPB {
   var header: ICAHeader
   var sessionID: ICAScannerSessionID
@@ -921,62 +479,19 @@ struct ICAScannerStatusPB {
   init()
   init(header: ICAHeader, sessionID: ICAScannerSessionID, status: UInt32)
 }
-
-/*!
-    @struct ICAScannerStartPB
-    @field header
-        See description for ICAHeader. <->
-    @field sessionID
-        A session ID of the scanner that should start scanning. <--
-*/
 struct ICAScannerStartPB {
   var header: ICAHeader
   var sessionID: ICAScannerSessionID
   init()
   init(header: ICAHeader, sessionID: ICAScannerSessionID)
 }
-
-/*!
-    @struct ICDHeader
-    @discussion
-        This is the first field in all parameter blocks used by APIs defined in ICADevices.h.
-        Type of parameter passed to a callback function used by APIs defined in ICADevices.h.
-        The parameter for the completion proc should to be casted to an appropriate type such as ICD_NewObjectPB* for it to be useful.
-    @field err
-        Error returned by an API. -->
-    @field refcon
-        An arbitrary refcon value passed to the callback. <--
-*/
 struct ICDHeader {
   var err: ICAError
   var refcon: UInt
   init()
   init(err: ICAError, refcon: UInt)
 }
-
-/*!
-    @typedef ICDCompletion
-    @discussion
-        Type of callback function used by APIs defined in ICADevices.h.
-    @param pb
-        The parameter pb is a pointer to the parameter block passed to the API.
-*/
 typealias ICDCompletion = @convention(c) (UnsafeMutablePointer<ICDHeader>) -> Void
-
-/*!
-    @struct ICD_NewObjectPB
-    @discussion
-        Parameter block passed to function <code>ICDNewObject</code>.
-    @field header
-        The function returns error code in the <code>err</code> field of this structure. 
-        The <code>refcon</code> field of this structure is used to pass a pointer to the callback function if <code>ICDNewObject</code> is called asynchronously.
-    @field  parentObject
-        Parent object of the new object.
-    @field  objectInfo
-        <code>ICAObjectInfo</code> struct filled with information about the new object.
-    @field  object
-        New object.
-*/
 struct ICD_NewObjectPB {
   var header: ICDHeader
   var parentObject: ICAObject
@@ -985,17 +500,6 @@ struct ICD_NewObjectPB {
   init()
   init(header: ICDHeader, parentObject: ICAObject, objectInfo: ICAObjectInfo, object: ICAObject)
 }
-
-/*!
-    @struct ICD_DisposeObjectPB
-    @discussion
-        Parameter block passed to function <code>ICDDisposeObject</code>.
-    @field header
-        The function returns error code in the <code>err</code> field of this structure. 
-        The <code>refcon</code> field of this structure is used to pass a pointer to the callback function if <code>ICDDisposeObject</code> is called asynchronously.
-    @field object
-        Object to be disposed.
-*/
 struct ICD_DisposeObjectPB {
   var header: ICDHeader
   var object: ICAObject

@@ -374,231 +374,117 @@ typealias DVDEventValue = UInt
 typealias DVDEventCallBackRef = UnsafeMutablePointer<Void>
 typealias DVDFatalErrCallBackFunctionPtr = @convention(c) (DVDErrorCode, UnsafeMutablePointer<Void>) -> Void
 typealias DVDEventCallBackFunctionPtr = @convention(c) (DVDEventCode, DVDEventValue, DVDEventValue, UnsafeMutablePointer<Void>) -> Void
-@available(OSX 10.3, *)
 func DVDInitialize() -> OSStatus
-@available(OSX 10.3, *)
 func DVDDispose() -> OSStatus
-@available(OSX 10.3, *)
 func DVDIsValidMediaRef(inRef: UnsafeMutablePointer<FSRef>, _ outIsValid: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-@available(OSX 10.5, *)
 func DVDIsValidMediaURL(inRef: CFURL, _ outIsValid: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDHasMedia(outHasMedia: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDOpenMediaFile(inFile: UnsafeMutablePointer<FSRef>) -> OSStatus
-@available(OSX 10.5, *)
 func DVDOpenMediaFileWithURL(inFile: CFURL) -> OSStatus
-@available(OSX 10.3, *)
 func DVDCloseMediaFile() -> OSStatus
-@available(OSX 10.3, *)
 func DVDOpenMediaVolume(inVolume: UnsafeMutablePointer<FSRef>) -> OSStatus
-@available(OSX 10.5, *)
 func DVDOpenMediaVolumeWithURL(inVolume: CFURL) -> OSStatus
-@available(OSX 10.3, *)
 func DVDCloseMediaVolume() -> OSStatus
-@available(OSX 10.3, *)
 func DVDIsSupportedDisplay(inDisplay: CGDirectDisplayID, _ outSupported: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDSwitchToDisplay(newDisplay: CGDirectDisplayID, _ outSupported: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDSetVideoDisplay(inDisplay: CGDirectDisplayID) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetVideoDisplay(outDisplay: UnsafeMutablePointer<CGDirectDisplayID>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDSetVideoWindowID(inVidWindowID: UInt32) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetVideoWindowID(outVidWindowID: UnsafeMutablePointer<UInt32>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetNativeVideoSize(outWidth: UnsafeMutablePointer<UInt16>, _ outHeight: UnsafeMutablePointer<UInt16>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetAspectRatio(outRatio: UnsafeMutablePointer<DVDAspectRatio>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDSetAspectRatio(inRatio: DVDAspectRatio) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetFormatStandard(outFormat: UnsafeMutablePointer<DVDFormat>) -> OSStatus
-@available(OSX 10.5, *)
 func DVDSetVideoWindowRef(inWindowRef: WindowRef) -> OSStatus
-@available(OSX 10.5, *)
 func DVDGetVideoWindowRef(outWindowRef: UnsafeMutablePointer<WindowRef>) -> OSStatus
-@available(OSX 10.5, *)
 func DVDSetVideoCGBounds(inRect: UnsafeMutablePointer<CGRect>) -> OSStatus
-@available(OSX 10.5, *)
 func DVDGetVideoCGBounds(outRect: UnsafeMutablePointer<CGRect>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetAudioStreamFormat(outFormat: UnsafeMutablePointer<DVDAudioFormat>, _ outBitsPerSample: UnsafeMutablePointer<UInt32>, _ outSamplesPerSecond: UnsafeMutablePointer<UInt32>, _ outChannels: UnsafeMutablePointer<UInt32>) -> OSStatus
-@available(OSX 10.4, *)
 func DVDGetAudioStreamFormatByStream(inStreamNum: UInt32, _ outFormat: UnsafeMutablePointer<DVDAudioFormat>, _ outBitsPerSample: UnsafeMutablePointer<UInt32>, _ outSamplesPerSecond: UnsafeMutablePointer<UInt32>, _ outChannels: UnsafeMutablePointer<UInt32>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetAudioOutputModeCapabilities(outModes: UnsafeMutablePointer<DVDAudioMode>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDSetAudioOutputMode(inMode: DVDAudioMode) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetAudioOutputMode(outMode: UnsafeMutablePointer<DVDAudioMode>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetSPDIFDataOutDeviceCount(outCount: UnsafeMutablePointer<UInt32>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetSPDIFDataOutDeviceCFName(inIndex: UInt32, _ outName: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDSetSPDIFDataOutDevice(inIndex: UInt32) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetSPDIFDataOutDevice(outIndex: UnsafeMutablePointer<UInt32>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDSetTime(inTimeCode: DVDTimeCode, _ inTime: DVDTimePosition, _ inFrames: UInt16) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetTime(inTimeCode: DVDTimeCode, _ outTime: UnsafeMutablePointer<DVDTimePosition>, _ outFrames: UnsafeMutablePointer<UInt16>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetState(outState: UnsafeMutablePointer<DVDState>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDIdle() -> OSStatus
-@available(OSX 10.3, *)
 func DVDUpdateVideo() -> OSStatus
-@available(OSX 10.3, *)
 func DVDIsPlaying(outIsPlaying: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDIsPaused(outIsPaused: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDPlay() -> OSStatus
-@available(OSX 10.3, *)
 func DVDPause() -> OSStatus
-@available(OSX 10.3, *)
 func DVDResume() -> OSStatus
-@available(OSX 10.3, *)
 func DVDStop() -> OSStatus
-@available(OSX 10.3, *)
 func DVDScan(inRate: DVDScanRate, _ inDirection: DVDScanDirection) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetScanRate(outRate: UnsafeMutablePointer<DVDScanRate>, _ outDirection: UnsafeMutablePointer<DVDScanDirection>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDStepFrame(inDirection: DVDScanDirection) -> OSStatus
-@available(OSX 10.3, *)
 func DVDIsMuted(outIsMuted: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDMute(inMute: Bool) -> OSStatus
-@available(OSX 10.3, *)
 func DVDSetAudioVolume(inVolume: UInt16) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetAudioVolume(outVolume: UnsafeMutablePointer<UInt16>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetAudioVolumeInfo(outMinVolume: UnsafeMutablePointer<UInt16>, _ outCurVolume: UnsafeMutablePointer<UInt16>, _ outMaxVolume: UnsafeMutablePointer<UInt16>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDHasMenu(inMenu: DVDMenu, _ outHasMenu: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDIsOnMenu(outOnMenu: UnsafeMutablePointer<DarwinBoolean>, _ outMenu: UnsafeMutablePointer<DVDMenu>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGoToMenu(inMenu: DVDMenu) -> OSStatus
-@available(OSX 10.3, *)
 func DVDReturnToTitle() -> OSStatus
-@available(OSX 10.3, *)
 func DVDGoBackOneLevel() -> OSStatus
-@available(OSX 10.3, *)
 func DVDDoUserNavigation(inNavigation: DVDUserNavigation) -> OSStatus
-@available(OSX 10.4, *)
 func DVDDoButtonActivate(inIndex: Int32) -> OSStatus
-@available(OSX 10.4, *)
 func DVDGetButtoninfo(numberOfButtons: UnsafeMutablePointer<UInt32>, _ selectedButton: UnsafeMutablePointer<UInt32>, _ forcedActivateButton: UnsafeMutablePointer<UInt32>, _ userButtonOffset: UnsafeMutablePointer<UInt32>, _ numberOfUserButtons: UnsafeMutablePointer<UInt32>) -> OSStatus
-@available(OSX 10.4, *)
 func DVDGetButtonPosition(index: UInt32, _ outRect: UnsafeMutablePointer<CGRect>, _ autoAction: UnsafeMutablePointer<UInt32>) -> OSStatus
-@available(OSX 10.5, *)
 func DVDDoMenuCGClick(inPt: UnsafeMutablePointer<CGPoint>, _ outIndex: UnsafeMutablePointer<Int32>) -> OSStatus
-@available(OSX 10.5, *)
 func DVDDoMenuCGMouseOver(inPt: UnsafeMutablePointer<CGPoint>, _ outIndex: UnsafeMutablePointer<Int32>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetMediaUniqueID(outDiscID: UnsafeMutablePointer<UInt8>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetMediaVolumeName(outDiscVolumeName: UnsafeMutablePointer<UnsafeMutablePointer<Int8>>) -> OSStatus
-@available(OSX 10.4, *)
 func DVDGetMediaVolumeCFName(outDiscVolumeCFName: UnsafeMutablePointer<Unmanaged<CFString>?>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDSetTitle(inTitleNum: UInt16) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetTitle(outTitleNum: UnsafeMutablePointer<UInt16>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetNumTitles(outNumTitles: UnsafeMutablePointer<UInt16>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDHasPreviousChapter(outHasChapter: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDHasNextChapter(outHasChapter: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDSetChapter(inChapterNum: UInt16) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetChapter(outChapterNum: UnsafeMutablePointer<UInt16>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetNumChapters(inTitleNum: UInt16, _ outNumChapters: UnsafeMutablePointer<UInt16>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDPreviousChapter() -> OSStatus
-@available(OSX 10.3, *)
 func DVDNextChapter() -> OSStatus
-@available(OSX 10.3, *)
 func DVDSetAngle(inAngleNum: UInt16) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetAngle(outAngleNum: UnsafeMutablePointer<UInt16>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetNumAngles(outNumAngles: UnsafeMutablePointer<UInt16>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDDisplaySubPicture(inDisplay: Bool) -> OSStatus
-@available(OSX 10.3, *)
 func DVDIsDisplayingSubPicture(outDisplayingSubPicture: UnsafeMutablePointer<DarwinBoolean>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDSetSubPictureStream(inStreamNum: UInt16) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetSubPictureStream(outStreamNum: UnsafeMutablePointer<UInt16>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetNumSubPictureStreams(outNumStreams: UnsafeMutablePointer<UInt16>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDSetAudioStream(inStreamNum: UInt16) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetAudioStream(outStreamNum: UnsafeMutablePointer<UInt16>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetNumAudioStreams(outNumStreams: UnsafeMutablePointer<UInt16>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDSetDefaultSubPictureLanguageCode(inCode: DVDLanguageCode, _ inExtension: DVDSubpictureExtensionCode) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetSubPictureLanguageCode(outCode: UnsafeMutablePointer<DVDLanguageCode>, _ outExtension: UnsafeMutablePointer<DVDSubpictureExtensionCode>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetSubPictureLanguageCodeByStream(inStreamNum: UInt16, _ outCode: UnsafeMutablePointer<DVDLanguageCode>, _ outExtension: UnsafeMutablePointer<DVDSubpictureExtensionCode>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDSetDefaultAudioLanguageCode(inCode: DVDLanguageCode, _ inExtension: DVDAudioExtensionCode) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetAudioLanguageCode(outCode: UnsafeMutablePointer<DVDLanguageCode>, _ outExtension: UnsafeMutablePointer<DVDAudioExtensionCode>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetAudioLanguageCodeByStream(inStreamNum: UInt16, _ outCode: UnsafeMutablePointer<DVDLanguageCode>, _ outExtension: UnsafeMutablePointer<DVDAudioExtensionCode>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDSetDefaultMenuLanguageCode(inCode: DVDLanguageCode) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetMenuLanguageCode(outCode: UnsafeMutablePointer<DVDLanguageCode>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetBookmark(outBookMarkData: UnsafeMutablePointer<Void>, _ ioBookMarkDataSize: UnsafeMutablePointer<UInt32>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGotoBookmark(inBookMarkData: UnsafeMutablePointer<Void>, _ inBookMarkDataSize: UInt32) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetLastPlayBookmark(outBookMarkData: UnsafeMutablePointer<Void>, _ ioBookMarkDataSize: UnsafeMutablePointer<UInt32>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDSetLastPlayBookmark(inBookMarkData: UnsafeMutablePointer<Void>, _ inBookMarkDataSize: UInt32) -> OSStatus
-@available(OSX 10.3, *)
 func DVDClearLastPlayBookmark() -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetDiscRegionCode(outCode: UnsafeMutablePointer<DVDRegionCode>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetDriveRegionCode(outCode: UnsafeMutablePointer<DVDRegionCode>, _ outNumberChangesLeft: UnsafeMutablePointer<Int16>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDSetDriveRegionCode(inCode: DVDRegionCode, _ inAuthorization: AuthorizationRef) -> OSStatus
-@available(OSX 10.3, *)
 func DVDEnableWebAccess(inEnable: Bool) -> OSStatus
-@available(OSX 10.4, *)
 func DVDGetGPRMValue(index: UInt32, _ value: UnsafeMutablePointer<UInt32>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDSetFatalErrorCallBack(inCallBackProc: DVDFatalErrCallBackFunctionPtr, _ inRefCon: UnsafeMutablePointer<Void>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDRegisterEventCallBack(inCallBackProc: DVDEventCallBackFunctionPtr, _ inCode: UnsafeMutablePointer<DVDEventCode>, _ inCodeCount: UInt32, _ inRefCon: UnsafeMutablePointer<Void>, _ outCallBackID: UnsafeMutablePointer<DVDEventCallBackRef>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDUnregisterEventCallBack(inCallBackID: DVDEventCallBackRef) -> OSStatus
-@available(OSX 10.3, *)
 func DVDIsRegisteredEventCallBack(inCallBackID: DVDEventCallBackRef) -> Bool
-@available(OSX 10.3, *)
 func DVDSetTimeEventRate(inMilliseconds: UInt32) -> OSStatus
-@available(OSX 10.3, *)
 func DVDGetTimeEventRate(outMilliseconds: UnsafeMutablePointer<UInt32>) -> OSStatus
-@available(OSX 10.3, *)
 func DVDSleep() -> OSStatus
-@available(OSX 10.3, *)
 func DVDWakeUp() -> OSStatus

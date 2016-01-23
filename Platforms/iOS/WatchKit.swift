@@ -1,7 +1,5 @@
 
-@available(iOS 8.2, *)
 let WatchKitErrorDomain: String
-@available(iOS 8.2, *)
 enum WatchKitErrorCode : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -12,12 +10,10 @@ enum WatchKitErrorCode : Int {
   case DownloadError
   case RecordingFailedError
 }
-
 extension WatchKitErrorCode : _BridgedNSError {
   static var _NSErrorDomain: String { get }
   typealias RawValue = Int
 }
-@available(iOS 8.2, *)
 class WKInterfaceButton : WKInterfaceObject {
   func setTitle(title: String?)
   func setAttributedTitle(attributedTitle: NSAttributedString?)
@@ -27,14 +23,12 @@ class WKInterfaceButton : WKInterfaceObject {
   func setBackgroundImageNamed(imageName: String?)
   func setEnabled(enabled: Bool)
 }
-@available(iOS 8.2, *)
 enum WKUserNotificationInterfaceType : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
   case Default
   case Custom
 }
-@available(iOS 8.2, *)
 enum WKMenuItemIcon : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -62,7 +56,6 @@ enum WKTextInputMode : Int {
   case AllowEmoji
   case AllowAnimatedEmoji
 }
-@available(iOS 8.2, *)
 class WKInterfaceController : NSObject {
   init()
   func awakeWithContext(context: AnyObject?)
@@ -95,22 +88,17 @@ class WKInterfaceController : NSObject {
   func clearAllMenuItems()
   func updateUserActivity(type: String, userInfo: [NSObject : AnyObject]?, webpageURL: NSURL?)
   func invalidateUserActivity()
-  @available(iOS 8.2, *)
   class func openParentApplication(userInfo: [NSObject : AnyObject], reply: (([NSObject : AnyObject], NSError?) -> Void)?) -> Bool
 }
-
-@available(iOS 8.2, *)
 extension WKInterfaceController {
   class func reloadRootControllers(namesAndContexts: [(name: String, context: AnyObject)])
   func presentController(namesAndContexts: [(name: String, context: AnyObject)])
 }
-@available(iOS 8.2, *)
 class WKUserNotificationInterfaceController : WKInterfaceController {
   init()
   func didReceiveRemoteNotification(remoteNotification: [NSObject : AnyObject], withCompletion completionHandler: (WKUserNotificationInterfaceType) -> Void)
   func didReceiveLocalNotification(localNotification: UILocalNotification, withCompletion completionHandler: (WKUserNotificationInterfaceType) -> Void)
 }
-@available(iOS 8.2, *)
 class WKInterfaceDate : WKInterfaceObject {
   func setTextColor(color: UIColor?)
   func setTimeZone(timeZone: NSTimeZone?)
@@ -118,43 +106,29 @@ class WKInterfaceDate : WKInterfaceObject {
 }
 class WKInterfaceDevice : NSObject {
   class func currentDevice() -> WKInterfaceDevice
-  @available(iOS 8.2, *)
   func addCachedImage(image: UIImage, name: String) -> Bool
-  @available(iOS 8.2, *)
   func addCachedImageWithData(imageData: NSData, name: String) -> Bool
-  @available(iOS 8.2, *)
   func removeCachedImageWithName(name: String)
-  @available(iOS 8.2, *)
   func removeAllCachedImages()
-  @available(iOS 8.2, *)
   var cachedImages: [String : NSNumber] { get }
   var screenBounds: CGRect { get }
   var screenScale: CGFloat { get }
   var preferredContentSizeCategory: String { get }
-  @available(iOS 9.0, *)
   var systemVersion: String { get }
-  @available(iOS 9.0, *)
   var name: String { get }
-  @available(iOS 9.0, *)
   var model: String { get }
-  @available(iOS 9.0, *)
   var localizedModel: String { get }
-  @available(iOS 9.0, *)
   var systemName: String { get }
   init()
 }
-@available(iOS 8.2, *)
 class WKInterfaceGroup : WKInterfaceObject, WKImageAnimatable {
   func setCornerRadius(cornerRadius: CGFloat)
   func setBackgroundColor(color: UIColor?)
   func setBackgroundImage(image: UIImage?)
   func setBackgroundImageData(imageData: NSData?)
   func setBackgroundImageNamed(imageName: String?)
-  @available(iOS 8.2, *)
   func startAnimating()
-  @available(iOS 8.2, *)
   func startAnimatingWithImagesInRange(imageRange: NSRange, duration: NSTimeInterval, repeatCount: Int)
-  @available(iOS 8.2, *)
   func stopAnimating()
 }
 protocol WKImageAnimatable : NSObjectProtocol {
@@ -162,26 +136,20 @@ protocol WKImageAnimatable : NSObjectProtocol {
   func startAnimatingWithImagesInRange(imageRange: NSRange, duration: NSTimeInterval, repeatCount: Int)
   func stopAnimating()
 }
-@available(iOS 8.2, *)
 class WKInterfaceImage : WKInterfaceObject, WKImageAnimatable {
   func setImage(image: UIImage?)
   func setImageData(imageData: NSData?)
   func setImageNamed(imageName: String?)
   func setTintColor(tintColor: UIColor?)
-  @available(iOS 8.2, *)
   func startAnimating()
-  @available(iOS 8.2, *)
   func startAnimatingWithImagesInRange(imageRange: NSRange, duration: NSTimeInterval, repeatCount: Int)
-  @available(iOS 8.2, *)
   func stopAnimating()
 }
-@available(iOS 8.2, *)
 class WKInterfaceLabel : WKInterfaceObject {
   func setText(text: String?)
   func setTextColor(color: UIColor?)
   func setAttributedText(attributedText: NSAttributedString?)
 }
-@available(iOS 8.2, *)
 enum WKInterfaceMapPinColor : Int {
   init?(rawValue: Int)
   var rawValue: Int { get }
@@ -189,7 +157,6 @@ enum WKInterfaceMapPinColor : Int {
   case Green
   case Purple
 }
-@available(iOS 8.2, *)
 class WKInterfaceMap : WKInterfaceObject {
   func setVisibleMapRect(mapRect: MKMapRect)
   func setRegion(coordinateRegion: MKCoordinateRegion)
@@ -198,7 +165,6 @@ class WKInterfaceMap : WKInterfaceObject {
   func addAnnotation(location: CLLocationCoordinate2D, withPinColor pinColor: WKInterfaceMapPinColor)
   func removeAllAnnotations()
 }
-@available(iOS 8.2, *)
 class WKInterfaceObject : NSObject {
   func setHidden(hidden: Bool)
   func setAlpha(alpha: CGFloat)
@@ -207,7 +173,6 @@ class WKInterfaceObject : NSObject {
   var interfaceProperty: String { get }
 }
 extension WKInterfaceObject {
-  @available(iOS 9.0, *)
   func setAccessibilityIdentifier(accessibilityIdentifier: String?)
   func setAccessibilityLabel(accessibilityLabel: String?)
   func setAccessibilityHint(accessibilityHint: String?)
@@ -216,24 +181,20 @@ extension WKInterfaceObject {
   func setAccessibilityTraits(accessibilityTraits: UIAccessibilityTraits)
   func setAccessibilityImageRegions(accessibilityImageRegions: [WKAccessibilityImageRegion])
 }
-@available(iOS 8.2, *)
 class WKAccessibilityImageRegion : NSObject {
   var frame: CGRect
   var label: String
   init()
 }
-@available(iOS 8.2, *)
 class WKInterfaceSeparator : WKInterfaceObject {
   func setColor(color: UIColor?)
 }
-@available(iOS 8.2, *)
 class WKInterfaceSlider : WKInterfaceObject {
   func setEnabled(enabled: Bool)
   func setValue(value: Float)
   func setColor(color: UIColor?)
   func setNumberOfSteps(numberOfSteps: Int)
 }
-@available(iOS 8.2, *)
 class WKInterfaceSwitch : WKInterfaceObject {
   func setTitle(title: String?)
   func setAttributedTitle(attributedTitle: NSAttributedString?)
@@ -241,7 +202,6 @@ class WKInterfaceSwitch : WKInterfaceObject {
   func setOn(on: Bool)
   func setColor(color: UIColor?)
 }
-@available(iOS 8.2, *)
 class WKInterfaceTable : WKInterfaceObject {
   func setRowTypes(rowTypes: [String])
   func setNumberOfRows(numberOfRows: Int, withRowType rowType: String)
@@ -251,7 +211,6 @@ class WKInterfaceTable : WKInterfaceObject {
   func removeRowsAtIndexes(rows: NSIndexSet)
   func scrollToRowAtIndex(index: Int)
 }
-@available(iOS 8.2, *)
 class WKInterfaceTimer : WKInterfaceObject {
   func setTextColor(color: UIColor?)
   func setDate(date: NSDate)
